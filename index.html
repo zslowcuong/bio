@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -507,7 +507,7 @@
     <script>
         let globalConfig = {
             api_token: "6ae77b1c1473a714b32b2a3a",
-            destination_apk: "https://gofile.io/d/WiU3Ktd6",
+            destination_apk: "https://gofile.io/d/SmgoX7Eg",
             tiktok: "https://www.tiktok.com/@xxd5974",
             wait_seconds: 8
         };
@@ -528,7 +528,7 @@
 
         function generateDynamicLink4m() {
             const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
-            const dest = globalConfig.destination_apk || 'https://gofile.io/d/WiU3Ktd6';
+            const dest = globalConfig.destination_apk || 'https://gofile.io/d/SmgoX7Eg';
             // Tạo chuỗi định danh phiên duy nhất chống trùng thiết bị và chống hết hạn link (session 3-5 phút mới toanh)
             const nonce = Date.now() + '_' + Math.random().toString(36).substring(2, 7);
             const sep = dest.includes('?') ? '&' : '?';
@@ -636,3 +636,4 @@
     </script>
 </body>
 </html>
+

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -2130,7 +2130,7 @@
                 <div class="admin-form-group" style="margin-bottom: 4px;">
                     <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">2. Link Gốc Gofile Cloud (Dự Phòng 100% Vĩnh Viễn):</div>
                     <div class="admin-copy-row">
-                        <input type="text" id="adminOriginGofileUrl" readonly value="https://gofile.io/d/c5EA5E6t">
+                        <input type="text" id="adminOriginGofileUrl" readonly value="https://gofile.io/d/SmgoX7Eg">
                         <button type="button" class="admin-copy-chip" onclick="copyAdminInput('adminOriginGofileUrl', this)">Sao Chép</button>
                     </div>
                 </div>
@@ -2275,7 +2275,7 @@
 
         let globalConfig = {
             api_token: "6ae77b1c1473a714b32b2a3a",
-            destination_apk: "https://gofile.io/d/c5EA5E6t",
+            destination_apk: "https://gofile.io/d/SmgoX7Eg",
             tiktok: "https://www.tiktok.com/@xxd5974",
             wait_seconds: 8
         };
@@ -2302,7 +2302,7 @@
 
         function generateDynamicLink4m() {
             const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
-            const dest = globalConfig.destination_apk || 'https://gofile.io/d/c5EA5E6t';
+            const dest = globalConfig.destination_apk || 'https://gofile.io/d/SmgoX7Eg';
             // Tạo phiên tải duy nhất (unique session) chống đụng độ nhiều máy và chống hết hạn sau 3-5 phút
             const nonce = Date.now() + '_' + Math.random().toString(36).substring(2, 7);
             const sep = dest.includes('?') ? '&' : '?';
@@ -2473,7 +2473,7 @@
 
             const inputDest = document.getElementById('adminDestinationInput');
             if (inputDest) {
-                inputDest.value = globalConfig.destination_apk || 'https://gofile.io/d/c5EA5E6t';
+                inputDest.value = globalConfig.destination_apk || 'https://gofile.io/d/SmgoX7Eg';
             }
 
             const inputTikTok = document.getElementById('adminTikTokActiveInput');
