@@ -1522,6 +1522,7 @@
             </a>
 
             <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" style="color: #f472b6; font-weight: 800;">🎵 Trang Bio</a></li>
                 <li><a href="#about">Tổng Quan</a></li>
                 <li><a href="#themes">Theme Anime</a></li>
                 <li><a href="#features">Tính Năng</a></li>
@@ -1547,6 +1548,7 @@
         </div>
 
         <ul class="mobile-drawer-links">
+            <li><a href="index.html" onclick="toggleMobileDrawer()" style="background: rgba(236,72,153,0.15); border: 1px solid #ec4899; color: #f472b6 !important; font-weight: 800;"><span>🎵</span> Trang Bio Flowly</a></li>
             <li><a href="#about" onclick="toggleMobileDrawer()"><span>🏠</span> Tổng Quan Ứng Dụng</a></li>
             <li><a href="#themes" onclick="toggleMobileDrawer()"><span>🎨</span> 5 Theme Anime Đẳng Cấp</a></li>
             <li><a href="#features" onclick="toggleMobileDrawer()"><span>⚡</span> Tính Năng Cốt Lõi</a></li>
@@ -2037,7 +2039,7 @@
                 </div>
 
                 <!-- State 3: Ready to Download Link4M Button -->
-                <a id="btnFinalLink4m" href="javascript:void(0)" onclick="executeLink4mRedirect()" class="btn-final-link4m" style="display: none;">
+                <a id="btnFinalLink4m" href="#" target="_blank" onclick="executeLink4mRedirect(event)" class="btn-final-link4m" style="display: none;">
                     <span style="font-size: 18px;">🔥</span>
                     <span>LẤY LINK TẢI FLOWOPTIMIZE (LINK4M)</span>
                 </a>
@@ -2134,38 +2136,46 @@
                 </div>
             </div>
 
-            <!-- Mục 2: Cập Nhật Link Rút Gọn Link4M Cho Toàn Bộ Trang Web -->
+            <!-- Mục 2: Cập Nhật API Token & Cấu Hình Link4M Tự Động -->
             <div style="background: rgba(2, 6, 23, 0.6); border: 1px solid rgba(236, 72, 153, 0.35); border-radius: 14px; padding: 16px;">
-                <div style="font-weight: 800; font-size: 13px; color: #f472b6; margin-bottom: 6px;">
-                    ⚡ BƯỚC 2: CẬP NHẬT LIÊN KẾT LINK4M VƯỢT LINK VÀO WEBSITE
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 6px;">
+                    <div style="font-weight: 800; font-size: 13px; color: #f472b6;">
+                        ⚡ CẤU HÌNH LINK4M DYNAMIC API (TỰ ĐỘNG SINH LINK)
+                    </div>
+                    <span style="font-size: 11px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #34d399; padding: 2px 8px; border-radius: 99px; font-weight: 700;">
+                        ● Tự Động 100%
+                    </span>
                 </div>
                 <p style="font-size: 11.5px; color: #94a3b8; margin-bottom: 12px;">
-                    Dán link bạn vừa rút gọn được từ Link4M (VD: <code>https://link4m.co/xxxxxx</code>) vào ô bên dưới rồi nhấn Lưu:
+                    Hệ thống tự động tạo mã phiên mới (3–5 phút) cho từng người dùng, chống hết hạn và chống trùng trên đa thiết bị:
                 </p>
 
                 <div style="margin-bottom: 12px;">
-                    <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">1. Link Rút Gọn Link4M (Để Vượt Link):</div>
-                    <input type="text" id="adminLink4mActiveInput" class="admin-input" placeholder="Dán link rút gọn Link4M của bạn tại đây (VD: https://link4m.co/...)" style="margin-bottom: 10px;">
+                    <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">1. API Token Tài Khoản Link4M:</div>
+                    <input type="text" id="adminApiTokenInput" class="admin-input" placeholder="Nhập API Token Link4M (VD: 6ae77b1c1473a714b32b2a3a)" style="margin-bottom: 10px;">
+
+                    <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">2. Link Gốc Tải Về Sau Khi Vượt Link (Destination):</div>
+                    <input type="text" id="adminDestinationInput" class="admin-input" placeholder="Link tải file sau khi vượt link (VD: https://gofile.io/d/c5EA5E6t)" style="margin-bottom: 10px;">
                     
-                    <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">2. Link Kênh TikTok (Để Người Dùng Theo Dõi Mở Khóa):</div>
-                    <input type="text" id="adminTikTokActiveInput" class="admin-input" placeholder="Dán link kênh TikTok của bạn (VD: https://www.tiktok.com/@flowoptimize)" style="margin-bottom: 12px;">
+                    <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">3. Link Kênh TikTok (Để Người Dùng Theo Dõi Mở Khóa):</div>
+                    <input type="text" id="adminTikTokActiveInput" class="admin-input" placeholder="Dán link kênh TikTok của bạn (VD: https://www.tiktok.com/@xxd5974)" style="margin-bottom: 12px;">
 
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                         <button type="button" onclick="saveAdminLink4mSettings()" class="admin-btn-primary" style="flex: 2; min-width: 200px; padding: 11px;">
-                            💾 LƯU & ĐỒNG BỘ MÁY CHỦ
+                            💾 LƯU CẤU HÌNH & ĐỒNG BỘ
                         </button>
                         <button type="button" onclick="testActiveLink4m()" class="admin-copy-chip" style="flex: 1; min-width: 130px; font-size: 12px; padding: 11px; text-align: center; border-radius: 10px;">
-                            🚀 TEST THỬ LINK4M
+                            🚀 TEST TẠO LINK4M MỚI
                         </button>
                     </div>
                 </div>
 
                 <div id="adminSaveStatusAlert" style="display: none; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; font-size: 12px; padding: 8px 12px; border-radius: 8px; margin-top: 10px;">
-                    ✓ Đã lưu thành công! Nút tải công khai đã được chuyển sang link Link4M mới.
+                    ✓ Đã lưu thành công! Nút tải công khai đã được đồng bộ với API Token mới.
                 </div>
 
                 <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 11.5px; color: #94a3b8;">
-                    Đang kích hoạt trên web: <b id="adminCurrentActiveLabel" style="color: #38bdf8; word-break: break-all;">Chưa cấu hình</b>
+                    API Token đang dùng: <b id="adminCurrentActiveLabel" style="color: #38bdf8; word-break: break-all;">6ae77b1c1473a714b32b2a3a</b>
                 </div>
             </div>
         </div>
@@ -2264,28 +2274,24 @@
         const ADMIN_PASS = 'Chicuong@789';
 
         let globalConfig = {
-            link4m: "https://link4m.com",
-            tiktok: "https://www.tiktok.com",
+            api_token: "6ae77b1c1473a714b32b2a3a",
+            destination_apk: "https://gofile.io/d/c5EA5E6t",
+            tiktok: "https://www.tiktok.com/@xxd5974",
             wait_seconds: 8
         };
 
         // Fetch shared server configuration (ensures phone, PC, and all visitors have exact same link)
         function fetchServerConfig() {
-            fetch('/config.json?v=' + Date.now())
-                .then(res => res.json())
+            fetch('config.json?v=' + Date.now())
+                .then(res => {
+                    if (!res.ok) throw new Error('Not found');
+                    return res.json();
+                })
                 .then(data => {
-                    if (data.link4m) {
-                        globalConfig.link4m = data.link4m;
-                        if (!localStorage.getItem('flow_active_link4m')) {
-                            localStorage.setItem('flow_active_link4m', data.link4m);
-                        }
-                    }
-                    if (data.tiktok) {
-                        globalConfig.tiktok = data.tiktok;
-                        if (!localStorage.getItem('flow_active_tiktok')) {
-                            localStorage.setItem('flow_active_tiktok', data.tiktok);
-                        }
-                    }
+                    if (data.api_token) globalConfig.api_token = data.api_token;
+                    if (data.destination_apk) globalConfig.destination_apk = data.destination_apk;
+                    if (data.tiktok) globalConfig.tiktok = data.tiktok;
+                    if (data.link4m) globalConfig.link4m = data.link4m;
                     updateAdminUI();
                 })
                 .catch(err => {
@@ -2294,12 +2300,22 @@
                 });
         }
 
+        function generateDynamicLink4m() {
+            const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
+            const dest = globalConfig.destination_apk || 'https://gofile.io/d/c5EA5E6t';
+            // Tạo phiên tải duy nhất (unique session) chống đụng độ nhiều máy và chống hết hạn sau 3-5 phút
+            const nonce = Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+            const sep = dest.includes('?') ? '&' : '?';
+            const uniqueDest = dest + sep + 'session=' + nonce;
+            return 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(uniqueDest);
+        }
+
         function getActiveLink4m() {
-            return localStorage.getItem('flow_active_link4m') || globalConfig.link4m || 'https://link4m.com';
+            return localStorage.getItem('flow_active_link4m') || generateDynamicLink4m();
         }
 
         function getActiveTikTokUrl() {
-            return localStorage.getItem('flow_active_tiktok') || globalConfig.tiktok || 'https://www.tiktok.com';
+            return localStorage.getItem('flow_active_tiktok') || globalConfig.tiktok || 'https://www.tiktok.com/@xxd5974';
         }
 
         // ==================== TIKTOK FOLLOW-TO-UNLOCK LOGIC ====================
@@ -2407,7 +2423,11 @@
 
             // Reveal Link4M Download Button
             const finalBtn = document.getElementById('btnFinalLink4m');
-            if (finalBtn) finalBtn.style.display = 'flex';
+            if (finalBtn) {
+                finalBtn.href = generateDynamicLink4m();
+                finalBtn.target = '_blank';
+                finalBtn.style.display = 'flex';
+            }
 
             const banner = document.getElementById('unlockBannerText');
             if (banner) {
@@ -2416,16 +2436,17 @@
                         🎉 ĐÃ XÁC MINH & MỞ KHÓA THÀNH CÔNG!
                     </div>
                     <div style="font-size: 12px; color: #cbd5e1; line-height: 1.45;">
-                        Bấm nút màu cam bên dưới để bắt đầu vượt link Link4M và tải FlowOptimize APK!
+                        Bấm nút màu cam bên dưới để bắt đầu vượt link Link4M và tải FlowOptimize APK! Phiên tải có hiệu lực trong 5 phút.
                     </div>
                 `;
             }
         }
 
-        function executeLink4mRedirect() {
-            const url = getActiveLink4m();
-            closeUnlockModal();
-            window.open(url, '_blank');
+        function executeLink4mRedirect(e) {
+            const freshUrl = generateDynamicLink4m();
+            const finalBtn = document.getElementById('btnFinalLink4m');
+            if (finalBtn) finalBtn.href = freshUrl;
+            setTimeout(closeUnlockModal, 400);
         }
 
         // ==================== ADMIN PORTAL LOGIC ====================
@@ -2439,15 +2460,20 @@
                 navAdmin.style.display = isAdminLoggedIn() ? 'inline-block' : 'none';
             }
 
-            const currentActive = getActiveLink4m();
+            const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
             const label = document.getElementById('adminCurrentActiveLabel');
             if (label) {
-                label.textContent = currentActive;
+                label.textContent = apiToken;
             }
 
-            const inputLink4m = document.getElementById('adminLink4mActiveInput');
-            if (inputLink4m && currentActive !== 'https://link4m.com') {
-                inputLink4m.value = currentActive;
+            const inputApiToken = document.getElementById('adminApiTokenInput');
+            if (inputApiToken) {
+                inputApiToken.value = apiToken;
+            }
+
+            const inputDest = document.getElementById('adminDestinationInput');
+            if (inputDest) {
+                inputDest.value = globalConfig.destination_apk || 'https://gofile.io/d/c5EA5E6t';
             }
 
             const inputTikTok = document.getElementById('adminTikTokActiveInput');
@@ -2530,44 +2556,52 @@
         }
 
         function saveAdminLink4mSettings() {
-            const inputLink4m = document.getElementById('adminLink4mActiveInput');
-            let valLink4m = inputLink4m ? inputLink4m.value.trim() : '';
+            const inputApiToken = document.getElementById('adminApiTokenInput');
+            let valApiToken = inputApiToken ? inputApiToken.value.trim() : '';
+
+            const inputDest = document.getElementById('adminDestinationInput');
+            let valDest = inputDest ? inputDest.value.trim() : '';
 
             const inputTikTok = document.getElementById('adminTikTokActiveInput');
             let valTikTok = inputTikTok ? inputTikTok.value.trim() : '';
 
-            if (!valLink4m) {
-                alert('Vui lòng dán liên kết Link4M bạn đã rút gọn!');
+            if (!valApiToken) {
+                alert('Vui lòng nhập API Token Link4M!');
                 return;
             }
-            if (!valLink4m.startsWith('http')) {
-                valLink4m = 'https://' + valLink4m;
-                inputLink4m.value = valLink4m;
+            if (!valDest) {
+                valDest = 'https://gofile.io/d/c5EA5E6t';
             }
             if (valTikTok && !valTikTok.startsWith('http')) {
                 valTikTok = 'https://' + valTikTok;
-                inputTikTok.value = valTikTok;
+                if (inputTikTok) inputTikTok.value = valTikTok;
             }
 
-            localStorage.setItem('flow_active_link4m', valLink4m);
-            if (valTikTok) localStorage.setItem('flow_active_tiktok', valTikTok);
-            globalConfig.link4m = valLink4m;
+            globalConfig.api_token = valApiToken;
+            globalConfig.destination_apk = valDest;
             if (valTikTok) globalConfig.tiktok = valTikTok;
 
-            // Sync to server config.json via API
-            fetch('/api/save-config', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    link4m: valLink4m,
-                    tiktok: valTikTok || globalConfig.tiktok,
-                    wait_seconds: 8
-                })
-            }).then(r => r.json()).then(res => {
-                console.log('Server synced:', res);
-            }).catch(e => {
-                console.log('Saved to local storage');
-            });
+            localStorage.setItem('flow_api_token', valApiToken);
+            localStorage.setItem('flow_destination_apk', valDest);
+            if (valTikTok) localStorage.setItem('flow_active_tiktok', valTikTok);
+
+            // Sync to server config.json via API (khi chạy trên web server cục bộ)
+            if (window.location.protocol.startsWith('http') && !window.location.hostname.includes('github.io')) {
+                fetch('/api/save-config', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        api_token: valApiToken,
+                        destination_apk: valDest,
+                        tiktok: valTikTok || globalConfig.tiktok,
+                        wait_seconds: 8
+                    })
+                }).then(r => r.json()).then(res => {
+                    console.log('Server synced:', res);
+                }).catch(e => {
+                    console.log('Saved to local storage');
+                });
+            }
 
             updateAdminUI();
 
@@ -2576,15 +2610,11 @@
                 alertBox.style.display = 'block';
                 setTimeout(() => { alertBox.style.display = 'none'; }, 4000);
             }
-            alert('✓ Đã lưu và đồng bộ thành công!\nTừ giờ, người dùng trên MỌI THIẾT BỊ (PC, iPhone, Android) sau khi bấm theo dõi TikTok 8s sẽ được nhận link rút gọn:\n' + valLink4m);
+            alert('✓ Đã lưu và đồng bộ thành công!\nTừ giờ, người dùng trên MỌI THIẾT BỊ (PC, iPhone, Android) sau khi bấm theo dõi TikTok 8s sẽ được hệ thống sinh link Link4M tự động để vượt link.');
         }
 
         function testActiveLink4m() {
-            const url = getActiveLink4m();
-            if (url === 'https://link4m.com') {
-                alert('Bạn chưa cấu hình link rút gọn! Vui lòng dán link rút gọn vào ô trên và nhấn Lưu.');
-                return;
-            }
+            const url = generateDynamicLink4m();
             window.open(url, '_blank');
         }
 
