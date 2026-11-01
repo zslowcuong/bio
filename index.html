@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -493,7 +493,7 @@
             </div>
 
             <!-- State 3: Ready to Download Link4M Button -->
-            <a id="btnFinalLink4m" href="javascript:void(0)" onclick="executeLink4mRedirect()" class="btn-final-link4m" style="display: none;">
+            <a id="btnFinalLink4m" href="#" target="_blank" onclick="executeLink4mRedirect(event)" class="btn-final-link4m" style="display: none;">
                 <span style="font-size: 18px;">🔥</span>
                 <span>LẤY LINK TẢI FLOWOPTIMIZE (LINK4M)</span>
             </a>
@@ -506,15 +506,18 @@
 
     <script>
         let globalConfig = {
-            link4m: "https://link4m.com",
-            tiktok: "https://www.tiktok.com/@xxd5974"
+            api_token: "6ae77b1c1473a714b32b2a3a",
+            destination_apk: "https://gofile.io/d/c5EA5E6t",
+            tiktok: "https://www.tiktok.com/@xxd5974",
+            wait_seconds: 8
         };
 
         // Fetch shared server config
         fetch('config.json?v=' + Date.now())
             .then(res => res.json())
             .then(data => {
-                if (data.link4m) globalConfig.link4m = data.link4m;
+                if (data.api_token) globalConfig.api_token = data.api_token;
+                if (data.destination_apk) globalConfig.destination_apk = data.destination_apk;
                 if (data.tiktok) globalConfig.tiktok = data.tiktok;
             })
             .catch(() => {});
@@ -522,6 +525,16 @@
         let unlockTimerInterval = null;
         let unlockHiddenTimeout = null;
         let hasUnlocked = false;
+
+        function generateDynamicLink4m() {
+            const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
+            const dest = globalConfig.destination_apk || 'https://gofile.io/d/c5EA5E6t';
+            // Tạo chuỗi định danh phiên duy nhất chống trùng thiết bị và chống hết hạn link (session 3-5 phút mới toanh)
+            const nonce = Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+            const sep = dest.includes('?') ? '&' : '?';
+            const uniqueDest = dest + sep + 'session=' + nonce;
+            return 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(uniqueDest);
+        }
 
         function openUnlockModal() {
             hasUnlocked = false;
@@ -531,6 +544,11 @@
             document.getElementById('btnFinalLink4m').style.display = 'none';
             document.getElementById('unlockProgressBar').style.width = '0%';
             document.getElementById('unlockCountdownNum').textContent = '8';
+
+            const banner = document.getElementById('unlockBannerText');
+            if (banner) {
+                banner.innerHTML = `Bấm nút bên dưới để <b>Follow kênh TikTok Flowly (@xxd5974)</b>, sau 8 giây hệ thống sẽ tự động mở khóa link tải!`;
+            }
 
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);
             if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
@@ -586,21 +604,30 @@
 
             document.getElementById('btnFollowTikTok').style.display = 'none';
             document.getElementById('unlockVerifyingBox').style.display = 'none';
-            document.getElementById('btnFinalLink4m').style.display = 'flex';
+
+            const finalBtn = document.getElementById('btnFinalLink4m');
+            finalBtn.href = generateDynamicLink4m();
+            finalBtn.target = '_blank';
+            finalBtn.style.display = 'flex';
 
             document.getElementById('unlockBannerText').innerHTML = `
                 <div style="font-weight: 800; color: #34d399; font-size: 13px; margin-bottom: 2px;">
                     🎉 ĐÃ MỞ KHÓA THÀNH CÔNG!
                 </div>
                 <div style="font-size: 11.5px; color: #cbd5e1;">
-                    Bấm nút màu cam bên dưới để bắt đầu vượt link Link4M!
+                    Bấm nút màu cam bên dưới để bắt đầu vượt link Link4M! Phiên tải có hiệu lực trong 5 phút.
                 </div>
             `;
         }
 
-        function executeLink4mRedirect() {
-            closeUnlockModal();
-            window.open(globalConfig.link4m, '_blank');
+        function executeLink4mRedirect(e) {
+            // Tự động gán link mới nhất ngay khi click chuột / chạm màn hình
+            const freshUrl = generateDynamicLink4m();
+            const finalBtn = document.getElementById('btnFinalLink4m');
+            if (finalBtn) {
+                finalBtn.href = freshUrl;
+            }
+            setTimeout(closeUnlockModal, 400);
         }
 
         document.addEventListener('keydown', function(e) {
