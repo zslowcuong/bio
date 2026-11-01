@@ -1,0 +1,611 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Flowly • Link Bio Tải App & Mạng Xã Hội</title>
+    <meta name="description" content="Trang liên kết chính thức của Flowly. Tải FlowOptimize v2.6 Ultra Pro, theo dõi kênh TikTok và hướng dẫn tối ưu Android.">
+    <meta name="theme-color" content="#070d1e">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #070d1e;
+            --accent: #38bdf8;
+            --pink: #ec4899;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --gradient-primary: linear-gradient(135deg, #0284c7 0%, #db2777 100%);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-top: env(safe-area-inset-top, 0px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: calc(40px + var(--safe-top)) 18px calc(40px + var(--safe-bottom));
+            background-image: 
+                radial-gradient(circle at 50% 10%, rgba(56, 189, 248, 0.18) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .bio-container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Avatar with Glowing Ring */
+        .avatar-wrap {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .avatar-img {
+            width: 96px;
+            height: 96px;
+            border-radius: 28px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4), 0 0 40px rgba(236, 72, 153, 0.3);
+            animation: pulseGlow 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4); }
+            100% { transform: scale(1.04); box-shadow: 0 14px 40px rgba(236, 72, 153, 0.5); }
+        }
+
+        /* Profile Info */
+        .profile-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .badge-verified {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 19px;
+            height: 19px;
+            background: #0284c7;
+            color: #ffffff;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        .profile-handle {
+            font-size: 13.5px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .profile-bio {
+            font-size: 13.5px;
+            color: #cbd5e1;
+            line-height: 1.55;
+            max-width: 380px;
+            margin-bottom: 24px;
+        }
+
+        /* Social Icon Pills */
+        .socials-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .social-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 8px 16px;
+            border-radius: 99px;
+            color: #f8fafc;
+            text-decoration: none;
+            font-size: 12.5px;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+        }
+
+        .social-pill:hover, .social-pill:active {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Links List */
+        .links-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 35px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(15, 23, 42, 0.75);
+            border: 1.5px solid rgba(56, 189, 248, 0.25);
+            border-radius: 18px;
+            padding: 16px 20px;
+            text-decoration: none;
+            color: #ffffff;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .link-card:hover {
+            transform: translateY(-3px) scale(1.01);
+            border-color: var(--accent);
+            box-shadow: 0 12px 35px var(--accent-glow);
+        }
+
+        .link-card:active {
+            transform: scale(0.98);
+        }
+
+        .link-card.featured {
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.35) 0%, rgba(219, 39, 119, 0.35) 100%);
+            border-color: rgba(236, 72, 153, 0.5);
+            box-shadow: 0 10px 30px rgba(219, 39, 119, 0.3);
+        }
+
+        .link-card.featured:hover {
+            box-shadow: 0 14px 40px rgba(219, 39, 119, 0.5);
+            border-color: #ec4899;
+        }
+
+        .link-card-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-align: left;
+        }
+
+        .link-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .link-title {
+            font-size: 14.5px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 3px;
+        }
+
+        .link-sub {
+            font-size: 11.5px;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .link-arrow {
+            font-size: 16px;
+            color: #64748b;
+            transition: transform 0.2s;
+        }
+
+        .link-card:hover .link-arrow {
+            transform: translateX(4px);
+            color: var(--accent);
+        }
+
+        /* Footer */
+        .bio-footer {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: auto;
+        }
+
+        .bio-footer b {
+            color: #94a3b8;
+        }
+
+        /* ==================== UNLOCK MODAL STYLES ==================== */
+        .unlock-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(2, 6, 23, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .unlock-modal-overlay.active {
+            display: flex;
+        }
+
+        .unlock-modal-card {
+            background: linear-gradient(145deg, rgba(11, 19, 43, 0.98), rgba(20, 30, 55, 0.98));
+            border: 1.5px solid rgba(56, 189, 248, 0.45);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85);
+            border-radius: 26px;
+            width: 100%;
+            max-width: 440px;
+            padding: 28px 22px;
+            position: relative;
+            text-align: center;
+            animation: springIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes springIn {
+            0% { opacity: 0; transform: scale(0.85) translateY(24px); }
+            60% { opacity: 1; transform: scale(1.03) translateY(-4px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .unlock-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #cbd5e1;
+            font-size: 20px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .btn-tiktok-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            background: #000000;
+            color: #ffffff;
+            padding: 14px 18px;
+            border-radius: 16px;
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            box-shadow: -3px -3px 15px rgba(0, 242, 254, 0.35), 3px 3px 15px rgba(254, 44, 85, 0.45);
+            margin-bottom: 12px;
+        }
+
+        .btn-final-link4m {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background: linear-gradient(135deg, #db2777 0%, #ea580c 100%);
+            color: #ffffff;
+            padding: 15px 18px;
+            border-radius: 16px;
+            font-size: 13.5px;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 10px 35px rgba(234, 88, 12, 0.55);
+            cursor: pointer;
+        }
+
+        .unlock-progress-track {
+            width: 100%;
+            height: 6px;
+            background: #1e293b;
+            border-radius: 99px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .unlock-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #38bdf8, #ec4899, #f59e0b);
+            border-radius: 99px;
+            transition: width 0.08s linear;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bio-container">
+        <!-- Avatar -->
+        <div class="avatar-wrap">
+            <img src="app_logo.png" alt="Flowly Avatar" class="avatar-img">
+        </div>
+
+        <!-- Name & Handle -->
+        <h1 class="profile-name">
+            <span>Flowly</span>
+            <span class="badge-verified" title="Đã xác minh">✓</span>
+        </h1>
+        <div class="profile-handle">@xxd5974</div>
+        <p class="profile-bio">
+            Tối ưu hóa Android & Gaming eSports 🚀<br>
+            Mở khóa 90Hz/120Hz • Dynamic 360p/480p • Không Cần Root!
+        </p>
+
+        <!-- Social Pill -->
+        <div class="socials-row">
+            <a href="https://www.tiktok.com/@xxd5974" target="_blank" class="social-pill">
+                <span>🎵 Kênh TikTok: @xxd5974</span>
+            </a>
+        </div>
+
+        <!-- Links List -->
+        <div class="links-list">
+            <!-- 1. Follow TikTok -->
+            <a href="https://www.tiktok.com/@xxd5974" target="_blank" class="link-card">
+                <div class="link-card-left">
+                    <div class="link-icon-box" style="background: rgba(254, 44, 85, 0.15); border-color: rgba(254, 44, 85, 0.4); color: #fe2c55;">
+                        🎵
+                    </div>
+                    <div>
+                        <div class="link-title">Theo Dõi Kênh TikTok Flowly</div>
+                        <div class="link-sub">Cập nhật video mẹo tối ưu game mới nhất</div>
+                    </div>
+                </div>
+                <span class="link-arrow">➔</span>
+            </a>
+
+            <!-- 2. Download APK (Featured) -->
+            <div onclick="openUnlockModal()" class="link-card featured">
+                <div class="link-card-left">
+                    <div class="link-icon-box" style="background: rgba(234, 88, 12, 0.25); border-color: #ea580c; color: #fb923c;">
+                        🔥
+                    </div>
+                    <div>
+                        <div class="link-title">Tải Về FlowOptimize APK v2.6</div>
+                        <div class="link-sub">Bản Pro siêu mượt • Tích hợp 5 Theme Anime</div>
+                    </div>
+                </div>
+                <span class="link-arrow">➔</span>
+            </div>
+
+            <!-- 3. Full Showcase Website -->
+            <a href="showcase.html" class="link-card">
+                <div class="link-card-left">
+                    <div class="link-icon-box" style="background: rgba(56, 189, 248, 0.15); border-color: var(--accent); color: var(--accent);">
+                        🌐
+                    </div>
+                    <div>
+                        <div class="link-title">Website Giới Thiệu Tính Năng Đầy Đủ</div>
+                        <div class="link-sub">Xem bảng tính DPI, hình ảnh 5 Theme Anime</div>
+                    </div>
+                </div>
+                <span class="link-arrow">➔</span>
+            </a>
+
+            <!-- 4. Shizuku Guide -->
+            <a href="showcase.html#guide" class="link-card">
+                <div class="link-card-left">
+                    <div class="link-icon-box" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399;">
+                        📖
+                    </div>
+                    <div>
+                        <div class="link-title">Hướng Dẫn Kích Hoạt Shizuku (ADB)</div>
+                        <div class="link-sub">Ghép đôi Wi-Fi hoặc kích hoạt máy tính</div>
+                    </div>
+                </div>
+                <span class="link-arrow">➔</span>
+            </a>
+        </div>
+
+        <div class="bio-footer">
+            <p><b>Flowly</b> • FlowOptimize Gaming Engine 2026</p>
+            <p style="font-size: 11px; margin-top: 4px; opacity: 0.7;">An toàn 100% • Không virus • Không yêu cầu Root</p>
+        </div>
+    </div>
+
+    <!-- ==================== TIKTOK FOLLOW-TO-UNLOCK MODAL ==================== -->
+    <div id="unlockDownloadModal" class="unlock-modal-overlay" onclick="closeUnlockOnBackdrop(event)">
+        <div class="unlock-modal-card">
+            <button class="unlock-close-btn" onclick="closeUnlockModal()">×</button>
+            
+            <div style="font-size: 11px; font-weight: 800; color: #38bdf8; background: rgba(56,189,248,0.12); border: 1px solid #38bdf8; padding: 4px 12px; border-radius: 99px; display: inline-block; margin-bottom: 14px;">
+                ● XÁC MINH MỞ KHÓA TẢI VỀ
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 12px; background: rgba(2, 6, 23, 0.6); padding: 12px; border-radius: 14px; margin-bottom: 14px; text-align: left;">
+                <img src="app_logo.png" alt="FlowOptimize" style="width: 40px; height: 40px; border-radius: 10px; border: 1px solid #38bdf8;">
+                <div>
+                    <div style="font-size: 14px; font-weight: 800; color: #fff;">FlowOptimize v2.6 Ultra Pro</div>
+                    <div style="font-size: 11px; color: #94a3b8;">Dung lượng: 7.18 MB • Quyền: Shizuku ADB</div>
+                </div>
+            </div>
+
+            <div id="unlockBannerText" style="background: rgba(236, 72, 153, 0.12); border: 1px solid rgba(236,72,153,0.35); border-radius: 12px; padding: 12px; margin-bottom: 16px; text-align: left; font-size: 12px; color: #cbd5e1;">
+                Bấm nút bên dưới để <b>Follow kênh TikTok Flowly (@xxd5974)</b>, sau 8 giây hệ thống sẽ tự động mở khóa link tải!
+            </div>
+
+            <!-- State 1: Follow TikTok Button -->
+            <button id="btnFollowTikTok" type="button" class="btn-tiktok-action" onclick="handleTikTokClick()">
+                <span style="font-size: 18px;">🎵</span>
+                <span style="font-weight: 800; font-size: 13px;">THEO DÕI TIKTOK ĐỂ MỞ KHÓA</span>
+            </button>
+
+            <!-- State 2: Verifying Progress -->
+            <div id="unlockVerifyingBox" style="display: none; background: rgba(2, 6, 23, 0.7); border: 1px solid #334155; border-radius: 14px; padding: 14px; margin-bottom: 12px; text-align: left;">
+                <div style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 2px;">
+                    Đang xác minh theo dõi...
+                </div>
+                <div style="font-size: 11.5px; color: #94a3b8;">
+                    Mở khóa sau <b id="unlockCountdownNum" style="color: #38bdf8; font-size: 14px;">8</b> giây
+                </div>
+                <div class="unlock-progress-track">
+                    <div id="unlockProgressBar" class="unlock-progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- State 3: Ready to Download Link4M Button -->
+            <a id="btnFinalLink4m" href="javascript:void(0)" onclick="executeLink4mRedirect()" class="btn-final-link4m" style="display: none;">
+                <span style="font-size: 18px;">🔥</span>
+                <span>LẤY LINK TẢI FLOWOPTIMIZE (LINK4M)</span>
+            </a>
+
+            <div style="font-size: 11px; color: #64748b; margin-top: 14px;">
+                ✓ Xác minh tự động • Hoàn toàn miễn phí 100%
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let globalConfig = {
+            link4m: "https://link4m.com",
+            tiktok: "https://www.tiktok.com/@xxd5974"
+        };
+
+        // Fetch shared server config
+        fetch('config.json?v=' + Date.now())
+            .then(res => res.json())
+            .then(data => {
+                if (data.link4m) globalConfig.link4m = data.link4m;
+                if (data.tiktok) globalConfig.tiktok = data.tiktok;
+            })
+            .catch(() => {});
+
+        let unlockTimerInterval = null;
+        let unlockHiddenTimeout = null;
+        let hasUnlocked = false;
+
+        function openUnlockModal() {
+            hasUnlocked = false;
+            document.getElementById('unlockDownloadModal').classList.add('active');
+            document.getElementById('btnFollowTikTok').style.display = 'flex';
+            document.getElementById('unlockVerifyingBox').style.display = 'none';
+            document.getElementById('btnFinalLink4m').style.display = 'none';
+            document.getElementById('unlockProgressBar').style.width = '0%';
+            document.getElementById('unlockCountdownNum').textContent = '8';
+
+            if (unlockTimerInterval) clearInterval(unlockTimerInterval);
+            if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
+
+            // Hidden 8s timeout
+            unlockHiddenTimeout = setTimeout(() => {
+                completeUnlockProcess();
+            }, 8000);
+        }
+
+        function closeUnlockModal() {
+            document.getElementById('unlockDownloadModal').classList.remove('active');
+            if (unlockTimerInterval) clearInterval(unlockTimerInterval);
+            if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
+        }
+
+        function closeUnlockOnBackdrop(e) {
+            if (e.target.id === 'unlockDownloadModal') {
+                closeUnlockModal();
+            }
+        }
+
+        function handleTikTokClick() {
+            window.open(globalConfig.tiktok, '_blank');
+            document.getElementById('btnFollowTikTok').style.display = 'none';
+            document.getElementById('unlockVerifyingBox').style.display = 'block';
+
+            let totalMs = 8000;
+            let startTime = Date.now();
+            if (unlockTimerInterval) clearInterval(unlockTimerInterval);
+
+            unlockTimerInterval = setInterval(() => {
+                let elapsed = Date.now() - startTime;
+                let pct = Math.min(100, (elapsed / totalMs) * 100);
+                let remaining = Math.max(0, Math.ceil((totalMs - elapsed) / 1000));
+
+                document.getElementById('unlockProgressBar').style.width = pct + '%';
+                document.getElementById('unlockCountdownNum').textContent = remaining;
+
+                if (elapsed >= totalMs) {
+                    clearInterval(unlockTimerInterval);
+                    completeUnlockProcess();
+                }
+            }, 50);
+        }
+
+        function completeUnlockProcess() {
+            if (hasUnlocked) return;
+            hasUnlocked = true;
+
+            if (unlockTimerInterval) clearInterval(unlockTimerInterval);
+            if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
+
+            document.getElementById('btnFollowTikTok').style.display = 'none';
+            document.getElementById('unlockVerifyingBox').style.display = 'none';
+            document.getElementById('btnFinalLink4m').style.display = 'flex';
+
+            document.getElementById('unlockBannerText').innerHTML = `
+                <div style="font-weight: 800; color: #34d399; font-size: 13px; margin-bottom: 2px;">
+                    🎉 ĐÃ MỞ KHÓA THÀNH CÔNG!
+                </div>
+                <div style="font-size: 11.5px; color: #cbd5e1;">
+                    Bấm nút màu cam bên dưới để bắt đầu vượt link Link4M!
+                </div>
+            `;
+        }
+
+        function executeLink4mRedirect() {
+            closeUnlockModal();
+            window.open(globalConfig.link4m, '_blank');
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeUnlockModal();
+        });
+    </script>
+</body>
+</html>
