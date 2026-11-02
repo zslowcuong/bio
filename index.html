@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -418,7 +418,7 @@
             </div>
 
             <!-- 3. Full Showcase Website -->
-            <a href="https://browsing-setup-plane-pot.trycloudflare.com" target="_blank" class="link-card">
+            <a href="https://exercise-probability-attending-paintings.trycloudflare.com" target="_blank" class="link-card">
                 <div class="link-card-left">
                     <div class="link-icon-box" style="background: rgba(56, 189, 248, 0.15); border-color: var(--accent); color: var(--accent);">
                         🌐
@@ -432,7 +432,7 @@
             </a>
 
             <!-- 4. Shizuku Guide -->
-            <a href="https://browsing-setup-plane-pot.trycloudflare.com/#guide" target="_blank" class="link-card">
+            <a href="https://exercise-probability-attending-paintings.trycloudflare.com/#guide" target="_blank" class="link-card">
                 <div class="link-card-left">
                     <div class="link-icon-box" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399;">
                         📖
@@ -507,7 +507,7 @@
     <script>
         let globalConfig = {
             api_token: "6ae77b1c1473a714b32b2a3a",
-            destination_apk: "https://gofile.io/d/SmgoX7Eg",
+            destination_apk: "https://gofile.io/d/HkkDx5FO",
             tiktok: "https://www.tiktok.com/@xxd5974",
             wait_seconds: 8
         };
@@ -528,7 +528,7 @@
 
         function generateDynamicLink4m() {
             const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
-            const dest = globalConfig.destination_apk || 'https://gofile.io/d/SmgoX7Eg';
+            const dest = globalConfig.destination_apk || 'https://gofile.io/d/HkkDx5FO';
             // Tạo chuỗi định danh phiên duy nhất chống trùng thiết bị và chống hết hạn link (session 3-5 phút mới toanh)
             const nonce = Date.now() + '_' + Math.random().toString(36).substring(2, 7);
             const sep = dest.includes('?') ? '&' : '?';
@@ -536,8 +536,25 @@
             return 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(uniqueDest);
         }
 
+        let preloadedFreshLink = null;
+        async function fetchFreshLink4mApi() {
+            try {
+                const res = await fetch('/api/generate-link4m', { signal: AbortSignal.timeout(4000) });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.status === 'success' && data.shortenedUrl) {
+                        preloadedFreshLink = data.shortenedUrl;
+                        return data.shortenedUrl;
+                    }
+                }
+            } catch(e) {}
+            return generateDynamicLink4m();
+        }
+
         function openUnlockModal() {
             hasUnlocked = false;
+            preloadedFreshLink = null;
+            fetchFreshLink4mApi();
             document.getElementById('unlockDownloadModal').classList.add('active');
             document.getElementById('btnFollowTikTok').style.display = 'flex';
             document.getElementById('unlockVerifyingBox').style.display = 'none';
@@ -606,9 +623,12 @@
             document.getElementById('unlockVerifyingBox').style.display = 'none';
 
             const finalBtn = document.getElementById('btnFinalLink4m');
-            finalBtn.href = generateDynamicLink4m();
+            finalBtn.href = preloadedFreshLink || generateDynamicLink4m();
             finalBtn.target = '_blank';
             finalBtn.style.display = 'flex';
+            if (!preloadedFreshLink) {
+                fetchFreshLink4mApi().then(url => { if (url) finalBtn.href = url; });
+            }
 
             document.getElementById('unlockBannerText').innerHTML = `
                 <div style="font-weight: 800; color: #34d399; font-size: 13px; margin-bottom: 2px;">
@@ -621,11 +641,9 @@
         }
 
         function executeLink4mRedirect(e) {
-            // Tự động gán link mới nhất ngay khi click chuột / chạm màn hình
-            const freshUrl = generateDynamicLink4m();
             const finalBtn = document.getElementById('btnFinalLink4m');
-            if (finalBtn) {
-                finalBtn.href = freshUrl;
+            if (finalBtn && !finalBtn.href.includes('link4m')) {
+                finalBtn.href = preloadedFreshLink || generateDynamicLink4m();
             }
             setTimeout(closeUnlockModal, 400);
         }
@@ -636,4 +654,5 @@
     </script>
 </body>
 </html>
+
 
