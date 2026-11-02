@@ -2138,7 +2138,7 @@
                 <div class="admin-form-group" style="margin-bottom: 4px;">
                     <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">2. Link Gốc Gofile Cloud (Dự Phòng 100% Vĩnh Viễn):</div>
                     <div class="admin-copy-row">
-                        <input type="text" id="adminOriginGofileUrl" readonly value="https://gofile.io/d/HkkDx5FO">
+                        <input type="text" id="adminOriginGofileUrl" readonly value="https://gofile.io/d/hjP08Ofv">
                         <button type="button" class="admin-copy-chip" onclick="copyAdminInput('adminOriginGofileUrl', this)">Sao Chép</button>
                     </div>
                 </div>
@@ -2163,7 +2163,7 @@
                     <input type="text" id="adminApiTokenInput" class="admin-input" placeholder="Nhập API Token Link4M (VD: 6ae77b1c1473a714b32b2a3a)" style="margin-bottom: 10px;">
 
                     <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">2. Link Gốc Tải Về Sau Khi Vượt Link (Destination):</div>
-                    <input type="text" id="adminDestinationInput" class="admin-input" placeholder="Link tải file sau khi vượt link (VD: https://gofile.io/d/c5EA5E6t)" style="margin-bottom: 10px;">
+                    <input type="text" id="adminDestinationInput" class="admin-input" placeholder="Link tải file sau khi vượt link (VD: https://gofile.io/d/hjP08Ofv)" style="margin-bottom: 10px;">
                     
                     <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">3. Link Kênh TikTok (Để Người Dùng Theo Dõi Mở Khóa):</div>
                     <input type="text" id="adminTikTokActiveInput" class="admin-input" placeholder="Dán link kênh TikTok của bạn (VD: https://www.tiktok.com/@xxd5974)" style="margin-bottom: 12px;">
@@ -2283,7 +2283,7 @@
 
         let globalConfig = {
             api_token: "6ae77b1c1473a714b32b2a3a",
-            destination_apk: "https://gofile.io/d/HkkDx5FO",
+            destination_apk: "https://gofile.io/d/hjP08Ofv",
             tiktok: "https://www.tiktok.com/@xxd5974",
             wait_seconds: 8
         };
@@ -2310,7 +2310,7 @@
 
         function generateDynamicLink4m() {
             const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
-            const dest = globalConfig.destination_apk || 'https://gofile.io/d/HkkDx5FO';
+            const dest = globalConfig.destination_apk || 'https://gofile.io/d/hjP08Ofv';
             // Tạo phiên tải duy nhất (unique session) chống đụng độ nhiều máy và chống hết hạn sau 3-5 phút
             const nonce = Date.now() + '_' + Math.random().toString(36).substring(2, 7);
             const sep = dest.includes('?') ? '&' : '?';
@@ -2501,7 +2501,7 @@
 
             const inputDest = document.getElementById('adminDestinationInput');
             if (inputDest) {
-                inputDest.value = globalConfig.destination_apk || 'https://gofile.io/d/HkkDx5FO';
+                inputDest.value = globalConfig.destination_apk || 'https://gofile.io/d/hjP08Ofv';
             }
 
             const inputTikTok = document.getElementById('adminTikTokActiveInput');
@@ -2598,7 +2598,7 @@
                 return;
             }
             if (!valDest) {
-                valDest = 'https://gofile.io/d/c5EA5E6t';
+                valDest = 'https://gofile.io/d/hjP08Ofv';
             }
             if (valTikTok && !valTikTok.startsWith('http')) {
                 valTikTok = 'https://' + valTikTok;
