@@ -1,7 +1,22 @@
 {
+  "project": "FlowOptimize & FlowS",
   "api_token": "6ae77b1c1473a714b32b2a3a",
-  "destination_apk": "https://gofile.io/d/hjP08Ofv",
   "tiktok": "https://www.tiktok.com/@xxd5974",
   "wait_seconds": 8,
-  "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/hjP08Ofv"
+  "flowoptimize": {
+    "name": "FlowOptimize Ultra Pro (Anime Edition)",
+    "version": "v2.6.0 Pro",
+    "package": "com.example.gameoptimizer",
+    "destination_apk": "https://gofile.io/d/ZUqi1crJ",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/ZUqi1crJ",
+    "direct_apk": "FlowOptimize.apk"
+  },
+  "flows": {
+    "name": "FlowS Gaming Edition (New Version)",
+    "version": "v3.5.0 Pro",
+    "package": "com.flows.gaming",
+    "destination_apk": "https://gofile.io/d/z3wUcYxV",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/z3wUcYxV",
+    "direct_apk": "FlowS.apk"
+  }
 }

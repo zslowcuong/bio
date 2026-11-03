@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>Flowly • Link Bio Tải App & Mạng Xã Hội</title>
-    <meta name="description"
-        content="Trang liên kết chính thức của Flowly. Tải FlowOptimize v2.6 Ultra Pro, theo dõi kênh TikTok và hướng dẫn tối ưu Android.">
+    <title>Flowly • Link Bio Tải App & Preview FlowS vs FlowOptimize</title>
+    <meta name="description" content="Trang liên kết chính thức của Flowly. Trải nghiệm trực tiếp Preview 2 ứng dụng FlowS (New Version) & FlowOptimize Ultra Pro, hướng dẫn full chức năng chi tiết và link tải vượt key Link4M.">
     <meta name="theme-color" content="#070d1e">
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Montserrat (Headers/Gaming/Numbers) & Playfair Display (Luxury Serif Headings) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-dark: #070d1e;
+            --bg-card: rgba(15, 23, 42, 0.85);
+            --bg-card-elevated: #0f172a;
             --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.45);
+            --neon-green: #00ff66;
+            --neon-green-glow: rgba(0, 255, 102, 0.45);
             --pink: #ec4899;
+            --pink-glow: rgba(236, 72, 153, 0.45);
+            --amber: #f59e0b;
+            --border-color: rgba(255, 255, 255, 0.1);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --gradient-primary: linear-gradient(135deg, #0284c7 0%, #db2777 100%);
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Montserrat', 'Plus Jakarta Sans', -apple-system, sans-serif;
             --safe-bottom: env(safe-area-inset-bottom, 0px);
             --safe-top: env(safe-area-inset-top, 0px);
         }
@@ -32,85 +37,130 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: var(--font-sans);
             background-color: var(--bg-dark);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: calc(40px + var(--safe-top)) 18px calc(40px + var(--safe-bottom));
+            padding: calc(32px + var(--safe-top)) 16px calc(50px + var(--safe-bottom));
             background-image:
-                radial-gradient(circle at 50% 10%, rgba(56, 189, 248, 0.18) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+                radial-gradient(circle at 50% 5%, rgba(56, 189, 248, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 85% 40%, rgba(236, 72, 153, 0.14) 0%, transparent 45%),
+                radial-gradient(circle at 15% 65%, rgba(0, 255, 102, 0.12) 0%, transparent 50%),
+                radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
             background-attachment: fixed;
             -webkit-font-smoothing: antialiased;
         }
 
-        .bio-container {
+        .serif {
+            font-family: var(--font-serif);
+        }
+
+        .main-wrapper {
             width: 100%;
-            max-width: 480px;
+            max-width: 640px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
         }
 
-        /* Avatar with Glowing Ring */
-        .avatar-wrap {
+        /* Profile Header */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .avatar-container {
             position: relative;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
-        .avatar-img {
-            width: 96px;
-            height: 96px;
-            border-radius: 28px;
-            object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4), 0 0 40px rgba(236, 72, 153, 0.3);
-            animation: pulseGlow 4s infinite alternate ease-in-out;
-        }
-
-        @keyframes pulseGlow {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4);
-            }
-
-            100% {
-                transform: scale(1.04);
-                box-shadow: 0 14px 40px rgba(236, 72, 153, 0.5);
-            }
-        }
-
-        /* Profile Info */
-        .profile-name {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 22px;
-            font-weight: 900;
+        .avatar-dual-box {
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+        }
+
+        .avatar-img {
+            width: 86px;
+            height: 86px;
+            border-radius: 26px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.45), 0 0 40px rgba(236, 72, 153, 0.35);
+            animation: pulseGlow 4s infinite alternate ease-in-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar-badge-app {
+            position: absolute;
+            bottom: -4px;
+            right: -6px;
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            border: 2px solid #070d1e;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            z-index: 3;
+            background: #000;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 10px 30px rgba(56, 189, 248, 0.4), 0 0 30px rgba(236, 72, 153, 0.3); }
+            100% { box-shadow: 0 14px 45px rgba(56, 189, 248, 0.7), 0 0 50px rgba(0, 255, 102, 0.4); }
+        }
+
+        .brand-badge {
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            padding: 4px 14px;
+            border-radius: 99px;
+            margin-bottom: 8px;
+            display: inline-flex;
+            align-items: center;
             gap: 6px;
-            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .profile-title {
+            font-size: 30px;
+            font-weight: 900;
             letter-spacing: -0.5px;
+            color: #ffffff;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .badge-verified {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 19px;
-            height: 19px;
-            background: #0284c7;
-            color: #ffffff;
+            width: 22px;
+            height: 22px;
+            background: var(--accent);
+            color: #070d1e;
             border-radius: 50%;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 900;
         }
 
@@ -118,154 +168,505 @@
             font-size: 13.5px;
             color: var(--accent);
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+        }
+
+        .profile-tagline {
+            font-size: 17px;
+            font-style: italic;
+            color: #cbd5e1;
+            margin-bottom: 8px;
         }
 
         .profile-bio {
-            font-size: 13.5px;
-            color: #cbd5e1;
+            font-size: 12.5px;
+            color: var(--text-muted);
             line-height: 1.55;
-            max-width: 380px;
-            margin-bottom: 24px;
+            max-width: 90%;
+            margin: 0 auto 18px;
         }
 
-        /* Social Icon Pills */
-        .socials-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
-
-        .social-pill {
+        /* TikTok Follow Button */
+        .btn-tiktok-pill {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(15, 23, 42, 0.75);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 8px 16px;
+            background: #000;
+            color: #fff;
+            padding: 10px 20px;
             border-radius: 99px;
-            color: #f8fafc;
+            font-size: 13px;
+            font-weight: 800;
             text-decoration: none;
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            box-shadow: -2px -2px 12px rgba(0, 242, 254, 0.35), 2px 2px 12px rgba(254, 44, 85, 0.45);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-bottom: 24px;
+        }
+
+        .btn-tiktok-pill:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: -3px -3px 18px rgba(0, 242, 254, 0.5), 3px 3px 18px rgba(254, 44, 85, 0.6);
+        }
+
+        /* Dual Fast Download Cards */
+        .download-cards-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-bottom: 34px;
+        }
+
+        @media (min-width: 580px) {
+            .download-cards-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .app-action-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 18px;
+            text-align: left;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1.5px solid var(--border-color);
+        }
+
+        .app-action-card.flows-card {
+            background: linear-gradient(145deg, rgba(17, 24, 20, 0.95), rgba(10, 16, 12, 0.95));
+            border-color: rgba(0, 255, 102, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 255, 102, 0.16);
+        }
+
+        .app-action-card.flows-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--neon-green);
+            box-shadow: 0 14px 35px rgba(0, 255, 102, 0.28);
+        }
+
+        .app-action-card.flowopt-card {
+            background: linear-gradient(145deg, rgba(20, 28, 48, 0.95), rgba(12, 18, 36, 0.95));
+            border-color: rgba(236, 72, 153, 0.5);
+            box-shadow: 0 10px 25px rgba(219, 39, 119, 0.16);
+        }
+
+        .app-action-card.flowopt-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--pink);
+            box-shadow: 0 14px 35px rgba(219, 39, 119, 0.28);
+        }
+
+        .card-top-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-app-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card-app-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+
+        .card-app-badge {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            padding: 2px 8px;
+            border-radius: 99px;
+            display: inline-block;
+        }
+
+        .card-app-desc {
+            font-size: 11.5px;
+            color: #cbd5e1;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .btn-card-download {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
             font-size: 12.5px;
-            font-weight: 700;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-card-download.flows {
+            background: linear-gradient(135deg, #15803d 0%, #00ff66 100%);
+            color: #052e16;
+            box-shadow: 0 6px 18px rgba(0, 255, 102, 0.3);
+        }
+
+        .btn-card-download.flowopt {
+            background: linear-gradient(135deg, #0284c7 0%, #db2777 100%);
+            color: #ffffff;
+            box-shadow: 0 6px 18px rgba(219, 39, 119, 0.3);
+        }
+
+        /* ==================== INTERACTIVE APP PREVIEW SECTION ==================== */
+        .preview-section {
+            width: 100%;
+            background: rgba(11, 18, 33, 0.9);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 26px;
+            padding: 26px 18px;
+            margin-bottom: 34px;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        .section-header-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section-kicker {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .section-headline {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.25;
+            margin-bottom: 6px;
+        }
+
+        .section-subline {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Segmented App Tabs Switcher */
+        .preview-tabs-row {
+            display: flex;
+            background: rgba(2, 6, 23, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 4px;
+            gap: 6px;
+            margin-bottom: 20px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .preview-tab-btn {
+            flex: 1;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 12.5px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .preview-tab-btn.active.flows {
+            background: linear-gradient(135deg, rgba(21, 128, 61, 0.9), rgba(0, 255, 102, 0.9));
+            color: #052e16;
+            box-shadow: 0 4px 15px rgba(0, 255, 102, 0.35);
+        }
+
+        .preview-tab-btn.active.flowopt {
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.9), rgba(219, 39, 119, 0.9));
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(219, 39, 119, 0.35);
+        }
+
+        /* Phone Mockup Frame */
+        .phone-frame-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto 16px;
+        }
+
+        .phone-device {
+            width: 100%;
+            height: 620px;
+            background: #000;
+            border-radius: 36px;
+            border: 4px solid #1e293b;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .phone-device.theme-flows {
+            border-color: rgba(0, 255, 102, 0.6);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 45px rgba(0, 255, 102, 0.25);
+        }
+
+        .phone-device.theme-flowopt {
+            border-color: rgba(236, 72, 153, 0.6);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 45px rgba(236, 72, 153, 0.25);
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 18px;
+            background: #000;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .phone-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #080c0a;
+            position: relative;
+            z-index: 10;
+        }
+
+        .preview-info-box {
+            background: rgba(2, 6, 23, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #cbd5e1;
+            text-align: left;
+            margin-top: 14px;
+        }
+
+        /* ==================== FULL FEATURES & DETAILED USAGE GUIDE ==================== */
+        .guide-section {
+            width: 100%;
+            margin-bottom: 34px;
+            text-align: left;
+        }
+
+        .guide-headline-wrap {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        /* Guide Tabs (FlowS vs FlowOptimize) */
+        .guide-switcher-tabs {
+            display: flex;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 4px;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .guide-tab-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .guide-tab-btn.active.flows {
+            background: rgba(0, 255, 102, 0.15);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+        }
+
+        .guide-tab-btn.active.flowopt {
+            background: rgba(236, 72, 153, 0.15);
+            border: 1px solid var(--pink);
+            color: #f472b6;
+        }
+
+        .guide-content-panel {
+            display: none;
+        }
+
+        .guide-content-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 14px;
             backdrop-filter: blur(10px);
             transition: all 0.2s ease;
         }
 
-        .social-pill:hover,
-        .social-pill:active {
-            background: rgba(56, 189, 248, 0.15);
-            border-color: var(--accent);
+        .feature-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
             transform: translateY(-2px);
         }
 
-        /* Links List */
-        .links-list {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-bottom: 35px;
-        }
-
-        .link-card {
+        .feature-card-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            background: rgba(15, 23, 42, 0.75);
-            border: 1.5px solid rgba(56, 189, 248, 0.25);
-            border-radius: 18px;
-            padding: 16px 20px;
-            text-decoration: none;
-            color: #ffffff;
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
+            gap: 12px;
+            margin-bottom: 10px;
         }
 
-        .link-card:hover {
-            transform: translateY(-3px) scale(1.01);
-            border-color: var(--accent);
-            box-shadow: 0 12px 35px var(--accent-glow);
-        }
-
-        .link-card:active {
-            transform: scale(0.98);
-        }
-
-        .link-card.featured {
-            background: linear-gradient(135deg, rgba(2, 132, 199, 0.35) 0%, rgba(219, 39, 119, 0.35) 100%);
-            border-color: rgba(236, 72, 153, 0.5);
-            box-shadow: 0 10px 30px rgba(219, 39, 119, 0.3);
-        }
-
-        .link-card.featured:hover {
-            box-shadow: 0 14px 40px rgba(219, 39, 119, 0.5);
-            border-color: #ec4899;
-        }
-
-        .link-card-left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            text-align: left;
-        }
-
-        .link-icon-box {
-            width: 44px;
-            height: 44px;
+        .feature-badge-icon {
+            width: 38px;
+            height: 38px;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.06);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 20px;
             flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .link-title {
-            font-size: 14.5px;
+        .feature-title-text {
+            font-size: 15px;
             font-weight: 800;
             color: #ffffff;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
-        .link-sub {
-            font-size: 11.5px;
-            color: #94a3b8;
-            font-weight: 500;
-        }
-
-        .link-arrow {
-            font-size: 16px;
-            color: #64748b;
-            transition: transform 0.2s;
-        }
-
-        .link-card:hover .link-arrow {
-            transform: translateX(4px);
+        .feature-sub-tag {
+            font-size: 11px;
             color: var(--accent);
+            font-weight: 700;
+        }
+
+        .feature-step-box {
+            background: rgba(2, 6, 23, 0.6);
+            border-radius: 12px;
+            padding: 12px 14px;
+            border-left: 3px solid var(--accent);
+            margin-top: 10px;
+            font-size: 12px;
+            line-height: 1.55;
+            color: #cbd5e1;
+        }
+
+        .feature-step-box.green {
+            border-left-color: var(--neon-green);
+        }
+
+        .feature-step-box.pink {
+            border-left-color: var(--pink);
+        }
+
+        .feature-step-box b {
+            color: #ffffff;
+        }
+
+        /* Comparison Table */
+        .comparison-card {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 22px 18px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 14px;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: left;
+        }
+
+        .comparison-table th {
+            color: var(--text-muted);
+            font-weight: 800;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
         }
 
         /* Footer */
-        .bio-footer {
-            font-size: 12px;
+        .site-footer {
+            font-size: 11.5px;
             color: #64748b;
+            text-align: center;
             margin-top: auto;
+            line-height: 1.6;
         }
 
-        .bio-footer b {
+        .site-footer b {
             color: #94a3b8;
         }
 
-        /* ==================== UNLOCK MODAL STYLES ==================== */
+        /* Unlock Modal Link4M */
         .unlock-modal-overlay {
             display: none;
             position: fixed;
@@ -273,7 +674,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(2, 6, 23, 0.88);
+            background: rgba(2, 6, 23, 0.9);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             z-index: 99999;
@@ -293,77 +694,48 @@
             border-radius: 26px;
             width: 100%;
             max-width: 440px;
-            padding: 28px 22px;
+            padding: 26px 20px;
             position: relative;
             text-align: center;
             animation: springIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
 
         @keyframes springIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.85) translateY(24px);
-            }
-
-            60% {
-                opacity: 1;
-                transform: scale(1.03) translateY(-4px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+            0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .unlock-close-btn {
             position: absolute;
-            top: 16px;
-            right: 16px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #cbd5e1;
-            font-size: 20px;
+            top: 14px;
+            right: 14px;
             width: 32px;
             height: 32px;
             border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: #94a3b8;
+            font-size: 14px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
         }
 
-        .btn-tiktok-action {
+        .app-card-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 8px;
             width: 100%;
-            background: #000000;
-            color: #ffffff;
-            padding: 14px 18px;
-            border-radius: 16px;
-            border: 1.5px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            box-shadow: -3px -3px 15px rgba(0, 242, 254, 0.35), 3px 3px 15px rgba(254, 44, 85, 0.45);
-            margin-bottom: 12px;
-        }
-
-        .btn-final-link4m {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            background: linear-gradient(135deg, #db2777 0%, #ea580c 100%);
-            color: #ffffff;
-            padding: 15px 18px;
-            border-radius: 16px;
-            font-size: 13.5px;
+            padding: 13px 18px;
+            border-radius: 12px;
+            font-size: 13px;
             font-weight: 800;
-            text-decoration: none;
-            box-shadow: 0 10px 35px rgba(234, 88, 12, 0.55);
+            border: none;
             cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
         }
 
         .unlock-progress-track {
@@ -384,142 +756,425 @@
         }
     </style>
 </head>
-
 <body>
 
-    <div class="bio-container">
-        <!-- Avatar -->
-        <div class="avatar-wrap">
-            <img src="app_logo.png" alt="Flowly Avatar" class="avatar-img">
-        </div>
-
-        <!-- Name & Handle -->
-        <h1 class="profile-name">
-            <span>Flowly</span>
-            <span class="badge-verified" title="Đã xác minh">✓</span>
-        </h1>
-        <div class="profile-handle">@xxd5974</div>
-        <p class="profile-bio">
-            Tối ưu hóa Android & Gaming eSports 🚀<br>
-            Mở khóa 90Hz/120Hz • Dynamic 360p/480p • Không Cần Root!
-        </p>
-
-        <!-- Social Pill -->
-        <div class="socials-row">
-            <a href="https://www.tiktok.com/@xxd5974" target="_blank" class="social-pill">
-                <span>🎵 Kênh TikTok: @xxd5974</span>
-            </a>
-        </div>
-
-        <!-- Links List -->
-        <div class="links-list">
-            <!-- 1. Follow TikTok -->
-            <a href="https://www.tiktok.com/@xxd5974" target="_blank" class="link-card">
-                <div class="link-card-left">
-                    <div class="link-icon-box"
-                        style="background: rgba(254, 44, 85, 0.15); border-color: rgba(254, 44, 85, 0.4); color: #fe2c55;">
-                        🎵
-                    </div>
-                    <div>
-                        <div class="link-title">Theo Dõi Kênh TikTok Flowly</div>
-                        <div class="link-sub">Cập nhật video mẹo tối ưu game mới nhất</div>
-                    </div>
+    <div class="main-wrapper">
+        <!-- Profile Header -->
+        <header class="profile-section">
+            <div class="avatar-container">
+                <div class="avatar-dual-box">
+                    <img src="app_logo.png" alt="Flowly Avatar" class="avatar-img" id="mainBioAvatar">
+                    <img src="flows_logo.png" alt="FlowS Badge" class="avatar-badge-app">
                 </div>
-                <span class="link-arrow">➔</span>
-            </a>
-
-            <!-- 2. Download APK (Featured) -->
-            <div onclick="openUnlockModal()" class="link-card featured">
-                <div class="link-card-left">
-                    <div class="link-icon-box"
-                        style="background: rgba(234, 88, 12, 0.25); border-color: #ea580c; color: #fb923c;">
-                        🔥
-                    </div>
-                    <div>
-                        <div class="link-title">Tải Về FlowOptimize APK v2.6</div>
-                        <div class="link-sub">Bản Pro siêu mượt • Tích hợp 5 Theme Anime</div>
-                    </div>
-                </div>
-                <span class="link-arrow">➔</span>
             </div>
 
-            <!-- 3. Full Showcase Website -->
-            <a href="showcase.html" target="_blank" class="link-card">
-                <div class="link-card-left">
-                    <div class="link-icon-box"
-                        style="background: rgba(56, 189, 248, 0.15); border-color: var(--accent); color: var(--accent);">
-                        🌐
-                    </div>
-                    <div>
-                        <div class="link-title">Website Giới Thiệu Tính Năng Đầy Đủ</div>
-                        <div class="link-sub">Xem bảng tính DPI, hình ảnh 5 Theme Anime</div>
-                    </div>
-                </div>
-                <span class="link-arrow">➔</span>
-            </a>
+            <div class="brand-badge">
+                <span>⚡</span>
+                <span>FLOWLY GAMING ENGINE 2026</span>
+            </div>
 
-            <!-- 4. Shizuku Guide -->
-            <a href="showcase.html#guide" target="_blank" class="link-card">
-                <div class="link-card-left">
-                    <div class="link-icon-box"
-                        style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399;">
-                        📖
-                    </div>
-                    <div>
-                        <div class="link-title">Hướng Dẫn Kích Hoạt Shizuku (ADB)</div>
-                        <div class="link-sub">Ghép đôi Wi-Fi hoặc kích hoạt máy tính</div>
-                    </div>
-                </div>
-                <span class="link-arrow">➔</span>
-            </a>
-        </div>
+            <h1 class="profile-title">
+                <span>Flowly</span>
+                <span class="badge-verified" title="Đã xác minh chính chủ">✓</span>
+            </h1>
+            <div class="profile-handle">@xxd5974</div>
 
-        <div class="bio-footer">
-            <p><b>Flowly</b> • FlowOptimize Gaming Engine 2026</p>
-            <p style="font-size: 11px; margin-top: 4px; opacity: 0.7;">An toàn 100% • Không virus • Không yêu cầu Root
+            <div class="profile-tagline serif">
+                "Nghệ Thuật Mở Khóa Giới Hạn Hiệu Năng & Độ Mượt eSports"
+            </div>
+
+            <p class="profile-bio">
+                Hệ sinh thái công cụ tối ưu phần cứng Android chuyên sâu qua Shizuku ADB (100% No Root).<br>
+                Hạ độ phân giải theo từng game • Mở khóa 120Hz mượt mà • Tự động hoàn trả gốc khi thoát!
             </p>
+
+            <!-- TikTok Follow Button -->
+            <a href="https://www.tiktok.com/@xxd5974" target="_blank" class="btn-tiktok-pill">
+                <span style="font-size: 16px;">🎵</span>
+                <span>KÊNH TIKTOK: @xxd5974</span>
+                <span style="color: #38bdf8; font-size: 11px;">➔</span>
+            </a>
+        </header>
+
+        <!-- Fast Download Cards (2 Apps) -->
+        <div class="download-cards-grid">
+            <!-- App 1: FlowS New Version -->
+            <div class="app-action-card flows-card">
+                <div>
+                    <div class="card-top-row">
+                        <img src="flows_logo.png" alt="FlowS" class="card-app-icon" style="border-color: #00ff66;">
+                        <div>
+                            <div class="card-app-title">FlowS - New Version</div>
+                            <span class="card-app-badge" style="background: rgba(0, 255, 102, 0.15); color: #00ff66;">GAMER TUNER (v3.5)</span>
+                        </div>
+                    </div>
+                    <div class="card-app-desc">
+                        • Quét game thật & hạ độ phân giải riêng<br>
+                        • Tự động hoàn trả gốc khi thoát hoặc tắt máy<br>
+                        • Khóa 120Hz & Chế độ CRAZY đầu 3x<br>
+                        • Nút Sửa Thanh Pin Trắng ColorOS/Realme
+                    </div>
+                </div>
+                <button type="button" onclick="openUnlockModal('flows')" class="btn-card-download flows">
+                    <span>⚡</span>
+                    <span>TẢI FLOWS (VƯỢT KEY LINK4M)</span>
+                </button>
+            </div>
+
+            <!-- App 2: FlowOptimize Ultra Pro -->
+            <div class="app-action-card flowopt-card">
+                <div>
+                    <div class="card-top-row">
+                        <img src="app_logo.png" alt="FlowOptimize" class="card-app-icon" style="border-color: #ec4899;">
+                        <div>
+                            <div class="card-app-title">FlowOptimize Ultra Pro</div>
+                            <span class="card-app-badge" style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">THEME ANIME (v2.6)</span>
+                        </div>
+                    </div>
+                    <div class="card-app-desc">
+                        • 7 Theme Anime (Gojo, Your Name, Conan...)<br>
+                        • Bong bóng nổi HUD PopUp RAM trên game<br>
+                        • Nút Khôi Phục Toàn Diện 1-Chạm<br>
+                        • Đã tích hợp nút Fix Thanh Pin Trắng
+                    </div>
+                </div>
+                <button type="button" onclick="openUnlockModal('flowoptimize')" class="btn-card-download flowopt">
+                    <span>🔥</span>
+                    <span>TẢI FLOWOPTIMIZE (LINK4M)</span>
+                </button>
+            </div>
         </div>
+
+        <!-- ==================== 1. INTERACTIVE LIVE APP PREVIEW ==================== -->
+        <section class="preview-section" id="previewApp">
+            <div class="section-header-box">
+                <span class="section-kicker">TRẢI NGHIỆM TRỰC TIẾP TRÊN WEB</span>
+                <h2 class="section-headline serif">Xem Thử Giao Diện 2 Ứng Dụng</h2>
+                <p class="section-subline">
+                    Nhấn chọn ứng dụng bên dưới để xem trước và trực tiếp tương tác với các màn hình, thanh gạt và tính năng của từng bản.
+                </p>
+            </div>
+
+            <!-- Switcher Tabs -->
+            <div class="preview-tabs-row">
+                <button type="button" class="preview-tab-btn active flows" id="tabBtnFlowS" onclick="switchPreviewApp('flows')">
+                    <span>⚡</span>
+                    <span>Preview FlowS (Gamer Tuner)</span>
+                </button>
+                <button type="button" class="preview-tab-btn flowopt" id="tabBtnFlowOpt" onclick="switchPreviewApp('flowoptimize')">
+                    <span>🌸</span>
+                    <span>Preview FlowOptimize (Anime)</span>
+                </button>
+            </div>
+
+            <!-- Phone Mockup Device -->
+            <div class="phone-frame-wrapper">
+                <div class="phone-device theme-flows" id="phoneMockupDevice">
+                    <div class="phone-notch"></div>
+                    <iframe id="phoneSimulatorFrame" src="preview_flows.html" class="phone-iframe" title="Interactive App Simulator"></iframe>
+                </div>
+            </div>
+
+            <div class="preview-info-box" id="previewNoticeBox">
+                <div style="font-weight: 800; color: #00ff66; margin-bottom: 2px;">
+                    🎮 Bạn đang xem thử: FlowS - New Version (Gamer Tuner v3.5)
+                </div>
+                <div>
+                    Phong cách chuẩn eSports hầm hố kết hợp giữa <b>Gamer GLTool</b> và <b>Magic Tuner</b>. Hỗ trợ quét tự động mọi tựa game cài đặt thật, cho phép hạ độ phân giải riêng cho từng game và tự động hoàn trả màn hình gốc khi thoát.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 2. FULL FEATURES & DETAILED USAGE GUIDE ==================== -->
+        <section class="guide-section" id="guideSection">
+            <div class="guide-headline-wrap">
+                <span class="section-kicker">CẨM NANG HƯỚNG DẪN ĐẦY ĐỦ</span>
+                <h2 class="section-headline serif">Chi Tiết Toàn Bộ Tính Năng & Cách Dùng</h2>
+                <p class="section-subline">
+                    Hướng dẫn chi tiết từng bước sử dụng từ A đến Z cho cả 2 ứng dụng để phát huy tối đa 100% sức mạnh điện thoại của bạn.
+                </p>
+            </div>
+
+            <!-- Guide Switcher Tabs -->
+            <div class="guide-switcher-tabs">
+                <button type="button" class="guide-tab-btn active flows" id="guideBtnFlowS" onclick="switchGuideApp('flows')">
+                    ⚡ Chi Tiết Tính Năng FlowS (Game Tuner)
+                </button>
+                <button type="button" class="guide-tab-btn flowopt" id="guideBtnFlowOpt" onclick="switchGuideApp('flowoptimize')">
+                    🌸 Chi Tiết Tính Năng FlowOptimize (Bản Anime)
+                </button>
+            </div>
+
+            <!-- Guide Panel 1: FlowS -->
+            <div class="guide-content-panel active" id="guidePanelFlowS">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-card-header">
+                        <div class="feature-badge-icon" style="color: #00ff66; border-color: rgba(0,255,102,0.3);">🎯</div>
+                        <div>
+                            <div class="feature-title-text">1. Quét Game Thật & Hạ Độ Phân Giải Riêng Từng Game</div>
+                            <div class="feature-sub-tag">Ultra Smooth 720p • Super Smooth 540p • Tăng 20-30 FPS</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 12.5px; color: #cbd5e1; line-height: 1.55;">
+                        FlowS tự động nhận diện kho game thực tế trên thiết bị của bạn qua Package Manager (Liên Quân, Free Fire, PUBG Mobile, Roblox, Bowmasters...). Bạn có thể hạ độ phân giải riêng cho từng game để giảm tải GPU mà không làm mờ các app khác.
+                    </p>
+                    <div class="feature-step-box green">
+                        <b>📖 Cách Dùng:</b><br>
+                        1. Mở FlowS và chuyển sang tab <b>Library (Kho Game Cài Đặt)</b>.<br>
+                        2. Tại khung tựa game bạn muốn chơi, mở menu chọn <b>Ultra Smooth 720p</b> (Đề xuất) hoặc <b>Super Smooth 540p</b>.<br>
+                        3. Nhấn nút <b>🚀 LAUNCH GAME</b>: Hệ thống sẽ tự động hạ độ phân giải chuẩn tỷ lệ màn hình và khởi chạy game ngay lập tức!
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-card-header">
+                        <div class="feature-badge-icon" style="color: #38bdf8; border-color: rgba(56,189,248,0.3);">🔄</div>
+                        <div>
+                            <div class="feature-title-text">2. Cơ Chế Khôi Phục Gốc Thông Minh (Auto-Restore)</div>
+                            <div class="feature-sub-tag">Bảo vệ màn hình khóa và ứng dụng thông thường 100%</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 12.5px; color: #cbd5e1; line-height: 1.55;">
+                        Bạn không bao giờ phải lo lắng việc hạ độ phân giải làm méo màn hình khóa hay lỗi vân tay. FlowS sở hữu dịch vụ giám sát 2 tầng độc quyền:
+                    </p>
+                    <div class="feature-step-box">
+                        <b>📖 Cách Dùng:</b><br>
+                        • <b>Khi lỡ tay bấm nút nguồn tắt màn hình:</b> FlowS nhận diện sự kiện <code>ACTION_SCREEN_OFF</code> và đưa ngay độ phân giải về gốc 100% trong mili-giây, giúp bạn mở khóa vân tay và khuôn mặt sắc nét chuẩn xác.<br>
+                        • <b>Khi vừa thoát game về màn hình chính:</b> Hệ thống tự động phát hiện bạn đã rời khỏi game và hoàn trả lại độ phân giải gốc của máy mà không cần thao tác thêm.
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-card-header">
+                        <div class="feature-badge-icon" style="color: #a855f7; border-color: rgba(168,85,247,0.3);">🔥</div>
+                        <div>
+                            <div class="feature-title-text">3. Chế Độ CRAZY Đầu 3x & Khóa Màn Hình 120Hz</div>
+                            <div class="feature-sub-tag">Dồn RAM trống về mức 3000MB - 3500MB • Máy cực mát không quá nhiệt</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 12.5px; color: #cbd5e1; line-height: 1.55;">
+                        Chế độ CRAZY tạm dừng các tiến trình ngầm ngốn RAM như AI Assistant, Cloud Sync, Analytics. Tối ưu hóa bộ nhớ RAM về mức đầu 3x mượt mà, đồng thời bảo toàn các ngưỡng nhiệt an toàn của CPU.
+                    </p>
+                    <div class="feature-step-box">
+                        <b>📖 Cách Dùng:</b><br>
+                        1. Tại tab <b>Home</b>, bấm chọn nút chế độ <b>🔥 CRAZY</b>.<br>
+                        2. Màn hình hiện thông báo xác nhận an toàn, bấm <b>OK</b> để kích hoạt.<br>
+                        3. RAM trống sẽ lập tức tăng vọt lên đầu 3x và màn hình được khóa ở tần số quét cao nhất chống khựng giật.
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-card-header">
+                        <div class="feature-badge-icon" style="color: #fbbf24; border-color: rgba(251,191,36,0.3);">🔋</div>
+                        <div>
+                            <div class="feature-title-text">4. Nút Sửa Thanh Pin Trắng (ColorOS / RealmeUI)</div>
+                            <div class="feature-sub-tag">Khôi phục biểu tượng pin trắng nguyên bản 100%</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 12.5px; color: #cbd5e1; line-height: 1.55;">
+                        Khắc phục triệt để lỗi người dùng máy Oppo / Realme bị thanh pin chuyển sang màu xanh dương (do hệ thống tự bật cờ High Performance).
+                    </p>
+                    <div class="feature-step-box green">
+                        <b>📖 Cách Dùng:</b><br>
+                        Tại thẻ Battery ở màn hình chính, chỉ cần bấm nút <b>⚡ Sửa Thanh Pin Trắng</b> -> Thanh pin lập tức trở về màu trắng tiêu chuẩn của hệ điều hành.
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card">
+                    <div class="feature-card-header">
+                        <div class="feature-badge-icon" style="color: #f43f5e; border-color: rgba(244,63,94,0.3);">⚡</div>
+                        <div>
+                            <div class="feature-title-text">5. Tab Extensions: Touch 180Hz, Ice Cooling & FSTrim</div>
+                            <div class="feature-sub-tag">Gia tốc cảm ứng kéo tâm • Dọn chip nhớ UFS • Ổn định TCP Buffer</div>
+                        </div>
+                    </div>
+                    <div class="feature-step-box">
+                        <b>📖 Cách Dùng:</b><br>
+                        Vào tab <b>Extensions</b> -> Bật <b>Touch 180Hz</b> để tăng độ nhạy vuốt ngón tay khi vuốt tâm Free Fire / Liên Quân; Bật <b>Ice Cooling</b> để giữ mát máy dưới 37°C; Bấm nút <b>FSTrim</b> để dọn sạch chip nhớ Flash.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guide Panel 2: FlowOptimize -->
+            <div class="guide-content-panel" id="guidePanelFlowOpt">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-card-header">
+                        <div class="feature-badge-icon" style="color: #ec4899; border-color: rgba(236,72,153,0.3);">💬</div>
+                        <div>
+                            <div class="feature-title-text">1. Bong Bóng Nổi HUD PopUp Trên Game Thời Gian Thực</div>
+                            <div class="feature-sub-tag">Theo dõi RAM trống, nhiệt độ máy & pin trực tiếp khi đang chiến game</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 12.5px; color: #cbd5e1; line-height: 1.55;">
+                        FlowOptimize cho phép hiển thị một bong bóng nổi HUD tiêu chuẩn siêu nhỏ gọn trên góc màn hình game. Giúp bạn luôn kiểm soát được dung lượng RAM và nhiệt độ phần cứng mà không cần thoát khỏi trận đấu.
+                    </p>
+                    <div class="feature-step-box pink">
+                        <b>📖 Cách Dùng:</b><br>
+                        1. Mở FlowOptimize, bật công tắc <b>Bong Bóng Nổi HUD Trên Game</b>.<br>
+                        2. Cấp quyền <i>Hiển thị trên ứng dụng khác</i> khi hệ thống yêu cầu.<br>
+                        3. Bong bóng nổi sẽ hiển thị trên góc màn hình, bạn có thể nhấn vào để dọn RAM tức thì hoặc kéo thả vị trí tùy thích.
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-card-header">
+                        <div class="feature-badge-icon" style="color: #38bdf8; border-color: rgba(56,189,248,0.3);">🎨</div>
+                        <div>
+                            <div class="feature-title-text">2. Bộ Sưu Tập 7 Theme Anime Đỉnh Cao</div>
+                            <div class="feature-sub-tag">Gojo Satoru • Your Name • Thám tử Conan • One Piece • Naruto</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 12.5px; color: #cbd5e1; line-height: 1.55;">
+                        Giao diện nghệ thuật với nền Anime phong cách Cyberpunk và các hiệu ứng phát sáng neon sống động, thay đổi hoàn toàn diện mạo ứng dụng theo sở thích cá nhân.
+                    </p>
+                    <div class="feature-step-box">
+                        <b>📖 Cách Dùng:</b><br>
+                        Nhấn vào nút đổi Theme hình bảng màu ở góc trên màn hình -> Chọn nhân vật Anime bạn yêu thích (Your Name, Gojo...) để đổi toàn bộ hình nền và bảng màu giao diện tức thì.
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-card-header">
+                        <div class="feature-badge-icon" style="color: #10b981; border-color: rgba(16,185,129,0.3);">🛡️</div>
+                        <div>
+                            <div class="feature-title-text">3. Nút Khôi Phục Toàn Diện 1-Chạm (Full System Restore)</div>
+                            <div class="feature-sub-tag">Mở khóa lại toàn bộ app ngầm • An toàn 100% cho học tập & làm việc</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 12.5px; color: #cbd5e1; line-height: 1.55;">
+                        Khi bạn kết thúc thời gian chơi game và cần quay lại học tập, làm việc hoặc nhận cuộc gọi Zalo/Messenger/Gemini mà không lo app bị tắt ngầm:
+                    </p>
+                    <div class="feature-step-box pink">
+                        <b>📖 Cách Dùng:</b><br>
+                        Nhấn nút đỏ <b>🔄 KHÔI PHỤC TOÀN DIỆN</b> trên màn hình chính: Toàn bộ ứng dụng ngầm bị tạm dừng sẽ được unsuspend mở lại 100%, độ phân giải, DPI và tần số quét được đưa về chuẩn gốc của nhà sản xuất.
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-card-header">
+                        <div class="feature-badge-icon" style="color: #fbbf24; border-color: rgba(251,191,36,0.3);">⚖️</div>
+                        <div>
+                            <div class="feature-title-text">4. Chế Độ Game Mode 4 Cấp Độ Thông Minh</div>
+                            <div class="feature-sub-tag">Eco • Balance • High • Ultra Boost</div>
+                        </div>
+                    </div>
+                    <div class="feature-step-box">
+                        <b>📖 Cách Dùng:</b><br>
+                        Tùy thuộc vào lượng pin còn lại, bạn có thể chọn <b>Eco</b> (Tiết kiệm pin khi pin dưới 20%), <b>Balance</b> (Cân bằng hàng ngày) hoặc <b>Ultra</b> (Bật Vulkan SkiaGL, hoạt họa 0.0x để thi đấu xếp hạng).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 3. COMPARISON TABLE ==================== -->
+        <section class="comparison-card">
+            <div style="text-align: center; margin-bottom: 12px;">
+                <span class="section-kicker">SO SÁNH TỔNG QUAN</span>
+                <h3 class="serif" style="font-size: 20px; font-weight: 800; color: #fff;">Nên Chọn Ứng Dụng Nào Cho Bạn?</h3>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Tính Năng</th>
+                        <th style="color: #00ff66;">FlowS (New Version)</th>
+                        <th style="color: #f472b6;">FlowOptimize (Anime)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Phong Cách Thiết Kế</b></td>
+                        <td>Gamer GLTool & Magic Tuner eSports</td>
+                        <td>Anime Cyberpunk & Hero Art</td>
+                    </tr>
+                    <tr>
+                        <td><b>Hạ Độ Phân Giải Từng Game</b></td>
+                        <td>✓ Có (Tự quét game thật)</td>
+                        <td>Hạ toàn hệ thống</td>
+                    </tr>
+                    <tr>
+                        <td><b>Tự Hoàn Trả Gốc Khi Thoát</b></td>
+                        <td>✓ Có (100% tự động khi tắt/thoát)</td>
+                        <td>Dùng nút khôi phục 1 chạm</td>
+                    </tr>
+                    <tr>
+                        <td><b>Bong Bóng Nổi HUD PopUp</b></td>
+                        <td>Có trong tab Extensions</td>
+                        <td>✓ Tối ưu chuyên biệt trên màn hình</td>
+                    </tr>
+                    <tr>
+                        <td><b>Bộ Theme Anime</b></td>
+                        <td>7 Theme đa dạng</td>
+                        <td>7 Theme Anime chuyên sâu</td>
+                    </tr>
+                    <tr>
+                        <td><b>Chế Độ CRAZY Đầu 3x</b></td>
+                        <td>✓ Có (Dồn RAM đầu 3x)</td>
+                        <td>✓ Có</td>
+                    </tr>
+                    <tr>
+                        <td><b>Fix Thanh Pin Trắng</b></td>
+                        <td>✓ Tích hợp nút 1-chạm</td>
+                        <td>✓ Tích hợp nút 1-chạm</td>
+                    </tr>
+                    <tr>
+                        <td><b>Phù Hợp Cho Ai?</b></td>
+                        <td>Game thủ cày game nặng, leo rank</td>
+                        <td>Người thích giao diện đẹp, anime, HUD</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p><b>Flowly Gaming</b> • Powered by Flowly Engine © 2026</p>
+            <p style="margin-top: 4px;">Tối ưu hóa Android eSports • Shizuku ADB An Toàn • 100% No Root</p>
+        </footer>
     </div>
 
-    <!-- ==================== TIKTOK FOLLOW-TO-UNLOCK MODAL ==================== -->
+    <!-- ==================== UNLOCK MODAL (LINK4M) ==================== -->
     <div id="unlockDownloadModal" class="unlock-modal-overlay" onclick="closeUnlockOnBackdrop(event)">
         <div class="unlock-modal-card">
-            <button class="unlock-close-btn" onclick="closeUnlockModal()">×</button>
+            <button class="unlock-close-btn" onclick="closeUnlockModal()">✕</button>
 
-            <div
-                style="font-size: 11px; font-weight: 800; color: #38bdf8; background: rgba(56,189,248,0.12); border: 1px solid #38bdf8; padding: 4px 12px; border-radius: 99px; display: inline-block; margin-bottom: 14px;">
-                ● XÁC MINH MỞ KHÓA TẢI VỀ
+            <div style="font-size: 11px; font-weight: 800; color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); padding: 4px 12px; border-radius: 99px; display: inline-block; margin-bottom: 14px;">
+                ● XÁC MINH MỞ KHÓA TẢI VỀ LINK4M
             </div>
 
-            <div
-                style="display: flex; align-items: center; gap: 12px; background: rgba(2, 6, 23, 0.6); padding: 12px; border-radius: 14px; margin-bottom: 14px; text-align: left;">
-                <img src="app_logo.png" alt="FlowOptimize"
-                    style="width: 40px; height: 40px; border-radius: 10px; border: 1px solid #38bdf8;">
+            <div style="display: flex; align-items: center; gap: 12px; background: rgba(15, 23, 42, 0.6); padding: 12px; border-radius: 14px; margin-bottom: 14px; text-align: left; border: 1px solid rgba(255, 255, 255, 0.08);">
+                <img id="modalAppIcon" src="flows_logo.png" alt="App" style="width: 46px; height: 46px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2); object-fit: cover;">
                 <div>
-                    <div style="font-size: 14px; font-weight: 800; color: #fff;">FlowOptimize v2.6 Ultra Pro</div>
-                    <div style="font-size: 11px; color: #94a3b8;">Dung lượng: 7.18 MB • Quyền: Shizuku ADB</div>
+                    <div id="modalAppTitle" style="font-size: 14.5px; font-weight: 800; color: #fff;">FlowS - New Version</div>
+                    <div id="modalAppSub" style="font-size: 11px; color: var(--text-muted);">Bản New Version • Tự Động Hoàn Trả Gốc</div>
                 </div>
             </div>
 
-            <div id="unlockBannerText"
-                style="background: rgba(236, 72, 153, 0.12); border: 1px solid rgba(236,72,153,0.35); border-radius: 12px; padding: 12px; margin-bottom: 16px; text-align: left; font-size: 12px; color: #cbd5e1;">
-                Bấm nút bên dưới để <b>Follow kênh TikTok Flowly (@xxd5974)</b>, sau 8 giây hệ thống sẽ tự động mở khóa
-                link tải!
+            <div id="unlockBannerText" style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 12px; margin-bottom: 16px; text-align: left; font-size: 12px; color: #cbd5e1; line-height: 1.45;">
+                Nhấn nút bên dưới để <b>Follow kênh TikTok chính thức (@xxd5974)</b>, sau 8 giây hệ thống sẽ tự động mở khóa link tải vượt key Link4M!
             </div>
 
-            <!-- State 1: Follow TikTok Button -->
-            <button id="btnFollowTikTok" type="button" class="btn-tiktok-action" onclick="handleTikTokClick()">
-                <span style="font-size: 18px;">🎵</span>
-                <span style="font-weight: 800; font-size: 13px;">THEO DÕI TIKTOK ĐỂ MỞ KHÓA</span>
+            <!-- Follow TikTok Button -->
+            <button id="btnFollowTikTok" type="button" class="app-card-btn" style="background: #000; color: #fff; border: 1.5px solid rgba(255,255,255,0.25); box-shadow: -2px -2px 10px rgba(0, 242, 254, 0.3), 2px 2px 10px rgba(254, 44, 85, 0.4);" onclick="handleTikTokClick()">
+                <span style="font-size: 16px;">🎵</span>
+                <span>THEO DÕI TIKTOK ĐỂ MỞ KHÓA</span>
             </button>
 
-            <!-- State 2: Verifying Progress -->
-            <div id="unlockVerifyingBox"
-                style="display: none; background: rgba(2, 6, 23, 0.7); border: 1px solid #334155; border-radius: 14px; padding: 14px; margin-bottom: 12px; text-align: left;">
+            <!-- Verifying Box -->
+            <div id="unlockVerifyingBox" style="display: none; background: #0b132b; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 14px; margin-bottom: 12px; text-align: left;">
                 <div style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 2px;">
                     Đang xác minh theo dõi...
                 </div>
-                <div style="font-size: 11.5px; color: #94a3b8;">
+                <div style="font-size: 11.5px; color: var(--text-muted);">
                     Mở khóa sau <b id="unlockCountdownNum" style="color: #38bdf8; font-size: 14px;">8</b> giây
                 </div>
                 <div class="unlock-progress-track">
@@ -527,167 +1182,199 @@
                 </div>
             </div>
 
-            <!-- State 3: Ready to Download Link4M Button -->
-            <a id="btnFinalLink4m" href="#" target="_blank" onclick="executeLink4mRedirect(event)"
-                class="btn-final-link4m" style="display: none;">
-                <span style="font-size: 18px;">🔥</span>
-                <span>LẤY LINK TẢI FLOWOPTIMIZE (LINK4M)</span>
+            <!-- Ready Link4M Button -->
+            <a id="btnFinalLink4m" href="#" target="_blank" class="app-card-btn" style="display: none; background: linear-gradient(135deg, #db2777 0%, #ea580c 100%); color: #fff;">
+                <span style="font-size: 16px;">🔥</span>
+                <span id="txtFinalLink4mLabel">LẤY LINK TẢI FLOWS (LINK4M)</span>
             </a>
 
-            <div style="font-size: 11px; color: #64748b; margin-top: 14px;">
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 14px;">
                 ✓ Xác minh tự động • Hoàn toàn miễn phí 100%
             </div>
         </div>
     </div>
 
+    <!-- JavaScript Logic -->
     <script>
+        let currentTargetApp = 'flows';
         let globalConfig = {
             api_token: "6ae77b1c1473a714b32b2a3a",
-            destination_apk: "https://gofile.io/d/hjP08Ofv",
             tiktok: "https://www.tiktok.com/@xxd5974",
-            wait_seconds: 8
+            wait_seconds: 8,
+            flows: {
+                destination_apk: "https://gofile.io/d/z3wUcYxV",
+                name: "FlowS Gaming Edition v3.5 (New Version)"
+            },
+            flowoptimize: {
+                destination_apk: "https://gofile.io/d/ZUqi1crJ",
+                name: "FlowOptimize Ultra Pro v2.6 (Bản Anime)"
+            }
         };
 
-        // Fetch shared server config
-        fetch('config.json?v=' + Date.now())
-            .then(res => res.json())
-            .then(data => {
-                if (data.api_token) globalConfig.api_token = data.api_token;
-                if (data.destination_apk) globalConfig.destination_apk = data.destination_apk;
-                if (data.tiktok) globalConfig.tiktok = data.tiktok;
-            })
-            .catch(() => { });
+        function fetchConfig() {
+            fetch('config.json?v=' + Date.now())
+                .then(res => res.json())
+                .then(d => {
+                    if (d.api_token) globalConfig.api_token = d.api_token;
+                    if (d.tiktok) globalConfig.tiktok = d.tiktok;
+                    if (d.flows) globalConfig.flows = d.flows;
+                    if (d.flowoptimize) globalConfig.flowoptimize = d.flowoptimize;
+                }).catch(e => {});
+        }
 
+        // ==================== PREVIEW APP SWITCHER ====================
+        function switchPreviewApp(appKey) {
+            const btnFlowS = document.getElementById('tabBtnFlowS');
+            const btnFlowOpt = document.getElementById('tabBtnFlowOpt');
+            const phoneDevice = document.getElementById('phoneMockupDevice');
+            const frame = document.getElementById('phoneSimulatorFrame');
+            const noticeBox = document.getElementById('previewNoticeBox');
+
+            if (appKey === 'flows') {
+                btnFlowS.classList.add('active');
+                btnFlowOpt.classList.remove('active');
+                phoneDevice.className = 'phone-device theme-flows';
+                frame.src = 'preview_flows.html';
+                noticeBox.innerHTML = `
+                    <div style="font-weight: 800; color: #00ff66; margin-bottom: 2px;">
+                        🎮 Đang xem thử: FlowS - New Version (Gamer Tuner v3.5)
+                    </div>
+                    <div>
+                        Phong cách chuẩn eSports hầm hố (Gamer GLTool + Magic Tuner). Tự động quét game thật, cho phép hạ độ phân giải riêng cho từng game và tự động hoàn trả gốc khi thoát.
+                    </div>
+                `;
+            } else {
+                btnFlowOpt.classList.add('active');
+                btnFlowS.classList.remove('active');
+                phoneDevice.className = 'phone-device theme-flowopt';
+                frame.src = 'preview_flowopt.html';
+                noticeBox.innerHTML = `
+                    <div style="font-weight: 800; color: #f472b6; margin-bottom: 2px;">
+                        🌸 Đang xem thử: FlowOptimize Ultra Pro (Bản Theme Anime v2.6)
+                    </div>
+                    <div>
+                        Giao diện Anime Cyberpunk tuyệt đẹp, tích hợp Bong bóng nổi HUD PopUp hiển thị RAM thực tế nổi trên game và nút Khôi Phục Toàn Diện 1-chạm cực kỳ an toàn.
+                    </div>
+                `;
+            }
+        }
+
+        // ==================== GUIDE APP SWITCHER ====================
+        function switchGuideApp(appKey) {
+            const btnFlowS = document.getElementById('guideBtnFlowS');
+            const btnFlowOpt = document.getElementById('guideBtnFlowOpt');
+            const panelFlowS = document.getElementById('guidePanelFlowS');
+            const panelFlowOpt = document.getElementById('guidePanelFlowOpt');
+
+            if (appKey === 'flows') {
+                btnFlowS.classList.add('active');
+                btnFlowOpt.classList.remove('active');
+                panelFlowS.classList.add('active');
+                panelFlowOpt.classList.remove('active');
+            } else {
+                btnFlowOpt.classList.add('active');
+                btnFlowS.classList.remove('active');
+                panelFlowOpt.classList.add('active');
+                panelFlowS.classList.remove('active');
+            }
+        }
+
+        // ==================== LINK4M MODAL ====================
         let unlockTimerInterval = null;
         let unlockHiddenTimeout = null;
-        let hasUnlocked = false;
 
-        function generateDynamicLink4m() {
-            const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
-            const dest = globalConfig.destination_apk || 'https://gofile.io/d/hjP08Ofv';
-            // Tạo chuỗi định danh phiên duy nhất chống trùng thiết bị và chống hết hạn link (session 3-5 phút mới toanh)
-            const nonce = Date.now() + '_' + Math.random().toString(36).substring(2, 7);
-            const sep = dest.includes('?') ? '&' : '?';
-            const uniqueDest = dest + sep + 'session=' + nonce;
-            return 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(uniqueDest);
-        }
+        function openUnlockModal(appKey) {
+            currentTargetApp = appKey;
+            const modal = document.getElementById('unlockDownloadModal');
+            if (!modal) return;
 
-        let preloadedFreshLink = null;
-        async function fetchFreshLink4mApi() {
-            try {
-                const res = await fetch('/api/generate-link4m', { signal: AbortSignal.timeout(4000) });
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data.status === 'success' && data.shortenedUrl) {
-                        preloadedFreshLink = data.shortenedUrl;
-                        return data.shortenedUrl;
-                    }
-                }
-            } catch(e) {}
-            return generateDynamicLink4m();
-        }
+            const icon = document.getElementById('modalAppIcon');
+            const title = document.getElementById('modalAppTitle');
+            const sub = document.getElementById('modalAppSub');
+            const linkBtnLabel = document.getElementById('txtFinalLink4mLabel');
 
-        function openUnlockModal() {
-            hasUnlocked = false;
-            preloadedFreshLink = null;
-            fetchFreshLink4mApi();
-            document.getElementById('unlockDownloadModal').classList.add('active');
+            if (appKey === 'flows') {
+                if (icon) icon.src = 'flows_logo.png';
+                if (title) title.textContent = 'FlowS - New Version';
+                if (sub) sub.textContent = 'Game Tuner • Quét Game Thật • 120Hz';
+                if (linkBtnLabel) linkBtnLabel.textContent = 'LẤY LINK TẢI FLOWS (LINK4M)';
+            } else {
+                if (icon) icon.src = 'app_logo.png';
+                if (title) title.textContent = 'FlowOptimize Ultra Pro';
+                if (sub) sub.textContent = 'Bản Anime • Khôi Phục Toàn Diện';
+                if (linkBtnLabel) linkBtnLabel.textContent = 'LẤY LINK TẢI FLOWOPTIMIZE (LINK4M)';
+            }
+
             document.getElementById('btnFollowTikTok').style.display = 'flex';
             document.getElementById('unlockVerifyingBox').style.display = 'none';
             document.getElementById('btnFinalLink4m').style.display = 'none';
             document.getElementById('unlockProgressBar').style.width = '0%';
             document.getElementById('unlockCountdownNum').textContent = '8';
 
-            const banner = document.getElementById('unlockBannerText');
-            if (banner) {
-                banner.innerHTML = `Bấm nút bên dưới để <b>Follow kênh TikTok Flowly (@xxd5974)</b>, sau 8 giây hệ thống sẽ tự động mở khóa link tải!`;
-            }
+            modal.classList.add('active');
 
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);
             if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
 
-            // Hidden 8s timeout
             unlockHiddenTimeout = setTimeout(() => {
-                completeUnlockProcess();
+                completeUnlock();
             }, 8000);
         }
 
         function closeUnlockModal() {
-            document.getElementById('unlockDownloadModal').classList.remove('active');
+            const modal = document.getElementById('unlockDownloadModal');
+            if (modal) modal.classList.remove('active');
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);
             if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
         }
 
         function closeUnlockOnBackdrop(e) {
-            if (e.target.id === 'unlockDownloadModal') {
-                closeUnlockModal();
-            }
+            if (e.target.id === 'unlockDownloadModal') closeUnlockModal();
         }
 
         function handleTikTokClick() {
-            window.open(globalConfig.tiktok, '_blank');
+            const tiktokUrl = globalConfig.tiktok || 'https://www.tiktok.com/@xxd5974';
+            window.open(tiktokUrl, '_blank');
+
             document.getElementById('btnFollowTikTok').style.display = 'none';
             document.getElementById('unlockVerifyingBox').style.display = 'block';
 
-            let totalMs = 8000;
-            let startTime = Date.now();
-            if (unlockTimerInterval) clearInterval(unlockTimerInterval);
+            let count = 8;
+            const numEl = document.getElementById('unlockCountdownNum');
+            const barEl = document.getElementById('unlockProgressBar');
 
+            if (unlockTimerInterval) clearInterval(unlockTimerInterval);
             unlockTimerInterval = setInterval(() => {
-                let elapsed = Date.now() - startTime;
-                let pct = Math.min(100, (elapsed / totalMs) * 100);
-                let remaining = Math.max(0, Math.ceil((totalMs - elapsed) / 1000));
+                count -= 0.1;
+                const pct = Math.min(100, Math.round(((8 - count) / 8) * 100));
+                if (barEl) barEl.style.width = pct + '%';
+                if (numEl) numEl.textContent = Math.max(0, Math.ceil(count));
 
-                document.getElementById('unlockProgressBar').style.width = pct + '%';
-                document.getElementById('unlockCountdownNum').textContent = remaining;
-
-                if (elapsed >= totalMs) {
+                if (count <= 0) {
                     clearInterval(unlockTimerInterval);
-                    completeUnlockProcess();
+                    completeUnlock();
                 }
-            }, 50);
+            }, 100);
         }
 
-        function completeUnlockProcess() {
-            if (hasUnlocked) return;
-            hasUnlocked = true;
-
-            if (unlockTimerInterval) clearInterval(unlockTimerInterval);
-            if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
-
-            document.getElementById('btnFollowTikTok').style.display = 'none';
+        function completeUnlock() {
             document.getElementById('unlockVerifyingBox').style.display = 'none';
-
+            document.getElementById('btnFollowTikTok').style.display = 'none';
             const finalBtn = document.getElementById('btnFinalLink4m');
-            finalBtn.href = preloadedFreshLink || generateDynamicLink4m();
-            finalBtn.target = '_blank';
             finalBtn.style.display = 'flex';
-            if (!preloadedFreshLink) {
-                fetchFreshLink4mApi().then(url => { if (url) finalBtn.href = url; });
-            }
 
-            document.getElementById('unlockBannerText').innerHTML = `
-                <div style="font-weight: 800; color: #34d399; font-size: 13px; margin-bottom: 2px;">
-                    🎉 ĐÃ MỞ KHÓA THÀNH CÔNG!
-                </div>
-                <div style="font-size: 11.5px; color: #cbd5e1;">
-                    Bấm nút màu cam bên dưới để bắt đầu vượt link Link4M! Phiên tải có hiệu lực trong 5 phút.
-                </div>
-            `;
+            const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
+            const dest = currentTargetApp === 'flows' ? 
+                (globalConfig.flows.destination_apk || 'https://gofile.io/d/z3wUcYxV') : 
+                (globalConfig.flowoptimize.destination_apk || 'https://gofile.io/d/ZUqi1crJ');
+
+            const nonce = Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+            const sep = dest.includes('?') ? '&' : '?';
+            const uniqueDest = dest + sep + 'session=' + nonce;
+            finalBtn.href = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(uniqueDest);
         }
 
-        function executeLink4mRedirect(e) {
-            const finalBtn = document.getElementById('btnFinalLink4m');
-            if (finalBtn && !finalBtn.href.includes('link4m')) {
-                finalBtn.href = preloadedFreshLink || generateDynamicLink4m();
-            }
-            setTimeout(closeUnlockModal, 400);
-        }
-
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') closeUnlockModal();
-        });
+        document.addEventListener('DOMContentLoaded', fetchConfig);
     </script>
 </body>
-
 </html>

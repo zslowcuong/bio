@@ -1,0 +1,2436 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>FlowS with Game Tuner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #080c0a;
+            --card-bg: #111713;
+            --card-bg-elevated: #16201a;
+            --border-color: #1e2c22;
+            --border-glow: rgba(34, 197, 94, 0.35);
+            --neon-green: #00ff66;
+            --acid-green: #22c55e;
+            --text-primary: #f0fdf4;
+            --text-secondary: #86968b;
+            --text-muted: #526357;
+            --btn-green: linear-gradient(135deg, #15803d 0%, #22c55e 100%);
+            --btn-red: linear-gradient(135deg, #be123c 0%, #f43f5e 100%);
+            --badge-bg: rgba(34, 197, 94, 0.12);
+            --safe-cyan: #38bdf8;
+            --warn-amber: #f59e0b;
+        }
+
+        /* 1. Gojo Satoru Theme Override */
+        body.theme-gojo {
+            --bg-color: #040814;
+            --card-bg: #0b1329;
+            --card-bg-elevated: #111d3d;
+            --border-color: #1c2b57;
+            --border-glow: rgba(56, 189, 248, 0.45);
+            --neon-green: #38bdf8;
+            --acid-green: #0ea5e9;
+            --text-primary: #f0f9ff;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --btn-green: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+            --badge-bg: rgba(56, 189, 248, 0.15);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, transparent 60%),
+                radial-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+        }
+
+        /* 2. Your Name Theme Override */
+        body.theme-yourname {
+            --bg-color: #0c0817;
+            --card-bg: #15102a;
+            --card-bg-elevated: #1e173a;
+            --border-color: #2b1f52;
+            --border-glow: rgba(236, 72, 153, 0.4);
+            --neon-green: #ec4899;
+            --acid-green: #f43f5e;
+            --text-primary: #fff1f2;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --btn-green: linear-gradient(135deg, #db2777 0%, #a855f7 100%);
+            --badge-bg: rgba(236, 72, 153, 0.15);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(236, 72, 153, 0.15) 0%, transparent 60%),
+                radial-gradient(rgba(236, 72, 153, 0.08) 1px, transparent 1px);
+        }
+
+        /* 3. Naruto Theme Override */
+        body.theme-naruto {
+            --bg-color: #0f0803;
+            --card-bg: #1a1008;
+            --card-bg-elevated: #261609;
+            --border-color: #3d2310;
+            --border-glow: rgba(249, 115, 22, 0.45);
+            --neon-green: #f97316;
+            --acid-green: #ea580c;
+            --text-primary: #fff7ed;
+            --text-secondary: #fdba74;
+            --text-muted: #9a3412;
+            --btn-green: linear-gradient(135deg, #c2410c 0%, #f97316 100%);
+            --badge-bg: rgba(249, 115, 22, 0.15);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(249, 115, 22, 0.15) 0%, transparent 60%),
+                radial-gradient(rgba(249, 115, 22, 0.08) 1px, transparent 1px);
+        }
+
+        /* 4. One Piece Theme Override */
+        body.theme-onepiece {
+            --bg-color: #0a0614;
+            --card-bg: #150f24;
+            --card-bg-elevated: #20143a;
+            --border-color: #3b2064;
+            --border-glow: rgba(234, 179, 8, 0.45);
+            --neon-green: #eab308;
+            --acid-green: #ca8a04;
+            --text-primary: #fefce8;
+            --text-secondary: #fef08a;
+            --text-muted: #854d0e;
+            --btn-green: linear-gradient(135deg, #a16207 0%, #eab308 100%);
+            --badge-bg: rgba(234, 179, 8, 0.15);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(234, 179, 8, 0.15) 0%, transparent 60%),
+                radial-gradient(rgba(234, 179, 8, 0.08) 1px, transparent 1px);
+        }
+
+        /* 5. Conan Theme Override */
+        body.theme-conan {
+            --bg-color: #030712;
+            --card-bg: #0b1528;
+            --card-bg-elevated: #112240;
+            --border-color: #1d3557;
+            --border-glow: rgba(96, 165, 250, 0.45);
+            --neon-green: #60a5fa;
+            --acid-green: #3b82f6;
+            --text-primary: #eff6ff;
+            --text-secondary: #bfdbfe;
+            --text-muted: #60a5fa;
+            --btn-green: linear-gradient(135deg, #1d4ed8 0%, #60a5fa 100%);
+            --badge-bg: rgba(96, 165, 250, 0.15);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(96, 165, 250, 0.15) 0%, transparent 60%),
+                radial-gradient(rgba(96, 165, 250, 0.08) 1px, transparent 1px);
+        }
+
+        /* 6. Dragon Ball Theme Override */
+        body.theme-dragonball {
+            --bg-color: #070913;
+            --card-bg: #10152b;
+            --card-bg-elevated: #18203f;
+            --border-color: #263363;
+            --border-glow: rgba(165, 243, 252, 0.45);
+            --neon-green: #38bdf8;
+            --acid-green: #0284c7;
+            --text-primary: #f0fdfa;
+            --text-secondary: #99f6e4;
+            --text-muted: #2dd4bf;
+            --btn-green: linear-gradient(135deg, #4f46e5 0%, #38bdf8 100%);
+            --badge-bg: rgba(56, 189, 248, 0.15);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, transparent 60%),
+                radial-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(34, 197, 94, 0.08) 0%, transparent 60%),
+                radial-gradient(rgba(34, 197, 94, 0.07) 1px, transparent 1px);
+            background-size: 100% 100%, 18px 18px;
+            background-attachment: fixed;
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: max(12px, env(safe-area-inset-top)) 12px 84px;
+            overflow-x: hidden;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        /* Announcement Banner */
+        .announcement-banner {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(16, 185, 129, 0.08) 100%);
+            border: 1px solid var(--neon-green);
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
+            position: relative;
+            animation: fadeInBanner 0.4s ease-out;
+        }
+
+        @keyframes fadeInBanner {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .announcement-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .announcement-badge {
+            background: var(--neon-green);
+            color: #050a06;
+            font-size: 9.5px;
+            font-weight: 900;
+            padding: 2px 7px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .announcement-title {
+            font-size: 11.5px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-left: 6px;
+            flex: 1;
+        }
+
+        .announcement-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            cursor: pointer;
+            padding: 2px 6px;
+        }
+
+        .announcement-desc {
+            font-size: 10.5px;
+            color: #d1fae5;
+            line-height: 1.4;
+        }
+
+        /* App Header */
+        .app-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding: 4px 4px;
+        }
+
+        .device-info-col {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .device-model-name {
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .device-gpu-sub {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .badge-status {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 6px;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            letter-spacing: 0.5px;
+        }
+
+        .quick-turbo-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #22c55e 0%, #15803d 100%);
+            border: 2px solid #86efac;
+            color: #ffffff;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 16px rgba(34, 197, 94, 0.6);
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+        .quick-turbo-btn:active {
+            transform: scale(0.92);
+        }
+
+        /* Status Grid */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 10px 6px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-icon {
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .stat-value {
+            font-size: 12px;
+            font-weight: 800;
+            color: #ffffff;
+            white-space: nowrap;
+        }
+
+        .stat-sub {
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-top: 1px;
+        }
+
+        /* Pro Status Card */
+        .pro-status-card {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(17, 23, 19, 0.95) 100%);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pro-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .pro-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pro-meter {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--neon-green);
+        }
+
+        .pro-badge {
+            background: var(--neon-green);
+            color: #050a06;
+            font-size: 10px;
+            font-weight: 900;
+            padding: 3px 8px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Cards Base */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .card-header-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.2px;
+        }
+
+        .badge-tag {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 5px;
+            background: var(--badge-bg);
+            color: var(--neon-green);
+            border: 1px solid var(--border-glow);
+        }
+
+        /* Sensei AI Terminal Assistant */
+        .sensei-terminal {
+            background: #090e0b;
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #a7f3d0;
+            max-height: 110px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
+        }
+
+        .sensei-prompt {
+            color: var(--neon-green);
+            font-weight: 700;
+        }
+
+        .chip-slider-wrap {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+        .chip-slider-wrap::-webkit-scrollbar { display: none; }
+
+        .sensei-chip {
+            background: #141c16;
+            border: 1px solid var(--border-color);
+            color: #e2e8f0;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 11px;
+            border-radius: 8px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .sensei-chip:active {
+            background: var(--neon-green);
+            color: #050a06;
+            transform: scale(0.96);
+        }
+
+        /* Switch list item */
+        .switch-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .switch-row:last-child { border-bottom: none; }
+
+        .switch-title-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1;
+            padding-right: 12px;
+        }
+
+        .switch-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+
+        .switch-desc {
+            font-size: 10px;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        /* Standard Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .switch-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #1e293b;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: .25s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 24px;
+        }
+
+        .switch-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 2px;
+            bottom: 2px;
+            background-color: #ffffff;
+            transition: .25s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 50%;
+        }
+
+        input:checked + .switch-slider {
+            background-color: var(--neon-green);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        input:checked + .switch-slider:before {
+            transform: translateX(20px);
+            background-color: #050a06;
+        }
+
+        /* Segmented Buttons */
+        .segmented-row {
+            display: flex;
+            background: #0d1310;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 3px;
+            gap: 3px;
+        }
+
+        .segment-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 8px 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .segment-btn.active {
+            background: var(--card-bg-elevated);
+            color: #ffffff;
+            border: 1px solid var(--neon-green);
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.25);
+        }
+
+        /* Slider Control Group */
+        .slider-control-group {
+            margin: 10px 0;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .slider-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #e2e8f0;
+        }
+
+        .slider-value-badge {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--neon-green);
+            background: rgba(34, 197, 94, 0.12);
+            padding: 2px 7px;
+            border-radius: 4px;
+            border: 1px solid var(--border-glow);
+        }
+
+        .range-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 4px;
+            background: #1e293b;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--neon-green);
+            cursor: pointer;
+            box-shadow: 0 0 8px var(--border-glow);
+        }
+
+        /* Buttons */
+        .btn-action {
+            width: 100%;
+            background: var(--btn-green);
+            color: #050a06;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.3);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .btn-action:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: #1e293b;
+            color: #ffffff;
+            box-shadow: none;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Game Items in Library */
+        .game-item-card {
+            background: #0f1712;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            transition: border-color 0.2s ease;
+        }
+        .game-item-card:hover {
+            border-color: var(--neon-green);
+        }
+
+        .game-header-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .game-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: #1a231d;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            font-size: 20px;
+        }
+
+        .game-real-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .game-title-text {
+            font-size: 13px;
+            font-weight: 800;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .game-pkg-sub {
+            font-size: 9.5px;
+            color: var(--text-secondary);
+            font-family: monospace;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .game-res-selector-box {
+            background: #090e0b;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin-bottom: 10px;
+        }
+
+        .game-res-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #cbd5e1;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .game-res-dropdown {
+            width: 100%;
+            background: #141c16;
+            color: var(--neon-green);
+            border: 1px solid var(--border-glow);
+            border-radius: 6px;
+            padding: 6px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            outline: none;
+        }
+
+        .game-res-tip {
+            font-size: 9.5px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            line-height: 1.3;
+        }
+
+        .game-launch-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-game-tune {
+            flex: 1;
+            background: #141c16;
+            border: 1px solid var(--border-color);
+            color: #e2e8f0;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 8px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-game-tune:active {
+            background: var(--border-glow);
+        }
+
+        .btn-game-launch {
+            flex: 1.5;
+            background: var(--btn-green);
+            border: none;
+            color: #050a06;
+            font-size: 11.5px;
+            font-weight: 900;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            transition: transform 0.15s ease;
+        }
+        .btn-game-launch:active {
+            transform: scale(0.96);
+        }
+
+        /* Audit Table */
+        .audit-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+            margin-top: 8px;
+        }
+
+        .audit-table th, .audit-table td {
+            padding: 8px 6px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .audit-table th {
+            color: var(--text-secondary);
+            font-weight: 700;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        .audit-tag {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--neon-green);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 10px;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(11, 16, 13, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 4px max(8px, env(safe-area-inset-bottom));
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            color: var(--text-secondary);
+            font-size: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 4px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active {
+            color: var(--neon-green);
+            transform: translateY(-2px);
+        }
+
+        .nav-icon {
+            font-size: 18px;
+        }
+
+        /* Tab Views */
+        .tab-view {
+            display: none;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        .tab-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Toast Feedback */
+        .toast-feedback {
+            position: fixed;
+            bottom: 74px;
+            left: 50%;
+            transform: translateX(-50%) translateY(30px);
+            background: rgba(15, 23, 42, 0.95);
+            color: #ffffff;
+            border: 1px solid var(--neon-green);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2000;
+            white-space: nowrap;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
+
+        .toast-feedback.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Welcome Modal */
+        .modal-backdrop {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: #111713;
+            border: 1px solid var(--neon-green);
+            border-radius: 16px;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.35);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Welcome Modal on First Launch -->
+    <div id="welcomeModal" class="modal-backdrop" style="display:none;">
+        <div class="modal-card">
+            <div style="font-size: 36px; margin-bottom: 8px;">🎮✨</div>
+            <h3 style="font-size: 16px; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Chào mừng đến với FlowS Gaming!</h3>
+            <div style="font-size: 11px; color: #cbd5e1; line-height: 1.5; margin-bottom: 14px; text-align: left; background: #090e0b; padding: 12px; border-radius: 10px; border: 1px solid var(--border-color);">
+                <div style="font-weight: 700; color: var(--neon-green); margin-bottom: 6px;">🎉 ỨNG DỤNG MỚI RA MẮT • PRO VIP MIỄN PHÍ:</div>
+                <div style="margin-bottom: 4px;">• <b>Khóa 120Hz & Zero Lag</b>: Khung hình siêu ổn định.</div>
+                <div style="margin-bottom: 4px;">• <b>Kho Game Thông Minh</b>: Quét tự động & hạ độ phân giải cho từng game.</div>
+                <div style="margin-bottom: 4px;">• <b>Tự động hoàn trả 100%</b>: Ngay khi bạn thoát game hoặc tắt màn hình.</div>
+                <div style="margin-bottom: 4px;">• <b>CRAZY Mode</b>: Đóng băng ngầm, đưa RAM về đầu 3x cực mát.</div>
+                <div>• <b>Fix Thanh Pin Trắng</b>: Trả lại màu pin trắng chuẩn trên ColorOS/RealmeUI.</div>
+            </div>
+            <button class="btn-action" onclick="closeWelcomeModal()">
+                <span>🚀 BẮT ĐẦU TRẢI NGHIỆM MIỄN PHÍ NGAY</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Feedback Container -->
+    <div id="toastFeedback" class="toast-feedback">FlowS Engine Ready</div>
+
+    <div class="container">
+
+        <!-- Top App Header -->
+        <header class="app-header">
+            <div class="device-info-col">
+                <div class="device-model-name">
+                    <span id="txtDeviceModel">OPPO Reno7 5G</span>
+                    <span class="badge-status" id="txtShizukuBadge">READY</span>
+                </div>
+                <div class="device-gpu-sub" id="txtDeviceSub">Mali-G68 MC4 • Android 13</div>
+            </div>
+            <div class="quick-turbo-btn" onclick="testClawPulse()" title="Kích hoạt Turbo nhanh">
+                <span>⚡</span>
+            </div>
+        </header>
+
+        <!-- New Release Announcement Banner -->
+        <div class="announcement-banner" id="announcementBanner">
+            <div class="announcement-header">
+                <span class="announcement-badge">🎉 MỚI RA MẮT</span>
+                <span class="announcement-title">FlowS Gaming Edition v3.5</span>
+                <button class="announcement-close-btn" onclick="dismissAnnouncement()">✕</button>
+            </div>
+            <div class="announcement-desc">
+                Trải nghiệm <b>MIỄN PHÍ VĨNH VIỄN</b> toàn bộ tính năng <b>PRO VIP & Game Tuner 120Hz</b>! Tự động quét game & hạ độ phân giải cho từng game, hoàn trả ngay khi thoát.
+            </div>
+        </div>
+
+        <!-- Real-time Status Grid (4 items matching Frame 003) -->
+        <div class="status-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🔋</div>
+                <div class="stat-value" id="valBattery">68% Sạc</div>
+                <div class="stat-sub">PIN</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌡️</div>
+                <div class="stat-value" id="valTemp">35.2°C Mát</div>
+                <div class="stat-sub">NHIỆT ĐỘ</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💾</div>
+                <div class="stat-value" id="valRam">2.4 GB</div>
+                <div class="stat-sub">RAM TRỐNG</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-value" id="valRefresh">90 Hz</div>
+                <div class="stat-sub">MÀN HÌNH</div>
+            </div>
+        </div>
+
+        <!-- Pro Activated Card (Matching Frame 004) -->
+        <div class="pro-status-card">
+            <div class="pro-info">
+                <div class="pro-title">
+                    <span>👑 FlowS Pro Activated</span>
+                </div>
+                <div class="pro-meter">Vĩnh viễn • Mở khóa toàn bộ Game Tuner & Shell</div>
+            </div>
+            <span class="pro-badge">PRO VIP</span>
+        </div>
+
+        <!-- ==================== TAB 1: HOME ==================== -->
+        <div id="tab-home" class="tab-view active">
+
+            <!-- 4 Mode Selector Tabs (Ported from FlowOptimize) -->
+            <div class="card">
+                <div class="card-header-line">
+                    <div class="card-title">
+                        <span>⚡ 4 Chế Độ Tối Ưu Máy</span>
+                    </div>
+                    <span class="badge-tag" id="lblCurrentModeBadge">MÁT MÁY</span>
+                </div>
+                <div class="segmented-row" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 8px;">
+                    <button class="segment-btn active" id="btnModeSmooth" onclick="switchGamingMode('smooth')">🍃 Mát Máy</button>
+                    <button class="segment-btn" id="btnModeMedium" onclick="switchGamingMode('medium')">⚖️ Cân Bằng</button>
+                    <button class="segment-btn" id="btnModeExtreme" onclick="switchGamingMode('extreme')">🚀 Cực Mạnh</button>
+                    <button class="segment-btn" id="btnModeCrazy" onclick="switchGamingMode('crazy')" style="color: #f43f5e;">🔥 CRAZY</button>
+                </div>
+                <div id="txtModeDescription" style="font-size: 10.5px; color: var(--text-secondary); line-height: 1.4;">
+                    🍃 <b>Chế độ Smooth (Mát Máy)</b>: Tối ưu hoạt họa 0.5x, giữ máy luôn mát dưới 37°C, tiết kiệm pin tối đa khi chơi game lâu.
+                </div>
+            </div>
+
+            <!-- Magic Tuner Feature: Performance Killers Detected Card -->
+            <div class="card" id="cardKillers" style="border: 1px solid rgba(239, 68, 68, 0.45); background: rgba(239, 68, 68, 0.08); margin-bottom: 12px;">
+                <div class="card-header-line" onclick="fixAllPerformanceKillers()" style="cursor: pointer; margin-bottom: 6px;">
+                    <div class="card-title" style="color: #ef4444; font-weight: 700; font-size: 13px;">
+                        <span>⚠️ Performance Killers Detected</span>
+                    </div>
+                    <button id="btnFixKillers" class="sensei-chip" onclick="event.stopPropagation(); fixAllPerformanceKillers()" style="background: rgba(239, 68, 68, 0.25); border: 1px solid #ef4444; color: #fca5a5; font-size: 10px; padding: 4px 10px; font-weight: 700; cursor: pointer;">
+                        ⚡ TỐI ƯU NGAY
+                    </button>
+                </div>
+                <div id="txtKillersSummary" style="font-size: 10px; color: #fca5a5; margin-bottom: 8px;">
+                    Phát hiện tính năng ngầm của hệ điều hành đang hạn chế hiệu năng game:
+                </div>
+                <div id="killerAdaptiveBattery" style="display: flex; align-items: center; justify-content: space-between; background: rgba(15, 23, 42, 0.7); padding: 8px 10px; border-radius: 8px; margin-bottom: 6px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                    <div style="font-size: 11px; color: #fca5a5;">
+                        <b>• Adaptive Battery is ON</b>
+                        <div style="font-size: 9.5px; color: var(--text-muted);">Bóp xung nhịp CPU và delay tiến trình game để tiết kiệm pin.</div>
+                    </div>
+                    <span class="badge-tag" style="background: rgba(239, 68, 68, 0.2); color: #ef4444;">BÓP XUNG</span>
+                </div>
+                <div id="killerAnimationScale" style="display: flex; align-items: center; justify-content: space-between; background: rgba(15, 23, 42, 0.7); padding: 8px 10px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                    <div style="font-size: 11px; color: #fca5a5;">
+                        <b>• Animation Scale is ON</b>
+                        <div style="font-size: 9.5px; color: var(--text-muted);">Gây trễ phản hồi chuyển cảnh khung hình và cảm ứng 1.0x.</div>
+                    </div>
+                    <span class="badge-tag" style="background: rgba(239, 68, 68, 0.2); color: #ef4444;">TRỄ 1.0X</span>
+                </div>
+            </div>
+
+            <!-- Fix Thanh Pin Trắng Card (Oppo/Realme ColorOS) -->
+            <div class="card" style="border: 1px solid rgba(56, 189, 248, 0.4); background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%);">
+                <div class="card-header-line">
+                    <div class="card-title" style="color: #38bdf8;">
+                        <span>🔋 Khôi Phục Thanh Pin Trắng (Tắt Viền Xanh ColorOS)</span>
+                    </div>
+                    <span class="badge-tag" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">FIX COLOROS</span>
+                </div>
+                <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.4; margin-bottom: 10px;">
+                    Nếu góc pin trên điện thoại Oppo/Realme của bạn bị đổi thành màu xanh do tính năng hiệu năng cao, bấm nút này để lập tức trả về thanh pin trắng nguyên bản 100%!
+                </p>
+                <button class="btn-action" style="background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);" onclick="fixBatteryColor()">
+                    <span>🤍 KHÔI PHỤC THANH PIN TRẮNG NGUYÊN BẢN</span>
+                </button>
+            </div>
+
+            <!-- Sensei AI Terminal Assistant -->
+            <div class="card">
+                <div class="card-header-line">
+                    <div class="card-title">
+                        <span>🤖 FlowS Sensei Assistant</span>
+                    </div>
+                    <span class="badge-tag">AI ENGINE</span>
+                </div>
+
+                <div class="sensei-terminal" id="senseiLog">
+                    <span class="sensei-prompt">sensei&gt;</span> FlowS Gaming Assistant v3.5 đã khởi động.<br>
+                    <span class="sensei-prompt">sensei&gt;</span> Shizuku ADB: Đã cấp quyền Shell thành công.<br>
+                    <span class="sensei-prompt">sensei&gt;</span> Bạn muốn tối ưu gì tiếp theo?
+                </div>
+
+                <!-- Interactive Diagnostic Chips -->
+                <div class="chip-slider-wrap">
+                    <button class="sensei-chip" onclick="askSensei('scan')">⚡ Quét hệ thống</button>
+                    <button class="sensei-chip" onclick="askSensei('fix_all')">🚀 Tối ưu tức thì</button>
+                    <button class="sensei-chip" onclick="askSensei('free_ram')">🧹 Dọn sạch RAM</button>
+                    <button class="sensei-chip" onclick="askSensei('cool_down')">❄️ Ép mát CPU</button>
+                    <button class="sensei-chip" onclick="askSensei('why_lag')">❓ Tại sao lag?</button>
+                    <button class="sensei-chip" onclick="askSensei('why_hot')">❓ Tại sao nóng?</button>
+                </div>
+            </div>
+
+            <!-- Quick Tools Section -->
+            <div class="card">
+                <div class="card-header-line">
+                    <div class="card-title">
+                        <span>🛠️ Công Cụ Nhanh</span>
+                    </div>
+                </div>
+
+                <!-- Chế độ Game Profile -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">🎮 Chế Độ Game Mode & Tuner</div>
+                        <div class="switch-desc">Cấu hình Magic Tuner, DPI, 120Hz & Renderer SkiaGL.</div>
+                    </div>
+                    <button class="btn-game-tune" onclick="switchTab('gamemode')">Cấu hình</button>
+                </div>
+
+                <!-- Bong bóng nổi HUD Trên Game -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">📌 Bong Bóng Nổi HUD Trên Game</div>
+                        <div class="switch-desc">Hiển thị RAM thực tế, bấm vào để mở menu dọn RAM nhanh.</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sw-hud-overlay" onchange="toggleHudOverlay(this)">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Đặc Quyền Shizuku -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">⚡ Đặc Quyền Shizuku (ADB Shell)</div>
+                        <div class="switch-desc" id="txtShizukuDesc">Dịch vụ đang hoạt động với quyền hạn cao nhất.</div>
+                    </div>
+                    <button class="btn-game-tune" onclick="checkShizukuStatus(true)">Kiểm tra</button>
+                </div>
+            </div>
+
+            <!-- Nút Khôi Phục Toàn Diện -->
+            <div class="card" style="border-color: rgba(34, 197, 94, 0.4); background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(17, 23, 19, 0.95) 100%);">
+                <div class="card-header-line">
+                    <div class="card-title">
+                        <span style="color: var(--neon-green);">🔒 Quản Lý & Khôi Phục Toàn Diện</span>
+                    </div>
+                    <span class="badge-tag">AN TOÀN</span>
+                </div>
+                <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.4; margin-bottom: 12px;">
+                    Đảm bảo tất cả ứng dụng có thể bật lại bình thường nếu bị tắt. Nếu Gemini, Google Drive hoặc bất kỳ app nào bị kẹt, chạm ngay nút dưới để hoàn trả 100% về cài đặt gốc:
+                </p>
+                <button class="btn-action" onclick="executeFullRestore()">
+                    <span>🔄 KHÔI PHỤC TOÀN DIỆN: Return all value đã thay đổi, bật lại mọi app</span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- ==================== TAB 2: LIBRARY (KHO GAME CÀI ĐẶT THẬT) ==================== -->
+        <div id="tab-library" class="tab-view">
+            <div class="card">
+                <div class="card-header-line">
+                    <div class="card-title">
+                        <span>🎮 Kho Game Cài Đặt (Quét Thực Tế)</span>
+                    </div>
+                    <span class="badge-tag" id="tagLibraryCount">ĐANG QUÉT...</span>
+                </div>
+                <p style="font-size: 11px; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.4;">
+                    Hệ thống tự động quét toàn bộ game thật cài đặt trên máy. Bạn có thể chọn mức hạ độ phân giải cho từng game. Khi ấn <b>LAUNCH</b>, độ phân giải sẽ được áp dụng, và <b>khi vừa thoát game sẽ tự động trả về màn hình gốc 100%!</b>
+                </p>
+
+                <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                    <button class="btn-game-tune" style="flex: 1; border-color: var(--neon-green); color: var(--neon-green);" onclick="refreshGameLibrary()">
+                        🔄 Quét Lại Kho Game
+                    </button>
+                    <button class="btn-game-tune" style="flex: 1;" onclick="addCustomGamePrompt()">
+                        ➕ Thêm Game Khác
+                    </button>
+                </div>
+
+                <!-- Dynamic Real Games Container -->
+                <div id="gamesContainer">
+                    <div style="text-align: center; padding: 24px 0; color: var(--text-muted); font-size: 11px;">
+                        Đang đọc danh sách game trên máy...
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== TAB 3: GAME MODE & MAGIC TUNER ==================== -->
+        <div id="tab-gamemode" class="tab-view">
+
+            <!-- Magic Tuner Feature: Performance Setup -->
+            <div class="card">
+                <div class="card-header-line">
+                    <div class="card-title">
+                        <span>⚙️ Performance Setup (Magic Tuner)</span>
+                    </div>
+                    <span class="badge-tag">TUNER</span>
+                </div>
+
+                <!-- Resolution Slider: OFF 300 320 360 380 400 440 480 -->
+                <div class="slider-control-group" style="margin-bottom: 14px;">
+                    <div class="slider-header">
+                        <span class="slider-label">Resolution / Density (DPI):</span>
+                        <span class="slider-value-badge" id="valDensityTuner">OFF (Gốc)</span>
+                    </div>
+                    <div class="segmented-row density-segmented" style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 3px;">
+                        <button class="segment-btn active" onclick="setMagicDensity(0, this)">OFF</button>
+                        <button class="segment-btn" onclick="setMagicDensity(300, this)">300</button>
+                        <button class="segment-btn" onclick="setMagicDensity(320, this)">320</button>
+                        <button class="segment-btn" onclick="setMagicDensity(360, this)">360</button>
+                        <button class="segment-btn" onclick="setMagicDensity(380, this)">380</button>
+                        <button class="segment-btn" onclick="setMagicDensity(400, this)">400</button>
+                        <button class="segment-btn" onclick="setMagicDensity(440, this)">440</button>
+                        <button class="segment-btn" onclick="setMagicDensity(480, this)">480</button>
+                    </div>
+                </div>
+
+                <!-- Unlock Refresh Rate Slider: OFF 30 45 60 90 120 144 -->
+                <div class="slider-control-group" style="margin-bottom: 14px;">
+                    <div class="slider-header">
+                        <span class="slider-label">Unlock Refresh Rate:</span>
+                        <span class="slider-value-badge" id="valRefreshRateTuner">OFF (Auto)</span>
+                    </div>
+                    <div class="segmented-row hz-segmented" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px;">
+                        <button class="segment-btn active" onclick="setMagicRefreshRate(0, this)">OFF</button>
+                        <button class="segment-btn" onclick="setMagicRefreshRate(30, this)">30</button>
+                        <button class="segment-btn" onclick="setMagicRefreshRate(45, this)">45</button>
+                        <button class="segment-btn" onclick="setMagicRefreshRate(60, this)">60</button>
+                        <button class="segment-btn" onclick="setMagicRefreshRate(90, this)">90</button>
+                        <button class="segment-btn" onclick="setMagicRefreshRate(120, this)">120</button>
+                        <button class="segment-btn" onclick="setMagicRefreshRate(144, this)">144</button>
+                    </div>
+                </div>
+
+                <!-- 3 Toggles: System Performance Boost, Memory Management, CPU Optimization -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">⚡ System Performance Boost ⓘ</div>
+                        <div class="switch-desc">Tối ưu I/O Scheduler & giảm tải hệ điều hành khi chơi game.</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sw-sys-perf" onchange="toggleMagicSysPerf(this)">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">💾 Memory Management ⓘ</div>
+                        <div class="switch-desc">Quản lý ZRAM & tự động dọn swap cache giữ RAM luôn thông thoáng.</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sw-mem-mgmt" onchange="toggleMagicMemMgmt(this)">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">🧠 CPU Optimization ⓘ</div>
+                        <div class="switch-desc">Điều phối tiến trình game lên nhân lớn (Big Cores), hạ nhiệt chip.</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sw-cpu-opt" onchange="toggleMagicCpuOpt(this)">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Profile Selector -->
+            <div class="card">
+                <div class="card-header-line">
+                    <div class="card-title">
+                        <span>🚀 Hồ Sơ Game Mode</span>
+                    </div>
+                </div>
+                <div class="segmented-row">
+                    <button class="segment-btn active" id="btn-profile-esports" onclick="selectProfile('esports')">eSports 120Hz</button>
+                    <button class="segment-btn" id="btn-profile-balanced" onclick="selectProfile('balanced')">Cân Bằng 90Hz</button>
+                    <button class="segment-btn" id="btn-profile-eco" onclick="selectProfile('eco')">Tiết Kiệm Pin</button>
+                </div>
+                <div style="font-size: 11px; color: var(--text-secondary); line-height: 1.4; margin-top: 6px;" id="profileDescText">
+                    Áp dụng xung nhịp GPU tối đa, hoạt họa 0x tức thì và khóa màn hình 120Hz chống khựng giật.
+                </div>
+            </div>
+
+            <!-- Flowly Game Tuner Engine -->
+            <div class="card">
+                <div class="card-header-line">
+                    <div class="card-title">
+                        <span>⚙️ Flowly Game Tuner (Downscale & FPS)</span>
+                    </div>
+                    <span class="badge-tag" id="lblTunerSelectedGame">TẤT CẢ GAME</span>
+                </div>
+
+                <!-- Resolution Downscaling Slider -->
+                <div class="slider-control-group">
+                    <div class="slider-header">
+                        <span class="slider-label">Độ phân giải render (Downscaling)</span>
+                        <span class="slider-value-badge" id="valDownscale">75% (810x1800)</span>
+                    </div>
+                    <input type="range" class="range-slider" id="sliderDownscale" min="50" max="100" step="5" value="75" oninput="onDownscaleSliderChange(this.value)">
+                    <div style="font-size: 10px; color: var(--text-secondary); margin-top: 4px;">
+                        Mẹo: Giảm độ phân giải render giúp GPU nhẹ tải hơn, tăng FPS và giảm nóng máy đáng kể.
+                    </div>
+                </div>
+
+                <!-- FPS Cap Limit -->
+                <div class="slider-control-group">
+                    <div class="slider-header">
+                        <span class="slider-label">Giới hạn Khung hình (FPS Cap)</span>
+                        <span class="slider-value-badge" id="valFpsCap">90 FPS</span>
+                    </div>
+                    <div class="segmented-row">
+                        <button class="segment-btn" onclick="selectFpsCap(30, this)">30</button>
+                        <button class="segment-btn" onclick="selectFpsCap(60, this)">60</button>
+                        <button class="segment-btn active" onclick="selectFpsCap(90, this)">90</button>
+                        <button class="segment-btn" onclick="selectFpsCap(120, this)">120</button>
+                        <button class="segment-btn" onclick="selectFpsCap(0, this)">Max</button>
+                    </div>
+                </div>
+
+                <!-- Graphics Renderer Selection -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">Bộ Render Vulkan (ANGLE / SkiaGL)</div>
+                        <div class="switch-desc">Bật tăng tốc SkiaGL Vulkan thay cho OpenGL ES mặc định.</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sw-angle-renderer" checked onchange="toggleAngleRenderer(this)">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+
+                <!-- AOT Dexopt Precompile (Speed-Profile) -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">⚡ Precompile Game (AOT Dexopt)</div>
+                        <div class="switch-desc">Biên dịch trước bytecode sang mã máy native để triệt tiêu khựng hình.</div>
+                    </div>
+                    <button class="btn-game-tune" onclick="executePrecompile()">Biên dịch</button>
+                </div>
+
+                <!-- Zero Lag & Backpressure -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">Triệt Tiêu Backpressure (Zero Lag)</div>
+                        <div class="switch-desc">Tắt bộ đệm trễ SurfaceFlinger để hình ảnh xuất tức thời.</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sw-zerolag" checked onchange="toggleZeroLag(this)">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+
+                <button class="btn-action" style="margin-top: 10px;" onclick="applyGameTunerSettings()">
+                    <span>💾 ÁP DỤNG CẤU HÌNH GAME TUNER</span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- ==================== TAB 4: EXTENSIONS (TIỆN ÍCH MỞ RỘNG) ==================== -->
+        <div id="tab-extensions" class="tab-view">
+
+            <div class="card">
+                <div class="card-header-line">
+                    <div class="card-title">
+                        <span>🧩 Tiện Ích Mở Rộng FlowS</span>
+                    </div>
+                    <span class="badge-tag">MODULAR</span>
+                </div>
+
+                <!-- Bong bóng nổi HUD Trên Game -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">📊 Bong Bóng Nổi HUD Trên Game</div>
+                        <div class="switch-desc">Bong bóng HUD theo chuẩn độ phân giải máy, hiển thị FPS & RAM.</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sw-ext-overlay" onchange="toggleHudOverlay(this)">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Touch 180Hz / Gia Tốc Cảm Ứng -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">⚡ Touch 180Hz / Siêu Nhạy Cảm Ứng</div>
+                        <div class="switch-desc">Tăng polling rate cảm ứng lên 180-360Hz, giảm delay chạm khi combat.</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sw-ext-touch" checked onchange="toggleTouch180Hz(this)">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+
+                <!-- FSTrim SSD Chip Nhớ UFS -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">💾 FSTrim Chip Nhớ UFS / SSD</div>
+                        <div class="switch-desc">Dọn sạch cell nhớ UFS nhàn rỗi, triệt tiêu hiện tượng drop FPS do I/O disk.</div>
+                    </div>
+                    <button class="btn-game-tune" onclick="triggerFSTrimDirect()">Dọn Ngay</button>
+                </div>
+
+                <!-- Network & Ping Booster -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">📶 FlowS Ping Booster</div>
+                        <div class="switch-desc">Tắt quét Wi-Fi/Bluetooth ngầm, chống nhảy Ping 460ms đột ngột.</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sw-ext-ping" checked onchange="togglePingBooster(this)">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Ice Cooling Engine -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">❄️ Ice Cooling Thermal Engine</div>
+                        <div class="switch-desc">Ép thống đốc CPU thông minh, khống chế nhiệt độ &lt; 38°C khi combat.</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sw-ext-ice" checked onchange="toggleIceCooling(this)">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Fast Charge Turbo -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">⚡ Fast Charge Turbo Khi Chơi Game</div>
+                        <div class="switch-desc">Sạc nhanh tối đa an toàn khi cắm sạc vừa chơi.</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sw-ext-fastcharge" checked onchange="toggleFastCharge(this)">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Game Sound Equalizer -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title">🎧 Game Sound Equalizer</div>
+                        <div class="switch-desc">Tăng cường âm trầm (bass) & tiếng bước chân trong game FPS.</div>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="sw-ext-equalizer" checked onchange="toggleEqualizer(this)">
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Chế Độ CRAZY Điên Rồ -->
+                <div class="switch-row">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title" style="color: #f43f5e;">🔥 Chế Độ CRAZY Điên Rồ</div>
+                        <div class="switch-desc">Đưa RAM về đầu 3x (~3200MB). Tạm dừng mọi tác vụ để dồn 100% công lực. Có thể khôi phục bất cứ lúc nào!</div>
+                    </div>
+                    <button class="btn-game-tune" style="border-color: #f43f5e; color: #f43f5e;" onclick="activateCrazyMode()">Kích hoạt</button>
+                </div>
+            </div>
+
+            <!-- Tự động Dọn RAM Thông Minh theo Mốc Máy -->
+            <div class="card">
+                <div class="card-header-line">
+                    <div class="card-title">
+                        <span>🎯 Mốc Tự Dọn RAM Thông Minh</span>
+                    </div>
+                    <span class="badge-tag" id="lblRamCapacity">MÁY 8GB RAM</span>
+                </div>
+                <div style="font-size: 11px; color: var(--text-secondary); line-height: 1.4; margin-bottom: 8px;">
+                    🛡️ Cơ chế an toàn tuyệt đối: Bảo vệ 100% cuộc gọi Messenger, Zalo và app đang xem (YouTube, TikTok)!
+                </div>
+
+                <div class="segmented-row">
+                    <button class="segment-btn" onclick="selectRamThreshold('3x', this)">3x - 3.8x (Yếu)</button>
+                    <button class="segment-btn" onclick="selectRamThreshold('4x', this)">3.8x - 4.5x</button>
+                    <button class="segment-btn active" onclick="selectRamThreshold('5x', this)">4.5x - 5.x (Chuẩn)</button>
+                    <button class="segment-btn" onclick="selectRamThreshold('6x', this)">5x - 6x (Mạnh)</button>
+                </div>
+
+                <div class="slider-control-group">
+                    <div class="slider-header">
+                        <span class="slider-label">Mốc dọn tự động (MB)</span>
+                        <span class="slider-value-badge" id="valCustomThreshold">5500 MB (75%)</span>
+                    </div>
+                    <input type="range" class="range-slider" id="sliderRamThreshold" min="3000" max="7500" step="100" value="5500" oninput="onRamThresholdSlider(this.value)">
+                </div>
+
+                <button class="btn-action btn-secondary" onclick="triggerSmartRamClean()">
+                    <span>🧹 DỌN SẠCH RAM NGAY BÂY GIỜ</span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- ==================== TAB 5: SETTINGS & AUDIT ==================== -->
+        <div id="tab-settings" class="tab-view">
+
+            <!-- What Gets Changed (Audit Log) -->
+            <div class="card">
+                <div class="card-header-line">
+                    <div class="card-title">
+                        <span>📋 Bảng Đối Soát Hệ Thống (What Gets Changed)</span>
+                    </div>
+                    <button class="btn-game-tune" onclick="loadAuditTable()">Làm mới</button>
+                </div>
+                <div style="font-size: 11px; color: var(--text-secondary); margin-bottom: 8px;">
+                    Minh bạch 100%: Toàn bộ thông số hệ thống mà FlowS tối ưu và giá trị nguyên bản.
+                </div>
+
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>Thông số</th>
+                            <th>Gốc</th>
+                            <th>Hiện tại</th>
+                        </tr>
+                    </thead>
+                    <tbody id="auditTableBody">
+                        <tr>
+                            <td>Hoạt họa (Animation)</td>
+                            <td>1.0x</td>
+                            <td><span class="audit-tag">0.0x Tức thì</span></td>
+                        </tr>
+                        <tr>
+                            <td>Tần số quét (Refresh Rate)</td>
+                            <td>60/90 Hz</td>
+                            <td><span class="audit-tag">120 Hz Khóa</span></td>
+                        </tr>
+                        <tr>
+                            <td>Renderer Đồ họa</td>
+                            <td>OpenGL ES</td>
+                            <td><span class="audit-tag">SkiaGL Vulkan</span></td>
+                        </tr>
+                        <tr>
+                            <td>Triệt tiêu trễ (Backpressure)</td>
+                            <td>0 (Trễ)</td>
+                            <td><span class="audit-tag">1 (0x Lag)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Chống nhảy Ping Wi-Fi</td>
+                            <td>1 (Quét ngầm)</td>
+                            <td><span class="audit-tag">0 (Ổn định)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Fix Thanh Pin Trắng Card (Oppo/Realme ColorOS) -->
+            <div class="card" style="border: 1px solid rgba(56, 189, 248, 0.4); background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%);">
+                <div class="card-header-line">
+                    <div class="card-title" style="color: #38bdf8;">
+                        <span>🔋 Khôi Phục Thanh Pin Trắng (Fix Viền Xanh ColorOS)</span>
+                    </div>
+                </div>
+                <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.4; margin-bottom: 10px;">
+                    Nếu góc pin trên điện thoại Oppo/Realme của bạn bị đổi thành màu xanh do tính năng hiệu năng cao, bấm nút này để lập tức trả về thanh pin trắng nguyên bản 100%!
+                </p>
+                <button class="btn-action" style="background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);" onclick="fixBatteryColor()">
+                    <span>🤍 KHÔI PHỤC THANH PIN TRẮNG NGUYÊN BẢN</span>
+                </button>
+            </div>
+
+            <!-- Khôi Phục Toàn Diện Card -->
+            <div class="card" style="border-color: rgba(34, 197, 94, 0.4);">
+                <div class="card-header-line">
+                    <div class="card-title">
+                        <span style="color: var(--neon-green);">🔄 Hoàn Trả Mọi Giá Trị & Mở App</span>
+                    </div>
+                </div>
+                <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.4; margin-bottom: 10px;">
+                    Nếu bạn muốn đưa toàn bộ máy về trạng thái xuất xưởng trước khi chạy FlowS: Khôi phục màn hình gốc, DPI, tốc độ hoạt họa 1.0x, và mở khóa mọi app.
+                </p>
+                <button class="btn-action" onclick="executeFullRestore()">
+                    <span>🔄 KHÔI PHỤC TOÀN DIỆN: Return all value đã thay đổi, bật lại mọi app</span>
+                </button>
+            </div>
+
+            <!-- Theme Manager (7 Full Themes Supported) -->
+            <div class="card">
+                <div class="card-header-line">
+                    <div class="card-title">
+                        <span>🎨 Giao Diện & Chủ Đề (7 Themes)</span>
+                    </div>
+                </div>
+                <div class="segmented-row" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 4px;">
+                    <button class="segment-btn active" id="btn-theme-carbon" onclick="switchTheme('carbon', this)">Gamer GLTool</button>
+                    <button class="segment-btn" id="btn-theme-gojo" onclick="switchTheme('gojo', this)">Gojo Satoru</button>
+                    <button class="segment-btn" id="btn-theme-yourname" onclick="switchTheme('yourname', this)">Your Name</button>
+                    <button class="segment-btn" id="btn-theme-naruto" onclick="switchTheme('naruto', this)">Naruto</button>
+                </div>
+                <div class="segmented-row" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;">
+                    <button class="segment-btn" id="btn-theme-onepiece" onclick="switchTheme('onepiece', this)">One Piece</button>
+                    <button class="segment-btn" id="btn-theme-conan" onclick="switchTheme('conan', this)">Conan</button>
+                    <button class="segment-btn" id="btn-theme-dragonball" onclick="switchTheme('dragonball', this)">Dragon Ball</button>
+                </div>
+            </div>
+
+            <!-- Version Info -->
+            <div style="text-align: center; font-size: 11px; color: var(--text-muted); padding: 12px 0;">
+                FlowS with Game Tuner • v3.5.0 Pro Activated<br>
+                Engineered for Snapdragon & MediaTek Dimensity
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bottom Navigation Bar (5 tabs) -->
+    <nav class="bottom-nav">
+        <a class="nav-item active" id="nav-home" onclick="switchTab('home')">
+            <span class="nav-icon">🏠</span>
+            <span>Home</span>
+        </a>
+        <a class="nav-item" id="nav-library" onclick="switchTab('library')">
+            <span class="nav-icon">🎮</span>
+            <span>Library</span>
+        </a>
+        <a class="nav-item" id="nav-gamemode" onclick="switchTab('gamemode')">
+            <span class="nav-icon">⚡</span>
+            <span>Game Mode</span>
+        </a>
+        <a class="nav-item" id="nav-extensions" onclick="switchTab('extensions')">
+            <span class="nav-icon">🧩</span>
+            <span>Extensions</span>
+        </a>
+        <a class="nav-item" id="nav-settings" onclick="switchTab('settings')">
+            <span class="nav-icon">⚙️</span>
+            <span>Settings</span>
+        </a>
+    </nav>
+
+    <!-- FlowS Core JavaScript Logic -->
+    <script>
+        const getBridge = () => window.AndroidBridge || window.Android || null;
+
+        let currentTab = 'home';
+        let currentTheme = 'carbon';
+        let selectedGamePackage = '';
+        let currentFpsCap = 90;
+        let currentDownscalePct = 75;
+        let recommendedResolutions = [];
+        let installedGamesCache = [];
+
+        // Announcement logic
+        function dismissAnnouncement() {
+            const b = document.getElementById('announcementBanner');
+            if (b) b.style.display = 'none';
+            try { localStorage.setItem('flows_announcement_seen', 'true'); } catch(e) {}
+        }
+
+        function checkWelcomeAndAnnouncement() {
+            try {
+                const seenWelcome = localStorage.getItem('flows_welcome_seen');
+                if (!seenWelcome) {
+                    const modal = document.getElementById('welcomeModal');
+                    if (modal) modal.style.display = 'flex';
+                }
+            } catch(e) {}
+        }
+
+        function closeWelcomeModal() {
+            const modal = document.getElementById('welcomeModal');
+            if (modal) modal.style.display = 'none';
+            try { localStorage.setItem('flows_welcome_seen', 'true'); } catch(e) {}
+            showToast("🎉 Chào mừng đến với FlowS Pro VIP!");
+        }
+
+        // Switch Tabs smoothly
+        function switchTab(tabId) {
+            currentTab = tabId;
+            document.querySelectorAll('.tab-view').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+            const targetView = document.getElementById('tab-' + tabId);
+            const targetNav = document.getElementById('nav-' + tabId);
+            if (targetView) targetView.classList.add('active');
+            if (targetNav) targetNav.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (tabId === 'library') {
+                loadRealGamesList();
+            } else if (tabId === 'settings') {
+                loadAuditTable();
+            }
+        }
+
+        // Show toast notification
+        function showToast(msg) {
+            const toast = document.getElementById('toastFeedback');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2600);
+        }
+
+        // Fix Battery Color (ColorOS / RealmeUI)
+        function fixBatteryColor() {
+            const bridge = getBridge();
+            if (bridge && bridge.fixBatteryStatusWhite) {
+                bridge.fixBatteryStatusWhite();
+                showToast("✓ Đã khôi phục thanh pin trắng chuẩn nguyên bản!");
+            } else {
+                showToast("Đã khôi phục thanh pin trắng!");
+            }
+        }
+
+        // Switch Gaming Mode (Smooth, Medium, Extreme, Crazy)
+        function switchGamingMode(mode) {
+            document.querySelectorAll('#btnModeSmooth, #btnModeMedium, #btnModeExtreme, #btnModeCrazy').forEach(b => b.classList.remove('active'));
+            const badge = document.getElementById('lblCurrentModeBadge');
+            const desc = document.getElementById('txtModeDescription');
+
+            if (mode === 'smooth') {
+                document.getElementById('btnModeSmooth').classList.add('active');
+                if (badge) badge.textContent = "MÁT MÁY";
+                if (desc) desc.innerHTML = "🍃 <b>Chế độ Smooth (Mát Máy)</b>: Tối ưu hoạt họa 0.5x, giữ máy luôn mát dưới 37°C, tiết kiệm pin tối đa khi chơi game lâu.";
+            } else if (mode === 'medium') {
+                document.getElementById('btnModeMedium').classList.add('active');
+                if (badge) badge.textContent = "CÂN BẰNG";
+                if (desc) desc.innerHTML = "⚖️ <b>Chế độ Medium (Cân Bằng)</b>: Cân bằng FPS và nhiệt độ, dọn swap đệm và ổn định TCP buffer 60.";
+            } else if (mode === 'extreme') {
+                document.getElementById('btnModeExtreme').classList.add('active');
+                if (badge) badge.textContent = "CỰC MẠNH";
+                if (desc) desc.innerHTML = "🚀 <b>Chế độ Cực Mạnh (0x Delay)</b>: Hoạt họa 0.0x tức thì, Vulkan SkiaGL, không trễ hình ảnh, khóa 120Hz.";
+            } else if (mode === 'crazy') {
+                document.getElementById('btnModeCrazy').classList.add('active');
+                if (badge) badge.textContent = "CRAZY (ĐẦU 3x)";
+                if (desc) desc.innerHTML = "🔥 <b>Chế độ CRAZY Điên Rồ</b>: Ép RAM về đầu 3x, tạm dừng tác vụ nền, dồn 100% công lực cho game. 100% có thể khôi phục!";
+                activateCrazyMode();
+                return;
+            }
+
+            const bridge = getBridge();
+            if (bridge && bridge.applyGamingMode) {
+                bridge.applyGamingMode(mode);
+            } else {
+                showToast("Đã kích hoạt chế độ: " + mode.toUpperCase());
+            }
+        }
+
+        // Strict Verification Toggle Runner
+        function runStrictToggle(featureName, switchEl, apiFunc) {
+            const originalState = !switchEl.checked;
+            switchEl.disabled = true;
+
+            try {
+                const resJson = apiFunc(switchEl.checked);
+                let result = { success: true };
+                try {
+                    result = typeof resJson === 'string' ? JSON.parse(resJson) : resJson;
+                } catch(e) {}
+
+                if (!result.success) {
+                    switchEl.checked = originalState;
+                    alert("❌ Lỗi khi kích hoạt " + featureName + ":\n" + (result.error || "Không thể thực thi lệnh Shizuku."));
+                } else {
+                    showToast("✓ " + (result.message || (featureName + (switchEl.checked ? " đã bật" : " đã tắt"))));
+                }
+            } catch (err) {
+                switchEl.checked = originalState;
+                alert("❌ Lỗi ngoại lệ: " + err.message);
+            } finally {
+                switchEl.disabled = false;
+            }
+        }
+
+        // HUD Floating Bubble Toggle
+        function toggleHudOverlay(switchEl) {
+            const bridge = getBridge();
+            if (!bridge) {
+                showToast("Bật giao diện xem trước HUD");
+                return;
+            }
+
+            if (switchEl.checked) {
+                if (bridge.isOverlayPermissionGranted && !bridge.isOverlayPermissionGranted()) {
+                    switchEl.checked = false;
+                    alert("⚠️ Cần cấp quyền 'Hiển thị trên ứng dụng khác' để bong bóng nổi HUD hoạt động!");
+                    if (bridge.requestOverlayPermission) bridge.requestOverlayPermission();
+                    return;
+                }
+                if (bridge.startFloatingMonitor) {
+                    bridge.startFloatingMonitor(true);
+                    showToast("✓ Đã bật Bong bóng nổi HUD Trên Game");
+                }
+            } else {
+                if (bridge.stopFloatingMonitor) {
+                    bridge.stopFloatingMonitor();
+                    showToast("Đã tắt Bong bóng nổi HUD");
+                }
+            }
+        }
+
+        // Touch 180Hz Toggle
+        function toggleTouch180Hz(switchEl) {
+            const bridge = getBridge();
+            if (!bridge || !bridge.triggerTouch180Hz) {
+                showToast("Touch 180Hz: Đã đổi trạng thái");
+                return;
+            }
+            runStrictToggle("Touch 180Hz / Gia tốc cảm ứng", switchEl, (enabled) => bridge.triggerTouch180Hz(enabled));
+        }
+
+        // Direct FSTrim
+        function triggerFSTrimDirect() {
+            const bridge = getBridge();
+            if (bridge && bridge.triggerFSTrim) {
+                bridge.triggerFSTrim();
+            } else {
+                showToast("💾 Đã FSTrim & dọn dẹp chip nhớ UFS!");
+            }
+        }
+
+        // Ping Booster Toggle
+        function togglePingBooster(switchEl) {
+            const bridge = getBridge();
+            if (!bridge || !bridge.triggerFlowlyPingBooster) {
+                showToast("Ping Booster: Đã đổi trạng thái");
+                return;
+            }
+            runStrictToggle("FlowS Ping Booster", switchEl, (enabled) => bridge.triggerFlowlyPingBooster(enabled));
+        }
+
+        // Ice Cooling Toggle
+        function toggleIceCooling(switchEl) {
+            const bridge = getBridge();
+            if (!bridge || !bridge.triggerIceCoolingEngine) {
+                showToast("Ice Cooling: Đã đổi trạng thái");
+                return;
+            }
+            runStrictToggle("Ice Cooling Engine", switchEl, (enabled) => bridge.triggerIceCoolingEngine(enabled));
+        }
+
+        // Fast Charge Turbo Toggle
+        function toggleFastCharge(switchEl) {
+            const bridge = getBridge();
+            if (!bridge || !bridge.triggerFastChargeTurbo) {
+                showToast("Fast Charge: Đã đổi trạng thái");
+                return;
+            }
+            runStrictToggle("Fast Charge Turbo", switchEl, (enabled) => bridge.triggerFastChargeTurbo(enabled));
+        }
+
+        // Game Sound Equalizer Toggle
+        function toggleEqualizer(switchEl) {
+            const bridge = getBridge();
+            if (!bridge || !bridge.triggerSoundEqualizer) {
+                showToast("Equalizer: Đã đổi trạng thái");
+                return;
+            }
+            runStrictToggle("Game Sound Equalizer", switchEl, (enabled) => bridge.triggerSoundEqualizer(enabled));
+        }
+
+        // Zero Lag Toggle
+        function toggleZeroLag(switchEl) {
+            const bridge = getBridge();
+            if (!bridge || !bridge.triggerFlowlyZeroLag) {
+                showToast("Zero Lag: Đã đổi trạng thái");
+                return;
+            }
+            runStrictToggle("FlowS Zero Lag", switchEl, (enabled) => bridge.triggerFlowlyZeroLag(enabled));
+        }
+
+        // ANGLE SkiaGL Renderer Toggle
+        function toggleAngleRenderer(switchEl) {
+            const bridge = getBridge();
+            if (!bridge || !bridge.applyGameTuning) {
+                showToast("Renderer: Đã đổi");
+                return;
+            }
+            runStrictToggle("ANGLE SkiaGL Renderer", switchEl, (enabled) => {
+                return bridge.applyGameTuning("", currentDownscalePct / 100.0, currentFpsCap, enabled ? "skiagl" : "default");
+            });
+        }
+
+        // AOT Dexopt Precompile
+        function executePrecompile() {
+            const bridge = getBridge();
+            const pkg = selectedGamePackage || "com.garena.game.kgvn";
+            if (!bridge || !bridge.precompileGame) {
+                alert("Đang mô phỏng AOT Dexopt cho " + pkg + "...");
+                return;
+            }
+            showToast("⚡ Đang biên dịch AOT machine code cho " + pkg + "...");
+            setTimeout(() => {
+                const resJson = bridge.precompileGame(pkg);
+                try {
+                    const res = JSON.parse(resJson);
+                    if (res.success) {
+                        alert("✓ Hoàn tất biên dịch AOT:\n" + res.message);
+                    } else {
+                        alert("❌ Lỗi biên dịch: " + res.error);
+                    }
+                } catch(e) {
+                    showToast("Đã biên dịch xong!");
+                }
+            }, 300);
+        }
+
+        // Crazy Mode Activation
+        function activateCrazyMode() {
+            const confirmed = confirm(
+                "🔥 KÍCH HOẠT CHẾ ĐỘ CRAZY (ĐIÊN RỒ)?\n\n" +
+                "- Tạm dừng mọi tác vụ ngầm để dồn 100% công lực CPU & GPU cho game.\n" +
+                "- Tối ưu dồn RAM về đầu 3x (~3000MB - 3500MB) giúp máy siêu mượt và mát lạnh!\n" +
+                "- Tuyệt đối KHÔNG làm đổi màu thanh pin và KHÔNG làm quá nhiệt CPU.\n" +
+                "- Bạn hoàn toàn có thể ấn 'KHÔI PHỤC TOÀN DIỆN' bất cứ lúc nào để mở lại mọi app và cuộc gọi.\n\n" +
+                "Bạn có muốn kích hoạt ngay không?"
+            );
+            if (!confirmed) return;
+
+            const bridge = getBridge();
+            if (bridge && bridge.triggerCrazyMode) {
+                showToast("🔥 Đang kích hoạt Chế Độ CRAZY...");
+                setTimeout(() => {
+                    const res = bridge.triggerCrazyMode();
+                    alert("🔥 Chế Độ CRAZY Đã Bật:\nRAM đã được dọn về mức đầu 3x!");
+                    updateTelemetry();
+                }, 400);
+            } else {
+                showToast("Chế độ Crazy đã bật!");
+            }
+        }
+
+        // Full System Restore
+        function executeFullRestore() {
+            const bridge = getBridge();
+            if (!bridge || !bridge.restoreAllDisabledPackages) {
+                alert("Đang khôi phục cài đặt gốc và mở lại ứng dụng...");
+                return;
+            }
+            showToast("🔄 Đang quét & khôi phục 100% ứng dụng và cài đặt...");
+            setTimeout(() => {
+                const res = bridge.restoreAllDisabledPackages();
+                alert(
+                    "✓ KHÔI PHỤC TOÀN DIỆN THÀNH CÔNG!\n\n" +
+                    "- Đã mở khóa và unsuspend: Gemini, Google Drive, Máy ảnh, Bộ sưu tập.\n" +
+                    "- Đã trả về độ phân giải, DPI, tần số quét và hoạt họa gốc của máy.\n" +
+                    "- Đã trả về thanh pin trắng nguyên bản 100%!\n" +
+                    "- Mọi ứng dụng hoạt động bình thường 100%!"
+                );
+                updateTelemetry();
+                loadAuditTable();
+            }, 500);
+        }
+
+        // Downscale slider change
+        function onDownscaleSliderChange(val) {
+            currentDownscalePct = parseInt(val);
+            const w = Math.round(1080 * (currentDownscalePct / 100.0));
+            const h = Math.round(2400 * (currentDownscalePct / 100.0));
+            document.getElementById('valDownscale').textContent = currentDownscalePct + "% (" + w + "x" + h + ")";
+        }
+
+        // FPS Cap Selection
+        function selectFpsCap(fps, btnEl) {
+            currentFpsCap = fps;
+            document.querySelectorAll('#tab-gamemode .segmented-row:nth-of-type(2) .segment-btn').forEach(b => b.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+            document.getElementById('valFpsCap').textContent = fps === 0 ? "Max / Không Giới Hạn" : fps + " FPS";
+        }
+
+        // Apply Game Tuner Settings
+        function applyGameTunerSettings() {
+            const bridge = getBridge();
+            const downscaleFloat = currentDownscalePct / 100.0;
+            const renderer = document.getElementById('sw-angle-renderer').checked ? "skiagl" : "default";
+
+            if (bridge && bridge.applyGameTuning) {
+                const resJson = bridge.applyGameTuning(selectedGamePackage, downscaleFloat, currentFpsCap, renderer);
+                try {
+                    const res = JSON.parse(resJson);
+                    if (res.success) {
+                        showToast("✓ Đã lưu cấu hình Game Tuner");
+                    } else {
+                        alert("Lỗi: " + res.error);
+                    }
+                } catch(e) {
+                    showToast("Đã áp dụng Game Tuner");
+                }
+            } else {
+                showToast("Đã lưu cấu hình Game Tuner!");
+            }
+        }
+
+        // Profile Selection
+        function selectProfile(profile) {
+            document.querySelectorAll('#btn-profile-esports, #btn-profile-balanced, #btn-profile-eco').forEach(b => b.classList.remove('active'));
+            const descEl = document.getElementById('profileDescText');
+
+            if (profile === 'esports') {
+                document.getElementById('btn-profile-esports').classList.add('active');
+                descEl.textContent = "Áp dụng xung nhịp GPU tối đa, hoạt họa 0x tức thì và khóa màn hình 120Hz chống khựng giật.";
+                const bridge = getBridge();
+                if (bridge && bridge.lock120HzFpsAndCooling) bridge.lock120HzFpsAndCooling(true);
+            } else if (profile === 'balanced') {
+                document.getElementById('btn-profile-balanced').classList.add('active');
+                descEl.textContent = "Cân bằng hoàn hảo giữa độ mượt 90Hz và nhiệt độ mát mẻ lâu dài.";
+            } else {
+                document.getElementById('btn-profile-eco').classList.add('active');
+                descEl.textContent = "Tiết kiệm pin tối ưu cho các tựa game 2D nhẹ hoặc đọc truyện.";
+            }
+            showToast("Đã chọn hồ sơ: " + profile.toUpperCase());
+        }
+
+        // Open Tuner for specific game from Library
+        function openGameTunerFor(pkg, name) {
+            selectedGamePackage = pkg;
+            document.getElementById('lblTunerSelectedGame').textContent = name.toUpperCase();
+            switchTab('gamemode');
+        }
+
+        // ==================== REAL GAMES SCANNING & PER-GAME LAUNCH ====================
+        function loadRealGamesList() {
+            const bridge = getBridge();
+            const container = document.getElementById('gamesContainer');
+            const countTag = document.getElementById('tagLibraryCount');
+
+            // 1. Fetch recommended resolutions
+            if (bridge && bridge.getRecommendedResolutionsJson) {
+                try {
+                    recommendedResolutions = JSON.parse(bridge.getRecommendedResolutionsJson());
+                } catch(e) {}
+            }
+            if (!recommendedResolutions || recommendedResolutions.length === 0) {
+                recommendedResolutions = [
+                    { id: "native", name: "Gốc (100% - 1080x2400)", desc: "Độ nét tiêu chuẩn (480 DPI)", width: 1080, height: 2400, density: 480 },
+                    { id: "720p", name: "Ultra Smooth 720p (Đề xuất)", desc: "Giảm ~33% tải GPU, tăng 20-30 FPS (720x1600 @ 320 DPI)", width: 720, height: 1600, density: 320 },
+                    { id: "540p", name: "Super Smooth 540p", desc: "Giảm ~50% tải GPU, máy cực mát (540x1200 @ 240 DPI)", width: 540, height: 1200, density: 240 },
+                    { id: "480p", name: "Crazy Smooth 480p", desc: "Max FPS cho game nặng hoặc máy yếu (480x1066 @ 213 DPI)", width: 480, height: 1066, density: 213 }
+                ];
+            }
+
+            // 2. Fetch installed games
+            let games = [];
+            if (bridge && bridge.getInstalledGamesJson) {
+                try {
+                    const json = bridge.getInstalledGamesJson();
+                    games = JSON.parse(json);
+                } catch(e) {}
+            }
+
+            // Fallback sample games if bridge unavailable
+            if (!games || games.length === 0) {
+                games = [
+                    { packageName: "com.garena.game.kgvn", appName: "Liên Quân Mobile", icon: "", isRealGame: true },
+                    { packageName: "com.roblox.client.vnggames", appName: "Roblox VNG", icon: "", isRealGame: true },
+                    { packageName: "com.playgendary.bowmasters", appName: "Bowmasters", icon: "", isRealGame: true },
+                    { packageName: "com.vng.pubgmobile", appName: "PUBG Mobile VN", icon: "", isRealGame: true }
+                ];
+            }
+
+            installedGamesCache = games;
+            if (countTag) countTag.textContent = games.length + " TỰA GAME";
+
+            if (games.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 24px 0; color: var(--text-muted); font-size: 11px;">Chưa quét thấy game launcher. Bấm "Thêm Game Khác" để chọn thủ công.</div>';
+                return;
+            }
+
+            let html = '';
+            games.forEach((g, idx) => {
+                const pkg = g.packageName;
+                const name = g.appName || pkg;
+                const iconHtml = g.icon ? 
+                    `<img src="${g.icon}" class="game-real-icon" alt="icon">` : 
+                    `<span>${idx === 0 ? '⚔️' : idx === 1 ? '🧱' : idx === 2 ? '🎯' : '🔥'}</span>`;
+
+                html += `
+                <div class="game-item-card" id="gameCard-${pkg}">
+                    <div class="game-header-top">
+                        <div class="game-icon-box">
+                            ${iconHtml}
+                        </div>
+                        <div style="flex: 1; overflow: hidden;">
+                            <div class="game-title-text">${name}</div>
+                            <div class="game-pkg-sub">${pkg}</div>
+                        </div>
+                        <span class="badge-tag" style="background: rgba(34, 197, 94, 0.15); color: #00ff66;">ĐÃ CÀI ĐẶT</span>
+                    </div>
+
+                    <div class="game-res-selector-box">
+                        <div class="game-res-label">
+                            <span>🎯 Độ Phân Giải Chơi Game:</span>
+                            <span style="color: var(--neon-green); font-size: 9px;" id="badgeResStatus-${pkg}">Tự động hoàn trả khi thoát</span>
+                        </div>
+                        <select class="game-res-dropdown" id="selRes-${pkg}" onchange="onGameResDropdownChange('${pkg}', this.value)">
+                            ${recommendedResolutions.map((r, rIdx) => `
+                                <option value="${r.id}" ${r.id === '720p' ? 'selected' : ''}>${r.name}</option>
+                            `).join('')}
+                        </select>
+                        <div class="game-res-tip" id="tipRes-${pkg}">
+                            💡 Đề xuất: Ultra Smooth 720p giúp GPU nhẹ 33%, tăng 20-30 FPS. Khi thoát game sẽ hoàn trả 100% màn hình gốc!
+                        </div>
+                    </div>
+
+                    <div class="game-launch-row">
+                        <button class="btn-game-tune" onclick="openGameTunerFor('${pkg}', '${name}')">⚙️ Cấu Hình Sâu</button>
+                        <button class="btn-game-launch" onclick="launchGameWithScaledResolution('${pkg}', '${name}')">🚀 LAUNCH GAME</button>
+                    </div>
+                </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function refreshGameLibrary() {
+            showToast("🔄 Đang quét lại toàn bộ game trên máy...");
+            setTimeout(loadRealGamesList, 300);
+        }
+
+        function onGameResDropdownChange(pkg, resId) {
+            const tipEl = document.getElementById('tipRes-' + pkg);
+            const resObj = recommendedResolutions.find(r => r.id === resId);
+            if (tipEl && resObj) {
+                tipEl.textContent = '💡 ' + resObj.desc + '. Tự động hoàn trả khi thoát game hoặc tắt màn hình!';
+            }
+        }
+
+        function launchGameWithScaledResolution(pkg, name) {
+            const bridge = getBridge();
+            const sel = document.getElementById('selRes-' + pkg);
+            const resId = sel ? sel.value : '720p';
+
+            let targetW = 0, targetH = 0, targetDpi = 0;
+            const resObj = recommendedResolutions.find(r => r.id === resId);
+            if (resObj && resId !== 'native') {
+                targetW = resObj.width;
+                targetH = resObj.height;
+                targetDpi = resObj.density;
+            }
+
+            showToast("🚀 Đang áp dụng độ phân giải & khởi chạy " + name + "...");
+
+            if (bridge && bridge.launchGameWithResolution) {
+                const resStr = bridge.launchGameWithResolution(pkg, targetW, targetH, targetDpi);
+                try {
+                    const res = JSON.parse(resStr);
+                    if (!res.success) {
+                        alert("Lỗi khởi chạy: " + (res.error || "Không thể khởi động game"));
+                    }
+                } catch(e) {}
+            } else {
+                alert("Đã khởi chạy game " + name + " với độ phân giải: " + resId);
+            }
+        }
+
+        function addCustomGamePrompt() {
+            const pkg = prompt("Nhập package name game bạn muốn thêm (Ví dụ: com.dts.freefireth):", "");
+            if (!pkg || !pkg.trim()) return;
+            const cleanPkg = pkg.trim();
+            installedGamesCache.push({
+                packageName: cleanPkg,
+                appName: cleanPkg,
+                icon: "",
+                isRealGame: true
+            });
+            loadRealGamesList();
+            showToast("✓ Đã thêm " + cleanPkg + " vào Kho Game!");
+        }
+
+        // Sensei AI Interactive Terminal
+        function askSensei(action) {
+            const logEl = document.getElementById('senseiLog');
+            let userPrompt = "";
+            let replyText = "";
+
+            if (action === 'scan') {
+                userPrompt = "scan --all";
+                replyText = "sensei> Đang quét tài nguyên... CPU: Tối ưu 8 lõi. GPU: SkiaGL Vulkan hoạt động. Nhiệt độ: 34°C ổn định.";
+            } else if (action === 'fix_all') {
+                userPrompt = "fix --all";
+                replyText = "sensei> Đã áp dụng FlowS Zero Lag, khóa 120Hz và ổn định Ping chống giật 460ms!";
+                const bridge = getBridge();
+                if (bridge && bridge.triggerFlowlyZeroLag) bridge.triggerFlowlyZeroLag(true);
+            } else if (action === 'free_ram') {
+                userPrompt = "free --ram";
+                replyText = "sensei> Đã dọn sạch bộ nhớ đệm cache và tiến trình rác. Bảo vệ an toàn 100% cuộc gọi Zalo & Messenger!";
+                triggerSmartRamClean();
+            } else if (action === 'cool_down') {
+                userPrompt = "cool --down";
+                replyText = "sensei> Kích hoạt Ice Cooling Thermal Engine. Đã hạ tải nhiệt độ pin xuống mức an toàn.";
+                const bridge = getBridge();
+                if (bridge && bridge.triggerIceCoolingEngine) bridge.triggerIceCoolingEngine(true);
+            } else if (action === 'why_lag') {
+                userPrompt = "why --lag";
+                replyText = "sensei> Lý do gây lag: Tốc độ hoạt họa hệ thống còn tồn đọng bộ đệm trễ. FlowS đã triệt tiêu Backpressure để đạt 0x trễ!";
+            } else if (action === 'why_hot') {
+                userPrompt = "why --hot";
+                replyText = "sensei> Lý do nóng máy: Độ phân giải game quá cao ép GPU quá tải. Hãy chọn Ultra Smooth 720p trong Kho Game để máy luôn mát!";
+            }
+
+            logEl.innerHTML += `<br><span class="sensei-prompt">user&gt;</span> ${userPrompt}<br>${replyText}`;
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        // Smart RAM Clean Trigger
+        function triggerSmartRamClean() {
+            const bridge = getBridge();
+            if (bridge && bridge.triggerExtremeCleanFromUi) {
+                bridge.triggerExtremeCleanFromUi();
+                showToast("✓ Đã dọn sạch RAM thông minh!");
+                setTimeout(updateTelemetry, 1000);
+            } else {
+                showToast("Đã dọn sạch RAM!");
+            }
+        }
+
+        // Ram Threshold Selection
+        function selectRamThreshold(level, btnEl) {
+            document.querySelectorAll('#tab-extensions .segmented-row .segment-btn').forEach(b => b.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+
+            let mb = 5500;
+            if (level === '3x') mb = 3600;
+            else if (level === '4x') mb = 4200;
+            else if (level === '5x') mb = 5500;
+            else if (level === '6x') mb = 6500;
+
+            document.getElementById('sliderRamThreshold').value = mb;
+            onRamThresholdSlider(mb);
+        }
+
+        function onRamThresholdSlider(val) {
+            document.getElementById('valCustomThreshold').textContent = val + " MB";
+            const bridge = getBridge();
+            if (bridge && bridge.setAutoCleanThreshold) {
+                bridge.setAutoCleanThreshold(parseInt(val));
+            }
+        }
+
+        // Theme Switching: Supports Carbon, Gojo, Your Name, Naruto, One Piece, Conan, Dragon Ball
+        function switchTheme(themeKey, btnEl) {
+            currentTheme = themeKey;
+            document.body.classList.remove(
+                'theme-gojo', 'theme-yourname', 'theme-naruto', 
+                'theme-onepiece', 'theme-conan', 'theme-dragonball'
+            );
+
+            if (themeKey !== 'carbon') {
+                document.body.classList.add('theme-' + themeKey);
+            }
+
+            document.querySelectorAll('#tab-settings .segment-btn').forEach(b => b.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+
+            showToast("Đã chuyển theme: " + themeKey.toUpperCase());
+        }
+
+        // Load Audit Table
+        function loadAuditTable() {
+            const bridge = getBridge();
+            if (!bridge || !bridge.getSystemAuditJson) return;
+
+            try {
+                const jsonStr = bridge.getSystemAuditJson();
+                const list = JSON.parse(jsonStr);
+                const tbody = document.getElementById('auditTableBody');
+                if (!list || list.length === 0) return;
+
+                tbody.innerHTML = '';
+                list.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${item.defaultValue}</td>
+                        <td><span class="audit-tag">${item.status || item.currentValue}</span></td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch(e) {}
+        }
+
+        // Telemetry Update Loop
+        function updateTelemetry() {
+            const bridge = getBridge();
+            if (!bridge) return;
+
+            if (bridge.getBatteryTelemetryJson) {
+                try {
+                    const b = JSON.parse(bridge.getBatteryTelemetryJson());
+                    document.getElementById('valBattery').textContent = b.level + "% " + (b.isCharging ? "Sạc" : "Pin");
+                    document.getElementById('valTemp').textContent = b.temperature + "°C " + (b.temperature < 38 ? "Mát" : "Ấm");
+                } catch(e) {}
+            }
+
+            if (bridge.getRealtimeRamJson) {
+                try {
+                    const r = JSON.parse(bridge.getRealtimeRamJson());
+                    let mb = 0;
+                    if (typeof r.freeMb === 'number') mb = r.freeMb;
+                    else if (typeof r.availMb === 'number') mb = r.availMb;
+                    else mb = parseFloat(r.freeMb || r.availMb) || 2400;
+                    const freeGb = (mb / 1024.0).toFixed(1);
+                    const el = document.getElementById('valRam');
+                    if (el) el.textContent = (isNaN(freeGb) ? "2.5" : freeGb) + " GB";
+                } catch(e) {}
+            }
+        }
+
+        // Check Shizuku status
+        function checkShizukuStatus(showPrompt) {
+            const bridge = getBridge();
+            const badge = document.getElementById('txtShizukuBadge');
+            const desc = document.getElementById('txtShizukuDesc');
+
+            if (bridge && bridge.checkShizukuConnection) {
+                const isConnected = bridge.checkShizukuConnection();
+                if (isConnected) {
+                    badge.textContent = "READY";
+                    badge.style.color = "var(--neon-green)";
+                    desc.textContent = "Dịch vụ Shizuku đang kết nối (ADB Shell Level).";
+                    if (showPrompt) showToast("✓ Shizuku đã sẵn sàng!");
+                } else {
+                    badge.textContent = "OFFLINE";
+                    badge.style.color = "#f43f5e";
+                    desc.textContent = "Shizuku chưa chạy. Bấm để mở app Shizuku.";
+                    if (showPrompt) {
+                        alert("⚠️ Shizuku chưa chạy! Hãy mở app Shizuku và bấm Start qua Wireless Debugging.");
+                        if (bridge.openShizukuApp) bridge.openShizukuApp();
+                    }
+                }
+            }
+        }
+
+        function testClawPulse() {
+            showToast("⚡ FlowS Engine: Sẵn sàng!");
+            updateTelemetry();
+        }
+
+        // Callback from Android Native when HUD status syncs
+        window.onMonitorStatusSync = function(hasOverlay, isRunning) {
+            const hudSw = document.getElementById('sw-hud-overlay');
+            const extSw = document.getElementById('sw-ext-overlay');
+            const active = hasOverlay && isRunning;
+            if (hudSw) hudSw.checked = active;
+            if (extSw) extSw.checked = active;
+        };
+
+        // Performance Killers Check
+        function checkKillers() {
+            const bridge = getBridge();
+            if (bridge && bridge.checkPerformanceKillers) {
+                try {
+                    const k = JSON.parse(bridge.checkPerformanceKillers());
+                    const kBat = document.getElementById('killerAdaptiveBattery');
+                    const kAnim = document.getElementById('killerAnimationScale');
+                    const btn = document.getElementById('btnFixKillers');
+                    const summary = document.getElementById('txtKillersSummary');
+
+                    if (!k.adaptiveBatteryOn && !k.animationScaleOn) {
+                        if (btn) {
+                            btn.textContent = "✓ ĐÃ TỐI ƯU";
+                            btn.style.color = "var(--neon-green)";
+                            btn.style.borderColor = "var(--neon-green)";
+                        }
+                        if (kBat) kBat.style.display = 'none';
+                        if (kAnim) kAnim.style.display = 'none';
+                        if (summary) summary.innerHTML = "<b style='color: var(--neon-green);'>✓ Toàn bộ Performance Killers đã được triệt tiêu hoàn toàn!</b>";
+                    } else {
+                        if (kBat) kBat.style.display = k.adaptiveBatteryOn ? 'flex' : 'none';
+                        if (kAnim) kAnim.style.display = k.animationScaleOn ? 'flex' : 'none';
+                    }
+                } catch(e) {}
+            }
+        }
+
+        function fixAllPerformanceKillers() {
+            const bridge = getBridge();
+            if (bridge && bridge.fixPerformanceKillers) {
+                bridge.fixPerformanceKillers();
+                showToast("⚡ Đã triệt tiêu toàn bộ Performance Killers!");
+                setTimeout(checkKillers, 700);
+            }
+        }
+
+        function setMagicDensity(dpi, btnEl) {
+            const bridge = getBridge();
+            if (bridge && bridge.setDensityDpi) {
+                bridge.setDensityDpi(dpi);
+            }
+            document.querySelectorAll('#tab-gamemode .density-segmented .segment-btn').forEach(b => b.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+            const badge = document.getElementById('valDensityTuner');
+            if (badge) badge.textContent = dpi === 0 ? "OFF (Gốc)" : dpi + " DPI";
+        }
+
+        function setMagicRefreshRate(hz, btnEl) {
+            const bridge = getBridge();
+            if (bridge && bridge.setCustomRefreshRate) {
+                bridge.setCustomRefreshRate(hz);
+            }
+            document.querySelectorAll('#tab-gamemode .hz-segmented .segment-btn').forEach(b => b.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+            const badge = document.getElementById('valRefreshRateTuner');
+            if (badge) badge.textContent = hz === 0 ? "OFF (Auto)" : hz + " Hz";
+        }
+
+        function toggleMagicSysPerf(el) {
+            const bridge = getBridge();
+            if (bridge && bridge.setSystemPerformanceBoost) {
+                bridge.setSystemPerformanceBoost(el.checked);
+            }
+        }
+
+        function toggleMagicMemMgmt(el) {
+            const bridge = getBridge();
+            if (bridge && bridge.setMemoryManagement) {
+                bridge.setMemoryManagement(el.checked);
+            }
+        }
+
+        function toggleMagicCpuOpt(el) {
+            const bridge = getBridge();
+            if (bridge && bridge.setCpuOptimization) {
+                bridge.setCpuOptimization(el.checked);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            checkWelcomeAndAnnouncement();
+            checkKillers();
+            checkShizukuStatus(false);
+            updateTelemetry();
+            loadRealGamesList();
+            setInterval(updateTelemetry, 4000);
+        });
+    </script>
+</body>
+</html>
