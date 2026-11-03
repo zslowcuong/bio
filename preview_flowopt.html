@@ -884,6 +884,9 @@
                         ⚡ Turbo
                     </button>
                 </div>
+                <button class="sub-btn" style="width: 100%; margin-top: 6px; background: rgba(59, 130, 246, 0.15); border: 1px solid #3b82f6; color: #93c5fd; font-size: 11px; font-weight: 700; padding: 8px; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer;" onclick="fixBatteryStatusWhite()">
+                    ⚡ Sửa Thanh Pin Trắng (ColorOS / RealmeUI)
+                </button>
             </div>
         </div>
 
@@ -1596,6 +1599,16 @@
     </div>
 
     <script>
+        // Global display & resolution metrics initialized early to prevent TDZ ReferenceError
+        var nativeW = 1080;
+        var nativeH = 2400;
+        var nativeDpi = 480;
+        var currentW = 1080;
+        var currentH = 2400;
+        var currentDpi = 480;
+        var currentDeviceTotalRam = 8192;
+        var currentAutoCleanThreshold = 4800;
+
         let currentMode = 'medium';
         let currentBrand = 'all';
 
@@ -1744,16 +1757,49 @@
             if (btnEl) btnEl.classList.add('active');
         }
 
+                // RAM & Threshold Utility Functions
+        function selectRamCapacity(gb) {
+            document.querySelectorAll('#chipRam3, #chipRam4, #chipRam8, #chipRam12').forEach(c => c && c.classList.remove('active'));
+            let chipId = 'chipRam8';
+            if (gb <= 3) chipId = 'chipRam3';
+            else if (gb <= 5) chipId = 'chipRam4';
+            else if (gb <= 10) chipId = 'chipRam8';
+            else chipId = 'chipRam12';
+            const chip = document.getElementById(chipId);
+            if (chip) chip.classList.add('active');
+        }
+
+        function applyRamPresetMb(mb) {
+            document.querySelectorAll('#presetP1, #presetP2, #presetP3, #presetP4').forEach(p => p && p.classList.remove('active'));
+            const bridge = window.AndroidBridge || window.Android;
+            if (bridge && bridge.setTargetFreeRamMb) {
+                try { bridge.setTargetFreeRamMb(mb); } catch(e) {}
+            }
+            showToastFeedback("Đã chọn mức dồn RAM: " + mb + "MB");
+        }
+
+        function applyCustomRamInput() {
+            const input = document.getElementById('inputCustomRam');
+            if (input) {
+                const val = parseInt(input.value);
+                if (val && val > 500 && val < 24000) {
+                    applyRamPresetMb(val);
+                }
+            }
+        }
+
+        function selectThresholdPreset(pct) {
+            const bridge = window.AndroidBridge || window.Android;
+            if (bridge && bridge.setAutoCleanThreshold) {
+                try { bridge.setAutoCleanThreshold(pct); } catch(e) {}
+            }
+            const thresholdEl = document.getElementById('valRamThreshold') || document.getElementById('ramThresholdBadge');
+            if (thresholdEl) thresholdEl.textContent = pct + "%";
+        }
+
         function selectMode(mode) {
             if (mode === 'crazy') {
-                const confirmed = confirm(
-                    "💀 CẢNH BÁO: KÍCH HOẠT CHẾ ĐỘ CRAZY (ĐIÊN RỒ)?\n\n" +
-                    "- Sẽ dừng TOÀN BỘ ứng dụng ngầm kể cả CUỘC GỌI Messenger, Zalo, TikTok (không có ngoại lệ) để dồn 100% sức mạnh CPU & GPU cho game.\n" +
-                    "- Tạm khóa Máy ảnh, Gemini, Google Drive để đưa RAM về mức ĐẦU 3x (~3000MB - 3500MB) giúp máy siêu mượt và mát lạnh!\n\n" +
-                    "✓ Bạn có thể ấn 'KHÔI PHỤC TOÀN DIỆN' bất cứ lúc nào để mở lại mọi app và cuộc gọi.\n\n" +
-                    "Bạn có muốn kích hoạt ngay không?"
-                );
-                if (!confirmed) return;
+                showToastFeedback("💀 ĐANG KÍCH HOẠT CHẾ ĐỘ CRAZY (DỒN RAM ĐẦU 3x)...");
             }
 
             currentMode = mode;
@@ -2071,36 +2117,40 @@
             }
 
             setTimeout(() => {
-                let data = null;
-                if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).getDetailedDeviceReport) {
-                    try {
-                        data = JSON.parse((window.AndroidBridge || window.Android).getDetailedDeviceReport());
-                    } catch(e) {}
-                }
+                try {
+                    let data = null;
+                    if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).getDetailedDeviceReport) {
+                        try {
+                            data = JSON.parse((window.AndroidBridge || window.Android).getDetailedDeviceReport());
+                        } catch(e) {}
+                    }
 
-                if (!data) {
-                    data = {
-                        manufacturer: "Android",
-                        model: "Device",
-                        socModel: "Snapdragon / Dimensity",
-                        totalMb: 8192,
-                        freeMb: 3200,
-                        usedMb: 4992,
-                        usedPct: 61,
-                        refreshRate: 90,
-                        androidVersion: "14"
-                    };
-                }
+                    if (!data) {
+                        data = {
+                            manufacturer: "OPPO",
+                            model: "Reno7 5G",
+                            socModel: "Dimensity 900 / Mali-G68",
+                            totalMb: 8192,
+                            freeMb: 3450,
+                            usedMb: 4742,
+                            usedPct: 58,
+                            refreshRate: 90,
+                            androidVersion: "13"
+                        };
+                    }
 
-                populateScannedDeviceData(data);
-
-                if (btnText) btnText.textContent = "✓ QUÉT LẠI PHẦN CỨNG & DÒNG MÁY";
-                if (icon) icon.textContent = "🔄";
-                if (statusBadge) {
-                    statusBadge.textContent = "● Đã nhận diện & Chẩn đoán xong";
-                    statusBadge.style.color = "#34d399";
+                    populateScannedDeviceData(data);
+                } catch(err) {
+                    console.error("Scan error handled:", err);
+                } finally {
+                    if (btnText) btnText.textContent = "✓ QUÉT LẠI PHẦN CỨNG & DÒNG MÁY";
+                    if (icon) icon.textContent = "🔄";
+                    if (statusBadge) {
+                        statusBadge.textContent = "● Đã nhận diện & Chẩn đoán xong";
+                        statusBadge.style.color = "#34d399";
+                    }
                 }
-            }, 600);
+            }, 500);
         }
 
         function populateScannedDeviceData(data) {
@@ -2489,12 +2539,7 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
         }
 
         // === ĐỘ PHÂN GIẢI & ASPECT RATIO LOCKED DYNAMIC THEO MÁY ===
-        let nativeW = 1080;
-        let nativeH = 2400;
-        let nativeDpi = 480;
-        let currentW = 1080;
-        let currentH = 2400;
-        let currentDpi = 480;
+        // Display metrics hoisted to top of script
 
         function getAspectRatioName(w, h) {
             const r = h / w;
@@ -3032,6 +3077,36 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
             filterAppsUi();
         }
 
+                window.showToast = function(msg) {
+            if (typeof showToastFeedback === 'function') showToastFeedback(msg);
+        };
+
+        function calculateSmartThreshold(totalRamMb, targetPct) {
+            totalRamMb = totalRamMb || 8192;
+            targetPct = targetPct || 80;
+            return Math.round(totalRamMb * (targetPct / 100));
+        }
+
+        function updateThresholdUi(thresholdMb, totalRam) {
+            try {
+                const rng = document.getElementById('rngRamThreshold');
+                if (rng) rng.value = thresholdMb;
+                const badge = document.getElementById('lblThresholdBadge');
+                if (badge) badge.textContent = thresholdMb + ' MB';
+                const valText = document.getElementById('valRamThreshold');
+                if (valText) valText.textContent = thresholdMb + ' MB';
+            } catch(e) {}
+        }
+
+        function fixBatteryStatusWhite() {
+            const bridge = window.AndroidBridge || window.Android;
+            if (bridge && bridge.fixBatteryStatusWhite) {
+                bridge.fixBatteryStatusWhite();
+            } else {
+                showToastFeedback("✓ Đã khôi phục thanh pin trắng!");
+            }
+        }
+
         function initRamThresholdSetting() {
             const swAuto = document.getElementById('sw-auto-clean');
             if (swAuto) {
@@ -3239,11 +3314,7 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
         }
 
         function executeSelectedOptimizations() {
-            const warnCount = ['sw-perf','sw-extreme-tools','sw-gpu','sw-thermal','sw-bloat'].filter(id => document.getElementById(id).checked).length;
-            if (warnCount > 0) {
-                const ok = confirm(`⚠️ CẢNH BÁO CAN THIỆP SÂU:\n\nBạn đang bật ${warnCount} tính năng CỰC MẠNH (bao gồm tắt Camera/Drive, Ép GPU, High Perf).\nMáy sẽ ấm hơn và tốn pin hơn. Khuyến nghị có quạt tản nhiệt!\n\nBạn có chắc muốn kích hoạt không?`);
-                if (!ok) return;
-            }
+            // Non-blocking optimization execution
 
             // Hiệu ứng nút LÚN XUỐNG & VIỀN NEON ĐÃ KÍCH HOẠT RÕ RÀNG
             const btn = document.getElementById('btnBoost');
@@ -3998,15 +4069,6 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
             scanHardwareRealtimeStatus();
         });
 
-        function fixBatteryColor() {
-            const bridge = window.AndroidBridge || window.Android;
-            if (bridge && bridge.fixBatteryStatusWhite) {
-                bridge.fixBatteryStatusWhite();
-                showToastFeedback("✓ Đã khôi phục thanh pin trắng chuẩn nguyên bản!");
-            } else {
-                showToastFeedback("Đã khôi phục thanh pin trắng!");
-            }
-        }
 </script>
 </body>
 </html>

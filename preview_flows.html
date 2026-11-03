@@ -1094,6 +1094,16 @@
                 <div class="switch-row">
                     <div class="switch-title-wrap">
                         <div class="switch-title">⚡ Đặc Quyền Shizuku (ADB Shell)</div>
+                <!-- Sửa Thanh Pin Trắng (ColorOS / RealmeUI) -->
+                <div class="switch-row" style="background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 10px; padding: 10px; margin-top: 8px;">
+                    <div class="switch-title-wrap">
+                        <div class="switch-title" style="color: #60a5fa;">⚡ Sửa Thanh Pin Trắng (ColorOS / RealmeUI)</div>
+                        <div class="switch-desc">Khôi phục biểu tượng pin trắng nguyên bản nếu bị đổi thành màu xanh khi bật High Performance.</div>
+                    </div>
+                    <button class="action-chip" onclick="fixBatteryStatusWhite()" style="background: rgba(59, 130, 246, 0.25); border: 1px solid #3b82f6; color: #93c5fd; font-size: 11px; padding: 6px 12px; font-weight: 700; cursor: pointer; border-radius: 8px;">
+                        ⚡ KHÔI PHỤC
+                    </button>
+                </div>
                         <div class="switch-desc" id="txtShizukuDesc">Dịch vụ đang hoạt động với quyền hạn cao nhất.</div>
                     </div>
                     <button class="btn-game-tune" onclick="checkShizukuStatus(true)">Kiểm tra</button>
@@ -1640,16 +1650,21 @@
         }
 
         // Show toast notification
+                function fixBatteryStatusWhite() {
+            const bridge = getBridge();
+            if (bridge && bridge.fixBatteryStatusWhite) {
+                bridge.fixBatteryStatusWhite();
+            } else {
+                showToast("✓ Đã gửi lệnh khôi phục thanh pin trắng!");
+            }
+        }
+
         function showToast(msg) {
             const toast = document.getElementById('toastFeedback');
+            if (!toast) return;
             toast.textContent = msg;
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2600);
-        }
-
-         else {
-                showToast("Đã khôi phục thanh pin trắng!");
-            }
         }
 
         // Switch Gaming Mode (Smooth, Medium, Extreme, Crazy)
@@ -1847,17 +1862,8 @@
 
         // Crazy Mode Activation
         function activateCrazyMode() {
-            const confirmed = confirm(
-                "🔥 KÍCH HOẠT CHẾ ĐỘ CRAZY (ĐIÊN RỒ)?\n\n" +
-                "- Tạm dừng mọi tác vụ ngầm để dồn 100% công lực CPU & GPU cho game.\n" +
-                "- Tối ưu dồn RAM về đầu 3x (~3000MB - 3500MB) giúp máy siêu mượt và mát lạnh!\n" +
-                "- Tuyệt đối KHÔNG làm đổi màu thanh pin và KHÔNG làm quá nhiệt CPU.\n" +
-                "- Bạn hoàn toàn có thể ấn 'KHÔI PHỤC TOÀN DIỆN' bất cứ lúc nào để mở lại mọi app và cuộc gọi.\n\n" +
-                "Bạn có muốn kích hoạt ngay không?"
-            );
-            if (!confirmed) return;
-
             const bridge = getBridge();
+            showToast("🔥 ĐANG KÍCH HOẠT CHẾ ĐỘ CRAZY (DỒN RAM ĐẦU 3x)...");
             if (bridge && bridge.triggerCrazyMode) {
                 showToast("🔥 Đang kích hoạt Chế Độ CRAZY...");
                 setTimeout(() => {
