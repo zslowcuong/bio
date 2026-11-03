@@ -1763,25 +1763,25 @@
 
             // Áp dụng tức thì tốc độ hoạt họa 0x cho chế độ Cực Mạnh & Crazy
             if (mode === 'crazy') {
-                if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.setAnimationScale) {
-                    (window.AndroidBridge || window.Android)Bridge.setAnimationScale(0.0);
+                if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).setAnimationScale) {
+                    (window.AndroidBridge || window.Android).setAnimationScale(0.0);
                 }
-                if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.triggerCrazyMode) {
-                    (window.AndroidBridge || window.Android)Bridge.triggerCrazyMode();
+                if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).triggerCrazyMode) {
+                    (window.AndroidBridge || window.Android).triggerCrazyMode();
                 }
                 selectRamCapacity(3);
                 applyRamPresetMb(3400);
             } else if (mode === 'extreme') {
-                if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.setAnimationScale) {
-                    (window.AndroidBridge || window.Android)Bridge.setAnimationScale(0.0);
+                if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).setAnimationScale) {
+                    (window.AndroidBridge || window.Android).setAnimationScale(0.0);
                 }
             } else if (mode === 'medium') {
-                if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.setAnimationScale) {
-                    (window.AndroidBridge || window.Android)Bridge.setAnimationScale(0.5);
+                if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).setAnimationScale) {
+                    (window.AndroidBridge || window.Android).setAnimationScale(0.5);
                 }
             } else if (mode === 'smooth') {
-                if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.setAnimationScale) {
-                    (window.AndroidBridge || window.Android)Bridge.setAnimationScale(0.75);
+                if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).setAnimationScale) {
+                    (window.AndroidBridge || window.Android).setAnimationScale(0.75);
                 }
             }
 
@@ -1803,8 +1803,8 @@
             const autoCleanEl = document.getElementById('sw-auto-clean');
             if (autoCleanEl) {
                 autoCleanEl.checked = true;
-                if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.setAutoCleanRAM) {
-                    (window.AndroidBridge || window.Android)Bridge.setAutoCleanRAM(true);
+                if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).setAutoCleanRAM) {
+                    (window.AndroidBridge || window.Android).setAutoCleanRAM(true);
                 }
             }
             if (mode === 'extreme') {
@@ -2072,9 +2072,9 @@
 
             setTimeout(() => {
                 let data = null;
-                if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.getDetailedDeviceReport) {
+                if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).getDetailedDeviceReport) {
                     try {
-                        data = JSON.parse((window.AndroidBridge || window.Android)Bridge.getDetailedDeviceReport());
+                        data = JSON.parse((window.AndroidBridge || window.Android).getDetailedDeviceReport());
                     } catch(e) {}
                 }
 
@@ -2196,8 +2196,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
                 toast.style.transform = 'translateX(-50%) translateY(-12px)';
             }, 2400);
 
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.showToast) {
-                (window.AndroidBridge || window.Android)Bridge.showToast(message);
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).showToast) {
+                (window.AndroidBridge || window.Android).showToast(message);
             }
         }
 
@@ -2465,8 +2465,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
                     logBox.scrollTop = logBox.scrollHeight;
                 }
 
-                if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.runCommandBatch) {
-                    (window.AndroidBridge || window.Android)Bridge.runCommandBatch(JSON.stringify(cmds), finishMsg);
+                if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).runCommandBatch) {
+                    (window.AndroidBridge || window.Android).runCommandBatch(JSON.stringify(cmds), finishMsg);
                 }
 
                 showToastFeedback(`⚡ ĐÃ KÍCH HOẠT: ${cfg.name}`);
@@ -2480,8 +2480,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
                     logBox.scrollTop = logBox.scrollHeight;
                 }
 
-                if (cmds.length > 0 && (window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.runCommandBatch) {
-                    (window.AndroidBridge || window.Android)Bridge.runCommandBatch(JSON.stringify(cmds), `Đã khôi phục: ${cfg.name}`);
+                if (cmds.length > 0 && (window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).runCommandBatch) {
+                    (window.AndroidBridge || window.Android).runCommandBatch(JSON.stringify(cmds), `Đã khôi phục: ${cfg.name}`);
                 }
 
                 showToastFeedback(`⚪ ĐÃ TẮT: ${cfg.name}`);
@@ -2509,9 +2509,9 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
         }
 
         function initResolutionMetrics() {
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.getDisplayMetricsJson) {
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).getDisplayMetricsJson) {
                 try {
-                    const raw = (window.AndroidBridge || window.Android)Bridge.getDisplayMetricsJson();
+                    const raw = (window.AndroidBridge || window.Android).getDisplayMetricsJson();
                     const data = (typeof raw === 'string') ? JSON.parse(raw) : raw;
                     if (data && data.nativeWidth && data.nativeHeight) {
                         nativeW = parseInt(data.nativeWidth);
@@ -2604,16 +2604,16 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
             if (inputH) inputH.value = currentH;
             if (inputDpi) inputDpi.value = currentDpi;
 
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.isAutoResetOnLockEnabled) {
-                const autoReset = (window.AndroidBridge || window.Android)Bridge.isAutoResetOnLockEnabled();
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).isAutoResetOnLockEnabled) {
+                const autoReset = (window.AndroidBridge || window.Android).isAutoResetOnLockEnabled();
                 const chk = document.getElementById('chkAutoResetOnLock');
                 if (chk) chk.checked = autoReset;
             }
         }
 
         function onAutoResetOnLockChanged(checked) {
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.setAutoResetOnLock) {
-                (window.AndroidBridge || window.Android)Bridge.setAutoResetOnLock(checked);
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).setAutoResetOnLock) {
+                (window.AndroidBridge || window.Android).setAutoResetOnLock(checked);
             }
         }
 
@@ -2665,8 +2665,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
                 return;
             }
 
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.applyScreenResolution) {
-                const ok = (window.AndroidBridge || window.Android)Bridge.applyScreenResolution(w, h, dpi);
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).applyScreenResolution) {
+                const ok = (window.AndroidBridge || window.Android).applyScreenResolution(w, h, dpi);
                 if (ok) {
                     document.getElementById('resSafetyModal').style.display = 'flex';
                 }
@@ -2681,8 +2681,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
             const dpi = parseInt(document.getElementById('inputResDpi').value);
             const autoReset = document.getElementById('chkAutoResetOnLock').checked;
 
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.savePermanentResolution) {
-                const ok = (window.AndroidBridge || window.Android)Bridge.savePermanentResolution(w, h, dpi, autoReset);
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).savePermanentResolution) {
+                const ok = (window.AndroidBridge || window.Android).savePermanentResolution(w, h, dpi, autoReset);
                 if (ok) {
                     currentW = w;
                     currentH = h;
@@ -2701,22 +2701,22 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
             currentH = nativeH;
             currentDpi = nativeDpi;
             document.getElementById('currentResBadge').textContent = `${nativeW}x${nativeH} @ ${nativeDpi}`;
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.revertResolutionChange) {
-                (window.AndroidBridge || window.Android)Bridge.revertResolutionChange();
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).revertResolutionChange) {
+                (window.AndroidBridge || window.Android).revertResolutionChange();
             }
         }
 
         function onConfirmResolutionKeep() {
             document.getElementById('resSafetyModal').style.display = 'none';
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.confirmResolutionChange) {
-                (window.AndroidBridge || window.Android)Bridge.confirmResolutionChange();
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).confirmResolutionChange) {
+                (window.AndroidBridge || window.Android).confirmResolutionChange();
             }
         }
 
         function onCancelResolutionRevert() {
             document.getElementById('resSafetyModal').style.display = 'none';
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.revertResolutionChange) {
-                (window.AndroidBridge || window.Android)Bridge.revertResolutionChange();
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).revertResolutionChange) {
+                (window.AndroidBridge || window.Android).revertResolutionChange();
             }
         }
 
@@ -2740,8 +2740,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
 
         // === KIỂM TRA & KẾT NỐI LẠI SHIZUKU THỦ CÔNG ===
         function checkShizukuManual() {
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.checkShizukuConnection) {
-                const ok = (window.AndroidBridge || window.Android)Bridge.checkShizukuConnection();
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).checkShizukuConnection) {
+                const ok = (window.AndroidBridge || window.Android).checkShizukuConnection();
                 if (ok) {
                     alert("✅ Shizuku đã kết nối và được cấp quyền đầy đủ! Sẵn sàng thực thi toàn bộ lệnh.");
                 } else {
@@ -2753,8 +2753,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
         }
 
         function reconnectShizukuManual() {
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.reconnectShizuku) {
-                (window.AndroidBridge || window.Android)Bridge.reconnectShizuku();
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).reconnectShizuku) {
+                (window.AndroidBridge || window.Android).reconnectShizuku();
             } else {
                 showShizukuModal("Không thể kết nối lại Shizuku. Hãy mở app Shizuku bấm Start.");
             }
@@ -2775,8 +2775,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
         // MAGIC TUNER: KHÓA 120HZ & GIẢI NHIỆT MÁY
         // ==========================================
         function toggleLock120Hz(checked) {
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.lock120HzFpsAndCooling) {
-                (window.AndroidBridge || window.Android)Bridge.lock120HzFpsAndCooling(checked);
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).lock120HzFpsAndCooling) {
+                (window.AndroidBridge || window.Android).lock120HzFpsAndCooling(checked);
             }
             showToastFeedback(checked ? "🔒 Đã khóa cứng 120Hz mượt tuyệt đối!" : "✓ Đã mở lại tần số quét tự động");
         }
@@ -2824,20 +2824,20 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
         function updateAutoCleanSetting(el) {
             if (!el) el = document.getElementById('sw-auto-clean');
             const isClean = el ? el.checked : true;
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.setAutoCleanRAM) {
-                (window.AndroidBridge || window.Android)Bridge.setAutoCleanRAM(isClean);
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).setAutoCleanRAM) {
+                (window.AndroidBridge || window.Android).setAutoCleanRAM(isClean);
             }
             if (document.getElementById('sw-float-hud').checked) {
-                if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.startFloatingMonitor) {
-                    (window.AndroidBridge || window.Android)Bridge.startFloatingMonitor(isClean);
+                if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).startFloatingMonitor) {
+                    (window.AndroidBridge || window.Android).startFloatingMonitor(isClean);
                 }
             }
             showToastFeedback(isClean ? "⚡ Đã bật Tự Động Dọn RAM Thông Minh" : "⚪ Đã tắt Tự Động Dọn RAM");
         }
 
         function triggerExtremeCleanNow() {
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.triggerExtremeCleanFromUi) {
-                (window.AndroidBridge || window.Android)Bridge.triggerExtremeCleanFromUi();
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).triggerExtremeCleanFromUi) {
+                (window.AndroidBridge || window.Android).triggerExtremeCleanFromUi();
                 alert("🚀 Đã kích hoạt dọn dẹp RAM thông minh!\nYouTube/TikTok đang xem, cuộc gọi Zalo/Messenger & các ứng dụng trong Whitelist được bảo toàn 100%.");
             } else {
                 showShizukuModal("Chưa kết nối Shizuku! Hãy mở app Shizuku trước.");
@@ -2845,9 +2845,9 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
         }
 
         function updateRamUi() {
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.getRealtimeRamJson) {
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).getRealtimeRamJson) {
                 try {
-                    const ram = JSON.parse((window.AndroidBridge || window.Android)Bridge.getRealtimeRamJson());
+                    const ram = JSON.parse((window.AndroidBridge || window.Android).getRealtimeRamJson());
                     currentDeviceTotalRam = ram.totalMb;
                     const pct = Math.round((ram.usedMb / ram.totalMb) * 100);
                     document.getElementById('realtimeRamText').textContent = `RAM: ${ram.usedMb}MB (${pct}%)`;
@@ -2881,10 +2881,10 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
                 container.innerHTML = '<div style="text-align: center; color: #94a3b8; padding: 20px; font-size: 11px;">🔄 Đang quét toàn bộ ứng dụng và tiến trình đang chạy...</div>';
             }
 
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.getInstalledAndRunningAppsJson) {
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).getInstalledAndRunningAppsJson) {
                 setTimeout(() => {
                     try {
-                        const jsonStr = (window.AndroidBridge || window.Android)Bridge.getInstalledAndRunningAppsJson();
+                        const jsonStr = (window.AndroidBridge || window.Android).getInstalledAndRunningAppsJson();
                         const parsed = JSON.parse(jsonStr);
                         if (Array.isArray(parsed) && parsed.length > 0) {
                             allDeviceApps = parsed;
@@ -3007,8 +3007,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
                 target.isProtected = isChecked;
             }
 
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.setAppProtection) {
-                (window.AndroidBridge || window.Android)Bridge.setAppProtection(pkg, isChecked);
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).setAppProtection) {
+                (window.AndroidBridge || window.Android).setAppProtection(pkg, isChecked);
             }
 
             const appName = target ? target.name : pkg;
@@ -3035,16 +3035,16 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
         function initRamThresholdSetting() {
             const swAuto = document.getElementById('sw-auto-clean');
             if (swAuto) {
-                if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.isAutoCleanEnabled) {
-                    swAuto.checked = (window.AndroidBridge || window.Android)Bridge.isAutoCleanEnabled();
+                if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).isAutoCleanEnabled) {
+                    swAuto.checked = (window.AndroidBridge || window.Android).isAutoCleanEnabled();
                 } else {
                     swAuto.checked = true;
                 }
             }
 
             let savedThreshold = -1;
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.getAutoCleanThreshold) {
-                savedThreshold = (window.AndroidBridge || window.Android)Bridge.getAutoCleanThreshold();
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).getAutoCleanThreshold) {
+                savedThreshold = (window.AndroidBridge || window.Android).getAutoCleanThreshold();
             }
 
             if (savedThreshold > 0) {
@@ -3258,8 +3258,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
 
             const finishMsg = `🟢 ĐÃ KÍCH HOẠT: Chế độ ${currentMode.toUpperCase()} đang tối ưu toàn diện!`;
 
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.runCommandBatch) {
-                (window.AndroidBridge || window.Android)Bridge.runCommandBatch(JSON.stringify(cmds), finishMsg);
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).runCommandBatch) {
+                (window.AndroidBridge || window.Android).runCommandBatch(JSON.stringify(cmds), finishMsg);
             } else {
                 cmds.forEach(c => {
                     document.getElementById('tvLog').textContent += (c.startsWith('#') ? `\n${c}\n` : `✓ ${c}\n`);
@@ -3331,12 +3331,12 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
             ];
 
             // Revert resolution via bridge to clear prefs
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.revertResolutionChange) {
-                (window.AndroidBridge || window.Android)Bridge.revertResolutionChange();
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).revertResolutionChange) {
+                (window.AndroidBridge || window.Android).revertResolutionChange();
             }
 
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.runCommandBatch) {
-                (window.AndroidBridge || window.Android)Bridge.runCommandBatch(JSON.stringify(restoreCmds), "✓ Đã khôi phục 100% cài đặt nguyên bản của máy!");
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).runCommandBatch) {
+                (window.AndroidBridge || window.Android).runCommandBatch(JSON.stringify(restoreCmds), "✓ Đã khôi phục 100% cài đặt nguyên bản của máy!");
             }
 
             // Sync UI
@@ -3362,8 +3362,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
 
         // === TIỆN ÍCH KHẨN CẤP ===
         function triggerAutoFixFromUi() {
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.autoFixCameraAndUninstaller) {
-                (window.AndroidBridge || window.Android)Bridge.autoFixCameraAndUninstaller();
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).autoFixCameraAndUninstaller) {
+                (window.AndroidBridge || window.Android).autoFixCameraAndUninstaller();
                 alert("🛠️ Đang tự động sửa quyền bảo mật ColorOS, khôi phục Camera & sửa triệt để lỗi gỡ cài đặt bị kẹt!\nVui lòng chờ 3 giây rồi mở lại Camera.");
             } else {
                 showShizukuModal("Chưa kết nối Shizuku! Hãy mở app Shizuku trước.");
@@ -3371,8 +3371,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
         }
 
         function triggerGamingTurboBoost() {
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.applyGamingTurboBoost) {
-                (window.AndroidBridge || window.Android)Bridge.applyGamingTurboBoost();
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).applyGamingTurboBoost) {
+                (window.AndroidBridge || window.Android).applyGamingTurboBoost();
                 alert("⚡ Turbo 360Hz & Cảm ứng siêu nhạy đã được kích hoạt!");
             } else {
                 showShizukuModal("Chưa kết nối Shizuku! Hãy mở app Shizuku trước.");
@@ -3429,8 +3429,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
 
         function syncDisabledAppsFromNative() {
             try {
-                if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.getDisabledPackagesJson) {
-                    const jsonStr = (window.AndroidBridge || window.Android)Bridge.getDisabledPackagesJson();
+                if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).getDisabledPackagesJson) {
+                    const jsonStr = (window.AndroidBridge || window.Android).getDisabledPackagesJson();
                     const disabledList = JSON.parse(jsonStr || "[]");
                     disabledList.forEach(item => {
                         const existing = managedApps.find(a => a.pkg === item.packageName);
@@ -3524,8 +3524,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
                 app.enabled = isChecked;
                 if (isChecked) app.isDisabledBySystem = false;
             }
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.setPackageState) {
-                (window.AndroidBridge || window.Android)Bridge.setPackageState(pkg, isChecked);
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).setPackageState) {
+                (window.AndroidBridge || window.Android).setPackageState(pkg, isChecked);
             }
         }
 
@@ -3535,10 +3535,10 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
                 app.enabled = true;
                 app.isDisabledBySystem = false;
             }
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.unfreezePackage) {
-                (window.AndroidBridge || window.Android)Bridge.unfreezePackage(pkg);
-            } else if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.setPackageState) {
-                (window.AndroidBridge || window.Android)Bridge.setPackageState(pkg, true);
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).unfreezePackage) {
+                (window.AndroidBridge || window.Android).unfreezePackage(pkg);
+            } else if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).setPackageState) {
+                (window.AndroidBridge || window.Android).setPackageState(pkg, true);
             }
             renderDrawerApps();
             showToastFeedback(`⚡ Đang bật lại & cấp quyền chạy nền: ${pkg}`);
@@ -3546,8 +3546,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
 
         function triggerInstantUninstall(pkg) {
             const ok = confirm(`Bạn có chắc muốn gỡ cài đặt ứng dụng: ${pkg}?`);
-            if (ok && (window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.uninstallPackageInstantly) {
-                (window.AndroidBridge || window.Android)Bridge.uninstallPackageInstantly(pkg);
+            if (ok && (window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).uninstallPackageInstantly) {
+                (window.AndroidBridge || window.Android).uninstallPackageInstantly(pkg);
             }
         }
 
@@ -3555,7 +3555,7 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
             const ok = confirm("Bạn có chắc muốn KHÔI PHỤC TOÀN DIỆN VỀ BAN ĐẦU?\n\n- Mở khóa toàn bộ ứng dụng (Gemini, Google Drive, Máy ảnh...)\n- Hoàn trả độ phân giải & DPI gốc của máy\n- Hoàn trả độ nhạy cảm ứng & Tần số quét gốc (Hz)\n- Hoàn trả hoạt ảnh 1.0x & Cài đặt hệ thống gốc\n\nToàn bộ thiết bị sẽ trở lại trạng thái cài đặt ban đầu!");
             if (!ok) return;
 
-            if (!(window.AndroidBridge || window.Android)Bridge) {
+            if (!(window.AndroidBridge || window.Android)) {
                 alert("Chưa kết nối Shizuku!");
                 return;
             }
@@ -3566,8 +3566,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
                 logBox.scrollTop = logBox.scrollHeight;
             }
             showToastFeedback("🔓 Đang quét & khôi phục 100% ứng dụng và cài đặt gốc...");
-            if ((window.AndroidBridge || window.Android)Bridge.restoreAllDisabledPackages) {
-                (window.AndroidBridge || window.Android)Bridge.restoreAllDisabledPackages();
+            if ((window.AndroidBridge || window.Android).restoreAllDisabledPackages) {
+                (window.AndroidBridge || window.Android).restoreAllDisabledPackages();
             }
 
             // Đưa các công tắc trên giao diện về trạng thái mặc định an toàn
@@ -3665,8 +3665,8 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
 
         function openShizukuFromModal() {
             closeShizukuModal();
-            if ((window.AndroidBridge || window.Android)Bridge && (window.AndroidBridge || window.Android)Bridge.openShizukuApp) {
-                (window.AndroidBridge || window.Android)Bridge.openShizukuApp();
+            if ((window.AndroidBridge || window.Android) && (window.AndroidBridge || window.Android).openShizukuApp) {
+                (window.AndroidBridge || window.Android).openShizukuApp();
             }
         }
 
@@ -3997,6 +3997,16 @@ const btnEl = document.getElementById(`brand-${matchedBrand}`);
             setInterval(updateBatteryTelemetry, 2500);
             scanHardwareRealtimeStatus();
         });
+
+        function fixBatteryColor() {
+            const bridge = window.AndroidBridge || window.Android;
+            if (bridge && bridge.fixBatteryStatusWhite) {
+                bridge.fixBatteryStatusWhite();
+                showToastFeedback("✓ Đã khôi phục thanh pin trắng chuẩn nguyên bản!");
+            } else {
+                showToastFeedback("Đã khôi phục thanh pin trắng!");
+            }
+        }
 </script>
 </body>
 </html>
