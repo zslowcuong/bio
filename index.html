@@ -285,6 +285,39 @@
             line-height: 1.6;
         }
 
+        
+        .social-pills-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .btn-telegram-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, rgba(34, 158, 217, 0.25) 0%, rgba(15, 23, 42, 0.95) 100%);
+            border: 1px solid rgba(56, 189, 248, 0.45);
+            padding: 10px 22px;
+            border-radius: 99px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.25);
+        }
+
+        .btn-telegram-pill:hover {
+            border-color: #38bdf8;
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 25px rgba(56, 189, 248, 0.55);
+            background: linear-gradient(135deg, rgba(34, 158, 217, 0.45) 0%, rgba(15, 23, 42, 0.95) 100%);
+        }
+
         .btn-tiktok-pill {
             display: inline-flex;
             align-items: center;
@@ -1135,6 +1168,7 @@
             <li><a href="#themes">Theme Anime</a></li>
             <li><a href="#dpi">Bảng DPI</a></li>
             <li><a href="#guide">Kích Hoạt Shizuku</a></li>
+            <li><a href="#community" style="color: #38bdf8; font-weight: 700;">✈️ Nhóm Telegram</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#download" class="nav-btn-download">Tải APK Ngay</a></li>
         </ul>
@@ -1155,11 +1189,18 @@
                 Hệ sinh thái công cụ tối ưu phần cứng Android chuyên sâu qua Shizuku ADB (100% No Root).<br>
                 <b>Hạ độ phân giải riêng từng game • Mở khóa 120Hz mượt mà • Tự hoàn trả gốc khi thoát!</b>
             </p>
-            <a href="https://www.tiktok.com/@xxd5974" target="_blank" class="btn-tiktok-pill">
-                <span>🎵</span>
-                <span>KÊNH TIKTOK: @xxd5974</span>
-                <span style="color: #38bdf8;">➔</span>
-            </a>
+            <div class="social-pills-row">
+                <a href="https://www.tiktok.com/@xxd5974" target="_blank" class="btn-tiktok-pill">
+                    <span>🎵</span>
+                    <span>KÊNH TIKTOK: @xxd5974</span>
+                    <span style="color: #ec4899;">➔</span>
+                </a>
+                <a href="https://t.me/+dtVBEzwuN2Q4NmI9" target="_blank" class="btn-telegram-pill">
+                    <span>✈️</span>
+                    <span>HỘI NHÓM TELEGRAM FLOWOP</span>
+                    <span style="color: #38bdf8;">➔</span>
+                </a>
+            </div>
         </header>
 
         <!-- ==================== 2. FAST DOWNLOAD CARDS (ALWAYS VISIBLE) ==================== -->
@@ -1702,7 +1743,7 @@
         <!-- ==================== 10. SITE FOOTER ==================== -->
         <footer class="site-footer">
             <p><b>Flowly Gaming Engine 2026</b> • Hệ sinh thái tối ưu phần cứng Android eSports đỉnh cao.</p>
-            <p>100% No Root • An toàn bảo mật • Kênh TikTok chính thức: <a href="https://www.tiktok.com/@xxd5974" target="_blank" style="color: #38bdf8; text-decoration: none;">@xxd5974</a></p>
+            <p>100% No Root • An toàn bảo mật • Kênh TikTok: <a href="https://www.tiktok.com/@xxd5974" target="_blank" style="color: #ec4899; text-decoration: none; font-weight: 700;">@xxd5974</a> • Hội Nhóm Telegram: <a href="https://t.me/+dtVBEzwuN2Q4NmI9" target="_blank" style="color: #38bdf8; text-decoration: none; font-weight: 700;">FlowOp Community ✈️</a></p>
         </footer>
 
     </main>
