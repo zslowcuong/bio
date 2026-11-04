@@ -2338,9 +2338,14 @@
 
         function generateDynamicLink4m() {
             const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
-            const dest = (currentTargetApp === 'flows') ? 
-                ((globalConfig.flows && globalConfig.flows.destination_apk) || 'https://gofile.io/d/z3wUcYxV') :
-                ((globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || globalConfig.destination_apk || 'https://gofile.io/d/ZUqi1crJ');
+            let dest = '';
+            if (currentTargetApp === 'flows') {
+                dest = (globalConfig.flows && globalConfig.flows.destination_apk) || 'https://gofile.io/d/z3wUcYxV';
+            } else if (currentTargetApp === 'flowultra') {
+                dest = (globalConfig.flowultra && globalConfig.flowultra.destination_apk) || 'https://gofile.io/d/HqxIEJbn';
+            } else {
+                dest = (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || globalConfig.destination_apk || 'https://gofile.io/d/ZUqi1crJ';
+            }
             const nonce = Date.now() + '_' + Math.random().toString(36).substring(2, 7);
             const sep = dest.includes('?') ? '&' : '?';
             const uniqueDest = dest + sep + 'session=' + nonce;
@@ -2350,7 +2355,7 @@
         let preloadedFreshLink = null;
         async function fetchFreshLink4mApi() {
             try {
-                const res = await fetch('/api/generate-link4m', { signal: AbortSignal.timeout(4000) });
+                const res = await fetch('/api/generate-link4m?app=' + encodeURIComponent(currentTargetApp), { signal: AbortSignal.timeout(4000) });
                 if (res.ok) {
                     const data = await res.json();
                     if (data.status === 'success' && data.shortenedUrl) {
