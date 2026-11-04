@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cửa Hàng Bản Quyền FlowOptimize PRO VIP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030712;
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --card-border: rgba(56, 189, 248, 0.25);
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.35);
+            --gold: #f59e0b;
+            --gold-glow: rgba(245, 158, 11, 0.4);
+            --green: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--bg);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15), transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.08), transparent 50%);
+            color: #f8fafc;
+            min-height: 100vh;
+            padding: 24px 16px 50px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            max-width: 500px;
+            margin-bottom: 24px;
+        }
+
+        .logo-wrap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            margin-bottom: 12px;
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
+        }
+
+        .logo-wrap img {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 23px;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .sub {
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            width: 100%;
+            max-width: 460px;
+            margin-bottom: 24px;
+        }
+
+        .plan-card {
+            background: var(--card-bg);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px 18px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(56, 189, 248, 0.5);
+        }
+
+        .plan-card.selected {
+            border-color: #fbbf24;
+            background: rgba(30, 41, 59, 0.95);
+            box-shadow: 0 0 35px var(--gold-glow);
+        }
+
+        .badge-popular {
+            position: absolute;
+            top: -10px;
+            right: 18px;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 900;
+            padding: 4px 10px;
+            border-radius: 99px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5);
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .plan-name {
+            font-size: 16px;
+            font-weight: 900;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .plan-price {
+            font-size: 22px;
+            font-weight: 900;
+            color: #fbbf24;
+        }
+
+        .plan-price small {
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .plan-desc {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 12px;
+        }
+
+        .plan-features {
+            list-style: none;
+            font-size: 12px;
+            color: #cbd5e1;
+            margin-bottom: 14px;
+        }
+
+        .plan-features li {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .plan-features li span {
+            color: #10b981;
+            font-weight: 900;
+        }
+
+        .input-card {
+            width: 100%;
+            max-width: 460px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(20px);
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+            text-align: left;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            font-size: 11.5px;
+            font-weight: 800;
+            color: #38bdf8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 12px 14px;
+            color: #fff;
+            font-size: 13.5px;
+            font-weight: 700;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .btn-pay {
+            width: 100%;
+            max-width: 460px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #fff;
+            font-size: 14.5px;
+            font-weight: 900;
+            padding: 16px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-pay:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(245, 158, 11, 0.6);
+        }
+
+        .btn-pay:active {
+            transform: scale(0.98);
+        }
+
+        /* MODAL VIETQR */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            background: rgba(3, 7, 18, 0.96);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: rgba(15, 23, 42, 0.98);
+            border: 2px solid #f59e0b;
+            box-shadow: 0 0 50px rgba(245, 158, 11, 0.3), 0 20px 40px rgba(0, 0, 0, 0.9);
+            border-radius: 24px;
+            padding: 24px 20px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .qr-wrap {
+            background: #fff;
+            padding: 12px;
+            border-radius: 16px;
+            display: inline-block;
+            margin: 14px 0;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+        }
+
+        .qr-wrap img {
+            width: 220px;
+            height: 220px;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .copy-pill {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12.5px;
+        }
+
+        .copy-btn {
+            background: rgba(56, 189, 248, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* SUCCESS VIEW */
+        .key-reveal {
+            background: rgba(16, 185, 129, 0.15);
+            border: 2px solid #10b981;
+            box-shadow: 0 0 35px rgba(16, 185, 129, 0.35);
+            border-radius: 16px;
+            padding: 18px;
+            margin: 16px 0;
+            text-align: center;
+        }
+
+        .key-text-val {
+            font-family: monospace;
+            font-size: 16px;
+            font-weight: 900;
+            color: #fff;
+            background: rgba(15, 23, 42, 0.95);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 10px 0;
+            word-break: break-all;
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #10b981;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 99px;
+            font-size: 13px;
+            font-weight: 800;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+            z-index: 99999999;
+            pointer-events: none;
+        }
+
+        #toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo-wrap">
+            <img src="app_logo.png" alt="Logo">
+        </div>
+        <h1>SHOP KEY PRO VIP</h1>
+        <p class="sub">Mở khóa vĩnh viễn 100% tính năng FlowOptimize eSports. Không cần vượt link hàng ngày, tự động kích hoạt 24/7 qua VietQR.</p>
+    </div>
+
+    <!-- 3 GÓI BẢN QUYỀN -->
+    <div class="pricing-grid">
+        <!-- GÓI 1: TUẦN -->
+        <div class="plan-card" onclick="selectPlan('week', 15000, 'Gói Tuần (7 Ngày)', this)">
+            <div class="plan-header">
+                <div class="plan-name">🥉 GÓI TUẦN</div>
+                <div class="plan-price">15.000đ <small>/ 7 ngày</small></div>
+            </div>
+            <div class="plan-desc">Trải nghiệm Full tính năng Pro trong 1 tuần giải đấu.</div>
+            <ul class="plan-features">
+                <li><span>✓</span> Mở khóa 100% không cần vượt link trong 7 ngày</li>
+                <li><span>✓</span> Full 5 tính năng 👑 Vương Miện eSports</li>
+                <li><span>✓</span> Hỗ trợ 1 thiết bị</li>
+            </ul>
+        </div>
+
+        <!-- GÓI 2: THÁNG (HOT) -->
+        <div class="plan-card selected" onclick="selectPlan('month', 39000, 'Gói Tháng (30 Ngày)', this)">
+            <div class="badge-popular">🔥 PHỔ BIẾN NHẤT</div>
+            <div class="plan-header">
+                <div class="plan-name">🥈 GÓI THÁNG</div>
+                <div class="plan-price">39.000đ <small>/ tháng</small></div>
+            </div>
+            <div class="plan-desc">Tiết kiệm 50% chi phí. Dành cho game thủ leo rank cày cuốc.</div>
+            <ul class="plan-features">
+                <li><span>✓</span> 30 ngày sử dụng không bao giờ bị khóa</li>
+                <li><span>✓</span> Mở khóa siêu tốc Zero Lag 0x & Florentino Idol</li>
+                <li><span>✓</span> Ưu tiên cập nhật profile cấu hình mới</li>
+            </ul>
+        </div>
+
+        <!-- GÓI 3: VĨNH VIỄN -->
+        <div class="plan-card" onclick="selectPlan('lifetime', 99000, 'Gói Vĩnh Viễn (Trọn Đời)', this)">
+            <div class="badge-popular" style="background: linear-gradient(135deg, #10b981, #0284c7);">👑 SIÊU TIẾT KIỆM</div>
+            <div class="plan-header">
+                <div class="plan-name">👑 GÓI TRỌN ĐỜI</div>
+                <div class="plan-price">99.000đ <small>/ vĩnh viễn</small></div>
+            </div>
+            <div class="plan-desc">Mua 1 lần dùng mãi mãi. Tự động hỗ trợ mọi bản cập nhật APK tương lai.</div>
+            <ul class="plan-features">
+                <li><span>✓</span> Bản quyền trọn đời không giới hạn thời gian</li>
+                <li><span>✓</span> Không bao giờ phải vượt link hay gia hạn lại</li>
+                <li><span>✓</span> Hỗ trợ đổi máy miễn phí qua Zalo Admin</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- FORM THÔNG TIN KHÁCH HÀNG -->
+    <div class="input-card">
+        <div class="form-group">
+            <label class="form-label">📱 Số Điện Thoại / Zalo Nhận Key:</label>
+            <input type="text" id="custPhone" class="form-input" placeholder="Ví dụ: 0987654321..." required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">🔑 Mã Thiết Bị (HWID Máy Của Bạn):</label>
+            <input type="text" id="custHwid" class="form-input" placeholder="Nhập mã HWID từ app hoặc để trống...">
+        </div>
+    </div>
+
+    <!-- NÚT THANH TOÁN -->
+    <button class="btn-pay" onclick="openPaymentModal()">
+        <span>⚡ TẠO MÃ VIETQR THANH TOÁN</span> (<span id="payBtnAmount">39.000đ</span>)
+    </button>
+
+    <div style="margin-top: 20px; font-size: 11.5px; color: #64748b; text-align: center;">
+        Hệ thống hỗ trợ thanh toán 100% ngân hàng tại Việt Nam (MB, Vietcombank, Techcombank, ACB, MoMo...)
+    </div>
+
+    <!-- MODAL VIETQR THANH TOÁN -->
+    <div class="modal-overlay" id="qrModal">
+        <div class="modal-card">
+            <button onclick="closePaymentModal()" style="position: absolute; top: 16px; right: 16px; background: none; border: none; color: #94a3b8; font-size: 20px; cursor: pointer;">✕</button>
+
+            <!-- TRẠNG THÁI 1: CHỜ THANH TOÁN -->
+            <div id="paymentPendingView">
+                <div style="font-size: 13px; font-weight: 800; color: #fbbf24; text-transform: uppercase;">QUÉT MÃ VIETQR THANH TOÁN TỰ ĐỘNG</div>
+                <div style="font-size: 11.5px; color: #94a3b8; margin-top: 4px;">Mở ứng dụng Ngân hàng hoặc MoMo quét mã QR bên dưới:</div>
+
+                <!-- VIETQR IMAGE -->
+                <div class="qr-wrap">
+                    <img id="vietQrImg" src="" alt="Mã VietQR">
+                </div>
+
+                <div class="copy-pill">
+                    <span style="color: #94a3b8;">Ngân hàng:</span>
+                    <strong style="color: #fff;" id="bankNameDisplay">MB BANK</strong>
+                </div>
+                <div class="copy-pill">
+                    <span style="color: #94a3b8;">Số tài khoản:</span>
+                    <strong style="color: #38bdf8;" id="bankAccountDisplay">0987654321</strong>
+                    <button class="copy-btn" onclick="copyText('bankAccountDisplay')">Copy</button>
+                </div>
+                <div class="copy-pill">
+                    <span style="color: #94a3b8;">Số tiền:</span>
+                    <strong style="color: #fbbf24;" id="orderAmountDisplay">39.000đ</strong>
+                    <button class="copy-btn" onclick="copyExactAmount()">Copy</button>
+                </div>
+                <div class="copy-pill">
+                    <span style="color: #94a3b8;">Nội dung CK:</span>
+                    <strong style="color: #ef4444; font-family: monospace; font-size: 14px;" id="orderCodeDisplay">FLOW 8932</strong>
+                    <button class="copy-btn" onclick="copyText('orderCodeDisplay')">Copy</button>
+                </div>
+
+                <div style="font-size: 10.5px; color: #f87171; margin: 10px 0;">
+                    *LƯU Ý QUAN TRỌNG: Hãy giữ nguyên nội dung chuyển khoản để hệ thống tự động duyệt Key!
+                </div>
+
+                <button class="btn-pay" style="width: 100%; margin-top: 10px;" onclick="simulateCheckPayment()">
+                    <span>🔄 TÔI ĐÃ CHUYỂN KHOẢN (KIỂM TRA)</span>
+                </button>
+            </div>
+
+            <!-- TRẠNG THÁI 2: ĐÃ THANH TOÁN THÀNH CÔNG VÀ TRAO KEY -->
+            <div id="paymentSuccessView" style="display: none;">
+                <div style="font-size: 44px; margin-bottom: 8px;">🎉</div>
+                <div style="font-size: 18px; font-weight: 900; color: #34d399;">THANH TOÁN THÀNH CÔNG!</div>
+                <div style="font-size: 12px; color: #cbd5e1; margin-top: 4px;">Cảm ơn bạn! Mã Key PRO VIP của bạn đã được khởi tạo:</div>
+
+                <div class="key-reveal">
+                    <div style="font-size: 11px; font-weight: 800; color: #34d399; text-transform: uppercase;">MÃ KEY PRO VIP CỦA BẠN:</div>
+                    <div class="key-text-val" id="deliveredKeyDisplay">FLOW-VIP-xxxx</div>
+                    <button class="btn-pay" style="background: linear-gradient(135deg, #10b981, #059669); margin-top: 8px;" onclick="copyDeliveredKey()">
+                        <span>📋 SAO CHÉP MÃ KEY</span>
+                    </button>
+                </div>
+
+                <a href="intent://com.example.gameoptimizer#Intent;scheme=package;package=com.example.gameoptimizer;end" class="btn-pay" style="background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; text-decoration: none; margin-top: 10px;">
+                    <span>🚀 Mở App FlowOptimize & Dán Key</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast">✅ Đã sao chép!</div>
+
+    <script>
+        // CẤU HÌNH TÀI KHOẢN NGÂN HÀNG NHẬN TIỀN CỦA SHOP
+        // (Có thể chỉnh sửa tại đây hoặc qua trang admin.html)
+        let SHOP_CONFIG = {
+            bankId: "TCB",               // Mã ngân hàng: MB, VCB, TCB, ACB, VPB, TPB, ICB...
+            bankName: "Techcombank",
+            accountNo: "0827353177",    // Thay bằng số tài khoản thật của bạn
+            accountName: "TRAN CHI CUONG" // Tên chủ tài khoản
+        };
+
+        // Lấy HWID từ URL nếu có
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlHwid = urlParams.get('hwid');
+        if (urlHwid) {
+            document.getElementById('custHwid').value = urlHwid.trim().toUpperCase();
+        }
+
+        let selectedPlan = {
+            id: 'month',
+            price: 39000,
+            name: 'Gói Tháng (30 Ngày)'
+        };
+
+        function selectPlan(id, price, name, cardEl) {
+            selectedPlan = { id, price, name };
+            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+            if (cardEl) cardEl.classList.add('selected');
+            document.getElementById('payBtnAmount').textContent = price.toLocaleString('vi-VN') + 'đ';
+        }
+
+        let currentOrderCode = "";
+        let generatedProKey = "";
+
+        function openPaymentModal() {
+            const phone = document.getElementById('custPhone').value.trim();
+            if (!phone) {
+                alert("Vui lòng nhập số điện thoại hoặc Zalo để lưu hóa đơn nhận Key!");
+                document.getElementById('custPhone').focus();
+                return;
+            }
+
+            // Sinh mã đơn hàng ngẫu nhiên: ví dụ FLOW9821
+            const randomCode = Math.floor(1000 + Math.random() * 9000);
+            currentOrderCode = `FLOW${randomCode}`;
+
+            // Tạo mã VietQR chuẩn Napas qua VietQR API
+            const qrUrl = `https://img.vietqr.io/image/${SHOP_CONFIG.bankId}-${SHOP_CONFIG.accountNo}-compact2.png?amount=${selectedPlan.price}&addInfo=${currentOrderCode}&accountName=${encodeURIComponent(SHOP_CONFIG.accountName)}`;
+
+            document.getElementById('vietQrImg').src = qrUrl;
+            document.getElementById('bankNameDisplay').textContent = SHOP_CONFIG.bankName;
+            document.getElementById('bankAccountDisplay').textContent = SHOP_CONFIG.accountNo;
+            document.getElementById('orderAmountDisplay').textContent = selectedPlan.price.toLocaleString('vi-VN') + 'đ';
+            document.getElementById('orderCodeDisplay').textContent = currentOrderCode;
+
+            document.getElementById('paymentPendingView').style.display = 'block';
+            document.getElementById('paymentSuccessView').style.display = 'none';
+            document.getElementById('qrModal').style.display = 'flex';
+        }
+
+        function closePaymentModal() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+
+        // Mô phỏng kiểm tra thanh toán & Trao Key
+        function simulateCheckPayment() {
+            const btn = event.currentTarget;
+            btn.innerHTML = `<span>⏳ Đang kiểm tra giao dịch ngân hàng...</span>`;
+
+            setTimeout(() => {
+                // Tạo mã Key PRO VIP
+                const planPrefix = selectedPlan.id === 'lifetime' ? 'LIFETIME' : (selectedPlan.id === 'month' ? '30D' : '7D');
+                const randomHex = Math.random().toString(36).substring(2, 8).toUpperCase();
+                generatedProKey = `FLOW-VIP-${planPrefix}-${randomHex}`;
+
+                // Lưu đơn hàng vào LocalStorage Database
+                const orderData = {
+                    orderCode: currentOrderCode,
+                    phone: document.getElementById('custPhone').value.trim(),
+                    hwid: document.getElementById('custHwid').value.trim() || 'ALL_DEVICE',
+                    plan: selectedPlan.name,
+                    price: selectedPlan.price,
+                    key: generatedProKey,
+                    createdAt: new Date().toLocaleString('vi-VN'),
+                    status: 'COMPLETED'
+                };
+
+                saveOrderToStorage(orderData);
+
+                // Chuyển sang màn hình thành công
+                document.getElementById('deliveredKeyDisplay').textContent = generatedProKey;
+                document.getElementById('paymentPendingView').style.display = 'none';
+                document.getElementById('paymentSuccessView').style.display = 'block';
+            }, 1500);
+        }
+
+        function saveOrderToStorage(order) {
+            try {
+                let orders = JSON.parse(localStorage.getItem('flow_shop_orders') || '[]');
+                orders.unshift(order);
+                localStorage.setItem('flow_shop_orders', JSON.stringify(orders));
+            } catch(e) {}
+        }
+
+        function copyDeliveredKey() {
+            navigator.clipboard.writeText(generatedProKey).then(() => {
+                showToast("📋 Đã sao chép mã Key PRO VIP!");
+            });
+        }
+
+        function copyExactAmount() {
+            navigator.clipboard.writeText(selectedPlan.price.toString()).then(() => {
+                showToast("📋 Đã sao chép số tiền!");
+            });
+        }
+
+        function copyText(elemId) {
+            const txt = document.getElementById(elemId).textContent;
+            navigator.clipboard.writeText(txt).then(() => {
+                showToast("📋 Đã sao chép: " + txt);
+            });
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2500);
+        }
+    </script>
+</body>
+</html>
+

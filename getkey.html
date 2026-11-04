@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cổng Lấy Key 24H • FlowOptimize eSports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030712;
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --card-border: rgba(56, 189, 248, 0.25);
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.35);
+            --green: #10b981;
+            --gold: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--bg);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15), transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.08), transparent 50%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 28px 22px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px var(--accent-glow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #38bdf8, #818cf8, #f59e0b);
+        }
+
+        .logo-wrap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            margin-bottom: 16px;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+        }
+
+        .logo-wrap img {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 21px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .sub {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 22px;
+            line-height: 1.5;
+        }
+
+        .hwid-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px dashed rgba(56, 189, 248, 0.4);
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .hwid-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #38bdf8;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hwid-val {
+            font-family: monospace;
+            font-size: 16px;
+            font-weight: 800;
+            color: #f1f5f9;
+            word-break: break-all;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .steps-box {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 12.5px;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-num {
+            min-width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1px;
+        }
+
+        .btn-start {
+            width: 100%;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 900;
+            padding: 16px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(2, 132, 199, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(56, 189, 248, 0.6);
+        }
+
+        .btn-start:active {
+            transform: scale(0.98);
+        }
+
+        .pro-promo {
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .pro-promo a {
+            color: #fbbf24;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .pro-promo a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo-wrap">
+            <img src="app_logo.png" alt="Logo">
+        </div>
+
+        <h1>CỔNG LẤY KEY 24H</h1>
+        <p class="sub">Vượt link xác nhận nhanh để mở khóa truy cập toàn bộ ứng dụng FlowOptimize trong 24 giờ</p>
+
+        <!-- HWID BOX -->
+        <div class="hwid-card">
+            <div class="hwid-label">
+                <span>📱</span> Thiết bị được liên kết:
+            </div>
+            <div class="hwid-val">
+                <span id="hwidDisplay">Đang nhận diện...</span>
+                <span style="font-size: 11px; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">CỐ ĐỊNH</span>
+            </div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 6px;">
+                *Key tạo ra chỉ sử dụng được duy nhất trên máy này, không thể chia sẻ cho máy khác.
+            </div>
+        </div>
+
+        <!-- HƯỚNG DẪN 3 BƯỚC -->
+        <div class="steps-box">
+            <div class="step-item">
+                <div class="step-num">1</div>
+                <div>Bấm <b>Bắt Đầu Vượt Link</b> bên dưới để tới hệ thống Link4m.</div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">2</div>
+                <div>Làm theo hướng dẫn vượt link (khoảng 20-30 giây).</div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">3</div>
+                <div>Sau khi hoàn tất, hệ thống tự động trả về trang <b>showkey.html</b> chứa Key 24H riêng cho thiết bị của bạn.</div>
+            </div>
+        </div>
+
+        <!-- NÚT BẮT ĐẦU VƯỢT LINK -->
+        <a id="btnBypassLink" href="#" class="btn-start">
+            <span>🚀 BẮT ĐẦU VƯỢT LINK (LINK4M)</span>
+        </a>
+
+        <!-- PRO PROMO -->
+        <div class="pro-promo">
+            <div>Không muốn vượt link mỗi ngày?</div>
+            <a href="https://zslowcuong.github.io/bio/">
+                <span>👑 Nâng cấp PRO VIP (Tuần / Tháng / Vĩnh Viễn)</span> ➔
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Lấy thông số từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        let hwid = urlParams.get('hwid');
+
+        if (!hwid || hwid.trim() === '') {
+            hwid = 'DEVICE_' + Math.random().toString(36).substring(2, 10).toUpperCase();
+        } else {
+            hwid = hwid.trim().toUpperCase();
+        }
+
+        document.getElementById('hwidDisplay').textContent = hwid;
+
+        // Cấu hình Link4m API token
+        const link4mApi = "6ae77b1c1473a714b32b2a3a";
+        const currentTimestamp = Date.now();
+        const destinationShowKey = `https://zslowcuong.github.io/bio/showkey.html?hwid=${encodeURIComponent(hwid)}&t=${currentTimestamp}`;
+        
+        // Tạo link rút gọn Link4m
+        const shortLink = `https://link4m.co/st?api=${link4mApi}&url=${encodeURIComponent(destinationShowKey)}`;
+
+        const btn = document.getElementById('btnBypassLink');
+        btn.href = shortLink;
+
+        btn.addEventListener('click', function(e) {
+            btn.innerHTML = `<span>⏳ ĐANG CHUYỂN HƯỚNG...</span>`;
+        });
+    </script>
+</body>
+</html>
+

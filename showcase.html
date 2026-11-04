@@ -1928,7 +1928,7 @@
                 Cả 2 phiên bản đều tương thích hoàn hảo từ Android 8 đến Android 15 qua đặc quyền Shizuku ADB (Không cần Root). Chọn phiên bản bạn yêu thích:
             </p>
 
-            <!-- 2-Card App Download Grid -->
+            <!-- 3-Card App Download Grid -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 800px; margin: 0 auto 28px; text-align: left;">
                 <!-- App 1: FlowS New Version -->
                 <div style="background: rgba(17, 24, 20, 0.9); border: 1.5px solid rgba(0, 255, 102, 0.5); border-radius: 20px; padding: 22px; box-shadow: 0 10px 30px rgba(0, 255, 102, 0.18); display: flex; flex-direction: column; justify-content: space-between;">
@@ -1977,7 +1977,32 @@
                 </div>
             </div>
 
-            <!-- Hướng Dẫn Vượt Link4M Nhanh Trong 3 Bước -->
+            
+                <!-- App 3: FlowUltra Hardware Suite -->
+                <div style="background: rgba(23, 20, 15, 0.9); border: 1.5px solid rgba(245, 158, 11, 0.5); border-radius: 20px; padding: 22px; box-shadow: 0 10px 30px rgba(245, 158, 11, 0.2); display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                            <img src="flows_logo.png" alt="FlowUltra Logo" style="width: 52px; height: 52px; border-radius: 14px; border: 1.5px solid #f59e0b; object-fit: cover;">
+                            <div>
+                                <div style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 900; color: #fff;">FlowUltra Suite</div>
+                                <div style="font-size: 11px; color: #f59e0b; font-weight: 700;">Hardware & Deep Doze (v1.0.5)</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 12px; color: #cbd5e1; line-height: 1.55; margin-bottom: 16px;">
+                            ✓ 20 Engine mã nguồn mở cấp thấp Shappky & Appzuku<br>
+                            ✓ Screen-Off Deep Doze ép CPU ngủ sâu pin đêm &lt; 1%<br>
+                            ✓ Màn hình AFK Extinguish 0-Nits cày game không nóng máy<br>
+                            ✓ Hail Freeze đóng băng app rác 0% CPU &amp; RAM
+                        </div>
+                    </div>
+                    <button type="button" onclick="openUnlockModal('flowultra')" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px 18px; border-radius: 12px; font-size: 13px; font-weight: 800; background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%); color: #050811; border: none; cursor: pointer; transition: transform 0.2s; box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);">
+                        <span>🚀</span>
+                        <span>TẢI FLOWULTRA (LINK4M)</span>
+                    </button>
+                </div>
+            </div>
+
+<!-- Hướng Dẫn Vượt Link4M Nhanh Trong 3 Bước -->
             <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 18px 22px; text-align: left; max-width: 680px; margin: 0 auto 20px;">
                 <div style="font-weight: 800; font-size: 13px; color: var(--accent); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
                     <span>📖 3 Bước Vượt Link4M Cực Nhanh (10 Giây):</span>
@@ -2340,9 +2365,15 @@
             const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
             let dest = '';
             if (currentTargetApp === 'flows') {
-                dest = (globalConfig.flows && globalConfig.flows.destination_apk) || 'https://gofile.io/d/z3wUcYxV';
+                if (modalIcon) modalIcon.src = 'flows_logo.png';
+                if (modalTitle) modalTitle.textContent = 'FlowS - Gamer Tuner (v3.5)';
+                if (modalSub) modalSub.textContent = 'Game Tuner • Quét Game Thật • 120Hz';
+                if (linkBtn) linkBtn.innerHTML = '<span style="font-size: 18px;">⚡</span><span>LẤY LINK TẢI FLOWS (LINK4M)</span>';
             } else if (currentTargetApp === 'flowultra') {
-                dest = (globalConfig.flowultra && globalConfig.flowultra.destination_apk) || 'https://gofile.io/d/HqxIEJbn';
+                if (modalIcon) modalIcon.src = 'flows_logo.png';
+                if (modalTitle) modalTitle.textContent = 'FlowUltra - Hardware Suite (v1.0.5)';
+                if (modalSub) modalSub.textContent = '20 Open-Source Engines • Deep Doze • AFK 0-Nits';
+                if (linkBtn) linkBtn.innerHTML = '<span style="font-size: 18px;">🚀</span><span>LẤY LINK TẢI FLOWULTRA (LINK4M)</span>';
             } else {
                 dest = (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || globalConfig.destination_apk || 'https://gofile.io/d/ZUqi1crJ';
             }
@@ -2398,9 +2429,14 @@
 
             if (currentTargetApp === 'flows') {
                 if (modalIcon) modalIcon.src = 'flows_logo.png';
-                if (modalTitle) modalTitle.textContent = 'FlowS - New Version';
+                if (modalTitle) modalTitle.textContent = 'FlowS - Gamer Tuner (v3.5)';
                 if (modalSub) modalSub.textContent = 'Game Tuner • Quét Game Thật • 120Hz';
                 if (linkBtn) linkBtn.innerHTML = '<span style="font-size: 18px;">⚡</span><span>LẤY LINK TẢI FLOWS (LINK4M)</span>';
+            } else if (currentTargetApp === 'flowultra') {
+                if (modalIcon) modalIcon.src = 'flows_logo.png';
+                if (modalTitle) modalTitle.textContent = 'FlowUltra - Hardware Suite (v1.0.5)';
+                if (modalSub) modalSub.textContent = '20 Open-Source Engines • Deep Doze • AFK 0-Nits';
+                if (linkBtn) linkBtn.innerHTML = '<span style="font-size: 18px;">🚀</span><span>LẤY LINK TẢI FLOWULTRA (LINK4M)</span>';
             } else {
                 if (modalIcon) modalIcon.src = 'app_logo.png';
                 if (modalTitle) modalTitle.textContent = 'FlowOptimize Ultra Pro';

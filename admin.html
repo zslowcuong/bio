@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Quản Lý • FlowOptimize eSports Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030712;
+            --card-bg: rgba(15, 23, 42, 0.9);
+            --card-border: rgba(56, 189, 248, 0.2);
+            --accent: #38bdf8;
+            --green: #10b981;
+            --gold: #f59e0b;
+            --red: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: #f8fafc;
+            min-height: 100vh;
+            padding: 24px 20px;
+        }
+
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .brand-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-badge {
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid #f59e0b;
+            color: #fbbf24;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 99px;
+        }
+
+        /* STATS GRID */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 26px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        /* ACTIONS BAR */
+        .actions-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .btn-action {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+            font-size: 13px;
+            font-weight: 800;
+            padding: 10px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-action:hover {
+            background: rgba(56, 189, 248, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-action.gold {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b;
+            color: #fbbf24;
+        }
+
+        /* TABLE */
+        .table-wrap {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            overflow-x: auto;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        th {
+            background: rgba(30, 41, 59, 0.7);
+            color: #94a3b8;
+            font-weight: 800;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: #cbd5e1;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .status-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 99px;
+        }
+
+        .status-active {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid #10b981;
+            color: #34d399;
+        }
+
+        .status-revoked {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid #ef4444;
+            color: #f87171;
+        }
+
+        .btn-revoke {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #f87171;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* LOGIN OVERLAY */
+        #loginGate {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.98);
+            backdrop-filter: blur(25px);
+            z-index: 9999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: rgba(15, 23, 42, 0.95);
+            border: 2px solid #38bdf8;
+            border-radius: 20px;
+            padding: 28px 24px;
+            max-width: 360px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.3);
+        }
+
+        .login-input {
+            width: 100%;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 12px;
+            color: #fff;
+            font-size: 14px;
+            text-align: center;
+            margin: 16px 0;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MÀN HÌNH ĐĂNG NHẬP ADMIN -->
+    <div id="loginGate">
+        <div class="login-box">
+            <div style="font-size: 40px; margin-bottom: 8px;">🔐</div>
+            <h2 style="font-size: 18px; font-weight: 900;">ADMIN DASHBOARD</h2>
+            <p style="font-size: 12px; color: #94a3b8; margin-top: 4px;">Nhập mã PIN quản trị viên để truy cập:</p>
+            <input type="password" id="adminPinInput" class="login-input" placeholder="Mã PIN (mặc định: admin2026)">
+            <button onclick="checkAdminLogin()" class="btn-action gold" style="width: 100%; justify-content: center; padding: 12px;">
+                ĐĂNG NHẬP
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div class="header-bar">
+        <div class="brand-title">
+            <span>🛡️ FLOWOPTIMIZE ADMIN DASHBOARD</span>
+            <span class="brand-badge">QUẢN LÝ KEY & SHOP</span>
+        </div>
+        <div style="font-size: 12px; color: #94a3b8;">
+            Hệ thống: <b style="color: #10b981;">Online 24/7</b>
+        </div>
+    </div>
+
+    <!-- 4 Ô THỐNG KÊ DOANH THU & ĐƠN HÀNG -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">💰 Tổng Doanh Thu</div>
+            <div class="stat-value" id="totalRevenueDisplay" style="color: #fbbf24;">0đ</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">📦 Tổng Số Đơn Hàng</div>
+            <div class="stat-value" id="totalOrdersDisplay" style="color: #38bdf8;">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">👑 Key PRO Đang Hoạt Động</div>
+            <div class="stat-value" id="activeKeysDisplay" style="color: #34d399;">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">🚀 Lượt Vượt Link 24H Hôm Nay</div>
+            <div class="stat-value" id="bypassesTodayDisplay" style="color: #a78bfa;">142</div>
+        </div>
+    </div>
+
+    <!-- NÚT THAO TÁC NHANH -->
+    <div class="actions-bar">
+        <button class="btn-action gold" onclick="createManualKey()">
+            <span>➕</span> Tạo Key PRO Thủ Công (Tặng / Bán Ngoài)
+        </button>
+        <button class="btn-action" onclick="exportDataJson()">
+            <span>📥</span> Xuất File Dữ Liệu Khách Hàng (JSON)
+        </button>
+        <a href="shop.html" target="_blank" class="btn-action" style="text-decoration: none;">
+            <span>🛒</span> Xem Trang Shop Bán Key
+        </a>
+    </div>
+
+    <!-- BẢNG DANH SÁCH ĐƠN HÀNG VÀ KEY -->
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã Đơn</th>
+                    <th>Thời Gian</th>
+                    <th>Khách Hàng (SĐT)</th>
+                    <th>Gói Bản Quyền</th>
+                    <th>Số Tiền</th>
+                    <th>Mã Key Cấp Phép</th>
+                    <th>Trạng Thái</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+                <!-- RENDER TỰ ĐỘNG TỪ LOCALSTORAGE -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const ADMIN_PIN = "admin2026";
+
+        function checkAdminLogin() {
+            const val = document.getElementById('adminPinInput').value.trim();
+            if (val === ADMIN_PIN) {
+                document.getElementById('loginGate').style.display = 'none';
+                loadDashboardData();
+            } else {
+                alert("Mã PIN không chính xác! Vui lòng thử lại.");
+            }
+        }
+
+        // Tải danh sách đơn hàng
+        function loadDashboardData() {
+            let orders = [];
+            try {
+                orders = JSON.parse(localStorage.getItem('flow_shop_orders') || '[]');
+            } catch(e) {}
+
+            // Thêm dữ liệu mẫu nếu chưa có
+            if (orders.length === 0) {
+                orders = [
+                    {
+                        orderCode: "FLOW9821",
+                        phone: "0963351915",
+                        hwid: "OPPO_1716D098",
+                        plan: "Gói Vĩnh Viễn (Trọn Đời)",
+                        price: 99000,
+                        key: "FLOW-VIP-LIFETIME-A8F9",
+                        createdAt: "03:45:10 - 05/11/2026",
+                        status: "COMPLETED"
+                    },
+                    {
+                        orderCode: "FLOW4312",
+                        phone: "0912345678",
+                        hwid: "ALL_DEVICE",
+                        plan: "Gói Tháng (30 Ngày)",
+                        price: 39000,
+                        key: "FLOW-VIP-30D-K2X7",
+                        createdAt: "02:15:30 - 05/11/2026",
+                        status: "COMPLETED"
+                    }
+                ];
+                localStorage.setItem('flow_shop_orders', JSON.stringify(orders));
+            }
+
+            // Tính thống kê
+            let totalRev = 0;
+            let activeCount = 0;
+            orders.forEach(o => {
+                if (o.status === 'COMPLETED') {
+                    totalRev += (o.price || 0);
+                    activeCount++;
+                }
+            });
+
+            document.getElementById('totalRevenueDisplay').textContent = totalRev.toLocaleString('vi-VN') + 'đ';
+            document.getElementById('totalOrdersDisplay').textContent = orders.length;
+            document.getElementById('activeKeysDisplay').textContent = activeCount;
+
+            // Render bảng
+            const tbody = document.getElementById('ordersTableBody');
+            tbody.innerHTML = '';
+
+            orders.forEach((o, index) => {
+                const tr = document.createElement('tr');
+                const isCompleted = o.status === 'COMPLETED';
+                tr.innerHTML = `
+                    <td style="font-weight: 800; font-family: monospace; color: #fbbf24;">${o.orderCode}</td>
+                    <td style="font-size: 11.5px; color: #94a3b8;">${o.createdAt}</td>
+                    <td style="font-weight: 700;">${o.phone}</td>
+                    <td>${o.plan}</td>
+                    <td style="font-weight: 800; color: #34d399;">${(o.price || 0).toLocaleString('vi-VN')}đ</td>
+                    <td style="font-family: monospace; font-size: 12px; font-weight: 800; color: #fff;">${o.key}</td>
+                    <td>
+                        <span class="status-badge ${isCompleted ? 'status-active' : 'status-revoked'}">
+                            ${isCompleted ? '🟢 Hoạt Động' : '🔴 Đã Khóa'}
+                        </span>
+                    </td>
+                    <td>
+                        ${isCompleted ? `<button class="btn-revoke" onclick="revokeKey(${index})">Khóa Key</button>` : '<span style="color:#64748b; font-size:11px;">Đã thu hồi</span>'}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Khóa / Thu hồi key 1 chạm
+        function revokeKey(idx) {
+            if (!confirm("Bạn có chắc chắn muốn khóa và thu hồi mã Key này không? Ứng dụng của khách hàng sẽ lập tức bị khóa từ xa!")) return;
+            let orders = JSON.parse(localStorage.getItem('flow_shop_orders') || '[]');
+            if (orders[idx]) {
+                orders[idx].status = 'REVOKED';
+                localStorage.setItem('flow_shop_orders', JSON.stringify(orders));
+                loadDashboardData();
+                alert("Đã khóa Key thành công!");
+            }
+        }
+
+        // Tạo key thủ công
+        function createManualKey() {
+            const phone = prompt("Nhập Số Điện Thoại / Tên khách hàng:");
+            if (!phone) return;
+            const planType = prompt("Chọn gói (1: Tuần 15k, 2: Tháng 39k, 3: Vĩnh Viễn 99k):", "3");
+            let planName = "Gói Vĩnh Viễn (Trọn Đời)";
+            let price = 99000;
+            let prefix = "LIFETIME";
+
+            if (planType === "1") {
+                planName = "Gói Tuần (7 Ngày)";
+                price = 15000;
+                prefix = "7D";
+            } else if (planType === "2") {
+                planName = "Gói Tháng (30 Ngày)";
+                price = 39000;
+                prefix = "30D";
+            }
+
+            const randomHex = Math.random().toString(36).substring(2, 8).toUpperCase();
+            const newKey = `FLOW-VIP-${prefix}-${randomHex}`;
+
+            let orders = JSON.parse(localStorage.getItem('flow_shop_orders') || '[]');
+            orders.unshift({
+                orderCode: "MANUAL" + Math.floor(1000 + Math.random() * 9000),
+                phone: phone,
+                hwid: "MANUAL_GIFT",
+                plan: planName,
+                price: price,
+                key: newKey,
+                createdAt: new Date().toLocaleString('vi-VN'),
+                status: "COMPLETED"
+            });
+
+            localStorage.setItem('flow_shop_orders', JSON.stringify(orders));
+            loadDashboardData();
+            alert(`🎉 ĐÃ TẠO KEY THÀNH CÔNG!\n\nMã Key: ${newKey}\nGói: ${planName}\n\nHãy gửi mã Key này cho khách hàng!`);
+        }
+
+        // Xuất file JSON
+        function exportDataJson() {
+            const data = localStorage.getItem('flow_shop_orders') || '[]';
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `flow_orders_${Date.now()}.json`;
+            a.click();
+        }
+    </script>
+</body>
+</html>
+
