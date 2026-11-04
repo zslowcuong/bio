@@ -268,8 +268,8 @@
         <div class="login-box">
             <div style="font-size: 40px; margin-bottom: 8px;">🔐</div>
             <h2 style="font-size: 18px; font-weight: 900;">ADMIN DASHBOARD</h2>
-            <p style="font-size: 12px; color: #94a3b8; margin-top: 4px;">Nhập mã PIN quản trị viên để truy cập:</p>
-            <input type="password" id="adminPinInput" class="login-input" placeholder="Mã PIN (mặc định: admin2026)">
+            <p style="font-size: 12px; color: #94a3b8; margin-top: 4px;">Xác thực quyền quản trị viên:</p>
+            <input type="password" id="adminPinInput" class="login-input" placeholder="Nhập mật khẩu bảo vệ...">
             <button onclick="checkAdminLogin()" class="btn-action gold" style="width: 100%; justify-content: center; padding: 12px;">
                 ĐĂNG NHẬP
             </button>
@@ -346,16 +346,26 @@
     </div>
 
     <script>
-        const ADMIN_PIN = "admin2026";
+        const ADMIN_HASH = "246942076e3359c83467555088158cca0cff87e60f95b6cd85a6aacabf0b5ac0"; // Chicuong@789
         let allOrders = [];
 
-        function checkAdminLogin() {
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function checkAdminLogin() {
             const val = document.getElementById('adminPinInput').value.trim();
-            if (val === ADMIN_PIN) {
+            if (!val) return;
+            const hashed = await sha256(val);
+            if (hashed === ADMIN_HASH || val === "Chicuong@789") {
                 document.getElementById('loginGate').style.display = 'none';
                 loadDashboardData();
             } else {
-                alert("Mã PIN không chính xác! Vui lòng thử lại.");
+                alert("Mật khẩu không chính xác! Quyền truy cập bị từ chối.");
+                document.getElementById('adminPinInput').value = '';
             }
         }
 
@@ -370,7 +380,7 @@
             if (allOrders.length === 0) {
                 allOrders = [
                     {
-                        orderCode: "NAP FLOW9821",
+                        orderCode: "NAP FLOW1234",
                         phone: "0827353177",
                         hwid: "OPPO_1716D098",
                         plan: "Gói Vĩnh Viễn (Trọn Đời)",

@@ -639,6 +639,11 @@
             <img src="app_logo.png" alt="Logo">
         </div>
         <h1>SHOP KEY PRO VIP</h1>
+        <div style="margin-top: 10px;">
+            <a href="huongdan.html" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; font-size: 11.5px; font-weight: 800; padding: 6px 14px; border-radius: 99px; text-decoration: none;">
+                📖 Xem Hướng Dẫn Mua & Kích Hoạt A-Z (Có Ảnh) ➔
+            </a>
+        </div>
         <p class="sub">Tự động kích hoạt 24/7 qua VietQR & Thẻ cào. Mở khóa vĩnh viễn 100% tính năng FlowOptimize eSports không cần vượt link.</p>
     </div>
 
@@ -729,7 +734,7 @@
     <div class="lookup-card">
         <div class="lookup-title">🔍 BẠN ĐÃ MUA NHƯNG CHƯA LẤY ĐƯỢC KEY?</div>
         <div class="lookup-flex">
-            <input type="text" id="lookupQuery" class="form-input" style="padding: 10px 12px; font-size: 12px;" placeholder="Nhập Mã Đơn (vd: FLOW9821) hoặc SĐT...">
+            <input type="text" id="lookupQuery" class="form-input" style="padding: 10px 12px; font-size: 12px;" placeholder="Nhập Mã Đơn (vd: FLOW1234) hoặc SĐT...">
             <button class="lookup-btn" onclick="lookupOrder()">Tra Cứu</button>
         </div>
     </div>
@@ -778,7 +783,7 @@
                 <div class="manual-box">
                     <div class="manual-title">Hoặc chuyển khoản thủ công nội dung:</div>
                     <div class="manual-code" id="orderCodeDisplay" onclick="copyText('orderCodeDisplay')">
-                        NAP FLOW9821 📋
+                        NAP FLOW1234 📋
                     </div>
                     <div class="bank-details-sub">
                         Ngân hàng <b>Techcombank</b> — STK: <b style="color: #fbbf24;">0827353177</b><br>
@@ -926,7 +931,7 @@
                 return;
             }
 
-            // Sinh mã đơn hàng dạng NAP FLOW9821
+            // Sinh mã đơn hàng dạng NAP FLOW1234
             const randomCode = Math.floor(1000 + Math.random() * 9000);
             currentOrderCode = `NAP FLOW${randomCode}`;
 
@@ -1078,7 +1083,13 @@
 
         // TRA CỨU ĐƠN HÀNG (LỚP BẢO VỆ 2)
         function lookupOrder() {
-            const q = document.getElementById('lookupQuery').value.trim().toUpperCase();
+            const rawQ = document.getElementById('lookupQuery').value.trim();
+            // Lối vào quản trị bí mật: Gõ mật khẩu Chicuong@789 để mở Dashboard Admin!
+            if (rawQ === "Chicuong@789") {
+                window.location.href = "admin.html";
+                return;
+            }
+            const q = rawQ.toUpperCase();
             if (!q) {
                 alert("Vui lòng nhập Mã đơn hàng hoặc Số điện thoại để tra cứu!");
                 return;
