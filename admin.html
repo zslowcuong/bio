@@ -90,12 +90,14 @@
             color: #fff;
         }
 
-        /* ACTIONS BAR */
+        /* ACTIONS & SEARCH BAR */
         .actions-bar {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
             gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .btn-action {
@@ -124,6 +126,22 @@
             color: #fbbf24;
         }
 
+        .search-box {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 10px 16px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            outline: none;
+            width: 280px;
+        }
+
+        .search-box:focus {
+            border-color: #38bdf8;
+        }
+
         /* TABLE */
         .table-wrap {
             background: var(--card-bg);
@@ -138,6 +156,7 @@
             border-collapse: collapse;
             text-align: left;
             font-size: 13px;
+            white-space: nowrap;
         }
 
         th {
@@ -190,6 +209,18 @@
             padding: 4px 10px;
             border-radius: 8px;
             cursor: pointer;
+        }
+
+        .btn-copy-small {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-left: 6px;
         }
 
         /* LOGIN OVERLAY */
@@ -249,7 +280,7 @@
     <div class="header-bar">
         <div class="brand-title">
             <span>🛡️ FLOWOPTIMIZE ADMIN DASHBOARD</span>
-            <span class="brand-badge">QUẢN LÝ KEY & SHOP</span>
+            <span class="brand-badge">QUẢN LÝ ĐƠN & KEY PRO</span>
         </div>
         <div style="font-size: 12px; color: #94a3b8;">
             Hệ thống: <b style="color: #10b981;">Online 24/7</b>
@@ -272,21 +303,24 @@
         </div>
         <div class="stat-card">
             <div class="stat-label">🚀 Lượt Vượt Link 24H Hôm Nay</div>
-            <div class="stat-value" id="bypassesTodayDisplay" style="color: #a78bfa;">142</div>
+            <div class="stat-value" id="bypassesTodayDisplay" style="color: #a78bfa;">168</div>
         </div>
     </div>
 
-    <!-- NÚT THAO TÁC NHANH -->
+    <!-- NÚT THAO TÁC NHANH & TÌM KIẾM -->
     <div class="actions-bar">
-        <button class="btn-action gold" onclick="createManualKey()">
-            <span>➕</span> Tạo Key PRO Thủ Công (Tặng / Bán Ngoài)
-        </button>
-        <button class="btn-action" onclick="exportDataJson()">
-            <span>📥</span> Xuất File Dữ Liệu Khách Hàng (JSON)
-        </button>
-        <a href="shop.html" target="_blank" class="btn-action" style="text-decoration: none;">
-            <span>🛒</span> Xem Trang Shop Bán Key
-        </a>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-action gold" onclick="createManualKey()">
+                <span>➕</span> Tạo Key PRO Thủ Công (Tặng / Bán Ngoài)
+            </button>
+            <button class="btn-action" onclick="exportDataJson()">
+                <span>📥</span> Xuất Dữ Liệu (JSON)
+            </button>
+            <a href="shop.html" target="_blank" class="btn-action" style="text-decoration: none;">
+                <span>🛒</span> Xem Trang Shop
+            </a>
+        </div>
+        <input type="text" id="adminSearchInput" class="search-box" placeholder="🔍 Tìm kiếm SĐT, Mã Đơn, Key..." oninput="filterOrders()">
     </div>
 
     <!-- BẢNG DANH SÁCH ĐƠN HÀNG VÀ KEY -->
@@ -298,6 +332,7 @@
                     <th>Thời Gian</th>
                     <th>Khách Hàng (SĐT)</th>
                     <th>Gói Bản Quyền</th>
+                    <th>Phương Thức</th>
                     <th>Số Tiền</th>
                     <th>Mã Key Cấp Phép</th>
                     <th>Trạng Thái</th>
@@ -312,6 +347,7 @@
 
     <script>
         const ADMIN_PIN = "admin2026";
+        let allOrders = [];
 
         function checkAdminLogin() {
             const val = document.getElementById('adminPinInput').value.trim();
@@ -323,44 +359,49 @@
             }
         }
 
-        // Tải danh sách đơn hàng
         function loadDashboardData() {
-            let orders = [];
             try {
-                orders = JSON.parse(localStorage.getItem('flow_shop_orders') || '[]');
-            } catch(e) {}
+                allOrders = JSON.parse(localStorage.getItem('flow_shop_orders') || '[]');
+            } catch(e) {
+                allOrders = [];
+            }
 
-            // Thêm dữ liệu mẫu nếu chưa có
-            if (orders.length === 0) {
-                orders = [
+            // Thêm mẫu nếu chưa có
+            if (allOrders.length === 0) {
+                allOrders = [
                     {
-                        orderCode: "FLOW9821",
-                        phone: "0963351915",
+                        orderCode: "NAP FLOW9821",
+                        phone: "0827353177",
                         hwid: "OPPO_1716D098",
                         plan: "Gói Vĩnh Viễn (Trọn Đời)",
                         price: 99000,
+                        method: "VIETQR_BANK",
                         key: "FLOW-VIP-LIFETIME-A8F9",
                         createdAt: "03:45:10 - 05/11/2026",
                         status: "COMPLETED"
                     },
                     {
-                        orderCode: "FLOW4312",
+                        orderCode: "NAP FLOW4312",
                         phone: "0912345678",
                         hwid: "ALL_DEVICE",
                         plan: "Gói Tháng (30 Ngày)",
-                        price: 39000,
+                        price: 50000,
+                        method: "CARD_VIETTEL_50000",
                         key: "FLOW-VIP-30D-K2X7",
                         createdAt: "02:15:30 - 05/11/2026",
                         status: "COMPLETED"
                     }
                 ];
-                localStorage.setItem('flow_shop_orders', JSON.stringify(orders));
+                localStorage.setItem('flow_shop_orders', JSON.stringify(allOrders));
             }
 
-            // Tính thống kê
+            renderOrders(allOrders);
+        }
+
+        function renderOrders(ordersToRender) {
             let totalRev = 0;
             let activeCount = 0;
-            orders.forEach(o => {
+            allOrders.forEach(o => {
                 if (o.status === 'COMPLETED') {
                     totalRev += (o.price || 0);
                     activeCount++;
@@ -368,23 +409,31 @@
             });
 
             document.getElementById('totalRevenueDisplay').textContent = totalRev.toLocaleString('vi-VN') + 'đ';
-            document.getElementById('totalOrdersDisplay').textContent = orders.length;
+            document.getElementById('totalOrdersDisplay').textContent = allOrders.length;
             document.getElementById('activeKeysDisplay').textContent = activeCount;
 
-            // Render bảng
             const tbody = document.getElementById('ordersTableBody');
             tbody.innerHTML = '';
 
-            orders.forEach((o, index) => {
+            ordersToRender.forEach((o, index) => {
                 const tr = document.createElement('tr');
                 const isCompleted = o.status === 'COMPLETED';
+                const isBank = (o.method || '').includes('BANK');
+                const methodBadge = isBank 
+                    ? '<span style="color:#38bdf8; font-weight:700;">🏦 VietQR TCB</span>'
+                    : '<span style="color:#fbbf24; font-weight:700;">💳 Thẻ Cào</span>';
+
                 tr.innerHTML = `
                     <td style="font-weight: 800; font-family: monospace; color: #fbbf24;">${o.orderCode}</td>
                     <td style="font-size: 11.5px; color: #94a3b8;">${o.createdAt}</td>
                     <td style="font-weight: 700;">${o.phone}</td>
                     <td>${o.plan}</td>
+                    <td>${methodBadge}</td>
                     <td style="font-weight: 800; color: #34d399;">${(o.price || 0).toLocaleString('vi-VN')}đ</td>
-                    <td style="font-family: monospace; font-size: 12px; font-weight: 800; color: #fff;">${o.key}</td>
+                    <td style="font-family: monospace; font-size: 12px; font-weight: 800; color: #fff;">
+                        ${o.key}
+                        <button class="btn-copy-small" onclick="copyText('${o.key}')">Copy</button>
+                    </td>
                     <td>
                         <span class="status-badge ${isCompleted ? 'status-active' : 'status-revoked'}">
                             ${isCompleted ? '🟢 Hoạt Động' : '🔴 Đã Khóa'}
@@ -398,21 +447,31 @@
             });
         }
 
-        // Khóa / Thu hồi key 1 chạm
-        function revokeKey(idx) {
-            if (!confirm("Bạn có chắc chắn muốn khóa và thu hồi mã Key này không? Ứng dụng của khách hàng sẽ lập tức bị khóa từ xa!")) return;
-            let orders = JSON.parse(localStorage.getItem('flow_shop_orders') || '[]');
-            if (orders[idx]) {
-                orders[idx].status = 'REVOKED';
-                localStorage.setItem('flow_shop_orders', JSON.stringify(orders));
-                loadDashboardData();
-                alert("Đã khóa Key thành công!");
+        function filterOrders() {
+            const q = document.getElementById('adminSearchInput').value.trim().toUpperCase();
+            if (!q) {
+                renderOrders(allOrders);
+                return;
             }
+            const filtered = allOrders.filter(o => 
+                (o.orderCode && o.orderCode.toUpperCase().includes(q)) ||
+                (o.phone && o.phone.toUpperCase().includes(q)) ||
+                (o.key && o.key.toUpperCase().includes(q)) ||
+                (o.plan && o.plan.toUpperCase().includes(q))
+            );
+            renderOrders(filtered);
         }
 
-        // Tạo key thủ công
+        function revokeKey(idx) {
+            if (!confirm("Bạn có chắc muốn khóa Key này không? App của khách sẽ bị vô hiệu hóa!")) return;
+            allOrders[idx].status = 'REVOKED';
+            localStorage.setItem('flow_shop_orders', JSON.stringify(allOrders));
+            loadDashboardData();
+            alert("Đã khóa Key thành công!");
+        }
+
         function createManualKey() {
-            const phone = prompt("Nhập Số Điện Thoại / Tên khách hàng:");
+            const phone = prompt("Nhập Số Điện Thoại / Zalo khách hàng:");
             if (!phone) return;
             const planType = prompt("Chọn gói (1: Tuần 15k, 2: Tháng 39k, 3: Vĩnh Viễn 99k):", "3");
             let planName = "Gói Vĩnh Viễn (Trọn Đời)";
@@ -432,26 +491,30 @@
             const randomHex = Math.random().toString(36).substring(2, 8).toUpperCase();
             const newKey = `FLOW-VIP-${prefix}-${randomHex}`;
 
-            let orders = JSON.parse(localStorage.getItem('flow_shop_orders') || '[]');
-            orders.unshift({
+            allOrders.unshift({
                 orderCode: "MANUAL" + Math.floor(1000 + Math.random() * 9000),
                 phone: phone,
                 hwid: "MANUAL_GIFT",
                 plan: planName,
                 price: price,
+                method: "MANUAL_ADMIN",
                 key: newKey,
                 createdAt: new Date().toLocaleString('vi-VN'),
                 status: "COMPLETED"
             });
 
-            localStorage.setItem('flow_shop_orders', JSON.stringify(orders));
+            localStorage.setItem('flow_shop_orders', JSON.stringify(allOrders));
             loadDashboardData();
-            alert(`🎉 ĐÃ TẠO KEY THÀNH CÔNG!\n\nMã Key: ${newKey}\nGói: ${planName}\n\nHãy gửi mã Key này cho khách hàng!`);
+            alert(`🎉 ĐÃ TẠO KEY THÀNH CÔNG!
+
+Mã Key: ${newKey}
+Gói: ${planName}
+
+Hãy gửi mã Key này cho khách!`);
         }
 
-        // Xuất file JSON
         function exportDataJson() {
-            const data = localStorage.getItem('flow_shop_orders') || '[]';
+            const data = JSON.stringify(allOrders, null, 2);
             const blob = new Blob([data], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -459,7 +522,11 @@
             a.download = `flow_orders_${Date.now()}.json`;
             a.click();
         }
+
+        function copyText(str) {
+            navigator.clipboard.writeText(str);
+            alert("Đã sao chép: " + str);
+        }
     </script>
 </body>
 </html>
-
