@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Tạo & Cấp Key PRO VIP - Flow Ecosystem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body {
+            background: radial-gradient(circle at top, #0f172a 0%, #030712 100%);
+            min-height: 100vh;
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.15);
+            border-radius: 24px;
+            max-width: 650px;
+            width: 100%;
+            padding: 32px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(56, 189, 248, 0.12);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        h1 {
+            font-size: 22px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #ffffff 40%, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p.subtitle {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 800;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        input, select, textarea {
+            width: 100%;
+            background: #0b1120;
+            border: 1.5px solid #334155;
+            border-radius: 12px;
+            padding: 12px 14px;
+            color: #f8fafc;
+            font-size: 14px;
+            font-weight: 700;
+            outline: none;
+            transition: all 0.2s;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+        }
+        .hwid-input {
+            font-family: monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #38bdf8;
+        }
+        .btn-gen {
+            width: 100%;
+            background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+            border: none;
+            padding: 15px;
+            border-radius: 14px;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(2, 132, 199, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+        .btn-gen:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(2, 132, 199, 0.6);
+        }
+        .result-box {
+            display: none;
+            margin-top: 24px;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1.5px dashed #10b981;
+            border-radius: 16px;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .key-display {
+            font-family: monospace;
+            font-size: 18px;
+            font-weight: 900;
+            color: #34d399;
+            background: #031e17;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            margin: 10px 0;
+            word-break: break-all;
+            user-select: all;
+        }
+        .btn-copy-msg {
+            background: #10b981;
+            color: #022c22;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 900;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+        .btn-copy-msg:hover { background: #34d399; }
+        .msg-template {
+            background: #0b1120;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 12px;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-top: 10px;
+            white-space: pre-wrap;
+        }
+        .history-list {
+            margin-top: 24px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .hist-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11.5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="badge">⚡ FLOW ECOSYSTEM ADMIN TOOL</div>
+        <h1>TẠO & CẤP MÃ KEY PRO VIP CHO KHÁCH</h1>
+        <p class="subtitle">Sử dụng khi khách chuyển khoản xong chụp màn hình gửi Zalo cho bạn. Mã Key tạo ra khóa chặt theo HWID máy khách, không thể share sang máy khác.</p>
+
+        <div class="form-group">
+            <label>1. Mã Thiết Bị (HWID) Của Khách:</label>
+            <input type="text" id="hwidInput" class="hwid-input" placeholder="VD: OPPO_1716D098 (Khách sao chép trong app)" autofocus>
+            <small style="color: #64748b; font-size: 11px; margin-top: 4px; display: block;">👉 Nhắc khách mở app FlowOptimize, ngay cổng khóa có nút <b>[Sao Chép]</b> mã HWID gửi qua Zalo.</small>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+                <label>2. Gói Khách Mua:</label>
+                <select id="planSelect">
+                    <option value="7D" selected>Gói Tuần (7 Ngày - 15.000đ)</option>
+                    <option value="30D">Gói Tháng (30 Ngày - 39.000đ)</option>
+                    <option value="LIFE">Gói Trọn Đời (Vĩnh Viễn - 99.000đ)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>3. Tên Khách / Mã Đơn Hàng:</label>
+                <input type="text" id="custNameInput" placeholder="VD: Bảo Duy - NAP FLOW432018">
+            </div>
+        </div>
+
+        <button class="btn-gen" onclick="generateKey()">
+            <span>⚡ TẠO KEY & TỰ ĐỘNG COPY VÀO BỘ NHỚ TẠM</span>
+        </button>
+
+        <div id="resultBox" class="result-box">
+            <div style="color: #10b981; font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 6px;">
+                <span>✅</span> ĐÃ TẠO MÃ KEY THÀNH CÔNG CHO KHÁCH HÀNG!
+            </div>
+            <div id="keyDisplay" class="key-display"></div>
+            
+            <label style="margin-top: 14px; margin-bottom: 4px;">📋 Tin nhắn soạn sẵn gửi khách qua Zalo/Messenger:</label>
+            <div id="msgTemplate" class="msg-template"></div>
+
+            <button class="btn-copy-msg" onclick="copyCustomerMessage()">
+                <span>📋 Sao Chép Toàn Bộ Tin Nhắn Gửi Khách</span>
+            </button>
+        </div>
+
+        <div class="history-list">
+            <div style="font-size: 11.5px; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 8px; display: flex; justify-content: space-between;">
+                <span>Lịch Sử Cấp Key Gần Đây</span>
+                <span style="cursor: pointer; color: #ef4444;" onclick="clearHistory()">Xóa Lịch Sử</span>
+            </div>
+            <div id="historyItems"></div>
+        </div>
+    </div>
+
+    <script>
+        const PRO_SALT = "FLOWLY_PRO_VIP_SECRET_SALT_2026";
+
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function generateKey() {
+            const hwid = (document.getElementById('hwidInput').value || '').trim().toUpperCase();
+            if (!hwid) {
+                alert('⚠️ Vui lòng nhập Mã HWID của khách hàng!\n(Bảo khách mở app FlowOptimize rồi bấm nút [Sao Chép] HWID gửi qua Zalo)');
+                return;
+            }
+
+            const plan = document.getElementById('planSelect').value;
+            const custInfo = (document.getElementById('custNameInput').value || 'Khách Hàng').trim();
+            const planNames = { '7D': 'Gói Tuần (7 Ngày - 15.000đ)', '30D': 'Gói Tháng (30 Ngày - 39.000đ)', 'LIFE': 'Gói Trọn Đời (Vĩnh Viễn - 99.000đ)' };
+
+            const sig = await sha256(`${hwid}:${plan}:${PRO_SALT}`);
+            const sig8 = sig.substring(0, 8).toUpperCase();
+            const fullKey = `FLOW-VIP-${hwid}-${plan}-${sig8}`;
+
+            document.getElementById('keyDisplay').innerText = fullKey;
+
+            // Template tin nhắn gửi khách
+            const msg = `Dạ em chào anh/chị ${custInfo}! Em đã xác nhận thanh toán thành công ạ!\n\n` +
+                        `🔑 MÃ KEY PRO VIP DÀNH RIÊNG CHO MÁY BẠN:\n` +
+                        `${fullKey}\n\n` +
+                        `📌 Gói: ${planNames[plan]}\n` +
+                        `🔒 Khóa theo máy (HWID): ${hwid}\n\n` +
+                        `👉 HƯỚNG DẪN KÍCH HOẠT:\n` +
+                        `1. Mở ứng dụng FlowOptimize.\n` +
+                        `2. Dán mã Key ở trên vào ô "DÁN MÃ KEY" rồi bấm [KÍCH HOẠT & MỞ KHÓA APP].\n` +
+                        `3. Vào phần Cài Đặt bật Full tính năng: 120Hz/165Hz, Zero Lag, Profile Florentino Idol XQTho.\n\n` +
+                        `Chúc anh/chị leo rank mượt mà đỉnh cao! Cần hỗ trợ nhắn em 24/7 nhé ạ! ❤️`;
+
+            document.getElementById('msgTemplate').innerText = msg;
+            document.getElementById('resultBox').style.display = 'block';
+
+            // Auto copy key first
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(fullKey).catch(e => console.log('Clipboard error', e));
+                }
+            } catch(e) {}
+
+            // Save history
+            saveHistory({ key: fullKey, hwid, plan: planNames[plan], cust: custInfo, time: new Date().toLocaleTimeString('vi-VN') + ' ' + new Date().toLocaleDateString('vi-VN') });
+            renderHistory();
+        }
+
+        function copyCustomerMessage() {
+            const msg = document.getElementById('msgTemplate').innerText;
+            navigator.clipboard.writeText(msg).then(() => {
+                alert('🎉 Đã sao chép toàn bộ tin nhắn kèm Key!\n\nBạn chỉ cần mở Zalo/Messenger của khách rồi ấn Dán (Paste) là xong!');
+            });
+        }
+
+        function saveHistory(item) {
+            let hist = JSON.parse(localStorage.getItem('flow_desktop_key_hist') || '[]');
+            hist.unshift(item);
+            if (hist.length > 15) hist = hist.slice(0, 15);
+            localStorage.setItem('flow_desktop_key_hist', JSON.stringify(hist));
+        }
+
+        function renderHistory() {
+            const hist = JSON.parse(localStorage.getItem('flow_desktop_key_hist') || '[]');
+            const container = document.getElementById('historyItems');
+            if (hist.length === 0) {
+                container.innerHTML = '<div style="color: #475569; font-size: 11px;">Chưa có mã key nào được tạo gần đây.</div>';
+                return;
+            }
+            container.innerHTML = hist.map(h => `
+                <div class="hist-item">
+                    <div>
+                        <b style="color: #38bdf8;">${h.cust}</b> - <span style="color: #cbd5e1;">${h.plan}</span>
+                        <div style="color: #94a3b8; font-family: monospace; font-size: 10.5px; margin-top: 2px;">${h.key}</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="color: #64748b; font-size: 10px;">${h.time}</span><br>
+                        <button onclick="navigator.clipboard.writeText('${h.key}'); alert('Đã copy key!')" style="background: #1e293b; color: #38bdf8; border: 1px solid #334155; border-radius: 4px; padding: 2px 6px; font-size: 10px; cursor: pointer; margin-top: 4px;">Copy Key</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function clearHistory() {
+            if (confirm('Xóa lịch sử cấp key?')) {
+                localStorage.removeItem('flow_desktop_key_hist');
+                renderHistory();
+            }
+        }
+
+        renderHistory();
+    </script>
+</body>
+</html>
