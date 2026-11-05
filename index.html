@@ -1260,6 +1260,31 @@
             </div>
         </header>
 
+        
+        <!-- ==================== BANNER MUA KEY PRO VIP & LIÊN HỆ ADMIN TRỰC TIẾP ==================== -->
+        <div class="direct-admin-vip-box" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.14) 0%, rgba(14, 165, 233, 0.12) 100%); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: 18px; padding: 18px 24px; margin: 24px auto 32px auto; max-width: 960px; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);">
+            <div style="display: flex; align-items: center; gap: 14px; text-align: left; flex: 1; min-width: 280px;">
+                <div style="width: 52px; height: 52px; min-width: 52px; border-radius: 14px; background: rgba(245, 158, 11, 0.2); border: 1.5px solid #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);">👑</div>
+                <div>
+                    <div style="font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 900; color: #fbbf24; text-transform: uppercase; letter-spacing: 0.4px;">
+                        MUA KEY PRO VIP TRỰC TIẾP • HỖ TRỢ KÍCH HOẠT 24/7
+                    </div>
+                    <div style="font-size: 12.5px; color: #cbd5e1; margin-top: 4px; line-height: 1.5;">
+                        Không muốn vượt link mỗi ngày? Nâng cấp bản quyền PRO VIP mở 100% tính năng eSports. Mua trực tiếp liên hệ ngay <b>SĐT / Zalo Admin: <span style="color: #38bdf8; font-weight: 800; font-size: 13.5px;">0827.353.177</span></b>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <a href="shop.html" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #050811; font-weight: 900; font-size: 12.5px; padding: 11px 20px; border-radius: 99px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 18px rgba(245, 158, 11, 0.45); transition: transform 0.2s;">
+                    <span>🛒</span> BẢNG GIÁ SHOP KEY
+                </a>
+                <a href="https://zalo.me/0827353177" target="_blank" style="background: #0284c7; color: #fff; font-weight: 800; font-size: 12.5px; padding: 11px 20px; border-radius: 99px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 18px rgba(2, 132, 199, 0.45); transition: transform 0.2s;">
+                    <span>💬</span> ZALO: 0827353177
+                </a>
+
+            </div>
+        </div>
+
         <!-- ==================== 2. FAST DOWNLOAD CARDS (ALWAYS VISIBLE) ==================== -->
         <section class="section-wrap" id="download">
             <div class="section-title-wrap">
@@ -1873,7 +1898,7 @@
             </div>
 
             <!-- Ready Link4M Button -->
-            <a id="btnFinalLink4m" href="#" target="_blank" class="btn-modal-action" style="display: none; background: linear-gradient(135deg, #00ff66 0%, #00cc52 100%); color: #000;">
+            <a id="btnFinalLink4m" href="#" target="_blank" onclick="handleLink4mClick(event)" class="btn-modal-action" style="display: none; background: linear-gradient(135deg, #00ff66 0%, #00cc52 100%); color: #000;">
                 <span style="font-size: 16px;">⚡</span>
                 <span id="txtFinalLink4mLabel">LẤY LINK TẢI FLOWS (LINK4M)</span>
             </a>
@@ -2020,15 +2045,15 @@
             tiktok: "https://www.tiktok.com/@xxd5974",
             wait_seconds: 8,
             flows: {
-                destination_apk: "https://gofile.io/d/z3wUcYxV",
+                destination_apk: "https://gofile.io/d/j6tNGeVu",
                 direct_apk: "FlowS.apk"
             },
             flowoptimize: {
-                destination_apk: "https://gofile.io/d/ZUqi1crJ",
+                destination_apk: "https://gofile.io/d/6HSkUo1P",
                 direct_apk: "FlowOptimize.apk"
             },
             flowultra: {
-                destination_apk: "https://gofile.io/d/HqxIEJbn",
+                destination_apk: "https://gofile.io/d/4qt6zQyQ",
                 direct_apk: "FlowUltra.apk"
             }
         };
@@ -2157,6 +2182,41 @@
             }, 100);
         }
 
+                let isLink4mRedirecting = false;
+        function handleLink4mClick(e) {
+            if (isLink4mRedirecting) {
+                if (e) e.preventDefault();
+                return false;
+            }
+            isLink4mRedirecting = true;
+            const btn = document.getElementById('btnFinalLink4m');
+            const label = document.getElementById('txtFinalLink4mLabel');
+            if (btn) {
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.75';
+            }
+            if (label) {
+                label.textContent = 'ĐANG MỞ LINK4M... VUI LÒNG ĐỢI';
+            }
+            // Khóa click trong 3 giây chống spam click trùng lặp Link4m
+            setTimeout(() => {
+                isLink4mRedirecting = false;
+                if (btn) {
+                    btn.style.pointerEvents = 'auto';
+                    btn.style.opacity = '1';
+                }
+                if (label) {
+                    if (currentTargetApp === 'flows') {
+                        label.textContent = 'CHUYỂN SANG LINK4M TẢI FLOWS →';
+                    } else if (currentTargetApp === 'flowultra') {
+                        label.textContent = 'CHUYỂN SANG LINK4M TẢI FLOWULTRA →';
+                    } else {
+                        label.textContent = 'CHUYỂN SANG LINK4M TẢI FLOWOPTIMIZE →';
+                    }
+                }
+            }, 3000);
+        }
+
         function completeUnlock() {
             document.getElementById('unlockVerifyingBox').style.display = 'none';
             document.getElementById('btnFollowTikTok').style.display = 'none';
@@ -2170,13 +2230,13 @@
             let directApk = 'FlowS.apk';
 
             if (currentTargetApp === 'flows') {
-                dest = (globalConfig.flows && globalConfig.flows.destination_apk) || 'https://gofile.io/d/z3wUcYxV';
+                dest = (globalConfig.flows && globalConfig.flows.destination_apk) || 'https://gofile.io/d/j6tNGeVu';
                 directApk = (globalConfig.flows && globalConfig.flows.direct_apk) || 'FlowS.apk';
             } else if (currentTargetApp === 'flowultra') {
-                dest = (globalConfig.flowultra && globalConfig.flowultra.destination_apk) || 'https://gofile.io/d/HqxIEJbn';
+                dest = (globalConfig.flowultra && globalConfig.flowultra.destination_apk) || 'https://gofile.io/d/4qt6zQyQ';
                 directApk = (globalConfig.flowultra && globalConfig.flowultra.direct_apk) || 'FlowUltra.apk';
             } else {
-                dest = (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || 'https://gofile.io/d/ZUqi1crJ';
+                dest = (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || 'https://gofile.io/d/6HSkUo1P';
                 directApk = (globalConfig.flowoptimize && globalConfig.flowoptimize.direct_apk) || 'FlowOptimize.apk';
             }
 
@@ -2187,15 +2247,10 @@
 
             const banner = document.getElementById('unlockBannerText');
             if (banner) {
-                banner.innerHTML = '✅ <b>Bước 3 (Hoàn tất):</b> Đã mở khóa thành công! Bạn có thể bấm nút màu bên dưới để tải qua <b>Link4M</b> để chuyển sang trang tải APK chính thức.';
+                banner.innerHTML = '✅ <b>Bước 3 (Hoàn tất):</b> Đã mở khóa thành công! Hãy bấm nút bên dưới để chuyển sang <b>Link4M</b> lấy link tải APK.';
             }
 
-            // Auto-redirect to Link4M
-            setTimeout(() => {
-                try {
-                    window.location.href = link4mUrl;
-                } catch(e) {}
-            }, 1200);
+// Auto-redirect disabled: User clicks explicitly to prevent duplicate requests & anti-click errors
         }
 
         document.addEventListener('DOMContentLoaded', fetchConfig);

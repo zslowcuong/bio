@@ -1078,7 +1078,6 @@
                                 localStorage.setItem('flow_used_tx_ids', JSON.stringify(usedTxIds));
                             }
 
-                        if (matched) {
                             playSuccessChime();
                             document.getElementById('bankReceivedAlert').style.display = 'block';
                             document.getElementById('alertAmount').textContent = parseFloat(matched.amount_in).toLocaleString('vi-VN') + ' VNĐ';

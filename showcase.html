@@ -2375,7 +2375,7 @@
                 if (modalSub) modalSub.textContent = '20 Open-Source Engines • Deep Doze • AFK 0-Nits';
                 if (linkBtn) linkBtn.innerHTML = '<span style="font-size: 18px;">🚀</span><span>LẤY LINK TẢI FLOWULTRA (LINK4M)</span>';
             } else {
-                dest = (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || globalConfig.destination_apk || 'https://gofile.io/d/ZUqi1crJ';
+                dest = (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || globalConfig.destination_apk || 'https://gofile.io/d/6HSkUo1P';
             }
             const nonce = Date.now() + '_' + Math.random().toString(36).substring(2, 7);
             const sep = dest.includes('?') ? '&' : '?';
@@ -2562,11 +2562,28 @@
             }
         }
 
+        let isLink4mRedirecting = false;
         function executeLink4mRedirect(e) {
+            if (isLink4mRedirecting) {
+                if (e) e.preventDefault();
+                return false;
+            }
+            isLink4mRedirecting = true;
             const freshUrl = generateDynamicLink4m();
             const finalBtn = document.getElementById('btnFinalLink4m');
-            if (finalBtn) finalBtn.href = freshUrl;
-            setTimeout(closeUnlockModal, 400);
+            if (finalBtn) {
+                finalBtn.href = freshUrl;
+                finalBtn.style.pointerEvents = 'none';
+                finalBtn.style.opacity = '0.75';
+            }
+            setTimeout(() => {
+                isLink4mRedirecting = false;
+                if (finalBtn) {
+                    finalBtn.style.pointerEvents = 'auto';
+                    finalBtn.style.opacity = '1';
+                }
+                closeUnlockModal();
+            }, 1200);
         }
 
         // ==================== ADMIN PORTAL LOGIC ====================
