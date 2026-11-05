@@ -1,574 +1,747 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Quản Lý • FlowOptimize eSports Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #030712;
-            --card-bg: rgba(15, 23, 42, 0.9);
-            --card-border: rgba(56, 189, 248, 0.2);
-            --accent: #38bdf8;
-            --green: #10b981;
-            --gold: #f59e0b;
-            --red: #ef4444;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        body {
-            background: var(--bg);
-            color: #f8fafc;
-            min-height: 100vh;
-            padding: 24px 20px;
-        }
-
-        .header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .brand-title {
-            font-size: 20px;
-            font-weight: 900;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .brand-badge {
-            background: rgba(245, 158, 11, 0.2);
-            border: 1px solid #f59e0b;
-            color: #fbbf24;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 3px 10px;
-            border-radius: 99px;
-        }
-
-        /* STATS GRID */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 18px;
-            padding: 18px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        .stat-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: #94a3b8;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .stat-value {
-            font-size: 26px;
-            font-weight: 900;
-            color: #fff;
-        }
-
-        /* ACTIONS & SEARCH BAR */
-        .actions-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .btn-action {
-            background: rgba(56, 189, 248, 0.15);
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            color: #38bdf8;
-            font-size: 13px;
-            font-weight: 800;
-            padding: 10px 18px;
-            border-radius: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .btn-action:hover {
-            background: rgba(56, 189, 248, 0.3);
-            transform: translateY(-1px);
-        }
-
-        .btn-action.gold {
-            background: rgba(245, 158, 11, 0.2);
-            border-color: #f59e0b;
-            color: #fbbf24;
-        }
-
-        .search-box {
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 10px 16px;
-            color: #fff;
-            font-size: 13px;
-            font-weight: 600;
-            outline: none;
-            width: 280px;
-        }
-
-        .search-box:focus {
-            border-color: #38bdf8;
-        }
-
-        /* TABLE */
-        .table-wrap {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            overflow-x: auto;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 13px;
-            white-space: nowrap;
-        }
-
-        th {
-            background: rgba(30, 41, 59, 0.7);
-            color: #94a3b8;
-            font-weight: 800;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 14px 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        td {
-            padding: 14px 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            color: #cbd5e1;
-        }
-
-        tr:hover td {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .status-badge {
-            display: inline-block;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 3px 10px;
-            border-radius: 99px;
-        }
-
-        .status-pending {
-            background: rgba(245, 158, 11, 0.2);
-            border: 1px solid #f59e0b;
-            color: #fbbf24;
-        }
-        .status-active {
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid #10b981;
-            color: #34d399;
-        }
-
-        .status-revoked {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid #ef4444;
-            color: #f87171;
-        }
-
-        .btn-revoke {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.4);
-            color: #f87171;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .btn-copy-small {
-            background: rgba(56, 189, 248, 0.15);
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            color: #38bdf8;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 4px 8px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-left: 6px;
-        }
-
-        /* LOGIN OVERLAY */
-        #loginGate {
-            position: fixed;
-            inset: 0;
-            background: rgba(3, 7, 18, 0.98);
-            backdrop-filter: blur(25px);
-            z-index: 9999999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .login-box {
-            background: rgba(15, 23, 42, 0.95);
-            border: 2px solid #38bdf8;
-            border-radius: 20px;
-            padding: 28px 24px;
-            max-width: 360px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 0 40px rgba(56, 189, 248, 0.3);
-        }
-
-        .login-input {
-            width: 100%;
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 12px;
-            color: #fff;
-            font-size: 14px;
-            text-align: center;
-            margin: 16px 0;
-            outline: none;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- MÀN HÌNH ĐĂNG NHẬP ADMIN -->
-    <div id="loginGate">
-        <div class="login-box">
-            <div style="font-size: 40px; margin-bottom: 8px;">🔐</div>
-            <h2 style="font-size: 18px; font-weight: 900;">ADMIN DASHBOARD</h2>
-            <p style="font-size: 12px; color: #94a3b8; margin-top: 4px;">Xác thực quyền quản trị viên:</p>
-            <input type="password" id="adminPinInput" class="login-input" placeholder="Nhập mật khẩu bảo vệ...">
-            <button onclick="checkAdminLogin()" class="btn-action gold" style="width: 100%; justify-content: center; padding: 12px;">
-                ĐĂNG NHẬP
-            </button>
-        </div>
-    </div>
-
-    <!-- MAIN DASHBOARD -->
-    <div class="header-bar">
-        <div class="brand-title">
-            <span>🛡️ FLOWOPTIMIZE ADMIN DASHBOARD</span>
-            <span class="brand-badge">QUẢN LÝ ĐƠN & KEY PRO</span>
-        </div>
-        <div style="font-size: 12px; color: #94a3b8;">
-            Hệ thống: <b style="color: #10b981;">Online 24/7</b>
-        </div>
-    </div>
-
-    <!-- 4 Ô THỐNG KÊ DOANH THU & ĐƠN HÀNG -->
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-label">💰 Tổng Doanh Thu</div>
-            <div class="stat-value" id="totalRevenueDisplay" style="color: #fbbf24;">0đ</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">📦 Tổng Số Đơn Hàng</div>
-            <div class="stat-value" id="totalOrdersDisplay" style="color: #38bdf8;">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">👑 Key PRO Đang Hoạt Động</div>
-            <div class="stat-value" id="activeKeysDisplay" style="color: #34d399;">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">🚀 Lượt Vượt Link 24H Hôm Nay</div>
-            <div class="stat-value" id="bypassesTodayDisplay" style="color: #a78bfa;">168</div>
-        </div>
-    </div>
-
-    <!-- NÚT THAO TÁC NHANH & TÌM KIẾM -->
-    <div class="actions-bar">
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button class="btn-action gold" onclick="createManualKey()">
-                <span>➕</span> Tạo Key PRO Thủ Công (Tặng / Bán Ngoài)
-            </button>
-            <button class="btn-action" onclick="exportDataJson()">
-                <span>📥</span> Xuất Dữ Liệu (JSON)
-            </button>
-            <a href="shop.html" target="_blank" class="btn-action" style="text-decoration: none;">
-                <span>🛒</span> Xem Trang Shop
-            </a>
-        </div>
-        <input type="text" id="adminSearchInput" class="search-box" placeholder="🔍 Tìm kiếm SĐT, Mã Đơn, Key..." oninput="filterOrders()">
-    </div>
-
-    <!-- BẢNG DANH SÁCH ĐƠN HÀNG VÀ KEY -->
-    <div class="table-wrap">
-        <table>
-            <thead>
-                <tr>
-                    <th>Mã Đơn</th>
-                    <th>Thời Gian</th>
-                    <th>Khách Hàng (SĐT)</th>
-                    <th>Gói Bản Quyền</th>
-                    <th>Phương Thức</th>
-                    <th>Số Tiền</th>
-                    <th>Mã Key Cấp Phép</th>
-                    <th>Trạng Thái</th>
-                    <th>Hành Động</th>
-                </tr>
-            </thead>
-            <tbody id="ordersTableBody">
-                <!-- RENDER TỰ ĐỘNG TỪ LOCALSTORAGE -->
-            </tbody>
-        </table>
-    </div>
-
-    <script>
-        const ADMIN_HASH = "246942076e3359c83467555088158cca0cff87e60f95b6cd85a6aacabf0b5ac0"; // Chicuong@789
-        let allOrders = [];
-
-        async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        async function checkAdminLogin() {
-            const val = document.getElementById('adminPinInput').value.trim();
-            if (!val) return;
-            const hashed = await sha256(val);
-            if (hashed === ADMIN_HASH || val === "Chicuong@789") {
-                document.getElementById('loginGate').style.display = 'none';
-                loadDashboardData();
-            } else {
-                alert("Mật khẩu không chính xác! Quyền truy cập bị từ chối.");
-                document.getElementById('adminPinInput').value = '';
-            }
-        }
-
-        function loadDashboardData() {
-            try {
-                allOrders = JSON.parse(localStorage.getItem('flow_shop_orders') || '[]');
-            } catch(e) {
-                allOrders = [];
-            }
-
-            // Thêm mẫu nếu chưa có
-            if (allOrders.length === 0) {
-                allOrders = [
-                    {
-                        orderCode: "NAP FLOW1234",
-                        phone: "0827353177",
-                        hwid: "OPPO_1716D098",
-                        plan: "Gói Vĩnh Viễn (Trọn Đời)",
-                        price: 99000,
-                        method: "VIETQR_BANK",
-                        key: "FLOW-VIP-LIFETIME-A8F9",
-                        createdAt: "03:45:10 - 05/11/2026",
-                        status: "COMPLETED"
-                    },
-                    {
-                        orderCode: "NAP FLOW4312",
-                        phone: "0912345678",
-                        hwid: "ALL_DEVICE",
-                        plan: "Gói Tháng (30 Ngày)",
-                        price: 50000,
-                        method: "CARD_VIETTEL_50000",
-                        key: "FLOW-VIP-30D-K2X7",
-                        createdAt: "02:15:30 - 05/11/2026",
-                        status: "COMPLETED"
-                    }
-                ];
-                localStorage.setItem('flow_shop_orders', JSON.stringify(allOrders));
-            }
-
-            renderOrders(allOrders);
-        }
-
-        function renderOrders(ordersToRender) {
-            let totalRev = 0;
-            let activeCount = 0;
-            allOrders.forEach(o => {
-                if (o.status === 'COMPLETED') {
-                    totalRev += (o.price || 0);
-                    activeCount++;
-                }
-            });
-
-            document.getElementById('totalRevenueDisplay').textContent = totalRev.toLocaleString('vi-VN') + 'đ';
-            document.getElementById('totalOrdersDisplay').textContent = allOrders.length;
-            document.getElementById('activeKeysDisplay').textContent = activeCount;
-
-            const tbody = document.getElementById('ordersTableBody');
-            tbody.innerHTML = '';
-
-            ordersToRender.forEach((o, index) => {
-                const tr = document.createElement('tr');
-                const isCompleted = o.status === 'COMPLETED';
-                const isBank = (o.method || '').includes('BANK');
-                const methodBadge = isBank 
-                    ? '<span style="color:#38bdf8; font-weight:700;">🏦 VietQR TCB</span>'
-                    : '<span style="color:#fbbf24; font-weight:700;">💳 Thẻ Cào</span>';
-
-                tr.innerHTML = `
-                    <td style="font-weight: 800; font-family: monospace; color: #fbbf24;">${o.orderCode}</td>
-                    <td style="font-size: 11.5px; color: #94a3b8;">${o.createdAt}</td>
-                    <td style="font-weight: 700;">${o.phone}</td>
-                    <td>${o.plan}</td>
-                    <td>${methodBadge}</td>
-                    <td style="font-weight: 800; color: #34d399;">${(o.price || 0).toLocaleString('vi-VN')}đ</td>
-                    <td style="font-family: monospace; font-size: 12px; font-weight: 800; color: #fff;">
-                        ${o.key}
-                        <button class="btn-copy-small" onclick="copyText('${o.key}')">Copy</button>
-                    </td>
-                    <td>
-                        <span class="status-badge ${isCompleted ? 'status-active' : (o.status === 'PENDING_PAYMENT' ? 'status-pending' : 'status-revoked')}">
-                            ${isCompleted ? '🟢 Đã Cấp Key' : (o.status === 'PENDING_PAYMENT' ? '⏳ Chờ Chuyển Tiền' : '🔴 Đã Khóa')}
-                        </span>
-                    </td>
-                    <td>
-                        ${o.status === 'PENDING_PAYMENT' 
-                            ? `<button class="btn-action gold" style="padding: 5px 10px; font-size: 11px;" onclick="approveOrderPayment(${index})">✅ Duyệt Đã Nhận Tiền</button>`
-                            : (isCompleted ? `<button class="btn-revoke" onclick="revokeKey(${index})">Khóa Key</button>` : '<span style="color:#64748b; font-size:11px;">Đã thu hồi</span>')
-                        }
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function filterOrders() {
-            const q = document.getElementById('adminSearchInput').value.trim().toUpperCase();
-            if (!q) {
-                renderOrders(allOrders);
-                return;
-            }
-            const filtered = allOrders.filter(o => 
-                (o.orderCode && o.orderCode.toUpperCase().includes(q)) ||
-                (o.phone && o.phone.toUpperCase().includes(q)) ||
-                (o.key && o.key.toUpperCase().includes(q)) ||
-                (o.plan && o.plan.toUpperCase().includes(q))
-            );
-            renderOrders(filtered);
-        }
-
-                // ADMIN BẤM NÚT NÀY KHI ĐÃ THẤY TIỀN NỔ TRONG APP TECHCOMBANK TRÊN ĐIỆN THOẠI
-        async function approveOrderPayment(idx) {
-            const o = allOrders[idx];
-            if (!confirm(`XÁC NHẬN ĐÃ NHẬN TIỀN CHO ĐƠN HÀNG: ${o.orderCode}?\n\n• Khách hàng: ${o.phone}\n• Số tiền: ${(o.price||0).toLocaleString('vi-VN')}đ\n• Mã máy HWID: ${o.hwid}\n\nSau khi bấm OK, hệ thống sẽ cấp mã Key PRO VIP chính chủ cho khách!`)) return;
-
-            const planTag = o.plan.includes('Vĩnh Viễn') ? 'LIFE' : (o.plan.includes('Tháng') ? '30D' : '7D');
-            const cleanHwid = (o.hwid || 'OPPO_1716D098').trim().toUpperCase();
-            const sigHex = await sha256(`${cleanHwid}:${planTag}:${PRO_SALT}`);
-            const sig8 = sigHex.substring(0, 8).toUpperCase();
-            const issuedKey = `FLOW-VIP-${cleanHwid}-${planTag}-${sig8}`;
-
-            o.key = issuedKey;
-            o.status = 'COMPLETED';
-            localStorage.setItem('flow_shop_orders', JSON.stringify(allOrders));
-            loadDashboardData();
-            alert(`🎉 ĐÃ DUYỆT ĐƠN VÀ CẤP KEY THÀNH CÔNG!\n\nMã Key: ${issuedKey}\n\nKhách hàng hiện tại có thể mở trang Shop bấm 'Tra Cứu' để lấy key ngay lập tức!`);
-        }
-
-        function revokeKey(idx) {
-            if (!confirm("Bạn có chắc muốn khóa Key này không? App của khách sẽ bị vô hiệu hóa!")) return;
-            allOrders[idx].status = 'REVOKED';
-            localStorage.setItem('flow_shop_orders', JSON.stringify(allOrders));
-            loadDashboardData();
-            alert("Đã khóa Key thành công!");
-        }
-
-        const PRO_SALT = "FLOWLY_PRO_VIP_SECRET_SALT_2026";
-
-        async function createManualKey() {
-            const hwid = prompt("Nhập Mã Thiết Bị (HWID) máy của khách hàng (Ví dụ: OPPO_1716D098):", "OPPO_1716D098");
-            if (!hwid) return;
-            const phone = prompt("Nhập Số Điện Thoại / Zalo khách hàng:", "0827353177");
-            if (!phone) return;
-            const planType = prompt("Chọn gói (1: Tuần 15k, 2: Tháng 39k, 3: Vĩnh Viễn 99k):", "3");
-            let planName = "Gói Vĩnh Viễn (Trọn Đời)";
-            let price = 99000;
-            let planTag = "LIFE";
-
-            if (planType === "1") {
-                planName = "Gói Tuần (7 Ngày)";
-                price = 15000;
-                planTag = "7D";
-            } else if (planType === "2") {
-                planName = "Gói Tháng (30 Ngày)";
-                price = 39000;
-                planTag = "30D";
-            }
-
-            const cleanHwid = hwid.trim().toUpperCase();
-            const sigHex = await sha256(`${cleanHwid}:${planTag}:${PRO_SALT}`);
-            const sig8 = sigHex.substring(0, 8).toUpperCase();
-            const newKey = `FLOW-VIP-${cleanHwid}-${planTag}-${sig8}`;
-
-            allOrders.unshift({
-                orderCode: "MANUAL" + Math.floor(1000 + Math.random() * 9000),
-                phone: phone,
-                hwid: "MANUAL_GIFT",
-                plan: planName,
-                price: price,
-                method: "MANUAL_ADMIN",
-                key: newKey,
-                createdAt: new Date().toLocaleString('vi-VN'),
-                status: "COMPLETED"
-            });
-
-            localStorage.setItem('flow_shop_orders', JSON.stringify(allOrders));
-            loadDashboardData();
-            alert(`🎉 ĐÃ TẠO KEY THÀNH CÔNG!
-
-Mã Key: ${newKey}
-Gói: ${planName}
-
-Hãy gửi mã Key này cho khách!`);
-        }
-
-        function exportDataJson() {
-            const data = JSON.stringify(allOrders, null, 2);
-            const blob = new Blob([data], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `flow_orders_${Date.now()}.json`;
-            a.click();
-        }
-
-        function copyText(str) {
-            navigator.clipboard.writeText(str);
-            alert("Đã sao chép: " + str);
-        }
-    </script>
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Quản Lý • FlowOptimize eSports Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030712;
+            --card-bg: rgba(15, 23, 42, 0.9);
+            --card-border: rgba(56, 189, 248, 0.2);
+            --accent: #38bdf8;
+            --green: #10b981;
+            --gold: #f59e0b;
+            --red: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: #f8fafc;
+            min-height: 100vh;
+            padding: 24px 20px;
+        }
+
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .brand-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-badge {
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid #f59e0b;
+            color: #fbbf24;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 99px;
+        }
+
+        /* STATS GRID */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 26px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        /* ACTIONS & SEARCH BAR */
+        .actions-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .btn-action {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+            font-size: 13px;
+            font-weight: 800;
+            padding: 10px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-action:hover {
+            background: rgba(56, 189, 248, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-action.gold {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b;
+            color: #fbbf24;
+        }
+
+        .search-box {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 10px 16px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            outline: none;
+            width: 280px;
+        }
+
+        .search-box:focus {
+            border-color: #38bdf8;
+        }
+
+        /* TABLE */
+        .table-wrap {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            overflow-x: auto;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        th {
+            background: rgba(30, 41, 59, 0.7);
+            color: #94a3b8;
+            font-weight: 800;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: #cbd5e1;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .status-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 99px;
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid #f59e0b;
+            color: #fbbf24;
+        }
+        .status-active {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid #10b981;
+            color: #34d399;
+        }
+
+        .status-revoked {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid #ef4444;
+            color: #f87171;
+        }
+
+        .btn-revoke {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #f87171;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .btn-copy-small {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-left: 6px;
+        }
+
+        /* LOGIN OVERLAY */
+        #loginGate {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.98);
+            backdrop-filter: blur(25px);
+            z-index: 9999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: rgba(15, 23, 42, 0.95);
+            border: 2px solid #38bdf8;
+            border-radius: 20px;
+            padding: 28px 24px;
+            max-width: 360px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.3);
+        }
+
+        .login-input {
+            width: 100%;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 12px;
+            color: #fff;
+            font-size: 14px;
+            text-align: center;
+            margin: 16px 0;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MÀN HÌNH ĐĂNG NHẬP ADMIN -->
+    <div id="loginGate">
+        <div class="login-box">
+            <div style="font-size: 40px; margin-bottom: 8px;">🔐</div>
+            <h2 style="font-size: 18px; font-weight: 900;">ADMIN DASHBOARD</h2>
+            <p style="font-size: 12px; color: #94a3b8; margin-top: 4px;">Xác thực quyền quản trị viên:</p>
+            <input type="password" id="adminPinInput" class="login-input" placeholder="Nhập mật khẩu bảo vệ...">
+            <button onclick="checkAdminLogin()" class="btn-action gold" style="width: 100%; justify-content: center; padding: 12px;">
+                ĐĂNG NHẬP
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div class="header-bar">
+        <div class="brand-title">
+            <span>🛡️ FLOWOPTIMIZE ADMIN DASHBOARD</span>
+            <span class="brand-badge">QUẢN LÝ ĐƠN & KEY PRO</span>
+        </div>
+        <div style="font-size: 12px; color: #94a3b8;">
+            Hệ thống: <b style="color: #10b981;">Online 24/7</b>
+        </div>
+    </div>
+
+    <!-- 4 Ô THỐNG KÊ DOANH THU & ĐƠN HÀNG -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">💰 Tổng Doanh Thu</div>
+            <div class="stat-value" id="totalRevenueDisplay" style="color: #fbbf24;">0đ</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">📦 Tổng Số Đơn Hàng</div>
+            <div class="stat-value" id="totalOrdersDisplay" style="color: #38bdf8;">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">👑 Key PRO Đang Hoạt Động</div>
+            <div class="stat-value" id="activeKeysDisplay" style="color: #34d399;">0</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">🚀 Lượt Vượt Link 24H Hôm Nay</div>
+            <div class="stat-value" id="bypassesTodayDisplay" style="color: #a78bfa;">168</div>
+        </div>
+    </div>
+
+    <!-- OTA EVENT PRO KEY MANAGER -->
+    <div class="stat-card" style="margin-bottom: 24px; border: 1.5px solid #f59e0b; background: rgba(15, 23, 42, 0.95); box-shadow: 0 10px 30px rgba(245, 158, 11, 0.15);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 22px;">🎉</span>
+                <div>
+                    <h3 style="font-size: 16px; font-weight: 900; color: #fff;">QUẢN LÝ SỰ KIỆN KEY EVENT PRO (OTA - TỰ ĐỘNG ĐỒNG BỘ TOÀN BỘ APP)</h3>
+                    <p style="font-size: 11.5px; color: #94a3b8;">Phát hoặc thu hồi Key PRO Event từ xa qua config.json. Người dùng <b>KHÔNG CẦN TẢI LẠI APP</b>!</p>
+                </div>
+            </div>
+            <div id="eventStatusBadge" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #34d399; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 99px;">
+                🟢 ĐANG BẬT SỰ KIỆN
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 16px;">
+            <div>
+                <label style="font-size: 11px; font-weight: 800; color: #fbbf24; text-transform: uppercase; display: block; margin-bottom: 6px;">Mã Key Event (Mã chung toàn bộ máy):</label>
+                <input type="text" id="eventKeyInput" value="EVENT-WEEK-VIP" style="width: 100%; background: #0b1120; border: 1px solid #334155; border-radius: 10px; padding: 10px 12px; color: #f8fafc; font-family: monospace; font-weight: 800; font-size: 13px; text-transform: uppercase;">
+            </div>
+            <div>
+                <label style="font-size: 11px; font-weight: 800; color: #fbbf24; text-transform: uppercase; display: block; margin-bottom: 6px;">Thời Hạn Sử Dụng Của Key Event:</label>
+                <select id="eventDurationSelect" style="width: 100%; background: #0b1120; border: 1px solid #334155; border-radius: 10px; padding: 10px 12px; color: #f8fafc; font-weight: 800; font-size: 13px;">
+                    <option value="3">3 Ngày (Trải nghiệm nhanh)</option>
+                    <option value="7" selected>7 Ngày (Gói Tuần sự kiện - Chuẩn)</option>
+                    <option value="14">14 Ngày (2 Tuần thi đấu giải)</option>
+                    <option value="30">30 Ngày (1 Tháng tri ân)</option>
+                    <option value="0">Vĩnh Viễn (Full Master)</option>
+                </select>
+            </div>
+            <div>
+                <label style="font-size: 11px; font-weight: 800; color: #fbbf24; text-transform: uppercase; display: block; margin-bottom: 6px;">Trạng Thái Sự Kiện:</label>
+                <select id="eventActiveSelect" onchange="toggleEventStatusBadge()" style="width: 100%; background: #0b1120; border: 1px solid #334155; border-radius: 10px; padding: 10px 12px; color: #f8fafc; font-weight: 800; font-size: 13px;">
+                    <option value="true" selected>BẬT - Cho phép mọi máy nhận & kích hoạt</option>
+                    <option value="false">TẮT - Đóng sự kiện / Thu hồi key</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 16px;">
+            <div>
+                <label style="font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 6px;">Tiêu Đề Thông Báo Trong App:</label>
+                <input type="text" id="eventTitleInput" value="🎉 SỰ KIỆN TRI ÂN: TẶNG KEY PRO VIP 7 NGÀY" style="width: 100%; background: #0b1120; border: 1px solid #334155; border-radius: 10px; padding: 10px 12px; color: #f8fafc; font-size: 12px;">
+            </div>
+            <div>
+                <label style="font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 6px;">Nội Dung Lời Nhắn Đến Khách Hàng:</label>
+                <input type="text" id="eventNoticeInput" value="Admin tặng toàn thể anh em 7 ngày trải nghiệm PRO VIP Full tính năng không cần vượt link!" style="width: 100%; background: #0b1120; border: 1px solid #334155; border-radius: 10px; padding: 10px 12px; color: #f8fafc; font-size: 12px;">
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px;">
+            <button class="btn-action gold" onclick="downloadUpdatedConfigJson()">
+                <span>💾</span> Tải config.json Mới Về Máy
+            </button>
+            <button class="btn-action" onclick="copyUpdatedConfigJson()">
+                <span>📋</span> Copy Toàn Bộ Mã config.json
+            </button>
+        </div>
+
+        <div style="background: rgba(30, 41, 59, 0.6); border-left: 3px solid #38bdf8; border-radius: 6px; padding: 10px 14px; font-size: 11.5px; color: #cbd5e1; line-height: 1.6;">
+            💡 <b>Cách áp dụng sự kiện chỉ với 1 bước:</b> Sau khi bấm <b>"Tải config.json"</b> hoặc <b>"Copy"</b>, bạn tải file lên hoặc dán vào file <code>config.json</code> trên GitHub của bạn. Vercel sẽ tự build trong 15 giây. Sau đó, <b>tất cả máy khách hàng đang mở App sẽ tự động đồng bộ và mở khóa PRO ngay lập tức</b> mà không ai phải gỡ app hay tải lại APK!
+        </div>
+    </div>
+
+    <!-- NÚT THAO TÁC NHANH & TÌM KIẾM -->
+    <div class="actions-bar">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-action gold" onclick="createManualKey()">
+                <span>➕</span> Tạo Key PRO Thủ Công (Tặng / Bán Ngoài)
+            </button>
+            <button class="btn-action" onclick="exportDataJson()">
+                <span>📥</span> Xuất Dữ Liệu (JSON)
+            </button>
+            <a href="shop.html" target="_blank" class="btn-action" style="text-decoration: none;">
+                <span>🛒</span> Xem Trang Shop
+            </a>
+        </div>
+        <input type="text" id="adminSearchInput" class="search-box" placeholder="🔍 Tìm kiếm SĐT, Mã Đơn, Key..." oninput="filterOrders()">
+    </div>
+
+    <!-- BẢNG DANH SÁCH ĐƠN HÀNG VÀ KEY -->
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã Đơn</th>
+                    <th>Thời Gian</th>
+                    <th>Khách Hàng (SĐT)</th>
+                    <th>Gói Bản Quyền</th>
+                    <th>Phương Thức</th>
+                    <th>Số Tiền</th>
+                    <th>Mã Key Cấp Phép</th>
+                    <th>Trạng Thái</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+                <!-- RENDER TỰ ĐỘNG TỪ LOCALSTORAGE -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const ADMIN_HASH = "246942076e3359c83467555088158cca0cff87e60f95b6cd85a6aacabf0b5ac0"; // Chicuong@789
+        let allOrders = [];
+
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function checkAdminLogin() {
+            const val = document.getElementById('adminPinInput').value.trim();
+            if (!val) return;
+            const hashed = await sha256(val);
+            if (hashed === ADMIN_HASH || val === "Chicuong@789") {
+                document.getElementById('loginGate').style.display = 'none';
+                loadDashboardData();
+            } else {
+                alert("Mật khẩu không chính xác! Quyền truy cập bị từ chối.");
+                document.getElementById('adminPinInput').value = '';
+            }
+        }
+
+        function loadDashboardData() {
+            try {
+                allOrders = JSON.parse(localStorage.getItem('flow_shop_orders') || '[]');
+            } catch(e) {
+                allOrders = [];
+            }
+
+            // Thêm mẫu nếu chưa có
+            if (allOrders.length === 0) {
+                allOrders = [
+                    {
+                        orderCode: "NAP FLOW1234",
+                        phone: "0827353177",
+                        hwid: "OPPO_1716D098",
+                        plan: "Gói Vĩnh Viễn (Trọn Đời)",
+                        price: 99000,
+                        method: "VIETQR_BANK",
+                        key: "FLOW-VIP-LIFETIME-A8F9",
+                        createdAt: "03:45:10 - 05/11/2026",
+                        status: "COMPLETED"
+                    },
+                    {
+                        orderCode: "NAP FLOW4312",
+                        phone: "0912345678",
+                        hwid: "ALL_DEVICE",
+                        plan: "Gói Tháng (30 Ngày)",
+                        price: 50000,
+                        method: "CARD_VIETTEL_50000",
+                        key: "FLOW-VIP-30D-K2X7",
+                        createdAt: "02:15:30 - 05/11/2026",
+                        status: "COMPLETED"
+                    }
+                ];
+                localStorage.setItem('flow_shop_orders', JSON.stringify(allOrders));
+            }
+
+            renderOrders(allOrders);
+        }
+
+        function renderOrders(ordersToRender) {
+            let totalRev = 0;
+            let activeCount = 0;
+            allOrders.forEach(o => {
+                if (o.status === 'COMPLETED') {
+                    totalRev += (o.price || 0);
+                    activeCount++;
+                }
+            });
+
+            document.getElementById('totalRevenueDisplay').textContent = totalRev.toLocaleString('vi-VN') + 'đ';
+            document.getElementById('totalOrdersDisplay').textContent = allOrders.length;
+            document.getElementById('activeKeysDisplay').textContent = activeCount;
+
+            const tbody = document.getElementById('ordersTableBody');
+            tbody.innerHTML = '';
+
+            ordersToRender.forEach((o, index) => {
+                const tr = document.createElement('tr');
+                const isCompleted = o.status === 'COMPLETED';
+                const isBank = (o.method || '').includes('BANK');
+                const methodBadge = isBank 
+                    ? '<span style="color:#38bdf8; font-weight:700;">🏦 VietQR TCB</span>'
+                    : '<span style="color:#fbbf24; font-weight:700;">💳 Thẻ Cào</span>';
+
+                tr.innerHTML = `
+                    <td style="font-weight: 800; font-family: monospace; color: #fbbf24;">${o.orderCode}</td>
+                    <td style="font-size: 11.5px; color: #94a3b8;">${o.createdAt}</td>
+                    <td style="font-weight: 700;">${o.phone}</td>
+                    <td>${o.plan}</td>
+                    <td>${methodBadge}</td>
+                    <td style="font-weight: 800; color: #34d399;">${(o.price || 0).toLocaleString('vi-VN')}đ</td>
+                    <td style="font-family: monospace; font-size: 12px; font-weight: 800; color: #fff;">
+                        ${o.key}
+                        <button class="btn-copy-small" onclick="copyText('${o.key}')">Copy</button>
+                    </td>
+                    <td>
+                        <span class="status-badge ${isCompleted ? 'status-active' : (o.status === 'PENDING_PAYMENT' ? 'status-pending' : 'status-revoked')}">
+                            ${isCompleted ? '🟢 Đã Cấp Key' : (o.status === 'PENDING_PAYMENT' ? '⏳ Chờ Chuyển Tiền' : '🔴 Đã Khóa')}
+                        </span>
+                    </td>
+                    <td>
+                        ${o.status === 'PENDING_PAYMENT' 
+                            ? `<button class="btn-action gold" style="padding: 5px 10px; font-size: 11px;" onclick="approveOrderPayment(${index})">✅ Duyệt Đã Nhận Tiền</button>`
+                            : (isCompleted ? `<button class="btn-revoke" onclick="revokeKey(${index})">Khóa Key</button>` : '<span style="color:#64748b; font-size:11px;">Đã thu hồi</span>')
+                        }
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterOrders() {
+            const q = document.getElementById('adminSearchInput').value.trim().toUpperCase();
+            if (!q) {
+                renderOrders(allOrders);
+                return;
+            }
+            const filtered = allOrders.filter(o => 
+                (o.orderCode && o.orderCode.toUpperCase().includes(q)) ||
+                (o.phone && o.phone.toUpperCase().includes(q)) ||
+                (o.key && o.key.toUpperCase().includes(q)) ||
+                (o.plan && o.plan.toUpperCase().includes(q))
+            );
+            renderOrders(filtered);
+        }
+
+                // ADMIN BẤM NÚT NÀY KHI ĐÃ THẤY TIỀN NỔ TRONG APP TECHCOMBANK TRÊN ĐIỆN THOẠI
+        async function approveOrderPayment(idx) {
+            const o = allOrders[idx];
+            if (!confirm(`XÁC NHẬN ĐÃ NHẬN TIỀN CHO ĐƠN HÀNG: ${o.orderCode}?\n\n• Khách hàng: ${o.phone}\n• Số tiền: ${(o.price||0).toLocaleString('vi-VN')}đ\n• Mã máy HWID: ${o.hwid}\n\nSau khi bấm OK, hệ thống sẽ cấp mã Key PRO VIP chính chủ cho khách!`)) return;
+
+            const planTag = o.plan.includes('Vĩnh Viễn') ? 'LIFE' : (o.plan.includes('Tháng') ? '30D' : '7D');
+            const cleanHwid = (o.hwid || 'OPPO_1716D098').trim().toUpperCase();
+            const sigHex = await sha256(`${cleanHwid}:${planTag}:${PRO_SALT}`);
+            const sig8 = sigHex.substring(0, 8).toUpperCase();
+            const issuedKey = `FLOW-VIP-${cleanHwid}-${planTag}-${sig8}`;
+
+            o.key = issuedKey;
+            o.status = 'COMPLETED';
+            localStorage.setItem('flow_shop_orders', JSON.stringify(allOrders));
+            loadDashboardData();
+            alert(`🎉 ĐÃ DUYỆT ĐƠN VÀ CẤP KEY THÀNH CÔNG!\n\nMã Key: ${issuedKey}\n\nKhách hàng hiện tại có thể mở trang Shop bấm 'Tra Cứu' để lấy key ngay lập tức!`);
+        }
+
+        function revokeKey(idx) {
+            if (!confirm("Bạn có chắc muốn khóa Key này không? App của khách sẽ bị vô hiệu hóa!")) return;
+            allOrders[idx].status = 'REVOKED';
+            localStorage.setItem('flow_shop_orders', JSON.stringify(allOrders));
+            loadDashboardData();
+            alert("Đã khóa Key thành công!");
+        }
+
+        const PRO_SALT = "FLOWLY_PRO_VIP_SECRET_SALT_2026";
+
+        async function createManualKey() {
+            const hwid = prompt("Nhập Mã Thiết Bị (HWID) máy của khách hàng (Ví dụ: OPPO_1716D098):", "OPPO_1716D098");
+            if (!hwid) return;
+            const phone = prompt("Nhập Số Điện Thoại / Zalo khách hàng:", "0827353177");
+            if (!phone) return;
+            const planType = prompt("Chọn gói (1: Tuần 15k, 2: Tháng 39k, 3: Vĩnh Viễn 99k):", "3");
+            let planName = "Gói Vĩnh Viễn (Trọn Đời)";
+            let price = 99000;
+            let planTag = "LIFE";
+
+            if (planType === "1") {
+                planName = "Gói Tuần (7 Ngày)";
+                price = 15000;
+                planTag = "7D";
+            } else if (planType === "2") {
+                planName = "Gói Tháng (30 Ngày)";
+                price = 39000;
+                planTag = "30D";
+            }
+
+            const cleanHwid = hwid.trim().toUpperCase();
+            const sigHex = await sha256(`${cleanHwid}:${planTag}:${PRO_SALT}`);
+            const sig8 = sigHex.substring(0, 8).toUpperCase();
+            const newKey = `FLOW-VIP-${cleanHwid}-${planTag}-${sig8}`;
+
+            allOrders.unshift({
+                orderCode: "MANUAL" + Math.floor(1000 + Math.random() * 9000),
+                phone: phone,
+                hwid: "MANUAL_GIFT",
+                plan: planName,
+                price: price,
+                method: "MANUAL_ADMIN",
+                key: newKey,
+                createdAt: new Date().toLocaleString('vi-VN'),
+                status: "COMPLETED"
+            });
+
+            localStorage.setItem('flow_shop_orders', JSON.stringify(allOrders));
+            loadDashboardData();
+            alert(`🎉 ĐÃ TẠO KEY THÀNH CÔNG!
+
+Mã Key: ${newKey}
+Gói: ${planName}
+
+Hãy gửi mã Key này cho khách!`);
+        }
+
+        function exportDataJson() {
+            const data = JSON.stringify(allOrders, null, 2);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `flow_orders_${Date.now()}.json`;
+            a.click();
+        }
+
+        function copyText(str) {
+            navigator.clipboard.writeText(str);
+            alert("Đã sao chép: " + str);
+        }
+
+        function toggleEventStatusBadge() {
+            const isAct = document.getElementById('eventActiveSelect').value === 'true';
+            const badge = document.getElementById('eventStatusBadge');
+            if (isAct) {
+                badge.style.background = 'rgba(16, 185, 129, 0.2)';
+                badge.style.borderColor = '#10b981';
+                badge.style.color = '#34d399';
+                badge.textContent = '🟢 ĐANG BẬT SỰ KIỆN';
+            } else {
+                badge.style.background = 'rgba(239, 68, 68, 0.2)';
+                badge.style.borderColor = '#ef4444';
+                badge.style.color = '#f87171';
+                badge.textContent = '🔴 ĐANG TẮT SỰ KIỆN';
+            }
+        }
+
+        function generateCompleteConfigObject() {
+            const evKey = (document.getElementById('eventKeyInput').value || 'EVENT-WEEK-VIP').trim().toUpperCase();
+            const evDays = parseInt(document.getElementById('eventDurationSelect').value) || 7;
+            const evActive = document.getElementById('eventActiveSelect').value === 'true';
+            const evTitle = document.getElementById('eventTitleInput').value.trim() || '🎉 SỰ KIỆN TRI ÂN: TẶNG KEY PRO VIP';
+            const evNotice = document.getElementById('eventNoticeInput').value.trim() || 'Nhập mã để nhận PRO VIP không cần vượt link!';
+
+            return {
+                "project": "Flow Ecosystem (FlowS, FlowOptimize, FlowUltra)",
+                "api_token": "6ae77b1c1473a714b32b2a3a",
+                "tiktok": "https://www.tiktok.com/@xxd5974",
+                "telegram": "https://t.me/+dtVBEzwuN2Q4NmI9",
+                "wait_seconds": 8,
+                "pro_keys": {
+                    "valid_keys": [
+                        "FLOW-PRO-2026",
+                        "VIP-XQTHO",
+                        "VIP-CHICUONG-2026",
+                        evKey
+                    ],
+                    "event_active": evActive,
+                    "event_key": evKey,
+                    "event_duration_days": evDays,
+                    "event_title": evTitle,
+                    "event_notice": evNotice,
+                    "trial_key_hint": evKey,
+                    "notice": evNotice
+                },
+                "flows": {
+                    "name": "FlowS Gamer Tuner Edition",
+                    "version": "v1.0.8 Pro",
+                    "version_code": 2,
+                    "min_version_code": 2,
+                    "force_update": false,
+                    "update_url": "https://bio-seven-nu.vercel.app/",
+                    "package": "com.flows.gaming",
+                    "changelog": "Bổ sung kích hoạt PRO Key, đồng bộ Device ID, hệ thống Feedback Formspree & Telegram.",
+                    "destination_apk": "https://gofile.io/d/j6tNGeVu",
+                    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/j6tNGeVu",
+                    "direct_apk": "FlowS.apk"
+                },
+                "flowoptimize": {
+                    "name": "FlowOptimize Anime Edition",
+                    "version": "v1.2.0 Pro",
+                    "version_code": 2,
+                    "min_version_code": 2,
+                    "force_update": false,
+                    "update_url": "https://bio-seven-nu.vercel.app/",
+                    "package": "com.example.gameoptimizer",
+                    "changelog": "Tối ưu hóa độ phân giải eSports, kích hoạt PRO Key, gửi feedback phản hồi trực tiếp.",
+                    "destination_apk": "https://gofile.io/d/xPjjCyoA",
+                    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/xPjjCyoA",
+                    "direct_apk": "FlowOptimize.apk"
+                },
+                "flowultra": {
+                    "name": "FlowUltra eSports Hardware Suite",
+                    "version": "v1.0.5 Pro",
+                    "version_code": 2,
+                    "min_version_code": 2,
+                    "force_update": false,
+                    "update_url": "https://bio-seven-nu.vercel.app/",
+                    "package": "com.flows.flowultra",
+                    "changelog": "Giao diện Zayon Gaming HUD eSports, khôi phục 100% cài đặt gốc, sửa lỗi font tiếng Việt, kích hoạt PRO & Feedback.",
+                    "destination_apk": "https://gofile.io/d/4qt6zQyQ",
+                    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/4qt6zQyQ",
+                    "direct_apk": "FlowUltra.apk"
+                }
+            };
+        }
+
+        function downloadUpdatedConfigJson() {
+            const obj = generateCompleteConfigObject();
+            const str = JSON.stringify(obj, null, 2);
+            const blob = new Blob([str], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'config.json';
+            a.click();
+            alert('✅ ĐÃ TẠO FILE config.json MỚI THÀNH CÔNG!\n\nHãy tải file này lên thư mục kho GitHub của bạn (commit đè lên config.json cũ) để kích hoạt sự kiện cho toàn bộ người dùng!');
+        }
+
+        function copyUpdatedConfigJson() {
+            const obj = generateCompleteConfigObject();
+            const str = JSON.stringify(obj, null, 2);
+            navigator.clipboard.writeText(str).then(() => {
+                alert('📋 ĐÃ SAO CHÉP TOÀN BỘ NỘI DUNG config.json VÀO BỘ NHỚ TẠM!\n\nBạn có thể mở GitHub trên trình duyệt, chỉnh sửa file config.json và dán đè nội dung này vào rồi bấm Commit!');
+            }).catch(() => {
+                alert('Mã config.json:\n\n' + str);
+            });
+        }
+
+    </script>
+</body>
+</html>

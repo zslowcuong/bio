@@ -8,12 +8,16 @@
     "valid_keys": [
       "FLOW-PRO-2026",
       "VIP-XQTHO",
-      "FLOW-VIP",
-      "FLOW-BETA",
-      "VIP-CHICUONG-2026"
+      "VIP-CHICUONG-2026",
+      "EVENT-WEEK-VIP"
     ],
-    "trial_key_hint": "FLOW-PRO-2026",
-    "notice": "Giai đoạn thử nghiệm: Dùng Key miễn phí FLOW-PRO-2026 để mở khóa 100% tính năng Pro."
+    "event_active": true,
+    "event_key": "EVENT-WEEK-VIP",
+    "event_duration_days": 7,
+    "event_title": "🎉 SỰ KIỆN TRI ÂN: TẶNG KEY PRO VIP 7 NGÀY",
+    "event_notice": "Admin tặng toàn thể anh em 7 ngày trải nghiệm PRO VIP Full tính năng không cần vượt link!",
+    "trial_key_hint": "EVENT-WEEK-VIP",
+    "notice": "Sự kiện tri ân tặng Key PRO VIP 7 ngày đang diễn ra."
   },
   "flows": {
     "name": "FlowS Gamer Tuner Edition",
