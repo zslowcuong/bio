@@ -188,6 +188,11 @@
             border-radius: 99px;
         }
 
+        .status-pending {
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid #f59e0b;
+            color: #fbbf24;
+        }
         .status-active {
             background: rgba(16, 185, 129, 0.15);
             border: 1px solid #10b981;
@@ -445,12 +450,15 @@
                         <button class="btn-copy-small" onclick="copyText('${o.key}')">Copy</button>
                     </td>
                     <td>
-                        <span class="status-badge ${isCompleted ? 'status-active' : 'status-revoked'}">
-                            ${isCompleted ? '🟢 Hoạt Động' : '🔴 Đã Khóa'}
+                        <span class="status-badge ${isCompleted ? 'status-active' : (o.status === 'PENDING_PAYMENT' ? 'status-pending' : 'status-revoked')}">
+                            ${isCompleted ? '🟢 Đã Cấp Key' : (o.status === 'PENDING_PAYMENT' ? '⏳ Chờ Chuyển Tiền' : '🔴 Đã Khóa')}
                         </span>
                     </td>
                     <td>
-                        ${isCompleted ? `<button class="btn-revoke" onclick="revokeKey(${index})">Khóa Key</button>` : '<span style="color:#64748b; font-size:11px;">Đã thu hồi</span>'}
+                        ${o.status === 'PENDING_PAYMENT' 
+                            ? `<button class="btn-action gold" style="padding: 5px 10px; font-size: 11px;" onclick="approveOrderPayment(${index})">✅ Duyệt Đã Nhận Tiền</button>`
+                            : (isCompleted ? `<button class="btn-revoke" onclick="revokeKey(${index})">Khóa Key</button>` : '<span style="color:#64748b; font-size:11px;">Đã thu hồi</span>')
+                        }
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -472,6 +480,24 @@
             renderOrders(filtered);
         }
 
+                // ADMIN BẤM NÚT NÀY KHI ĐÃ THẤY TIỀN NỔ TRONG APP TECHCOMBANK TRÊN ĐIỆN THOẠI
+        async function approveOrderPayment(idx) {
+            const o = allOrders[idx];
+            if (!confirm(`XÁC NHẬN ĐÃ NHẬN TIỀN CHO ĐƠN HÀNG: ${o.orderCode}?\n\n• Khách hàng: ${o.phone}\n• Số tiền: ${(o.price||0).toLocaleString('vi-VN')}đ\n• Mã máy HWID: ${o.hwid}\n\nSau khi bấm OK, hệ thống sẽ cấp mã Key PRO VIP chính chủ cho khách!`)) return;
+
+            const planTag = o.plan.includes('Vĩnh Viễn') ? 'LIFE' : (o.plan.includes('Tháng') ? '30D' : '7D');
+            const cleanHwid = (o.hwid || 'OPPO_1716D098').trim().toUpperCase();
+            const sigHex = await sha256(`${cleanHwid}:${planTag}:${PRO_SALT}`);
+            const sig8 = sigHex.substring(0, 8).toUpperCase();
+            const issuedKey = `FLOW-VIP-${cleanHwid}-${planTag}-${sig8}`;
+
+            o.key = issuedKey;
+            o.status = 'COMPLETED';
+            localStorage.setItem('flow_shop_orders', JSON.stringify(allOrders));
+            loadDashboardData();
+            alert(`🎉 ĐÃ DUYỆT ĐƠN VÀ CẤP KEY THÀNH CÔNG!\n\nMã Key: ${issuedKey}\n\nKhách hàng hiện tại có thể mở trang Shop bấm 'Tra Cứu' để lấy key ngay lập tức!`);
+        }
+
         function revokeKey(idx) {
             if (!confirm("Bạn có chắc muốn khóa Key này không? App của khách sẽ bị vô hiệu hóa!")) return;
             allOrders[idx].status = 'REVOKED';
@@ -480,26 +506,32 @@
             alert("Đã khóa Key thành công!");
         }
 
-        function createManualKey() {
-            const phone = prompt("Nhập Số Điện Thoại / Zalo khách hàng:");
+        const PRO_SALT = "FLOWLY_PRO_VIP_SECRET_SALT_2026";
+
+        async function createManualKey() {
+            const hwid = prompt("Nhập Mã Thiết Bị (HWID) máy của khách hàng (Ví dụ: OPPO_1716D098):", "OPPO_1716D098");
+            if (!hwid) return;
+            const phone = prompt("Nhập Số Điện Thoại / Zalo khách hàng:", "0827353177");
             if (!phone) return;
             const planType = prompt("Chọn gói (1: Tuần 15k, 2: Tháng 39k, 3: Vĩnh Viễn 99k):", "3");
             let planName = "Gói Vĩnh Viễn (Trọn Đời)";
             let price = 99000;
-            let prefix = "LIFETIME";
+            let planTag = "LIFE";
 
             if (planType === "1") {
                 planName = "Gói Tuần (7 Ngày)";
                 price = 15000;
-                prefix = "7D";
+                planTag = "7D";
             } else if (planType === "2") {
                 planName = "Gói Tháng (30 Ngày)";
                 price = 39000;
-                prefix = "30D";
+                planTag = "30D";
             }
 
-            const randomHex = Math.random().toString(36).substring(2, 8).toUpperCase();
-            const newKey = `FLOW-VIP-${prefix}-${randomHex}`;
+            const cleanHwid = hwid.trim().toUpperCase();
+            const sigHex = await sha256(`${cleanHwid}:${planTag}:${PRO_SALT}`);
+            const sig8 = sigHex.substring(0, 8).toUpperCase();
+            const newKey = `FLOW-VIP-${cleanHwid}-${planTag}-${sig8}`;
 
             allOrders.unshift({
                 orderCode: "MANUAL" + Math.floor(1000 + Math.random() * 9000),

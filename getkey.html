@@ -269,7 +269,7 @@
         <!-- PRO PROMO -->
         <div class="pro-promo">
             <div>Không muốn vượt link mỗi ngày?</div>
-            <a href="https://zslowcuong.github.io/bio/">
+            <a href="shop.html">
                 <span>👑 Nâng cấp PRO VIP (Tuần / Tháng / Vĩnh Viễn)</span> ➔
             </a>
         </div>
@@ -291,7 +291,8 @@
         // Cấu hình Link4m API token
         const link4mApi = "6ae77b1c1473a714b32b2a3a";
         const currentTimestamp = Date.now();
-        const destinationShowKey = `https://zslowcuong.github.io/bio/showkey.html?hwid=${encodeURIComponent(hwid)}&t=${currentTimestamp}`;
+        const baseBioUrl = (window.location.origin && window.location.origin !== "null" && !window.location.origin.startsWith("file:")) ? (window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1)) : "https://zslowcuong.github.io/bio/";
+        const destinationShowKey = `${baseBioUrl}showkey.html?hwid=${encodeURIComponent(hwid)}&t=${currentTimestamp}`;
         
         // Tạo link rút gọn Link4m
         const shortLink = `https://link4m.co/st?api=${link4mApi}&url=${encodeURIComponent(destinationShowKey)}`;
