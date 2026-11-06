@@ -1252,17 +1252,35 @@
         .linkbio-pill:active {
             transform: scale(0.98);
         }
+        .linkbio-pill-img {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: #0f172a;
+            display: block;
+            flex-shrink: 0;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+        }
+        .linkbio-pill:hover .linkbio-pill-img {
+            transform: scale(1.08);
+            box-shadow: 0 6px 18px rgba(56, 189, 248, 0.4);
+        }
         .linkbio-pill-icon {
             width: 44px;
             height: 44px;
             min-width: 44px;
-            border-radius: 50%;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 22px;
             border: 1.5px solid;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            flex-shrink: 0;
         }
         .linkbio-pill-content {
             flex: 1;
@@ -1331,6 +1349,28 @@
             padding: 1px 7px;
             border-radius: 6px;
         }
+        @media (max-width: 480px) {
+            .linkbio-pill {
+                padding: 8px 12px 8px 8px;
+                gap: 10px;
+            }
+            .linkbio-pill-img {
+                width: 38px;
+                height: 38px;
+                min-width: 38px;
+                border-radius: 10px;
+            }
+            .linkbio-pill-title {
+                font-size: 12.5px;
+            }
+            .linkbio-pill-desc {
+                font-size: 10.5px;
+            }
+            .linkbio-pill-action {
+                font-size: 10px;
+                padding: 5px 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1353,8 +1393,8 @@
             <li><a href="#themes">Theme Anime</a></li>
             <li><a href="#dpi">Bảng DPI</a></li>
             <li><a href="#guide">Kích Hoạt Shizuku</a></li>
+            <li><a href="#tools" style="color: #38bdf8; font-weight: 700;">📱 Kho APK Tối Ưu</a></li>
             <li><a href="#community" style="color: #38bdf8; font-weight: 700;">✈️ Nhóm Telegram</a></li>
-                <li><a href="shop.html" style="color: #fbbf24; font-weight: 800;">👑 Mua Key PRO (VietQR)</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#download" class="nav-btn-download">Tải APK Ngay</a></li>
         </ul>
@@ -1386,41 +1426,11 @@
                     <span>HỘI NHÓM TELEGRAM FLOWOP</span>
                     <span style="color: #38bdf8;">➔</span>
                 </a>
-                <a href="shop.html" class="btn-tiktok-pill" style="border-color: #f59e0b; background: rgba(245, 158, 11, 0.18); color: #fbbf24; box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);">
-                    <span>👑</span>
-                    <span>SHOP KEY PRO VIP (VIETQR 24/7)</span>
-                    <span style="color: #fbbf24;">➔</span>
-                </a>
             </div>
         </header>
 
-        
-        <!-- ==================== BANNER MUA KEY PRO VIP & LIÊN HỆ ADMIN TRỰC TIẾP ==================== -->
-        <div class="direct-admin-vip-box" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.14) 0%, rgba(14, 165, 233, 0.12) 100%); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: 18px; padding: 18px 24px; margin: 24px auto 32px auto; max-width: 960px; display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);">
-            <div style="display: flex; align-items: center; gap: 14px; text-align: left; flex: 1; min-width: 280px;">
-                <div style="width: 52px; height: 52px; min-width: 52px; border-radius: 14px; background: rgba(245, 158, 11, 0.2); border: 1.5px solid #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);">👑</div>
-                <div>
-                    <div style="font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 900; color: #fbbf24; text-transform: uppercase; letter-spacing: 0.4px;">
-                        MUA KEY PRO VIP TRỰC TIẾP • HỖ TRỢ KÍCH HOẠT 24/7
-                    </div>
-                    <div style="font-size: 12.5px; color: #cbd5e1; margin-top: 4px; line-height: 1.5;">
-                        Không muốn vượt link mỗi ngày? Nâng cấp bản quyền PRO VIP mở 100% tính năng eSports. Mua trực tiếp liên hệ ngay <b>SĐT / Zalo Admin: <span style="color: #38bdf8; font-weight: 800; font-size: 13.5px;">0827.353.177</span></b>
-                    </div>
-                </div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                <a href="shop.html" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: #050811; font-weight: 900; font-size: 12.5px; padding: 11px 20px; border-radius: 99px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 18px rgba(245, 158, 11, 0.45); transition: transform 0.2s;">
-                    <span>🛒</span> BẢNG GIÁ SHOP KEY
-                </a>
-                <a href="https://zalo.me/0827353177" target="_blank" style="background: #0284c7; color: #fff; font-weight: 800; font-size: 12.5px; padding: 11px 20px; border-radius: 99px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 18px rgba(2, 132, 199, 0.45); transition: transform 0.2s;">
-                    <span>💬</span> ZALO: 0827353177
-                </a>
-
-            </div>
-        </div>
-
         <!-- ==================== BỘ CÔNG CỤ TỐI ƯU BỔ TRỢ (LINKBIO STYLE) ==================== -->
-        <section class="linkbio-tools-section">
+        <section class="linkbio-tools-section" id="tools">
             
             <!-- NHÓM 1: BẮT ĐẦU TẠI ĐÂY (CÀI TRƯỚC) -->
             <div class="linkbio-cat-header">
@@ -1430,30 +1440,30 @@
             <div class="linkbio-pills-list">
                 <!-- 1. Shizuku -->
                 <a href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases/download/v13.5.4.r1049.0e5b723/shizuku-v13.5.4.r1049.0e5b723-release.apk" target="_blank" class="linkbio-pill">
-                    <div class="linkbio-pill-icon" style="background: rgba(56, 189, 248, 0.15); border-color: #38bdf8;">🐱</div>
+                    <img src="icon_shizuku.png" alt="Shizuku" class="linkbio-pill-img">
                     <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Shizuku 🐱 <span class="pill-tag-hot">BẮT BUỘC</span></div>
-                        <div class="linkbio-pill-desc">Chạy ứng dụng tối ưu không cần Root qua ADB</div>
+                        <div class="linkbio-pill-title">Shizuku <span class="pill-tag-hot">BẮT BUỘC</span></div>
+                        <div class="linkbio-pill-desc">Chạy ứng dụng tối ưu không cần Root qua ADB không dây</div>
                     </div>
                     <div class="linkbio-pill-action"><span>Tải (8s)</span> <span>➔</span></div>
                 </a>
 
                 <!-- 2. aShell You -->
                 <a href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/1UZYg0rv" target="_blank" class="linkbio-pill">
-                    <div class="linkbio-pill-icon" style="background: rgba(245, 158, 11, 0.15); border-color: #f59e0b;">⚡</div>
+                    <img src="icon_ashell.png" alt="aShell You" class="linkbio-pill-img">
                     <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">aShell You ⚡ <span class="pill-tag-pro">NO ROOT</span></div>
-                        <div class="linkbio-pill-desc">Thực thi lệnh Shizuku trực tiếp trên máy không cần PC</div>
+                        <div class="linkbio-pill-title">aShell You <span class="pill-tag-pro">NO ROOT</span></div>
+                        <div class="linkbio-pill-desc">Thực thi lệnh shell &amp; tối ưu Shizuku trực tiếp trên máy</div>
                     </div>
                     <div class="linkbio-pill-action"><span>Tải (8s)</span> <span>➔</span></div>
                 </a>
 
                 <!-- 3. Canta -->
                 <a href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/jpqeDLj1" target="_blank" class="linkbio-pill">
-                    <div class="linkbio-pill-icon" style="background: rgba(16, 185, 129, 0.15); border-color: #10b981;">🗑️</div>
+                    <img src="icon_canta.png" alt="Canta" class="linkbio-pill-img">
                     <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Canta 🗑️ <span class="pill-tag-safe">AN TOÀN</span></div>
-                        <div class="linkbio-pill-desc">Gỡ bỏ ứng dụng rác, bloatware hệ thống siêu sạch</div>
+                        <div class="linkbio-pill-title">Canta <span class="pill-tag-safe">AN TOÀN</span></div>
+                        <div class="linkbio-pill-desc">Gỡ bỏ ứng dụng rác &amp; bloatware hệ thống siêu sạch</div>
                     </div>
                     <div class="linkbio-pill-action"><span>Tải (8s)</span> <span>➔</span></div>
                 </a>
@@ -1467,29 +1477,29 @@
             <div class="linkbio-pills-list">
                 <!-- 4. App Manager -->
                 <a href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/Botbwj5O" target="_blank" class="linkbio-pill">
-                    <div class="linkbio-pill-icon" style="background: rgba(14, 165, 233, 0.15); border-color: #38bdf8;">🛡️</div>
+                    <img src="icon_appmanager.png" alt="App Manager" class="linkbio-pill-img">
                     <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">App Manager 🛡️ <span class="pill-tag-hot">HOT</span></div>
-                        <div class="linkbio-pill-desc">Quản lý chuyên sâu, xóa cache ngầm & tối ưu quyền app</div>
+                        <div class="linkbio-pill-title">App Manager <span class="pill-tag-hot">HOT</span></div>
+                        <div class="linkbio-pill-desc">Quản lý chuyên sâu, xóa cache ngầm &amp; chặn chạy nền</div>
                     </div>
                     <div class="linkbio-pill-action"><span>Tải (8s)</span> <span>➔</span></div>
                 </a>
 
                 <!-- 5. Hail -->
                 <a href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/Amg5FPbY" target="_blank" class="linkbio-pill">
-                    <div class="linkbio-pill-icon" style="background: rgba(56, 189, 248, 0.15); border-color: #38bdf8;">❄️</div>
+                    <img src="icon_hail.png" alt="Hail" class="linkbio-pill-img">
                     <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Hail ❄️ - Đóng Băng App Ngầm</div>
-                        <div class="linkbio-pill-desc">Đóng băng ứng dụng ngốn RAM &amp; Pin triệt để</div>
+                        <div class="linkbio-pill-title">Hail - Đóng Băng App Ngầm <span class="pill-tag-pro">PIN TRÂU</span></div>
+                        <div class="linkbio-pill-desc">Đóng băng ứng dụng ngốn RAM &amp; Pin triệt để 1 chạm</div>
                     </div>
                     <div class="linkbio-pill-action"><span>Tải (8s)</span> <span>➔</span></div>
                 </a>
 
                 <!-- 6. OptiDroid -->
                 <a href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/BYHGBBvt" target="_blank" class="linkbio-pill">
-                    <div class="linkbio-pill-icon" style="background: rgba(168, 85, 247, 0.15); border-color: #a855f7;">🚀</div>
+                    <img src="icon_optidroid.png" alt="OptiDroid" class="linkbio-pill-img">
                     <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">OptiDroid 🚀 - Tinh Chỉnh Hệ Thống</div>
+                        <div class="linkbio-pill-title">OptiDroid - Tinh Chỉnh Hệ Thống <span class="pill-tag-hot">MỚI</span></div>
                         <div class="linkbio-pill-desc">Tối ưu hóa phần cứng &amp; quản lý tiến trình Android</div>
                     </div>
                     <div class="linkbio-pill-action"><span>Tải (8s)</span> <span>➔</span></div>
@@ -1497,20 +1507,20 @@
 
                 <!-- 7. RyTuneX -->
                 <a href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/Lun7iMMH" target="_blank" class="linkbio-pill">
-                    <div class="linkbio-pill-icon" style="background: rgba(236, 72, 153, 0.15); border-color: #ec4899;">🎮</div>
+                    <img src="icon_rytunex.png" alt="RyTuneX" class="linkbio-pill-img">
                     <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">RyTuneX 🎮 - Cân Bằng FPS Leo Rank</div>
-                        <div class="linkbio-pill-desc">Tinh chỉnh hiệu năng CPU/GPU, ổn định khung hình</div>
+                        <div class="linkbio-pill-title">RyTuneX - Cân Bằng FPS Leo Rank <span class="pill-tag-safe">MƯỢT</span></div>
+                        <div class="linkbio-pill-desc">Tinh chỉnh hiệu năng CPU/GPU, ổn định khung hình leo rank</div>
                     </div>
                     <div class="linkbio-pill-action"><span>Tải (8s)</span> <span>➔</span></div>
                 </a>
 
                 <!-- 8. Gama Booster -->
                 <a href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/DPRkhgtC" target="_blank" class="linkbio-pill">
-                    <div class="linkbio-pill-icon" style="background: rgba(234, 88, 12, 0.15); border-color: #ea580c;">🔥</div>
+                    <img src="icon_gama.png" alt="Gama Booster" class="linkbio-pill-img">
                     <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Gama Booster 🔥 - Game Turbo Tăng Tốc</div>
-                        <div class="linkbio-pill-desc">Tăng tốc độ họa, giảm giật lag combat mượt mà</div>
+                        <div class="linkbio-pill-title">Gama Booster - Game Turbo Tăng Tốc <span class="pill-tag-pro">TURBO</span></div>
+                        <div class="linkbio-pill-desc">Tăng tốc đồ họa, giảm giật lag combat cực mượt mà</div>
                     </div>
                     <div class="linkbio-pill-action"><span>Tải (8s)</span> <span>➔</span></div>
                 </a>
