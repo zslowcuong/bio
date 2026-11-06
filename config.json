@@ -63,5 +63,69 @@
     "destination_apk": "https://gofile.io/d/4qt6zQyQ",
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/4qt6zQyQ",
     "direct_apk": "FlowUltra.apk"
+  },
+  "tools_store": {
+    "shizuku": {
+      "name": "Shizuku 🐱",
+      "tag": "BẮT BUỘC",
+      "desc": "Chạy ứng dụng tối ưu không cần Root qua ADB",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases/download/v13.5.4.r1049.0e5b723/shizuku-v13.5.4.r1049.0e5b723-release.apk"
+    },
+    "ashell": {
+      "name": "aShell You ⚡",
+      "tag": "NO ROOT",
+      "desc": "Thực thi lệnh Shizuku trực tiếp trên máy không cần PC",
+      "file": "aShellYou-v7.4.0-fdroid-release.apk",
+      "gofile": "https://gofile.io/d/1UZYg0rv",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/1UZYg0rv"
+    },
+    "canta": {
+      "name": "Canta 🗑️",
+      "tag": "AN TOÀN",
+      "desc": "Gỡ bỏ ứng dụng rác, bloatware hệ thống siêu sạch",
+      "file": "Canta.apk",
+      "gofile": "https://gofile.io/d/jpqeDLj1",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/jpqeDLj1"
+    },
+    "appmanager": {
+      "name": "App Manager 🛡️",
+      "tag": "HOT",
+      "desc": "Quản lý chuyên sâu, xóa cache ngầm & tối ưu quyền app",
+      "file": "AppManager_v4.1.1.apk",
+      "gofile": "https://gofile.io/d/Botbwj5O",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/Botbwj5O"
+    },
+    "hail": {
+      "name": "Hail ❄️",
+      "tag": "TIẾT KIỆM PIN",
+      "desc": "Đóng băng ứng dụng ngốn RAM & Pin triệt để",
+      "file": "Hail-v1.11.0.apk",
+      "gofile": "https://gofile.io/d/Amg5FPbY",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/Amg5FPbY"
+    },
+    "optidroid": {
+      "name": "OptiDroid 🚀",
+      "tag": "TỐI ƯU SÂU",
+      "desc": "Tối ưu hóa phần cứng & quản lý tiến trình Android",
+      "file": "OptiDroid.apk",
+      "gofile": "https://gofile.io/d/BYHGBBvt",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/BYHGBBvt"
+    },
+    "rytunex": {
+      "name": "RyTuneX 🎮",
+      "tag": "CÂN BẰNG FPS",
+      "desc": "Tinh chỉnh hiệu năng CPU/GPU, ổn định khung hình",
+      "file": "RyTuneX-Android-v1.0.1.apk",
+      "gofile": "https://gofile.io/d/Lun7iMMH",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/Lun7iMMH"
+    },
+    "gama": {
+      "name": "Gama Booster 🔥",
+      "tag": "GAME TURBO",
+      "desc": "Tăng tốc độ họa, giảm giật lag combat mượt mà",
+      "file": "gama_v1.4.apk",
+      "gofile": "https://gofile.io/d/DPRkhgtC",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/DPRkhgtC"
+    }
   }
 }
