@@ -393,6 +393,9 @@
         .app-icon-img {
             width: 58px;
             height: 58px;
+            max-width: 58px;
+            max-height: 58px;
+            flex-shrink: 0;
             border-radius: 14px;
             object-fit: cover;
             border: 2px solid;
@@ -1894,6 +1897,247 @@
             transform: scale(0.98);
         }
 
+    
+        /* ==================== ACCORDION STYLES (XỔ XUỐNG / THU GỌN) ==================== */
+        .linkbio-accordion-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 14px;
+            padding: 10px 18px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .accordion-hint {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+        .accordion-hint b {
+            color: #38bdf8;
+        }
+        .accordion-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-accordion-toggle {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f1f5f9;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-accordion-toggle:hover {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: #38bdf8;
+            color: #38bdf8;
+        }
+        .linkbio-set-accordion {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+        .linkbio-set-accordion:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+        .linkbio-set-accordion.is-open {
+            border-color: rgba(56, 189, 248, 0.45);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.12);
+        }
+        .linkbio-set-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            cursor: pointer;
+            user-select: none;
+            background: rgba(30, 41, 59, 0.4);
+            transition: background 0.25s ease;
+        }
+        .linkbio-set-header:hover {
+            background: rgba(30, 41, 59, 0.7);
+        }
+        .linkbio-set-header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+        .linkbio-set-badge-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .linkbio-set-count {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .linkbio-set-header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .btn-set-all-download {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .btn-set-all-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+            filter: brightness(1.1);
+        }
+        .set-chevron {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, color 0.2s ease;
+        }
+        .linkbio-set-accordion.is-open .set-chevron {
+            transform: rotate(180deg);
+            background: rgba(56, 189, 248, 0.25);
+            color: #38bdf8;
+        }
+        .linkbio-set-body {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        }
+        .linkbio-set-accordion.is-open .linkbio-set-body {
+            max-height: 4000px;
+            opacity: 1;
+        }
+        .linkbio-set-body .linkbio-pills-list {
+            padding: 14px 18px 20px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+                /* Search Bar for 10 Sets */
+        .linkbio-search-bar-wrap {
+            max-width: 680px;
+            margin: 0 auto 18px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .linkbio-search-bar-wrap .search-icon {
+            position: absolute;
+            left: 16px;
+            font-size: 1rem;
+            color: #94a3b8;
+            pointer-events: none;
+        }
+        .linkbio-search-bar-wrap input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 999px;
+            padding: 13px 44px 13px 44px;
+            font-size: 0.9rem;
+            color: #fff;
+            outline: none;
+            backdrop-filter: blur(12px);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+        }
+        .linkbio-search-bar-wrap input:focus {
+            border-color: #38bdf8;
+            background: rgba(15, 23, 42, 0.98);
+            box-shadow: 0 0 24px rgba(56, 189, 248, 0.35);
+        }
+        .linkbio-search-bar-wrap input::placeholder {
+            color: #64748b;
+        }
+        .btn-clear-search {
+            position: absolute;
+            right: 14px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+        .btn-clear-search:hover {
+            background: rgba(239, 68, 68, 0.25);
+            color: #ef4444;
+        }
+
+        /* Fix Guide Grid odd items & code overflow */
+        .guide-steps-grid > .guide-step-item:last-child:nth-child(odd) {
+            grid-column: 1 / -1;
+        }
+        .guide-cmd-box {
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 1px solid rgba(56, 189, 248, 0.3) !important;
+            border-radius: 8px !important;
+            padding: 10px 14px !important;
+            margin: 10px 0 !important;
+            overflow-x: auto !important;
+            white-space: pre-wrap !important;
+            word-break: break-all !important;
+            font-family: 'Consolas', 'Fira Code', monospace !important;
+            color: #38bdf8 !important;
+            font-size: 0.85rem !important;
+        }
+        @media (max-width: 680px) {
+            .linkbio-set-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .linkbio-set-header-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .btn-set-all-download {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -1952,723 +2196,979 @@
             </div>
         </header>
 
-                        <!-- ==================== BỘ CÔNG CỤ TỐI ƯU BỔ TRỢ (LINKBIO STYLE) ==================== -->
+                                <!-- ==================== 2. FAST DOWNLOAD CARDS (ALWAYS VISIBLE) ==================== -->
+        <section class="section-wrap" id="download">
+            <div class="section-title-wrap">
+                <span class="section-badge" style="background: linear-gradient(135deg, rgba(0, 255, 102, 0.2), rgba(236, 72, 153, 0.2)); border-color: #00ff66; color: #00ff66; box-shadow: 0 0 16px rgba(0, 255, 102, 0.25);">👑 BỘ BA CÔNG CỤ TỐI ƯU ĐỘC QUYỀN FLOWLY</span>
+                <h2 class="section-title">Tải Về 3 App Cốt Lõi: FlowS, FlowOp &amp; FlowUltra</h2>
+                <p class="section-desc">Bộ ba ứng dụng tối ưu phần cứng Android chuyên sâu qua Shizuku ADB (100% No Root) • Mỗi app một nhiệm vụ riêng, chạy mượt mà độc lập, 0% xung đột!</p>
+            </div>
+
+            <div class="apps-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <!-- 1. FlowS (Gamer Tuner) -->
+                <div class="app-download-card flows">
+                    <div>
+                        <div class="app-header">
+                            <img src="flows_logo.png" alt="FlowS" class="app-icon-img" style="border-color: #00ff66;">
+                            <div>
+                                <div class="app-title">FlowS</div>
+                                <span class="app-sub-badge" style="background: rgba(0, 255, 102, 0.15); color: #00ff66;">GAMER TUNER (v3.5)</span>
+                            </div>
+                        </div>
+                        <div class="app-bullets">
+                            • 🎮 <b>Tự Quét Game Thật:</b> Nhận diện Liên Quân, Free Fire, PUBG, Tốc Chiến...<br>
+                            • 🖥️ <b>Hạ Độ Phân Giải Riêng Từng Game:</b> 540p, 720p tăng 25-35 FPS mượt mà.<br>
+                            • 🔄 <b>Auto-Restore Độc Quyền:</b> Tự về gốc khi tắt màn hình hoặc thoát game.<br>
+                            • 🔥 <b>Chế Độ CRAZY Đầu 3x:</b> Dồn RAM ~3200MB, khóa 120Hz chống quá nhiệt.<br>
+                            • 🔋 <b>Sửa Thanh Pin Trắng:</b> Nút 1-chạm cho máy Oppo & Realme.
+                        </div>
+                    </div>
+                    <button type="button" onclick="openUnlockModal('flows')" class="btn-download-action flows">
+                        <span>⚡</span>
+                        <span>TẢI FLOWS (LINK4M)</span>
+                    </button>
+                </div>
+
+                <!-- 2. FlowOptimize (Theme Anime & Chẩn Đoán Hãng) -->
+                <div class="app-download-card flowopt">
+                    <div>
+                        <div class="app-header">
+                            <img src="app_logo.png" alt="FlowOptimize" class="app-icon-img" style="border-color: #ec4899;">
+                            <div>
+                                <div class="app-title">FlowOp (FlowOptimize)</div>
+                                <span class="app-sub-badge" style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">THEME ANIME (v2.6)</span>
+                            </div>
+                        </div>
+                        <div class="app-bullets">
+                            • 🌸 <b>7 Bộ Theme Anime Độc Quyền:</b> Kimi no Na wa, Gojo, Naruto, One Piece...<br>
+                            • 🔍 <b>Chẩn Đoán Lỗi Bóp Xung Theo Hãng:</b> Xiaomi Joyose, Samsung GOS, Oppo, Vivo, Infinix.<br>
+                            • 🫧 <b>Bong Bóng Nổi HUD:</b> Theo dõi RAM, nhiệt độ trực tiếp trong game.<br>
+                            • 🛡️ <b>Cơ Chế Dọn RAM Thông Minh:</b> Bảo vệ 100% cuộc gọi Zalo, Messenger.<br>
+                            • 🔄 <b>Khôi Phục Toàn Diện 1-Chạm:</b> Mở lại 100% ứng dụng khi cần.
+                        </div>
+                    </div>
+                    <button type="button" onclick="openUnlockModal('flowoptimize')" class="btn-download-action flowopt">
+                        <span>🌸</span>
+                        <span>TẢI FLOWOPTIMIZE (LINK4M)</span>
+                    </button>
+                </div>
+
+                <!-- 3. FlowUltra (Mã Nguồn Mở Cấp Thấp - 20 Open-Source Engines) -->
+                <div class="app-download-card flowultra">
+                    <div>
+                        <div class="app-header">
+                            <img src="flowultra_logo.png" alt="FlowUltra" class="app-icon-img" style="border-color: #f59e0b;">
+                            <div>
+                                <div class="app-title">FlowUltra</div>
+                                <span class="app-sub-badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">OPEN-SOURCE SUITE (v1.0)</span>
+                            </div>
+                        </div>
+                        <div class="app-bullets">
+                            • ⚡ <b>Shappky 4-Stage Progressive Killer:</b> Diệt tận gốc tiến trình cứng đầu pkill -9.<br>
+                            • 🛑 <b>Appzuku Greedy Restrictor:</b> Khóa AppOps WakeLock chạy ngầm TikTok, FB, Shopee.<br>
+                            • ❄️ <b>Screen-Off Deep Doze:</b> Ép CPU ngủ sâu force-idle khi tắt màn hình, pin đêm tụt &lt; 1%.<br>
+                            • 🕶️ <b>AFK Extinguish 0-Nits:</b> Tắt màn AMOLED 0-nits cày game không hao pin.<br>
+                            • 📊 <b>MemHogs Live PSS Tracker &amp; Hail:</b> Đo RAM chuẩn xác &amp; đóng băng app rác 0% CPU.
+                        </div>
+                    </div>
+                    <button type="button" onclick="openUnlockModal('flowultra')" class="btn-download-action flowultra">
+                        <span>🚀</span>
+                        <span>TẢI FLOWULTRA (LINK4M)</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== BỘ CÔNG CỤ TỐI ƯU BỔ TRỢ (LINKBIO STYLE) ==================== -->
         <section class="linkbio-tools-section" id="tools">
-            <!-- SET 1: COMBO HOÀNG KIM (7 MẢNH GHÉP TỐI THƯỢNG — 0% XUNG ĐỘT) -->
-            <div class="linkbio-category-header">
-                <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(234, 179, 8, 0.25), rgba(245, 158, 11, 0.15)); border-color: #f59e0b; color: #fbbf24; box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);">👑 SET 1: COMBO HOÀNG KIM (7 MẢNH GHÉP TỐI THƯỢNG — 0% XUNG ĐỘT)</span>
-                <div class="linkbio-cat-sub">Nguyên tắc cốt lõi: Mỗi mảng hệ thống 1 app phụ trách • 0% chạy ngầm thừa • Phủ kín từ nhân hệ thống đến đồ họa</div>
+            <div class="section-title-wrap" style="margin-bottom: 24px;">
+                <span class="section-badge" style="background: rgba(56, 189, 248, 0.15); border-color: #38bdf8; color: #38bdf8; box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);">📦 HỆ SINH THÁI 10 BỘ TỐI ƯU BỔ TRỢ</span>
+                <h2 class="section-title">Kho 64 Ứng Dụng Chuyên Sâu Từng Tầng</h2>
+                <p class="section-desc">Phân loại theo từng SET mô-đun khoa học • Nhấp vào từng SET để xổ xuống danh sách ứng dụng • Tải riêng lẻ hoặc tải trọn bộ qua Link4M</p>
             </div>
-            <div class="linkbio-pills-list">
-                <div class="linkbio-pill" data-app-id="shizukunext" onclick="handlePillClick(event, 'shizukunext')">
-                    <img src="icon_shizukunext.png" alt="Shizuku-Next" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Shizuku-Next <span class="pill-tag-crown">NỀN TẢNG CẤP QUYỀN</span></div>
-                        <div class="linkbio-pill-desc">Watchdog tự bật lại khi bị kill, giữ kết nối ổn định 24/7, hỗ trợ ADB Modules</div>
+
+            <!-- Live Search Bar -->
+            <div class="linkbio-search-bar-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="toolSearchInput" placeholder="Tìm kiếm nhanh trong 64 ứng dụng (vd: Canta, Vulkan, BBS, Shizuku, IdleTweaks...)" oninput="filterTools(this.value)">
+                <button type="button" class="btn-clear-search" onclick="clearToolSearch()" title="Xóa tìm kiếm">✕</button>
+            </div>
+
+            <!-- Quick Accordion Controls -->
+            <div class="linkbio-accordion-controls">
+                <div class="accordion-hint">💡 <b>Nhấp vào từng SET để xổ xuống danh sách ứng dụng</b> (Gọn gàng, tiết kiệm không gian)</div>
+                <div class="accordion-buttons">
+                    <button type="button" class="btn-accordion-toggle" onclick="expandAllSets()">📂 Mở Tất Cả</button>
+                    <button type="button" class="btn-accordion-toggle" onclick="collapseAllSets()">📁 Thu Gọn Tất Cả</button>
+                </div>
+            </div>
+
+            <!-- SET 1: COMBO HOÀNG KIM (7 MẢNH GHÉP TỐI THƯỢNG) -->
+            <div class="linkbio-set-accordion is-open" id="accordion-set1">
+                <div class="linkbio-set-header" onclick="toggleSetAccordion('accordion-set1')">
+                    <div class="linkbio-set-header-left">
+                        <div class="linkbio-set-badge-row">
+                            <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(234, 179, 8, 0.25), rgba(245, 158, 11, 0.15)); border-color: #f59e0b; color: #fbbf24; box-shadow: 0 0 16px rgba(245, 158, 11, 0.25);">👑 SET 1: COMBO HOÀNG KIM (7 MẢNH GHÉP TỐI THƯỢNG)</span>
+                            <span class="linkbio-set-count">8 Ứng Dụng</span>
+                        </div>
+                        <div class="linkbio-cat-sub">Nguyên tắc cốt lõi: Mỗi mảng hệ thống 1 app phụ trách • 0% chạy ngầm thừa</div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'shizukunext'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-set-header-right">
+                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set1')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
+                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
+                        </button>
+                        <div class="set-chevron">▼</div>
                     </div>
                 </div>
-                <div class="linkbio-pill" data-app-id="canta" onclick="handlePillClick(event, 'canta')">
-                    <img src="icon_canta.png" alt="Canta" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Canta <span class="pill-tag-safe">GỠ RÁC HỆ THỐNG</span></div>
-                        <div class="linkbio-pill-desc">Gỡ bỏ vĩnh viễn bloatware hệ thống theo danh sách an toàn UAD (chỉ cần chạy 1 lần)</div>
+                <div class="linkbio-set-body">
+                    <div class="linkbio-pills-list">
+                    <div class="linkbio-pill" data-app-id="shizukunext" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/rushiranpise/Shizuku-Next/releases/download/v14.0.33-next/shizuku-v14.0.33-next.apk" onclick="handlePillClick(event, 'shizukunext')">
+                        <img src="icon_shizukunext.png" alt="Shizuku-Next" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Shizuku-Next <span class="pill-tag-crown">NỀN TẢNG CẤP QUYỀN</span></div>
+                            <div class="linkbio-pill-desc">Watchdog tự bật lại khi bị kill, giữ kết nối ổn định 24/7, hỗ trợ ADB Modules</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'shizukunext'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'canta'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="canta" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/jpqeDLj1" onclick="handlePillClick(event, 'canta')">
+                        <img src="icon_canta.png" alt="Canta" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Canta <span class="pill-tag-safe">GỠ RÁC HỆ THỐNG</span></div>
+                            <div class="linkbio-pill-desc">Gỡ bỏ vĩnh viễn bloatware hệ thống theo danh sách an toàn UAD (chỉ cần chạy 1 lần)</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'canta'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="appmanager" onclick="handlePillClick(event, 'appmanager')">
-                    <img src="icon_appmanager.png" alt="App Manager" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">App Manager <span class="pill-tag-hot">PHẪU THUẬT QUYỀN</span></div>
-                        <div class="linkbio-pill-desc">Tắt Services quảng cáo & Tracker theo dõi ngầm trong app ngân hàng, Zalo, Messenger</div>
+                    <div class="linkbio-pill" data-app-id="appmanager" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/Botbwj5O" onclick="handlePillClick(event, 'appmanager')">
+                        <img src="icon_appmanager.png" alt="App Manager" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">App Manager <span class="pill-tag-hot">PHẪU THUẬT QUYỀN</span></div>
+                            <div class="linkbio-pill-desc">Tắt Services quảng cáo & Tracker theo dõi ngầm trong app ngân hàng, Zalo, Messenger</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'appmanager'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'appmanager'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="hail" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/Amg5FPbY" onclick="handlePillClick(event, 'hail')">
+                        <img src="icon_hail.png" alt="Hail" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Hail <span class="pill-tag-pro">ĐÓNG BĂNG APP</span></div>
+                            <div class="linkbio-pill-desc">Đóng băng triệt để ứng dụng nặng (Shopee, TikTok, Game) tự động ngay khi khóa màn hình</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'hail'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="hail" onclick="handlePillClick(event, 'hail')">
-                    <img src="icon_hail.png" alt="Hail" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Hail <span class="pill-tag-pro">ĐÓNG BĂNG APP</span></div>
-                        <div class="linkbio-pill-desc">Đóng băng triệt để ứng dụng nặng (Shopee, TikTok, Game) tự động ngay khi khóa màn hình</div>
+                    <div class="linkbio-pill" data-app-id="optidroid" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/BYHGBBvt" onclick="handlePillClick(event, 'optidroid')">
+                        <img src="icon_optidroid.png" alt="OptiDroid" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">OptiDroid <span class="pill-tag-hot">BIÊN DỊCH AOT</span></div>
+                            <div class="linkbio-pill-desc">Chế độ Speed-Profile biên dịch trước mã máy, loại bỏ 100% độ trễ khựng khung hình</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'optidroid'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'hail'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="gama" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/DPRkhgtC" onclick="handlePillClick(event, 'gama')">
+                        <img src="icon_gama.png" alt="Gama Booster" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Gama Booster <span class="pill-tag-crown">ĐỒ HỌA VULKAN</span></div>
+                            <div class="linkbio-pill-desc">Chuyển đổi trình dựng hình sang Vulkan giúp chiến game combat mát máy và mượt đỉnh</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'gama'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="optidroid" onclick="handlePillClick(event, 'optidroid')">
-                    <img src="icon_optidroid.png" alt="OptiDroid" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">OptiDroid <span class="pill-tag-hot">BIÊN DỊCH AOT</span></div>
-                        <div class="linkbio-pill-desc">Chế độ Speed-Profile biên dịch trước mã máy, loại bỏ 100% độ trễ khựng khung hình</div>
+                    <div class="linkbio-pill" data-app-id="sdmaidse" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/d4rken-org/sdmaid-se/releases/download/v2.2.2-rc0/eu.darken.sdmse-v2.2.2-rc0-20202000-FOSS-RELEASE.apk" onclick="handlePillClick(event, 'sdmaidse')">
+                        <img src="icon_sdmaidse.png" alt="SD Maid 2/SE (FOSS)" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">SD Maid 2/SE (FOSS) <span class="pill-tag-safe">DỌN CACHE ẨN</span></div>
+                            <div class="linkbio-pill-desc">Quét và xóa sạch cache ẩn hệ thống 3 ngày/lần tự động qua Shizuku không cần trợ năng</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'sdmaidse'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'optidroid'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="obtainium" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/ImranR98/Obtainium/releases/download/v1.7.4/app-arm64-v8a-release.apk" onclick="handlePillClick(event, 'obtainium')">
+                        <img src="icon_obtainium.png" alt="Obtainium" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Obtainium <span class="pill-tag-pro">TỰ ĐỘNG CẬP NHẬT</span></div>
+                            <div class="linkbio-pill-desc">Tự động đồng bộ và cập nhật phiên bản mới nhất cho toàn bộ app GitHub trên máy</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'obtainium'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="gama" onclick="handlePillClick(event, 'gama')">
-                    <img src="icon_gama.png" alt="Gama Booster" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Gama Booster <span class="pill-tag-crown">ĐỒ HỌA VULKAN</span></div>
-                        <div class="linkbio-pill-desc">Chuyển đổi trình dựng hình sang Vulkan giúp chiến game combat mát máy và mượt đỉnh</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'gama'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="sdmaidse" onclick="handlePillClick(event, 'sdmaidse')">
-                    <img src="icon_sdmaidse.png" alt="SD Maid 2/SE (FOSS)" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">SD Maid 2/SE (FOSS) <span class="pill-tag-safe">DỌN CACHE ẨN</span></div>
-                        <div class="linkbio-pill-desc">Quét và xóa sạch cache ẩn hệ thống 3 ngày/lần tự động qua Shizuku không cần trợ năng</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'sdmaidse'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="obtainium" onclick="handlePillClick(event, 'obtainium')">
-                    <img src="icon_obtainium.png" alt="Obtainium" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Obtainium <span class="pill-tag-pro">TỰ ĐỘNG CẬP NHẬT</span></div>
-                        <div class="linkbio-pill-desc">Tự động đồng bộ và cập nhật phiên bản mới nhất cho toàn bộ app GitHub trên máy</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'obtainium'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
                     </div>
                 </div>
             </div>
 
-            <!-- SET 2: GAME SPACE & ĐỘ NHẠY TỪNG NÚT (PER-BUTTON SENSITIVITY < 1MS) -->
-            <div class="linkbio-category-header">
-                <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(245, 158, 11, 0.2)); border-color: #ef4444; color: #f87171; box-shadow: 0 0 16px rgba(239, 68, 68, 0.25);">🎯 SET 2: GAME SPACE & ĐỘ NHẠY TỪNG NÚT (PER-BUTTON SENSITIVITY < 1MS)</span>
-                <div class="linkbio-cat-sub">Ép xung cảm ứng 1000Hz Digitizer • Vuốt tâm ms • Ghìm tâm trục X/Y • Kéo chiêu MOBA 0ms qua Shizuku IInputManager</div>
-            </div>
-            <div class="linkbio-pills-list">
-                <div class="linkbio-pill" data-app-id="gamelauncherpro" onclick="handlePillClick(event, 'gamelauncherpro')">
-                    <img src="icon_gamelauncherpro.png" alt="Game Launcher PRO" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Game Launcher PRO <span class="pill-tag-crown">ÉP XUNG 1000HZ</span></div>
-                        <div class="linkbio-pill-desc">Ép xung cảm ứng 1000Hz Digitizer, mở khóa 8 lớp tần số quét, tinh chỉnh config game</div>
+            <!-- SET 2: GAME SPACE & ĐỘ NHẠY TỪNG NÚT -->
+            <div class="linkbio-set-accordion" id="accordion-set2">
+                <div class="linkbio-set-header" onclick="toggleSetAccordion('accordion-set2')">
+                    <div class="linkbio-set-header-left">
+                        <div class="linkbio-set-badge-row">
+                            <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(245, 158, 11, 0.2)); border-color: #ef4444; color: #f87171; box-shadow: 0 0 16px rgba(239, 68, 68, 0.25);">🎯 SET 2: GAME SPACE & ĐỘ NHẠY TỪNG NÚT</span>
+                            <span class="linkbio-set-count">6 Ứng Dụng</span>
+                        </div>
+                        <div class="linkbio-cat-sub">Ép xung cảm ứng 1000Hz Digitizer • Vuốt tâm ms • Ghìm tâm trục X/Y qua Shizuku</div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'gamelauncherpro'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="keymapper" onclick="handlePillClick(event, 'keymapper')">
-                    <img src="icon_keymapper.png" alt="Key Mapper (v4.6+)" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Key Mapper (v4.6+) <span class="pill-tag-pro">FLOATING BUTTONS</span></div>
-                        <div class="linkbio-pill-desc">Tạo Nút nổi hoặc gán nút âm lượng đè lên nút Bắn để chỉnh tốc độ vuốt tâm mili-giây</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'keymapper'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-set-header-right">
+                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set2')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
+                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
+                        </button>
+                        <div class="set-chevron">▼</div>
                     </div>
                 </div>
-                <div class="linkbio-pill" data-app-id="gamemappermind" onclick="handlePillClick(event, 'gamemappermind')">
-                    <img src="icon_gamemappermind.png" alt="GameMapperMind" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">GameMapperMind <span class="pill-tag-hot">GHÌM TÂM X/Y</span></div>
-                        <div class="linkbio-pill-desc">Lớp phủ nút ảo chuyên FPS, tách rời độ nhạy kéo tâm ngang (X) và dọc (Y) theo ms</div>
+                <div class="linkbio-set-body">
+                    <div class="linkbio-pills-list">
+                    <div class="linkbio-pill" data-app-id="gamelauncherpro" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/willygailo/Game-Launcher/releases/download/v20.6.0-PRO/Game_Space.apk" onclick="handlePillClick(event, 'gamelauncherpro')">
+                        <img src="icon_gamelauncherpro.png" alt="Game Launcher PRO" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Game Launcher PRO <span class="pill-tag-crown">ÉP XUNG 1000HZ</span></div>
+                            <div class="linkbio-pill-desc">Ép xung cảm ứng 1000Hz Digitizer, mở khóa 8 lớp tần số quét, tinh chỉnh config game</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'gamelauncherpro'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'gamemappermind'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="keymapper" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/keymapperorg/KeyMapper/releases/download/v4.6.2/keymapper-4.6.2-foss.apk" onclick="handlePillClick(event, 'keymapper')">
+                        <img src="icon_keymapper.png" alt="Key Mapper (v4.6+)" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Key Mapper (v4.6+) <span class="pill-tag-pro">FLOATING BUTTONS</span></div>
+                            <div class="linkbio-pill-desc">Tạo Nút nổi hoặc gán nút âm lượng đè lên nút Bắn để chỉnh tốc độ vuốt tâm mili-giây</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'keymapper'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="openmapper" onclick="handlePillClick(event, 'openmapper')">
-                    <img src="icon_openmapper.png" alt="OpenMapper (Shizuku)" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">OpenMapper (Shizuku) <span class="pill-tag-safe">ĐỘ TRỄ < 0.5MS</span></div>
-                        <div class="linkbio-pill-desc">Map phím tay cầm & chuột bàn phím trực tiếp qua nhân Shizuku, 0% độ trễ, không bị ban</div>
+                    <div class="linkbio-pill" data-app-id="gamemappermind" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/NanoMindExplorer/GameMapperMind/releases/download/v2.1.4/app-release.apk" onclick="handlePillClick(event, 'gamemappermind')">
+                        <img src="icon_gamemappermind.png" alt="GameMapperMind" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">GameMapperMind <span class="pill-tag-hot">GHÌM TÂM X/Y</span></div>
+                            <div class="linkbio-pill-desc">Lớp phủ nút ảo chuyên FPS, tách rời độ nhạy kéo tâm ngang (X) và dọc (Y) theo ms</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'gamemappermind'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'openmapper'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="openmapper" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/kinou-p/android-open-mapper/releases/download/v1.4.0/OpenMapper-latest.apk" onclick="handlePillClick(event, 'openmapper')">
+                        <img src="icon_openmapper.png" alt="OpenMapper (Shizuku)" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">OpenMapper (Shizuku) <span class="pill-tag-safe">ĐỘ TRỄ < 0.5MS</span></div>
+                            <div class="linkbio-pill-desc">Map phím tay cầm & chuột bàn phím trực tiếp qua nhân Shizuku, 0% độ trễ, không bị ban</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'openmapper'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="k2er" onclick="handlePillClick(event, 'k2er')">
-                    <img src="icon_k2er.png" alt="K2er Touch KeyMapper" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">K2er Touch KeyMapper <span class="pill-tag-pro">MACRO LIÊN THANH</span></div>
-                        <div class="linkbio-pill-desc">Bơm cảm ứng đa điểm, gán macro combo chiêu và turbo nhấp liên thanh 50 lần/giây</div>
+                    <div class="linkbio-pill" data-app-id="k2er" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//play.google.com/store/apps/details%3Fid%3Dcom.k2tap.master" onclick="handlePillClick(event, 'k2er')">
+                        <img src="icon_k2er.png" alt="K2er Touch KeyMapper" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">K2er Touch KeyMapper <span class="pill-tag-pro">MACRO LIÊN THANH</span></div>
+                            <div class="linkbio-pill-desc">Bơm cảm ứng đa điểm, gán macro combo chiêu và turbo nhấp liên thanh 50 lần/giây</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'k2er'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'k2er'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="colorosgamespace" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//www.apkmirror.com/apk/coloros/game-space/" onclick="handlePillClick(event, 'colorosgamespace')">
+                        <img src="icon_colorosgamespace.png" alt="ColorOS Game Space" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">ColorOS Game Space <span class="pill-tag-crown">VUỐT SIÊU NHẠY</span></div>
+                            <div class="linkbio-pill-desc">Trích xuất Game Space chính hãng OPPO/Realme: Chỉnh độ nhạy cảm ứng từng góc ngón tay</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'colorosgamespace'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="colorosgamespace" onclick="handlePillClick(event, 'colorosgamespace')">
-                    <img src="icon_colorosgamespace.png" alt="ColorOS Game Space" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">ColorOS Game Space <span class="pill-tag-crown">VUỐT SIÊU NHẠY</span></div>
-                        <div class="linkbio-pill-desc">Trích xuất Game Space chính hãng OPPO/Realme: Chỉnh độ nhạy cảm ứng từng góc ngón tay</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'colorosgamespace'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SET 3: TẦNG KIẾN TRÚC & TƯỜNG LỬA KHÔNG VPN (NEXT-GEN ARCHITECTURE) -->
-            <div class="linkbio-category-header">
-                <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 182, 212, 0.2)); border-color: #10b981; color: #34d399; box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);">🛡️ SET 3: TẦNG KIẾN TRÚC & TƯỜNG LỬA KHÔNG VPN (NEXT-GEN ARCHITECTURE)</span>
-                <div class="linkbio-cat-sub">Đánh chặn luồng hệ thống • Tường lửa chặn mạng ngầm không hao pin VPN • Điều phối bộ nhớ theo tiêu điểm</div>
-            </div>
-            <div class="linkbio-pills-list">
-                <div class="linkbio-pill" data-app-id="shizukuplus" onclick="handlePillClick(event, 'shizukuplus')">
-                    <img src="icon_shizukuplus.png" alt="Shizuku+" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Shizuku+ <span class="pill-tag-crown">INTERCEPTOR LÕI</span></div>
-                        <div class="linkbio-pill-desc">Hợp nhất Root + ADB + Dhizuku làm một, tích hợp bộ đánh chặn Transparent Shell</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'shizukuplus'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="shizuwall" onclick="handlePillClick(event, 'shizuwall')">
-                    <img src="icon_shizuwall.png" alt="ShizuWall" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">ShizuWall <span class="pill-tag-safe">TƯỜNG LỬA 0% VPN</span></div>
-                        <div class="linkbio-pill-desc">Tường lửa chặn mạng từng app trực tiếp qua Shizuku iptables, 0% hao pin VPN ảo</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'shizuwall'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="nomorebackground" onclick="handlePillClick(event, 'nomorebackground')">
-                    <img src="icon_nomorebackground.png" alt="NoMoreBackground" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">NoMoreBackground <span class="pill-tag-hot">KILL NGẦM TỨC THÌ</span></div>
-                        <div class="linkbio-pill-desc">Bắn hạ toàn bộ ứng dụng vừa rời màn hình ngay lập tức, trả lại 100% RAM cho game</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'nomorebackground'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="corepolicy" onclick="handlePillClick(event, 'corepolicy')">
-                    <img src="icon_corepolicy.png" alt="CorePolicy" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">CorePolicy <span class="pill-tag-crown">FOCUS-AWARE SCALING</span></div>
-                        <div class="linkbio-pill-desc">Điều phối tài nguyên CPU/GPU theo app đang mở, ghim bộ nhớ không bị kill</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'corepolicy'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="thanox" onclick="handlePillClick(event, 'thanox')">
-                    <img src="icon_thanox.png" alt="Thanox (FOSS)" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Thanox (FOSS) <span class="pill-tag-pro">KIỂM SOÁT TẬN GỐC</span></div>
-                        <div class="linkbio-pill-desc">Chặn tự động khởi chạy liên kết app, bảo vệ quyền riêng tư và chặn quảng cáo</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'thanox'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="adaptivetheme" onclick="handlePillClick(event, 'adaptivetheme')">
-                    <img src="icon_adaptivetheme.png" alt="Adaptive Theme" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Adaptive Theme <span class="pill-tag-rare">MATERIAL 3 EXPRESSIVE</span></div>
-                        <div class="linkbio-pill-desc">Giao diện Material 3 động chuẩn Google, tùy biến bảng màu hệ thống không cần Root</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'adaptivetheme'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="shizucallrecorder" onclick="handlePillClick(event, 'shizucallrecorder')">
-                    <img src="icon_shizucallrecorder.png" alt="ShizuCallRecorder" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">ShizuCallRecorder <span class="pill-tag-safe">GHI ÂM TẦNG NHÂN</span></div>
-                        <div class="linkbio-pill-desc">Ghi âm cuộc gọi 2 chiều trong vắt trực tiếp qua quyền Shizuku không bị chặn</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'shizucallrecorder'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
                     </div>
                 </div>
             </div>
 
-            <!-- SET 4: PER-APP ENGINE & PHẪU THUẬT TÁC VỤ (TASK MANAGER & VƯỢT CHẶN NGÂN HÀNG) -->
-            <div class="linkbio-category-header">
-                <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(147, 51, 234, 0.25), rgba(236, 72, 153, 0.2)); border-color: #9333ea; color: #c084fc; box-shadow: 0 0 16px rgba(147, 51, 234, 0.25);">🎛️ SET 4: PER-APP ENGINE & PHẪU THUẬT TÁC VỤ (TASK MANAGER & VƯỢT CHẶN NGÂN HÀNG)</span>
-                <div class="linkbio-cat-sub">Bơm Shizuku qua cổng Magisk giả lập • Task Manager chuẩn Windows • Ép Deep Doze 0 giây • 120 nấc âm lượng</div>
-            </div>
-            <div class="linkbio-pills-list">
-                <div class="linkbio-pill" data-app-id="geto" onclick="handlePillClick(event, 'geto')">
-                    <img src="icon_geto.png" alt="Geto (Vượt Chặn Bank)" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Geto (Vượt Chặn Bank) <span class="pill-tag-crown">CẤP QUYỀN ẨN DANH</span></div>
-                        <div class="linkbio-pill-desc">Cấp quyền Shizuku cho app qua cổng Root giả lập, vượt mặt 100% app ngân hàng chặn Shizuku</div>
+            <!-- SET 3: TẦNG KIẾN TRÚC & TƯỜNG LỬA KHÔNG VPN -->
+            <div class="linkbio-set-accordion" id="accordion-set3">
+                <div class="linkbio-set-header" onclick="toggleSetAccordion('accordion-set3')">
+                    <div class="linkbio-set-header-left">
+                        <div class="linkbio-set-badge-row">
+                            <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 182, 212, 0.2)); border-color: #10b981; color: #34d399; box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);">🛡️ SET 3: TẦNG KIẾN TRÚC & TƯỜNG LỬA KHÔNG VPN</span>
+                            <span class="linkbio-set-count">7 Ứng Dụng</span>
+                        </div>
+                        <div class="linkbio-cat-sub">Đánh chặn luồng hệ thống • Tường lửa chặn mạng ngầm không hao pin VPN</div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'geto'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="imd" onclick="handlePillClick(event, 'imd')">
-                    <img src="icon_imd.png" alt="IMD (It's My Device)" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">IMD (It's My Device) <span class="pill-tag-pro">PER-APP RESOLUTION</span></div>
-                        <div class="linkbio-pill-desc">Bơm độ phân giải và tần số quét riêng cho từng game (ví dụ: Free Fire 720p 120Hz)</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'imd'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-set-header-right">
+                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set3')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
+                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
+                        </button>
+                        <div class="set-chevron">▼</div>
                     </div>
                 </div>
-                <div class="linkbio-pill" data-app-id="pensum" onclick="handlePillClick(event, 'pensum')">
-                    <img src="icon_pensum.png" alt="Pensum Task Manager" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Pensum Task Manager <span class="pill-tag-hot">WINDOWS TASK MANAGER</span></div>
-                        <div class="linkbio-pill-desc">Task Manager chuẩn Windows: Xem chi tiết tiến trình ngầm và End Task 1 chạm</div>
+                <div class="linkbio-set-body">
+                    <div class="linkbio-pills-list">
+                    <div class="linkbio-pill" data-app-id="shizukuplus" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/thejaustin/ShizukuPlus/releases/download/v13.6.0.r2551/Shizuku%252B-v13.6.0.r2551.apk" onclick="handlePillClick(event, 'shizukuplus')">
+                        <img src="icon_shizukuplus.png" alt="Shizuku+" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Shizuku+ <span class="pill-tag-crown">INTERCEPTOR LÕI</span></div>
+                            <div class="linkbio-pill-desc">Hợp nhất Root + ADB + Dhizuku làm một, tích hợp bộ đánh chặn Transparent Shell</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'shizukuplus'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'pensum'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="shizuwall" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/AhmetCanArslan/ShizuWall/releases/download/v4.6.8/ShizuWall-4.6.8.apk" onclick="handlePillClick(event, 'shizuwall')">
+                        <img src="icon_shizuwall.png" alt="ShizuWall" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">ShizuWall <span class="pill-tag-safe">TƯỜNG LỬA 0% VPN</span></div>
+                            <div class="linkbio-pill-desc">Tường lửa chặn mạng từng app trực tiếp qua Shizuku iptables, 0% hao pin VPN ảo</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'shizuwall'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="enforcedoze" onclick="handlePillClick(event, 'enforcedoze')">
-                    <img src="icon_enforcedoze.png" alt="EnforceDoze" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">EnforceDoze <span class="pill-tag-safe">DEEP DOZE 0 GIÂY</span></div>
-                        <div class="linkbio-pill-desc">Ép máy ngủ sâu ngay khi tắt màn hình, ngắt cảm biến chuyển động, qua đêm mất 0% pin</div>
+                    <div class="linkbio-pill" data-app-id="nomorebackground" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/adil192/no_more_background/releases/download/v2.8.2/NoMoreBackground.apk" onclick="handlePillClick(event, 'nomorebackground')">
+                        <img src="icon_nomorebackground.png" alt="NoMoreBackground" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">NoMoreBackground <span class="pill-tag-hot">KILL NGẦM TỨC THÌ</span></div>
+                            <div class="linkbio-pill-desc">Bắn hạ toàn bộ ứng dụng vừa rời màn hình ngay lập tức, trả lại 100% RAM cho game</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'nomorebackground'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'enforcedoze'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="corepolicy" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/DikyVinus/core_policy/releases/download/v5.0/core_policy-v5.0.zip" onclick="handlePillClick(event, 'corepolicy')">
+                        <img src="icon_corepolicy.png" alt="CorePolicy" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">CorePolicy <span class="pill-tag-crown">FOCUS-AWARE SCALING</span></div>
+                            <div class="linkbio-pill-desc">Điều phối tài nguyên CPU/GPU theo app đang mở, ghim bộ nhớ không bị kill</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'corepolicy'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="finevolume" onclick="handlePillClick(event, 'finevolume')">
-                    <img src="icon_finevolume.png" alt="FineVolume" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">FineVolume <span class="pill-tag-rare">120 NẤC ÂM LƯỢNG</span></div>
-                        <div class="linkbio-pill-desc">Độ lại thanh âm lượng thành 120 nấc siêu mịn, chỉnh âm lượng độc lập từng app</div>
+                    <div class="linkbio-pill" data-app-id="thanox" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/Tornaco/Thanox/releases/download/v9.6/thanox_9.6-prc.3404474.apk" onclick="handlePillClick(event, 'thanox')">
+                        <img src="icon_thanox.png" alt="Thanox (FOSS)" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Thanox (FOSS) <span class="pill-tag-pro">KIỂM SOÁT TẬN GỐC</span></div>
+                            <div class="linkbio-pill-desc">Chặn tự động khởi chạy liên kết app, bảo vệ quyền riêng tư và chặn quảng cáo</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'thanox'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'finevolume'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="adaptivetheme" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/xLexip/Adaptive-Theme/releases/download/v2.5.1/Adaptive-Theme-v2.5.1-foss.apk" onclick="handlePillClick(event, 'adaptivetheme')">
+                        <img src="icon_adaptivetheme.png" alt="Adaptive Theme" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Adaptive Theme <span class="pill-tag-rare">MATERIAL 3 EXPRESSIVE</span></div>
+                            <div class="linkbio-pill-desc">Giao diện Material 3 động chuẩn Google, tùy biến bảng màu hệ thống không cần Root</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'adaptivetheme'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="mpmanager" onclick="handlePillClick(event, 'mpmanager')">
-                    <img src="icon_mpmanager.png" alt="MP-Manager" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">MP-Manager <span class="pill-tag-pro">QUẢN LÝ DATA/OBB</span></div>
-                        <div class="linkbio-pill-desc">Mở toang thư mục Android/data và Android/obb bị khóa trên Android 13/14/15</div>
+                    <div class="linkbio-pill" data-app-id="shizucallrecorder" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/kitsumed/ShizuCallRecorder/releases/download/v2.0.0/ShizuCallRecorder-2.0.0.apk" onclick="handlePillClick(event, 'shizucallrecorder')">
+                        <img src="icon_shizucallrecorder.png" alt="ShizuCallRecorder" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">ShizuCallRecorder <span class="pill-tag-safe">GHI ÂM TẦNG NHÂN</span></div>
+                            <div class="linkbio-pill-desc">Ghi âm cuộc gọi 2 chiều trong vắt trực tiếp qua quyền Shizuku không bị chặn</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'shizucallrecorder'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'mpmanager'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
                     </div>
                 </div>
             </div>
 
-            <!-- SET 5: DỊ VẬT CAN THIỆP PHẦN CỨNG & KẾT NỐI (TẦNG SÂU HIẾM GẶP) -->
-            <div class="linkbio-category-header">
-                <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.25), rgba(59, 130, 246, 0.2)); border-color: #06b6d4; color: #22d3ee; box-shadow: 0 0 16px rgba(6, 182, 212, 0.25);">⚡ SET 5: DỊ VẬT CAN THIỆP PHẦN CỨNG & KẾT NỐI (TẦNG SÂU HIẾM GẶP)</span>
-                <div class="linkbio-cat-sub">Tắt bóng bán dẫn OLED • Khóa sóng 4G/5G chống giật Ping • Chia sẻ file ngang hàng P2P không qua Internet</div>
+            <!-- SET 4: PER-APP ENGINE & PHẪU THUẬT TÁC VỤ -->
+            <div class="linkbio-set-accordion" id="accordion-set4">
+                <div class="linkbio-set-header" onclick="toggleSetAccordion('accordion-set4')">
+                    <div class="linkbio-set-header-left">
+                        <div class="linkbio-set-badge-row">
+                            <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(147, 51, 234, 0.25), rgba(236, 72, 153, 0.2)); border-color: #9333ea; color: #c084fc; box-shadow: 0 0 16px rgba(147, 51, 234, 0.25);">🎛️ SET 4: PER-APP ENGINE & PHẪU THUẬT TÁC VỤ</span>
+                            <span class="linkbio-set-count">6 Ứng Dụng</span>
+                        </div>
+                        <div class="linkbio-cat-sub">Bơm Shizuku qua cổng Root giả lập • Task Manager Windows • Ép Deep Doze 0s</div>
+                    </div>
+                    <div class="linkbio-set-header-right">
+                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set4')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
+                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
+                        </button>
+                        <div class="set-chevron">▼</div>
+                    </div>
+                </div>
+                <div class="linkbio-set-body">
+                    <div class="linkbio-pills-list">
+                    <div class="linkbio-pill" data-app-id="geto" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/T31n/Geto/releases/download/v1.17.3/geto-v1.17.3.apk" onclick="handlePillClick(event, 'geto')">
+                        <img src="icon_geto.png" alt="Geto (Vượt Chặn Bank)" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Geto (Vượt Chặn Bank) <span class="pill-tag-crown">CẤP QUYỀN ẨN DANH</span></div>
+                            <div class="linkbio-pill-desc">Cấp quyền Shizuku cho app qua cổng Root giả lập, vượt mặt 100% app ngân hàng chặn Shizuku</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'geto'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+                    <div class="linkbio-pill" data-app-id="imd" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/soul-99/SU_IMD/releases/download/v3/IMD_app-release_v3.apk" onclick="handlePillClick(event, 'imd')">
+                        <img src="icon_imd.png" alt="IMD (It's My Device)" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">IMD (It's My Device) <span class="pill-tag-pro">PER-APP RESOLUTION</span></div>
+                            <div class="linkbio-pill-desc">Bơm độ phân giải và tần số quét riêng cho từng game (ví dụ: Free Fire 720p 120Hz)</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'imd'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+                    <div class="linkbio-pill" data-app-id="pensum" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/troikoss/Pensum/releases/download/v0.1.0-beta/app-release.apk" onclick="handlePillClick(event, 'pensum')">
+                        <img src="icon_pensum.png" alt="Pensum Task Manager" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Pensum Task Manager <span class="pill-tag-hot">WINDOWS TASK MANAGER</span></div>
+                            <div class="linkbio-pill-desc">Task Manager chuẩn Windows: Xem chi tiết tiến trình ngầm và End Task 1 chạm</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'pensum'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+                    <div class="linkbio-pill" data-app-id="enforcedoze" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/Akylas/EnforceDoze/releases/download/v1.10.2/86/app-release.apk" onclick="handlePillClick(event, 'enforcedoze')">
+                        <img src="icon_enforcedoze.png" alt="EnforceDoze" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">EnforceDoze <span class="pill-tag-safe">DEEP DOZE 0 GIÂY</span></div>
+                            <div class="linkbio-pill-desc">Ép máy ngủ sâu ngay khi tắt màn hình, ngắt cảm biến chuyển động, qua đêm mất 0% pin</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'enforcedoze'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+                    <div class="linkbio-pill" data-app-id="finevolume" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/broknhrt2562/finevolume/releases/download/1.0/FineVolume-release.apk" onclick="handlePillClick(event, 'finevolume')">
+                        <img src="icon_finevolume.png" alt="FineVolume" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">FineVolume <span class="pill-tag-rare">120 NẤC ÂM LƯỢNG</span></div>
+                            <div class="linkbio-pill-desc">Độ lại thanh âm lượng thành 120 nấc siêu mịn, chỉnh âm lượng độc lập từng app</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'finevolume'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+                    <div class="linkbio-pill" data-app-id="mpmanager" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/AbdurazaaqMohammed/MP-Manager/releases/download/1.1.1/MP-Manager.1.1.1.apk" onclick="handlePillClick(event, 'mpmanager')">
+                        <img src="icon_mpmanager.png" alt="MP-Manager" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">MP-Manager <span class="pill-tag-pro">QUẢN LÝ DATA/OBB</span></div>
+                            <div class="linkbio-pill-desc">Mở toang thư mục Android/data và Android/obb bị khóa trên Android 13/14/15</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'mpmanager'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
-            <div class="linkbio-pills-list">
-                <div class="linkbio-pill" data-app-id="pixels" onclick="handlePillClick(event, 'pixels')">
-                    <img src="icon_pixels.png" alt="Pixels" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Pixels <span class="pill-tag-pro">TẮT BÓNG OLED</span></div>
-                        <div class="linkbio-pill-desc">Tắt vật lý các bóng bán dẫn subpixel trên màn hình AMOLED, tiết kiệm 40% pin</div>
+
+            <!-- SET 5: DỊ VẬT CAN THIỆP PHẦN CỨNG & KẾT NỐI -->
+            <div class="linkbio-set-accordion" id="accordion-set5">
+                <div class="linkbio-set-header" onclick="toggleSetAccordion('accordion-set5')">
+                    <div class="linkbio-set-header-left">
+                        <div class="linkbio-set-badge-row">
+                            <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.25), rgba(59, 130, 246, 0.2)); border-color: #06b6d4; color: #22d3ee; box-shadow: 0 0 16px rgba(6, 182, 212, 0.25);">⚡ SET 5: DỊ VẬT CAN THIỆP PHẦN CỨNG & KẾT NỐI</span>
+                            <span class="linkbio-set-count">6 Ứng Dụng</span>
+                        </div>
+                        <div class="linkbio-cat-sub">Tắt bóng bán dẫn OLED • Khóa sóng 4G/5G chống giật Ping • Chia sẻ file P2P</div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'pixels'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="galaxymaxhz" onclick="handlePillClick(event, 'galaxymaxhz')">
-                    <img src="icon_galaxymaxhz.png" alt="Galaxy Max Hz" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Galaxy Max Hz <span class="pill-tag-crown">MỞ KHÓA 120HZ</span></div>
-                        <div class="linkbio-pill-desc">Mở khóa tần số quét thích ứng (Adaptive Hz) từ 10Hz - 120Hz/144Hz cho mọi máy</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'galaxymaxhz'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-set-header-right">
+                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set5')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
+                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
+                        </button>
+                        <div class="set-chevron">▼</div>
                     </div>
                 </div>
-                <div class="linkbio-pill" data-app-id="netmonster" onclick="handlePillClick(event, 'netmonster')">
-                    <img src="icon_netmonster.png" alt="NetMonster" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">NetMonster <span class="pill-tag-safe">KHÓA 4G/5G ONLY</span></div>
-                        <div class="linkbio-pill-desc">Mở menu Radio ẩn, khóa cứng băng tần LTE Only/NR Only, triệt tiêu 100% rớt mạng khi combat</div>
+                <div class="linkbio-set-body">
+                    <div class="linkbio-pills-list">
+                    <div class="linkbio-pill" data-app-id="pixels" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//play.google.com/store/apps/details%3Fid%3Dcom.tribalfs.pixels" onclick="handlePillClick(event, 'pixels')">
+                        <img src="icon_pixels.png" alt="Pixels" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Pixels <span class="pill-tag-pro">TẮT BÓNG OLED</span></div>
+                            <div class="linkbio-pill-desc">Tắt vật lý các bóng bán dẫn subpixel trên màn hình AMOLED, tiết kiệm 40% pin</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'pixels'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'netmonster'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="galaxymaxhz" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/tribalfs/GalaxyMaxHzPub/releases/download/v9.1/galaxy_max_hz_v9.1.apk" onclick="handlePillClick(event, 'galaxymaxhz')">
+                        <img src="icon_galaxymaxhz.png" alt="Galaxy Max Hz" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Galaxy Max Hz <span class="pill-tag-crown">MỞ KHÓA 120HZ</span></div>
+                            <div class="linkbio-pill-desc">Mở khóa tần số quét thích ứng (Adaptive Hz) từ 10Hz - 120Hz/144Hz cho mọi máy</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'galaxymaxhz'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="wgtunnel" onclick="handlePillClick(event, 'wgtunnel')">
-                    <img src="icon_wgtunnel.png" alt="WGTunnel" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">WGTunnel <span class="pill-tag-hot">VPN WIREGUARD TỐC ĐỘ</span></div>
-                        <div class="linkbio-pill-desc">VPN WireGuard tối giản chạy trực tiếp trên Shizuku, giảm ping máy chủ quốc tế</div>
+                    <div class="linkbio-pill" data-app-id="netmonster" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//play.google.com/store/apps/details%3Fid%3Dcz.mroczis.netmonster" onclick="handlePillClick(event, 'netmonster')">
+                        <img src="icon_netmonster.png" alt="NetMonster" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">NetMonster <span class="pill-tag-safe">KHÓA 4G/5G ONLY</span></div>
+                            <div class="linkbio-pill-desc">Mở menu Radio ẩn, khóa cứng băng tần LTE Only/NR Only, triệt tiêu 100% rớt mạng khi combat</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'netmonster'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'wgtunnel'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="wgtunnel" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/zaneschepke/wgtunnel/releases/download/nightly/wgtunnel-standalone-v5.8.3-nightly%2Bgit.203a800-arm64.apk" onclick="handlePillClick(event, 'wgtunnel')">
+                        <img src="icon_wgtunnel.png" alt="WGTunnel" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">WGTunnel <span class="pill-tag-hot">VPN WIREGUARD TỐC ĐỘ</span></div>
+                            <div class="linkbio-pill-desc">VPN WireGuard tối giản chạy trực tiếp trên Shizuku, giảm ping máy chủ quốc tế</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'wgtunnel'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="smartdock" onclick="handlePillClick(event, 'smartdock')">
-                    <img src="icon_smartdock.png" alt="SmartDock" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">SmartDock <span class="pill-tag-rare">GIAO DIỆN DESKTOP</span></div>
-                        <div class="linkbio-pill-desc">Biến điện thoại thành cỗ máy tính để bàn (Samsung DeX mã nguồn mở) khi cắm màn hình rời</div>
+                    <div class="linkbio-pill" data-app-id="smartdock" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/axel358/smartdock/releases/download/1.9.8/SmartDock1.9.8.apk" onclick="handlePillClick(event, 'smartdock')">
+                        <img src="icon_smartdock.png" alt="SmartDock" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">SmartDock <span class="pill-tag-rare">GIAO DIỆN DESKTOP</span></div>
+                            <div class="linkbio-pill-desc">Biến điện thoại thành cỗ máy tính để bàn (Samsung DeX mã nguồn mở) khi cắm màn hình rời</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'smartdock'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'smartdock'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="localsend" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/localsend/localsend/releases/download/v1.18.2/LocalSend-1.18.2-android-arm64v8.apk" onclick="handlePillClick(event, 'localsend')">
+                        <img src="icon_localsend.png" alt="LocalSend" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">LocalSend <span class="pill-tag-safe">CHIA SẺ P2P LAN</span></div>
+                            <div class="linkbio-pill-desc">Bắn file dung lượng lớn giữa điện thoại và PC qua mạng nội bộ tốc độ 100MB/s không cần Internet</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'localsend'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="localsend" onclick="handlePillClick(event, 'localsend')">
-                    <img src="icon_localsend.png" alt="LocalSend" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">LocalSend <span class="pill-tag-safe">CHIA SẺ P2P LAN</span></div>
-                        <div class="linkbio-pill-desc">Bắn file dung lượng lớn giữa điện thoại và PC qua mạng nội bộ tốc độ 100MB/s không cần Internet</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'localsend'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
                     </div>
                 </div>
             </div>
 
             <!-- SET 6: BẮT ĐẦU TẠI ĐÂY (NỀN TẢNG CƠ BẢN) -->
-            <div class="linkbio-category-header">
-                <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(249, 115, 22, 0.2)); border-color: #ef4444; color: #f87171;">🚀 SET 6: BẮT ĐẦU TẠI ĐÂY (NỀN TẢNG CƠ BẢN)</span>
-                <div class="linkbio-cat-sub">Bộ ba khởi đầu bắt buộc: Nền tảng cấp quyền ADB không dây, cửa sổ dòng lệnh & công cụ tinh chỉnh</div>
-            </div>
-            <div class="linkbio-pills-list">
-                <div class="linkbio-pill" data-app-id="shizuku" onclick="handlePillClick(event, 'shizuku')">
-                    <img src="icon_shizuku.png" alt="Shizuku" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Shizuku <span class="pill-tag-req">BẮT BUỘC</span></div>
-                        <div class="linkbio-pill-desc">Chạy ứng dụng tối ưu không cần Root qua ADB không dây</div>
+            <div class="linkbio-set-accordion" id="accordion-set6">
+                <div class="linkbio-set-header" onclick="toggleSetAccordion('accordion-set6')">
+                    <div class="linkbio-set-header-left">
+                        <div class="linkbio-set-badge-row">
+                            <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(249, 115, 22, 0.2)); border-color: #ef4444; color: #f87171;">🚀 SET 6: BẮT ĐẦU TẠI ĐÂY (NỀN TẢNG CƠ BẢN)</span>
+                            <span class="linkbio-set-count">3 Ứng Dụng</span>
+                        </div>
+                        <div class="linkbio-cat-sub">Bộ ba khởi đầu bắt buộc: Nền tảng cấp quyền ADB không dây, Terminal & Tinh chỉnh</div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'shizuku'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="ashell" onclick="handlePillClick(event, 'ashell')">
-                    <img src="icon_ashell.png" alt="aShell You" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">aShell You <span class="pill-tag-noroot">NO ROOT</span></div>
-                        <div class="linkbio-pill-desc">Thực thi lệnh Shizuku trực tiếp trên máy không cần máy tính PC</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'ashell'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-set-header-right">
+                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set6')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
+                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
+                        </button>
+                        <div class="set-chevron">▼</div>
                     </div>
                 </div>
-                <div class="linkbio-pill" data-app-id="rytunex" onclick="handlePillClick(event, 'rytunex')">
-                    <img src="icon_rytunex.png" alt="RyTuneX" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">RyTuneX <span class="pill-tag-fps">CÂN BẰNG FPS</span></div>
-                        <div class="linkbio-pill-desc">Cân bằng hiệu năng CPU/GPU, ổn định khung hình khi leo rank</div>
+                <div class="linkbio-set-body">
+                    <div class="linkbio-pills-list">
+                    <div class="linkbio-pill" data-app-id="shizuku" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases/download/v13.5.4.r1049.0e5b723/shizuku-v13.5.4.r1049.0e5b723-release.apk" onclick="handlePillClick(event, 'shizuku')">
+                        <img src="icon_shizuku.png" alt="Shizuku" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Shizuku <span class="pill-tag-req">BẮT BUỘC</span></div>
+                            <div class="linkbio-pill-desc">Chạy ứng dụng tối ưu không cần Root qua ADB không dây</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'shizuku'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'rytunex'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="ashell" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/1UZYg0rv" onclick="handlePillClick(event, 'ashell')">
+                        <img src="icon_ashell.png" alt="aShell You" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">aShell You <span class="pill-tag-noroot">NO ROOT</span></div>
+                            <div class="linkbio-pill-desc">Thực thi lệnh Shizuku trực tiếp trên máy không cần máy tính PC</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'ashell'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- SET 7: KIM CƯƠNG ẨN GITHUB & CODEBERG (HIDDEN GEMS) -->
-            <div class="linkbio-category-header">
-                <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(56, 189, 248, 0.2)); border-color: #a855f7; color: #c084fc;">💎 SET 7: KIM CƯƠNG ẨN GITHUB & CODEBERG (HIDDEN GEMS)</span>
-                <div class="linkbio-cat-sub">Các dự án ngầm đột phá: Đo FPS từ tầng hiển thị SurfaceFlinger, gỡ app hệ thống & tùy biến giao diện</div>
-            </div>
-            <div class="linkbio-pills-list">
-                <div class="linkbio-pill" data-app-id="framex" onclick="handlePillClick(event, 'framex')">
-                    <img src="icon_framex.png" alt="FrameX" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">FrameX <span class="pill-tag-fps">FPS SURFACEFLINGER</span></div>
-                        <div class="linkbio-pill-desc">Đo FPS chuẩn xác từ tầng SurfaceFlinger, 0% hao tốn CPU/GPU</div>
+                    <div class="linkbio-pill" data-app-id="rytunex" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/Lun7iMMH" onclick="handlePillClick(event, 'rytunex')">
+                        <img src="icon_rytunex.png" alt="RyTuneX" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">RyTuneX <span class="pill-tag-fps">CÂN BẰNG FPS</span></div>
+                            <div class="linkbio-pill-desc">Cân bằng hiệu năng CPU/GPU, ổn định khung hình khi leo rank</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'rytunex'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'framex'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="shappky" onclick="handlePillClick(event, 'shappky')">
-                    <img src="icon_shappky.png" alt="Shappky" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Shappky <span class="pill-tag-hot">KILLER THEO LỊCH</span></div>
-                        <div class="linkbio-pill-desc">Shell App Killer: Tự động kết liễu các tiến trình ngầm cứng đầu theo kịch bản</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'shappky'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="savertuner" onclick="handlePillClick(event, 'savertuner')">
-                    <img src="icon_savertuner.png" alt="SaverTuner" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">SaverTuner <span class="pill-tag-pro">PIN KHÔNG GIẢM HZ</span></div>
-                        <div class="linkbio-pill-desc">Mở khóa hàng chục biến số ẩn của Tiết kiệm pin gốc, không làm giảm Hz màn hình</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'savertuner'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="installerx" onclick="handlePillClick(event, 'installerx')">
-                    <img src="icon_installerx.png" alt="InstallerX Revived" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">InstallerX Revived <span class="pill-tag-safe">CÀI ĐẶT SIÊU TỐC</span></div>
-                        <div class="linkbio-pill-desc">Trình cài APK siêu tốc qua Shizuku, vượt rào chặn SDK cũ và cho phép hạ cấp</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'installerx'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="colorblendr" onclick="handlePillClick(event, 'colorblendr')">
-                    <img src="icon_colorblendr.png" alt="ColorBlendr" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">ColorBlendr <span class="pill-tag-noroot">THEME MONET PRO</span></div>
-                        <div class="linkbio-pill-desc">Tùy biến bảng màu Monet Material You trên toàn hệ thống không cần Root</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'colorblendr'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="sharemove" onclick="handlePillClick(event, 'sharemove')">
-                    <img src="icon_sharemove.png" alt="ShaRemove" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">ShaRemove <span class="pill-tag-pro">DỌN SẠCH CHIA SẺ</span></div>
-                        <div class="linkbio-pill-desc">Xóa sạch danh bạ gợi ý rác trong menu chia sẻ Android, tăng tốc mở tức thì</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'sharemove'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
                     </div>
                 </div>
             </div>
 
-            <!-- SET 8: SIÊU CÔNG CỤ NGẦM (DEEP SHIZUKU ECOSYSTEM) -->
-            <div class="linkbio-category-header">
-                <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.25), rgba(168, 85, 247, 0.2)); border-color: #ec4899; color: #f472b6;">🔮 SET 8: SIÊU CÔNG CỤ NGẦM (DEEP SHIZUKU ECOSYSTEM)</span>
-                <div class="linkbio-cat-sub">Mở rộng quyền năng hệ thống: Tách âm lượng từng app, tắt màn hình khi cày game, chặn văng sàn TMĐT</div>
-            </div>
-            <div class="linkbio-pills-list">
-                <div class="linkbio-pill" data-app-id="shizutools" onclick="handlePillClick(event, 'shizutools')">
-                    <img src="icon_shizutools.png" alt="ShizuTools" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">ShizuTools <span class="pill-tag-pro">TÁCH ÂM LƯỢNG</span></div>
-                        <div class="linkbio-pill-desc">Tách âm lượng từng app riêng biệt, mở khóa theme trả phí ColorOS/RealmeUI</div>
+            <!-- SET 7: KIM CƯƠNG ẨN GITHUB & CODEBERG -->
+            <div class="linkbio-set-accordion" id="accordion-set7">
+                <div class="linkbio-set-header" onclick="toggleSetAccordion('accordion-set7')">
+                    <div class="linkbio-set-header-left">
+                        <div class="linkbio-set-badge-row">
+                            <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(56, 189, 248, 0.2)); border-color: #a855f7; color: #c084fc;">💎 SET 7: KIM CƯƠNG ẨN GITHUB & CODEBERG</span>
+                            <span class="linkbio-set-count">6 Ứng Dụng</span>
+                        </div>
+                        <div class="linkbio-cat-sub">Đo FPS từ tầng hiển thị SurfaceFlinger, gỡ app hệ thống & tùy biến Monet</div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'shizutools'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="extinguish" onclick="handlePillClick(event, 'extinguish')">
-                    <img src="icon_extinguish.png" alt="Extinguish" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Extinguish <span class="pill-tag-hot">TẮT ĐIỆN MÀN HÌNH</span></div>
-                        <div class="linkbio-pill-desc">Ngắt hoàn toàn nguồn điện tấm nền màn hình khi cày game/YouTube chạy ngầm</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'extinguish'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-set-header-right">
+                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set7')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
+                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
+                        </button>
+                        <div class="set-chevron">▼</div>
                     </div>
                 </div>
-                <div class="linkbio-pill" data-app-id="redirectguard" onclick="handlePillClick(event, 'redirectguard')">
-                    <img src="icon_redirectguard.png" alt="Redirect Guard" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Redirect Guard <span class="pill-tag-safe">CHẶN VĂNG SÀN TMĐT</span></div>
-                        <div class="linkbio-pill-desc">Bắn hạ tức thì các pha tự động văng sang Shopee/Lazada/TikTok khi chạm link ẩn</div>
+                <div class="linkbio-set-body">
+                    <div class="linkbio-pills-list">
+                    <div class="linkbio-pill" data-app-id="framex" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/MaheshSharan/FrameX-Android/releases/download/v1.5.27/FrameX_v1.5.27-release.apk" onclick="handlePillClick(event, 'framex')">
+                        <img src="icon_framex.png" alt="FrameX" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">FrameX <span class="pill-tag-fps">FPS SURFACEFLINGER</span></div>
+                            <div class="linkbio-pill-desc">Đo FPS chuẩn xác từ tầng SurfaceFlinger, 0% hao tốn CPU/GPU</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'framex'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'redirectguard'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="shappky" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/YasserNull/shappky/releases/download/v2.0.0/shappky-v2.0.0-arm64-v8a.apk" onclick="handlePillClick(event, 'shappky')">
+                        <img src="icon_shappky.png" alt="Shappky" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Shappky <span class="pill-tag-hot">KILLER THEO LỊCH</span></div>
+                            <div class="linkbio-pill-desc">Shell App Killer: Tự động kết liễu các tiến trình ngầm cứng đầu theo kịch bản</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'shappky'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="extendroid" onclick="handlePillClick(event, 'extendroid')">
-                    <img src="icon_extendroid.png" alt="Extendroid" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Extendroid <span class="pill-tag-crown">ĐA CỬA SỔ DESKTOP</span></div>
-                        <div class="linkbio-pill-desc">Biến màn hình điện thoại thành giao diện đa cửa sổ tự do thu phóng và ép PiP</div>
+                    <div class="linkbio-pill" data-app-id="savertuner" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//codeberg.org/s1m/savertuner/releases/download/1.1.6/savertuner.apk" onclick="handlePillClick(event, 'savertuner')">
+                        <img src="icon_savertuner.png" alt="SaverTuner" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">SaverTuner <span class="pill-tag-pro">PIN KHÔNG GIẢM HZ</span></div>
+                            <div class="linkbio-pill-desc">Mở khóa hàng chục biến số ẩn của Tiết kiệm pin gốc, không làm giảm Hz màn hình</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'savertuner'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'extendroid'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="installerx" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/wxxsfxyzm/InstallerX-Revived/releases/download/26.09/InstallerX-Revived-online-26.09.apk" onclick="handlePillClick(event, 'installerx')">
+                        <img src="icon_installerx.png" alt="InstallerX Revived" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">InstallerX Revived <span class="pill-tag-safe">CÀI ĐẶT SIÊU TỐC</span></div>
+                            <div class="linkbio-pill-desc">Trình cài APK siêu tốc qua Shizuku, vượt rào chặn SDK cũ và cho phép hạ cấp</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'installerx'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="essentials" onclick="handlePillClick(event, 'essentials')">
-                    <img src="icon_essentials.png" alt="Essentials" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Essentials <span class="pill-tag-rare">DAO ĐA NĂNG SYSTEM</span></div>
-                        <div class="linkbio-pill-desc">Bộ dao đa năng: Kích hoạt chế độ siêu tiết kiệm pin, ẩn icon thanh trạng thái</div>
+                    <div class="linkbio-pill" data-app-id="colorblendr" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/Mahmud0808/ColorBlendr/releases/download/v3.1.2/ColorBlendr.v3.1.2.apk" onclick="handlePillClick(event, 'colorblendr')">
+                        <img src="icon_colorblendr.png" alt="ColorBlendr" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">ColorBlendr <span class="pill-tag-noroot">THEME MONET PRO</span></div>
+                            <div class="linkbio-pill-desc">Tùy biến bảng màu Monet Material You trên toàn hệ thống không cần Root</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'colorblendr'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'essentials'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="sharemove" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/thejaustin/sharemove/releases/download/v1.0.0-alpha.twenty-five/sharemove-1.0.0-alpha.twenty-five.apk" onclick="handlePillClick(event, 'sharemove')">
+                        <img src="icon_sharemove.png" alt="ShaRemove" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">ShaRemove <span class="pill-tag-pro">DỌN SẠCH CHIA SẺ</span></div>
+                            <div class="linkbio-pill-desc">Xóa sạch danh bạ gợi ý rác trong menu chia sẻ Android, tăng tốc mở tức thì</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'sharemove'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="shizustore" onclick="handlePillClick(event, 'shizustore')">
-                    <img src="icon_shizustore.png" alt="ShizuStore" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">ShizuStore <span class="pill-tag-pro">KHO APP SHIZUKU</span></div>
-                        <div class="linkbio-pill-desc">Cửa hàng ứng dụng mã nguồn mở gom toàn bộ app dùng quyền Shizuku trên GitHub</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'shizustore'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="shizucorefetch" onclick="handlePillClick(event, 'shizucorefetch')">
-                    <img src="icon_shizucorefetch.png" alt="ShizuCoreFetch" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">ShizuCoreFetch <span class="pill-tag-safe">NẠP CORE SHIZUKU</span></div>
-                        <div class="linkbio-pill-desc">Tự động nạp Core & cập nhật mô-đun Shizuku siêu tốc, giao diện Material 3</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'shizucorefetch'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
                     </div>
                 </div>
             </div>
 
-            <!-- SET 9: CÔNG NGHỆ ĐỈNH CAO VỰC THẲM (DEEP ARCHITECTURE & CARRIER MODEM) -->
-            <div class="linkbio-category-header">
-                <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(147, 51, 234, 0.25)); border-color: #3b82f6; color: #60a5fa; box-shadow: 0 0 16px rgba(59, 130, 246, 0.25);">🌌 SET 9: CÔNG NGHỆ ĐỈNH CAO VỰC THẲM (DEEP ARCHITECTURE & CARRIER MODEM)</span>
-                <div class="linkbio-cat-sub">Can thiệp cơ sở dữ liệu Phenotype, cấu hình Modem viễn thông VoLTE/VoWiFi, luồng Raw Display 120Hz và lõi Linux cgroup v2</div>
+            <!-- SET 8: SIÊU CÔNG CỤ NGẦM (DEEP SHIZUKU) -->
+            <div class="linkbio-set-accordion" id="accordion-set8">
+                <div class="linkbio-set-header" onclick="toggleSetAccordion('accordion-set8')">
+                    <div class="linkbio-set-header-left">
+                        <div class="linkbio-set-badge-row">
+                            <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.25), rgba(168, 85, 247, 0.2)); border-color: #ec4899; color: #f472b6;">🔮 SET 8: SIÊU CÔNG CỤ NGẦM (DEEP SHIZUKU)</span>
+                            <span class="linkbio-set-count">7 Ứng Dụng</span>
+                        </div>
+                        <div class="linkbio-cat-sub">Tách âm lượng từng app, tắt màn hình khi cày game, chặn văng sàn TMĐT</div>
+                    </div>
+                    <div class="linkbio-set-header-right">
+                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set8')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
+                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
+                        </button>
+                        <div class="set-chevron">▼</div>
+                    </div>
+                </div>
+                <div class="linkbio-set-body">
+                    <div class="linkbio-pills-list">
+                    <div class="linkbio-pill" data-app-id="shizutools" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/legendsayantan/ShizuTools/releases/download/v1.4.6/app-release.apk" onclick="handlePillClick(event, 'shizutools')">
+                        <img src="icon_shizutools.png" alt="ShizuTools" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">ShizuTools <span class="pill-tag-pro">TÁCH ÂM LƯỢNG</span></div>
+                            <div class="linkbio-pill-desc">Tách âm lượng từng app riêng biệt, mở khóa theme trả phí ColorOS/RealmeUI</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'shizutools'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+                    <div class="linkbio-pill" data-app-id="extinguish" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/Moderpach/Extinguish/releases/download/0.9.5.1/app-release.apk" onclick="handlePillClick(event, 'extinguish')">
+                        <img src="icon_extinguish.png" alt="Extinguish" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Extinguish <span class="pill-tag-hot">TẮT ĐIỆN MÀN HÌNH</span></div>
+                            <div class="linkbio-pill-desc">Ngắt hoàn toàn nguồn điện tấm nền màn hình khi cày game/YouTube chạy ngầm</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'extinguish'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+                    <div class="linkbio-pill" data-app-id="redirectguard" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/rdevz-ph/RedirectGuard/releases/download/v1.6-hotfix1/RedirectGuard-v1.6-hotfix1-release.apk" onclick="handlePillClick(event, 'redirectguard')">
+                        <img src="icon_redirectguard.png" alt="Redirect Guard" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Redirect Guard <span class="pill-tag-safe">CHẶN VĂNG SÀN TMĐT</span></div>
+                            <div class="linkbio-pill-desc">Bắn hạ tức thì các pha tự động văng sang Shopee/Lazada/TikTok khi chạm link ẩn</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'redirectguard'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+                    <div class="linkbio-pill" data-app-id="extendroid" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/legendsayantan/Extendroid/releases/download/v1.0.5-no-mediaprojection/Extendroid_v1.0.5_no-mediaprojection.apk" onclick="handlePillClick(event, 'extendroid')">
+                        <img src="icon_extendroid.png" alt="Extendroid" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Extendroid <span class="pill-tag-crown">ĐA CỬA SỔ DESKTOP</span></div>
+                            <div class="linkbio-pill-desc">Biến màn hình điện thoại thành giao diện đa cửa sổ tự do thu phóng và ép PiP</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'extendroid'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+                    <div class="linkbio-pill" data-app-id="essentials" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/sameerasw/essentials/releases/download/v20.3-beta.2/app-release.apk" onclick="handlePillClick(event, 'essentials')">
+                        <img src="icon_essentials.png" alt="Essentials" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Essentials <span class="pill-tag-rare">DAO ĐA NĂNG SYSTEM</span></div>
+                            <div class="linkbio-pill-desc">Bộ dao đa năng: Kích hoạt chế độ siêu tiết kiệm pin, ẩn icon thanh trạng thái</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'essentials'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+                    <div class="linkbio-pill" data-app-id="shizustore" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/timschneeb/ShizuStore/releases/download/1.5.0/ShizuStore-1.5.0.apk" onclick="handlePillClick(event, 'shizustore')">
+                        <img src="icon_shizustore.png" alt="ShizuStore" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">ShizuStore <span class="pill-tag-pro">KHO APP SHIZUKU</span></div>
+                            <div class="linkbio-pill-desc">Cửa hàng ứng dụng mã nguồn mở gom toàn bộ app dùng quyền Shizuku trên GitHub</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'shizustore'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+                    <div class="linkbio-pill" data-app-id="shizucorefetch" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/elhizazi1/ShizuCoreFetch/releases/download/2.4.0/app-release-sign.apk" onclick="handlePillClick(event, 'shizucorefetch')">
+                        <img src="icon_shizucorefetch.png" alt="ShizuCoreFetch" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">ShizuCoreFetch <span class="pill-tag-safe">NẠP CORE SHIZUKU</span></div>
+                            <div class="linkbio-pill-desc">Tự động nạp Core & cập nhật mô-đun Shizuku siêu tốc, giao diện Material 3</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'shizucorefetch'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
-            <div class="linkbio-pills-list">
-                <div class="linkbio-pill" data-app-id="gmsflags" onclick="handlePillClick(event, 'gmsflags')">
-                    <img src="icon_gmsflags.png" alt="GMS Flags" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">GMS Flags <span class="pill-tag-crown">GMS TWEAK</span></div>
-                        <div class="linkbio-pill-desc">Can thiệp database Phenotype.db mở khóa cờ ẩn & triệt tiêu hao pin ngầm Google Play Services</div>
+
+            <!-- SET 9: ĐỈNH CAO VỰC THẲM (DEEP ARCHITECTURE) -->
+            <div class="linkbio-set-accordion" id="accordion-set9">
+                <div class="linkbio-set-header" onclick="toggleSetAccordion('accordion-set9')">
+                    <div class="linkbio-set-header-left">
+                        <div class="linkbio-set-badge-row">
+                            <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(147, 51, 234, 0.25)); border-color: #3b82f6; color: #60a5fa; box-shadow: 0 0 16px rgba(59, 130, 246, 0.25);">🌌 SET 9: ĐỈNH CAO VỰC THẲM (DEEP ARCHITECTURE)</span>
+                            <span class="linkbio-set-count">8 Ứng Dụng</span>
+                        </div>
+                        <div class="linkbio-cat-sub">Can thiệp Phenotype.db, cấu hình Modem VoLTE/VoWiFi, luồng Raw Display 120Hz</div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'gmsflags'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="pixelims" onclick="handlePillClick(event, 'pixelims')">
-                    <img src="icon_pixelims.png" alt="Pixel IMS" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Pixel IMS <span class="pill-tag-hot">CARRIER MODEM</span></div>
-                        <div class="linkbio-pill-desc">Dùng Shizuku ghi đè CarrierConfig ép mở khóa VoLTE / VoWiFi chống rớt cuộc gọi khi khóa 4G</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'pixelims'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-set-header-right">
+                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set9')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
+                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
+                        </button>
+                        <div class="set-chevron">▼</div>
                     </div>
                 </div>
-                <div class="linkbio-pill" data-app-id="scrcpyandroid" onclick="handlePillClick(event, 'scrcpyandroid')">
-                    <img src="icon_scrcpy.png" alt="Scrcpy-Android" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Scrcpy-Android <span class="pill-tag-pro">RAW DISPLAY 120HZ</span></div>
-                        <div class="linkbio-pill-desc">Stream luồng raw H.265/AV1 120FPS độ trễ 0ms & tắt tối đen màn hình vật lý thiết bị thật</div>
+                <div class="linkbio-set-body">
+                    <div class="linkbio-pills-list">
+                    <div class="linkbio-pill" data-app-id="gmsflags" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/polodarb/GMS-Flags/releases/download/1.1.0/gms_flags_1.1.0.apk" onclick="handlePillClick(event, 'gmsflags')">
+                        <img src="icon_gmsflags.png" alt="GMS Flags" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">GMS Flags <span class="pill-tag-crown">GMS TWEAK</span></div>
+                            <div class="linkbio-pill-desc">Can thiệp database Phenotype.db mở khóa cờ ẩn & triệt tiêu hao pin ngầm Google Play Services</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'gmsflags'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'scrcpyandroid'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="pixelims" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/kyujin-cho/pixel-volte-patch/releases/download/1.3.2/dev.bluehouse.enablevolte.apk" onclick="handlePillClick(event, 'pixelims')">
+                        <img src="icon_pixelims.png" alt="Pixel IMS" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Pixel IMS <span class="pill-tag-hot">CARRIER MODEM</span></div>
+                            <div class="linkbio-pill-desc">Dùng Shizuku ghi đè CarrierConfig ép mở khóa VoLTE / VoWiFi chống rớt cuộc gọi khi khóa 4G</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'pixelims'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="openpods" onclick="handlePillClick(event, 'openpods')">
-                    <img src="icon_openpods.png" alt="AirBattery / OpenPods" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">AirBattery / OpenPods <span class="pill-tag-safe">BLE HARDWARE</span></div>
-                        <div class="linkbio-pill-desc">Đọc gói tin BLE hiển thị pin từng bên tai nghe AirPods, Galaxy Buds, Sony lên Widget</div>
+                    <div class="linkbio-pill" data-app-id="scrcpyandroid" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/zwc456baby/ScrcpyForAndroid/releases/download/v1.6.1/scrcpy-1.6.1-r36-release.apk" onclick="handlePillClick(event, 'scrcpyandroid')">
+                        <img src="icon_scrcpy.png" alt="Scrcpy-Android" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Scrcpy-Android <span class="pill-tag-pro">RAW DISPLAY 120HZ</span></div>
+                            <div class="linkbio-pill-desc">Stream luồng raw H.265/AV1 120FPS độ trễ 0ms & tắt tối đen màn hình vật lý thiết bị thật</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'scrcpyandroid'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'openpods'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="openpods" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//f-droid.org/repo/com.dosse.airpods_24.apk" onclick="handlePillClick(event, 'openpods')">
+                        <img src="icon_openpods.png" alt="AirBattery / OpenPods" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">AirBattery / OpenPods <span class="pill-tag-safe">BLE HARDWARE</span></div>
+                            <div class="linkbio-pill-desc">Đọc gói tin BLE hiển thị pin từng bên tai nghe AirPods, Galaxy Buds, Sony lên Widget</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'openpods'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="fdeai" onclick="handlePillClick(event, 'fdeai')">
-                    <img src="icon_fdeai.png" alt="Athena / FDE-AI" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Athena / FDE-AI <span class="pill-tag-crown">LMKD AI TUNER</span></div>
-                        <div class="linkbio-pill-desc">AI điều phối ngưỡng LMKD & Standby Buckets giữ game bất tử trong RAM không bị reload</div>
+                    <div class="linkbio-pill" data-app-id="fdeai" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/feravolt/FDE.AI-docs/releases/download/26.08.1/FDE.AI-v26.08.1.apk" onclick="handlePillClick(event, 'fdeai')">
+                        <img src="icon_fdeai.png" alt="Athena / FDE-AI" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Athena / FDE-AI <span class="pill-tag-crown">LMKD AI TUNER</span></div>
+                            <div class="linkbio-pill-desc">AI điều phối ngưỡng LMKD & Standby Buckets giữ game bất tử trong RAM không bị reload</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'fdeai'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'fdeai'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="brevent" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//play.google.com/store/apps/details%3Fid%3Dme.piebridge.brevent" onclick="handlePillClick(event, 'brevent')">
+                        <img src="icon_brevent.png" alt="Brevent" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Brevent <span class="pill-tag-pro">CGROUP V2 FREEZER</span></div>
+                            <div class="linkbio-pill-desc">Tiên phong cơ chế Linux cgroup v2 Cached App Freezer đóng băng ứng dụng 0% CPU</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'brevent'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="brevent" onclick="handlePillClick(event, 'brevent')">
-                    <img src="icon_brevent.png" alt="Brevent" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Brevent <span class="pill-tag-pro">CGROUP V2 FREEZER</span></div>
-                        <div class="linkbio-pill-desc">Tiên phong cơ chế Linux cgroup v2 Cached App Freezer đóng băng ứng dụng 0% CPU</div>
+                    <div class="linkbio-pill" data-app-id="sensorsoff" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//developer.android.com/guide/topics/sensors/sensors_overview" onclick="handlePillClick(event, 'sensorsoff')">
+                        <img src="icon_sensorsoff.png" alt="Sensors Off Tile" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Sensors Off Tile <span class="pill-tag-hot">HARDWARE KILLSWITCH</span></div>
+                            <div class="linkbio-pill-desc">Ngắt mạch toàn bộ cảm biến (Gyro, Accel, Mic) 1 chạm triệt tiêu quảng cáo lắc & giảm IRQ CPU</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'sensorsoff'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'brevent'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="clipious" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/lamarios/clipious/releases/download/1.22.15/app-release.apk" onclick="handlePillClick(event, 'clipious')">
+                        <img src="icon_clipious.png" alt="Clipious / ShizuClip" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Clipious / ShizuClip <span class="pill-tag-safe">READ_LOGS PRIVACY</span></div>
+                            <div class="linkbio-pill-desc">Vượt rào cản Android 10-16: Đọc và đồng bộ clipboard ngầm & xem Invidious riêng tư tuyệt đối</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'clipious'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="sensorsoff" onclick="handlePillClick(event, 'sensorsoff')">
-                    <img src="icon_sensorsoff.png" alt="Sensors Off Tile" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Sensors Off Tile <span class="pill-tag-hot">HARDWARE KILLSWITCH</span></div>
-                        <div class="linkbio-pill-desc">Ngắt mạch toàn bộ cảm biến (Gyro, Accel, Mic) 1 chạm triệt tiêu quảng cáo lắc & giảm IRQ CPU</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'sensorsoff'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="clipious" onclick="handlePillClick(event, 'clipious')">
-                    <img src="icon_clipious.png" alt="Clipious / ShizuClip" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Clipious / ShizuClip <span class="pill-tag-safe">READ_LOGS PRIVACY</span></div>
-                        <div class="linkbio-pill-desc">Vượt rào cản Android 10-16: Đọc và đồng bộ clipboard ngầm & xem Invidious riêng tư tuyệt đối</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'clipious'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
                     </div>
                 </div>
             </div>
-            <!-- SET 10: CÔNG NGHỆ TẦNG BẢN NGUYÊN (KERNEL WAKELOCK, UFS TRIM & EVENT-DRIVEN) -->
-            <div class="linkbio-category-header">
-                <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.25), rgba(234, 179, 8, 0.25)); border-color: #ec4899; color: #f472b6; box-shadow: 0 0 16px rgba(236, 72, 153, 0.25);">🧬 SET 10: CÔNG NGHỆ TẦNG BẢN NGUYÊN (KERNEL WAKELOCK, UFS TRIM &amp; EVENT-DRIVEN)</span>
-                <div class="linkbio-cat-sub">Kiểm soát Partial/Kernel WakeLocks • Ép Deep Doze trong 5s • Dọn rác ô nhớ UFS (sm fstrim) • Tự động hóa sự kiện</div>
-            </div>
-            <div class="linkbio-pills-list">
-                <div class="linkbio-pill" data-app-id="idletweaks" onclick="handlePillClick(event, 'idletweaks')">
-                    <img src="icon_idletweaks.png" alt="Zero / IdleTweaks" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Zero / IdleTweaks <span class="pill-tag-crown">DEEP DOZE 5 GIÂY</span></div>
-                        <div class="linkbio-pill-desc">Can thiệp device_idle_constants, cắt hoàn toàn Light Doze ép máy ngủ sâu sau 5 giây tắt màn hình</div>
+
+            <!-- SET 10: CÔNG NGHỆ TẦNG BẢN NGUYÊN -->
+            <div class="linkbio-set-accordion" id="accordion-set10">
+                <div class="linkbio-set-header" onclick="toggleSetAccordion('accordion-set10')">
+                    <div class="linkbio-set-header-left">
+                        <div class="linkbio-set-badge-row">
+                            <span class="linkbio-cat-badge" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.25), rgba(234, 179, 8, 0.25)); border-color: #ec4899; color: #f472b6; box-shadow: 0 0 16px rgba(236, 72, 153, 0.25);">🧬 SET 10: CÔNG NGHỆ TẦNG BẢN NGUYÊN</span>
+                            <span class="linkbio-set-count">7 Ứng Dụng</span>
+                        </div>
+                        <div class="linkbio-cat-sub">Kiểm soát WakeLocks • Ép Deep Doze 5s • Dọn rác UFS (sm fstrim) • Event-Driven</div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'idletweaks'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="betterbatterystats" onclick="handlePillClick(event, 'betterbatterystats')">
-                    <img src="icon_betterbatterystats.png" alt="BetterBatteryStats" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">BetterBatteryStats (BBS) <span class="pill-tag-hot">SOI KERNEL WAKELOCKS</span></div>
-                        <div class="linkbio-pill-desc">Bắt tận tay các Partial &amp; Kernel WakeLocks đánh thức CPU ngầm và tước quyền qua Shizuku AppOps</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'betterbatterystats'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-set-header-right">
+                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set10')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
+                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
+                        </button>
+                        <div class="set-chevron">▼</div>
                     </div>
                 </div>
-                <div class="linkbio-pill" data-app-id="simplehook" onclick="handlePillClick(event, 'simplehook')">
-                    <img src="icon_simplehook.png" alt="SimpleHook" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">SimpleHook / Vector <span class="pill-tag-pro">DEX HOOKING RUNTIME</span></div>
-                        <div class="linkbio-pill-desc">Chỉnh sửa giá trị trả về hàm Java/Kotlin thời gian thực, mở khóa tính năng ẩn không cần sửa file APK</div>
+                <div class="linkbio-set-body">
+                    <div class="linkbio-pills-list">
+                    <div class="linkbio-pill" data-app-id="idletweaks" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/bihari-boy/IdleTweaks" onclick="handlePillClick(event, 'idletweaks')">
+                        <img src="icon_idletweaks.png" alt="Zero / IdleTweaks" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Zero / IdleTweaks <span class="pill-tag-crown">DEEP DOZE 5 GIÂY</span></div>
+                            <div class="linkbio-pill-desc">Can thiệp device_idle_constants, cắt hoàn toàn Light Doze ép máy ngủ sâu sau 5 giây tắt màn hình</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'idletweaks'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'simplehook'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="betterbatterystats" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/asksven/bbs_reloaded-releases/releases/download/v1.0.0/bbs-reloaded-v1.0.0.apk" onclick="handlePillClick(event, 'betterbatterystats')">
+                        <img src="icon_betterbatterystats.png" alt="BetterBatteryStats (BBS)" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">BetterBatteryStats (BBS) <span class="pill-tag-hot">SOI KERNEL WAKELOCKS</span></div>
+                            <div class="linkbio-pill-desc">Bắt tận tay các Partial & Kernel WakeLocks đánh thức CPU ngầm và tước quyền qua Shizuku AppOps</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'betterbatterystats'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="batterychargelimit" onclick="handlePillClick(event, 'batterychargelimit')">
-                    <img src="icon_batterychargelimit.png" alt="Battery Charge Limiter" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Battery Charge Limiter <span class="pill-tag-safe">BYPASS CHARGING 80%</span></div>
-                        <div class="linkbio-pill-desc">Khóa ngưỡng sạc ở 80% - 85% từ chip nguồn, giả lập nhánh nguồn sạc nhánh giảm nhiệt độ khi cắm sạc chơi game</div>
+                    <div class="linkbio-pill" data-app-id="simplehook" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/littleWhiteDuck/SimpleHook/releases/download/v2.0.2/SimpleHookR-root-2.0.2-26081216.apk" onclick="handlePillClick(event, 'simplehook')">
+                        <img src="icon_simplehook.png" alt="SimpleHook / Vector" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">SimpleHook / Vector <span class="pill-tag-pro">DEX HOOKING RUNTIME</span></div>
+                            <div class="linkbio-pill-desc">Chỉnh sửa giá trị trả về hàm Java/Kotlin thời gian thực, mở khóa tính năng ẩn không cần sửa file APK</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'simplehook'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'batterychargelimit'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="batterychargelimit" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/sriharshaarangi/BatteryChargeLimit" onclick="handlePillClick(event, 'batterychargelimit')">
+                        <img src="icon_batterychargelimit.png" alt="Battery Charge Limiter" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Battery Charge Limiter <span class="pill-tag-safe">BYPASS CHARGING 80%</span></div>
+                            <div class="linkbio-pill-desc">Khóa ngưỡng sạc ở 80% - 85% từ chip nguồn, giả lập nhánh nguồn sạc nhánh giảm nhiệt độ khi cắm sạc chơi game</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'batterychargelimit'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="bluetoothcodec" onclick="handlePillClick(event, 'bluetoothcodec')">
-                    <img src="icon_bluetoothcodec.png" alt="Bluetooth Codec Changer" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Bluetooth Codec Changer <span class="pill-tag-rare">KHÓA LDAC 990KBPS</span></div>
-                        <div class="linkbio-pill-desc">Ép khóa cứng chuẩn truyền LDAC 990kbps / aptX và hạ bộ đệm âm thanh giảm tối đa độ trễ tai nghe Bluetooth</div>
+                    <div class="linkbio-pill" data-app-id="bluetoothcodec" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//play.google.com/store/apps/details%3Fid%3Dcom.amrg.bluetooth_codec_converter" onclick="handlePillClick(event, 'bluetoothcodec')">
+                        <img src="icon_bluetoothcodec.png" alt="Bluetooth Codec Changer" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Bluetooth Codec Changer <span class="pill-tag-rare">KHÓA LDAC 990KBPS</span></div>
+                            <div class="linkbio-pill-desc">Ép khóa cứng chuẩn truyền LDAC 990kbps / aptX và hạ bộ đệm âm thanh giảm tối đa độ trễ tai nghe Bluetooth</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'bluetoothcodec'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'bluetoothcodec'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
+                    <div class="linkbio-pill" data-app-id="diskinfo" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//play.google.com/store/apps/details%3Fid%3Dme.kuder.diskinfo" onclick="handlePillClick(event, 'diskinfo')">
+                        <img src="icon_diskinfo.png" alt="DiskInfo / F2FS-Tuner" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">DiskInfo / F2FS-Tuner <span class="pill-tag-pro">BẢO TRÌ CHIP NHỚ UFS</span></div>
+                            <div class="linkbio-pill-desc">Soi phân vùng UFS/zRAM và bắn lệnh sm fstrim dọn sạch ô nhớ vật lý, phục hồi tốc độ đọc ghi gốc của chip nhớ</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'diskinfo'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="diskinfo" onclick="handlePillClick(event, 'diskinfo')">
-                    <img src="icon_diskinfo.png" alt="DiskInfo" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">DiskInfo / F2FS-Tuner <span class="pill-tag-pro">BẢO TRÌ CHIP NHỚ UFS</span></div>
-                        <div class="linkbio-pill-desc">Soi phân vùng UFS/zRAM và bắn lệnh sm fstrim dọn sạch ô nhớ vật lý, phục hồi tốc độ đọc ghi gốc của chip nhớ</div>
+                    <div class="linkbio-pill" data-app-id="easer" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/renyuneyun/Easer/releases/download/v0.8.2.3/Easer-v0.8.2.3.apk" onclick="handlePillClick(event, 'easer')">
+                        <img src="icon_easer.png" alt="Chronos / Easer" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">Chronos / Easer <span class="pill-tag-crown">TỰ ĐỘNG HÓA PIPELINE</span></div>
+                            <div class="linkbio-pill-desc">Tự động hóa theo sự kiện: Bấm mở icon Game là tự kích hoạt Vulkan, khóa LTE và gọi Hail đóng băng khi thoát</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'easer'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
                     </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'diskinfo'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
-                    </div>
-                </div>
-                <div class="linkbio-pill" data-app-id="easer" onclick="handlePillClick(event, 'easer')">
-                    <img src="icon_easer.png" alt="Easer" class="linkbio-pill-img">
-                    <div class="linkbio-pill-content">
-                        <div class="linkbio-pill-title">Chronos / Easer <span class="pill-tag-crown">TỰ ĐỘNG HÓA PIPELINE</span></div>
-                        <div class="linkbio-pill-desc">Tự động hóa theo sự kiện: Bấm mở icon Game là tự kích hoạt Vulkan, khóa LTE và gọi Hail đóng băng khi thoát</div>
-                    </div>
-                    <div class="linkbio-pill-action" onclick="openRandomDownload(event, 'easer'); event.stopPropagation();">
-                        <span>Tải ngay!</span> <span>➔</span>
                     </div>
                 </div>
             </div>
@@ -3079,88 +3579,7 @@ settings put secure multi_press_timeout 200</code></pre>
             </div>
         </section>
 
-        <!-- ==================== 2. FAST DOWNLOAD CARDS (ALWAYS VISIBLE) ==================== -->
-        <section class="section-wrap" id="download">
-            <div class="section-title-wrap">
-                <span class="section-badge">DOWNLOAD &amp; TRẢI NGHIỆM</span>
-                <h2 class="section-title">Tải Về Bộ Ba Ứng Dụng Tối Ưu Flowly</h2>
-                <p class="section-desc">Mỗi ứng dụng mang một sứ mệnh tối ưu riêng biệt, hoạt động độc lập và không xung đột!</p>
-            </div>
 
-            <div class="apps-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-                <!-- 1. FlowS (Gamer Tuner) -->
-                <div class="app-download-card flows">
-                    <div>
-                        <div class="app-header">
-                            <img src="flows_logo.png" alt="FlowS" class="app-icon-img" style="border-color: #00ff66;">
-                            <div>
-                                <div class="app-title">FlowS</div>
-                                <span class="app-sub-badge" style="background: rgba(0, 255, 102, 0.15); color: #00ff66;">GAMER TUNER (v3.5)</span>
-                            </div>
-                        </div>
-                        <div class="app-bullets">
-                            • 🎮 <b>Tự Quét Game Thật:</b> Nhận diện Liên Quân, Free Fire, PUBG, Tốc Chiến...<br>
-                            • 🖥️ <b>Hạ Độ Phân Giải Riêng Từng Game:</b> 540p, 720p tăng 25-35 FPS mượt mà.<br>
-                            • 🔄 <b>Auto-Restore Độc Quyền:</b> Tự về gốc khi tắt màn hình hoặc thoát game.<br>
-                            • 🔥 <b>Chế Độ CRAZY Đầu 3x:</b> Dồn RAM ~3200MB, khóa 120Hz chống quá nhiệt.<br>
-                            • 🔋 <b>Sửa Thanh Pin Trắng:</b> Nút 1-chạm cho máy Oppo & Realme.
-                        </div>
-                    </div>
-                    <button type="button" onclick="openUnlockModal('flows')" class="btn-download-action flows">
-                        <span>⚡</span>
-                        <span>TẢI FLOWS (LINK4M)</span>
-                    </button>
-                </div>
-
-                <!-- 2. FlowOptimize (Theme Anime & Chẩn Đoán Hãng) -->
-                <div class="app-download-card flowopt">
-                    <div>
-                        <div class="app-header">
-                            <img src="app_logo.png" alt="FlowOptimize" class="app-icon-img" style="border-color: #ec4899;">
-                            <div>
-                                <div class="app-title">FlowOptimize</div>
-                                <span class="app-sub-badge" style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">THEME ANIME (v2.6)</span>
-                            </div>
-                        </div>
-                        <div class="app-bullets">
-                            • 🌸 <b>7 Bộ Theme Anime Độc Quyền:</b> Kimi no Na wa, Gojo, Naruto, One Piece...<br>
-                            • 🔍 <b>Chẩn Đoán Lỗi Bóp Xung Theo Hãng:</b> Xiaomi Joyose, Samsung GOS, Oppo, Vivo, Infinix.<br>
-                            • 🫧 <b>Bong Bóng Nổi HUD:</b> Theo dõi RAM, nhiệt độ trực tiếp trong game.<br>
-                            • 🛡️ <b>Cơ Chế Dọn RAM Thông Minh:</b> Bảo vệ 100% cuộc gọi Zalo, Messenger.<br>
-                            • 🔄 <b>Khôi Phục Toàn Diện 1-Chạm:</b> Mở lại 100% ứng dụng khi cần.
-                        </div>
-                    </div>
-                    <button type="button" onclick="openUnlockModal('flowoptimize')" class="btn-download-action flowopt">
-                        <span>🌸</span>
-                        <span>TẢI FLOWOPTIMIZE (LINK4M)</span>
-                    </button>
-                </div>
-
-                <!-- 3. FlowUltra (Mã Nguồn Mở Cấp Thấp - 20 Open-Source Engines) -->
-                <div class="app-download-card flowultra">
-                    <div>
-                        <div class="app-header">
-                            <img src="flowultra_logo.png" alt="FlowUltra" class="app-icon-img" style="border-color: #f59e0b;">
-                            <div>
-                                <div class="app-title">FlowUltra</div>
-                                <span class="app-sub-badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">OPEN-SOURCE SUITE (v1.0)</span>
-                            </div>
-                        </div>
-                        <div class="app-bullets">
-                            • ⚡ <b>Shappky 4-Stage Progressive Killer:</b> Diệt tận gốc tiến trình cứng đầu pkill -9.<br>
-                            • 🛑 <b>Appzuku Greedy Restrictor:</b> Khóa AppOps WakeLock chạy ngầm TikTok, FB, Shopee.<br>
-                            • ❄️ <b>Screen-Off Deep Doze:</b> Ép CPU ngủ sâu force-idle khi tắt màn hình, pin đêm tụt &lt; 1%.<br>
-                            • 🕶️ <b>AFK Extinguish 0-Nits:</b> Tắt màn AMOLED 0-nits cày game không hao pin.<br>
-                            • 📊 <b>MemHogs Live PSS Tracker &amp; Hail:</b> Đo RAM chuẩn xác &amp; đóng băng app rác 0% CPU.
-                        </div>
-                    </div>
-                    <button type="button" onclick="openUnlockModal('flowultra')" class="btn-download-action flowultra">
-                        <span>🚀</span>
-                        <span>TẢI FLOWULTRA (LINK4M)</span>
-                    </button>
-                </div>
-            </div>
-        </section>
 
         <!-- ==================== 3. COLLAPSIBLE INTERACTIVE PREVIEW ==================== -->
         <section class="preview-trigger-wrap" id="preview">
@@ -5660,26 +6079,124 @@ settings put secure multi_press_timeout 200</code></pre>
         if (e.key === 'Escape') closeAppModal();
     });
 
-    function openRandomDownload(event, appId) {
-        if (event) event.preventDefault();
-        const app = APP_TRIPLE_LINKS[appId];
-        if (!app) return;
-        const gateways = [app.layma, app.link4m, app.yeumoney].filter(Boolean);
-        const chosen = gateways[Math.floor(Math.random() * gateways.length)];
-        window.open(chosen, '_blank', 'noopener,noreferrer');
+        // SET LINKS (LINK4M ONLY)
+    const SET_LINKS = {
+    "set1": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases",
+    "set2": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases",
+    "set3": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases",
+    "set4": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases",
+    "set5": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases",
+    "set6": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases",
+    "set7": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases",
+    "set8": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases",
+    "set9": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases",
+    "set10": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases"
+};
+
+    // Accordion Toggle Functions
+    function toggleSetAccordion(accordionId) {
+        const el = document.getElementById(accordionId);
+        if (!el) return;
+        el.classList.toggle('is-open');
     }
 
-    // Randomize href on page load for right-click / direct tap
+    function filterTools(query) {
+        query = (query || '').toLowerCase().trim();
+        const sets = document.querySelectorAll('.linkbio-set-accordion');
+        
+        if (!query) {
+            sets.forEach(setEl => {
+                const pills = setEl.querySelectorAll('.linkbio-pill');
+                pills.forEach(p => p.style.display = '');
+                setEl.style.display = '';
+            });
+            return;
+        }
+        
+        sets.forEach(setEl => {
+            const pills = setEl.querySelectorAll('.linkbio-pill');
+            let matchCount = 0;
+            pills.forEach(p => {
+                const text = (p.textContent || '').toLowerCase();
+                const appId = (p.getAttribute('data-app-id') || '').toLowerCase();
+                if (text.includes(query) || appId.includes(query)) {
+                    p.style.display = '';
+                    matchCount++;
+                } else {
+                    p.style.display = 'none';
+                }
+            });
+            
+            if (matchCount > 0) {
+                setEl.style.display = '';
+                setEl.classList.add('is-open');
+            } else {
+                setEl.style.display = 'none';
+            }
+        });
+    }
+
+    function clearToolSearch() {
+        const inp = document.getElementById('toolSearchInput');
+        if (inp) {
+            inp.value = '';
+            filterTools('');
+        }
+    }
+
+    function expandAllSets() {
+        document.querySelectorAll('.linkbio-set-accordion').forEach(el => el.classList.add('is-open'));
+    }
+
+    function collapseAllSets() {
+        document.querySelectorAll('.linkbio-set-accordion').forEach(el => el.classList.remove('is-open'));
+    }
+
+    // Open Set Full Download (Link4M Only)
+    function openSetDownload(event, setId) {
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        const link = SET_LINKS[setId] || "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases";
+        window.open(link, '_blank', 'noopener,noreferrer');
+    }
+
+    // Open Individual App Download (Link4M Only)
+    function openDirectDownload(event, appId) {
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        const app = APP_TRIPLE_LINKS[appId];
+        if (!app) return;
+        // Gom lại 1 link Link4M duy nhất (loại bỏ hoàn toàn Layma & YeuMoney)
+        const link = app.link4m || app.dest;
+        window.open(link, '_blank', 'noopener,noreferrer');
+    }
+
+    // Alias for compatibility
+    function openRandomDownload(event, appId) {
+        openDirectDownload(event, appId);
+    }
+
+    // Direct open from Detail Modal
+    function openDetailDownload() {
+        if (!currentModalAppId) return;
+        openDirectDownload(null, currentModalAppId);
+    }
+
+    // Set href on DOM load
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.linkbio-pill[data-app-id]').forEach(pill => {
             const id = pill.getAttribute('data-app-id');
             const app = APP_TRIPLE_LINKS[id];
-            if (app) {
-                const gateways = [app.layma, app.link4m, app.yeumoney].filter(Boolean);
-                pill.href = gateways[Math.floor(Math.random() * gateways.length)];
+            if (app && app.link4m) {
+                pill.href = app.link4m;
             }
         });
     });
+
     </script>
 
 
