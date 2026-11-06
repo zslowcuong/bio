@@ -43,7 +43,7 @@
     "version": "v1.4.0 Pro",
     "version_code": 4,
     "min_version_code": 4,
-    "force_update": true,
+    "force_update": false,
     "update_url": "https://bio-seven-nu.vercel.app/",
     "package": "com.example.gameoptimizer",
     "changelog": "Bản cập nhật v1.4.0 Pro: Tối ưu eSports siêu mượt, nâng cấp tính năng PRO và giao diện mới.",
