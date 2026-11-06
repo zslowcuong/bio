@@ -40,15 +40,15 @@
   },
   "flowoptimize": {
     "name": "FlowOptimize Anime Edition",
-    "version": "v1.2.0 Pro",
-    "version_code": 2,
-    "min_version_code": 2,
-    "force_update": false,
+    "version": "v1.3.0 Pro",
+    "version_code": 3,
+    "min_version_code": 3,
+    "force_update": true,
     "update_url": "https://bio-seven-nu.vercel.app/",
     "package": "com.example.gameoptimizer",
-    "changelog": "Tối ưu hóa độ phân giải eSports, kích hoạt PRO Key, gửi feedback phản hồi trực tiếp.",
-    "destination_apk": "https://gofile.io/d/xPjjCyoA",
-    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/xPjjCyoA",
+    "changelog": "Bản cập nhật v1.3.0 Pro: Tối ưu eSports siêu mượt, nâng cấp tính năng PRO và giao diện mới.",
+    "destination_apk": "https://gofile.io/d/OLldrNVo",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/OLldrNVo",
     "direct_apk": "FlowOptimize.apk"
   },
   "flowultra": {
