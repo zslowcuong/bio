@@ -2264,15 +2264,10 @@
                         </div>
                     </div>
                     <div style="margin-top: 16px;">
-                        <a href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//raw.githubusercontent.com/7dzuong/bio/main/BrotX-v8.apk" target="_blank" class="btn-download-action brotx" style="text-decoration: none;">
+                        <button type="button" onclick="openUnlockModal('brotx')" class="btn-download-action brotx">
                             <span>🔥</span>
                             <span>TẢI BROTX V8 (LINK4M)</span>
-                        </a>
-                        <div style="display: flex; gap: 8px; margin-top: 8px;">
-                            <a href="BrotX-v8.apk" download style="flex: 1; padding: 10px 12px; font-size: 12px; font-weight: 700; text-align: center; border-radius: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                                <span>⚡</span> <span>Tải Trực Tiếp (4.1MB)</span>
-                            </a>
-                        </div>
+                        </button>
                     </div>
                 </div>
 
@@ -2297,16 +2292,13 @@
                         </div>
                     </div>
                     <div style="margin-top: 16px;">
-                        <a href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases/download/v13.5.4.r1049.0e5b723/shizuku-v13.5.4.r1049.0e5b723-release.apk" target="_blank" class="btn-download-action shizuku" style="text-decoration: none;">
+                        <button type="button" onclick="openUnlockModal('shizuku')" class="btn-download-action shizuku">
                             <span>⚡</span>
                             <span>TẢI SHIZUKU (LINK4M)</span>
-                        </a>
+                        </button>
                         <div style="display: flex; gap: 8px; margin-top: 8px;">
-                            <a href="https://github.com/RikkaApps/Shizuku/releases" target="_blank" style="flex: 1; padding: 10px 12px; font-size: 12px; font-weight: 700; text-align: center; border-radius: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(6,182,212,0.3); color: #7dd3fc; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                                <span>🌐</span> <span>GitHub Official</span>
-                            </a>
-                            <a href="#guide" style="flex: 1; padding: 10px 12px; font-size: 12px; font-weight: 700; text-align: center; border-radius: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); color: #cbd5e1; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                                <span>📖</span> <span>Xem HD Cài</span>
+                            <a href="#guide" style="width: 100%; padding: 10px 12px; font-size: 12px; font-weight: 700; text-align: center; border-radius: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(6,182,212,0.3); color: #7dd3fc; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                                <span>📖</span> <span>Xem Hướng Dẫn Kích Hoạt Shizuku</span>
                             </a>
                         </div>
                     </div>
@@ -2314,8 +2306,7 @@
             </div>
         </section>
 
-
-                                <!-- ==================== 2. FAST DOWNLOAD CARDS (ALWAYS VISIBLE) ==================== -->
+<!-- ==================== 2. FAST DOWNLOAD CARDS (ALWAYS VISIBLE) ==================== -->
         <section class="section-wrap" id="download">
             <div class="section-title-wrap">
                 <span class="section-badge" style="background: linear-gradient(135deg, rgba(0, 255, 102, 0.2), rgba(236, 72, 153, 0.2)); border-color: #00ff66; color: #00ff66; box-shadow: 0 0 16px rgba(0, 255, 102, 0.25);">👑 BỘ BA CÔNG CỤ TỐI ƯU ĐỘC QUYỀN FLOWLY</span>
@@ -4394,12 +4385,11 @@ settings put secure multi_press_timeout 200</code></pre>
         function openUnlockModal(appKey) {
             currentTargetApp = appKey;
             const modal = document.getElementById('unlockDownloadModal');
-            const icon = document.getElementById('detailModalAppIcon');
+            const icon = document.getElementById('modalAppIcon') || document.getElementById('detailModalAppIcon');
             const title = document.getElementById('modalAppTitle');
             const sub = document.getElementById('modalAppSub');
             const linkBtnLabel = document.getElementById('txtFinalLink4mLabel');
             const finalBtn = document.getElementById('btnFinalLink4m');
-            // directBtn removed
             const banner = document.getElementById('unlockBannerText');
             const btnTikTok = document.getElementById('btnFollowTikTok');
             const verifyingBox = document.getElementById('unlockVerifyingBox');
@@ -4432,13 +4422,13 @@ settings put secure multi_press_timeout 200</code></pre>
             } else if (appKey === 'flowultra') {
                 if (icon) icon.src = 'flowultra_logo.png';
                 if (title) title.textContent = 'FlowUltra - Hardware Suite (v1.0.5)';
-                if (sub) sub.textContent = '20 Open-Source Engines • Shappky 4-Stage • Deep Doze • AFK 0-Nits';
+                if (sub) sub.textContent = '20 Open-Source Engines • Shappky 4-Stage • Deep Doze';
                 if (linkBtnLabel) linkBtnLabel.textContent = 'CHUYỂN SANG LINK4M TẢI FLOWULTRA →';
                 if (finalBtn) {
                     finalBtn.style.background = 'linear-gradient(135deg, #d97706 0%, #f59e0b 100%)';
                     finalBtn.style.color = '#050811';
                 }
-            } else {
+            } else if (appKey === 'flowopt' || appKey === 'flowoptimize') {
                 if (icon) icon.src = 'app_logo.png';
                 if (title) title.textContent = 'FlowOptimize Ultra Pro (v2.6)';
                 if (sub) sub.textContent = 'Bản Anime • 7 Theme Sắc Nét • HUD PopUp • Chẩn Đoán Hãng';
@@ -4447,9 +4437,49 @@ settings put secure multi_press_timeout 200</code></pre>
                     finalBtn.style.background = 'linear-gradient(135deg, #f472b6 0%, #ec4899 100%)';
                     finalBtn.style.color = '#fff';
                 }
+            } else if (appKey === 'brotx') {
+                if (icon) icon.src = 'icon_brotx.png';
+                if (title) title.textContent = 'BrotX Optimizer v8 (v8.0.0)';
+                if (sub) sub.textContent = 'Siêu Công Cụ Dọn Dẹp UAD & Tối Ưu Gaming';
+                if (linkBtnLabel) linkBtnLabel.textContent = 'CHUYỂN SANG LINK4M TẢI BROTX V8 →';
+                if (finalBtn) {
+                    finalBtn.style.background = 'linear-gradient(135deg, #ef4444 0%, #f97316 100%)';
+                    finalBtn.style.color = '#fff';
+                }
+            } else if (appKey === 'shizuku') {
+                if (icon) icon.src = 'icon_shizuku.png';
+                if (title) title.textContent = 'Shizuku - Nền Tảng Cấp Quyền ADB';
+                if (sub) sub.textContent = 'Hoạt Động 100% Không Cần Root (v13.5.4)';
+                if (linkBtnLabel) linkBtnLabel.textContent = 'CHUYỂN SANG LINK4M TẢI SHIZUKU →';
+                if (finalBtn) {
+                    finalBtn.style.background = 'linear-gradient(135deg, #0284c7 0%, #06b6d4 100%)';
+                    finalBtn.style.color = '#fff';
+                }
+            } else if (typeof appKey === 'string' && appKey.startsWith('set')) {
+                const setNum = appKey.replace('set', '').toUpperCase();
+                if (icon) icon.src = 'app_logo.png';
+                if (title) title.textContent = 'Trọn Bộ SET ' + setNum;
+                if (sub) sub.textContent = 'Gói Ứng Dụng Tối Ưu Chuyên Sâu Tầng Hệ Thống';
+                if (linkBtnLabel) linkBtnLabel.textContent = 'CHUYỂN SANG LINK4M TẢI TRỌN BỘ SET ' + setNum + ' →';
+                if (finalBtn) {
+                    finalBtn.style.background = 'linear-gradient(135deg, #0284c7 0%, #38bdf8 100%)';
+                    finalBtn.style.color = '#fff';
+                }
+            } else {
+                const appInfo = (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS[appKey]) || 
+                                (typeof APP_DETAILS_DATA !== 'undefined' && APP_DETAILS_DATA[appKey]) || {};
+                const appName = appInfo.name || appInfo.title || (appKey ? String(appKey).toUpperCase() : 'ỨNG DỤNG');
+                if (icon) icon.src = appInfo.icon || 'app_logo.png';
+                if (title) title.textContent = appName;
+                if (sub) sub.textContent = appInfo.tag || 'Ứng Dụng Tối Ưu Android Qua Shizuku';
+                if (linkBtnLabel) linkBtnLabel.textContent = 'CHUYỂN SANG LINK4M TẢI ' + appName.toUpperCase() + ' →';
+                if (finalBtn) {
+                    finalBtn.style.background = 'linear-gradient(135deg, #38bdf8 0%, #00ff66 100%)';
+                    finalBtn.style.color = '#050811';
+                }
             }
 
-            modal.classList.add('active');
+            if (modal) modal.classList.add('active');
 
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);
             if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
@@ -4532,39 +4562,54 @@ settings put secure multi_press_timeout 200</code></pre>
         }
 
         function completeUnlock() {
-            document.getElementById('unlockVerifyingBox').style.display = 'none';
-            document.getElementById('btnFollowTikTok').style.display = 'none';
+            const verifyingBox = document.getElementById('unlockVerifyingBox');
+            const btnTikTok = document.getElementById('btnFollowTikTok');
             const finalBtn = document.getElementById('btnFinalLink4m');
-            // directBtn removed
-            finalBtn.style.display = 'flex';
-            
+
+            if (verifyingBox) verifyingBox.style.display = 'none';
+            if (btnTikTok) btnTikTok.style.display = 'none';
+            if (finalBtn) finalBtn.style.display = 'flex';
 
             const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
-            let dest = '';
-            let directApk = 'FlowS.apk';
+            let link4mUrl = '';
 
             if (currentTargetApp === 'flows') {
-                dest = (globalConfig.flows && globalConfig.flows.destination_apk) || 'https://gofile.io/d/j6tNGeVu';
-                directApk = (globalConfig.flows && globalConfig.flows.direct_apk) || 'FlowS.apk';
+                const dest = (globalConfig.flows && globalConfig.flows.destination_apk) || 'https://gofile.io/d/j6tNGeVu';
+                link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
             } else if (currentTargetApp === 'flowultra') {
-                dest = (globalConfig.flowultra && globalConfig.flowultra.destination_apk) || 'https://gofile.io/d/4qt6zQyQ';
-                directApk = (globalConfig.flowultra && globalConfig.flowultra.direct_apk) || 'FlowUltra.apk';
+                const dest = (globalConfig.flowultra && globalConfig.flowultra.destination_apk) || 'https://gofile.io/d/4qt6zQyQ';
+                link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
+            } else if (currentTargetApp === 'flowopt' || currentTargetApp === 'flowoptimize') {
+                const dest = (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || 'https://gofile.io/d/TytolAEu';
+                link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
+            } else if (currentTargetApp === 'brotx') {
+                link4mUrl = (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS['brotx'] && APP_TRIPLE_LINKS['brotx'].link4m) ||
+                            ('https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent('https://raw.githubusercontent.com/7dzuong/bio/main/BrotX-v8.apk'));
+            } else if (currentTargetApp === 'shizuku') {
+                link4mUrl = (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS['shizuku'] && APP_TRIPLE_LINKS['shizuku'].link4m) ||
+                            ('https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent('https://github.com/RikkaApps/Shizuku/releases'));
+            } else if (typeof currentTargetApp === 'string' && currentTargetApp.startsWith('set')) {
+                link4mUrl = (typeof SET_LINKS !== 'undefined' && SET_LINKS[currentTargetApp]) ||
+                            ('https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent('https://github.com/RikkaApps/Shizuku/releases'));
             } else {
-                dest = (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || 'https://gofile.io/d/TytolAEu';
-                directApk = (globalConfig.flowoptimize && globalConfig.flowoptimize.direct_apk) || 'FlowOptimize.apk';
+                const appInfo = (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS[currentTargetApp]) || null;
+                if (appInfo && appInfo.link4m) {
+                    link4mUrl = appInfo.link4m;
+                } else if (appInfo && appInfo.dest) {
+                    link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(appInfo.dest);
+                } else {
+                    link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent('https://github.com/RikkaApps/Shizuku/releases');
+                }
             }
 
-            const link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
-            finalBtn.href = link4mUrl;
-
-
+            if (finalBtn) {
+                finalBtn.href = link4mUrl;
+            }
 
             const banner = document.getElementById('unlockBannerText');
             if (banner) {
                 banner.innerHTML = '✅ <b>Bước 3 (Hoàn tất):</b> Đã mở khóa thành công! Hãy bấm nút bên dưới để chuyển sang <b>Link4M</b> lấy link tải APK.';
             }
-
-// Auto-redirect disabled: User clicks explicitly to prevent duplicate requests & anti-click errors
         }
 
         document.addEventListener('DOMContentLoaded', fetchConfig);
@@ -6193,7 +6238,8 @@ settings put secure multi_press_timeout 200</code></pre>
 
     function triggerModalDownload() {
         if (!currentModalAppId) return;
-        openRandomDownload(null, currentModalAppId);
+        closeAppModal();
+        openUnlockModal(currentModalAppId);
     }
 
     function copyModalCommand() {
@@ -6284,26 +6330,23 @@ settings put secure multi_press_timeout 200</code></pre>
     }
 
     // Open Set Full Download (Link4M Only)
+        // Open Set Full Download -> Must follow TikTok + 8s verification
     function openSetDownload(event, setId) {
         if (event) {
             event.preventDefault();
             event.stopPropagation();
         }
-        const link = SET_LINKS[setId] || "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases";
-        window.open(link, '_blank', 'noopener,noreferrer');
+        openUnlockModal(setId);
     }
 
-    // Open Individual App Download (Link4M Only)
+    // Open Individual App Download -> Must follow TikTok + 8s verification
     function openDirectDownload(event, appId) {
         if (event) {
             event.preventDefault();
             event.stopPropagation();
         }
-        const app = APP_TRIPLE_LINKS[appId];
-        if (!app) return;
-        // Gom lại 1 link Link4M duy nhất (loại bỏ hoàn toàn Layma & YeuMoney)
-        const link = app.link4m || app.dest;
-        window.open(link, '_blank', 'noopener,noreferrer');
+        closeAppModal();
+        openUnlockModal(appId);
     }
 
     // Alias for compatibility
@@ -6311,20 +6354,18 @@ settings put secure multi_press_timeout 200</code></pre>
         openDirectDownload(event, appId);
     }
 
-    // Direct open from Detail Modal
+    // Direct open from Detail Modal -> Must follow TikTok + 8s verification
     function openDetailDownload() {
         if (!currentModalAppId) return;
-        openDirectDownload(null, currentModalAppId);
+        closeAppModal();
+        openUnlockModal(currentModalAppId);
     }
 
-    // Set href on DOM load
+    // Set click handlers on DOM load (no direct href to bypass modal)
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.linkbio-pill[data-app-id]').forEach(pill => {
-            const id = pill.getAttribute('data-app-id');
-            const app = APP_TRIPLE_LINKS[id];
-            if (app && app.link4m) {
-                pill.href = app.link4m;
-            }
+            pill.removeAttribute('href');
+            pill.style.cursor = 'pointer';
         });
     });
 
