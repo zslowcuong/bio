@@ -446,5 +446,12 @@
     "layma": "https://layma.net/brLREOP7T",
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/renyuneyun/Easer/releases/download/v0.8.2.3/Easer-v0.8.2.3.apk",
     "yeumoney": "https://yeumoney.com/UANUpsveQ"
+  },
+  "brotx": {
+    "name": "BrotX Optimizer v8",
+    "dest": "BrotX-v8.apk",
+    "layma": "",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//raw.githubusercontent.com/7dzuong/bio/main/BrotX-v8.apk",
+    "yeumoney": ""
   }
 }
