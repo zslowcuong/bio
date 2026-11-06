@@ -4,6 +4,12 @@
   "tiktok": "https://www.tiktok.com/@xxd5974",
   "telegram": "https://t.me/+dtVBEzwuN2Q4NmI9",
   "wait_seconds": 8,
+  "telegram_notify": {
+    "enabled": true,
+    "bot_token": "9262220150:AAGdwwtYyFYlzrlOU7B9BzxnGgBVy5Isg8I",
+    "chat_id": "8264644840",
+    "instructions": "Điền bot_token từ @BotFather và chat_id từ @userinfobot để nhận thông báo đơn hàng tức thì"
+  },
   "pro_keys": {
     "valid_keys": [
       "FLOW-PRO-2026",

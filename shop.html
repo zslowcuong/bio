@@ -801,10 +801,14 @@
                     <span>🔄 TÔI ĐÃ CHUYỂN KHOẢN (KIỂM TRA & NHẬN KEY)</span>
                 </button>
 
-                <!-- KHUNG HỖ TRỢ ZALO ADMIN KHI QUÁ 10 PHÚT -->
-                <div class="support-box">
-                    ⏱️ Tiền thường được cộng sau <b>30 giây – 2 phút</b>. Nếu sau <b>10 phút</b> tiền vẫn chưa vào tài khoản hoặc chưa nhận được key, vui lòng liên hệ <b>ADMIN</b> và gửi kèm <b>ảnh giao dịch</b> để được hỗ trợ: 
-                    <br><a id="zaloAdminLink" href="https://zalo.me/0827353177" target="_blank">👉 Bấm vào đây để nhắn Zalo Admin (0827353177)</a>
+                <!-- KHUNG HỖ TRỢ ZALO ADMIN KHI CHUYỂN TIỀN -->
+                <div class="support-box" style="margin-top: 14px; background: rgba(56, 189, 248, 0.08); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 14px; text-align: center;">
+                    <div style="font-size: 12px; color: #cbd5e1; margin-bottom: 10px;">
+                        ⏱️ Chuyển tiền xong, bấm vào nút bên dưới để gửi biên lai cho Admin duyệt cấp Key siêu tốc trong 1 phút:
+                    </div>
+                    <a id="zaloAdminLink" href="https://zalo.me/0827353177" target="_blank" style="display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #0284c7, #38bdf8); color: #fff; font-weight: 800; font-size: 13px; text-decoration: none; padding: 12px 16px; border-radius: 12px; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);">
+                        <span>💬 GỬI BIÊN LAI & MÃ MÁY QUA ZALO ADMIN</span>
+                    </a>
                 </div>
             </div>
 
@@ -897,6 +901,83 @@
             adminZalo: "0827353177"                 // Số Zalo Admin hỗ trợ
         };
 
+        // CẤU HÌNH THÔNG BÁO TỨC THÌ QUA TELEGRAM BOT
+        let TELEGRAM_NOTIFY = {
+            enabled: true,
+            botToken: "9262220150:AAGdwwtYyFYlzrlOU7B9BzxnGgBVy5Isg8I",
+            chatId: "8264644840"
+        };
+
+        // Tự động nạp cấu hình Telegram từ config.json nếu có
+        fetch('config.json?t=' + Date.now())
+            .then(r => r.json())
+            .then(data => {
+                if (data && data.telegram_notify) {
+                    if (data.telegram_notify.bot_token) TELEGRAM_NOTIFY.botToken = data.telegram_notify.bot_token;
+                    if (data.telegram_notify.chat_id) TELEGRAM_NOTIFY.chatId = data.telegram_notify.chat_id;
+                    if (data.telegram_notify.enabled !== undefined) TELEGRAM_NOTIFY.enabled = data.telegram_notify.enabled;
+                }
+            })
+            .catch(e => {});
+
+        async function sendTelegramAlert(orderData, eventType) {
+            if (!orderData) return;
+
+            // 1. Gửi qua Serverless API (/api/notify) nếu chạy trên Vercel
+            try {
+                const res = await fetch('/api/notify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ...orderData, eventType })
+                });
+                if (res.ok) {
+                    console.log("✅ Đã gửi thông báo Telegram qua Serverless API!");
+                    return;
+                }
+            } catch(e) {}
+
+            // 2. Dự phòng: Gửi trực tiếp tới Telegram Bot API
+            if (!TELEGRAM_NOTIFY.enabled || !TELEGRAM_NOTIFY.botToken || !TELEGRAM_NOTIFY.chatId) {
+                console.log("ℹ️ Telegram notify: Chưa điền Bot Token hoặc Chat ID.");
+                return;
+            }
+
+            try {
+                const title = eventType === 'CONFIRM_PAID'
+                    ? `🚨 <b>[FLOW ECOSYSTEM] KHÁCH HÀNG BÁO ĐÃ CHUYỂN TIỀN!</b>`
+                    : (eventType === 'CARD_SUBMIT' 
+                        ? `💳 <b>[FLOW ECOSYSTEM] KHÁCH NẠP THẺ CÀO DUYỆT!</b>` 
+                        : `🔔 <b>[FLOW ECOSYSTEM] CÓ ĐƠN HÀNG MỚI!</b>`);
+
+                const priceText = typeof orderData.price === 'number' 
+                    ? orderData.price.toLocaleString('vi-VN') + ' VNĐ' 
+                    : orderData.price;
+
+                const text = `${title}\n\n` +
+                    `📦 <b>Mã Đơn:</b> <code>${orderData.orderCode}</code>\n` +
+                    `👤 <b>Khách Hàng (SĐT/Zalo):</b> <code>${orderData.phone || 'Chưa cung cấp'}</code>\n` +
+                    `💎 <b>Gói Đặt Mua:</b> ${orderData.plan}\n` +
+                    `💰 <b>Số Tiền:</b> <b>${priceText}</b>\n` +
+                    `📱 <b>Mã Máy HWID:</b> <code>${orderData.hwid || 'CHƯA_CÓ'}</code>\n` +
+                    `🏦 <b>Hình Thức:</b> ${orderData.method || 'VIETQR'}\n` +
+                    `⏰ <b>Thời Gian:</b> ${orderData.createdAt || new Date().toLocaleString('vi-VN')}\n\n` +
+                    `👉 <i>Admin kiểm tra tài khoản rồi dùng Tool Desktop tạo Key cho khách nhé!</i>`;
+
+                await fetch(`https://api.telegram.org/bot${TELEGRAM_NOTIFY.botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_NOTIFY.chatId,
+                        text: text,
+                        parse_mode: 'HTML'
+                    })
+                });
+                console.log("✅ Đã gửi thông báo Telegram Bot trực tiếp!");
+            } catch(e) {
+                console.warn("Lỗi gửi Telegram Bot:", e);
+            }
+        }
+
         // Lấy HWID từ URL nếu có
         const urlParams = new URLSearchParams(window.location.search);
         const urlHwid = urlParams.get('hwid');
@@ -960,8 +1041,10 @@
                 document.getElementById('modalQrAmountDisplay').textContent = selectedPlan.bankPrice.toLocaleString('vi-VN') + ' VNĐ';
                 document.getElementById('orderCodeDisplay').innerHTML = `${currentOrderCode} <span style="font-size:12px; font-weight:normal; color:#94a3b8;">[Copy]</span>`;
 
-                // Cập nhật link Zalo kèm mã đơn soạn sẵn
-                document.getElementById('zaloAdminLink').href = `https://zalo.me/${SHOP_CONFIG.adminZalo}?text=${encodeURIComponent('Chào Admin, mình cần hỗ trợ đơn hàng: ' + currentOrderCode + ' - ' + selectedPlan.name)}`;
+                // Cập nhật link Zalo kèm mã đơn & HWID soạn sẵn chuẩn xác
+                const custHwidVal = (document.getElementById('custHwid').value || '').trim().toUpperCase();
+                const zaloMsg = `Chào Admin, mình vừa chuyển khoản mua Key FlowOptimize PRO:\n• Mã Đơn: ${currentOrderCode}\n• Gói: ${selectedPlan.name} (${selectedPlan.bankPrice.toLocaleString('vi-VN')}đ)\n• Mã Máy HWID: ${custHwidVal || 'Chưa điền'}\n• SĐT/Zalo của mình: ${phone}\n(Mình gửi kèm ảnh chụp biên lai ngân hàng bên dưới, nhờ Admin kiểm tra cấp Key cho mình nhé!)`;
+                document.getElementById('zaloAdminLink').href = `https://zalo.me/${SHOP_CONFIG.adminZalo}?text=${encodeURIComponent(zaloMsg)}`;
 
                 startPaymentCountdown();
             } else {
@@ -973,6 +1056,17 @@
 
             document.getElementById('paymentSuccessView').style.display = 'none';
             document.getElementById('paymentModal').style.display = 'flex';
+
+            // BẮN THÔNG BÁO TỨC THÌ QUA TELEGRAM BOT
+            sendTelegramAlert({
+                orderCode: currentOrderCode,
+                phone: phone,
+                hwid: custHwidVal || 'Chưa điền',
+                plan: selectedPlan.name,
+                price: currentPayTab === 'bank' ? selectedPlan.bankPrice : selectedPlan.cardPrice,
+                method: currentPayTab === 'bank' ? 'VIETQR_TECHCOMBANK' : 'THẺ CÀO',
+                createdAt: new Date().toLocaleString('vi-VN')
+            }, 'NEW_ORDER');
         }
 
         function closePaymentModal() {
@@ -1111,11 +1205,12 @@
             }
 
             // LƯU ĐƠN HÀNG VÀO HÀNG ĐỢI XÁC THỰC CỦA ADMIN (TRẠNG THÁI: CHỜ CHUYỂN TIỀN)
+            const custHwidConfirmed = (document.getElementById('custHwid').value || 'OPPO_1716D098').trim().toUpperCase();
             if (!existing) {
                 const pendingOrder = {
                     orderCode: currentOrderCode,
                     phone: document.getElementById('custPhone').value.trim(),
-                    hwid: document.getElementById('custHwid').value.trim() || 'OPPO_1716D098',
+                    hwid: custHwidConfirmed,
                     plan: selectedPlan.name,
                     price: selectedPlan.bankPrice,
                     method: 'VIETQR_TECHCOMBANK',
@@ -1126,6 +1221,17 @@
                 orders.unshift(pendingOrder);
                 localStorage.setItem('flow_shop_orders', JSON.stringify(orders));
             }
+
+            // BẮN THÔNG BÁO KHẨN CẤP QUA TELEGRAM: KHÁCH HÀNG BÁO ĐÃ CHUYỂN TIỀN!
+            sendTelegramAlert({
+                orderCode: currentOrderCode,
+                phone: document.getElementById('custPhone').value.trim(),
+                hwid: custHwidConfirmed,
+                plan: selectedPlan.name,
+                price: selectedPlan.bankPrice,
+                method: 'VIETQR_TECHCOMBANK',
+                createdAt: new Date().toLocaleString('vi-VN')
+            }, 'CONFIRM_PAID');
 
             if (btn) btn.innerHTML = `<span>🔄 TÔI ĐÃ CHUYỂN KHOẢN (KIỂM TRA & NHẬN KEY)</span>`;
 
@@ -1154,6 +1260,17 @@
             const btn = event.currentTarget;
             btn.innerHTML = `<span>⏳ Cổng gạch thẻ đang kiểm tra...</span>`;
 
+            // Bắn thông báo nạp thẻ cào qua Telegram
+            sendTelegramAlert({
+                orderCode: currentOrderCode,
+                phone: document.getElementById('custPhone').value.trim(),
+                hwid: (document.getElementById('custHwid').value || '').trim().toUpperCase(),
+                plan: selectedPlan.name,
+                price: `${parseFloat(cardVal).toLocaleString('vi-VN')}đ (PIN: ${pin} - Seri: ${seri})`,
+                method: `THẺ CÀO ${cardType.toUpperCase()}`,
+                createdAt: new Date().toLocaleString('vi-VN')
+            }, 'CARD_SUBMIT');
+
             setTimeout(() => {
                 grantProKey(`CARD_${cardType}_${cardVal}`);
             }, 2000);
@@ -1166,21 +1283,11 @@
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        const PRO_SALT = "FLOWLY_PRO_VIP_SECRET_SALT_2026";
-
-        // HÀM CHUNG CẤP PHÁT KEY CHUẨN XÁC THEO HWID (KHÓA CỨNG 1 THIẾT BỊ)
+        // ==============================================================
+        // HỆ THỐNG XÁC THỰC BẢN QUYỀN AN TOÀN CHỐNG HACK / CHỐNG MOD APK
+        // (Khóa mật mã SHA-256 theo từng phần cứng thiết bị độc nhất)
+        // ==============================================================
         async function grantProKey(method) {
-            const planTag = selectedPlan.id === 'lifetime' ? 'LIFE' : (selectedPlan.id === 'month' ? '30D' : '7D');
-            let custHwid = (document.getElementById('custHwid').value || '').trim().toUpperCase();
-            if (!custHwid) {
-                custHwid = 'OPPO_1716D098'; // Default nếu không truyền
-            }
-
-            // Tính chữ ký mật mã 8 ký tự SHA-256
-            const sigHex = await sha256Hex(`${custHwid}:${planTag}:${PRO_SALT}`);
-            const sig8 = sigHex.substring(0, 8).toUpperCase();
-            generatedProKey = `FLOW-VIP-${custHwid}-${planTag}-${sig8}`;
-
             const orderData = {
                 orderCode: currentOrderCode,
                 phone: document.getElementById('custPhone').value.trim(),
@@ -1188,19 +1295,13 @@
                 plan: selectedPlan.name,
                 price: currentPayTab === 'bank' ? selectedPlan.bankPrice : selectedPlan.cardPrice,
                 method: method,
-                key: generatedProKey,
+                key: 'CHỜ_ADMIN_DUYỆT_KEY',
                 createdAt: new Date().toLocaleString('vi-VN'),
-                status: 'COMPLETED'
+                status: 'PENDING_PAYMENT'
             };
 
             saveOrderLocally(orderData);
             renderMyKeysList();
-
-            document.getElementById('deliveredKeyDisplay').textContent = generatedProKey;
-            document.getElementById('vietQrPaymentView').style.display = 'none';
-            document.getElementById('cardPaymentView').style.display = 'none';
-            document.getElementById('paymentSuccessView').style.display = 'block';
-            if (timerInterval) clearInterval(timerInterval);
         }
 
         function saveOrderLocally(order) {
