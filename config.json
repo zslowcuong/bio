@@ -69,7 +69,9 @@
       "name": "Shizuku 🐱",
       "tag": "BẮT BUỘC",
       "desc": "Chạy ứng dụng tối ưu không cần Root qua ADB",
-      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases/download/v13.5.4.r1049.0e5b723/shizuku-v13.5.4.r1049.0e5b723-release.apk"
+      "file": "Shizuku.apk",
+      "gofile": "https://gofile.io/d/DkhZ4xaM",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/DkhZ4xaM"
     },
     "ashell": {
       "name": "aShell You ⚡",

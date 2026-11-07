@@ -7,7 +7,7 @@
     <meta name="description" content="Kênh tổng hợp link tải ứng dụng tối ưu Android No Root: FlowOptimize, BrotX v8, Shizuku, Ax Manager, config game mượt 120FPS.">
     <link rel="icon" type="image/png" href="app_logo.png">
 
-    <!-- Fonts: Inter / Be Vietnam Pro -->
+    <!-- Fonts: Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -23,6 +23,8 @@
             --text-dark: #0f172a;
             --text-sub: #475569;
             --text-light: #f8fafc;
+            --tiktok-pink: #fe2c55;
+            --tiktok-cyan: #25f4ee;
         }
 
         * {
@@ -36,8 +38,8 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, transparent 60%),
-                radial-gradient(circle at 50% 100%, rgba(2, 132, 199, 0.12) 0%, transparent 60%);
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.16) 0%, transparent 60%),
+                radial-gradient(circle at 50% 100%, rgba(2, 132, 199, 0.14) 0%, transparent 60%);
             background-attachment: fixed;
             color: var(--text-light);
             min-height: 100vh;
@@ -60,7 +62,7 @@
         /* Top Header Card */
         .bio-top-banner {
             width: 100%;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-radius: 999px;
@@ -70,7 +72,7 @@
             justify-content: space-between;
             margin-bottom: 20px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
         .banner-left {
@@ -268,7 +270,12 @@
             color: #b91c1c;
         }
 
-        /* VIP Highlight Button (Khám phá web lớn) */
+        .badge-fixed {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        /* VIP Highlight Button */
         .bio-btn-vip {
             background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
             box-shadow: 0 5px 0 #075985, 0 8px 24px rgba(2, 132, 199, 0.5);
@@ -289,6 +296,243 @@
 
         .bio-btn-vip:active {
             box-shadow: 0 1px 0 #075985;
+        }
+
+        /* Modal Overlay Base */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 7, 18, 0.82);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 16px;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 440px;
+            background: #0f172a;
+            border: 1.5px solid #38bdf8;
+            border-radius: 26px;
+            padding: 22px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(56, 189, 248, 0.3);
+            text-align: center;
+            position: relative;
+            animation: modalPop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes modalPop {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-title {
+            font-size: 17px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .modal-desc {
+            font-size: 12.5px;
+            color: #94a3b8;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        /* App Header inside Download Modal */
+        .modal-app-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 18px;
+            padding: 12px 14px;
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .modal-app-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: #0284c7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .modal-app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-app-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #f8fafc;
+            line-height: 1.3;
+        }
+
+        .modal-app-sub {
+            font-size: 11.5px;
+            color: #38bdf8;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        /* Step Section inside Unlock Modal */
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .step-card {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 12px 14px;
+            text-align: left;
+        }
+
+        /* TikTok Follow Button */
+        .btn-tiktok-action {
+            width: 100%;
+            padding: 13px 16px;
+            border-radius: 999px;
+            background: #000000;
+            border: 1.5px solid #25f4ee;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 13.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 16px rgba(37, 244, 238, 0.25), 0 0 10px rgba(254, 44, 85, 0.25);
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-tiktok-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 244, 238, 0.4), 0 0 16px rgba(254, 44, 85, 0.4);
+            border-color: #fe2c55;
+        }
+
+        .btn-tiktok-action:active {
+            transform: scale(0.97);
+        }
+
+        /* Verification status box */
+        .verify-box {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px dashed #38bdf8;
+            border-radius: 14px;
+            padding: 10px 12px;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: center;
+            display: none;
+        }
+
+        .verify-box.active {
+            display: block;
+        }
+
+        .verify-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #1e293b;
+            border-radius: 99px;
+            margin-top: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .verify-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #25f4ee, #38bdf8, #fe2c55);
+            border-radius: 99px;
+            transition: width 0.2s linear;
+        }
+
+        /* Download Step 2 Button */
+        .btn-download-action {
+            width: 100%;
+            padding: 13px 16px;
+            border-radius: 999px;
+            background: #334155;
+            color: #64748b;
+            font-weight: 800;
+            font-size: 13.5px;
+            border: 1px solid #475569;
+            cursor: not-allowed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: none;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .btn-download-action.unlocked {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            border: 1.5px solid #38bdf8;
+            color: #ffffff;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #075985, 0 10px 25px rgba(2, 132, 199, 0.5);
+            animation: pulseUnlock 1.4s infinite ease-in-out;
+        }
+
+        .btn-download-action.unlocked:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 #075985, 0 14px 30px rgba(2, 132, 199, 0.7);
+        }
+
+        .btn-download-action.unlocked:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #075985;
+        }
+
+        @keyframes pulseUnlock {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* Modal Close Button */
+        .modal-close-btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #94a3b8;
+            font-weight: 700;
+            font-size: 13px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
         }
 
         /* Toast Feedback */
@@ -320,51 +564,7 @@
             opacity: 1;
         }
 
-        /* Modal Dialog */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            padding: 16px;
-        }
-
-        .modal-box {
-            width: 100%;
-            max-width: 440px;
-            background: #0f172a;
-            border: 1.5px solid #38bdf8;
-            border-radius: 24px;
-            padding: 22px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(56, 189, 248, 0.3);
-            text-align: center;
-            position: relative;
-            animation: modalPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        @keyframes modalPop {
-            0% { transform: scale(0.85); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-title {
-            font-size: 17px;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .modal-desc {
-            font-size: 13px;
-            color: #94a3b8;
-            margin-bottom: 18px;
-            line-height: 1.5;
-        }
-
+        /* Modal Tabs for Shizuku Guide */
         .modal-tabs {
             display: flex;
             gap: 8px;
@@ -397,19 +597,6 @@
             border-radius: 14px;
             border: 1px solid #334155;
             margin-bottom: 16px;
-        }
-
-        .modal-close-btn {
-            width: 100%;
-            padding: 12px;
-            border-radius: 999px;
-            background: #0284c7;
-            color: #ffffff;
-            font-weight: 800;
-            font-size: 14px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
         }
 
         /* Footer */
@@ -475,7 +662,7 @@
         </div>
 
         <!-- 1. FlowOptimize -->
-        <a href="FlowOptimize.apk" download="FlowOptimize.apk" class="bio-btn" onclick="onDirectDownload('FlowOptimize (FlowOp) 🚀')">
+        <div class="bio-btn" onclick="openDownloadModal('flowop')">
             <div class="bio-icon">
                 <img src="app_logo.png" alt="FlowOp">
             </div>
@@ -486,10 +673,10 @@
                 </div>
                 <div class="bio-desc">Siêu app tối ưu 120Hz, Dynamic Capsule, UID 2000</div>
             </div>
-        </a>
+        </div>
 
         <!-- 2. BrotX v8 -->
-        <a href="BrotX-v8.apk" download="BrotX-v8.apk" class="bio-btn" onclick="onDirectDownload('Brot X V8 🔥')">
+        <div class="bio-btn" onclick="openDownloadModal('brotx')">
             <div class="bio-icon">
                 <img src="icon_brotx.png" alt="BrotX">
             </div>
@@ -500,23 +687,24 @@
                 </div>
                 <div class="bio-desc">Bản BrotX mới nhất, đổi phân giải, giảm lag tăng FPS</div>
             </div>
-        </a>
+        </div>
 
         <!-- 3. Ax Manager Model 20000 -->
-        <a href="https://github.com/suzhelan/AxManager/releases/latest" target="_blank" class="bio-btn" onclick="onDirectDownload('Ax Manager')">
+        <div class="bio-btn" onclick="openDownloadModal('axmanager')">
             <div class="bio-icon">
                 <img src="icon_appmanager.png" alt="Ax Manager">
             </div>
             <div class="bio-info">
                 <div class="bio-name">
                     Ax Manager Model 20000 👻
+                    <span class="bio-badge badge-fixed">ĐÃ FIX LINK</span>
                 </div>
-                <div class="bio-desc">Tải để sử dụng module & tối ưu phần cứng sâu</div>
+                <div class="bio-desc">Tải để sử dụng module & tối ưu phần cứng sâu (Bản Gofile chuẩn)</div>
             </div>
-        </a>
+        </div>
 
         <!-- 4. Anti Lag-No Root -->
-        <a href="https://github.com/helloklf/vtools/releases" target="_blank" class="bio-btn" onclick="onDirectDownload('Anti Lag-No Root')">
+        <div class="bio-btn" onclick="openDownloadModal('antilag')">
             <div class="bio-icon">
                 <img src="icon_optidroid.png" alt="Anti Lag">
             </div>
@@ -524,12 +712,12 @@
                 <div class="bio-name">
                     Anti Lag-No Root 🤖
                 </div>
-                <div class="bio-desc">Bộ công cụ dọn dẹp RAM cực mạnh & tăng tốc máy</div>
+                <div class="bio-desc">Bộ công cụ dọn dẹp RAM cực mạnh & tăng tốc máy (Gofile APK)</div>
             </div>
-        </a>
+        </div>
 
         <!-- 5. Hexa Boost -->
-        <a href="https://github.com/smartpack/SmartPack-Kernel-Manager/releases" target="_blank" class="bio-btn" onclick="onDirectDownload('Hexa Boost')">
+        <div class="bio-btn" onclick="openDownloadModal('hexaboost')">
             <div class="bio-icon">
                 <img src="icon_gama.png" alt="Hexa Boost">
             </div>
@@ -537,9 +725,9 @@
                 <div class="bio-name">
                     Hexa Boost ⚡
                 </div>
-                <div class="bio-desc">Tối ưu hiệu năng game – Không cần Shizuku</div>
+                <div class="bio-desc">Tối ưu hiệu năng game – Không cần Shizuku (Gofile APK)</div>
             </div>
-        </a>
+        </div>
 
         <!-- ==================== PHẦN 2: BẮT ĐẦU TẠI ĐÂY ==================== -->
         <div class="section-title">
@@ -547,7 +735,7 @@
         </div>
 
         <!-- Shizuku -->
-        <a href="https://github.com/RikkaApps/Shizuku/releases/download/v13.5.4.r1049.0e5b723/shizuku-v13.5.4.r1049.0e5b723-release.apk" class="bio-btn" onclick="onDirectDownload('Shizuku')">
+        <div class="bio-btn" onclick="openDownloadModal('shizuku')">
             <div class="bio-icon">
                 <img src="icon_shizuku.png" alt="Shizuku">
             </div>
@@ -556,9 +744,9 @@
                     Shizuku 🐱
                     <span class="bio-badge">BẮT BUỘC</span>
                 </div>
-                <div class="bio-desc">Chạy app tối ưu không cần root (Nền tảng chính)</div>
+                <div class="bio-desc">Chạy app tối ưu không cần root (Bản APK Gofile chính thức)</div>
             </div>
-        </a>
+        </div>
 
         <!-- Hướng dẫn Shizuku -->
         <div class="bio-btn" onclick="openShizukuModal()">
@@ -587,7 +775,7 @@
             </div>
         </a>
 
-        <!-- Cách Vượt Link Nhanh / Lấy Key PRO VIP 24H -->
+        <!-- Nhận Key PRO VIP 24H -->
         <div class="bio-btn" onclick="openKeyVipModal()">
             <div class="bio-icon" style="background: #f59e0b; color: #fff; font-size: 20px;">
                 🔑
@@ -606,7 +794,7 @@
         </div>
 
         <!-- Liên Quân -->
-        <a href="FlowOptimize.apk" download="FlowOptimize.apk" class="bio-btn" onclick="onDirectDownload('Config Liên Quân 120FPS')">
+        <div class="bio-btn" onclick="openDownloadModal('lienquan')">
             <div class="bio-icon" style="background: #dc2626; color: #fff; font-size: 20px;">
                 ⚔️
             </div>
@@ -616,10 +804,10 @@
                 </div>
                 <div class="bio-desc">Config 120FPS mượt mà, Florentino 0ms múa cực dính</div>
             </div>
-        </a>
+        </div>
 
         <!-- Free Fire Secret Setting -->
-        <a href="FlowOptimize.apk" download="FlowOptimize.apk" class="bio-btn" onclick="onDirectDownload('Secret Setting FF')">
+        <div class="bio-btn" onclick="openDownloadModal('ff_secret')">
             <div class="bio-icon" style="background: #ea580c; color: #fff; font-size: 20px;">
                 🔥
             </div>
@@ -629,10 +817,10 @@
                 </div>
                 <div class="bio-desc">Cài đặt bí mật cho tâm ổn định, ghim tâm nhẹ</div>
             </div>
-        </a>
+        </div>
 
         <!-- Nhẹ Tâm FF -->
-        <a href="FlowOptimize.apk" download="FlowOptimize.apk" class="bio-btn" onclick="onDirectDownload('Nhẹ Tâm FF')">
+        <div class="bio-btn" onclick="openDownloadModal('ff_nhetam')">
             <div class="bio-icon" style="background: #e11d48; color: #fff; font-size: 20px;">
                 📌
             </div>
@@ -642,7 +830,7 @@
                 </div>
                 <div class="bio-desc">Ghim tâm nhẹ, kéo đầu dễ, vuốt mượt như iPhone</div>
             </div>
-        </a>
+        </div>
 
         <!-- ==================== PHẦN 4: HỆ SINH THÁI ĐẦY ĐỦ ==================== -->
         <div class="section-title">
@@ -671,6 +859,75 @@
 
     </div>
 
+    <!-- ==================== MODAL XÁC THỰC FOLLOW TIKTOK & VƯỢT LINK4M ==================== -->
+    <div id="downloadModal" class="modal-overlay" onclick="closeModalOnBg(event, 'downloadModal')">
+        <div class="modal-box">
+            
+            <div class="modal-title">🔐 MỞ KHÓA TẢI FILE APK</div>
+            <div class="modal-desc">Yêu cầu hoàn tất xác thực Follow TikTok để kích hoạt link tải Gofile siêu tốc:</div>
+
+            <!-- Card App Info -->
+            <div class="modal-app-card">
+                <div id="modalIcon" class="modal-app-icon">
+                    <img src="app_logo.png" alt="App Icon">
+                </div>
+                <div style="flex: 1; overflow: hidden;">
+                    <div id="modalAppName" class="modal-app-title">FlowOptimize Pro</div>
+                    <div id="modalAppSub" class="modal-app-sub">v1.4.0 • Gofile Tốc Độ Cao</div>
+                </div>
+            </div>
+
+            <!-- Steps -->
+            <div class="step-container">
+                
+                <!-- BƯỚC 1: FOLLOW TIKTOK -->
+                <div class="step-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-size: 12.5px; font-weight: 800; color: #f8fafc;">BƯỚC 1: XÁC THỰC THÀNH VIÊN</span>
+                        <span id="step1Badge" style="font-size: 10.5px; font-weight: 800; padding: 2px 7px; border-radius: 99px; background: rgba(37, 244, 238, 0.15); color: #25f4ee; border: 1px solid rgba(37, 244, 238, 0.3);">BẮT BUỘC</span>
+                    </div>
+                    
+                    <button id="btnFollowTikTok" type="button" class="btn-tiktok-action" onclick="onFollowTikTokClick()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.29 0 .57.04.84.11V9.41a6.33 6.33 0 0 0-.84-.06 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.06a8.23 8.23 0 0 0 5-1.63l-1.16-1.74z"/>
+                        </svg>
+                        <span>Follow TikTok (@xxd5974) Mở Khóa</span>
+                    </button>
+
+                    <!-- Verification Countdown Box -->
+                    <div id="verifyBox" class="verify-box">
+                        <div id="verifyStatusText">⏳ Đang quét xác thực Follow... Vui lòng chờ <b><span id="timerCount">8</span>s</b></div>
+                        <div class="verify-progress-bar">
+                            <div id="verifyProgressFill" class="verify-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BƯỚC 2: VƯỢT LINK4M TẢI APK GOFILE -->
+                <div class="step-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-size: 12.5px; font-weight: 800; color: #f8fafc;">BƯỚC 2: VƯỢT LINK4M NHẬN FILE</span>
+                        <span id="step2Badge" style="font-size: 10.5px; font-weight: 800; padding: 2px 7px; border-radius: 99px; background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.3);">ĐANG KHÓA</span>
+                    </div>
+
+                    <button id="btnUnlockDownload" type="button" class="btn-download-action" disabled onclick="onUnlockDownloadClick()">
+                        <span id="btnUnlockIcon">🔒</span>
+                        <span id="btnUnlockText">Vượt Link4m Tải APK (Gofile)</span>
+                    </button>
+                    
+                    <div style="font-size: 11px; color: #64748b; margin-top: 6px; text-align: center;">
+                        Link đích: <b>Gofile Tốc Độ Cao</b> • 100% Không Virus
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Close Modal -->
+            <button type="button" class="modal-close-btn" onclick="closeModal('downloadModal')">Đóng Hộp Thoại</button>
+
+        </div>
+    </div>
+
     <!-- Toast Notification -->
     <div id="bioToast" class="toast-notify">
         <span id="toastIcon">🚀</span>
@@ -684,10 +941,10 @@
             <div class="modal-desc">Chọn dòng máy của bạn để xem ảnh minh họa từng bước:</div>
 
             <div class="modal-tabs">
-                <button class="modal-tab-btn active" onclick="switchGuideTab('oppo')">OPPO / Realme</button>
-                <button class="modal-tab-btn" onclick="switchGuideTab('xiaomi')">Xiaomi / POCO</button>
-                <button class="modal-tab-btn" onclick="switchGuideTab('samsung')">Samsung</button>
-                <button class="modal-tab-btn" onclick="switchGuideTab('pc')">Kích hoạt qua PC</button>
+                <button class="modal-tab-btn active" onclick="switchGuideTab(event, 'oppo')">OPPO / Realme</button>
+                <button class="modal-tab-btn" onclick="switchGuideTab(event, 'xiaomi')">Xiaomi / POCO</button>
+                <button class="modal-tab-btn" onclick="switchGuideTab(event, 'samsung')">Samsung</button>
+                <button class="modal-tab-btn" onclick="switchGuideTab(event, 'pc')">Kích hoạt qua PC</button>
             </div>
 
             <img id="guideImg" src="shizuku_guide_oppo_realme.png" alt="Hướng dẫn Shizuku" class="modal-img">
@@ -714,12 +971,250 @@
                 <a href="ecosystem.html" style="flex: 1; padding: 10px; border-radius: 99px; background: rgba(255,255,255,0.1); color: #fff; text-decoration: none; font-weight: 700; font-size: 12.5px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2);">Xem Vượt Link</a>
             </div>
 
-            <button class="modal-close-btn" style="background: #334155;" onclick="closeModal('keyVipModal')">Đóng</button>
+            <button class="modal-close-btn" onclick="closeModal('keyVipModal')">Đóng</button>
         </div>
     </div>
 
     <script>
-        // Toast Function
+        // CẤU HÌNH HỆ THỐNG & API RÚT GỌN LINK4M
+        const LINK4M_API = '6ae77b1c1473a714b32b2a3a';
+        const TIKTOK_URL = 'https://www.tiktok.com/@xxd5974';
+        const WAIT_SECONDS = 8;
+
+        // DANH SÁCH ỨNG DỤNG VỚI LINK ĐÍCH GOFILE CHÍNH THỨC & LINK4M
+        const APPS_DATA = {
+            flowop: {
+                name: 'FlowOptimize (FlowOp) 🚀',
+                sub: 'v1.4.0 • 9.3 MB • Gofile Tốc Độ Cao',
+                icon: 'app_logo.png',
+                isEmoji: false,
+                dest: 'https://gofile.io/d/TytolAEu',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/TytolAEu'
+            },
+            brotx: {
+                name: 'Brot X V8 Gaming 🔥',
+                sub: 'v8.0 • 4.1 MB • Gofile Tốc Độ Cao',
+                icon: 'icon_brotx.png',
+                isEmoji: false,
+                dest: 'https://gofile.io/d/j6tNGeVu',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/j6tNGeVu'
+            },
+            axmanager: {
+                name: 'Ax Manager Model 20000 👻',
+                sub: 'v4.1.1 • 28.2 MB • Gofile Chuẩn 100%',
+                icon: 'icon_appmanager.png',
+                isEmoji: false,
+                dest: 'https://gofile.io/d/Botbwj5O',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/Botbwj5O'
+            },
+            antilag: {
+                name: 'Anti Lag - No Root 🤖',
+                sub: 'v1.2 • 14.2 MB • Gofile Tốc Độ Cao',
+                icon: 'icon_optidroid.png',
+                isEmoji: false,
+                dest: 'https://gofile.io/d/BYHGBBvt',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/BYHGBBvt'
+            },
+            hexaboost: {
+                name: 'Hexa Boost Game Turbo ⚡',
+                sub: 'v1.4 • 4.4 MB • Gofile Tốc Độ Cao',
+                icon: 'icon_gama.png',
+                isEmoji: false,
+                dest: 'https://gofile.io/d/DPRkhgtC',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/DPRkhgtC'
+            },
+            shizuku: {
+                name: 'Shizuku Official Gofile 🐱',
+                sub: 'v13.6.0 • 2.5 MB • Gofile APK Chuẩn 100%',
+                icon: 'icon_shizuku.png',
+                isEmoji: false,
+                dest: 'https://gofile.io/d/DkhZ4xaM',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/DkhZ4xaM'
+            },
+            lienquan: {
+                name: 'Config Liên Quân Mobile ⚔️',
+                sub: 'Tích hợp FlowOp • 120FPS 0ms Delay',
+                icon: '⚔️',
+                isEmoji: true,
+                dest: 'https://gofile.io/d/TytolAEu',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/TytolAEu'
+            },
+            ff_secret: {
+                name: 'Secret Setting Free Fire 🔥',
+                sub: 'Tích hợp FlowOp • Ghim Tâm Chuẩn VIP',
+                icon: '🔥',
+                isEmoji: true,
+                dest: 'https://gofile.io/d/TytolAEu',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/TytolAEu'
+            },
+            ff_nhetam: {
+                name: 'Nhẹ Tâm Free Fire 📌',
+                sub: 'Tích hợp FlowOp • Kéo Tâm Mượt Nhẹ',
+                icon: '📌',
+                isEmoji: true,
+                dest: 'https://gofile.io/d/TytolAEu',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/TytolAEu'
+            }
+        };
+
+        let currentActiveApp = null;
+        let countdownTimer = null;
+        let timeLeft = WAIT_SECONDS;
+
+        // Mở Modal Download & Reset trạng thái
+        function openDownloadModal(appKey) {
+            const app = APPS_DATA[appKey];
+            if (!app) return;
+            currentActiveApp = app;
+
+            // Render thông tin App
+            const modalAppName = document.getElementById('modalAppName');
+            const modalAppSub = document.getElementById('modalAppSub');
+            const modalIcon = document.getElementById('modalIcon');
+
+            modalAppName.innerText = app.name;
+            modalAppSub.innerText = app.sub;
+
+            if (app.isEmoji) {
+                modalIcon.innerHTML = `<span style="font-size:24px;">${app.icon}</span>`;
+            } else {
+                modalIcon.innerHTML = `<img src="${app.icon}" alt="${app.name}">`;
+            }
+
+            // Reset Bước 1 & Bước 2
+            resetModalVerificationState();
+
+            // Hiển thị modal
+            document.getElementById('downloadModal').style.display = 'flex';
+            trackClick(`OpenModal: ${app.name}`);
+        }
+
+        // Reset trạng thái xác thực
+        function resetModalVerificationState() {
+            clearInterval(countdownTimer);
+            timeLeft = WAIT_SECONDS;
+
+            const btnFollow = document.getElementById('btnFollowTikTok');
+            btnFollow.innerHTML = `
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.29 0 .57.04.84.11V9.41a6.33 6.33 0 0 0-.84-.06 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.06a8.23 8.23 0 0 0 5-1.63l-1.16-1.74z"/>
+                </svg>
+                <span>Follow TikTok (@xxd5974) Mở Khóa</span>
+            `;
+            btnFollow.style.opacity = '1';
+            btnFollow.disabled = false;
+
+            const verifyBox = document.getElementById('verifyBox');
+            verifyBox.classList.remove('active');
+            document.getElementById('timerCount').innerText = WAIT_SECONDS;
+            document.getElementById('verifyProgressFill').style.width = '0%';
+            document.getElementById('verifyStatusText').innerHTML = `⏳ Đang quét xác thực Follow... Vui lòng chờ <b><span id="timerCount">${WAIT_SECONDS}</span>s</b>`;
+
+            const btnUnlock = document.getElementById('btnUnlockDownload');
+            btnUnlock.disabled = true;
+            btnUnlock.classList.remove('unlocked');
+            document.getElementById('btnUnlockIcon').innerText = '🔒';
+            document.getElementById('btnUnlockText').innerText = 'Vượt Link4m Tải APK (Gofile)';
+
+            const step2Badge = document.getElementById('step2Badge');
+            step2Badge.innerText = 'ĐANG KHÓA';
+            step2Badge.style.color = '#94a3b8';
+            step2Badge.style.borderColor = 'rgba(148, 163, 184, 0.3)';
+            step2Badge.style.background = 'rgba(148, 163, 184, 0.15)';
+        }
+
+        // BƯỚC 1: Click Follow TikTok & Bắt đầu đếm ngược 8 giây
+        function onFollowTikTokClick() {
+            // Mở tab TikTok
+            window.open(TIKTOK_URL, '_blank');
+            showBioToast('Đang chuyển hướng sang TikTok @xxd5974...', '🎵');
+
+            // Đổi UI Bước 1 sang trạng thái chờ
+            const btnFollow = document.getElementById('btnFollowTikTok');
+            btnFollow.disabled = true;
+            btnFollow.style.opacity = '0.7';
+            btnFollow.innerHTML = `<span>⏳ Đang mở TikTok & xác minh...</span>`;
+
+            // Kích hoạt hộp quét xác thực
+            const verifyBox = document.getElementById('verifyBox');
+            verifyBox.classList.add('active');
+
+            const timerSpan = document.getElementById('timerCount');
+            const progressFill = document.getElementById('verifyProgressFill');
+
+            timeLeft = WAIT_SECONDS;
+            timerSpan.innerText = timeLeft;
+            progressFill.style.width = '10%';
+
+            clearInterval(countdownTimer);
+            const startTime = Date.now();
+            const totalDuration = WAIT_SECONDS * 1000;
+
+            countdownTimer = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+                const remaining = Math.max(0, Math.ceil((totalDuration - elapsed) / 1000));
+                const progressPct = Math.min(100, (elapsed / totalDuration) * 100);
+
+                timerSpan.innerText = remaining;
+                progressFill.style.width = progressPct + '%';
+
+                if (elapsed >= totalDuration) {
+                    clearInterval(countdownTimer);
+                    completeVerification();
+                }
+            }, 100);
+        }
+
+        // Hoàn tất 8s xác thực -> Mở khóa Bước 2
+        function completeVerification() {
+            const verifyStatusText = document.getElementById('verifyStatusText');
+            verifyStatusText.innerHTML = `<span style="color:#22c55e; font-weight:800;">✅ XÁC THỰC THÀNH CÔNG! ĐÃ MỞ KHÓA TẢI FILE</span>`;
+
+            const btnFollow = document.getElementById('btnFollowTikTok');
+            btnFollow.innerHTML = `<span>✅ Đã xác nhận Follow TikTok</span>`;
+            btnFollow.style.borderColor = '#22c55e';
+            btnFollow.style.boxShadow = '0 0 15px rgba(34, 197, 94, 0.4)';
+
+            const step1Badge = document.getElementById('step1Badge');
+            step1Badge.innerText = 'ĐÃ XONG';
+            step1Badge.style.color = '#22c55e';
+            step1Badge.style.borderColor = 'rgba(34, 197, 94, 0.4)';
+            step1Badge.style.background = 'rgba(34, 197, 94, 0.15)';
+
+            // MỞ KHÓA BƯỚC 2
+            const btnUnlock = document.getElementById('btnUnlockDownload');
+            btnUnlock.disabled = false;
+            btnUnlock.classList.add('unlocked');
+            document.getElementById('btnUnlockIcon').innerText = '🚀';
+            document.getElementById('btnUnlockText').innerText = 'BƯỚC 2: VƯỢT LINK4M TẢI APK (GOFILE)';
+
+            const step2Badge = document.getElementById('step2Badge');
+            step2Badge.innerText = 'ĐÃ SẴN SÀNG';
+            step2Badge.style.color = '#38bdf8';
+            step2Badge.style.borderColor = 'rgba(56, 189, 248, 0.5)';
+            step2Badge.style.background = 'rgba(56, 189, 248, 0.2)';
+
+            showBioToast('🎉 Đã mở khóa tải file APK! Bấm Bước 2 ngay.', '🔓');
+        }
+
+        // BƯỚC 2: Click Vượt Link4m chuyển hướng sang APK Gofile
+        function onUnlockDownloadClick() {
+            if (!currentActiveApp || !currentActiveApp.link4m) return;
+            trackClick(`Link4mDownload: ${currentActiveApp.name}`);
+            showBioToast('Đang chuyển hướng sang Link4m vượt link tải...', '🚀');
+
+            setTimeout(() => {
+                window.location.href = currentActiveApp.link4m;
+            }, 600);
+        }
+
+        // Tải file trực tiếp (vd: .bat PC)
+        function onDirectDownload(name) {
+            showBioToast(`Đang tải file: ${name}...`, '📥');
+            trackClick(`DirectDownload: ${name}`);
+        }
+
+        // Toast Feedback
         function showBioToast(msg, icon = '🚀') {
             const toast = document.getElementById('bioToast');
             const txt = document.getElementById('toastText');
@@ -733,13 +1228,7 @@
             clearTimeout(window._toastTimer);
             window._toastTimer = setTimeout(() => {
                 toast.classList.remove('show');
-            }, 2600);
-        }
-
-        // Direct Download Feedback
-        function onDirectDownload(name) {
-            showBioToast(`Đang tải trực tiếp: ${name}...`, '📥');
-            trackClick(`Download: ${name}`);
+            }, 2800);
         }
 
         // Share Bio Link
@@ -763,10 +1252,12 @@
             document.getElementById('shizukuModal').style.display = 'flex';
         }
 
-        function switchGuideTab(type) {
+        function switchGuideTab(event, type) {
             const tabs = document.querySelectorAll('.modal-tab-btn');
             tabs.forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
 
             const img = document.getElementById('guideImg');
             if (type === 'oppo') img.src = 'shizuku_guide_oppo_realme.png';
@@ -793,6 +1284,9 @@
         function closeModal(id) {
             const el = document.getElementById(id);
             if (el) el.style.display = 'none';
+            if (id === 'downloadModal') {
+                clearInterval(countdownTimer);
+            }
         }
 
         function closeModalOnBg(e, id) {
