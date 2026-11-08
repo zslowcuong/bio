@@ -286,13 +286,17 @@
 
         document.getElementById('hwidDisplay').textContent = hwid;
 
-        // Cấu hình Link4m API token
-        const link4mApi = "6ae77b1c1473a714b32b2a3a";
-        const currentTimestamp = Date.now();
-        const baseBioUrl = (window.location.origin && window.location.origin !== "null" && !window.location.origin.startsWith("file:")) ? (window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1)) : "https://zslowcuong.github.io/bio/";
-        const destinationShowKey = `${baseBioUrl}showkey.html?hwid=${encodeURIComponent(hwid)}&t=${currentTimestamp}`;
+        // Chuyển hướng nếu đang ở trên Vercel để tránh tự tạo link4m làm bóp CPM
+        if (window.location.hostname && window.location.hostname.includes("vercel.app")) {
+            window.location.replace("https://zslowcuong.github.io/bio/getkey.html" + window.location.search);
+        }
 
-        // Tạo link rút gọn Link4m
+        // Cấu hình Link4m API token (Cố định theo HWID, không kèm timestamp ngẫu nhiên để tránh bóp CPM)
+        const link4mApi = "6ae77b1c1473a714b32b2a3a";
+        const baseBioUrl = "https://zslowcuong.github.io/bio/";
+        const destinationShowKey = `${baseBioUrl}showkey.html?hwid=${encodeURIComponent(hwid)}`;
+
+        // Tạo link rút gọn Link4m cố định theo thiết bị
         const shortLink = `https://link4m.co/st?api=${link4mApi}&url=${encodeURIComponent(destinationShowKey)}`;
 
         const btn = document.getElementById('btnBypassLink');

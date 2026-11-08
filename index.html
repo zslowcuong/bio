@@ -736,9 +736,9 @@
         </div>
 
         <!-- Tool PC 1-click -->
-        <a href="TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat" download="TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat" class="bio-btn" onclick="onDirectDownload('Tool Kích Hoạt Shizuku PC')">
+        <div class="bio-btn" onclick="openDownloadModal('toolpc')">
             <div class="bio-icon" style="background: #10b981; color: #fff; font-size: 20px;">
-                ⚡
+                💻
             </div>
             <div class="bio-info">
                 <div class="bio-name">
@@ -747,7 +747,7 @@
                 </div>
                 <div class="bio-desc">Cắm cáp máy tính bấm 1 phím tự kích hoạt 100% ăn ngay</div>
             </div>
-        </a>
+        </div>
 
         <!-- Nhận Key PRO VIP 24H -->
         <div class="bio-btn" onclick="openKeyVipModal()">
@@ -766,17 +766,17 @@
         <div class="bio-footer">
             <p><strong>Flow Ecosystem</strong> © 2026</p>
             <p>Bộ Ba Siêu App: <strong>FlowOptimize • FlowS • FlowUltra</strong></p>
-            <p style="margin-top: 6px; color: #10b981; font-weight: 700;">⚡ Tải Xuống Trực Tiếp Siêu Tốc • 100% Không Quảng Cáo • Không Link4m</p>
+            <p style="margin-top: 6px; color: #38bdf8; font-weight: 700;">⚡ Hệ Sinh Thái Flow • 100% No Root • Tối Ưu Gaming eSports Đỉnh Cao</p>
         </div>
 
     </div>
 
-    <!-- ==================== MODAL TẢI FILE APK TRỰC TIẾP (100% KHÔNG LINK4M) ==================== -->
+    <!-- ==================== MODAL TẢI FILE ==================== -->
     <div id="downloadModal" class="modal-overlay" onclick="closeModalOnBg(event, 'downloadModal')">
         <div class="modal-box">
             
-            <div class="modal-title">⚡ TẢI ỨNG DỤNG CHÍNH THỨC</div>
-            <div class="modal-desc">Chọn máy chủ tải xuống tốc độ cao (100% Trực tiếp • Không Quảng Cáo • Không Rút Gọn Link):</div>
+            <div class="modal-title">⚡ TẢI ỨNG DỤNG & CÔNG CỤ</div>
+            <div class="modal-desc">Vui lòng vượt Link4m ủng hộ Admin hoặc chọn tải trực tiếp dự phòng:</div>
 
             <!-- Card App Info -->
             <div class="modal-app-card">
@@ -785,23 +785,23 @@
                 </div>
                 <div style="flex: 1; overflow: hidden; text-align: left;">
                     <div id="modalAppName" class="modal-app-title">FlowOptimize Pro</div>
-                    <div id="modalAppSub" class="modal-app-sub">v1.4.1 Pro • Tải Trực Tiếp Siêu Tốc</div>
+                    <div id="modalAppSub" class="modal-app-sub">v1.4.1 Pro • Link4m & Tải Trực Tiếp</div>
                 </div>
             </div>
 
             <!-- Download Buttons -->
             <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 16px;">
                 
-                <!-- Nút 1: Tải trực tiếp APK -->
-                <button id="btnDirectDownload" type="button" class="btn-download-action unlocked" onclick="onDirectApkClick()" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); width: 100%; border: none; padding: 13px; border-radius: 999px; color: #fff; font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);">
-                    <span style="font-size: 16px;">⚡</span>
-                    <span id="btnDirectText">TẢI FILE APK TRỰC TIẾP (Máy Chủ Chính)</span>
+                <!-- Nút 1 (Chính): Vượt Link4m -->
+                <button id="btnLink4mDownload" type="button" class="btn-download-action unlocked" onclick="onLink4mClick()" style="background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); width: 100%; border: none; padding: 14px; border-radius: 999px; color: #fff; font-weight: 800; font-size: 13.5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);">
+                    <span style="font-size: 17px;">🚀</span>
+                    <span id="btnLink4mText">VƯỢT LINK4M TẢI VỀ (Gofile Siêu Tốc)</span>
                 </button>
 
-                <!-- Nút 2: Tải qua Gofile Cloud dự phòng -->
-                <button id="btnGofileDownload" type="button" class="btn-download-action unlocked" onclick="onGofileClick()" style="background: linear-gradient(135deg, #10b981 0%, #047857 100%); width: 100%; border: none; padding: 13px; border-radius: 999px; color: #fff; font-weight: 800; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">
-                    <span style="font-size: 16px;">☁️</span>
-                    <span>TẢI QUA GOFILE CLOUD (Dự Phòng Siêu Tốc)</span>
+                <!-- Nút 2 (Dự phòng): Tải trực tiếp APK -->
+                <button id="btnDirectDownload" type="button" class="btn-download-action unlocked" onclick="onDirectApkClick()" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); width: 100%; padding: 12px; border-radius: 999px; color: #e2e8f0; font-weight: 700; font-size: 12.5px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <span style="font-size: 15px;">⚡</span>
+                    <span id="btnDirectText">Tải File Trực Tiếp (Dự Phòng Khi Lỗi Link)</span>
                 </button>
 
                 <!-- Kênh hỗ trợ TikTok -->
@@ -845,64 +845,84 @@
         </div>
     </div>
 
-    <!-- Modal Lấy Key PRO VIP 24H -->
+    <!-- Modal Lấy Key PRO VIP 30H -->
     <div id="keyVipModal" class="modal-overlay" onclick="closeModalOnBg(event, 'keyVipModal')">
         <div class="modal-box">
-            <div class="modal-title">👑 Nhận Key PRO VIP Miễn Phí</div>
+            <div class="modal-title">🔑 CỔNG NHẬN KEY PRO VIP</div>
             <div class="modal-desc">
-                Sử dụng mã Key sự kiện tri ân tuần lễ VIP của Admin bên dưới để mở khóa toàn bộ tính năng FlowOp & FlowS ngay:
+                Chọn phương thức nhận mã Key PRO VIP mở khóa toàn bộ tính năng FlowOp & FlowS:
             </div>
 
-            <div style="background: rgba(2, 132, 199, 0.15); border: 1.5px dashed #38bdf8; border-radius: 14px; padding: 12px; margin-bottom: 16px;">
-                <div style="font-size: 11px; color: #94a3b8; margin-bottom: 4px;">KEY SỰ KIỆN MIỄN PHÍ:</div>
-                <div id="keyDisplay" style="font-size: 18px; font-weight: 900; color: #38bdf8; letter-spacing: 1px;">EVENT-WEEK-VIP</div>
+            <!-- Nút Vượt Link4M Nhận Key 30h qua GitHub Pages -->
+            <a href="https://zslowcuong.github.io/bio/getkey.html" target="_blank" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); color: #fff; padding: 14px; border-radius: 999px; font-weight: 800; font-size: 13.5px; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4); margin-bottom: 12px;" onclick="trackClick('BypassKeyVIP30H')">
+                <span>🚀</span>
+                <span>VƯỢT LINK4M NHẬN KEY VIP 30 GIỜ</span>
+            </a>
+
+            <!-- Khung Key Sự Kiện Dự Phòng -->
+            <div style="background: rgba(2, 132, 199, 0.12); border: 1.5px dashed rgba(56, 189, 248, 0.5); border-radius: 14px; padding: 12px; margin-bottom: 14px;">
+                <div style="font-size: 11px; color: #94a3b8; margin-bottom: 4px;">HOẶC DÙNG KEY SỰ KIỆN TRI ÂN TUẦN LỄ VIP:</div>
+                <div id="keyDisplay" style="font-size: 17px; font-weight: 900; color: #38bdf8; letter-spacing: 1px;">EVENT-WEEK-VIP</div>
             </div>
 
             <div style="display: flex; gap: 8px; margin-bottom: 14px;">
-                <button type="button" style="flex: 1; padding: 11px; border-radius: 99px; background: #38bdf8; color: #0f172a; font-weight: 800; font-size: 13px; border: none; cursor: pointer;" onclick="copyKeyText()">📋 Sao Chép Key</button>
-                <a href="showkey.html" style="flex: 1; padding: 11px; border-radius: 99px; background: rgba(255,255,255,0.1); color: #fff; text-decoration: none; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2);">🔑 Xem Thêm Key</a>
+                <button type="button" style="flex: 1; padding: 11px; border-radius: 99px; background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-weight: 800; font-size: 12.5px; border: 1px solid rgba(56, 189, 248, 0.4); cursor: pointer;" onclick="copyKeyText()">📋 Sao Chép Key</button>
+                <a href="https://zslowcuong.github.io/bio/showkey.html" target="_blank" style="flex: 1; padding: 11px; border-radius: 99px; background: rgba(255,255,255,0.08); color: #fff; text-decoration: none; font-weight: 700; font-size: 12.5px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.15);">🔑 Xem Thêm Key</a>
             </div>
 
-            <button class="modal-close-btn" onclick="closeModal('keyVipModal')">Đóng</button>
+            <button class="modal-close-btn" onclick="closeModal('keyVipModal')">Đóng Hộp Thoại</button>
         </div>
     </div>
 
     <script>
         const TIKTOK_URL = 'https://www.tiktok.com/@xxd5974';
 
-        // DANH SÁCH ỨNG DỤNG CHÍNH THỨC (100% SẠCH • KHÔNG LINK4M)
+        // DANH SÁCH BỘ BA SIÊU APP FLOW & CÔNG CỤ NỀN TẢNG (LINK4M TĨNH CHỐNG BÓP CPM)
         const APPS_DATA = {
             flowop: {
                 name: 'FlowOptimize (FlowOp) 🚀',
-                sub: 'v1.4.1 Pro • 7.1 MB • Trực Tiếp & Gofile',
+                sub: 'v1.4.1 Pro • 7.1 MB • Link4m & Tải Trực Tiếp',
                 icon: 'app_logo.png',
                 isEmoji: false,
                 directApk: 'FlowOptimize.apk',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/TytolAEu',
                 gofile: 'https://gofile.io/d/TytolAEu'
             },
             flows: {
                 name: 'FlowS Gamer Tuner ⚡',
-                sub: 'v1.0.8 Pro • 8.8 MB • Trực Tiếp & Gofile',
+                sub: 'v1.0.8 Pro • 8.8 MB • Link4m & Tải Trực Tiếp',
                 icon: 'flows_logo.png',
                 isEmoji: false,
                 directApk: 'FlowS.apk',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/j6tNGeVu',
                 gofile: 'https://gofile.io/d/j6tNGeVu'
             },
             flowultra: {
                 name: 'FlowUltra Hardware Suite 🛡️',
-                sub: 'v1.0.5 Pro • 8.6 MB • Trực Tiếp & Gofile',
+                sub: 'v1.0.5 Pro • 8.6 MB • Link4m & Tải Trực Tiếp',
                 icon: 'flowultra_logo.png',
                 isEmoji: false,
                 directApk: 'FlowUltra.apk',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/4qt6zQyQ',
                 gofile: 'https://gofile.io/d/4qt6zQyQ'
             },
             shizuku: {
                 name: 'Shizuku Official 🐱',
-                sub: 'v13.6.0 • 2.5 MB • Trực Tiếp & Gofile',
+                sub: 'v13.6.0 • 2.5 MB • Link4m & Tải Trực Tiếp',
                 icon: 'icon_shizuku.png',
                 isEmoji: false,
                 directApk: 'Shizuku.apk',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/DkhZ4xaM',
                 gofile: 'https://gofile.io/d/DkhZ4xaM'
+            },
+            toolpc: {
+                name: 'Tool Kích Hoạt Shizuku (PC) 💻',
+                sub: 'v1.0 • 6.3 KB • File .bat Tự Động 1-Click',
+                icon: '💻',
+                isEmoji: true,
+                directApk: 'TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat',
+                link4m: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat',
+                gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat'
             }
         };
 
@@ -918,6 +938,8 @@
             const modalAppName = document.getElementById('modalAppName');
             const modalAppSub = document.getElementById('modalAppSub');
             const modalIcon = document.getElementById('modalIcon');
+            const btnLink4mText = document.getElementById('btnLink4mText');
+            const btnDirectText = document.getElementById('btnDirectText');
 
             modalAppName.innerText = app.name;
             modalAppSub.innerText = app.sub;
@@ -928,12 +950,27 @@
                 modalIcon.innerHTML = `<img src="${app.icon}" alt="${app.name}">`;
             }
 
+            if (btnLink4mText) {
+                btnLink4mText.innerText = appKey === 'toolpc' ? 'VƯỢT LINK4M TẢI TOOL PC' : 'VƯỢT LINK4M TẢI APK (Gofile Siêu Tốc)';
+            }
+            if (btnDirectText) {
+                btnDirectText.innerText = appKey === 'toolpc' ? 'Tải Trực Tiếp File .BAT (Dự Phòng)' : 'Tải File APK Trực Tiếp (Dự Phòng Khi Lỗi Link)';
+            }
+
             // Hiển thị modal
             document.getElementById('downloadModal').style.display = 'flex';
             trackClick(`OpenDownload: ${app.name}`);
         }
 
-        // Tải APK trực tiếp từ Host
+        // Vượt Link4M tải file (Link tĩnh cố định gom CPM cao nhất)
+        function onLink4mClick() {
+            if (!currentActiveApp || !currentActiveApp.link4m) return;
+            trackClick(`Link4mDownload: ${currentActiveApp.name}`);
+            showBioToast(`Đang chuyển hướng sang Link4M tải ${currentActiveApp.name}...`, '🚀');
+            window.open(currentActiveApp.link4m, '_blank');
+        }
+
+        // Tải APK / File trực tiếp từ Host
         function onDirectApkClick() {
             if (!currentActiveApp || !currentActiveApp.directApk) return;
             trackClick(`DirectDownload: ${currentActiveApp.name}`);
