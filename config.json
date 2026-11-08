@@ -40,13 +40,13 @@
   },
   "flowoptimize": {
     "name": "FlowOptimize Anime Edition",
-    "version": "v1.4.0 Pro",
-    "version_code": 4,
-    "min_version_code": 4,
+    "version": "v1.4.1 Pro",
+    "version_code": 5,
+    "min_version_code": 5,
     "force_update": false,
     "update_url": "https://zslowcuong.github.io/bio/",
     "package": "com.example.gameoptimizer",
-    "changelog": "Bản cập nhật v1.4.0 Pro: Tối ưu eSports siêu mượt, nâng cấp tính năng PRO và giao diện mới.",
+    "changelog": "Bản cập nhật v1.4.1 Pro: Thêm chức năng 1-chạm Khôi phục Máy ảnh, Gemini AI, Google Drive, Hoạt họa 0.5x sau khi dùng Cực Mạnh & Crazy.",
     "destination_apk": "https://gofile.io/d/TytolAEu",
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/TytolAEu",
     "direct_apk": "FlowOptimize.apk"
