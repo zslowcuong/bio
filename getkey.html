@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Cổng Lấy Key VIP 30 Giờ • FlowOptimize eSports</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg: #030712;
@@ -26,7 +28,7 @@
 
         body {
             background: var(--bg);
-            background-image: 
+            background-image:
                 radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15), transparent 60%),
                 radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.08), transparent 50%);
             color: #f8fafc;
@@ -221,6 +223,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -229,7 +232,8 @@
         </div>
 
         <h1>XÁC THỰC MỞ KHÓA 30 GIỜ</h1>
-        <p class="sub">Vượt link nhanh để mở khóa toàn bộ tính năng FlowOptimize Full PRO VIP trong 30 giờ (Gói mua VIP không cần vượt link)</p>
+        <p class="sub">Vượt link nhanh để mở khóa toàn bộ tính năng FlowOptimize Full PRO VIP trong 30 giờ (Gói mua VIP
+            không cần vượt link)</p>
 
         <!-- HWID BOX -->
         <div class="hwid-card">
@@ -238,7 +242,9 @@
             </div>
             <div class="hwid-val">
                 <span id="hwidDisplay">Đang nhận diện...</span>
-                <span style="font-size: 11px; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">CỐ ĐỊNH</span>
+                <span
+                    style="font-size: 11px; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">CỐ
+                    ĐỊNH</span>
             </div>
             <div style="font-size: 11px; color: #64748b; margin-top: 6px;">
                 *Thiết bị của bạn được mở khóa 100% tính năng PRO VIP hoàn toàn miễn phí.
@@ -285,17 +291,17 @@
         const currentTimestamp = Date.now();
         const baseBioUrl = (window.location.origin && window.location.origin !== "null" && !window.location.origin.startsWith("file:")) ? (window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1)) : "https://zslowcuong.github.io/bio/";
         const destinationShowKey = `${baseBioUrl}showkey.html?hwid=${encodeURIComponent(hwid)}&t=${currentTimestamp}`;
-        
+
         // Tạo link rút gọn Link4m
         const shortLink = `https://link4m.co/st?api=${link4mApi}&url=${encodeURIComponent(destinationShowKey)}`;
 
         const btn = document.getElementById('btnBypassLink');
         btn.href = shortLink;
 
-        btn.addEventListener('click', function(e) {
+        btn.addEventListener('click', function (e) {
             btn.innerHTML = `<span>⏳ ĐANG CHUYỂN HƯỚNG...</span>`;
         });
     </script>
 </body>
-</html>
 
+</html>
