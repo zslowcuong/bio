@@ -31,11 +31,11 @@
     "version_code": 2,
     "min_version_code": 2,
     "force_update": false,
-    "update_url": "https://zslowcuong.github.io/bio/",
+    "update_url": "https://bio-seven-nu.vercel.app/",
     "package": "com.flows.gaming",
     "changelog": "Bổ sung kích hoạt PRO Key, đồng bộ Device ID, hệ thống Feedback Formspree & Telegram.",
     "destination_apk": "https://gofile.io/d/j6tNGeVu",
-    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/j6tNGeVu",
+    "link4m": "https://gofile.io/d/j6tNGeVu",
     "direct_apk": "FlowS.apk"
   },
   "flowoptimize": {
@@ -44,11 +44,11 @@
     "version_code": 5,
     "min_version_code": 5,
     "force_update": false,
-    "update_url": "https://zslowcuong.github.io/bio/",
+    "update_url": "https://bio-seven-nu.vercel.app/",
     "package": "com.example.gameoptimizer",
     "changelog": "Bản cập nhật v1.4.1 Pro: Thêm chức năng 1-chạm Khôi phục Máy ảnh, Gemini AI, Google Drive, Hoạt họa 0.5x sau khi dùng Cực Mạnh & Crazy.",
     "destination_apk": "https://gofile.io/d/TytolAEu",
-    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/TytolAEu",
+    "link4m": "https://gofile.io/d/TytolAEu",
     "direct_apk": "FlowOptimize.apk"
   },
   "flowultra": {
@@ -57,11 +57,11 @@
     "version_code": 2,
     "min_version_code": 2,
     "force_update": false,
-    "update_url": "https://zslowcuong.github.io/bio/",
+    "update_url": "https://bio-seven-nu.vercel.app/",
     "package": "com.flows.flowultra",
     "changelog": "Giao diện Zayon Gaming HUD eSports, khôi phục 100% cài đặt gốc, sửa lỗi font tiếng Việt, kích hoạt PRO & Feedback.",
     "destination_apk": "https://gofile.io/d/4qt6zQyQ",
-    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/4qt6zQyQ",
+    "link4m": "https://gofile.io/d/4qt6zQyQ",
     "direct_apk": "FlowUltra.apk"
   },
   "tools_store": {
