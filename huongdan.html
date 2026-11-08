@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hướng Dẫn Mua Key PRO & Kích Hoạt A-Z • FlowOptimize</title>
+    <title>Cẩm Nang Hướng Dẫn Sử Dụng A-Z • FlowOptimize eSports</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #030712;
-            --card-bg: rgba(15, 23, 42, 0.9);
+            --card-bg: rgba(15, 23, 42, 0.92);
             --card-border: rgba(56, 189, 248, 0.25);
             --accent: #38bdf8;
             --gold: #f59e0b;
             --green: #10b981;
             --pink: #ff2d75;
+            --purple: #818cf8;
         }
 
         * {
@@ -27,11 +28,12 @@
         body {
             background: var(--bg);
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15), transparent 60%),
-                radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.08), transparent 50%);
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.18), transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.08), transparent 50%),
+                radial-gradient(circle at 0% 50%, rgba(16, 185, 129, 0.08), transparent 50%);
             color: #f8fafc;
             min-height: 100vh;
-            padding: 24px 16px 80px 16px;
+            padding: 24px 16px 90px 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -39,12 +41,12 @@
 
         .container {
             width: 100%;
-            max-width: 540px;
+            max-width: 580px;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
         .badge-guide {
@@ -54,11 +56,11 @@
             color: #38bdf8;
             font-size: 11px;
             font-weight: 800;
-            padding: 4px 12px;
+            padding: 4px 14px;
             border-radius: 99px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         h1 {
@@ -74,6 +76,51 @@
             font-size: 13px;
             color: #94a3b8;
             line-height: 1.5;
+        }
+
+        /* TAB NAVIGATION */
+        .tab-nav {
+            display: flex;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 6px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 10px;
+            border: none;
+            background: transparent;
+            color: #94a3b8;
+            font-size: 12.5px;
+            font-weight: 800;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: center;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.35);
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* STEP CARDS */
@@ -95,8 +142,8 @@
         }
 
         .step-num {
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 10px;
             background: linear-gradient(135deg, #0284c7, #38bdf8);
             color: #fff;
@@ -116,9 +163,9 @@
         }
 
         .step-desc {
-            font-size: 12.5px;
+            font-size: 12.8px;
             color: #cbd5e1;
-            line-height: 1.6;
+            line-height: 1.65;
             margin-bottom: 14px;
         }
 
@@ -134,14 +181,35 @@
             font-weight: 700;
         }
 
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            color: #cbd5e1;
+        }
+
+        .feature-item b {
+            color: #38bdf8;
+        }
+
         /* IMAGE WRAPPER */
         .step-img-box {
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 15, 29, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
             text-align: center;
+            margin-top: 10px;
         }
 
         .step-img-box img {
@@ -157,7 +225,7 @@
             color: #94a3b8;
             font-weight: 700;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(10, 15, 29, 0.8);
+            background: rgba(10, 15, 29, 0.9);
         }
 
         /* TIP BOX */
@@ -170,6 +238,18 @@
             font-size: 11.5px;
             color: #fbbf24;
             line-height: 1.5;
+        }
+
+        .tip-box.green {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: #34d399;
+        }
+
+        .tip-box.purple {
+            background: rgba(129, 140, 248, 0.1);
+            border-color: rgba(129, 140, 248, 0.3);
+            color: #a5b4fc;
         }
 
         .btn-action-main {
@@ -186,7 +266,7 @@
             padding: 16px;
             border-radius: 14px;
             box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4);
-            margin-top: 20px;
+            margin-top: 14px;
             transition: all 0.2s ease;
         }
 
@@ -218,115 +298,283 @@
 
     <div class="container">
         <div class="header">
-            <span class="badge-guide">📖 CẨM NANG HƯỚNG DẪN TỪ A - Z</span>
-            <h1>CÁCH MUA KEY PRO & KÍCH HOẠT TỰ ĐỘNG</h1>
-            <p class="sub">Xem hướng dẫn chi tiết cách lấy mã máy HWID, thanh toán VietQR / Thẻ cào và cách lấy lại key khi quên.</p>
+            <span class="badge-guide">⚡ HỆ SINH THÁI FLOW ECOSYSTEM</span>
+            <h1>CẨM NANG HƯỚNG DẪN TỪ A - Z</h1>
+            <p class="sub">Tất cả những gì bạn cần biết về cách sử dụng ứng dụng FlowOptimize và quy trình mua & kích hoạt Key PRO.</p>
         </div>
 
-        <!-- BƯỚC 1: LẤY MÃ HWID TRONG APP -->
-        <div class="step-card">
-            <div class="step-header">
-                <div class="step-num">1</div>
-                <div class="step-title">Lấy Mã Thiết Bị (HWID) Ở Đâu?</div>
-            </div>
-            <div class="step-desc">
-                Mỗi điện thoại có một mã phần cứng riêng biệt gọi là <b>Mã HWID</b>.
-                <br>• Khi mở App <b>FlowOptimize</b>, ngay tại màn hình Cổng Khóa, bạn sẽ thấy ô: <mark>MÃ THIẾT BỊ (HWID) CỦA BẠN</mark> (ví dụ: <code>OPPO_1716D098</code>).
-                <br>• Chỉ cần chạm vào nút <b>[Sao chép HWID 📋]</b> là xong!
-            </div>
-            <div class="step-img-box">
-                <img src="guide_step1_hwid.png" alt="Bước 1: Lấy mã HWID">
-                <div class="step-img-caption">📸 Màn hình Khóa Cổng App: Nút bấm sao chép mã HWID máy to rõ</div>
-            </div>
-            <div class="tip-box">
-                💡 <b>MẸO SIÊU NHANH:</b> Nếu bạn bấm vào nút <b>"Mua Key PRO"</b> ngay bên trong App, hệ thống sẽ tự động mở web và <b>tự điền sẵn mã HWID</b> vào ô cho bạn, không cần gõ bằng tay!
-            </div>
+        <!-- 2 TABS CHÍNH -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('tab-app')">🎮 Hướng Dẫn Dùng App</button>
+            <button class="tab-btn" onclick="switchTab('tab-key')">🔑 Hướng Dẫn Mua Key PRO</button>
         </div>
 
-        <!-- BƯỚC 2: CHỌN GÓI BẢN QUYỀN TẠI SHOP -->
-        <div class="step-card">
-            <div class="step-header">
-                <div class="step-num">2</div>
-                <div class="step-title">Chọn Gói Bản Quyền & Điền Thông Tin</div>
+        <!-- ========================================== -->
+        <!-- TAB 1: HƯỚNG DẪN DÙNG TỪNG NÚT BẤM TRONG APP -->
+        <!-- ========================================== -->
+        <div id="tab-app" class="tab-pane active">
+
+            <!-- PHẦN 1: MÀN HÌNH CHÍNH -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-num">1</div>
+                    <div class="step-title">Màn Hình Chính & Đảo Động (Dynamic Capsule)</div>
+                </div>
+                <div class="step-desc">
+                    Khi vừa mở App, bạn sẽ thấy ngay các thông tin phần cứng quan trọng:
+                    <br>• <b>Dynamic Capsule (Đảo Động)</b>: Hiển thị trạng thái kết nối Shizuku (<code>SHIZUKU CONNECTED</code>), Nhiệt độ Pin Kernel đo trực tiếp và Tình trạng mạng.
+                    <br>• <b>Mã Thiết Bị (HWID)</b>: Định danh độc bản của máy bạn (VD: <code>OPPO_1716D098</code>) để cấp quyền dùng thử và đăng ký key PRO.
+                    <br>• <b>Nút [🚀 KÍCH HOẠT FLOWOPTIMIZE]</b>: Nút chính bấm để chạy toàn bộ gói lệnh tối ưu vào hệ thống. Sau khi chạy xong, nút sẽ đổi sang màu ngọc lục bảo <code>🟢 ĐÃ TỐI ƯU THÀNH CÔNG</code>!
+                    <br>• <b>Nút [↪️ MẶC ĐỊNH]</b>: Khôi phục tất cả cài đặt hệ thống (DPI, FPS, Touch, Doze) về nguyên bản của nhà sản xuất.
+                </div>
+                <div class="step-img-box">
+                    <img src="assets_guide/guide_01_main_screen.png" alt="Màn hình chính FlowOptimize">
+                    <div class="step-img-caption">📸 Giao diện chính FlowOptimize: Đảo Động, Banner HWID và Nút Kích Hoạt</div>
+                </div>
             </div>
-            <div class="step-desc">
-                1. Truy cập vào trang <b>Shop Key PRO</b> (<code>shop.html</code>).
-                <br>2. Chọn 1 trong 3 gói phù hợp:
-                <br>• 🥉 <b>Gói Tuần</b>: 15.000đ (Dùng 7 ngày)
-                <br>• 🥈 <b>Gói Tháng</b>: 39.000đ (Tiết kiệm 50% - Bán chạy nhất)
-                <br>• 👑 <b>Gói Trọn Đời</b>: 99.000đ (Dùng vĩnh viễn không giới hạn)
-                <br>3. Điền <b>Số Điện Thoại / Zalo</b> của bạn để làm hóa đơn tra cứu.
-                <br>4. Dán mã HWID đã copy ở Bước 1 vào ô Mã thiết bị.
+
+            <!-- PHẦN 2: TAB HIỆU NĂNG PRO -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-num">2</div>
+                    <div class="step-title">Tab 1: Hiệu Năng PRO (Bộ 5 Tính Năng Đột Phá)</div>
+                </div>
+                <div class="step-desc">
+                    Tab đầu tiên tập trung vào hiệu năng CPU, GPU và độ trễ phản hồi:
+                    <div class="feature-grid">
+                        <div class="feature-item"><b>⚡ Auto Boost Khi Mở Game:</b> Tự động phát hiện khi bạn vào Liên Quân, Free Fire, PUBG để đẩy xung nhịp tối đa.</div>
+                        <div class="feature-item"><b>📊 Mini HUD FPS Realtime:</b> Đo FPS thực bằng SurfaceFlinger (chuẩn xác 100%, không FPS ảo) và nhiệt độ pin nổi trên màn hình.</div>
+                        <div class="feature-item"><b>🎧 Giảm Trễ Bluetooth:</b> Giảm latency của tai nghe không dây về mức cực thấp (Gaming mode).</div>
+                        <div class="feature-item"><b>🛡️ Bộ Chọn Thương Hiệu & Chế Độ:</b> Tùy chọn hãng máy (Xiaomi, Samsung, OPPO, Vivo, Gaming Phone...) và 4 mức tối ưu (Smooth, Vừa Phải, Cực Mạnh, Crazy Mode).</div>
+                        <div class="feature-item"><b>⚡ Sched Boost & Vulkan SkiaVk:</b> Kích hoạt render phần cứng qua Vulkan và bộ điều phối CPU hiệu năng cao.</div>
+                    </div>
+                </div>
+                <div class="step-img-box">
+                    <img src="assets_guide/guide_02_tab_perf.png" alt="Tab Hiệu Năng PRO">
+                    <div class="step-img-caption">📸 Tab 1: 5 tính năng eSports đột phá và bộ chọn hãng điện thoại</div>
+                </div>
+                <div class="step-img-box" style="margin-top: 12px;">
+                    <img src="assets_guide/guide_03b_modes_brands.png" alt="Bộ chọn chế độ và thương hiệu">
+                    <div class="step-img-caption">📸 4 Chế độ hiệu năng và tinh chỉnh riêng theo từng hãng điện thoại</div>
+                </div>
             </div>
-            <div class="step-img-box">
-                <img src="guide_step2_shop.png" alt="Bước 2: Chọn gói">
-                <div class="step-img-caption">📸 Giao diện 3 gói bản quyền và form nhập thông tin khách hàng</div>
+
+            <!-- PHẦN 3: TAB MÀN HÌNH & TẦN SỐ QUÉT -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-num">3</div>
+                    <div class="step-title">Tab 2: Màn Hình & Tần Số Quét (DPI & Cảm Ứng)</div>
+                </div>
+                <div class="step-desc">
+                    Tùy chỉnh góc nhìn màn hình và độ nhạy vuốt ngón tay:
+                    <br>• <b>Thanh Trượt DPI Màn Hình (160 - 600 DPI):</b> Điều chỉnh mật độ điểm ảnh. Tăng DPI giúp góc nhìn game rộng hơn, giảm DPI giúp icon to rõ dễ nhìn.
+                    <br>• <b>4 Nút Preset Siêu Tốc:</b> <code>360p (DPI 480)</code>, <code>480p (DPI 420)</code>, <code>720p (DPI 360)</code>, <code>1080p (DPI 320)</code>.
+                    <br>• <b>Công Tắc Bảo Vệ Vân Tay Dưới Màn Hình:</b> Ngăn chặn lệch vị trí cảm biến vân tay quang học khi thay đổi DPI.
+                    <br>• <b>Tốc Độ Con Trỏ & Thời Gian Chạm Giữ:</b> Giảm thời gian chạm từ 400ms xuống 100ms để skill xuất chiêu tức thì khi chạm ngón tay.
+                </div>
+                <div class="step-img-box">
+                    <img src="assets_guide/guide_04_tab_screen_dpi.png" alt="Tab Màn Hình DPI">
+                    <div class="step-img-caption">📸 Tab 2: Thanh trượt DPI, 4 mức độ phân giải và bảo vệ vân tay</div>
+                </div>
+                <div class="step-img-box" style="margin-top: 12px;">
+                    <img src="assets_guide/guide_05b_tab_screen_touch.png" alt="Tốc độ chạm giữ và con trỏ">
+                    <div class="step-img-caption">📸 Tinh chỉnh tốc độ con trỏ (+7) và giảm thời gian phản hồi chạm giữ (100ms)</div>
+                </div>
             </div>
+
+            <!-- PHẦN 4: TAB GAME TUNER -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-num">4</div>
+                    <div class="step-title">Tab 3: Game Tuner & Florentino 0ms Combo</div>
+                </div>
+                <div class="step-desc">
+                    Thiết lập đặc quyền cho game thủ eSports:
+                    <br>• <b>Khóa Màn Hình MAX FPS (90Hz / 120Hz):</b> Khóa cứng tần số quét màn hình ở mức tối đa phần cứng hỗ trợ, triệt tiêu hoàn toàn hiện tượng tụt về 60Hz khi combat.
+                    <br>• <b>Florentino 0ms Combo (Liên Quân Mobile):</b> Tối ưu hóa chuỗi rendering SF, cho phép nhặt hoa múa kiếm trơn tru không bị khựng hình.
+                    <br>• <b>Flowly GLTool Driver:</b> Theo dõi nhiệt độ chip thời gian thực, quản lý dòng sạc USB và kích hoạt các công tắc <i>Zero Lag, Ping Booster, Ice Cooling, Sạc Nhanh Turbo Charge</i>.
+                </div>
+                <div class="step-img-box">
+                    <img src="assets_guide/guide_06_tab_game_florentino.png" alt="Florentino 0ms Combo">
+                    <div class="step-img-caption">📸 Tab 3: Khóa Max FPS thực tế và cấu hình Florentino 0ms Liên Quân</div>
+                </div>
+                <div class="step-img-box" style="margin-top: 12px;">
+                    <img src="assets_guide/guide_07_tab_game_switches.png" alt="Flowly GLTool Switches">
+                    <div class="step-img-caption">📸 Flowly GLTool: Giảm ping mạng, tản nhiệt Ice Cooling và Turbo Charge</div>
+                </div>
+            </div>
+
+            <!-- PHẦN 5: TAB DỌN RAM & MÁT MÁY -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-num">5</div>
+                    <div class="step-title">Tab 4: Dọn RAM & Bảo Vệ Ứng Dụng Nền</div>
+                </div>
+                <div class="step-desc">
+                    Kiểm soát bộ nhớ thực tế và làm mát CPU:
+                    <br>• <b>Đo RAM Phần Cứng Chuẩn Xác:</b> Đọc trực tiếp dung lượng RAM thật từ Kernel (VD: 4.8GB / 7.4GB - 65% đã dùng).
+                    <br>• <b>Nút [🧹 DỌN DẸP RAM CỰC MẠNH]:</b> Đóng tất cả tiến trình rác chạy ngầm chỉ với 1 cú chạm.
+                    <br>• <b>🛡️ Danh Sách Ứng Dụng Được Bảo Vệ (Whitelist):</b> Đảm bảo các app quan trọng như Messenger (đang gọi video), Zalo, Camera, Google Drive... không bao giờ bị tắt nhầm!
+                </div>
+                <div class="step-img-box">
+                    <img src="assets_guide/guide_08_tab_ram.png" alt="Tab Dọn RAM">
+                    <div class="step-img-caption">📸 Tab 4: Biểu đồ RAM thực tế, nhiệt độ pin và công tắc dọn rác</div>
+                </div>
+                <div class="step-img-box" style="margin-top: 12px;">
+                    <img src="assets_guide/guide_app_manager_modal.png" alt="Quản lý App đã tắt và Whitelist">
+                    <div class="step-img-caption">📸 Drawer quản lý ứng dụng đã tắt và bật khiên bảo vệ các app liên lạc</div>
+                </div>
+            </div>
+
+            <!-- PHẦN 6: TAB THEME & CÁ NHÂN HÓA -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-num">6</div>
+                    <div class="step-title">Tab 5: Giao Diện & Cá Nhân Hóa (4 Master UI)</div>
+                </div>
+                <div class="step-desc">
+                    Tùy biến phong cách giao diện theo sở thích của bạn:
+                    <br>• <b>4 Giao Diện Master:</b> Anime Glow, Kính Mờ Liquid Glass, Minimalist OLED (tiết kiệm pin tối đa), Cyber Gaming.
+                    <br>• <b>Bộ Sưu Tập Anime Wallpapers:</b> Gojo Satoru, Conan, Dragon Ball, One Piece, Your Name, Naruto.
+                    <br>• <b>Khóa Cứng Chế Độ Khi Thoát:</b> Giữ nguyên toàn bộ xung nhịp và tần số quét ngay cả khi bạn tắt hoàn toàn App FlowOptimize.
+                </div>
+                <div class="step-img-box">
+                    <img src="assets_guide/guide_09_tab_themes.png" alt="Tab Giao Diện Themes">
+                    <div class="step-img-caption">📸 Tab 5: 4 chế độ Master UI và bộ sưu tập hình nền Anime sống động</div>
+                </div>
+            </div>
+
+            <!-- PHẦN 7: KHÔI PHỤC MẶC ĐỊNH AN TOÀN -->
+            <div class="step-card" style="border-color: #10b981;">
+                <div class="step-header">
+                    <div class="step-num" style="background: linear-gradient(135deg, #10b981, #059669);">↩️</div>
+                    <div class="step-title" style="color: #34d399;">Cách Khôi Phục Cài Đặt Gốc (An Toàn Tuyệt Đối)</div>
+                </div>
+                <div class="step-desc">
+                    Bất cứ khi nào bạn muốn đưa máy về nguyên bản xuất xưởng:
+                    <br>1. Tại màn hình chính, chạm vào nút <b>[↪️ MẶC ĐỊNH]</b>.
+                    <br>2. Hộp thoại xác nhận sẽ hiện lên: <i>"Khôi phục toàn bộ thiết lập về mặc định của nhà sản xuất?"</i>.
+                    <br>3. Bấm <b>[Đồng ý]</b>: App sẽ xóa toàn bộ lệnh can thiệp và trả máy về trạng thái gốc 100% trong 1 giây!
+                </div>
+                <div class="step-img-box">
+                    <img src="assets_guide/test_phone_restore_click.png" alt="Xác nhận khôi phục mặc định">
+                    <div class="step-img-caption">📸 Hộp thoại xác nhận hoàn trả an toàn không gây ảnh hưởng đến dữ liệu máy</div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- BƯỚC 3: QUÉT MÃ VIETQR HOẶC NẠP THẺ CÀO -->
-        <div class="step-card">
-            <div class="step-header">
-                <div class="step-num">3</div>
-                <div class="step-title">Thanh Toán Tự Động (VietQR hoặc Thẻ Cào)</div>
+        <!-- ========================================== -->
+        <!-- TAB 2: HƯỚNG DẪN MUA KEY PRO & KÍCH HOẠT -->
+        <!-- ========================================== -->
+        <div id="tab-key" class="tab-pane">
+
+            <!-- BƯỚC 1: LẤY MÃ HWID TRONG APP -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-num">1</div>
+                    <div class="step-title">Lấy Mã Thiết Bị (HWID) Ở Đâu?</div>
+                </div>
+                <div class="step-desc">
+                    Mỗi điện thoại có một mã phần cứng riêng biệt gọi là <b>Mã HWID</b>.
+                    <br>• Khi mở App <b>FlowOptimize</b>, ngay tại màn hình chính hoặc Cổng Khóa, bạn sẽ thấy ô: <mark>MÃ THIẾT BỊ (HWID) CỦA BẠN</mark> (ví dụ: <code>OPPO_1716D098</code>).
+                    <br>• Chỉ cần chạm vào nút <b>[Sao chép HWID 📋]</b> là xong!
+                </div>
+                <div class="step-img-box">
+                    <img src="guide_step1_hwid.png" alt="Bước 1: Lấy mã HWID">
+                    <div class="step-img-caption">📸 Màn hình Khóa Cổng App: Nút bấm sao chép mã HWID máy to rõ</div>
+                </div>
+                <div class="tip-box">
+                    💡 <b>MẸO SIÊU NHANH:</b> Nếu bạn bấm vào nút <b>"Mua Key PRO"</b> ngay bên trong App, hệ thống sẽ tự động mở web và <b>tự điền sẵn mã HWID</b> vào ô cho bạn, không cần gõ bằng tay!
+                </div>
             </div>
-            <div class="step-desc">
-                Bạn có thể chọn 1 trong 2 hình thức:
-                <br><br>
-                <b>A. Quét mã VietQR Techcombank (Khuyên dùng):</b>
-                <br>• Mở ứng dụng ngân hàng bất kỳ (Techcombank, MB, VCB, ACB, MoMo...) quét mã QR hiển thị trên màn hình.
-                <br>• <b>QUAN TRỌNG:</b> Giữ nguyên số tiền và nội dung chuyển khoản (ví dụ: <code>NAP FLOW1234</code>) để hệ thống tự động nhận diện và nhả key trong <b>30 giây – 2 phút</b>.
-                <br><br>
-                <b>B. Nạp bằng Thẻ Cào (Viettel, Vina, Mobi, Zing...):</b>
-                <br>• Chuyển sang tab <b>Nạp Bằng Thẻ Cào</b>, chọn nhà mạng, mệnh giá và nhập mã PIN + Seri. Cổng gạch thẻ tự duyệt trong 30s.
+
+            <!-- BƯỚC 2: CHỌN GÓI BẢN QUYỀN TẠI SHOP -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-num">2</div>
+                    <div class="step-title">Chọn Gói Bản Quyền & Điền Thông Tin</div>
+                </div>
+                <div class="step-desc">
+                    1. Truy cập vào trang <b>Shop Key PRO</b> (<code>shop.html</code>).
+                    <br>2. Chọn 1 trong 3 gói phù hợp:
+                    <br>• 🥉 <b>Gói Tuần</b>: 15.000đ (Dùng 7 ngày)
+                    <br>• 🥈 <b>Gói Tháng</b>: 39.000đ (Tiết kiệm 50% - Bán chạy nhất)
+                    <br>• 👑 <b>Gói Trọn Đời</b>: 99.000đ (Dùng vĩnh viễn không giới hạn)
+                    <br>3. Điền <b>Số Điện Thoại / Zalo</b> của bạn để làm hóa đơn tra cứu.
+                    <br>4. Dán mã HWID đã copy ở Bước 1 vào ô Mã thiết bị.
+                </div>
+                <div class="step-img-box">
+                    <img src="guide_step2_shop.png" alt="Bước 2: Chọn gói">
+                    <div class="step-img-caption">📸 Giao diện 3 gói bản quyền và form nhập thông tin khách hàng</div>
+                </div>
             </div>
-            <div class="step-img-box">
-                <img src="guide_step3_payment.png" alt="Bước 3: Quét mã QR thanh toán">
-                <div class="step-img-caption">📸 Màn hình VietQR tự động có đồng hồ đếm ngược và cú pháp chuyển tiền</div>
+
+            <!-- BƯỚC 3: QUÉT MÃ VIETQR HOẶC NẠP THẺ CÀO -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-num">3</div>
+                    <div class="step-title">Thanh Toán Tự Động (VietQR hoặc Thẻ Cào)</div>
+                </div>
+                <div class="step-desc">
+                    Bạn có thể chọn 1 trong 2 hình thức:
+                    <br><br>
+                    <b>A. Quét mã VietQR Techcombank (Khuyên dùng):</b>
+                    <br>• Mở ứng dụng ngân hàng bất kỳ (Techcombank, MB, VCB, ACB, MoMo...) quét mã QR hiển thị trên màn hình.
+                    <br>• <b>QUAN TRỌNG:</b> Giữ nguyên số tiền và nội dung chuyển khoản (ví dụ: <code>NAP FLOW1234</code>) để hệ thống tự động nhận diện và nhả key trong <b>30 giây – 2 phút</b>.
+                    <br><br>
+                    <b>B. Nạp bằng Thẻ Cào (Viettel, Vina, Mobi, Zing...):</b>
+                    <br>• Chuyển sang tab <b>Nạp Bằng Thẻ Cào</b>, chọn nhà mạng, mệnh giá và nhập mã PIN + Seri. Cổng gạch thẻ tự duyệt trong 30s.
+                </div>
+                <div class="step-img-box">
+                    <img src="guide_step3_payment.png" alt="Bước 3: Quét mã QR thanh toán">
+                    <div class="step-img-caption">📸 Màn hình VietQR tự động có đồng hồ đếm ngược và cú pháp chuyển tiền</div>
+                </div>
             </div>
+
+            <!-- BƯỚC 4: NHẬN KEY VÀ KÍCH HOẠT VÀO APP -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-num">4</div>
+                    <div class="step-title">Nhận Mã Key & Kích Hoạt Trong App</div>
+                </div>
+                <div class="step-desc">
+                    1. Ngay khi thanh toán thành công, màn hình sẽ bung ra thông báo: <b>🎉 THANH TOÁN THÀNH CÔNG!</b>
+                    <br>2. Mã Key PRO VIP của bạn sẽ hiện to rõ: (ví dụ: <code>FLOW-VIP-30D-XXXXXX</code>).
+                    <br>3. Bấm nút <b>[📋 SAO CHÉP MÃ KEY]</b>.
+                    <br>4. Bấm nút <b>[🚀 Mở App FlowOptimize & Dán Key]</b> để ứng dụng tự động mở ra và kích hoạt Full 5 tính năng eSports vĩnh viễn!
+                </div>
+                <div class="step-img-box">
+                    <img src="guide_step4_key.png" alt="Bước 4: Nhận key PRO">
+                    <div class="step-img-caption">📸 Màn hình nhận key PRO VIP: Tự động lưu trữ vĩnh viễn không lo mất</div>
+                </div>
+            </div>
+
+            <!-- MỤC ĐẶC BIỆT: CÁCH TRA CỨU LẠI KEY KHI QUÊN HOẶC ĐỔI MÁY -->
+            <div class="step-card" style="border-color: #10b981;">
+                <div class="step-header">
+                    <div class="step-num" style="background: linear-gradient(135deg, #10b981, #059669);">🔍</div>
+                    <div class="step-title" style="color: #34d399;">Cách Tra Cứu Lại Key (Khi Quên / Đổi Máy)</div>
+                </div>
+                <div class="step-desc">
+                    Hệ thống cam kết bảo vệ khách hàng <b>100% không bao giờ bị mất key</b>:
+                    <br><br>
+                    <b>1. Tự động lưu trên máy:</b>
+                    <br>Chỉ cần bạn mở lại trang <code>shop.html</code>, ngay đầu trang sẽ có mục: <b>"🔑 KEY ĐÃ MUA TRÊN MÁY NÀY"</b> hiển thị sẵn mã key để bạn copy bất cứ lúc nào.
+                    <br><br>
+                    <b>2. Ô tra cứu đơn hàng:</b>
+                    <br>Kéo xuống chân trang Shop, nhập <b>Mã Đơn (ví dụ: FLOW1234)</b> hoặc <b>Số Điện Thoại / Zalo</b> bạn đã điền lúc mua ➔ Bấm <b>[Tra Cứu]</b> là mã key sẽ hiện ra lại ngay tức khắc.
+                    <br><br>
+                    <b>3. Hỗ trợ qua Zalo Admin:</b>
+                    <br>Nếu sau 10 phút ngân hàng bị treo hoặc bạn chuyển nhầm nội dung: Hãy bấm nút <b>[💬 Zalo Admin: 0827353177]</b> và gửi ảnh biên lai. Admin kiểm tra và cấp lại key cho bạn chỉ trong 1 phút!
+                </div>
+            </div>
+
         </div>
 
-        <!-- BƯỚC 4: NHẬN KEY VÀ KÍCH HOẠT VÀO APP -->
-        <div class="step-card">
-            <div class="step-header">
-                <div class="step-num">4</div>
-                <div class="step-title">Nhận Mã Key & Kích Hoạt Trong App</div>
-            </div>
-            <div class="step-desc">
-                1. Ngay khi thanh toán thành công, màn hình sẽ bung ra thông báo: <b>🎉 THANH TOÁN THÀNH CÔNG!</b>
-                <br>2. Mã Key PRO VIP của bạn sẽ hiện to rõ: (ví dụ: <code>FLOW-VIP-30D-XXXXXX</code>).
-                <br>3. Bấm nút <b>[📋 SAO CHÉP MÃ KEY]</b>.
-                <br>4. Bấm nút <b>[🚀 Mở App FlowOptimize & Dán Key]</b> để ứng dụng tự động mở ra và kích hoạt Full 5 tính năng eSports vĩnh viễn!
-            </div>
-            <div class="step-img-box">
-                <img src="guide_step4_key.png" alt="Bước 4: Nhận key PRO">
-                <div class="step-img-caption">📸 Màn hình nhận key PRO VIP: Tự động lưu trữ vĩnh viễn không lo mất</div>
-            </div>
-        </div>
-
-        <!-- MỤC ĐẶC BIỆT: CÁCH TRA CỨU LẠI KEY KHI QUÊN HOẶC ĐỔI MÁY -->
-        <div class="step-card" style="border-color: #10b981;">
-            <div class="step-header">
-                <div class="step-num" style="background: linear-gradient(135deg, #10b981, #059669);">🔍</div>
-                <div class="step-title" style="color: #34d399;">Cách Tra Cứu Lại Key (Khi Quên / Đổi Máy)</div>
-            </div>
-            <div class="step-desc">
-                Hệ thống cam kết bảo vệ khách hàng <b>100% không bao giờ bị mất key</b>:
-                <br><br>
-                <b>1. Tự động lưu trên máy:</b>
-                <br>Chỉ cần bạn mở lại trang <code>shop.html</code>, ngay đầu trang sẽ có mục: <b>"🔑 KEY ĐÃ MUA TRÊN MÁY NÀY"</b> hiển thị sẵn mã key để bạn copy bất cứ lúc nào.
-                <br><br>
-                <b>2. Ô tra cứu đơn hàng:</b>
-                <br>Kéo xuống chân trang Shop, nhập <b>Mã Đơn (ví dụ: FLOW1234)</b> hoặc <b>Số Điện Thoại / Zalo</b> bạn đã điền lúc mua ➔ Bấm <b>[Tra Cứu]</b> là mã key sẽ hiện ra lại ngay tức khắc.
-                <br><br>
-                <b>3. Hỗ trợ qua Zalo Admin:</b>
-                <br>Nếu sau 10 phút ngân hàng bị treo hoặc bạn chuyển nhầm nội dung: Hãy bấm nút <b>[💬 Zalo Admin: 0827353177]</b> và gửi ảnh biên lai. Admin kiểm tra và cấp lại key cho bạn chỉ trong 1 phút!
-            </div>
-        </div>
-
-        <a href="index.html" class="btn-action-main" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #cbd5e1; margin-right: 8px;">🏠 Trang Chủ</a>
+        <a href="index.html" class="btn-action-main" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); color: #cbd5e1;">🏠 Quay Về Trang Chủ Bio</a>
         <a href="shop.html" class="btn-action-main">
-            <span>🛒 ĐI ĐẾN CỬA HÀNG MUA KEY NGAY</span>
+            <span>🛒 ĐI ĐẾN CỬA HÀNG MUA KEY PRO</span>
         </a>
     </div>
 
@@ -335,5 +583,20 @@
         <span>💬 Zalo Admin: 0827353177</span>
     </a>
 
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            const targetPane = document.getElementById(tabId);
+            if (targetPane) targetPane.classList.add('active');
+            
+            const btns = document.querySelectorAll('.tab-btn');
+            if (tabId === 'tab-app') btns[0].classList.add('active');
+            else if (tabId === 'tab-key') btns[1].classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
