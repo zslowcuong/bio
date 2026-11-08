@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Key 24H Của Bạn • FlowOptimize eSports</title>
+    <title>Key VIP 30 Giờ • FlowOptimize eSports</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -345,7 +345,7 @@
             </div>
             <div class="info-row">
                 <span class="info-label">Trạng thái:</span>
-                <span class="info-val" style="color: #34d399;">ĐÃ MỞ KHÓA FULL PRO 24H</span>
+                <span class="info-val" style="color: #34d399;">👑 FULL CHỨC NĂNG VIP 30 GIỜ</span>
             </div>
             <div class="info-row">
                 <span class="info-label">Thời hạn:</span>
@@ -354,7 +354,7 @@
         </div>
     </div>
 
-    <div id="toast">✅ Đã sao chép mã Key 24h!</div>
+    <div id="toast">✅ Đã sao chép mã Key VIP 30h!</div>
 
     <script>
         const KEY_SALT = "FLOWLY_SECRET_KEY_SALT_2026_ESPORTS";
@@ -370,9 +370,9 @@
 
         document.getElementById('infoHwid').textContent = hwid;
 
-        // Tính toán mốc thời gian (24 giờ kể từ hiện tại)
+        // Tính toán mốc thời gian (30 giờ kể từ hiện tại)
         const nowMs = Date.now();
-        const expiryMs = nowMs + 24 * 3600 * 1000;
+        const expiryMs = nowMs + 30 * 3600 * 1000;
         const expirySec = Math.floor(expiryMs / 1000);
         const expiryHex = expirySec.toString(16).toUpperCase();
 
@@ -397,12 +397,12 @@
                 const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
                 const sig8 = hashHex.substring(0, 8);
 
-                generatedKey = `FLOW24-${hwid}-${expiryHex}-${sig8}`;
+                generatedKey = `FLOW30-${hwid}-${expiryHex}-${sig8}`;
                 document.getElementById('keyValDisplay').textContent = generatedKey;
             } catch (e) {
                 // Fallback nếu môi trường chặn crypto.subtle
                 const simpleHash = Math.abs(hwid.split('').reduce((a,b)=>(((a<<5)-a)+b.charCodeAt(0))|0, 0)).toString(16).toUpperCase().padStart(8, '0').slice(0, 8);
-                generatedKey = `FLOW24-${hwid}-${expiryHex}-${simpleHash}`;
+                generatedKey = `FLOW30-${hwid}-${expiryHex}-${simpleHash}`;
                 document.getElementById('keyValDisplay').textContent = generatedKey;
             }
         }
