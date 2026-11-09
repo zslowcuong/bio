@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mô Phôi Master • Chạy Trạm Trắc Nghiệm K48 (Flash 7 Giây & Mindset)</title>
-  
+
   <!-- FONT CHỮ CHUYÊN BIỆT CHO TIẾNG VIỆT & TỐI ƯU TRÍ NHỚ (BE VIETNAM PRO & LEXEND) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Lexend:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Lexend:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
 
   <style>
     :root {
@@ -96,8 +99,17 @@
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.85; transform: scale(1.04); }
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.85;
+        transform: scale(1.04);
+      }
     }
 
     .logo-title {
@@ -148,6 +160,7 @@
       border: 1px solid rgba(56, 189, 248, 0.4);
       color: #38bdf8;
     }
+
     .nav-tab.highlight-tab.active {
       background: var(--accent);
       color: #080c14;
@@ -167,6 +180,7 @@
       border: 1px solid var(--border);
       font-weight: 600;
     }
+
     .stat-pill b {
       color: var(--accent);
     }
@@ -312,7 +326,8 @@
       font-size: 14px;
     }
 
-    .option-btn.selected-correct, .option-btn.flash-target {
+    .option-btn.selected-correct,
+    .option-btn.flash-target {
       background: rgba(16, 185, 129, 0.22) !important;
       border-color: var(--success) !important;
       color: #34d399 !important;
@@ -363,6 +378,7 @@
         opacity: 0;
         filter: blur(5px);
       }
+
       100% {
         transform: translateY(0) scale(1);
         opacity: 1;
@@ -439,6 +455,7 @@
       background: var(--accent);
       color: #080c14;
     }
+
     .btn-primary:hover {
       background: #7dd3fc;
     }
@@ -448,6 +465,7 @@
       color: var(--text-main);
       border: 1px solid var(--border);
     }
+
     .btn-secondary:hover {
       background: #2a3854;
     }
@@ -456,6 +474,7 @@
       background: var(--success);
       color: white;
     }
+
     .btn-success:hover {
       background: #059669;
     }
@@ -466,7 +485,8 @@
     }
 
     /* FORM CONTROLS */
-    .filter-select, .search-input {
+    .filter-select,
+    .search-input {
       background: #080c14;
       color: var(--text-main);
       border: 1px solid var(--border);
@@ -492,7 +512,8 @@
       line-height: 1.55;
     }
 
-    table.cheat-table th, table.cheat-table td {
+    table.cheat-table th,
+    table.cheat-table td {
       padding: 14px 16px;
       border-bottom: 1px solid var(--border);
       text-align: left;
@@ -549,6 +570,7 @@
       color: #ffffff;
       margin-bottom: 4px;
     }
+
     .step-content p {
       font-size: 14.5px;
       color: var(--text-muted);
@@ -560,6 +582,7 @@
       color: var(--text-muted);
       margin-top: 10px;
     }
+
     kbd {
       background: #080c14;
       border: 1px solid var(--border);
@@ -569,7 +592,7 @@
       color: var(--accent);
       font-weight: 700;
     }
-  
+
     /* ========================================================== */
     /* 🔥 LOCK-IN MODE STYLES                                    */
     /* ========================================================== */
@@ -579,8 +602,9 @@
       border-radius: 16px;
       padding: 24px;
       margin-bottom: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
+
     .lockin-hero h2 {
       font-size: 24px;
       font-weight: 900;
@@ -590,6 +614,7 @@
       gap: 10px;
       margin-bottom: 8px;
     }
+
     .lockin-hero p {
       font-size: 14.5px;
       color: var(--text-muted);
@@ -602,6 +627,7 @@
       gap: 16px;
       margin-bottom: 24px;
     }
+
     .sprint-card {
       background: #111827;
       border: 1.5px solid var(--border);
@@ -612,16 +638,19 @@
       position: relative;
       overflow: hidden;
     }
+
     .sprint-card:hover {
       border-color: #f59e0b;
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(245, 158, 11, 0.2);
     }
+
     .sprint-card.active-preset {
       border-color: #ef4444;
       background: rgba(239, 68, 68, 0.08);
       box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
     }
+
     .sprint-badge {
       display: inline-block;
       font-size: 11px;
@@ -631,10 +660,26 @@
       text-transform: uppercase;
       margin-bottom: 8px;
     }
-    .sprint-badge.warmup { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
-    .sprint-badge.pomodoro { background: rgba(16, 185, 129, 0.2); color: #34d399; }
-    .sprint-badge.marathon { background: rgba(239, 68, 68, 0.2); color: #f87171; }
-    .sprint-badge.chapter { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+
+    .sprint-badge.warmup {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+    }
+
+    .sprint-badge.pomodoro {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+    }
+
+    .sprint-badge.marathon {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+    }
+
+    .sprint-badge.chapter {
+      background: rgba(168, 85, 247, 0.2);
+      color: #c084fc;
+    }
 
     .sprint-title {
       font-size: 17px;
@@ -642,11 +687,13 @@
       color: #ffffff;
       margin-bottom: 6px;
     }
+
     .sprint-desc {
       font-size: 13px;
       color: var(--text-muted);
       line-height: 1.4;
     }
+
     .sprint-meta {
       font-size: 13.5px;
       color: var(--text-muted);
@@ -654,7 +701,7 @@
       justify-content: space-between;
       margin-top: 12px;
       padding-top: 10px;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     /* Lock-in Arena Active */
@@ -666,6 +713,7 @@
       padding: 24px;
       box-shadow: 0 0 40px rgba(245, 158, 11, 0.15);
     }
+
     .lockin-hud {
       display: flex;
       align-items: center;
@@ -676,11 +724,13 @@
       border-bottom: 1.5px solid var(--border);
       margin-bottom: 20px;
     }
+
     .hud-timer-box {
       display: flex;
       align-items: center;
       gap: 12px;
     }
+
     .hud-timer {
       font-family: 'Lexend', monospace;
       font-size: 32px;
@@ -693,25 +743,37 @@
       letter-spacing: 1px;
       animation: pulseTimerGlow 2s infinite;
     }
+
     @keyframes pulseTimerGlow {
-      0%, 100% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.2); }
-      50% { box-shadow: 0 0 25px rgba(239, 68, 68, 0.5); }
+
+      0%,
+      100% {
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 25px rgba(239, 68, 68, 0.5);
+      }
     }
+
     .hud-stat {
       text-align: center;
     }
+
     .hud-stat-val {
       font-family: 'Lexend', sans-serif;
       font-size: 20px;
       font-weight: 800;
       color: #ffffff;
     }
+
     .hud-stat-lbl {
       font-size: 11.5px;
       color: var(--text-muted);
       text-transform: uppercase;
       font-weight: 600;
     }
+
     .hud-streak {
       font-family: 'Lexend', sans-serif;
       font-size: 17px;
@@ -725,6 +787,7 @@
       align-items: center;
       gap: 6px;
     }
+
     .hud-pace {
       font-size: 13.5px;
       font-weight: 700;
@@ -733,8 +796,16 @@
       background: #111827;
       border: 1px solid var(--border);
     }
-    .hud-pace.ahead { color: #10b981; border-color: rgba(16, 185, 129, 0.4); }
-    .hud-pace.behind { color: #f59e0b; border-color: rgba(245, 158, 11, 0.4); }
+
+    .hud-pace.ahead {
+      color: #10b981;
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    .hud-pace.behind {
+      color: #f59e0b;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
 
     .lockin-progress-bar-wrap {
       width: 100%;
@@ -744,6 +815,7 @@
       overflow: hidden;
       margin-bottom: 20px;
     }
+
     .lockin-progress-bar-fill {
       height: 100%;
       width: 0%;
@@ -759,14 +831,16 @@
       overflow: hidden;
       margin-top: 24px;
     }
+
     .schedule-header {
       padding: 16px 20px;
-      background: rgba(255,255,255,0.03);
+      background: rgba(255, 255, 255, 0.03);
       border-bottom: 1.5px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
+
     .schedule-header h3 {
       font-size: 18px;
       font-weight: 800;
@@ -775,39 +849,46 @@
       align-items: center;
       gap: 8px;
     }
+
     .schedule-row {
       display: grid;
       grid-template-columns: 140px 1fr 140px 130px;
       padding: 14px 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       align-items: center;
       transition: background 0.2s;
     }
+
     .schedule-row:hover {
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
     }
+
     .schedule-time {
       font-family: 'Lexend', monospace;
       font-size: 13.5px;
       font-weight: 700;
       color: #60a5fa;
     }
+
     .schedule-content h4 {
       font-size: 15px;
       font-weight: 700;
       color: #ffffff;
       margin-bottom: 2px;
     }
+
     .schedule-content p {
       font-size: 13px;
       color: var(--text-muted);
     }
+
     .schedule-stat {
       font-family: 'Lexend', monospace;
       font-size: 13.5px;
       font-weight: 800;
       color: #fbbf24;
     }
+
     .btn-sprint-launch {
       background: linear-gradient(135deg, #f59e0b, #ef4444);
       color: #ffffff;
@@ -819,6 +900,7 @@
       cursor: pointer;
       transition: all 0.2s;
     }
+
     .btn-sprint-launch:hover {
       transform: scale(1.04);
       box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
@@ -829,13 +911,14 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.85);
+      background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(8px);
       z-index: 9999;
       align-items: center;
       justify-content: center;
       padding: 20px;
     }
+
     .lockin-victory-box {
       background: #111827;
       border: 2px solid #10b981;
@@ -847,9 +930,17 @@
       box-shadow: 0 0 50px rgba(16, 185, 129, 0.3);
       animation: victoryPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+
     @keyframes victoryPop {
-      0% { transform: scale(0.85); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+      0% {
+        transform: scale(0.85);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     @media (max-width: 680px) {
@@ -858,18 +949,161 @@
         gap: 10px;
         text-align: left;
       }
+
       .hud-timer {
         font-size: 24px;
         padding: 4px 12px;
       }
+
       .lockin-hud {
         justify-content: center;
         text-align: center;
       }
     }
+  
+    /* ========================================================== */
+    /* 🗺️ BẢN ĐỒ BIỂU MÔ & CƠ QUAN STYLES                         */
+    /* ========================================================== */
+    .epimap-search-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .epimap-input {
+      flex: 1;
+      min-width: 260px;
+      padding: 12px 18px;
+      background: #111827;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 15px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    .epimap-input:focus {
+      outline: none;
+      border-color: #10b981;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+    }
+
+    .epimap-tag-filter {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .epimap-tag {
+      background: #111827;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .epimap-tag:hover, .epimap-tag.active {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: #10b981;
+      color: #34d399;
+    }
+
+    .epimap-table-wrap {
+      background: #111827;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow-x: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .epimap-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+    .epimap-table th {
+      background: #080c14;
+      padding: 14px 18px;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .epimap-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .epimap-table tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .organ-badge {
+      display: inline-block;
+      font-family: 'Lexend', sans-serif;
+      font-weight: 800;
+      color: #ffffff;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+    .epi-badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34d399;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .trap-note {
+      background: rgba(239, 68, 68, 0.1);
+      border-left: 3px solid #ef4444;
+      padding: 6px 10px;
+      border-radius: 0 6px 6px 0;
+      font-size: 12.5px;
+      color: #fca5a5;
+      margin-top: 6px;
+    }
+
+    /* Wrong interactive arena */
+    .wrong-action-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 1.5px solid var(--border);
+      margin-bottom: 18px;
+    }
+    .wrong-retake-btn {
+      background: linear-gradient(135deg, #ef4444, #f59e0b);
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .wrong-retake-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+    }
 
   </style>
 </head>
+
 <body>
 
   <!-- HEADER -->
@@ -883,11 +1117,15 @@
       <button class="nav-tab highlight-tab active" onclick="switchTab('flash')">
         ⚡ Flash Trắc Nghiệm (Tự Động 7s)
       </button>
-      <button class="nav-tab lockin-tab" onclick="switchTab('lockin')" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(245, 158, 11, 0.2)); border: 1.5px solid #f59e0b; color: #fbbf24; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+      <button class="nav-tab lockin-tab" onclick="switchTab('lockin')"
+        style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(245, 158, 11, 0.2)); border: 1.5px solid #f59e0b; color: #fbbf24; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
         <span style="font-size:16px;">🔥</span> Chế Độ Lock-In
       </button>
       <button class="nav-tab" onclick="switchTab('station')">
         ⏱️ Chạy Trạm (Có Bấm Giờ)
+      </button>
+            <button class="nav-tab" onclick="switchTab('epimap')" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2)); border: 1.5px solid #10b981; color: #34d399; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+        <span style="font-size:16px;">🗺️</span> Bản Đồ Biểu Mô & Cơ Quan
       </button>
       <button class="nav-tab" onclick="switchTab('cheatsheet')">
         📋 Bảng Từ Khóa Vàng
@@ -956,7 +1194,8 @@
               </div>
               <div style="display:flex; gap:8px; align-items:center;">
                 <span class="chapter-tag" id="flash-card-chapter">BÀI HỌC</span>
-                <span style="font-size:13px; color:var(--accent); font-weight:700;" id="flash-card-orig-num">#Gốc: 1</span>
+                <span style="font-size:13px; color:var(--accent); font-weight:700;" id="flash-card-orig-num">#Gốc:
+                  1</span>
               </div>
             </div>
 
@@ -971,7 +1210,8 @@
             </div>
 
             <!-- Hint footer -->
-            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:14px; font-size:13px; color:var(--text-muted);">
+            <div
+              style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:14px; font-size:13px; color:var(--text-muted);">
               <div>Mẹo: Bạn có thể click trực tiếp vào đáp án để kiểm tra ngay mà không cần đợi hết 7s!</div>
               <div style="display:flex; gap:10px;">
                 <button class="btn btn-secondary btn-sm" onclick="prevFlashQ()">◀ Câu trước (←)</button>
@@ -982,12 +1222,13 @@
         </div>
 
         <div class="shortcut-legend">
-          Phím tắt Flash: <kbd>Space</kbd> Tạm dừng / Tiếp tục • <kbd>→</kbd> Nhảy câu tiếp • <kbd>←</kbd> Quay lại câu trước
+          Phím tắt Flash: <kbd>Space</kbd> Tạm dừng / Tiếp tục • <kbd>→</kbd> Nhảy câu tiếp • <kbd>←</kbd> Quay lại câu
+          trước
         </div>
       </div>
     </section>
 
-    
+
     <!-- ========================================================== -->
     <!-- 🔥 TAB: CHẾ ĐỘ LOCK-IN (DEEP FOCUS SPRINT)                -->
     <!-- ========================================================== -->
@@ -997,12 +1238,15 @@
         <div class="lockin-hero">
           <h2>🔥 CHẾ ĐỘ LOCK-IN • CHIẾN DỊCH VƯỢT CẠN 1.287 CÂU</h2>
           <p>
-            Cam kết tập trung 100%, không lướt mạng xã hội, không xao nhãng. Chinh phục mục tiêu số lượng câu hỏi trong thời gian ấn định với đồng hồ đếm ngược, theo dõi tốc độ (Pace), chuỗi đúng (Streak) và kích hoạt sóng não tập trung cao độ.
+            Cam kết tập trung 100%, không lướt mạng xã hội, không xao nhãng. Chinh phục mục tiêu số lượng câu hỏi trong
+            thời gian ấn định với đồng hồ đếm ngược, theo dõi tốc độ (Pace), chuỗi đúng (Streak) và kích hoạt sóng não
+            tập trung cao độ.
           </p>
         </div>
 
         <!-- Sprint Presets Grid -->
-        <h3 style="font-size:18px; font-weight:800; color:#ffffff; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+        <h3
+          style="font-size:18px; font-weight:800; color:#ffffff; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
           ⚡ Chọn Nhanh Gói Sprint Mục Tiêu:
         </h3>
         <div class="sprint-grid">
@@ -1052,32 +1296,43 @@
         </div>
 
         <!-- Custom Setup Panel -->
-        <div style="background:#111827; border:1.5px solid var(--border); border-radius:16px; padding:20px; margin-bottom:24px;">
-          <h4 style="font-size:16px; font-weight:800; color:#fbbf24; margin-bottom:14px;">🛠️ Tùy Chỉnh Thông Số Phiên Lock-In:</h4>
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; align-items:end;">
+        <div
+          style="background:#111827; border:1.5px solid var(--border); border-radius:16px; padding:20px; margin-bottom:24px;">
+          <h4 style="font-size:16px; font-weight:800; color:#fbbf24; margin-bottom:14px;">🛠️ Tùy Chỉnh Thông Số Phiên
+            Lock-In:</h4>
+          <div
+            style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; align-items:end;">
             <div>
-              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Phạm vi bài học:</label>
-              <select id="lockin-chapter-select" class="filter-select" style="width:100%;" onchange="onLockinChapterChange()">
+              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Phạm vi bài
+                học:</label>
+              <select id="lockin-chapter-select" class="filter-select" style="width:100%;"
+                onchange="onLockinChapterChange()">
                 <option value="all">Tất cả 16 bài học (1.287 câu)</option>
               </select>
             </div>
             <div>
-              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Số lượng câu mục tiêu:</label>
-              <input type="number" id="lockin-input-count" class="filter-select" style="width:100%; font-family:'Lexend',sans-serif; font-weight:700;" value="50" min="10" max="1287">
+              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Số lượng câu mục
+                tiêu:</label>
+              <input type="number" id="lockin-input-count" class="filter-select"
+                style="width:100%; font-family:'Lexend',sans-serif; font-weight:700;" value="50" min="10" max="1287">
             </div>
             <div>
-              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Thời gian cam kết (Phút):</label>
-              <input type="number" id="lockin-input-minutes" class="filter-select" style="width:100%; font-family:'Lexend',sans-serif; font-weight:700;" value="10" min="2" max="180">
+              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Thời gian cam
+                kết (Phút):</label>
+              <input type="number" id="lockin-input-minutes" class="filter-select"
+                style="width:100%; font-family:'Lexend',sans-serif; font-weight:700;" value="10" min="2" max="180">
             </div>
             <div>
-              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Kiểu làm bài:</label>
+              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Kiểu làm
+                bài:</label>
               <select id="lockin-mode-select" class="filter-select" style="width:100%;">
                 <option value="interactive" selected>⚡ Bấm Phím / Click Chốt Ngay</option>
                 <option value="flash7s">⏱️ Auto Flash 7 Giây</option>
               </select>
             </div>
             <div>
-              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Âm thanh tập trung:</label>
+              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Âm thanh tập
+                trung:</label>
               <select id="lockin-audio-select" class="filter-select" style="width:100%;">
                 <option value="focus" selected>🎧 Sóng não Gamma 40Hz (Siêu tập trung)</option>
                 <option value="tick">⏰ Nhịp Tích Tắc Đồng Hồ</option>
@@ -1087,7 +1342,8 @@
           </div>
 
           <div style="margin-top:20px; display:flex; justify-content:center;">
-            <button onclick="startLockinFromSetup()" style="background: linear-gradient(135deg, #f59e0b, #ef4444); color:#ffffff; border:none; padding:14px 40px; border-radius:12px; font-size:18px; font-weight:900; cursor:pointer; display:flex; align-items:center; gap:10px; box-shadow:0 6px 25px rgba(239,68,68,0.4); transition:all 0.2s;">
+            <button onclick="startLockinFromSetup()"
+              style="background: linear-gradient(135deg, #f59e0b, #ef4444); color:#ffffff; border:none; padding:14px 40px; border-radius:12px; font-size:18px; font-weight:900; cursor:pointer; display:flex; align-items:center; gap:10px; box-shadow:0 6px 25px rgba(239,68,68,0.4); transition:all 0.2s;">
               🔥 BẮT ĐẦU PHIÊN LOCK-IN NGAY
             </button>
           </div>
@@ -1157,7 +1413,8 @@
             <div class="schedule-time">Chiều 10.11<br>14h00 - 15h15</div>
             <div class="schedule-content">
               <h4>🚀 Sprint 5: Làm Chủ Toàn Bộ Phôi Thai Học</h4>
-              <p>Bài 13 Mở đầu Phôi (60 câu) + Bài 14 Phôi 3 lá (101 câu) + Bài 15 Phần phụ (88 câu) + Bài 18 Tiêu hóa (91 câu).</p>
+              <p>Bài 13 Mở đầu Phôi (60 câu) + Bài 14 Phôi 3 lá (101 câu) + Bài 15 Phần phụ (88 câu) + Bài 18 Tiêu hóa
+                (91 câu).</p>
             </div>
             <div class="schedule-stat">340 câu / 70p</div>
             <div>
@@ -1170,7 +1427,8 @@
             <div class="schedule-time">Tối 10.11<br>19h30 - 21h00</div>
             <div class="schedule-content">
               <h4>🚀 Sprint 6: Quét Sạch Kho Câu Sai & 3 Đề Chạy Trạm</h4>
-              <p>Xóa sạch toàn bộ câu sai tích lũy và thi thử 3 đề OSCE (40 câu / đề, 45 giây / trạm) chuẩn áp lực phòng thi.</p>
+              <p>Xóa sạch toàn bộ câu sai tích lũy và thi thử 3 đề OSCE (40 câu / đề, 45 giây / trạm) chuẩn áp lực phòng
+                thi.</p>
             </div>
             <div class="schedule-stat">Kho Sai + 120 câu</div>
             <div>
@@ -1188,7 +1446,8 @@
             <div class="hud-timer" id="lockin-hud-timer">10:00</div>
             <div>
               <div style="font-size:12px; color:var(--text-muted); font-weight:700;">THỜI GIAN CÒN LẠI</div>
-              <div id="lockin-target-total-time" style="font-size:13px; color:#ffffff; font-weight:800;">Mục tiêu: 10 phút</div>
+              <div id="lockin-target-total-time" style="font-size:13px; color:#ffffff; font-weight:800;">Mục tiêu: 10
+                phút</div>
             </div>
           </div>
 
@@ -1206,10 +1465,12 @@
           </div>
 
           <div style="display:flex; align-items:center; gap:8px;">
-            <button id="btn-lockin-audio-toggle" onclick="toggleLockinAudio()" class="btn-control" style="font-size:12.5px; padding:6px 12px;">
+            <button id="btn-lockin-audio-toggle" onclick="toggleLockinAudio()" class="btn-control"
+              style="font-size:12.5px; padding:6px 12px;">
               🎧 Âm thanh: Bật
             </button>
-            <button onclick="confirmExitLockin()" class="btn-control" style="font-size:12.5px; padding:6px 12px; border-color:#ef4444; color:#f87171;">
+            <button onclick="confirmExitLockin()" class="btn-control"
+              style="font-size:12.5px; padding:6px 12px; border-color:#ef4444; color:#f87171;">
               🛑 Dừng Lại
             </button>
           </div>
@@ -1227,7 +1488,8 @@
               <span class="desk-tag" id="lockin-q-chapter">Bài học</span>
               <span style="font-size:13px; color:var(--text-muted); margin-left:8px;" id="lockin-q-num">Câu 1</span>
             </div>
-            <span style="font-size:12px; color:var(--text-muted);">Phím tắt: <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> hoặc <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd></span>
+            <span style="font-size:12px; color:var(--text-muted);">Phím tắt: <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd>
+              <kbd>4</kbd> hoặc <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd></span>
           </div>
 
           <div class="question-stem" id="lockin-question-stem">
@@ -1266,8 +1528,11 @@
               <option value="60">⏱️ 60 giây / Trạm</option>
               <option value="0">⏱️ Không bấm giờ</option>
             </select>
-            <div id="station-timer-box" style="font-family:'Lexend',monospace; font-size:24px; font-weight:900; color:var(--accent); background:#080c14; padding:6px 16px; border-radius:10px; border:2px solid var(--border);">45s</div>
-            <button class="btn btn-secondary btn-sm" id="btn-timer-toggle" onclick="toggleStationTimer()">⏸️ Dừng</button>
+            <div id="station-timer-box"
+              style="font-family:'Lexend',monospace; font-size:24px; font-weight:900; color:var(--accent); background:#080c14; padding:6px 16px; border-radius:10px; border:2px solid var(--border);">
+              45s</div>
+            <button class="btn btn-secondary btn-sm" id="btn-timer-toggle" onclick="toggleStationTimer()">⏸️
+              Dừng</button>
           </div>
         </div>
 
@@ -1278,7 +1543,8 @@
             </div>
             <div style="display:flex; gap:8px; align-items:center;">
               <span class="chapter-tag" id="desk-chapter-tag">BÀI 1. BÀI MỞ ĐẦU</span>
-              <button class="btn btn-secondary btn-sm" id="btn-star-station" onclick="toggleStarCurrentStation()">⭐</button>
+              <button class="btn btn-secondary btn-sm" id="btn-star-station"
+                onclick="toggleStarCurrentStation()">⭐</button>
             </div>
           </div>
 
@@ -1293,14 +1559,69 @@
           <div class="station-footer">
             <button class="btn btn-secondary" onclick="prevStationQuestion()">◀ Trạm trước (←)</button>
             <div style="display:flex; gap:10px;">
-              <button class="btn btn-secondary" id="btn-reveal-station" onclick="revealStationAnswer()">👁️ Xem Đáp Án (Space)</button>
+              <button class="btn btn-secondary" id="btn-reveal-station" onclick="revealStationAnswer()">👁️ Xem Đáp Án
+                (Space)</button>
               <button class="btn btn-primary" onclick="nextStationQuestion()">Trạm tiếp theo (→) ▶</button>
             </div>
           </div>
         </div>
 
         <div class="shortcut-legend">
-          Phím tắt: Bấm <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> (hoặc <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd>) để chọn đáp án • <kbd>Space</kbd> Lật đáp án • <kbd>←</kbd> <kbd>→</kbd> Đổi trạm
+          Phím tắt: Bấm <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> (hoặc <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd>
+          <kbd>D</kbd>) để chọn đáp án • <kbd>Space</kbd> Lật đáp án • <kbd>←</kbd> <kbd>→</kbd> Đổi trạm
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- ========================================================== -->
+    <!-- 🗺️ TAB: BẢN ĐỒ BIỂU MÔ & CƠ QUAN TOÀN DIỆN               -->
+    <!-- ========================================================== -->
+    <section id="tab-epimap" class="tab-content">
+      <div class="station-exam-container" style="max-width:1200px;">
+        <div class="lockin-hero" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.1)); border-color: rgba(16, 185, 129, 0.4);">
+          <h2 style="color:#34d399;">🗺️ BẢN ĐỒ BIỂU MÔ & PHÂN BỐ CƠ QUAN / CẤU TRÚC</h2>
+          <p>
+            Tổng hợp và đối chiếu toàn bộ các dạng biểu mô, cấu trúc, mao mạch và tuyến xuất hiện trong 258 câu hỏi biểu mô & cơ quan của ngân hàng Mô - Phôi. Giúp bạn trả lời ngay lập tức các câu: <i>"Cơ quan này lợp bởi biểu mô gì?"</i> và <i>"Biểu mô này phân bố ở đâu?"</i> trong vòng 3 giây!
+          </p>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="epimap-search-bar">
+          <input type="text" id="epimap-search-input" class="epimap-input" placeholder="🔍 Tìm kiếm nhanh cơ quan, cấu trúc, loại biểu mô (vd: thực quản, khí quản, thận, bàng quang, lát đơn...)" oninput="filterEpimapTable()">
+          <button class="btn btn-secondary" onclick="document.getElementById('epimap-search-input').value=''; filterEpimapTable();">
+            Xóa Lọc
+          </button>
+        </div>
+
+        <!-- Tag Filters -->
+        <div class="epimap-tag-filter" id="epimap-tags">
+          <span class="epimap-tag active" onclick="setEpimapCategory('all', this)">Tất cả (Toàn bộ)</span>
+          <span class="epimap-tag" onclick="setEpimapCategory('lat_don', this)">Lát Đơn</span>
+          <span class="epimap-tag" onclick="setEpimapCategory('vuong_don', this)">Vuông Đơn</span>
+          <span class="epimap-tag" onclick="setEpimapCategory('tru_don', this)">Trụ Đơn</span>
+          <span class="epimap-tag" onclick="setEpimapCategory('gia_tang', this)">Trụ Giả Tầng</span>
+          <span class="epimap-tag" onclick="setEpimapCategory('lat_tang_ko_sung', this)">Lát Tầng Không Sừng</span>
+          <span class="epimap-tag" onclick="setEpimapCategory('lat_tang_sung', this)">Lát Tầng Sừng Hóa (Da)</span>
+          <span class="epimap-tag" onclick="setEpimapCategory('chuyen_tiep', this)">Chuyển Tiếp (Niệu)</span>
+          <span class="epimap-tag" onclick="setEpimapCategory('tuyen_mao_mach', this)">Mao Mạch & Tuyến & Thần Kinh</span>
+        </div>
+
+        <!-- Epithelium Table -->
+        <div class="epimap-table-wrap">
+          <table class="epimap-table">
+            <thead>
+              <tr>
+                <th style="width:20%;">Cơ Quan / Cấu Trúc</th>
+                <th style="width:22%;">Loại Biểu Mô / Bản Chất</th>
+                <th style="width:30%;">Vị Trí Phân Bố & Đặc Điểm Mô Học</th>
+                <th style="width:28%;">Bẫy Đề Thi & Điểm Cốt Lõi</th>
+              </tr>
+            </thead>
+            <tbody id="epimap-table-body">
+              <!-- Injected by JS -->
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -1311,7 +1632,8 @@
     <section id="tab-cheatsheet" class="tab-content">
       <div style="display:flex; flex-direction:column; gap:16px;">
         <div class="station-control-bar">
-          <input type="text" id="cheat-filter-input" class="search-input" placeholder="🔍 Lọc từ khóa trong bảng..." oninput="renderCheatTable()" />
+          <input type="text" id="cheat-filter-input" class="search-input" placeholder="🔍 Lọc từ khóa trong bảng..."
+            oninput="renderCheatTable()" />
           <select id="cheat-chapter-filter" class="filter-select" onchange="renderCheatTable()">
             <option value="all">Tất cả bài học</option>
           </select>
@@ -1345,11 +1667,14 @@
       <div class="station-exam-container">
         <div class="mindset-box">
           <div style="border-bottom:1px solid var(--border); padding-bottom:14px;">
-            <h2 style="color:var(--accent); font-size:22px; font-weight:800; display:flex; align-items:center; gap:8px;">
+            <h2
+              style="color:var(--accent); font-size:22px; font-weight:800; display:flex; align-items:center; gap:8px;">
               <span>🎯</span> CHIẾN THUẬT PHÒNG THI: QUẢN LÝ TAY, BÚT CHÌ & TỜ PHIẾU TÔ
             </h2>
             <p style="color:var(--text-muted); font-size:14.5px; margin-top:4px;">
-              Đặc thù thi trắc nghiệm chạy trạm: <b>Đề dán cố định trên bàn, bạn cầm tờ phiếu tô di chuyển qua từng trạm</b>. Áp lực lớn nhất không phải là câu hỏi khó, mà là <b>TÔ LỆCH DÒNG</b> hoặc <b>CUỐNG TAY KHI CHUÔNG REO</b>.
+              Đặc thù thi trắc nghiệm chạy trạm: <b>Đề dán cố định trên bàn, bạn cầm tờ phiếu tô di chuyển qua từng
+                trạm</b>. Áp lực lớn nhất không phải là câu hỏi khó, mà là <b>TÔ LỆCH DÒNG</b> hoặc <b>CUỐNG TAY KHI
+                CHUÔNG REO</b>.
             </p>
           </div>
 
@@ -1359,9 +1684,11 @@
             <div class="step-content">
               <h4>QUY TẮC "TAY TRÁI ĐỊNH VỊ SINH TỬ" (CHỐNG LỆCH DÒNG 100%)</h4>
               <p>
-                - Tờ giấy trắc nghiệm luôn cầm bằng tay trái.<br/>
-                - <b>Ngay khi bước chân tới bàn trạm:</b> Mắt nhìn số trạm dán trên bàn (VD: Trạm 16) ➔ <b>Ngón tay cái hoặc ngón trỏ tay trái ĐÈ CHẶT vào dòng số 16</b> trên tờ phiếu tô.<br/>
-                - <b style="color:var(--danger)">Tuyệt đối không nhấc ngón tay trái ra</b> cho đến khi tay phải đã tô đen xong ô tròn đó. Đây là mỏ neo duy nhất bảo vệ bạn không bao giờ bị tô lệch dòng khi đang vội!
+                - Tờ giấy trắc nghiệm luôn cầm bằng tay trái.<br />
+                - <b>Ngay khi bước chân tới bàn trạm:</b> Mắt nhìn số trạm dán trên bàn (VD: Trạm 16) ➔ <b>Ngón tay cái
+                  hoặc ngón trỏ tay trái ĐÈ CHẶT vào dòng số 16</b> trên tờ phiếu tô.<br />
+                - <b style="color:var(--danger)">Tuyệt đối không nhấc ngón tay trái ra</b> cho đến khi tay phải đã tô
+                đen xong ô tròn đó. Đây là mỏ neo duy nhất bảo vệ bạn không bao giờ bị tô lệch dòng khi đang vội!
               </p>
             </div>
           </div>
@@ -1372,8 +1699,10 @@
             <div class="step-content">
               <h4>QUẢN LÝ BÚT MỰC VS BÚT CHÌ: CẤT BÚT MỰC NGAY KHI VIẾT XONG</h4>
               <p>
-                - <b>Bút mực:</b> Chỉ dùng trong 2 phút đầu giờ để điền Họ tên, MSSV, Mã đề, Lớp. Sau khi điền xong ➔ <b>CẤT NGAY VÀO TÚI ÁO</b> hoặc cất vào hộp bút.<br/>
-                - <b>Bút chì (2B):</b> Cầm sẵn trên tay phải xuyên suốt cả buổi chạy trạm. Nên dùng loại chì 2B chuốt đầu hơi tù (không chuốt quá nhọn để chỉ cần xoay 2 vòng là kín ô tròn, tiết kiệm 3 giây/câu).
+                - <b>Bút mực:</b> Chỉ dùng trong 2 phút đầu giờ để điền Họ tên, MSSV, Mã đề, Lớp. Sau khi điền xong ➔
+                <b>CẤT NGAY VÀO TÚI ÁO</b> hoặc cất vào hộp bút.<br />
+                - <b>Bút chì (2B):</b> Cầm sẵn trên tay phải xuyên suốt cả buổi chạy trạm. Nên dùng loại chì 2B chuốt
+                đầu hơi tù (không chuốt quá nhọn để chỉ cần xoay 2 vòng là kín ô tròn, tiết kiệm 3 giây/câu).
               </p>
             </div>
           </div>
@@ -1384,10 +1713,13 @@
             <div class="step-content">
               <h4>NHỊP THỞ 4 BƯỚC TRONG 30s - 45s TẠI MỖI BÀN TRẠM</h4>
               <p>
-                - <b>0 - 3s (Tiếp cận):</b> Chân bước vào bàn, mắt đọc số trạm, ngón tay trái khóa dòng trên phiếu.<br/>
-                - <b>4 - 10s (Bắt cặp từ khóa):</b> Mắt quét đề tìm cụm từ khóa vàng đã học ở chế độ Flash 7s. Thấy từ khóa ➔ Chốt ngay chữ cái A, B, C hoặc D.<br/>
-                - <b>11 - 15s (Tô chì dứt khoát):</b> Tay phải xoay chì tô kín ô. Ngón tay trái vẫn giữ nguyên vị trí.<br/>
-                - <b>16s - chuông reo (Xả stress):</b> Thả lỏng vai, hít thở sâu 1 nhịp, chuẩn bị nhấc chân.<br/>
+                - <b>0 - 3s (Tiếp cận):</b> Chân bước vào bàn, mắt đọc số trạm, ngón tay trái khóa dòng trên
+                phiếu.<br />
+                - <b>4 - 10s (Bắt cặp từ khóa):</b> Mắt quét đề tìm cụm từ khóa vàng đã học ở chế độ Flash 7s. Thấy từ
+                khóa ➔ Chốt ngay chữ cái A, B, C hoặc D.<br />
+                - <b>11 - 15s (Tô chì dứt khoát):</b> Tay phải xoay chì tô kín ô. Ngón tay trái vẫn giữ nguyên vị
+                trí.<br />
+                - <b>16s - chuông reo (Xả stress):</b> Thả lỏng vai, hít thở sâu 1 nhịp, chuẩn bị nhấc chân.<br />
                 - <b>Chuông "KENG":</b> Bước dứt khoát sang bàn kế tiếp, mắt chuyển sang số bàn mới.
               </p>
             </div>
@@ -1399,9 +1731,12 @@
             <div class="step-content">
               <h4>NGUYÊN TẮC "BUÔNG BỎ" KHI GẶP CÂU CHƯA NHỚ (KHÔNG ĐỨNG ĐƠ NÃO)</h4>
               <p>
-                - Nếu sau 7 giây mà não vẫn trống rỗng: <b>TÔ NGAY 1 ĐÁP ÁN THEO TRỰC GIÁC ĐẦU TIÊN</b> (VD luôn chọn C hoặc B), sau đó dùng bút chì chấm một nốt nhỏ bên cạnh số câu.<br/>
-                - <b style="color:var(--warning)">Tuyệt đối không bỏ trống dòng:</b> Bỏ trống dòng rất dễ khiến trạm sau tô nhầm vào dòng trống đó.<br/>
-                - Khi chuông reo: <b>QUÊN HOÀN TOÀN CÂU VỪA RỒI</b>. Không tiếc nuối, không vừa đi vừa nghĩ về câu cũ, dành 100% sự tập trung cho bàn trạm mới trước mặt!
+                - Nếu sau 7 giây mà não vẫn trống rỗng: <b>TÔ NGAY 1 ĐÁP ÁN THEO TRỰC GIÁC ĐẦU TIÊN</b> (VD luôn chọn C
+                hoặc B), sau đó dùng bút chì chấm một nốt nhỏ bên cạnh số câu.<br />
+                - <b style="color:var(--warning)">Tuyệt đối không bỏ trống dòng:</b> Bỏ trống dòng rất dễ khiến trạm sau
+                tô nhầm vào dòng trống đó.<br />
+                - Khi chuông reo: <b>QUÊN HOÀN TOÀN CÂU VỪA RỒI</b>. Không tiếc nuối, không vừa đi vừa nghĩ về câu cũ,
+                dành 100% sự tập trung cho bàn trạm mới trước mặt!
               </p>
             </div>
           </div>
@@ -1412,19 +1747,66 @@
     <!-- ========================================================== -->
     <!-- ❌ TAB 5: KHO CÂU HAY SAI -->
     <!-- ========================================================== -->
-    <section id="tab-wrong" class="tab-content">
+        <section id="tab-wrong" class="tab-content">
       <div class="station-exam-container">
-        <div class="station-control-bar">
-          <div style="font-weight:700; color:var(--danger); font-size:16px;">
-            ❌ DANH SÁCH CÂU CẦN PHẢI ÔN LẠI (<span id="wrong-total-count">0</span> câu)
+        <!-- Default List View -->
+        <div id="wrong-list-view">
+          <div class="wrong-action-bar">
+            <div>
+              <div style="font-weight:800; color:var(--danger); font-size:18px; display:flex; align-items:center; gap:8px;">
+                <span>❌ KHO CÂU HAY SAI CỦA BẠN</span>
+                <span class="badge" style="background:#ef4444; color:#fff; font-size:14px; padding:3px 10px;" id="wrong-total-count">0</span>
+              </div>
+              <div style="font-size:13px; color:var(--text-muted); margin-top:4px;">
+                Luyện tập và sửa từng câu cho đến khi kho câu sai về con số 0!
+              </div>
+            </div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="wrong-retake-btn" onclick="startWrongInteractiveRetake()">
+                🔥 LÀM LẠI TOÀN BỘ CÂU SAI
+              </button>
+              <button class="btn btn-secondary btn-sm" onclick="startWrongFlash7s()">
+                ⚡ Flash 7s Câu Sai
+              </button>
+              <button class="btn btn-secondary btn-sm" onclick="clearAllWrongQuestions()">
+                🗑️ Xóa Sạch
+              </button>
+            </div>
           </div>
-          <button class="btn btn-primary btn-sm" onclick="startWrongStationExam()">
-            🚀 Chạy Trạm Luyện Riêng Kho Câu Này
-          </button>
+
+          <div id="wrong-items-container" style="display:flex; flex-direction:column; gap:12px;">
+            <!-- Injected by JS -->
+          </div>
         </div>
 
-        <div id="wrong-items-container" style="display:flex; flex-direction:column; gap:12px;">
-          <!-- Injected by JS -->
+        <!-- Interactive Retake Arena View -->
+        <div id="wrong-retake-arena" style="display:none;">
+          <div class="station-control-bar">
+            <div>
+              <span class="desk-tag" style="background:#ef4444; color:#fff;">ĐANG SỬA CÂU SAI</span>
+              <span style="font-size:14px; color:var(--text-muted); margin-left:10px;" id="retake-progress-indicator">Câu 1 / 10</span>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <span class="badge" style="background:#10b981; color:#fff; font-size:13px; padding:6px 12px;" id="retake-fixed-count">Đã sửa: 0 câu</span>
+              <button class="btn btn-secondary btn-sm" onclick="exitWrongRetake()">Quay Lại Danh Sách</button>
+            </div>
+          </div>
+
+          <div class="desk-station-card" style="border-color:rgba(239, 68, 68, 0.4); margin-top:14px;">
+            <div class="desk-header">
+              <span class="desk-tag" id="retake-q-chapter">Bài học</span>
+              <span style="font-size:12px; color:var(--text-muted);">Phím tắt: <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> hoặc <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd></span>
+            </div>
+
+            <div class="question-stem" id="retake-question-stem">
+              Nội dung câu hỏi...
+            </div>
+
+            <div class="options-list" id="retake-options-list">
+              <!-- Options generated by JS -->
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1475,7 +1857,7 @@
         gain.connect(audioCtx.destination);
         osc.start();
         osc.stop(audioCtx.currentTime + dur);
-      } catch (e) {}
+      } catch (e) { }
     }
     function soundWarningBeep() { playAudioTone(880, 'sine', 0.12); }
     function soundChimeSoft() {
@@ -1494,7 +1876,7 @@
         try {
           const savedProg = localStorage.getItem('mo_phoi_progress');
           if (savedProg) PROGRESS = JSON.parse(savedProg);
-        } catch (e) {}
+        } catch (e) { }
 
         // 2. Load questions: if QUESTIONS_DATA is loaded statically via script, use it directly!
         if (typeof window.QUESTIONS_DATA !== 'undefined' && Array.isArray(window.QUESTIONS_DATA) && window.QUESTIONS_DATA.length > 0) {
@@ -1557,6 +1939,12 @@
         if (sel.options[0]) {
           sel.options[0].textContent = `Tất cả 16 bài học (${ALL_QUESTIONS.length} câu)`;
         }
+        const wrongOpt = document.createElement('option');
+        wrongOpt.value = '__WRONG_ONLY__';
+        wrongOpt.textContent = `❌ Chỉ câu trong Kho câu sai (${PROGRESS.wrong_questions ? PROGRESS.wrong_questions.length : 0} câu)`;
+        wrongOpt.style.color = '#ef4444';
+        wrongOpt.style.fontWeight = 'bold';
+        sel.appendChild(wrongOpt);
         chapters.forEach(ch => {
           const opt = document.createElement('option');
           opt.value = ch;
@@ -1597,6 +1985,9 @@
       if (tabId === 'wrong') {
         renderWrongList();
       }
+      if (tabId === 'epimap') {
+        filterEpimapTable();
+      }
     }
 
     // ==========================================================
@@ -1605,6 +1996,9 @@
     function filterFlashQuestions() {
       const ch = document.getElementById('flash-chapter-filter').value;
       flashList = ALL_QUESTIONS.filter(q => {
+        if (ch === '__WRONG_ONLY__') {
+          return (PROGRESS.wrong_questions || []).includes(q.id);
+        }
         if (ch !== 'all' && q.chapter !== ch) return false;
         return true;
       });
@@ -1642,7 +2036,7 @@
         btn.className = 'option-btn';
         btn.innerHTML = `
           <div>
-            <span class="opt-key">${letters[idx] || (idx+1)}</span>
+            <span class="opt-key">${letters[idx] || (idx + 1)}</span>
             <span>${optText.replace(/^[a-e]\.\s*/i, '')}</span>
           </div>
         `;
@@ -1792,6 +2186,9 @@
       const countVal = document.getElementById('station-count-select').value;
 
       let pool = ALL_QUESTIONS.filter(q => {
+        if (ch === '__WRONG_ONLY__') {
+          return (PROGRESS.wrong_questions || []).includes(q.id);
+        }
         if (ch !== 'all' && q.chapter !== ch) return false;
         return true;
       });
@@ -1829,7 +2226,7 @@
         btn.className = 'option-btn';
         btn.innerHTML = `
           <div>
-            <span class="opt-key">${letters[idx] || (idx+1)}</span>
+            <span class="opt-key">${letters[idx] || (idx + 1)}</span>
             <span>${optText.replace(/^[a-e]\.\s*/i, '')}</span>
           </div>
         `;
@@ -1982,6 +2379,9 @@
       tbody.innerHTML = '';
 
       const filtered = ALL_QUESTIONS.filter(q => {
+        if (ch === '__WRONG_ONLY__') {
+          return (PROGRESS.wrong_questions || []).includes(q.id);
+        }
         if (ch !== 'all' && q.chapter !== ch) return false;
         if (s) {
           const matchQ = q.question.toLowerCase().includes(s);
@@ -1994,7 +2394,7 @@
       filtered.forEach((q, idx) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td style="color:var(--text-muted); font-size:12px;">${idx+1}</td>
+          <td style="color:var(--text-muted); font-size:12px;">${idx + 1}</td>
           <td>${q.question_html || q.question}</td>
           <td>${(q.options_html && q.options_html[q.correct_idx]) ? q.options_html[q.correct_idx] : `<mark class="kw-hl">${q.clean_ans || q.correct_text}</mark>`}</td>
           <td style="font-size:12px; color:var(--text-muted); font-weight:600;">${q.chapter.replace(/^BÀI\s+\d+[\.:\s]*/i, '')}</td>
@@ -2006,6 +2406,591 @@
     // ==========================================
     // ❌ TAB 5: KHO CÂU HAY SAI
     // ==========================================
+    
+    // ==========================================================
+    // 🗺️ EPIMAP DATA & SYSTEM (BẢN ĐỒ BIỂU MÔ & CƠ QUAN)
+    // ==========================================================
+    const EPIMAP_DATA = [
+  {
+    "organ": "Quai Henle (ngành xuống và lên mảnh)",
+    "system": "Hệ Tiết Niệu",
+    "category": "lat_don",
+    "epithelium": "Biểu mô lát đơn",
+    "details": "Nằm ở vùng tủy thận. Thành cực mỏng, tế bào dẹt nhân dẹt lồi vào lòng ống hẹp.",
+    "trap": "Ngành dày quai Henle là biểu mô VUÔNG ĐƠN. Chỉ ngành mảnh mới là LÁT ĐƠN. Khác biệt với mao mạch nhờ lòng ống không chứa hồng cầu.",
+    "search_kw": "quai henle"
+  },
+  {
+    "organ": "Bao Bowman (lá ngoài / lá thành)",
+    "system": "Hệ Tiết Niệu",
+    "category": "lat_don",
+    "epithelium": "Biểu mô lát đơn",
+    "details": "Lá ngoài cấu tạo bởi một hàng tế bào lát dẹt nằm trên màng đáy rõ rệt, quây xung quanh khoang Bowman.",
+    "trap": "Lá trong (lá tạng) cấu tạo bởi tế bào có chân (Podocyte) áp sát mao mạch cầu thận, KHÔNG phải biểu mô lát đơn thông thường.",
+    "search_kw": "bowman"
+  },
+  {
+    "organ": "Nội mô mạch máu & mao mạch & tim",
+    "system": "Hệ Tim Mạch",
+    "category": "lat_don",
+    "epithelium": "Biểu mô lát đơn (Nội mô)",
+    "details": "Lót liên tục mặt trong của tất cả các mạch máu (động mạch, mao mạch, tĩnh mạch) và buồng tim (nội tâm mạc). Tế bào dẹt mỏng lượn sóng.",
+    "trap": "Mọi mao mạch đều có lớp nội mô này; nhưng ở mao mạch kiểu xoang thì màng đáy đứt đoạn hoặc không có.",
+    "search_kw": "nội mô"
+  },
+  {
+    "organ": "Trung biểu mô (Màng bụng, màng phổi, màng ngoài tim)",
+    "system": "Thanh mạc",
+    "category": "lat_don",
+    "epithelium": "Biểu mô lát đơn (Trung biểu mô)",
+    "details": "Phủ mặt ngoài các tạng xoang cơ thể (thanh mạc ruột non/già, phúc mạc thành, màng phổi thành và tạng). Tiết dịch bôi trơn giảm ma sát.",
+    "trap": "Thanh mạc = Trung biểu mô + lớp mô liên kết dưới thanh mạc. Có nguồn gốc phôi học từ TRUNG BÌ phôi.",
+    "search_kw": "trung biểu mô"
+  },
+  {
+    "organ": "Phế nang (Phế bào loại I)",
+    "system": "Hệ Hô Hấp",
+    "category": "lat_don",
+    "epithelium": "Biểu mô lát đơn (Phế bào I)",
+    "details": "Chiếm 95% diện tích bề mặt phế nang, bào tương cực mỏng tạo hàng rào máu - khí trao đổi O2 và CO2.",
+    "trap": "Phế bào I dẹt (lát đơn, trao đổi khí). Phế bào II hình cầu/khối vuông nhô vào lòng phế nang (tiết Surfactant, có thể phân chia sửa chữa).",
+    "search_kw": "phế nang"
+  },
+  {
+    "organ": "Màng nhĩ (mặt trong) & Mê đạo màng tai trong",
+    "system": "Giác quan",
+    "category": "lat_don",
+    "epithelium": "Biểu mô lát đơn",
+    "details": "Mặt trong màng nhĩ và thành mê đạo màng của tai trong được lót bởi tế bào dẹt đơn tầng.",
+    "trap": "Mặt ngoài màng nhĩ tiếp nối với da ống tai ngoài nên là biểu mô LÁT TẦNG SỪNG HÓA.",
+    "search_kw": "màng nhĩ"
+  },
+  {
+    "organ": "Ống lượn gần (Ống gần)",
+    "system": "Hệ Tiết Niệu",
+    "category": "vuong_don",
+    "epithelium": "Biểu mô vuông đơn có bờ bàn chải",
+    "details": "Cực ngọn tế bào có vi nhung mao dày đặc tạo thành 'bờ bàn chải' nhằm tăng diện tích tái hấp thu 65-80% nước, Na+, glucose, acid amin.",
+    "trap": "Ống lượn gần có bờ bàn chải làm lòng ống không đều, nham nhở. Ống lượn xa KHÔNG có bờ bàn chải, lòng ống tròn đều và rộng hơn.",
+    "search_kw": "ống lượn gần"
+  },
+  {
+    "organ": "Ống lượn xa (Ống xa)",
+    "system": "Hệ Tiết Niệu",
+    "category": "vuong_don",
+    "epithelium": "Biểu mô vuông đơn (KHÔNG có bờ bàn chải)",
+    "details": "Tế bào hình khối vuông thấp hơn ống gần, không có bờ bàn chải, có vết đặc (macula densa) tại vùng tiếp xúc tiểu động mạch vào.",
+    "trap": "Đề hay hỏi: Ống lượn xa có bờ bàn chải không? -> HOÀN TOÀN KHÔNG CÓ bờ bàn chải, lòng ống nhẵn rõ.",
+    "search_kw": "ống lượn xa"
+  },
+  {
+    "organ": "Ống góp (Ống thu thập)",
+    "system": "Hệ Tiết Niệu",
+    "category": "vuong_don",
+    "epithelium": "Biểu mô vuông đơn -> Trụ đơn",
+    "details": "Đoạn nhỏ ở vỏ và tủy ngoài là biểu mô vuông đơn; khi nhập lại thành ống nhú Bellini đổ vào đài thận chuyển thành biểu mô trụ đơn cao.",
+    "trap": "Ranh giới tế bào ở ống góp rất rõ ràng, bào tương sáng màu (gồm tế bào chính và tế bào xen).",
+    "search_kw": "ống góp"
+  },
+  {
+    "organ": "Biểu mô mầm buồng trứng",
+    "system": "Hệ Sinh Dục Nữ",
+    "category": "vuong_don",
+    "epithelium": "Biểu mô vuông đơn",
+    "details": "Bao phủ bề mặt ngoài của buồng trứng. Dưới biểu mô mầm là lớp màng trắng (tổ chức liên kết đặc).",
+    "trap": "Tên gọi là 'biểu mô mầm' nhưng không sinh ra noãn bào. Tế bào mầm nguyên thủy có nguồn gốc từ túi noãn hoàng di cư về mầm sinh dục.",
+    "search_kw": "biểu mô mầm buồng trứng"
+  },
+  {
+    "organ": "Nang trứng nguyên phát",
+    "system": "Hệ Sinh Dục Nữ",
+    "category": "vuong_don",
+    "epithelium": "1 hàng tế bào nang hình khối vuông",
+    "details": "Gồm noãn bào I ở trung tâm được bao bọc bởi 1 hàng tế bào hạt nang hình khối vuông (hoặc trụ ngắn).",
+    "trap": "Nang trứng NGUYÊN THỦY chỉ có 1 hàng tế bào DẸT. Nang trứng NGUYÊN PHÁT đã chuyển thành tế bào VUÔNG (1 hoặc nhiều hàng).",
+    "search_kw": "nang trứng nguyên phát"
+  },
+  {
+    "organ": "Nang tuyến giáp (trạng thái bình thường/nghỉ)",
+    "system": "Hệ Nội Tiết",
+    "category": "vuong_don",
+    "epithelium": "Biểu mô vuông đơn",
+    "details": "Tế bào nang giáp hình khối vuông quây quanh lòng nang chứa đầy chất keo giáp (chứa thyroglobulin tích trữ hormone T3, T4).",
+    "trap": "Khi tuyến giáp hoạt động mạnh (cường giáp), tế bào chuyển sang hình TRỤ ĐƠN. Khi thoái hóa/nghỉ dài chuyển sang hình DẸT (LÁT ĐƠN).",
+    "search_kw": "tuyến giáp"
+  },
+  {
+    "organ": "Ống bài xuất trung gian (Tuyến nước bọt)",
+    "system": "Hệ Tiêu Hóa",
+    "category": "vuong_don",
+    "epithelium": "Biểu mô vuông đơn thấp",
+    "details": "Ống bài xuất trong tiểu thùy tiếp nối ngay sau nang tuyến nước bọt, lòng nhỏ hẹp, lót bởi biểu mô vuông đơn thấp.",
+    "trap": "Ống trung gian là VUÔNG ĐƠN. Ống vân tiếp theo là TRỤ ĐƠN có vạch đáy (nếp gấp que).",
+    "search_kw": "ống bài xuất trung gian"
+  },
+  {
+    "organ": "Biểu mô trước thấu kính",
+    "system": "Giác quan",
+    "category": "vuong_don",
+    "epithelium": "Biểu mô vuông đơn",
+    "details": "Nằm ngay dưới bao trước của thể thủy tinh (thấu kính). Về phía xích đạo thấu kính tế bào dài ra biệt hóa thành sợi thấu kính.",
+    "trap": "Mặt sau thấu kính KHÔNG CÓ biểu mô vì các tế bào biểu mô đã kéo dài thành sợi thấu kính trong quá trình phát triển phôi.",
+    "search_kw": "thấu kính"
+  },
+  {
+    "organ": "Dạ dày (Niêm mạc mặt trong)",
+    "system": "Hệ Tiêu Hóa",
+    "category": "tru_don",
+    "epithelium": "Biểu mô trụ đơn tiết nhầy",
+    "details": "Mọi tế bào đều tiết chất nhầy kiềm bảo vệ niêm mạc khỏi acid HCl và pepsin dịch vị. Biểu mô lõm xuống tạo thành các hố dạ dày.",
+    "trap": "Biểu mô dạ dày TUYỆT ĐỐI KHÔNG CÓ tế bào hình đài tiết nhầy và không có vi nhung mao mâm khía! Xuất hiện tế bào hình đài là chuyển sản ruột.",
+    "search_kw": "dạ dày"
+  },
+  {
+    "organ": "Ruột non (Tá tràng, Hỗng tràng, Hồi tràng)",
+    "system": "Hệ Tiêu Hóa",
+    "category": "tru_don",
+    "epithelium": "Biểu mô trụ đơn có mâm khía (vi nhung mao) & tế bào đài",
+    "details": "Cấu tạo gồm 3 loại tế bào chính: Tế bào hấp thu (tế bào mâm khía), tế bào hình đài tiết nhầy và tế bào nội tiết đường tiêu hóa (DNES).",
+    "trap": "Đáy tuyến Lieberkühn ruột non có thêm tế bào Paneth (tiết lysozyme diệt khuẩn, hạt ưa acid đỏ tươi). Tế bào Paneth KHÔNG CÓ ở biểu mô nhung mao ruột.",
+    "search_kw": "ruột non"
+  },
+  {
+    "organ": "Ruột già (Đại tràng, Ruột thừa)",
+    "system": "Hệ Tiêu Hóa",
+    "category": "tru_don",
+    "epithelium": "Biểu mô trụ đơn rất giàu tế bào hình đài",
+    "details": "Chức năng tái hấp thu nước và đóng khuôn phân. Rất nhiều tuyến Lieberkühn thẳng đứng giàu tế bào hình đài tiết nhầy bôi trơn.",
+    "trap": "Ruột già KHÔNG CÓ nếp gấp van ruột và KHÔNG CÓ nhung mao ruột như ruột non.",
+    "search_kw": "ruột già"
+  },
+  {
+    "organ": "Túi mật",
+    "system": "Hệ Tiêu Hóa",
+    "category": "tru_don",
+    "epithelium": "Biểu mô trụ đơn cao",
+    "details": "Biểu mô trụ đơn cao có vi nhung mao ngắn ở cực ngọn, niêm mạc gấp nhiều nếp ngoằn ngoèo giúp cô đặc mật.",
+    "trap": "Thành túi mật KHÔNG CÓ lớp cơ niêm và KHÔNG CÓ tầng dưới niêm mạc; lớp đệm liên kết trực tiếp với tầng cơ.",
+    "search_kw": "túi mật"
+  },
+  {
+    "organ": "Vòi tử cung (Vòi trứng / Ống dẫn trứng)",
+    "system": "Hệ Sinh Dục Nữ",
+    "category": "tru_don",
+    "epithelium": "Biểu mô trụ đơn có lông chuyển & tế bào tiết",
+    "details": "Gồm 2 loại tế bào: Tế bào có lông chuyển (đập dồn về buồng tử cung đưa noãn/hợp tử đi) và tế bào tiết dịch nuôi dưỡng hợp tử.",
+    "trap": "Lông chuyển của vòi trứng đập hướng về phía BUỒNG TỬ CUNG. Estrogen kích thích phát triển lông chuyển, Progesterone kích thích bài tiết dịch.",
+    "search_kw": "vòi tử cung"
+  },
+  {
+    "organ": "Thân tử cung (Nội mạc tử cung)",
+    "system": "Hệ Sinh Dục Nữ",
+    "category": "tru_don",
+    "epithelium": "Biểu mô trụ đơn có lông chuyển xen kẽ tế bào tiết",
+    "details": "Biểu mô lõm sâu vào lớp đệm tạo thành các tuyến tử cung đơn thẳng hoặc ngoằn ngoèo theo chu kỳ kinh nguyệt.",
+    "trap": "Nội mạc tử cung chia làm 2 lớp: Lớp chức năng (bong ra khi hành kinh) và lớp đáy (giữ lại tái tạo nội mạc chu kỳ sau).",
+    "search_kw": "nội mạc tử cung"
+  },
+  {
+    "organ": "Cổ trong cổ tử cung (Ống cổ tử cung)",
+    "system": "Hệ Sinh Dục Nữ",
+    "category": "tru_don",
+    "epithelium": "Biểu mô trụ đơn tiết nhầy",
+    "details": "Các tuyến cổ trong tiết chất nhầy nhầy trong suốt, loãng vào ngày rụng trứng giúp tinh trùng dễ di chuyển.",
+    "trap": "Cổ trong là TRỤ ĐƠN tiết nhầy, cổ ngoài là LÁT TẦNG KHÔNG SỪNG HÓA. Ranh giới cổ trong - cổ ngoài là nơi phát sinh 90% ung thư cổ tử cung.",
+    "search_kw": "cổ trong cổ tử cung"
+  },
+  {
+    "organ": "Ống vân (Tuyến nước bọt)",
+    "system": "Hệ Tiêu Hóa",
+    "category": "tru_don",
+    "epithelium": "Biểu mô trụ đơn có nếp gấp que (vạch đáy)",
+    "details": "Nằm trong tiểu thùy. Màng đáy tế bào gấp nếp sâu chứa chuỗi ti thể que song song, chịu trách nhiệm tái hấp thu Na+ bài tiết K+ làm loãng nước bọt.",
+    "trap": "Đặc trưng nhận diện dưới kính hiển vi: Vạch đáy đỏ tươi nằm cực đáy tế bào.",
+    "search_kw": "ống vân"
+  },
+  {
+    "organ": "Đường dẫn khí hô hấp (Hốc mũi, Khí quản, Phế quản)",
+    "system": "Hệ Hô Hấp",
+    "category": "gia_tang",
+    "epithelium": "Biểu mô trụ giả tầng có lông chuyển & tế bào đài",
+    "details": "Tất cả tế bào đều chạm màng đáy nhưng nhân nằm ở các độ cao khác nhau tạo cảm giác nhiều tầng. Cực ngọn có lông chuyển đập liên tục đẩy dị vật lên họng.",
+    "trap": "Các câu hỏi thi hay lừa: Biểu mô phế quản gian tiểu thùy là biểu mô gì? -> Vẫn là BIỂU MÔ TRỤ GIẢ TẦNG CÓ LÔNG CHUYỂN.",
+    "search_kw": "khí quản"
+  },
+  {
+    "organ": "Mào tinh hoàn (Ống mào tinh)",
+    "system": "Hệ Sinh Dục Nam",
+    "category": "gia_tang",
+    "epithelium": "Biểu mô trụ giả tầng có lông giả (Stereocilia)",
+    "details": "Gồm tế bào đáy và tế bào trụ cao mang túm stereocilia (bản chất là vi nhung mao siêu dài bất động) giúp hấp thu dịch và hoàn thiện tinh trùng.",
+    "trap": "Stereocilia là VI NHUNG MAO BẤT ĐỘNG, KHÔNG PHẢI LÔNG CHUYỂN THẬT SỰ (không có cấu trúc vi ống 9+2). Lòng ống mào tinh nhẵn đều chứa tinh trùng.",
+    "search_kw": "mào tinh"
+  },
+  {
+    "organ": "Ống dẫn tinh (Đoạn đầu)",
+    "system": "Hệ Sinh Dục Nam",
+    "category": "gia_tang",
+    "epithelium": "Biểu mô trụ giả tầng có lông giả",
+    "details": "Lớp niêm mạc lót bởi biểu mô trụ giả tầng, phía ngoài có tầng cơ cực dày gồm 3 lớp: dọc trong - vòng giữa - dọc ngoài.",
+    "trap": "Đặc điểm nhận diện ống dẫn tinh: Lòng hẹp hình khế, tầng cơ nhẵn cực kỳ dày gồm 3 lớp rõ rệt.",
+    "search_kw": "ống dẫn tinh"
+  },
+  {
+    "organ": "Thực quản",
+    "system": "Hệ Tiêu Hóa",
+    "category": "lat_tang_ko_sung",
+    "epithelium": "Biểu mô lát tầng không sừng hóa",
+    "details": "Gồm nhiều lớp tế bào: Lớp đáy (sinh sản), lớp sợi gai (trung gian) và lớp bề mặt dẹt còn nguyên nhân, không có chất sừng (keratin).",
+    "trap": "Tầng dưới niêm mạc thực quản CÓ TUYẾN THỰC QUẢN CHÍNH THỨC (tuyến tiết nhầy). 1/3 trên cơ vân, 1/3 giữa cơ vân + cơ trơn, 1/3 dưới cơ trơn.",
+    "search_kw": "thực quản"
+  },
+  {
+    "organ": "Âm đạo",
+    "system": "Hệ Sinh Dục Nữ",
+    "category": "lat_tang_ko_sung",
+    "epithelium": "Biểu mô lát tầng không sừng hóa (giàu Glycogen)",
+    "details": "Dưới tác dụng của Estrogen, tế bào lớp trung gian tích lũy nhiều glycogen. Vi khuẩn Döderlein lên men glycogen thành acid lactic tạo pH acid bảo vệ.",
+    "trap": "Thành âm đạo KHÔNG CÓ TUYẾN. Dịch nhầy âm đạo xuất phát từ tuyến cổ trong tử cung và tuyến tiền đình lớn (Bartholin).",
+    "search_kw": "âm đạo"
+  },
+  {
+    "organ": "Dây thanh âm thật (Thanh đới)",
+    "system": "Hệ Hô Hấp",
+    "category": "lat_tang_ko_sung",
+    "epithelium": "Biểu mô lát tầng không sừng hóa",
+    "details": "Hai dây thanh âm rung động liên tục với ma sát cơ học cao khi phát âm nên biểu mô biến đổi từ trụ giả tầng thành lát tầng không sừng hóa.",
+    "trap": "Toàn bộ thanh quản hầu hết là trụ giả tầng có lông chuyển; DUY NHẤT DÂY THANH ÂM THẬT VÀ MẶT TRƯỚC NẮP THANH MÔN là lát tầng không sừng.",
+    "search_kw": "dây thanh âm"
+  },
+  {
+    "organ": "Cổ ngoài cổ tử cung (Phần âm đạo cổ tử cung)",
+    "system": "Hệ Sinh Dục Nữ",
+    "category": "lat_tang_ko_sung",
+    "epithelium": "Biểu mô lát tầng không sừng hóa",
+    "details": "Liên tiếp trực tiếp với biểu mô thành trên âm đạo. Tế bào phẳng, sáng màu giàu glycogen.",
+    "trap": "Vùng chuyển tiếp giữa lát tầng không sừng hóa (cổ ngoài) và trụ đơn tiết nhầy (cổ trong) rất nhạy cảm với virus HPV.",
+    "search_kw": "cổ ngoài"
+  },
+  {
+    "organ": "Giác mạc (Biểu mô trước giác mạc)",
+    "system": "Giác quan",
+    "category": "lat_tang_ko_sung",
+    "epithelium": "Biểu mô lát tầng không sừng hóa (5-6 lớp tế bào)",
+    "details": "Trong suốt hoàn toàn, nằm trên màng Bowman. Có khả năng tái tạo cực nhanh (24-48 giờ) và mạng lưới đầu tận cùng thần kinh cảm giác rất phong phú.",
+    "trap": "Giác mạc KHÔNG CÓ MẠCH MÁU, được nuôi dưỡng nhờ thẩm thấu từ thủy dịch tiền phòng và mao mạch củng - giác mạc.",
+    "search_kw": "giác mạc"
+  },
+  {
+    "organ": "Biểu bì da dày (Lòng bàn tay, Lòng bàn chân)",
+    "system": "Hệ Da",
+    "category": "lat_tang_sung",
+    "epithelium": "Biểu mô lát tầng sừng hóa (ĐỦ 5 LỚP)",
+    "details": "Gồm 5 lớp theo thứ tự từ trong ra ngoài: Lớp đáy (sinh sản) -> Lớp gai (Malpighi) -> Lớp hạt (chứa hạt Keratohyalin) -> Lớp bóng (Lucidum) -> Lớp sừng dày.",
+    "trap": "CHỈ DA DÀY MỚI CÓ LỚP BÓNG (Stratum Lucidum). Da dày KHÔNG CÓ lông và tuyến bã nhờn, chỉ có tuyến mồ hôi.",
+    "search_kw": "da dày"
+  },
+  {
+    "organ": "Biểu bì da mỏng (Toàn thân)",
+    "system": "Hệ Da",
+    "category": "lat_tang_sung",
+    "epithelium": "Biểu mô lát tầng sừng hóa (CHỈ 4 LỚP)",
+    "details": "Lớp sừng mỏng, KHÔNG CÓ LỚP BÓNG. Có lỗ chân lông, nang lông, tuyến bã nhờn và cơ dựng lông.",
+    "trap": "Đề thi hay hỏi: Da mỏng thiếu lớp nào trong 5 lớp biểu bì? -> THIẾU LỚP BÓNG (Stratum lucidum).",
+    "search_kw": "da mỏng"
+  },
+  {
+    "organ": "Bàng quang & Niệu quản & Đài bể thận",
+    "system": "Hệ Tiết Niệu",
+    "category": "chuyen_tiep",
+    "epithelium": "Biểu mô chuyển tiếp (Biểu mô niệu)",
+    "details": "Gồm lớp đáy, lớp tế bào hình vợt (tế bào trung gian), và lớp tế bào đa diện lớn phủ mặt ngọn (tế bào vòm / tế bào dù, có thể có 2 nhân).",
+    "trap": "Khi rỗng (bàng quang xẹp): biểu mô có 6-8 hàng tế bào dầy cộm. Khi căng đầy nước tiểu: tế bào dẹt giãn ra chỉ còn 2-3 hàng. Không thấm nước tiểu nhờ màng ngọn dày đặc biệt.",
+    "search_kw": "bàng quang"
+  },
+  {
+    "organ": "Mao mạch kiểu xoang (Sinusoid Capillaries)",
+    "system": "Cơ quan tạo máu & Tiêu hóa",
+    "category": "tuyen_mao_mach",
+    "epithelium": "Mao mạch nan hoa có lỗ thủng lớn, màng đáy gián đoạn",
+    "details": "Gặp ở: GAN (giữa các bè Remak), LÁCH (xoang tĩnh mạch tủy đỏ), TỦY XƯƠNG, VỎ THƯỢNG THẬN. Cho phép đại phân tử và tế bào máu đi qua.",
+    "trap": "Đề thi liệt kê nơi có mao mạch kiểu xoang: Gan, Lách, Tủy xương, Vỏ thượng thận. Thận và ruột non là mao mạch CÓ LỖ THỦNG chứ không phải xoang.",
+    "search_kw": "kiểu xoang"
+  },
+  {
+    "organ": "Mao mạch có lỗ thủng (Fenestrated Capillaries)",
+    "system": "Hệ Tiết Niệu, Nội Tiết & Tiêu Hóa",
+    "category": "tuyen_mao_mach",
+    "epithelium": "Nội mô có lỗ thủng (cửa sổ lọc), màng đáy liên tục",
+    "details": "Gặp ở: Cầu thận (mao mạch cuộn Malpighi), Niêm mạc ruột non (nhung mao), Tuyến nội tiết, Đám rối màng mạch não thất.",
+    "trap": "Mao mạch cầu thận có lỗ thủng đường kính 70-90 nm, nhưng màng đáy dày liên tục tích điện âm ngăn Albumin lọt vào dịch lọc.",
+    "search_kw": "mao mạch có lỗ thủng"
+  },
+  {
+    "organ": "Tế bào Paneth (Ruột non)",
+    "system": "Hệ Tiêu Hóa",
+    "category": "tuyen_mao_mach",
+    "epithelium": "Tế bào tuyến ngoại tiết đáy tuyến Lieberkühn",
+    "details": "Nằm ở đáy tuyến Lieberkühn ruột non. Trong bào tương cực ngọn chứa các hạt chế tiết ưa acid bắt màu đỏ cam rực rỡ, tiết Lysozyme, Defensin diệt khuẩn.",
+    "trap": "Nhận diện mô học: Hạt ưa acid to màu ĐỎ TƯƠI ở cực ngọn tế bào đáy tuyến Lieberkühn. Ruột già bình thường KHÔNG CÓ tế bào Paneth.",
+    "search_kw": "tế bào paneth"
+  },
+  {
+    "organ": "Tế bào viền (Parietal cells - Tuyến đáy vị)",
+    "system": "Hệ Tiêu Hóa",
+    "category": "tuyen_mao_mach",
+    "epithelium": "Tế bào biểu mô hình tam giác/hình trứng",
+    "details": "Bắt màu ưa acid (hồng/đỏ) do chứa cực nhiều ti thể và vi quản nội bào. Tiết HCl và Yếu tố nội tại (Intrinsic Factor) để hấp thu Vitamin B12.",
+    "trap": "Tế bào VIỀN = tiết HCl + Yếu tố nội tại (bắt màu ưa ACID). Tế bào CHÍNH = tiết Pepsinogen (bắt màu ưa BASE tím đậm).",
+    "search_kw": "tế bào viền"
+  },
+  {
+    "organ": "Tế bào Kupffer (Gan)",
+    "system": "Hệ Tiêu Hóa & Miễn Dịch",
+    "category": "tuyen_mao_mach",
+    "epithelium": "Đại thực bào đơn nhân trong lòng mao mạch nan hoa",
+    "details": "Nằm áp sát vào thành trong tế bào nội mô mao mạch nan hoa gan, làm nhiệm vụ thực bào hồng cầu già, vi khuẩn và phức hợp miễn dịch.",
+    "trap": "Tế bào Kupffer nằm trong LÒNG mao mạch nan hoa. Tế bào Ito (tích lũy vitamin A và tổng hợp collagen gây xơ gan) nằm ở KHOANG DISSE.",
+    "search_kw": "kupffer"
+  },
+  {
+    "organ": "Tế bào Sertoli (Ống sinh tinh)",
+    "system": "Hệ Sinh Dục Nam",
+    "category": "tuyen_mao_mach",
+    "epithelium": "Tế bào biểu mô nâng đỡ hình tháp",
+    "details": "Đáy tựa trên màng đáy ống sinh tinh, đỉnh vươn vào lòng ống. Tạo hàng rào máu - tinh hoàn (dải bịt chặt chẽ), tiết ABP (Androgen Binding Protein) và Inhibin.",
+    "trap": "Hàng rào máu - tinh hoàn do LIÊN KẾT BỊT GIỮA CÁC TẾ BÀO SERTOLI tạo nên, ngăn kháng thể tấn công tinh trùng mang bộ gen đơn bội n.",
+    "search_kw": "sertoli"
+  },
+  {
+    "organ": "Tế bào Leydig (Tế bào kẽ dịch hoàn)",
+    "system": "Hệ Sinh Dục Nam",
+    "category": "tuyen_mao_mach",
+    "epithelium": "Tế bào nội tiết tuyến kẽ",
+    "details": "Nằm thành từng đám trong mô liên kết kẽ giữa các ống sinh tinh. Tiết hormone TESTOSTERONE. Chứa lưới nội chất trơn rất phát triển và các thể tinh thể Reinke.",
+    "trap": "LH từ tuyến yên kích thích tế bào Leydig tiết Testosterone. FSH từ tuyến yên kích thích tế bào Sertoli tiết ABP.",
+    "search_kw": "leydig"
+  }
+];
+
+    let currentEpimapCategory = 'all';
+    let currentEpimapSearchQuery = '';
+
+    function setEpimapCategory(cat, element) {
+      currentEpimapCategory = cat;
+      document.querySelectorAll('.epimap-tag').forEach(tag => tag.classList.remove('active'));
+      if (element) element.classList.add('active');
+      filterEpimapTable();
+    }
+
+    function filterEpimapTable() {
+      const searchInput = document.getElementById('epimap-search-input');
+      currentEpimapSearchQuery = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+      const filtered = EPIMAP_DATA.filter(item => {
+        const matchCat = (currentEpimapCategory === 'all' || item.category === currentEpimapCategory);
+        if (!matchCat) return false;
+        if (!currentEpimapSearchQuery) return true;
+        const combined = `${item.organ} ${item.epithelium} ${item.system || ''} ${item.details} ${item.trap} ${item.search_kw || ''}`.toLowerCase();
+        return combined.includes(currentEpimapSearchQuery);
+      });
+
+      renderEpimapTable(filtered);
+    }
+
+    function renderEpimapTable(items) {
+      const tbody = document.getElementById('epimap-table-body');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      if (!items || !items.length) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:30px; color:var(--text-muted); font-size:15px;">🔍 Không tìm thấy cấu trúc hoặc biểu mô phù hợp với từ khóa! Vui lòng thử từ khác.</td></tr>`;
+        return;
+      }
+
+      items.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            <span class="organ-badge">${row.organ}</span>
+            ${row.system ? `<div style="font-size:11.5px; color:var(--text-muted); font-weight:600; margin-top:2px;">🏛️ ${row.system}</div>` : ''}
+          </td>
+          <td>
+            <span class="epi-badge">${row.epithelium}</span>
+          </td>
+          <td style="font-size:13.5px; line-height:1.55;">
+            ${row.details}
+          </td>
+          <td>
+            <div class="trap-note">
+              <strong>⚠️ Bẫy & Điểm cốt lõi:</strong> ${row.trap}
+            </div>
+            ${row.search_kw ? `<button class="btn btn-secondary btn-sm" style="margin-top:8px; font-size:11.5px; padding:4px 10px; border-radius:6px;" onclick="practiceEpimapKeyword('${row.search_kw}')">🎯 Luyện ${row.search_kw} trong ngân hàng</button>` : ''}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function practiceEpimapKeyword(kw) {
+      const lowerKw = kw.toLowerCase();
+      const matched = ALL_QUESTIONS.filter(q => {
+        const txt = (q.question + ' ' + (q.correct_text || '') + ' ' + (q.options || []).join(' ')).toLowerCase();
+        return txt.includes(lowerKw);
+      });
+      if (!matched.length) {
+        alert(`Không tìm thấy câu hỏi với từ khóa "${kw}" trong 1.287 câu.`);
+        return;
+      }
+      stationExamList = matched;
+      currentStationIdx = 0;
+      switchTab('station');
+      renderCurrentStationDesk();
+    }
+
+    // ==========================================================
+    // ❌ WRONG QUESTIONS INTERACTIVE RETAKE ARENA
+    // ==========================================================
+    let retakeList = [];
+    let retakeCurrentIdx = 0;
+    let retakeFixedCount = 0;
+    let retakeAnswerLocked = false;
+
+    function startWrongInteractiveRetake() {
+      const wrongSet = new Set(PROGRESS.wrong_questions || []);
+      retakeList = ALL_QUESTIONS.filter(q => wrongSet.has(q.id));
+      if (!retakeList.length) {
+        alert('🎉 Kho câu sai hiện tại đang trống! Bạn đã nắm vững toàn bộ kiến thức!');
+        return;
+      }
+
+      retakeCurrentIdx = 0;
+      retakeFixedCount = 0;
+      retakeAnswerLocked = false;
+
+      document.getElementById('wrong-list-view').style.display = 'none';
+      document.getElementById('wrong-retake-arena').style.display = 'block';
+      renderRetakeQuestion();
+    }
+
+    function exitWrongRetake() {
+      document.getElementById('wrong-retake-arena').style.display = 'none';
+      document.getElementById('wrong-list-view').style.display = 'block';
+      renderWrongList();
+      updateGlobalStats();
+    }
+
+    function renderRetakeQuestion() {
+      const arena = document.getElementById('wrong-retake-arena');
+      if (retakeCurrentIdx >= retakeList.length) {
+        arena.innerHTML = `
+          <div style="background:var(--bg-card); border:2px solid #10b981; border-radius:18px; padding:40px 25px; text-align:center; max-width:650px; margin:20px auto;">
+            <div style="font-size:55px; margin-bottom:12px;">🏆</div>
+            <div style="font-size:22px; font-weight:800; color:#34d399; margin-bottom:10px;">XUẤT SẮC! ĐÃ HOÀN THÀNH LƯỢT ÔN CÂU SAI!</div>
+            <div style="font-size:15px; color:var(--text-muted); margin-bottom:24px; line-height:1.6;">
+              Bạn đã sửa thành công <strong style="color:#10b981; font-size:18px;">${retakeFixedCount}</strong> câu và loại bỏ khỏi kho câu sai.<br>
+              Kho câu sai hiện còn lại: <strong>${PROGRESS.wrong_questions ? PROGRESS.wrong_questions.length : 0}</strong> câu.
+            </div>
+            <button class="btn btn-primary" onclick="exitWrongRetake()" style="padding:12px 28px; font-weight:800; font-size:15px; border-radius:10px;">
+              Trở Lại Danh Sách Câu Sai
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      retakeAnswerLocked = false;
+      const q = retakeList[retakeCurrentIdx];
+      document.getElementById('retake-progress-indicator').textContent = `Câu ${retakeCurrentIdx + 1} / ${retakeList.length}`;
+      document.getElementById('retake-fixed-count').textContent = `Đã sửa: ${retakeFixedCount} câu`;
+      document.getElementById('retake-q-chapter').textContent = `${q.chapter.replace(/^BÀI\s+\d+[\.:\s]*/i, '')} (Gốc: #${q.orig_num})`;
+      document.getElementById('retake-question-stem').innerHTML = q.question_html || q.question;
+
+      const optContainer = document.getElementById('retake-options-list');
+      optContainer.innerHTML = '';
+
+      const labels = ['A', 'B', 'C', 'D'];
+      (q.options || []).forEach((optText, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        const optHtml = (q.options_html && q.options_html[idx]) ? q.options_html[idx] : optText;
+        btn.innerHTML = `
+          <div class="option-prefix">${labels[idx]}</div>
+          <div class="option-text">${optHtml}</div>
+        `;
+        btn.onclick = () => onRetakeOptionSelect(idx);
+        optContainer.appendChild(btn);
+      });
+    }
+
+    function onRetakeOptionSelect(chosenIdx) {
+      if (retakeAnswerLocked) return;
+      retakeAnswerLocked = true;
+
+      const q = retakeList[retakeCurrentIdx];
+      const optButtons = document.querySelectorAll('#retake-options-list .option-btn');
+      const isCorrect = (chosenIdx === q.correct_idx);
+
+      if (isCorrect) {
+        if (optButtons[chosenIdx]) optButtons[chosenIdx].classList.add('selected-correct');
+        soundChimeSoft();
+
+        // Remove from wrong questions bank immediately!
+        PROGRESS.wrong_questions = (PROGRESS.wrong_questions || []).filter(id => id !== q.id);
+        if (!PROGRESS.mastered_questions.includes(q.id)) {
+          PROGRESS.mastered_questions.push(q.id);
+        }
+        retakeFixedCount++;
+        saveProgress();
+        updateGlobalStats();
+
+        setTimeout(() => {
+          retakeCurrentIdx++;
+          renderRetakeQuestion();
+        }, 900);
+      } else {
+        if (optButtons[chosenIdx]) optButtons[chosenIdx].classList.add('selected-wrong');
+        if (q.correct_idx !== null && optButtons[q.correct_idx]) {
+          optButtons[q.correct_idx].classList.add('reveal-target');
+        }
+        soundWarningBeep();
+
+        setTimeout(() => {
+          retakeCurrentIdx++;
+          renderRetakeQuestion();
+        }, 1800);
+      }
+    }
+
+    function startWrongFlash7s() {
+      const wrongSet = new Set(PROGRESS.wrong_questions || []);
+      const wrongQuestions = ALL_QUESTIONS.filter(q => wrongSet.has(q.id));
+      if (!wrongQuestions.length) {
+        alert('Kho câu sai đang trống!');
+        return;
+      }
+      flashList = [...wrongQuestions];
+      currentFlashIdx = 0;
+      switchTab('flash');
+      renderCurrentFlashQ();
+      flashIsPlaying = true;
+      document.getElementById('btn-flash-play').textContent = '⏸️ Tạm Dừng';
+      startFlashCycle();
+    }
+
+    function clearAllWrongQuestions() {
+      if (!PROGRESS.wrong_questions || !PROGRESS.wrong_questions.length) {
+        alert('Kho câu sai hiện tại đang trống!');
+        return;
+      }
+      if (confirm('Bạn có chắc chắn muốn xóa toàn bộ câu hỏi trong Kho câu sai?')) {
+        PROGRESS.wrong_questions = [];
+        saveProgress();
+        renderWrongList();
+        updateGlobalStats();
+      }
+    }
+
     function renderWrongList() {
       const container = document.getElementById('wrong-items-container');
       const wrongSet = new Set(PROGRESS.wrong_questions);
@@ -2065,6 +3050,20 @@
     function handleKeyNavigation(e) {
 
       // Lock-In Key handler
+      // Retake Arena Key handler
+      if (document.getElementById('tab-wrong') && document.getElementById('tab-wrong').classList.contains('active')) {
+        const retakeArena = document.getElementById('wrong-retake-arena');
+        if (retakeArena && retakeArena.style.display !== 'none') {
+          const keyMap = { '1': 0, 'a': 0, '2': 1, 'b': 1, '3': 2, 'c': 2, '4': 3, 'd': 3 };
+          const key = e.key.toLowerCase();
+          if (key in keyMap) {
+            e.preventDefault();
+            onRetakeOptionSelect(keyMap[key]);
+            return;
+          }
+        }
+      }
+
       if (document.getElementById('tab-lockin') && document.getElementById('tab-lockin').classList.contains('active') && lockinActive) {
         const keyMap = { '1': 0, 'a': 0, '2': 1, 'b': 1, '3': 2, 'c': 2, '4': 3, 'd': 3 };
         const key = e.key.toLowerCase();
@@ -2124,7 +3123,7 @@
       // 1. Always save to localStorage immediately so user's progress is preserved per device
       try {
         localStorage.setItem('mo_phoi_progress', JSON.stringify(PROGRESS));
-      } catch (e) {}
+      } catch (e) { }
 
       // 2. If backend server is reachable, save to server too
       try {
@@ -2133,10 +3132,10 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(PROGRESS)
         });
-      } catch (e) {}
+      } catch (e) { }
     }
 
-    
+
     // ==========================================================
     // 🔥 CHẾ ĐỘ LOCK-IN JAVASCRIPT LOGIC
     // ==========================================================
@@ -2189,7 +3188,7 @@
         try {
           lockinAudioNode.stop();
           lockinAudioNode.disconnect();
-        } catch(e){}
+        } catch (e) { }
         lockinAudioNode = null;
       }
       lockinFocusTonePlaying = false;
@@ -2260,9 +3259,20 @@
       // Filter questions pool
       let pool = ALL_QUESTIONS;
       if (chapter && chapter !== 'all') {
-        pool = ALL_QUESTIONS.filter(q => q.chapter === chapter);
+        if (chapter === '__WRONG_ONLY__') {
+          pool = ALL_QUESTIONS.filter(q => (PROGRESS.wrong_questions || []).includes(q.id));
+        } else {
+          pool = ALL_QUESTIONS.filter(q => q.chapter === chapter);
+        }
       }
-      if (!pool.length) pool = ALL_QUESTIONS;
+      if (!pool.length) {
+        if (chapter === '__WRONG_ONLY__') {
+          alert('🎉 Kho câu sai đang trống! Không có câu nào để ôn luyện.');
+          lockinActive = false;
+          return;
+        }
+        pool = ALL_QUESTIONS;
+      }
 
       // Random sample or slice
       const shuffled = [...pool].sort(() => 0.5 - Math.random());
@@ -2568,10 +3578,12 @@ Chỉ còn ${remaining} câu nữa là cán đích. Bạn có chắc muốn dừ
       </div>
 
       <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-        <button onclick="closeVictoryAndSetupNext()" class="btn-control" style="background:linear-gradient(135deg, #10b981, #059669); color:#ffffff; font-weight:800; border:none; padding:10px 20px;">
+        <button onclick="closeVictoryAndSetupNext()" class="btn-control"
+          style="background:linear-gradient(135deg, #10b981, #059669); color:#ffffff; font-weight:800; border:none; padding:10px 20px;">
           🚀 Tiếp Tục Sprint Mới
         </button>
-        <button onclick="start5MinBreak()" class="btn-control" style="background:#1f2937; color:#fbbf24; border-color:#f59e0b; font-weight:700;">
+        <button onclick="start5MinBreak()" class="btn-control"
+          style="background:#1f2937; color:#fbbf24; border-color:#f59e0b; font-weight:700;">
           ☕ Nghỉ 5 Phút
         </button>
         <button onclick="switchTab('wrong'); closeVictoryModal();" class="btn-control">
@@ -2582,4 +3594,5 @@ Chỉ còn ${remaining} câu nữa là cán đích. Bạn có chắc muốn dừ
   </div>
 
 </body>
+
 </html>
