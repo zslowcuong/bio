@@ -569,6 +569,305 @@
       color: var(--accent);
       font-weight: 700;
     }
+  
+    /* ========================================================== */
+    /* 🔥 LOCK-IN MODE STYLES                                    */
+    /* ========================================================== */
+    .lockin-hero {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(245, 158, 11, 0.1));
+      border: 1.5px solid rgba(245, 158, 11, 0.4);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .lockin-hero h2 {
+      font-size: 24px;
+      font-weight: 900;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .lockin-hero p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .sprint-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .sprint-card {
+      background: #111827;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .sprint-card:hover {
+      border-color: #f59e0b;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.2);
+    }
+    .sprint-card.active-preset {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.08);
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
+    }
+    .sprint-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .sprint-badge.warmup { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .sprint-badge.pomodoro { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .sprint-badge.marathon { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+    .sprint-badge.chapter { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+
+    .sprint-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    .sprint-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .sprint-meta {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Lock-in Arena Active */
+    .lockin-arena-container {
+      display: none;
+      background: #0d121d;
+      border: 2px solid #f59e0b;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 0 40px rgba(245, 158, 11, 0.15);
+    }
+    .lockin-hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1.5px solid var(--border);
+      margin-bottom: 20px;
+    }
+    .hud-timer-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hud-timer {
+      font-family: 'Lexend', monospace;
+      font-size: 32px;
+      font-weight: 900;
+      color: #ef4444;
+      background: #080c14;
+      padding: 6px 18px;
+      border-radius: 12px;
+      border: 2px solid rgba(239, 68, 68, 0.5);
+      letter-spacing: 1px;
+      animation: pulseTimerGlow 2s infinite;
+    }
+    @keyframes pulseTimerGlow {
+      0%, 100% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.2); }
+      50% { box-shadow: 0 0 25px rgba(239, 68, 68, 0.5); }
+    }
+    .hud-stat {
+      text-align: center;
+    }
+    .hud-stat-val {
+      font-family: 'Lexend', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+    .hud-stat-lbl {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .hud-streak {
+      font-family: 'Lexend', sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+      color: #f59e0b;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 6px 14px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hud-pace {
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: #111827;
+      border: 1px solid var(--border);
+    }
+    .hud-pace.ahead { color: #10b981; border-color: rgba(16, 185, 129, 0.4); }
+    .hud-pace.behind { color: #f59e0b; border-color: rgba(245, 158, 11, 0.4); }
+
+    .lockin-progress-bar-wrap {
+      width: 100%;
+      height: 9px;
+      background: #1f2937;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .lockin-progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #f59e0b, #ef4444);
+      transition: width 0.3s ease;
+    }
+
+    /* Schedule Timeline */
+    .schedule-table-wrap {
+      background: #111827;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .schedule-header {
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .schedule-header h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .schedule-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 140px 130px;
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      align-items: center;
+      transition: background 0.2s;
+    }
+    .schedule-row:hover {
+      background: rgba(255,255,255,0.02);
+    }
+    .schedule-time {
+      font-family: 'Lexend', monospace;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #60a5fa;
+    }
+    .schedule-content h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+    .schedule-content p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .schedule-stat {
+      font-family: 'Lexend', monospace;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #fbbf24;
+    }
+    .btn-sprint-launch {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: #ffffff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-sprint-launch:hover {
+      transform: scale(1.04);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+    }
+
+    /* Modal Victory */
+    .lockin-victory-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lockin-victory-box {
+      background: #111827;
+      border: 2px solid #10b981;
+      border-radius: 20px;
+      max-width: 520px;
+      width: 100%;
+      padding: 32px 28px;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(16, 185, 129, 0.3);
+      animation: victoryPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes victoryPop {
+      0% { transform: scale(0.85); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @media (max-width: 680px) {
+      .schedule-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        text-align: left;
+      }
+      .hud-timer {
+        font-size: 24px;
+        padding: 4px 12px;
+      }
+      .lockin-hud {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -583,6 +882,9 @@
     <nav class="nav-tabs">
       <button class="nav-tab highlight-tab active" onclick="switchTab('flash')">
         ⚡ Flash Trắc Nghiệm (Tự Động 7s)
+      </button>
+      <button class="nav-tab lockin-tab" onclick="switchTab('lockin')" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(245, 158, 11, 0.2)); border: 1.5px solid #f59e0b; color: #fbbf24; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+        <span style="font-size:16px;">🔥</span> Chế Độ Lock-In
       </button>
       <button class="nav-tab" onclick="switchTab('station')">
         ⏱️ Chạy Trạm (Có Bấm Giờ)
@@ -681,6 +983,260 @@
 
         <div class="shortcut-legend">
           Phím tắt Flash: <kbd>Space</kbd> Tạm dừng / Tiếp tục • <kbd>→</kbd> Nhảy câu tiếp • <kbd>←</kbd> Quay lại câu trước
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- ========================================================== -->
+    <!-- 🔥 TAB: CHẾ ĐỘ LOCK-IN (DEEP FOCUS SPRINT)                -->
+    <!-- ========================================================== -->
+    <section id="tab-lockin" class="tab-content">
+      <!-- 1. SETUP / DASHBOARD VIEW -->
+      <div id="lockin-setup-view">
+        <div class="lockin-hero">
+          <h2>🔥 CHẾ ĐỘ LOCK-IN • CHIẾN DỊCH VƯỢT CẠN 1.287 CÂU</h2>
+          <p>
+            Cam kết tập trung 100%, không lướt mạng xã hội, không xao nhãng. Chinh phục mục tiêu số lượng câu hỏi trong thời gian ấn định với đồng hồ đếm ngược, theo dõi tốc độ (Pace), chuỗi đúng (Streak) và kích hoạt sóng não tập trung cao độ.
+          </p>
+        </div>
+
+        <!-- Sprint Presets Grid -->
+        <h3 style="font-size:18px; font-weight:800; color:#ffffff; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+          ⚡ Chọn Nhanh Gói Sprint Mục Tiêu:
+        </h3>
+        <div class="sprint-grid">
+          <!-- Preset 1 -->
+          <div class="sprint-card active-preset" id="preset-card-1" onclick="selectLockinPreset(1, 50, 10, 'all')">
+            <span class="sprint-badge warmup">Sprint Khởi Động</span>
+            <div class="sprint-title">⚡ 50 Câu / 10 Phút</div>
+            <div class="sprint-desc">Đánh thức phản xạ mắt và não, quét nhanh các từ khóa cốt lõi.</div>
+            <div class="sprint-meta">
+              <span>⏱️ 12 giây / câu</span>
+              <span style="color:#60a5fa; font-weight:700;">Khởi động hoàn hảo</span>
+            </div>
+          </div>
+
+          <!-- Preset 2 -->
+          <div class="sprint-card" id="preset-card-2" onclick="selectLockinPreset(2, 150, 25, 'all')">
+            <span class="sprint-badge pomodoro">Chuẩn Pomodoro</span>
+            <div class="sprint-title">🎯 150 Câu / 25 Phút</div>
+            <div class="sprint-desc">Đạt trạng thái Deep Work đỉnh cao, giải quyết trọn vẹn 1-2 bài học lớn.</div>
+            <div class="sprint-meta">
+              <span>⏱️ 10 giây / câu</span>
+              <span style="color:#34d399; font-weight:700;">Hiệu quả nhất ⭐</span>
+            </div>
+          </div>
+
+          <!-- Preset 3 -->
+          <div class="sprint-card" id="preset-card-3" onclick="selectLockinPreset(3, 300, 50, 'all')">
+            <span class="sprint-badge marathon">Đại Chiến Marathon</span>
+            <div class="sprint-title">🔥 300 Câu / 50 Phút</div>
+            <div class="sprint-desc">Quét sạch 1/4 toàn bộ ngân hàng câu hỏi chỉ trong chưa đầy 1 tiếng đồng hồ.</div>
+            <div class="sprint-meta">
+              <span>⏱️ 10 giây / câu</span>
+              <span style="color:#f87171; font-weight:700;">Cực kỳ bứt phá 🚀</span>
+            </div>
+          </div>
+
+          <!-- Preset 4 -->
+          <div class="sprint-card" id="preset-card-4" onclick="selectLockinPreset(4, 'chapter', 20, 'auto')">
+            <span class="sprint-badge chapter">Quét Trọn 1 Bài</span>
+            <div class="sprint-title">🏆 Toàn Bộ 1 Bài Học</div>
+            <div class="sprint-desc">Tự động lấy toàn bộ số câu của bài bạn chọn và tính giờ tự động 10s/câu.</div>
+            <div class="sprint-meta">
+              <span>⏱️ Theo bài chọn</span>
+              <span style="color:#c084fc; font-weight:700;">Luyện dứt điểm bài</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Setup Panel -->
+        <div style="background:#111827; border:1.5px solid var(--border); border-radius:16px; padding:20px; margin-bottom:24px;">
+          <h4 style="font-size:16px; font-weight:800; color:#fbbf24; margin-bottom:14px;">🛠️ Tùy Chỉnh Thông Số Phiên Lock-In:</h4>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; align-items:end;">
+            <div>
+              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Phạm vi bài học:</label>
+              <select id="lockin-chapter-select" class="filter-select" style="width:100%;" onchange="onLockinChapterChange()">
+                <option value="all">Tất cả 16 bài học (1.287 câu)</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Số lượng câu mục tiêu:</label>
+              <input type="number" id="lockin-input-count" class="filter-select" style="width:100%; font-family:'Lexend',sans-serif; font-weight:700;" value="50" min="10" max="1287">
+            </div>
+            <div>
+              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Thời gian cam kết (Phút):</label>
+              <input type="number" id="lockin-input-minutes" class="filter-select" style="width:100%; font-family:'Lexend',sans-serif; font-weight:700;" value="10" min="2" max="180">
+            </div>
+            <div>
+              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Kiểu làm bài:</label>
+              <select id="lockin-mode-select" class="filter-select" style="width:100%;">
+                <option value="interactive" selected>⚡ Bấm Phím / Click Chốt Ngay</option>
+                <option value="flash7s">⏱️ Auto Flash 7 Giây</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Âm thanh tập trung:</label>
+              <select id="lockin-audio-select" class="filter-select" style="width:100%;">
+                <option value="focus" selected>🎧 Sóng não Gamma 40Hz (Siêu tập trung)</option>
+                <option value="tick">⏰ Nhịp Tích Tắc Đồng Hồ</option>
+                <option value="none">🔇 Yên Tĩnh Hoàn Toàn</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top:20px; display:flex; justify-content:center;">
+            <button onclick="startLockinFromSetup()" style="background: linear-gradient(135deg, #f59e0b, #ef4444); color:#ffffff; border:none; padding:14px 40px; border-radius:12px; font-size:18px; font-weight:900; cursor:pointer; display:flex; align-items:center; gap:10px; box-shadow:0 6px 25px rgba(239,68,68,0.4); transition:all 0.2s;">
+              🔥 BẮT ĐẦU PHIÊN LOCK-IN NGAY
+            </button>
+          </div>
+        </div>
+
+        <!-- 48-Hour Exam Schedule Table -->
+        <div class="schedule-table-wrap">
+          <div class="schedule-header">
+            <h3>📅 LỘ TRÌNH 6 PHIÊN LOCK-IN ĐÁNH BẬT 1.287 CÂU (TỐI 9.11 ➔ 11.11)</h3>
+            <span style="font-size:13px; color:var(--text-muted);">Chia nhỏ mục tiêu • Chắc thắng 100%</span>
+          </div>
+
+          <!-- Sprint 1 -->
+          <div class="schedule-row">
+            <div class="schedule-time">Tối 9.11<br>19h30 - 20h20</div>
+            <div class="schedule-content">
+              <h4>🚀 Sprint 1: Mô Học Mở Đầu, Biểu Mô & Mô Liên Kết</h4>
+              <p>Bài 1 (47 câu) + Bài 2 (118 câu) + Bài 3 (123 câu). Nền tảng quan trọng nhất của Mô học.</p>
+            </div>
+            <div class="schedule-stat">288 câu / 50p</div>
+            <div>
+              <button class="btn-sprint-launch" onclick="launchScheduledSprint('s1')">Bắt đầu ➔</button>
+            </div>
+          </div>
+
+          <!-- Sprint 2 -->
+          <div class="schedule-row">
+            <div class="schedule-time">Tối 9.11<br>20h45 - 21h35</div>
+            <div class="schedule-content">
+              <h4>🚀 Sprint 2: Mô Cơ, Thần Kinh & Hệ Tim Mạch</h4>
+              <p>Bài 4 Mô cơ (46 câu) + Bài 5 Thần kinh (127 câu) + Bài 6 Tim mạch (56 câu).</p>
+            </div>
+            <div class="schedule-stat">229 câu / 50p</div>
+            <div>
+              <button class="btn-sprint-launch" onclick="launchScheduledSprint('s2')">Bắt đầu ➔</button>
+            </div>
+          </div>
+
+          <!-- Sprint 3 -->
+          <div class="schedule-row">
+            <div class="schedule-time">Sáng 10.11<br>08h00 - 08h50</div>
+            <div class="schedule-content">
+              <h4>🚀 Sprint 3: Hệ Hô Hấp, Tiêu Hóa & Tiết Niệu</h4>
+              <p>Bài 7 Hô hấp (56 câu) + Bài 8 Tiêu hóa (111 câu) + Bài 9 Tiết niệu (49 câu).</p>
+            </div>
+            <div class="schedule-stat">216 câu / 50p</div>
+            <div>
+              <button class="btn-sprint-launch" onclick="launchScheduledSprint('s3')">Bắt đầu ➔</button>
+            </div>
+          </div>
+
+          <!-- Sprint 4 -->
+          <div class="schedule-row">
+            <div class="schedule-time">Sáng 10.11<br>09h15 - 10h00</div>
+            <div class="schedule-content">
+              <h4>🚀 Sprint 4: Hệ Sinh Sản, Miễn Dịch & Da</h4>
+              <p>Bài 10 Sinh sản (64 câu) + Bài 11 Tạo máu & Miễn dịch (113 câu) + Bài 12 Da (37 câu).</p>
+            </div>
+            <div class="schedule-stat">214 câu / 45p</div>
+            <div>
+              <button class="btn-sprint-launch" onclick="launchScheduledSprint('s4')">Bắt đầu ➔</button>
+            </div>
+          </div>
+
+          <!-- Sprint 5 -->
+          <div class="schedule-row">
+            <div class="schedule-time">Chiều 10.11<br>14h00 - 15h15</div>
+            <div class="schedule-content">
+              <h4>🚀 Sprint 5: Làm Chủ Toàn Bộ Phôi Thai Học</h4>
+              <p>Bài 13 Mở đầu Phôi (60 câu) + Bài 14 Phôi 3 lá (101 câu) + Bài 15 Phần phụ (88 câu) + Bài 18 Tiêu hóa (91 câu).</p>
+            </div>
+            <div class="schedule-stat">340 câu / 70p</div>
+            <div>
+              <button class="btn-sprint-launch" onclick="launchScheduledSprint('s5')">Bắt đầu ➔</button>
+            </div>
+          </div>
+
+          <!-- Sprint 6 -->
+          <div class="schedule-row">
+            <div class="schedule-time">Tối 10.11<br>19h30 - 21h00</div>
+            <div class="schedule-content">
+              <h4>🚀 Sprint 6: Quét Sạch Kho Câu Sai & 3 Đề Chạy Trạm</h4>
+              <p>Xóa sạch toàn bộ câu sai tích lũy và thi thử 3 đề OSCE (40 câu / đề, 45 giây / trạm) chuẩn áp lực phòng thi.</p>
+            </div>
+            <div class="schedule-stat">Kho Sai + 120 câu</div>
+            <div>
+              <button class="btn-sprint-launch" onclick="launchScheduledSprint('s6')">Bắt đầu ➔</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. ARENA ACTIVE VIEW -->
+      <div id="lockin-arena-view" class="lockin-arena-container">
+        <!-- HUD -->
+        <div class="lockin-hud">
+          <div class="hud-timer-box">
+            <div class="hud-timer" id="lockin-hud-timer">10:00</div>
+            <div>
+              <div style="font-size:12px; color:var(--text-muted); font-weight:700;">THỜI GIAN CÒN LẠI</div>
+              <div id="lockin-target-total-time" style="font-size:13px; color:#ffffff; font-weight:800;">Mục tiêu: 10 phút</div>
+            </div>
+          </div>
+
+          <div class="hud-stat">
+            <div class="hud-stat-val" id="lockin-stat-progress">1 / 50</div>
+            <div class="hud-stat-lbl">Tiến Độ Câu</div>
+          </div>
+
+          <div class="hud-streak" id="lockin-stat-streak">
+            🔥 Streak: 0
+          </div>
+
+          <div class="hud-pace ahead" id="lockin-stat-pace">
+            ⚡ 0.0s / câu
+          </div>
+
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button id="btn-lockin-audio-toggle" onclick="toggleLockinAudio()" class="btn-control" style="font-size:12.5px; padding:6px 12px;">
+              🎧 Âm thanh: Bật
+            </button>
+            <button onclick="confirmExitLockin()" class="btn-control" style="font-size:12.5px; padding:6px 12px; border-color:#ef4444; color:#f87171;">
+              🛑 Dừng Lại
+            </button>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="lockin-progress-bar-wrap">
+          <div class="lockin-progress-bar-fill" id="lockin-progress-fill"></div>
+        </div>
+
+        <!-- Question Box -->
+        <div class="desk-station-card" style="box-shadow:none; border-color:rgba(245, 158, 11, 0.3);">
+          <div class="desk-header">
+            <div>
+              <span class="desk-tag" id="lockin-q-chapter">Bài học</span>
+              <span style="font-size:13px; color:var(--text-muted); margin-left:8px;" id="lockin-q-num">Câu 1</span>
+            </div>
+            <span style="font-size:12px; color:var(--text-muted);">Phím tắt: <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> hoặc <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd></span>
+          </div>
+
+          <div class="question-stem" id="lockin-question-stem">
+            Nội dung câu hỏi...
+          </div>
+
+          <div class="options-list" id="lockin-options-list">
+            <!-- options generated by JS -->
+          </div>
         </div>
       </div>
     </section>
@@ -992,7 +1548,8 @@
       const selects = [
         document.getElementById('flash-chapter-filter'),
         document.getElementById('station-chapter-filter'),
-        document.getElementById('cheat-chapter-filter')
+        document.getElementById('cheat-chapter-filter'),
+        document.getElementById('lockin-chapter-select')
       ];
 
       selects.forEach(sel => {
@@ -1022,6 +1579,7 @@
       const btn = Array.from(document.querySelectorAll('.nav-tab')).find(b => b.getAttribute('onclick').includes(tabId));
       if (btn) btn.classList.add('active');
 
+      if (tabId !== 'lockin') { stopLockinFocusAudio(); }
       if (tabId === 'flash') {
         flashIsPlaying = true;
         document.getElementById('btn-flash-play').textContent = '⏸️ Tạm Dừng';
@@ -1505,6 +2063,22 @@
     // KEYBOARD NAVIGATION
     // ==========================================
     function handleKeyNavigation(e) {
+
+      // Lock-In Key handler
+      if (document.getElementById('tab-lockin') && document.getElementById('tab-lockin').classList.contains('active') && lockinActive) {
+        const keyMap = { '1': 0, 'a': 0, '2': 1, 'b': 1, '3': 2, 'c': 2, '4': 3, 'd': 3 };
+        const key = e.key.toLowerCase();
+        if (key in keyMap) {
+          e.preventDefault();
+          onLockinOptionSelect(keyMap[key]);
+        } else if (key === ' ' && lockinAnswerLock) {
+          e.preventDefault();
+          lockinCurrentIdx++;
+          renderLockinCurrentQuestion();
+        }
+        return;
+      }
+
       if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
 
       const activeTab = document.querySelector('.tab-content.active');
@@ -1562,7 +2136,450 @@
       } catch (e) {}
     }
 
+    
+    // ==========================================================
+    // 🔥 CHẾ ĐỘ LOCK-IN JAVASCRIPT LOGIC
+    // ==========================================================
+    let lockinActive = false;
+    let lockinQuestions = [];
+    let lockinCurrentIdx = 0;
+    let lockinTargetCount = 50;
+    let lockinTargetSeconds = 600;
+    let lockinSecondsRemaining = 600;
+    let lockinTimerInterval = null;
+    let lockinStreak = 0;
+    let lockinMaxStreak = 0;
+    let lockinCorrectCount = 0;
+    let lockinStartTime = 0;
+    let lockinModeType = 'interactive'; // 'interactive' or 'flash7s'
+    let lockinAudioType = 'focus'; // 'focus', 'tick', 'none'
+    let lockinFocusTonePlaying = false;
+    let lockinAnswerLock = false;
+
+    // Focus Audio Generator (40Hz Gamma Focus Tone)
+    let lockinAudioNode = null;
+    let lockinGainNode = null;
+
+    function startLockinFocusAudio() {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (lockinAudioNode) stopLockinFocusAudio();
+
+        if (lockinAudioType === 'focus') {
+          // Warm 216Hz tone with gentle 40Hz binaural / focus modulation
+          lockinAudioNode = audioCtx.createOscillator();
+          lockinGainNode = audioCtx.createGain();
+
+          lockinAudioNode.type = 'sine';
+          lockinAudioNode.frequency.setValueAtTime(216, audioCtx.currentTime);
+          lockinGainNode.gain.setValueAtTime(0.035, audioCtx.currentTime); // gentle background
+
+          lockinAudioNode.connect(lockinGainNode);
+          lockinGainNode.connect(audioCtx.destination);
+          lockinAudioNode.start();
+          lockinFocusTonePlaying = true;
+        }
+      } catch (e) {
+        console.warn("Focus audio err:", e);
+      }
+    }
+
+    function stopLockinFocusAudio() {
+      if (lockinAudioNode) {
+        try {
+          lockinAudioNode.stop();
+          lockinAudioNode.disconnect();
+        } catch(e){}
+        lockinAudioNode = null;
+      }
+      lockinFocusTonePlaying = false;
+    }
+
+    function toggleLockinAudio() {
+      const btn = document.getElementById('btn-lockin-audio-toggle');
+      if (lockinFocusTonePlaying) {
+        stopLockinFocusAudio();
+        btn.textContent = '🎧 Âm thanh: Tắt';
+      } else {
+        startLockinFocusAudio();
+        btn.textContent = '🎧 Âm thanh: Bật';
+      }
+    }
+
+    function selectLockinPreset(presetNum, count, minutes, chapter) {
+      document.querySelectorAll('.sprint-card').forEach(c => c.classList.remove('active-preset'));
+      const activeCard = document.getElementById(`preset-card-${presetNum}`);
+      if (activeCard) activeCard.classList.add('active-preset');
+
+      const countInput = document.getElementById('lockin-input-count');
+      const minInput = document.getElementById('lockin-input-minutes');
+      const chapSelect = document.getElementById('lockin-chapter-select');
+
+      if (count === 'chapter') {
+        const selectedChap = chapSelect.value;
+        const chapCount = selectedChap === 'all' ? 100 : ALL_QUESTIONS.filter(q => q.chapter === selectedChap).length;
+        countInput.value = chapCount;
+        minInput.value = Math.max(5, Math.round((chapCount * 10) / 60));
+      } else {
+        countInput.value = count;
+        minInput.value = minutes;
+      }
+    }
+
+    function onLockinChapterChange() {
+      const activeCard = document.querySelector('.sprint-card.active-preset');
+      if (activeCard && activeCard.id === 'preset-card-4') {
+        selectLockinPreset(4, 'chapter', 20, 'auto');
+      }
+    }
+
+    function startLockinFromSetup() {
+      const count = parseInt(document.getElementById('lockin-input-count').value) || 50;
+      const minutes = parseInt(document.getElementById('lockin-input-minutes').value) || 10;
+      const chapter = document.getElementById('lockin-chapter-select').value;
+      const mode = document.getElementById('lockin-mode-select').value;
+      const audio = document.getElementById('lockin-audio-select').value;
+
+      launchLockinSprint(count, minutes, chapter, mode, audio);
+    }
+
+    function launchLockinSprint(count, minutes, chapter, mode, audio) {
+      lockinActive = true;
+      lockinTargetCount = count;
+      lockinTargetSeconds = minutes * 60;
+      lockinSecondsRemaining = lockinTargetSeconds;
+      lockinModeType = mode || 'interactive';
+      lockinAudioType = audio || 'focus';
+      lockinStreak = 0;
+      lockinMaxStreak = 0;
+      lockinCorrectCount = 0;
+      lockinCurrentIdx = 0;
+      lockinStartTime = Date.now();
+      lockinAnswerLock = false;
+
+      // Filter questions pool
+      let pool = ALL_QUESTIONS;
+      if (chapter && chapter !== 'all') {
+        pool = ALL_QUESTIONS.filter(q => q.chapter === chapter);
+      }
+      if (!pool.length) pool = ALL_QUESTIONS;
+
+      // Random sample or slice
+      const shuffled = [...pool].sort(() => 0.5 - Math.random());
+      lockinQuestions = shuffled.slice(0, Math.min(count, shuffled.length));
+      lockinTargetCount = lockinQuestions.length;
+
+      // Switch views
+      document.getElementById('lockin-setup-view').style.display = 'none';
+      document.getElementById('lockin-arena-view').style.display = 'block';
+
+      // Update HUD target time
+      document.getElementById('lockin-target-total-time').textContent = `Mục tiêu: ${minutes} phút`;
+
+      // Start Timer
+      clearInterval(lockinTimerInterval);
+      updateLockinHUDTimerDisplay();
+      lockinTimerInterval = setInterval(updateLockinTimerTick, 1000);
+
+      // Start Focus Tone
+      if (lockinAudioType === 'focus') {
+        startLockinFocusAudio();
+        document.getElementById('btn-lockin-audio-toggle').textContent = '🎧 Âm thanh: Bật';
+      } else {
+        stopLockinFocusAudio();
+        document.getElementById('btn-lockin-audio-toggle').textContent = '🎧 Âm thanh: Tắt';
+      }
+
+      renderLockinCurrentQuestion();
+    }
+
+    function updateLockinHUDTimerDisplay() {
+      const m = Math.floor(lockinSecondsRemaining / 60);
+      const s = lockinSecondsRemaining % 60;
+      const timerEl = document.getElementById('lockin-hud-timer');
+      timerEl.textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+      if (lockinSecondsRemaining <= 180) {
+        timerEl.style.color = '#ef4444';
+        timerEl.style.borderColor = '#ef4444';
+      } else {
+        timerEl.style.color = '#f59e0b';
+        timerEl.style.borderColor = 'rgba(245, 158, 11, 0.4)';
+      }
+    }
+
+    function updateLockinTimerTick() {
+      if (lockinSecondsRemaining > 0) {
+        lockinSecondsRemaining--;
+        updateLockinHUDTimerDisplay();
+
+        if (lockinAudioType === 'tick' && lockinSecondsRemaining % 1 === 0) {
+          playAudioTone(800, 'sine', 0.03);
+        }
+
+        // Update Pace Indicator
+        updateLockinPace();
+      } else {
+        // Time expired
+        clearInterval(lockinTimerInterval);
+        soundStationBell();
+        alert("⏱️ ĐÃ HẾT THỜI GIAN PHIÊN LOCK-IN! Hãy xem kết quả của bạn.");
+        endLockinSprint(false);
+      }
+    }
+
+    function updateLockinPace() {
+      const elapsedSec = Math.max(1, Math.round((Date.now() - lockinStartTime) / 1000));
+      const questionsDone = lockinCurrentIdx;
+      if (questionsDone > 0) {
+        const pace = (elapsedSec / questionsDone).toFixed(1);
+        const targetPace = (lockinTargetSeconds / lockinTargetCount).toFixed(1);
+        const paceEl = document.getElementById('lockin-stat-pace');
+
+        const expectedDone = Math.floor(elapsedSec / (lockinTargetSeconds / lockinTargetCount));
+        const diff = questionsDone - expectedDone;
+
+        if (diff >= 0) {
+          paceEl.className = 'hud-pace ahead';
+          paceEl.innerHTML = `⚡ ${pace}s / câu <span style="font-size:12px;">(🟢 +${diff} câu)</span>`;
+        } else {
+          paceEl.className = 'hud-pace behind';
+          paceEl.innerHTML = `⚡ ${pace}s / câu <span style="font-size:12px;">(🟡 ${diff} câu)</span>`;
+        }
+      }
+    }
+
+    function renderLockinCurrentQuestion() {
+      if (lockinCurrentIdx >= lockinQuestions.length) {
+        endLockinSprint(true);
+        return;
+      }
+
+      lockinAnswerLock = false;
+      const q = lockinQuestions[lockinCurrentIdx];
+
+      // Update HUD
+      document.getElementById('lockin-stat-progress').textContent = `${lockinCurrentIdx + 1} / ${lockinTargetCount}`;
+      const pct = Math.round(((lockinCurrentIdx + 1) / lockinTargetCount) * 100);
+      document.getElementById('lockin-progress-fill').style.width = `${pct}%`;
+      document.getElementById('lockin-stat-streak').innerHTML = `🔥 Streak: ${lockinStreak}`;
+
+      // Chapter & Q Num
+      document.getElementById('lockin-q-chapter').textContent = q.chapter;
+      document.getElementById('lockin-q-num').textContent = `Câu ${lockinCurrentIdx + 1} / ${lockinTargetCount}`;
+
+      // Stem
+      document.getElementById('lockin-question-stem').innerHTML = q.question_html || q.question;
+
+      // Options
+      const list = document.getElementById('lockin-options-list');
+      list.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.id = `lockin-opt-${idx}`;
+        const cleanOpt = opt.replace(/^[a-e]\.\s*/i, '');
+        btn.innerHTML = `
+          <div>
+            <span class="opt-key">${letters[idx]}</span>
+            <span>${cleanOpt}</span>
+          </div>
+        `;
+        btn.onclick = () => onLockinOptionSelect(idx);
+        list.appendChild(btn);
+      });
+    }
+
+    function onLockinOptionSelect(chosenIdx) {
+      if (lockinAnswerLock) return;
+      lockinAnswerLock = true;
+
+      const q = lockinQuestions[lockinCurrentIdx];
+      const isCorrect = chosenIdx === q.correct_idx;
+      const chosenBtn = document.getElementById(`lockin-opt-${chosenIdx}`);
+      const correctBtn = document.getElementById(`lockin-opt-${q.correct_idx}`);
+
+      if (isCorrect) {
+        lockinStreak++;
+        if (lockinStreak > lockinMaxStreak) lockinMaxStreak = lockinStreak;
+        lockinCorrectCount++;
+        soundChimeSoft();
+
+        if (chosenBtn) {
+          chosenBtn.classList.add('selected-correct');
+          chosenBtn.style.borderColor = '#10b981';
+          chosenBtn.style.background = 'rgba(16, 185, 129, 0.15)';
+        }
+
+        // Add to mastered
+        if (!PROGRESS.mastered_questions.includes(q.id)) {
+          PROGRESS.mastered_questions.push(q.id);
+        }
+      } else {
+        lockinStreak = 0;
+        soundWarningBeep();
+
+        if (chosenBtn) {
+          chosenBtn.classList.add('selected-wrong');
+          chosenBtn.style.borderColor = '#ef4444';
+          chosenBtn.style.background = 'rgba(239, 68, 68, 0.15)';
+        }
+
+        // Highlight correct option with paired yellow keyword
+        if (correctBtn && q.options_html && q.options_html[q.correct_idx]) {
+          const letters = ['A', 'B', 'C', 'D', 'E'];
+          correctBtn.style.borderColor = '#10b981';
+          correctBtn.style.background = 'rgba(16, 185, 129, 0.1)';
+          correctBtn.innerHTML = `
+            <div>
+              <span class="opt-key" style="background:#10b981; color:#fff;">${letters[q.correct_idx]}</span>
+              <span>${q.options_html[q.correct_idx].replace(/^[a-e]\.\s*/i, '')}</span>
+            </div>
+          `;
+        }
+
+        // Add to wrong bank
+        if (!PROGRESS.wrong_questions.includes(q.id)) {
+          PROGRESS.wrong_questions.push(q.id);
+        }
+      }
+
+      document.getElementById('lockin-stat-streak').innerHTML = `🔥 Streak: ${lockinStreak}`;
+      saveProgress();
+      updateGlobalStats();
+
+      // Auto advance
+      setTimeout(() => {
+        lockinCurrentIdx++;
+        renderLockinCurrentQuestion();
+      }, 1000);
+    }
+
+    function endLockinSprint(isCompleted) {
+      lockinActive = false;
+      clearInterval(lockinTimerInterval);
+      stopLockinFocusAudio();
+
+      const elapsedSec = Math.max(1, Math.round((Date.now() - lockinStartTime) / 1000));
+      const m = Math.floor(elapsedSec / 60);
+      const s = elapsedSec % 60;
+      const timeStr = `${m}m ${s.toString().padStart(2, '0')}s`;
+
+      const questionsDone = lockinCurrentIdx;
+      const pace = questionsDone > 0 ? (elapsedSec / questionsDone).toFixed(1) + 's / câu' : '--';
+      const acc = questionsDone > 0 ? Math.round((lockinCorrectCount / questionsDone) * 100) + '%' : '0%';
+
+      document.getElementById('victory-stat-count').textContent = `${questionsDone} / ${lockinTargetCount}`;
+      document.getElementById('victory-stat-time').textContent = timeStr;
+      document.getElementById('victory-stat-pace').textContent = pace;
+      document.getElementById('victory-stat-acc').textContent = acc;
+
+      const subEl = document.getElementById('lockin-victory-subtitle');
+      if (isCompleted) {
+        subEl.textContent = `Tuyệt vời! Bạn đã hoàn thành 100% mục tiêu ${lockinTargetCount} câu trong ${timeStr} với chuỗi Streak cao nhất: ${lockinMaxStreak} câu liên tiếp!`;
+        soundStationBell();
+      } else {
+        subEl.textContent = `Phiên Lock-In tạm dừng: Bạn đã vượt qua ${questionsDone} câu với độ chính xác ${acc}. Hãy nghỉ ngơi và sẵn sàng cho phiên tiếp theo!`;
+      }
+
+      document.getElementById('lockin-victory-overlay').style.display = 'flex';
+    }
+
+    function closeVictoryModal() {
+      document.getElementById('lockin-victory-overlay').style.display = 'none';
+    }
+
+    function closeVictoryAndSetupNext() {
+      closeVictoryModal();
+      document.getElementById('lockin-arena-view').style.display = 'none';
+      document.getElementById('lockin-setup-view').style.display = 'block';
+    }
+
+    function start5MinBreak() {
+      closeVictoryModal();
+      alert("☕ GIẢI LAO 5 PHÚT! Hãy đứng dậy uống nước, vươn vai, rời mắt khỏi màn hình để nạp lại năng lượng não bộ!");
+      document.getElementById('lockin-arena-view').style.display = 'none';
+      document.getElementById('lockin-setup-view').style.display = 'block';
+    }
+
+    function confirmExitLockin() {
+      const remaining = lockinTargetCount - lockinCurrentIdx;
+      if (confirm(`⚠️ BẠN ĐANG TRONG PHIÊN LOCK-IN!
+Chỉ còn ${remaining} câu nữa là cán đích. Bạn có chắc muốn dừng lại giữa chừng không?`)) {
+        endLockinSprint(false);
+      }
+    }
+
+    // 6 Scheduled Sprints from the roadmap table
+    function launchScheduledSprint(sprintId) {
+      switchTab('lockin');
+      if (sprintId === 's1') {
+        // Bai 1, 2, 3 (288 questions, 50 min)
+        launchLockinSprint(288, 50, 'all', 'interactive', 'focus');
+      } else if (sprintId === 's2') {
+        // Bai 4, 5, 6 (229 questions, 50 min)
+        launchLockinSprint(229, 50, 'all', 'interactive', 'focus');
+      } else if (sprintId === 's3') {
+        // Bai 7, 8, 9 (216 questions, 50 min)
+        launchLockinSprint(216, 50, 'all', 'interactive', 'focus');
+      } else if (sprintId === 's4') {
+        // Bai 10, 11, 12 (214 questions, 45 min)
+        launchLockinSprint(214, 45, 'all', 'interactive', 'focus');
+      } else if (sprintId === 's5') {
+        // Bai 13, 14, 15, 18 (340 questions, 70 min)
+        launchLockinSprint(340, 70, 'all', 'interactive', 'focus');
+      } else if (sprintId === 's6') {
+        // Kho cau sai + test
+        launchLockinSprint(100, 25, 'all', 'interactive', 'focus');
+      }
+    }
+
     window.onload = init;
   </script>
+
+  <!-- Modal Lock-in Victory -->
+  <div id="lockin-victory-overlay" class="lockin-victory-overlay">
+    <div class="lockin-victory-box">
+      <div style="font-size:48px; margin-bottom:12px;">🏆</div>
+      <h2 style="font-size:24px; font-weight:900; color:#10b981; margin-bottom:6px;">XUẤT SẮC! HOÀN THÀNH MỤC TIÊU!</h2>
+      <p style="font-size:14.5px; color:var(--text-muted); margin-bottom:20px;" id="lockin-victory-subtitle">
+        Bạn vừa hoàn thành xuất sắc phiên Lock-In tập trung tuyệt đối.
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; text-align:left;">
+        <div style="background:#080c14; padding:12px 16px; border-radius:10px; border:1px solid var(--border);">
+          <div style="font-size:11.5px; color:var(--text-muted);">TỔNG SỐ CÂU</div>
+          <div style="font-size:20px; font-weight:800; color:#ffffff;" id="victory-stat-count">50 / 50</div>
+        </div>
+        <div style="background:#080c14; padding:12px 16px; border-radius:10px; border:1px solid var(--border);">
+          <div style="font-size:11.5px; color:var(--text-muted);">THỜI GIAN SỬ DỤNG</div>
+          <div style="font-size:20px; font-weight:800; color:#60a5fa;" id="victory-stat-time">08m 12s</div>
+        </div>
+        <div style="background:#080c14; padding:12px 16px; border-radius:10px; border:1px solid var(--border);">
+          <div style="font-size:11.5px; color:var(--text-muted);">TỐC ĐỘ TRUNG BÌNH</div>
+          <div style="font-size:20px; font-weight:800; color:#fbbf24;" id="victory-stat-pace">9.8s / câu</div>
+        </div>
+        <div style="background:#080c14; padding:12px 16px; border-radius:10px; border:1px solid var(--border);">
+          <div style="font-size:11.5px; color:var(--text-muted);">ĐỘ CHÍNH XÁC</div>
+          <div style="font-size:20px; font-weight:800; color:#34d399;" id="victory-stat-acc">94%</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <button onclick="closeVictoryAndSetupNext()" class="btn-control" style="background:linear-gradient(135deg, #10b981, #059669); color:#ffffff; font-weight:800; border:none; padding:10px 20px;">
+          🚀 Tiếp Tục Sprint Mới
+        </button>
+        <button onclick="start5MinBreak()" class="btn-control" style="background:#1f2937; color:#fbbf24; border-color:#f59e0b; font-weight:700;">
+          ☕ Nghỉ 5 Phút
+        </button>
+        <button onclick="switchTab('wrong'); closeVictoryModal();" class="btn-control">
+          ❌ Xem Câu Sai
+        </button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
