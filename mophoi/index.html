@@ -1375,6 +1375,142 @@
       }
     }
 
+  
+    /* ========================================================== */
+    /* 📊 DẠNG CÂU HỎI (QUESTION ARCHETYPES) STYLING              */
+    /* ========================================================== */
+    .archetypes-banner-card {
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid #1e293b;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-top: 10px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .arch-banner-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .arch-banner-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    .arch-banner-count-badge {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 2px 9px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+    }
+
+    .arch-chips-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .arch-chip {
+      background: #0b1120;
+      border: 1.5px solid #334155;
+      color: #cbd5e1;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+    }
+
+    .arch-chip:hover {
+      background: #1e293b;
+      border-color: #38bdf8;
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(56, 189, 248, 0.25);
+    }
+
+    .arch-chip.active {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.4), rgba(13, 148, 136, 0.4));
+      border-color: #38bdf8;
+      color: #38bdf8;
+      font-weight: 800;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
+    }
+
+    .arch-chip-count {
+      background: rgba(255, 255, 255, 0.09);
+      border-radius: 10px;
+      padding: 1px 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    .arch-chip.active .arch-chip-count {
+      background: rgba(56, 189, 248, 0.3);
+      color: #e0f2fe;
+    }
+
+    .arch-desc-box {
+      background: rgba(2, 132, 199, 0.1);
+      border-left: 3px solid #38bdf8;
+      padding: 6px 12px;
+      border-radius: 0 6px 6px 0;
+      font-size: 12px;
+      color: #93c5fd;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .arch-badge {
+      font-size: 12px;
+      font-weight: 700;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 3px 10px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      max-width: 320px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 0.2s;
+    }
+
+    .arch-badge:hover {
+      background: rgba(56, 189, 248, 0.22);
+      border-color: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+    }
+    
   </style>
 </head>
 
@@ -1427,7 +1563,20 @@
         <!-- Control Bar -->
         <div class="station-control-bar">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-            <select id="flash-chapter-filter" class="filter-select" onchange="filterFlashQuestions()">
+            <select id="flash-chapter-filter" class="filter-select" onchange="onFlashChapterFilterChange()">
+              <option value="all">Tất cả 16 bài học (1.287 câu)</option>
+            </select>
+
+            <!-- Bộ Lọc Dạng Câu Hỏi Trọng Tâm -->
+            <select id="flash-type-filter" class="filter-select" onchange="onFlashTypeFilterChange(this.value)" style="border-color:#0284c7; max-width:260px;" title="Lọc các câu hỏi cùng dạng">
+              <option value="all">⚡ Tất cả các dạng câu</option>
+            </select>
+
+            <!-- Sắp Xếp: Gom Nhóm Dạng Câu Hỏi vs Đề Gốc -->
+            <select id="flash-sort-select" class="filter-select" onchange="onFlashSortChange(this.value)" style="border-color:#a855f7;" title="Chế độ sắp xếp câu hỏi">
+              <option value="archetype" selected>🔀 Sắp xếp: Gom nhóm dạng câu (Chuẩn học)</option>
+              <option value="orig_num">🔢 Sắp xếp: Theo số câu gốc (#1 → #N)</option>
+            </select>
               <option value="all">Tất cả 16 bài học (1.287 câu)</option>
             </select>
 
@@ -1478,6 +1627,12 @@
           <div class="flash-progress-track">
             <div id="flash-progress-bar" class="flash-progress-fill" style="width: 100%;"></div>
           </div>
+        </div>
+
+        
+        <!-- 📊 BẢNG BÁO CÁO CÁC DẠNG CÂU HỎI TRONG BÀI & BỘ LỌC TƯƠNG TÁC -->
+        <div id="flash-archetypes-banner" class="archetypes-banner-card">
+          <!-- Rendered by updateFlashArchetypesUI() -->
         </div>
 
         <!-- ✏️ THANH CÔNG CỤ BÚT VẼ & NOTE BẢNG VẼ ĐIỆN TỬ -->
@@ -1552,6 +1707,7 @@
                   </div>
                   <div style="display:flex; gap:8px; align-items:center;">
                     <span class="chapter-tag" id="flash-card-chapter">BÀI HỌC</span>
+                    <span class="arch-badge" id="flash-card-arch-badge" style="display:none;" title="Dạng câu hỏi trọng tâm"></span>
                     <span style="font-size:13px; color:var(--accent); font-weight:700;" id="flash-card-orig-num">#Gốc: 1</span>
                   </div>
                 </div>
@@ -1928,7 +2084,17 @@
       <div class="station-exam-container">
         <div class="station-control-bar">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-            <select id="station-chapter-filter" class="filter-select" onchange="filterStationMode()">
+            <select id="station-chapter-filter" class="filter-select" onchange="onStationChapterFilterChange()">
+              <option value="all">Tất cả 16 bài học (1.287 câu)</option>
+            </select>
+            <select id="station-type-filter" class="filter-select" onchange="onStationTypeFilterChange(this.value)" style="border-color:#10b981; max-width:240px;" title="Lọc dạng câu hỏi trạm">
+              <option value="all">⚡ Tất cả dạng câu</option>
+            </select>
+            <select id="station-sort-select" class="filter-select" onchange="onStationSortChange(this.value)" style="border-color:#06b6d4;" title="Cách sắp xếp trạm thi">
+              <option value="random" selected>🎲 Thứ tự: Ngẫu nhiên (Mô phỏng thi)</option>
+              <option value="archetype">🔀 Thứ tự: Gom nhóm theo dạng câu</option>
+              <option value="orig_num">🔢 Thứ tự: Theo số câu gốc</option>
+            </select>
               <option value="all">Tất cả 16 bài học (1.287 câu)</option>
             </select>
             <select id="station-count-select" class="filter-select" onchange="filterStationMode()">
@@ -1984,6 +2150,7 @@
             </div>
             <div style="display:flex; gap:8px; align-items:center;">
               <span class="chapter-tag" id="desk-chapter-tag">BÀI 1. BÀI MỞ ĐẦU</span>
+              <span class="arch-badge" id="desk-arch-badge" style="display:none;" title="Dạng câu hỏi trạm"></span>
               <button class="btn btn-secondary btn-sm" id="btn-star-station"
                 onclick="toggleStarCurrentStation()">⭐</button>
             </div>
@@ -3077,9 +3244,217 @@
     // ==========================================================
     // ⚡ TAB 1: FLASH TRẮC NGHIỆM 7S ANIMATION MORPH LOGIC
     // ==========================================================
+    
+    // ==========================================================
+    // 📊 DẠNG CÂU HỎI (QUESTION ARCHETYPES): BÁO CÁO, LỌC & GOM NHÓM
+    // ==========================================================
+    let selectedFlashType = 'all';
+    let flashSortMode = 'archetype'; // 'archetype' (gom nhóm) or 'orig_num' (thứ tự đề gốc)
+
+    let selectedStationType = 'all';
+    let stationSortMode = 'random'; // 'random', 'archetype', 'orig_num'
+
+    function getArchetypesForChapter(chapterName) {
+      let pool = ALL_QUESTIONS;
+      if (chapterName === '__WRONG_ONLY__') {
+        const wrongIds = PROGRESS.wrong_questions || [];
+        pool = ALL_QUESTIONS.filter(q => wrongIds.includes(q.id));
+      } else if (chapterName && chapterName !== 'all') {
+        pool = ALL_QUESTIONS.filter(q => q.chapter === chapterName);
+      }
+
+      const map = new Map();
+      pool.forEach(q => {
+        const tid = q.type_id || 'other';
+        if (!map.has(tid)) {
+          map.set(tid, {
+            id: tid,
+            name: q.type_name || 'Khác',
+            rank: q.type_rank !== undefined ? q.type_rank : 50,
+            desc: q.type_desc || '',
+            count: 0
+          });
+        }
+        map.get(tid).count++;
+      });
+
+      return Array.from(map.values()).sort((a, b) => a.rank - b.rank);
+    }
+
+    function updateFlashArchetypesUI(ch) {
+      const archetypes = getArchetypesForChapter(ch);
+      const typeSelect = document.getElementById('flash-type-filter');
+      const banner = document.getElementById('flash-archetypes-banner');
+      if (!banner) return;
+
+      // 1. Update Dropdown
+      if (typeSelect) {
+        typeSelect.innerHTML = '';
+        const allOpt = document.createElement('option');
+        allOpt.value = 'all';
+        
+        let totalInChapter = 0;
+        if (ch === '__WRONG_ONLY__') {
+          totalInChapter = (PROGRESS.wrong_questions || []).length;
+          allOpt.textContent = `⚡ Tất cả các dạng câu sai (${totalInChapter} câu)`;
+        } else if (ch !== 'all') {
+          totalInChapter = ALL_QUESTIONS.filter(q => q.chapter === ch).length;
+          allOpt.textContent = `⚡ Tất cả các dạng (${totalInChapter} câu)`;
+        } else {
+          totalInChapter = ALL_QUESTIONS.length;
+          allOpt.textContent = `⚡ Tất cả 16 bài & dạng câu (${totalInChapter} câu)`;
+        }
+        typeSelect.appendChild(allOpt);
+
+        archetypes.forEach(arc => {
+          const opt = document.createElement('option');
+          opt.value = arc.id;
+          opt.textContent = `${arc.name} (${arc.count} câu)`;
+          typeSelect.appendChild(opt);
+        });
+
+        if (archetypes.some(a => a.id === selectedFlashType)) {
+          typeSelect.value = selectedFlashType;
+        } else {
+          selectedFlashType = 'all';
+          typeSelect.value = 'all';
+        }
+      }
+
+      // 2. Render Banner
+      let chapterTitle = 'TẤT CẢ 16 BÀI HỌC';
+      if (ch === '__WRONG_ONLY__') {
+        chapterTitle = 'KHO CÂU HAY SAI';
+      } else if (ch !== 'all') {
+        chapterTitle = ch.toUpperCase();
+      }
+
+      const isAll = (selectedFlashType === 'all');
+      const activeArc = archetypes.find(a => a.id === selectedFlashType);
+      const totalQuestionsCount = archetypes.reduce((acc, cur) => acc + cur.count, 0);
+
+      let bannerHtml = `
+        <div class="arch-banner-header">
+          <div class="arch-banner-title">
+            <span>📊</span>
+            <span><b>${chapterTitle}</b>: Báo cáo <span class="arch-banner-count-badge">${archetypes.length} Dạng Câu Hỏi</span></span>
+          </div>
+          <div style="font-size:12.5px; display:flex; align-items:center; gap:8px;">
+            <span style="color:var(--text-muted);">Trạng thái lọc:</span>
+            <span style="font-weight:700; color:${isAll ? '#38bdf8' : '#facc15'};">
+              ${isAll ? 'Đang học toàn bộ' : (activeArc ? activeArc.name : selectedFlashType)}
+            </span>
+            ${!isAll ? `<button class="btn btn-secondary btn-sm" onclick="setFlashArchetypeFilter('all')" style="padding:2px 8px; font-size:11px; border-radius:6px; cursor:pointer;" title="Bỏ lọc dạng câu để xem toàn bộ bài">✕ Bỏ Lọc</button>` : ''}
+          </div>
+        </div>
+
+        <div class="arch-chips-grid">
+          <button class="arch-chip ${isAll ? 'active' : ''}" onclick="setFlashArchetypeFilter('all')" title="Xem toàn bộ các câu trong bài">
+            <span>🏷️</span>
+            <span>Tất cả các dạng</span>
+            <span class="arch-chip-count">${totalQuestionsCount}</span>
+          </button>
+      `;
+
+      archetypes.forEach(arc => {
+        const isActive = (selectedFlashType === arc.id);
+        bannerHtml += `
+          <button class="arch-chip ${isActive ? 'active' : ''}" onclick="setFlashArchetypeFilter('${arc.id}')" title="${arc.desc ? (arc.desc + ' - ') : ''}Click để chỉ lọc và làm dạng câu hỏi này">
+            <span>${arc.name}</span>
+            <span class="arch-chip-count">${arc.count} câu</span>
+          </button>
+        `;
+      });
+
+      bannerHtml += `</div>`;
+
+      if (!isAll && activeArc && activeArc.desc) {
+        bannerHtml += `
+          <div class="arch-desc-box">
+            <span>💡</span>
+            <span><b>Trọng tâm ôn luyện dạng này:</b> ${activeArc.desc}</span>
+          </div>
+        `;
+      }
+
+      banner.innerHTML = bannerHtml;
+    }
+
+    function setFlashArchetypeFilter(typeId) {
+      selectedFlashType = typeId;
+      const typeSelect = document.getElementById('flash-type-filter');
+      if (typeSelect) typeSelect.value = typeId;
+      filterFlashQuestions();
+    }
+
+    function onFlashTypeFilterChange(val) {
+      selectedFlashType = val;
+      filterFlashQuestions();
+    }
+
+    function onFlashSortChange(val) {
+      flashSortMode = val;
+      filterFlashQuestions();
+    }
+
+    function onFlashChapterFilterChange() {
+      selectedFlashType = 'all';
+      filterFlashQuestions();
+    }
+
+    function onStationChapterFilterChange() {
+      selectedStationType = 'all';
+      updateStationArchetypesDropdown();
+      filterStationMode();
+    }
+
+    function updateStationArchetypesDropdown() {
+      const ch = document.getElementById('station-chapter-filter').value;
+      const typeSelect = document.getElementById('station-type-filter');
+      if (!typeSelect) return;
+
+      const archetypes = getArchetypesForChapter(ch);
+      typeSelect.innerHTML = '';
+      const allOpt = document.createElement('option');
+      allOpt.value = 'all';
+      allOpt.textContent = `⚡ Tất cả dạng câu (${archetypes.reduce((acc, c) => acc + c.count, 0)} câu)`;
+      typeSelect.appendChild(allOpt);
+
+      archetypes.forEach(arc => {
+        const opt = document.createElement('option');
+        opt.value = arc.id;
+        opt.textContent = `${arc.name} (${arc.count} câu)`;
+        typeSelect.appendChild(opt);
+      });
+
+      if (archetypes.some(a => a.id === selectedStationType)) {
+        typeSelect.value = selectedStationType;
+      } else {
+        selectedStationType = 'all';
+        typeSelect.value = 'all';
+      }
+    }
+
+    function onStationTypeFilterChange(val) {
+      selectedStationType = val;
+      filterStationMode();
+    }
+
+    function onStationSortChange(val) {
+      stationSortMode = val;
+      filterStationMode();
+    }
+    
+
+    // Upgraded filterFlashQuestions with Archetype filtering & Logical Grouping
     function filterFlashQuestions() {
       const ch = document.getElementById('flash-chapter-filter').value;
-      flashList = ALL_QUESTIONS.filter(q => {
+      
+      // Update Banner & Archetypes dropdown
+      updateFlashArchetypesUI(ch);
+
+      // 1. Filter by Chapter
+      let pool = ALL_QUESTIONS.filter(q => {
         if (ch === '__WRONG_ONLY__') {
           return (PROGRESS.wrong_questions || []).includes(q.id);
         }
@@ -3087,6 +3462,33 @@
         return true;
       });
 
+      // 2. Filter by Archetype (if active)
+      if (selectedFlashType && selectedFlashType !== 'all') {
+        pool = pool.filter(q => q.type_id === selectedFlashType);
+      }
+
+      // 3. Sorting: Group by Archetype rank or Original question number
+      const sortSelect = document.getElementById('flash-sort-select');
+      if (sortSelect) flashSortMode = sortSelect.value;
+
+      if (flashSortMode === 'archetype') {
+        pool.sort((a, b) => {
+          const rankA = a.type_rank !== undefined ? a.type_rank : 50;
+          const rankB = b.type_rank !== undefined ? b.type_rank : 50;
+          if (rankA !== rankB) return rankA - rankB;
+          const numA = a.orig_num !== undefined ? a.orig_num : a.id;
+          const numB = b.orig_num !== undefined ? b.orig_num : b.id;
+          return numA - numB;
+        });
+      } else {
+        pool.sort((a, b) => {
+          const numA = a.orig_num !== undefined ? a.orig_num : a.id;
+          const numB = b.orig_num !== undefined ? b.orig_num : b.id;
+          return numA - numB;
+        });
+      }
+
+      flashList = pool;
       currentFlashIdx = 0;
       loadFlashQuestionCard();
     }
@@ -3215,6 +3617,22 @@
       document.getElementById('flash-card-station-num').textContent = `CÂU ${currentFlashIdx + 1} / ${flashList.length}`;
       document.getElementById('flash-card-chapter').textContent = q.chapter;
       document.getElementById('flash-card-orig-num').textContent = `#Gốc: ${q.orig_num}`;
+
+      // Update Archetype Badge on Card
+      const archBadge = document.getElementById('flash-card-arch-badge');
+      if (archBadge) {
+        if (q.type_name) {
+          archBadge.textContent = q.type_name;
+          archBadge.title = (q.type_desc ? (q.type_desc + ' - ') : '') + 'Click để chỉ luyện dạng câu hỏi này!';
+          archBadge.style.display = 'inline-flex';
+          archBadge.style.cursor = 'pointer';
+          archBadge.onclick = () => {
+            if (q.type_id) setFlashArchetypeFilter(q.type_id);
+          };
+        } else {
+          archBadge.style.display = 'none';
+        }
+      }
 
       // Synchronize jump input
       const jumpInput = document.getElementById('flash-jump-input');
@@ -3392,6 +3810,8 @@
     function filterStationMode() {
       const ch = document.getElementById('station-chapter-filter').value;
       const countVal = document.getElementById('station-count-select').value;
+      const sortSelect = document.getElementById('station-sort-select');
+      if (sortSelect) stationSortMode = sortSelect.value;
 
       let pool = ALL_QUESTIONS.filter(q => {
         if (ch === '__WRONG_ONLY__') {
@@ -3401,9 +3821,27 @@
         return true;
       });
 
+      if (selectedStationType && selectedStationType !== 'all') {
+        pool = pool.filter(q => q.type_id === selectedStationType);
+      }
+
+      if (stationSortMode === 'archetype') {
+        pool.sort((a, b) => {
+          const rankA = a.type_rank !== undefined ? a.type_rank : 50;
+          const rankB = b.type_rank !== undefined ? b.type_rank : 50;
+          if (rankA !== rankB) return rankA - rankB;
+          return (a.orig_num || a.id) - (b.orig_num || b.id);
+        });
+      } else if (stationSortMode === 'orig_num') {
+        pool.sort((a, b) => (a.orig_num || a.id) - (b.orig_num || b.id));
+      } else {
+        // random
+        pool = [...pool].sort(() => Math.random() - 0.5);
+      }
+
       if (countVal !== 'all') {
         const limit = parseInt(countVal);
-        pool = [...pool].sort(() => Math.random() - 0.5).slice(0, limit);
+        pool = pool.slice(0, limit);
       }
 
       stationExamList = pool;
@@ -3418,6 +3856,17 @@
 
       document.getElementById('desk-station-number').textContent = `TRẠM SỐ ${currentStationIdx + 1} / ${stationExamList.length}`;
       document.getElementById('desk-chapter-tag').textContent = q.chapter;
+
+      const stationArchBadge = document.getElementById('desk-arch-badge');
+      if (stationArchBadge) {
+        if (q.type_name) {
+          stationArchBadge.textContent = q.type_name;
+          stationArchBadge.title = q.type_desc || q.type_name;
+          stationArchBadge.style.display = 'inline-flex';
+        } else {
+          stationArchBadge.style.display = 'none';
+        }
+      }
       document.getElementById('desk-question-prompt').innerHTML = q.question_html || q.question;
 
       // Synchronize station jump input
