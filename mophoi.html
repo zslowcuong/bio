@@ -1248,6 +1248,133 @@
       }
     }
 
+  
+    /* ========================================================== */
+    /* 📓 DEDICATED SIDE-BY-SIDE NOTE STUDIO & INK SCRIBBLE       */
+    /* ========================================================== */
+    .station-exam-container.wide-mode {
+      max-width: 1560px !important;
+      transition: max-width 0.3s ease;
+    }
+
+    .study-split-layout {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+      align-items: stretch;
+      margin-top: 10px;
+    }
+
+    .study-card-col {
+      flex: 1.15;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .study-note-col {
+      flex: 0.85;
+      min-width: 380px;
+      background: #090e17;
+      border: 1.5px solid #1e293b;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.45);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .note-studio-header {
+      background: #0d1527;
+      border-bottom: 1.5px solid #1e293b;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .note-studio-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .note-studio-toolbar {
+      background: #080c14;
+      border-bottom: 1px solid #1e293b;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      user-select: none;
+    }
+
+    .note-canvas-body {
+      flex: 1;
+      min-height: 460px;
+      position: relative;
+      background-color: #050811;
+      touch-action: none;
+      cursor: crosshair;
+      overflow: hidden;
+    }
+
+    /* Paper background styles */
+    .note-canvas-body.paper-grid {
+      background-size: 24px 24px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    }
+    .note-canvas-body.paper-lined {
+      background-size: 100% 28px;
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    }
+    .note-canvas-body.paper-blank {
+      background-image: none;
+    }
+
+    .note-canvas-element {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+
+    .note-status-saved {
+      font-size: 11px;
+      color: #34d399;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .note-status-saved.visible {
+      opacity: 1;
+    }
+
+    @media (max-width: 1024px) {
+      .study-split-layout {
+        flex-direction: column;
+      }
+      .study-note-col {
+        min-height: 480px;
+      }
+    }
+
   </style>
 </head>
 
@@ -1356,6 +1483,9 @@
         <!-- ✏️ THANH CÔNG CỤ BÚT VẼ & NOTE BẢNG VẼ ĐIỆN TỬ -->
         <div class="drawing-toolbar-wrap" id="flash-drawing-toolbar">
           <div class="drawing-tools-group">
+            <button id="btn-toggle-side-note" class="draw-btn active" onclick="toggleSideNotePanel()" title="Mở/Đóng sổ ghi chú bên phải (Phím N)" style="background:linear-gradient(135deg, #0284c7, #0d9488); color:#fff; border:none; padding:6px 14px; font-size:12.5px; border-radius:8px; font-weight:800; display:inline-flex; align-items:center; gap:6px; box-shadow:0 0 12px rgba(2,132,199,0.35); cursor:pointer;">
+              <span>📓</span> <span id="side-note-btn-text">Sổ Note Bên Phải (N)</span>
+            </button>
             <button class="draw-btn" id="btn-draw-toggle" onclick="toggleDrawingMode('flash')" title="Bật/Tắt bút vẽ (Phím W)">
               <span>✏️</span> <span id="draw-toggle-text">Bật Bút Vẽ Note (W)</span>
             </button>
@@ -1407,57 +1537,106 @@
           </div>
         </div>
 
-        <!-- Flash Morph Card Viewport -->
-        <div class="flash-morph-wrapper" style="width:100%; position:relative;">
-          <div class="desk-card flash-morph-card" id="flash-card" style="width:100%; position:relative; box-sizing:border-box;">
-            <!-- HTML5 Canvas Overlay for stylus drawing -->
-            <canvas id="flash-drawing-canvas" class="drawing-canvas-overlay"></canvas>
+        <!-- BỐ CỤC CHIA ĐÔI: CÂU HỎI BÊN TRÁI - SỔ NOTE INK SCRIBBLE BÊN PHẢI -->
+        <div class="study-split-layout" id="flash-study-split">
+          <!-- Cột Trái: Thẻ Câu Hỏi -->
+          <div class="study-card-col">
+            <div class="flash-morph-wrapper" style="width:100%; position:relative;">
+              <div class="desk-card flash-morph-card" id="flash-card" style="width:100%; position:relative; box-sizing:border-box;">
+                <!-- HTML5 Canvas Overlay for direct stylus underline/circling -->
+                <canvas id="flash-drawing-canvas" class="drawing-canvas-overlay"></canvas>
 
-            <div class="desk-header">
-              <div class="station-badge-large">
-                <span>⚡</span> <span id="flash-card-station-num">CÂU SỐ 1</span>
-              </div>
-              <div style="display:flex; gap:8px; align-items:center;">
-                <span class="chapter-tag" id="flash-card-chapter">BÀI HỌC</span>
-                <span style="font-size:13px; color:var(--accent); font-weight:700;" id="flash-card-orig-num">#Gốc: 1</span>
-              </div>
-            </div>
+                <div class="desk-header">
+                  <div class="station-badge-large">
+                    <span>⚡</span> <span id="flash-card-station-num">CÂU SỐ 1</span>
+                  </div>
+                  <div style="display:flex; gap:8px; align-items:center;">
+                    <span class="chapter-tag" id="flash-card-chapter">BÀI HỌC</span>
+                    <span style="font-size:13px; color:var(--accent); font-weight:700;" id="flash-card-orig-num">#Gốc: 1</span>
+                  </div>
+                </div>
 
-            <!-- Câu hỏi có từ khóa tô vàng -->
-            <div class="question-prompt" id="flash-question-prompt">
-              Đang nạp câu hỏi...
-            </div>
+                <!-- Câu hỏi có từ khóa tô vàng -->
+                <div class="question-prompt" id="flash-question-prompt">
+                  Đang nạp câu hỏi...
+                </div>
 
-            <!-- 4 Đáp án A, B, C, D (sau 7s đáp án đúng sẽ bung ánh sáng xanh + tô vàng) -->
-            <div class="options-list" id="flash-options-list">
-              <!-- Rendered by JS -->
-            </div>
+                <!-- 4 Đáp án A, B, C, D -->
+                <div class="options-list" id="flash-options-list">
+                  <!-- Rendered by JS -->
+                </div>
 
-            <!-- Hint footer -->
-            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:14px; font-size:13px; color:var(--text-muted); flex-wrap:wrap; gap:10px;">
-              <div>Mẹo: Bạn có thể click trực tiếp vào đáp án để kiểm tra ngay mà không cần đợi hết 7s!</div>
-              <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-                <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(-10)" title="Lùi 10 câu">-10</button>
-                <button class="btn btn-secondary btn-sm" onclick="prevFlashQ()">◀ Câu trước (←)</button>
-                <button class="btn btn-primary btn-sm" onclick="nextFlashQ()">Bỏ qua sang câu sau (→) ▶</button>
-                <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(10)" title="Tiến 10 câu">+10</button>
-                <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(50)" title="Tiến 50 câu">+50 ⏩</button>
+                <!-- Hint footer -->
+                <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:14px; font-size:13px; color:var(--text-muted); flex-wrap:wrap; gap:10px;">
+                  <div>Mẹo: Bạn có thể click trực tiếp vào đáp án để kiểm tra ngay mà không cần đợi hết 7s!</div>
+                  <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                    <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(-10)" title="Lùi 10 câu">-10</button>
+                    <button class="btn btn-secondary btn-sm" onclick="prevFlashQ()">◀ Câu trước (←)</button>
+                    <button class="btn btn-primary btn-sm" onclick="nextFlashQ()">Bỏ qua sang câu sau (→) ▶</button>
+                    <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(10)" title="Tiến 10 câu">+10</button>
+                    <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(50)" title="Tiến 50 câu">+50 ⏩</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Bảng Nháp Kẻ Ô Mở Rộng Bên Dưới (Scratchpad) -->
-        <div class="flash-scratchpad-panel" id="flash-scratchpad" style="display:none; width:100%; margin-top:14px;">
-          <div class="scratchpad-header">
-            <span>📐 BẢNG NHÁP ĐIỆN TỬ (VẼ TỰ DO / SƠ ĐỒ / GHI CHÚ)</span>
-            <div style="display:flex; gap:6px;">
-              <button class="draw-btn" style="padding:2px 8px; font-size:11px;" onclick="clearScratchpad()">Xóa Nháp</button>
-              <button class="draw-btn" style="padding:2px 8px; font-size:11px;" onclick="toggleScratchpad()">Đóng ✕</button>
+          <!-- Cột Phải: SỔ NOTE THÔNG MINH RIÊNG BIỆT (INK SCRIBBLE ENGINE) -->
+          <div class="study-note-col" id="side-note-panel">
+            <div class="note-studio-header">
+              <div class="note-studio-title">
+                <span>📓</span> <span id="note-card-title">SỔ GHI CHÚ CÂU 1</span>
+                <span class="note-status-saved" id="note-saved-badge">✓ Đã lưu</span>
+              </div>
+              <div style="display:flex; gap:6px; align-items:center;">
+                <!-- Paper Style Selector -->
+                <select id="note-paper-select" class="filter-select" style="padding:2px 8px; font-size:11.5px; height:28px;" onchange="setNotePaperStyle(this.value)">
+                  <option value="paper-grid" selected>📐 Ô Caro</option>
+                  <option value="paper-lined">📝 Kẻ Ngang</option>
+                  <option value="paper-blank">⬛ Trơn</option>
+                </select>
+                <button class="btn btn-secondary btn-sm" onclick="exportSingleNote()" style="padding:3px 8px; font-size:11px;" title="Xuất ảnh ghi chú của câu này kèm đề thi (.png)">
+                  📸 Xuất Note
+                </button>
+                <button class="btn btn-secondary btn-sm" onclick="clearSideNote()" style="padding:3px 8px; font-size:11px;" title="Xóa trang ghi chú câu này">
+                  🗑️ Xóa
+                </button>
+                <button class="btn btn-secondary btn-sm" onclick="toggleSideNotePanel()" style="padding:3px 8px; font-size:11px;" title="Thu gọn sổ note">
+                  ✕
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="scratchpad-body" id="scratchpad-body" style="height:350px;">
-            <canvas id="scratchpad-canvas" class="scratchpad-canvas"></canvas>
+
+            <!-- Toolbar Bút Viết Nét Thanh Đậm (Ink Scribble) -->
+            <div class="note-studio-toolbar">
+              <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+                <button class="draw-btn active" id="note-tool-ink" onclick="setNoteTool('ink')" title="Bút Mực Nét Thanh Đậm Tự Nhiên (Ink Scribble)">
+                  ✒️ Bút Mực Thanh Đậm
+                </button>
+                <button class="draw-btn" id="note-tool-fine" onclick="setNoteTool('fine')" title="Bút Nét Đều">
+                  ✏️ Nét Đều
+                </button>
+                <button class="draw-btn" id="note-tool-hl" onclick="setNoteTool('highlighter')" title="Dạ Quang">
+                  🖍️ Dạ Quang
+                </button>
+                <button class="draw-btn" id="note-tool-eraser" onclick="setNoteTool('eraser')" title="Gôm Tẩy">
+                  🧽 Tẩy
+                </button>
+              </div>
+
+              <div style="display:flex; gap:5px; align-items:center;">
+                <button class="draw-color-btn active" style="background:#fef08a;" onclick="setNoteColor('#fef08a', this)" title="Vàng Kem (Medical Note)"></button>
+                <button class="draw-color-btn" style="background:#ffffff;" onclick="setNoteColor('#ffffff', this)" title="Trắng Sáng"></button>
+                <button class="draw-color-btn" style="background:#34d399;" onclick="setNoteColor('#34d399', this)" title="Xanh Lục"></button>
+                <button class="draw-color-btn" style="background:#f87171;" onclick="setNoteColor('#f87171', this)" title="Đỏ Cảnh Báo"></button>
+                <button class="draw-color-btn" style="background:#38bdf8;" onclick="setNoteColor('#38bdf8', this)" title="Xanh Cyan"></button>
+              </div>
+            </div>
+
+            <!-- Vùng Vẽ & Viết Note -->
+            <div class="note-canvas-body paper-grid" id="note-canvas-container">
+              <canvas id="side-note-canvas" class="note-canvas-element"></canvas>
+            </div>
           </div>
         </div>
 
@@ -2435,6 +2614,344 @@
       ctx.fillText(line, x, y);
     }
 
+    
+    // ==========================================================
+    // ✒️ CALLIGRAPHIC INK SCRIBBLE & SIDE NOTE ENGINE
+    // ==========================================================
+    let sideNoteOpen = true;
+    let noteCanvas, noteCtx;
+    let noteTool = 'ink'; // 'ink' | 'fine' | 'highlighter' | 'eraser'
+    let noteColor = '#fef08a';
+    let noteBaseWidth = 3.2;
+    let noteCurrentWidth = 3.2;
+    let noteIsDrawing = false;
+    let noteLastPoint = null;
+    let noteStrokeCount = 0;
+
+    function initSideNoteStudio() {
+      noteCanvas = document.getElementById('side-note-canvas');
+      const container = document.getElementById('note-canvas-container');
+      if (!noteCanvas || !container) return;
+
+      noteCtx = noteCanvas.getContext('2d');
+      syncNoteCanvasSize();
+
+      // Bind Pointer Events for Tablet Stylus, Touch, Mouse
+      bindInkPointerEvents(noteCanvas, noteCtx);
+
+      // Set wide container on start
+      const mainContainer = document.querySelector('.station-exam-container');
+      if (mainContainer && sideNoteOpen) {
+        mainContainer.classList.add('wide-mode');
+      }
+
+      window.addEventListener('resize', () => {
+        syncNoteCanvasSize(true);
+      });
+    }
+
+    function syncNoteCanvasSize(preserve = false) {
+      if (!noteCanvas) return;
+      const container = document.getElementById('note-canvas-container');
+      if (!container) return;
+      const rect = container.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      let tempImg = null;
+      if (preserve && noteCanvas.width > 0 && noteCanvas.height > 0) {
+        tempImg = noteCanvas.toDataURL();
+      }
+
+      noteCanvas.width = rect.width;
+      noteCanvas.height = rect.height;
+
+      if (tempImg) {
+        const img = new Image();
+        img.onload = () => {
+          if (noteCtx) noteCtx.drawImage(img, 0, 0);
+        };
+        img.src = tempImg;
+      }
+    }
+
+    function toggleSideNotePanel() {
+      sideNoteOpen = !sideNoteOpen;
+      const panel = document.getElementById('side-note-panel');
+      const btn = document.getElementById('btn-toggle-side-note');
+      const text = document.getElementById('side-note-btn-text');
+      const mainContainer = document.querySelector('.station-exam-container');
+
+      if (sideNoteOpen) {
+        if (panel) panel.style.display = 'flex';
+        if (btn) btn.classList.add('active');
+        if (text) text.textContent = 'Đang Bật Sổ Note (N)';
+        if (mainContainer) mainContainer.classList.add('wide-mode');
+        setTimeout(() => {
+          syncNoteCanvasSize(true);
+          loadCurrentQuestionNote();
+        }, 60);
+      } else {
+        if (panel) panel.style.display = 'none';
+        if (btn) btn.classList.remove('active');
+        if (text) text.textContent = 'Mở Sổ Note Bên Phải (N)';
+        if (mainContainer) mainContainer.classList.remove('wide-mode');
+      }
+    }
+
+    function setNoteTool(tool) {
+      noteTool = tool;
+      document.querySelectorAll('.note-studio-toolbar .draw-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`note-tool-${tool}`);
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    function setNoteColor(color, el) {
+      noteColor = color;
+      document.querySelectorAll('.note-studio-toolbar .draw-color-btn').forEach(b => b.classList.remove('active'));
+      if (el) el.classList.add('active');
+      if (noteTool === 'eraser') {
+        setNoteTool('ink');
+      }
+    }
+
+    function setNotePaperStyle(styleClass) {
+      const container = document.getElementById('note-canvas-container');
+      if (!container) return;
+      container.classList.remove('paper-grid', 'paper-lined', 'paper-blank');
+      container.classList.add(styleClass);
+    }
+
+    // Calligraphic Ink Scribble Pointer Events
+    function bindInkPointerEvents(canvas, ctx) {
+      canvas.addEventListener('pointerdown', (e) => {
+        canvas.setPointerCapture(e.pointerId);
+        noteIsDrawing = true;
+
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const time = performance.now();
+        const pressure = (e.pressure && e.pressure > 0) ? e.pressure : 0.5;
+
+        noteLastPoint = { x, y, time, pressure };
+        noteCurrentWidth = noteBaseWidth * 0.7; // Start tapered
+
+        ctx.beginPath();
+        applyInkStyles(ctx, noteCurrentWidth);
+        ctx.arc(x, y, noteCurrentWidth / 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+      });
+
+      canvas.addEventListener('pointermove', (e) => {
+        if (!noteIsDrawing || !noteLastPoint) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const time = performance.now();
+        const pressure = (e.pressure && e.pressure > 0) ? e.pressure : null;
+
+        // 1. Calculate Velocity (pixels / ms)
+        const dist = Math.hypot(x - noteLastPoint.x, y - noteLastPoint.y);
+        const dt = Math.max(1, time - noteLastPoint.time);
+        const velocity = dist / dt;
+
+        // 2. Dynamic Ink Width (Calligraphic Thanh Đậm)
+        let targetWidth = noteBaseWidth;
+        if (noteTool === 'ink') {
+          // Fast move = elegant thin stroke (nét thanh); Slow move = bold ink (nét đậm)
+          const velocityFactor = Math.max(0.45, Math.min(1.85, 1.25 - velocity * 0.18));
+          const pressureFactor = (pressure !== null) ? (0.4 + pressure * 1.5) : 1.0;
+          targetWidth = noteBaseWidth * velocityFactor * pressureFactor;
+          // Smooth exponential damping
+          noteCurrentWidth = noteCurrentWidth * 0.6 + targetWidth * 0.4;
+        } else if (noteTool === 'fine') {
+          noteCurrentWidth = 2.0;
+        } else if (noteTool === 'highlighter') {
+          noteCurrentWidth = 22;
+        } else if (noteTool === 'eraser') {
+          noteCurrentWidth = 24;
+        }
+
+        applyInkStyles(ctx, noteCurrentWidth);
+
+        // 3. Smooth Quadratic Bézier Curve Midpoint
+        const midX = (noteLastPoint.x + x) / 2;
+        const midY = (noteLastPoint.y + y) / 2;
+
+        ctx.quadraticCurveTo(noteLastPoint.x, noteLastPoint.y, midX, midY);
+        ctx.stroke();
+
+        noteLastPoint = { x, y, time, pressure: pressure || 0.5 };
+        noteStrokeCount++;
+      });
+
+      const endDrawing = (e) => {
+        if (!noteIsDrawing) return;
+        noteIsDrawing = false;
+        try { canvas.releasePointerCapture(e.pointerId); } catch(err){}
+        ctx.closePath();
+        // Auto save note for current question
+        saveCurrentQuestionNote();
+      };
+
+      canvas.addEventListener('pointerup', endDrawing);
+      canvas.addEventListener('pointercancel', endDrawing);
+    }
+
+    function applyInkStyles(ctx, width) {
+      if (noteTool === 'eraser') {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.lineWidth = width;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+      } else if (noteTool === 'highlighter') {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.lineWidth = 22;
+        ctx.lineCap = 'square';
+        ctx.lineJoin = 'miter';
+        ctx.strokeStyle = hexToRgba(noteColor, 0.35);
+        ctx.fillStyle = hexToRgba(noteColor, 0.35);
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.lineWidth = width;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = noteColor;
+        ctx.fillStyle = noteColor;
+      }
+    }
+
+    // Auto-save and auto-restore notes per question
+    function getActiveQuestionId() {
+      if (flashList && flashList.length && flashList[currentFlashIdx]) {
+        return flashList[currentFlashIdx].id;
+      }
+      return null;
+    }
+
+    function saveCurrentQuestionNote() {
+      const qid = getActiveQuestionId();
+      if (!qid || !noteCanvas) return;
+
+      try {
+        const dataUrl = noteCanvas.toDataURL('image/png');
+        localStorage.setItem(`mo_phoi_note_${qid}`, dataUrl);
+
+        const badge = document.getElementById('note-saved-badge');
+        if (badge) {
+          badge.classList.add('visible');
+          setTimeout(() => badge.classList.remove('visible'), 1200);
+        }
+      } catch (e) {
+        console.warn("Could not save note to localStorage:", e);
+      }
+    }
+
+    function loadCurrentQuestionNote() {
+      if (!noteCanvas || !noteCtx) return;
+      const qid = getActiveQuestionId();
+      const titleEl = document.getElementById('note-card-title');
+
+      if (qid && flashList[currentFlashIdx]) {
+        const q = flashList[currentFlashIdx];
+        if (titleEl) {
+          titleEl.textContent = `SỔ NOTE CÂU ${currentFlashIdx + 1} (Gốc #${q.orig_num})`;
+        }
+
+        noteCtx.clearRect(0, 0, noteCanvas.width, noteCanvas.height);
+        const saved = localStorage.getItem(`mo_phoi_note_${qid}`);
+        if (saved) {
+          const img = new Image();
+          img.onload = () => {
+            noteCtx.drawImage(img, 0, 0);
+          };
+          img.src = saved;
+        }
+      }
+    }
+
+    function clearSideNote() {
+      if (!noteCtx || !noteCanvas) return;
+      if (confirm('Bạn có chắc muốn xóa sạch trang ghi chú của câu này?')) {
+        noteCtx.clearRect(0, 0, noteCanvas.width, noteCanvas.height);
+        const qid = getActiveQuestionId();
+        if (qid) {
+          localStorage.removeItem(`mo_phoi_note_${qid}`);
+        }
+      }
+    }
+
+    // Export current note + question as high-resolution image (.png)
+    function exportSingleNote() {
+      const qid = getActiveQuestionId();
+      if (!qid || !flashList[currentFlashIdx] || !noteCanvas) return;
+      const q = flashList[currentFlashIdx];
+
+      const expCanvas = document.createElement('canvas');
+      expCanvas.width = 900;
+      expCanvas.height = 1100;
+      const expCtx = expCanvas.getContext('2d');
+
+      // 1. Dark Luxury Background
+      expCtx.fillStyle = '#090e17';
+      expCtx.fillRect(0, 0, expCanvas.width, expCanvas.height);
+
+      // Outer border
+      expCtx.strokeStyle = '#1e293b';
+      expCtx.lineWidth = 4;
+      expCtx.strokeRect(12, 12, expCanvas.width - 24, expCanvas.height - 24);
+
+      // 2. Header Box
+      expCtx.fillStyle = '#0f172a';
+      expCtx.fillRect(16, 16, expCanvas.width - 32, 160);
+      expCtx.strokeStyle = '#38bdf8';
+      expCtx.lineWidth = 1.5;
+      expCtx.strokeRect(16, 16, expCanvas.width - 32, 160);
+
+      // Title
+      expCtx.fillStyle = '#38bdf8';
+      expCtx.font = 'bold 20px sans-serif';
+      expCtx.fillText(`MÔ PHÔI MASTER - CÂU ${currentFlashIdx + 1} / 1287`, 35, 52);
+
+      expCtx.fillStyle = '#94a3b8';
+      expCtx.font = '14px sans-serif';
+      expCtx.fillText(`${q.chapter} (Đề gốc: #${q.orig_num})`, 35, 76);
+
+      // Question text
+      expCtx.fillStyle = '#ffffff';
+      expCtx.font = 'bold 16px sans-serif';
+      const cleanStem = (q.question || '').replace(/<[^>]*>/g, '');
+      wrapText(expCtx, cleanStem, 35, 110, expCanvas.width - 70, 24);
+
+      // 3. Grid Background for Note Area
+      const noteY = 190;
+      const noteH = expCanvas.height - noteY - 25;
+      expCtx.fillStyle = '#050811';
+      expCtx.fillRect(20, noteY, expCanvas.width - 40, noteH);
+
+      // Subtle Grid lines
+      expCtx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+      expCtx.lineWidth = 1;
+      for (let x = 20; x <= expCanvas.width - 20; x += 24) {
+        expCtx.beginPath(); expCtx.moveTo(x, noteY); expCtx.lineTo(x, noteY + noteH); expCtx.stroke();
+      }
+      for (let y = noteY; y <= noteY + noteH; y += 24) {
+        expCtx.beginPath(); expCtx.moveTo(20, y); expCtx.lineTo(expCanvas.width - 20, y); expCtx.stroke();
+      }
+
+      // 4. Draw Handwritten Note Canvas
+      expCtx.drawImage(noteCanvas, 20, noteY, expCanvas.width - 40, noteH);
+
+      // 5. Download image
+      const link = document.createElement('a');
+      link.download = `MoPhoi_GhiChu_Cau_${currentFlashIdx + 1}.png`;
+      link.href = expCanvas.toDataURL('image/png');
+      link.click();
+    }
+
     async function init() {
       try {
         // 1. Try local storage for PROGRESS first
@@ -2478,6 +2995,7 @@
         }
 
         initDrawingStudio();
+        initSideNoteStudio();
         initDropdowns();
         filterFlashQuestions();
         filterStationMode();
@@ -3787,6 +4305,11 @@
 
       // Stylus & Drawing Hotkeys
       const k = e.key.toLowerCase();
+      if (k === 'n') {
+        e.preventDefault();
+        toggleSideNotePanel();
+        return;
+      }
       if (k === 'w') {
         e.preventDefault();
         toggleDrawingMode('flash');
