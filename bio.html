@@ -963,13 +963,18 @@
 
         .guide-tab-nav {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin-bottom: 22px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
         }
 
         .btn-guide-tab {
-            flex: 1;
-            padding: 12px;
+            flex: 0 0 auto;
+            white-space: nowrap;
+            padding: 11px 18px;
             border-radius: 12px;
             border: 1px solid var(--border-subtle);
             background: rgba(15, 23, 42, 0.7);
@@ -983,8 +988,24 @@
         .btn-guide-tab.active {
             border-color: #38bdf8;
             color: #fff;
-            background: rgba(56, 189, 248, 0.18);
+            background: rgba(56, 189, 248, 0.2);
             box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+        }
+
+        .guide-img-responsive {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .guide-img-responsive:hover {
+            transform: scale(1.01);
+            border-color: #38bdf8;
         }
 
         .guide-step {
@@ -2138,7 +2159,417 @@
             }
         }
 
-    </style>
+    
+        .app-download-card.shizuku {
+            border-color: rgba(6, 182, 212, 0.4);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.96) 100%);
+        }
+        .app-download-card.shizuku:hover {
+            border-color: #06b6d4;
+            box-shadow: 0 12px 30px rgba(6, 182, 212, 0.35);
+        }
+        .app-download-card.brotx {
+            border-color: rgba(239, 68, 68, 0.45);
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(249, 115, 22, 0.06) 50%, rgba(15, 23, 42, 0.96) 100%);
+        }
+        .app-download-card.brotx:hover {
+            border-color: #ef4444;
+            box-shadow: 0 12px 30px rgba(239, 68, 68, 0.45);
+        }
+
+        .btn-download-action.shizuku {
+            background: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%);
+            color: #fff;
+            box-shadow: 0 4px 18px rgba(6, 182, 212, 0.4);
+        }
+        .btn-download-action.shizuku:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 26px rgba(6, 182, 212, 0.6);
+        }
+
+        .btn-download-action.brotx {
+            background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+            color: #fff;
+            box-shadow: 0 4px 18px rgba(239, 68, 68, 0.45);
+        }
+        .btn-download-action.brotx:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 26px rgba(239, 68, 68, 0.65);
+        }
+
+    
+        /* BrotX v8 Component Styles */
+        .btn-brotx-toggle {
+            padding: 8px 12px;
+            font-size: 11px;
+            font-weight: 800;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.06);
+            color: #94a3b8;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        .btn-brotx-toggle.active {
+            border-color: #00ff66;
+            background: rgba(0, 255, 102, 0.15);
+            color: #00ff66;
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+        }
+
+    
+        /* ==================== GLOBAL MOBILE OVERFLOW FIX ==================== */
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden !important;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        #deviceDetectorWrap {
+            box-sizing: border-box !important;
+            max-width: 100% !important;
+            width: 100% !important;
+        }
+        #deviceDetectorWrap > div:first-child {
+            flex: 1 1 220px !important;
+            min-width: 0 !important;
+        }
+        #deviceDetectorWrap > div:first-child > div:last-child {
+            min-width: 0 !important;
+            flex: 1 !important;
+        }
+        #detectedDevAdvice, #detectedDevName {
+            word-break: break-word !important;
+        }
+        .guide-step {
+            max-width: 100% !important;
+        }
+        .step-text, .guide-step-item {
+            flex: 1 1 0 !important;
+            min-width: 0 !important;
+            word-break: break-word !important;
+        }
+        .modal-code-wrapper, pre, code, .code-box {
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            word-break: break-all !important;
+            white-space: pre-wrap !important;
+        }
+        .modal-code-wrapper pre {
+            max-width: 100% !important;
+            overflow-x: auto !important;
+            white-space: pre-wrap !important;
+            word-break: break-all !important;
+        }
+        .modal-code-wrapper code {
+            white-space: pre-wrap !important;
+            word-break: break-all !important;
+            display: block !important;
+        }
+        @media (max-width: 640px) {
+            #deviceDetectorWrap {
+                padding: 12px 14px !important;
+                gap: 12px !important;
+            }
+            #btnGoDetectedGuide {
+                width: 100% !important;
+                justify-content: center !important;
+            }
+            .comp-table {
+                font-size: 11px !important;
+            }
+            .comp-table th, .comp-table td {
+                padding: 8px 6px !important;
+            }
+        }@media (max-width: 640px) {
+            #deviceDetectorWrap {
+                padding: 12px 14px !important;
+                gap: 12px !important;
+            }
+            #btnGoDetectedGuide {
+                width: 100% !important;
+                justify-content: center !important;
+            }
+            .comp-table {
+                font-size: 11px !important;
+            }
+            .comp-table th, .comp-table td {
+                padding: 8px 6px !important;
+            }
+        }@media (max-width: 640px) {
+            #deviceDetectorWrap {
+                padding: 12px 14px !important;
+                gap: 12px !important;
+            }
+            #btnGoDetectedGuide {
+                width: 100% !important;
+                justify-content: center !important;
+            }
+            .comp-table {
+                font-size: 11px !important;
+            }
+            .comp-table th, .comp-table td {
+                padding: 8px 6px !important;
+            }
+        }
+
+        /* ==================== iOS LIQUID GLASS & SPRING PHYSICS ==================== */
+        :root {
+            --liquid-bg: rgba(15, 23, 42, 0.65);
+            --liquid-surface: rgba(30, 41, 59, 0.70);
+            --liquid-border-top: rgba(255, 255, 255, 0.42);
+            --liquid-border-bot: rgba(255, 255, 255, 0.08);
+            --liquid-blur: blur(28px) saturate(190%);
+            --liquid-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.22);
+            --ios-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ios-spring-snappy: cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        /* Thẻ Kính Lỏng Siêu Trong Suốt Đa Tầng */
+        .app-download-card,
+        .tool-card,
+        .theme-card,
+        .shizuku-hub-box,
+        .profile-card,
+        #before-after,
+        #deviceDetectorWrap,
+        .linkbio-set-card,
+        .feature-card,
+        .comp-table-wrap {
+            background: var(--liquid-bg) !important;
+            backdrop-filter: var(--liquid-blur) !important;
+            -webkit-backdrop-filter: var(--liquid-blur) !important;
+            border-radius: 22px !important;
+            border: 1px solid var(--liquid-border-bot) !important;
+            border-top: 1.5px solid var(--liquid-border-top) !important;
+            box-shadow: var(--liquid-shadow) !important;
+            transition: transform 0.3s var(--ios-spring), box-shadow 0.3s ease !important;
+        }
+
+        /* Hiệu Ứng Nảy Đàn Hồi iOS Spring Touch Feedback */
+        .app-download-card:active,
+        .tool-card:active,
+        .theme-card:active,
+        .btn-download-action:active,
+        .btn-guide-tab:active,
+        .btn-brotx-toggle:active,
+        .pill-link-btn:active,
+        .btn-capsule-act:active,
+        .btn-shizuku-shortcut:active {
+            transform: scale(0.96) !important;
+            transition: transform 0.12s ease !important;
+        }
+
+        /* DYNAMIC LIQUID CAPSULE CSS */
+        .dynamic-capsule-wrap {
+            position: sticky;
+            top: 12px;
+            z-index: 1000;
+            max-width: 480px;
+            margin: 0 auto 20px auto;
+            padding: 0 12px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .dynamic-capsule {
+            background: rgba(10, 15, 29, 0.82);
+            backdrop-filter: blur(28px) saturate(190%);
+            -webkit-backdrop-filter: blur(28px) saturate(190%);
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-top: 1.5px solid rgba(255, 255, 255, 0.45);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+            transition: all 0.45s var(--ios-spring);
+            cursor: pointer;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .dynamic-capsule.is-expanded {
+            border-radius: 26px;
+            background: rgba(10, 15, 29, 0.94);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.25);
+        }
+
+        .capsule-compact {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 18px;
+            gap: 8px;
+        }
+
+        .capsule-pill-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .capsule-glow-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+            animation: capsulePulse 2s infinite ease-in-out;
+        }
+        .capsule-glow-dot.warn {
+            background: #f59e0b;
+            box-shadow: 0 0 10px #f59e0b;
+        }
+
+        @keyframes capsulePulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.6; }
+        }
+
+        .capsule-label {
+            font-size: 11px;
+            font-weight: 800;
+            color: #38bdf8;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .capsule-divider {
+            width: 1px;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .capsule-val {
+            font-size: 12px;
+            font-weight: 900;
+            color: #fff;
+            font-family: monospace;
+        }
+        .capsule-val.val-cool { color: #00ff66; text-shadow: 0 0 8px rgba(0, 255, 102, 0.5); }
+        .capsule-val.val-warm { color: #f59e0b; text-shadow: 0 0 8px rgba(245, 158, 11, 0.5); }
+        .capsule-val.val-hot { color: #ef4444; text-shadow: 0 0 8px rgba(239, 68, 68, 0.5); }
+
+        .capsule-expand-arrow {
+            font-size: 11px;
+            color: #94a3b8;
+            transition: transform 0.3s ease;
+        }
+        .dynamic-capsule.is-expanded .capsule-expand-arrow {
+            transform: rotate(180deg);
+        }
+
+        .capsule-expanded {
+            display: none;
+            padding: 16px 20px 20px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .dynamic-capsule.is-expanded .capsule-expanded {
+            display: block;
+            animation: capsuleFadeIn 0.35s ease;
+        }
+
+        @keyframes capsuleFadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .capsule-exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+        .capsule-exp-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #cbd5e1;
+            font-weight: 700;
+        }
+        .capsule-exp-badge {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #000;
+            font-size: 10px;
+            font-weight: 900;
+            padding: 2px 8px;
+            border-radius: 999px;
+        }
+        .capsule-btn-close {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .capsule-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .capsule-metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 10px 12px;
+        }
+        .cap-metric-label {
+            font-size: 10px;
+            color: #94a3b8;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+        .cap-metric-val {
+            font-size: 17px;
+            font-weight: 900;
+            color: #fff;
+            margin: 3px 0 2px 0;
+            font-family: monospace;
+        }
+        .cap-metric-val.val-ping { color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
+        .cap-metric-sub {
+            font-size: 10px;
+            color: #64748b;
+        }
+
+        .capsule-quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .btn-capsule-act {
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 12px;
+            font-weight: 900;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: transform 0.2s var(--ios-spring);
+        }
+        .btn-capsule-act.boost {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #000;
+            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+        }
+        .btn-capsule-act.cool {
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: #000;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+        }
+</style>
 </head>
 <body>
 
@@ -2154,6 +2585,7 @@
         <ul class="nav-links">
             <li><a href="#about">Trang Chủ</a></li>
             <li><a href="#download">Tải 3 App</a></li>
+            <li><a href="#brotx-v8" style="color: #ff6b6b; font-weight: 800;">🔥 BrotX v8 (64 Cờ)</a></li>
             <li><a href="#preview">Xem Preview</a></li>
             <li><a href="#features">Tính Năng A-Z</a></li>
             <li><a href="#compare">So Sánh</a></li>
@@ -2169,6 +2601,74 @@
 
     <!-- Main Content Container -->
     <main class="main-container">
+
+        <!-- ==================== DYNAMIC LIQUID CAPSULE (iOS ISLAND) ==================== -->
+        <div id="dynamicLiquidCapsuleWrap" class="dynamic-capsule-wrap">
+            <div id="dynamicCapsule" class="dynamic-capsule" onclick="toggleCapsuleExpand()">
+                <!-- Collapsed View -->
+                <div class="capsule-compact">
+                    <div class="capsule-pill-group">
+                        <span class="capsule-glow-dot active" id="capsuleShizukuDot"></span>
+                        <span class="capsule-label" id="capsuleShizukuText">SHIZUKU READY</span>
+                    </div>
+                    <div class="capsule-divider"></div>
+                    <div class="capsule-pill-group">
+                        <span class="capsule-tele-icon">🎯</span>
+                        <span class="capsule-val" id="capsuleFpsVal">120 FPS</span>
+                    </div>
+                    <div class="capsule-divider"></div>
+                    <div class="capsule-pill-group">
+                        <span class="capsule-tele-icon">🌡️</span>
+                        <span class="capsule-val val-cool" id="capsuleTempVal">36.5°C</span>
+                    </div>
+                    <div class="capsule-expand-arrow">▾</div>
+                </div>
+
+                <!-- Expanded HUD View -->
+                <div class="capsule-expanded" id="capsuleExpandedPanel">
+                    <div class="capsule-exp-header">
+                        <div class="capsule-exp-title">
+                            <span class="capsule-exp-badge">DYNAMIC HUD</span>
+                            <span id="capsuleDeviceHardware">Snapdragon • Adreno GPU</span>
+                        </div>
+                        <button type="button" class="capsule-btn-close" onclick="event.stopPropagation(); toggleCapsuleExpand(false);">✕</button>
+                    </div>
+
+                    <div class="capsule-metrics-grid">
+                        <div class="capsule-metric-card">
+                            <div class="cap-metric-label">SURFACEFLINGER</div>
+                            <div class="cap-metric-val" id="capsuleLiveFps">120.0 FPS</div>
+                            <div class="cap-metric-sub">Khung hình thực tế</div>
+                        </div>
+                        <div class="capsule-metric-card">
+                            <div class="cap-metric-label">NHIỆT ĐỘ MÁY</div>
+                            <div class="cap-metric-val val-cool" id="capsuleLiveTemp">36.5°C</div>
+                            <div class="cap-metric-sub" id="capsuleThermalState">Mát mẻ (Tối ưu)</div>
+                        </div>
+                        <div class="capsule-metric-card">
+                            <div class="cap-metric-label">ĐỘ TRỄ PING</div>
+                            <div class="cap-metric-val val-ping" id="capsuleLivePing">14 ms</div>
+                            <div class="cap-metric-sub">Local Gaming Route</div>
+                        </div>
+                        <div class="capsule-metric-card">
+                            <div class="cap-metric-label">TRẠNG THÁI SHIZUKU</div>
+                            <div class="cap-metric-val" id="capsuleShizukuUid">UID 2000</div>
+                            <div class="cap-metric-sub">Quyền Shell Hệ Thống</div>
+                        </div>
+                    </div>
+
+                    <div class="capsule-quick-actions">
+                        <button type="button" class="btn-capsule-act boost" onclick="quickCapsuleBoost(event)">
+                            <span>⚡</span> <span>DỌN RAM &amp; TURBO</span>
+                        </button>
+                        <button type="button" class="btn-capsule-act cool" onclick="quickCapsuleCool(event)">
+                            <span>❄️</span> <span>HẠ NHIỆT MÁY</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- ==================== 1. PROFILE HEADER CARD (ALWAYS VISIBLE) ==================== -->
         <header class="profile-card" id="about">
@@ -2196,7 +2696,127 @@
             </div>
         </header>
 
-                                <!-- ==================== 2. FAST DOWNLOAD CARDS (ALWAYS VISIBLE) ==================== -->
+        <!-- ==================== SMART DEVICE DETECTOR BANNER ==================== -->
+        <div id="deviceDetectorWrap" style="max-width: 960px; margin: 0 auto 28px auto; padding: 16px 22px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(56, 189, 248, 0.12)); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(56, 189, 248, 0.15); border: 1px solid #38bdf8; display: flex; align-items: center; justify-content: center; font-size: 22px;">
+                    📱
+                </div>
+                <div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 11px; font-weight: 800; color: #38bdf8; letter-spacing: 1px; text-transform: uppercase;">⚡ ĐÃ TỰ ĐỘNG NHẬN DIỆN THIẾT BỊ CỦA BẠN</span>
+                        <span id="detectedBrandBadge" style="font-size: 10px; font-weight: 900; background: #0284c7; color: #fff; padding: 2px 8px; border-radius: 999px;">ANDROID</span>
+                    </div>
+                    <div id="detectedDevName" style="font-size: 15px; font-weight: 900; color: #fff; margin-top: 2px;">Đang phân tích cấu hình phần cứng...</div>
+                    <div id="detectedDevAdvice" style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Đã tự động ghim cẩm nang cài đặt &amp; bộ SET tối ưu chuẩn nhất cho dòng máy này!</div>
+                </div>
+            </div>
+            <a href="#guide" id="btnGoDetectedGuide" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 12px; background: linear-gradient(135deg, #0284c7, #38bdf8); color: #000; font-size: 12px; font-weight: 900; text-decoration: none; box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1.0)'">
+                <span>XEM HƯỚNG DẪN MÁY BẠN</span> ➔
+            </a>
+        </div>
+
+        <!-- ==================== 1.5. TOP HIGHLIGHT: BROTX V8 (HOT & NEW) & SHIZUKU (RECOMMEND) ==================== -->
+        <section class="section-wrap" id="featured" style="margin-bottom: 24px;">
+            <div class="section-title-wrap">
+                <span class="section-badge" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(6, 182, 212, 0.2)); border-color: #f97316; color: #f97316; box-shadow: 0 0 16px rgba(249, 115, 22, 0.3);">⚡ ỨNG DỤNG TIÊU ĐIỂM &amp; NỀN TẢNG BẮT BUỘC</span>
+                <h2 class="section-title">BrotX V8 &amp; Nền Tảng Shizuku</h2>
+                <p class="section-desc">Cài đặt Shizuku (Bắt buộc) để cấp quyền hệ thống ADB • Trải nghiệm siêu công cụ tối ưu &amp; UAD Debloater BrotX v8 mới nhất!</p>
+            </div>
+
+            <div class="apps-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <!-- 1. BrotX V8 (HOT & NEW) -->
+                <div class="app-download-card brotx">
+                    <div>
+                        <div class="app-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <img src="icon_brotx.png" alt="BrotX v8" class="app-icon-img" style="border-color: #ef4444; width: 52px; height: 52px; border-radius: 14px; object-fit: cover; box-shadow: 0 0 14px rgba(239, 68, 68, 0.4);">
+                                <div>
+                                    <div class="app-title" style="font-size: 18px; font-weight: 900; color: #fff;">BrotX V8</div>
+                                    <span class="app-sub-badge" style="background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4);">OPTIMIZER (v8.0.0)</span>
+                                </div>
+                            </div>
+                            <span style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.28), rgba(249, 115, 22, 0.28)); border: 1.5px solid #ef4444; color: #ff6b6b; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 999px; box-shadow: 0 0 14px rgba(239, 68, 68, 0.55); white-space: nowrap;">🔥 HOT &amp; NEW</span>
+                        </div>
+                        <div class="app-bullets">
+                            • 🚀 <b>BrotX Engine v8:</b> Tối ưu hóa sâu phần cứng qua quyền Shizuku ADB không cần Root.<br>
+                            • 🧹 <b>Universal Android Debloater (UAD):</b> Gỡ triệt để ứng dụng rác, bloatware ngầm theo danh sách an toàn.<br>
+                            • ⚡ <b>FPS &amp; CPU Throttle Fix:</b> Giảm giật lag giật khung hình, giữ xung nhịp ổn định tối đa cho game thủ.<br>
+                            • 🛡️ <b>An Toàn Tuyệt Đối:</b> Tự động sao lưu và hỗ trợ khôi phục app hệ thống chỉ với 1 chạm.
+                        </div>
+                    </div>
+                    <div style="margin-top: 16px;">
+                        <button type="button" onclick="openUnlockModal('brotx')" class="btn-download-action brotx">
+                            <span>🔥</span>
+                            <span>TẢI BROTX V8</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Shizuku (BẮT BUỘC / RECOMMEND) -->
+                <div class="app-download-card shizuku">
+                    <div>
+                        <div class="app-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <img src="icon_shizuku.png" alt="Shizuku" class="app-icon-img" style="border-color: #06b6d4; width: 52px; height: 52px; border-radius: 14px; object-fit: cover; box-shadow: 0 0 14px rgba(6, 182, 212, 0.4);">
+                                <div>
+                                    <div class="app-title" style="font-size: 18px; font-weight: 900; color: #fff;">Shizuku</div>
+                                    <span class="app-sub-badge" style="background: rgba(6, 182, 212, 0.15); color: #7dd3fc; border: 1px solid rgba(6, 182, 212, 0.4);">NỀN TẢNG (v13.5.4)</span>
+                                </div>
+                            </div>
+                            <span style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.28), rgba(59, 130, 246, 0.28)); border: 1.5px solid #06b6d4; color: #22d3ee; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 999px; box-shadow: 0 0 14px rgba(6, 182, 212, 0.5); white-space: nowrap;">⚡ BẮT BUỘC (RECOMMEND)</span>
+                        </div>
+                        <div class="app-bullets">
+                            • ⚡ <b>Nền Tảng Bắt Buộc:</b> Cung cấp đặc quyền ADB Shell (UID 2000) cho toàn bộ ứng dụng tối ưu hóa hoạt động.<br>
+                            • 🛡️ <b>100% An Toàn &amp; Không Cần Root:</b> Không can thiệp Rom, không nhảy Knox, giữ nguyên bảo hành gốc.<br>
+                            • 📶 <b>Kích Hoạt Không Dây 1 Lần:</b> Khởi chạy dễ dàng qua Ghép nối Wi-Fi trên Android 11+ hoặc kết nối PC/Ladb.<br>
+                            • 🔄 <b>Tự Động Kết Nối Lại:</b> Ứng dụng chạy ngầm bền bỉ, duy trì kết nối 24/7 ổn định mượt mà.
+                        </div>
+                    </div>
+                    <div style="margin-top: 16px;">
+                        <button type="button" onclick="openUnlockModal('shizuku')" class="btn-download-action shizuku">
+                            <span>⚡</span>
+                            <span>TẢI SHIZUKU</span>
+                        </button>
+                        <div style="display: flex; gap: 8px; margin-top: 8px;">
+                            <a href="#guide" style="width: 100%; padding: 10px 12px; font-size: 12px; font-weight: 700; text-align: center; border-radius: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(6,182,212,0.3); color: #7dd3fc; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                                <span>📖</span> <span>Xem Hướng Dẫn Kích Hoạt Shizuku</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Shizuku-Next (WATCHDOG 24/7 & ADB MODULES) -->
+                <div class="app-download-card shizuku" style="border-color: rgba(56, 189, 248, 0.45);">
+                    <div>
+                        <div class="app-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <img src="icon_shizukunext.png" alt="Shizuku-Next" class="app-icon-img" style="border-color: #38bdf8; width: 52px; height: 52px; border-radius: 14px; object-fit: cover; box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);">
+                                <div>
+                                    <div class="app-title" style="font-size: 18px; font-weight: 900; color: #fff;">Shizuku-Next</div>
+                                    <span class="app-sub-badge" style="background: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.4);">WATCHDOG (v14.0.33)</span>
+                                </div>
+                            </div>
+                            <span style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.28), rgba(99, 102, 241, 0.28)); border: 1.5px solid #38bdf8; color: #38bdf8; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 999px; box-shadow: 0 0 14px rgba(56, 189, 248, 0.5); white-space: nowrap;">⚡ WATCHDOG 24/7</span>
+                        </div>
+                        <div class="app-bullets">
+                            • 🔄 <b>Watchdog Tự Hồi Sinh:</b> Tự động kết nối lại khi bị hệ thống ngắt, duy trì 24/7 không cần bật lại thủ công.<br>
+                            • 📦 <b>Hỗ Trợ ADB Modules:</b> Nạp module tối ưu chuyên sâu không cần quyền Root.<br>
+                            • ⚡ <b>Cấp Quyền Siêu Tốc:</b> Tương thích hoàn hảo Android 11 đến Android 15 mới nhất.<br>
+                            • 🛡️ <b>0% Xung Đột:</b> Có thể cài song song hoặc thay thế Shizuku bản gốc mượt mà.
+                        </div>
+                    </div>
+                    <div style="margin-top: 16px;">
+                        <button type="button" onclick="openUnlockModal('shizukunext')" class="btn-download-action shizuku" style="background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);">
+                            <span>⚡</span>
+                            <span>TẢI SHIZUKU-NEXT</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- ==================== 2. FAST DOWNLOAD CARDS (ALWAYS VISIBLE) ==================== -->
         <section class="section-wrap" id="download">
             <div class="section-title-wrap">
                 <span class="section-badge" style="background: linear-gradient(135deg, rgba(0, 255, 102, 0.2), rgba(236, 72, 153, 0.2)); border-color: #00ff66; color: #00ff66; box-shadow: 0 0 16px rgba(0, 255, 102, 0.25);">👑 BỘ BA CÔNG CỤ TỐI ƯU ĐỘC QUYỀN FLOWLY</span>
@@ -2216,11 +2836,12 @@
                             </div>
                         </div>
                         <div class="app-bullets">
-                            • 🎮 <b>Tự Quét Game Thật:</b> Nhận diện Liên Quân, Free Fire, PUBG, Tốc Chiến...<br>
-                            • 🖥️ <b>Hạ Độ Phân Giải Riêng Từng Game:</b> 540p, 720p tăng 25-35 FPS mượt mà.<br>
-                            • 🔄 <b>Auto-Restore Độc Quyền:</b> Tự về gốc khi tắt màn hình hoặc thoát game.<br>
-                            • 🔥 <b>Chế Độ CRAZY Đầu 3x:</b> Dồn RAM ~3200MB, khóa 120Hz chống quá nhiệt.<br>
-                            • 🔋 <b>Sửa Thanh Pin Trắng:</b> Nút 1-chạm cho máy Oppo & Realme.
+                            • 🚀 <b>Auto Game Observer:</b> Tự động nhận diện mở game bật Gaming Boost &amp; tự hoàn trả gốc khi thoát.<br>
+                            • 🎯 <b>Live Mini HUD:</b> Đo FPS thực tế từ SurfaceFlinger, nhiệt độ Pin/CPU và Ping ms thời gian thực.<br>
+                            • 🎧 <b>Low-Latency Audio:</b> Giảm trễ âm thanh tai nghe Bluetooth từ 200ms xuống dưới 40ms.<br>
+                            • 🛡️ <b>Edge Palm Rejection:</b> Khóa chạm nhầm mép màn hình cong &amp; chặn vuốt văng ra ngoài khi combat.<br>
+                            • 🌐 <b>Smart Gaming DNS:</b> Bộ chọn DNS 3 chế độ (Nhà mạng / Google / AdGuard) kèm đo ping ms trực tiếp.<br>
+                            • 🖥️ <b>Hạ Độ Phân Giải Riêng Từng Game:</b> 540p, 720p bung trần 120 FPS mát máy &amp; Sửa thanh pin trắng.
                         </div>
                     </div>
                     <button type="button" onclick="openUnlockModal('flows')" class="btn-download-action flows">
@@ -2279,7 +2900,86 @@
             </div>
         </section>
 
-        <!-- ==================== BỘ CÔNG CỤ TỐI ƯU BỔ TRỢ (LINKBIO STYLE) ==================== -->
+        <!-- ==================== 2.5. INTERACTIVE BEFORE / AFTER PERFORMANCE SLIDER ==================== -->
+        <section class="section-wrap" id="before-after" style="margin-bottom: 36px;">
+            <div class="section-title-wrap">
+                <span class="section-badge" style="background: rgba(16, 185, 129, 0.15); border-color: #10b981; color: #34d399; box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);">📊 HIỆU NĂNG THỰC TẾ</span>
+                <h2 class="section-title">So Sánh Trực Quan: Trước &amp; Sau Khi Kích Hoạt FlowOp</h2>
+                <p class="section-desc">Kéo thanh trượt bên dưới để cảm nhận sự bứt phá về FPS, độ mượt và nhiệt độ máy khi chơi game!</p>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 20px; padding: 24px; box-shadow: 0 16px 40px rgba(0,0,0,0.7); max-width: 960px; margin: 0 auto;">
+                <!-- Comparison Dual Cards -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-bottom: 22px;">
+                    <!-- BEFORE CARD -->
+                    <div style="background: linear-gradient(145deg, rgba(239, 68, 68, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 16px; padding: 20px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                            <span style="font-size: 11px; font-weight: 900; background: #ef4444; color: #fff; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.5px;">🔴 TRƯỚC KHI TỐI ƯU</span>
+                            <span style="font-size: 12px; color: #f87171; font-weight: 700;">Hệ điều hành mặc định</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px;">
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                <span style="color: #94a3b8;">Khung hình FPS:</span>
+                                <b style="color: #ef4444;">35 - 45 FPS (Drop giật)</b>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                <span style="color: #94a3b8;">Nhiệt độ máy:</span>
+                                <b style="color: #ef4444;">43.5°C (Nóng bóp xung)</b>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                <span style="color: #94a3b8;">Độ trễ Ping mạng:</span>
+                                <b style="color: #ef4444;">85 - 240ms (Nhảy đỏ)</b>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                <span style="color: #94a3b8;">Độ trễ tai nghe Bluetooth:</span>
+                                <b style="color: #ef4444;">~220ms (Bắn xong mới nghe)</b>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #94a3b8;">Đa nhiệm ngầm:</span>
+                                <b style="color: #ef4444;">Tràn RAM, văng app</b>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AFTER CARD -->
+                    <div style="background: linear-gradient(145deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                            <span style="font-size: 11px; font-weight: 900; background: #10b981; color: #000; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.5px;">🟢 SAU KHI DÙNG FLOWOP &amp; BROTX V8</span>
+                            <span style="font-size: 12px; color: #34d399; font-weight: 700;">Đã kích hoạt Shizuku UID 2000</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px;">
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                <span style="color: #94a3b8;">Khung hình FPS:</span>
+                                <b style="color: #10b981;">60 / 120 FPS (Thẳng tắp)</b>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                <span style="color: #94a3b8;">Nhiệt độ máy:</span>
+                                <b style="color: #10b981;">36.8°C (Hạ 720p máy mát)</b>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                <span style="color: #94a3b8;">Độ trễ Ping mạng:</span>
+                                <b style="color: #10b981;">12 - 16ms (DSCP QoS Speed)</b>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                <span style="color: #94a3b8;">Độ trễ tai nghe Bluetooth:</span>
+                                <b style="color: #10b981;">&lt; 38ms (Nghe chuẩn bước chân)</b>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #94a3b8;">Đa nhiệm ngầm:</span>
+                                <b style="color: #10b981;">Bảo vệ 100% Zalo, Messenger</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to action inside slider box -->
+                <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px;">
+                    <a href="#featured" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #f97316 0%, #ef4444 100%); color: #fff; padding: 12px 28px; border-radius: 12px; font-weight: 900; font-size: 13px; text-decoration: none; box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1.0)'">
+                        <span>🔥 NÂNG CẤP HIỆU NĂNG NGAY (MIỄN PHÍ)</span> ➔
+                    </a>
+                </div>
+            </div>
+        </section>
         <section class="linkbio-tools-section" id="tools">
             <div class="section-title-wrap" style="margin-bottom: 24px;">
                 <span class="section-badge" style="background: rgba(56, 189, 248, 0.15); border-color: #38bdf8; color: #38bdf8; box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);">📦 HỆ SINH THÁI 10 BỘ TỐI ƯU BỔ TRỢ</span>
@@ -2287,7 +2987,7 @@
                 <p class="section-desc">Phân loại theo từng SET mô-đun khoa học • Nhấp vào từng SET để xổ xuống danh sách ứng dụng • Tải riêng lẻ hoặc tải trọn bộ về máy</p>
             </div>
 
-            <!-- Live Search Bar -->
+                        <!-- Live Search Bar -->
             <div class="linkbio-search-bar-wrap">
                 <span class="search-icon">🔍</span>
                 <input type="text" id="toolSearchInput" placeholder="Tìm kiếm nhanh trong 64 ứng dụng (vd: Canta, Vulkan, BBS, Shizuku, IdleTweaks...)" oninput="filterTools(this.value)">
@@ -2304,7 +3004,7 @@
             </div>
 
             <!-- SET 1: COMBO HOÀNG KIM (7 MẢNH GHÉP TỐI THƯỢNG) -->
-            <div class="linkbio-set-accordion is-open" id="accordion-set1">
+            <div class="linkbio-set-accordion" id="accordion-set1">
                 <div class="linkbio-set-header" onclick="toggleSetAccordion('accordion-set1')">
                     <div class="linkbio-set-header-left">
                         <div class="linkbio-set-badge-row">
@@ -2314,14 +3014,22 @@
                         <div class="linkbio-cat-sub">Nguyên tắc cốt lõi: Mỗi mảng hệ thống 1 app phụ trách • 0% chạy ngầm thừa</div>
                     </div>
                     <div class="linkbio-set-header-right">
-                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set1')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
-                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
-                        </button>
                         <div class="set-chevron">▼</div>
                     </div>
                 </div>
                 <div class="linkbio-set-body">
                     <div class="linkbio-pills-list">
+                    <div class="linkbio-pill" data-app-id="brotx" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//raw.githubusercontent.com/7dzuong/bio/main/BrotX-v8.apk" onclick="handlePillClick(event, 'brotx')">
+                        <img src="icon_brotx.png" alt="BrotX v8" class="linkbio-pill-img">
+                        <div class="linkbio-pill-content">
+                            <div class="linkbio-pill-title">BrotX Optimizer v8 <span class="pill-tag-hot" style="background: linear-gradient(135deg, #ef4444, #f97316); box-shadow: 0 0 10px rgba(239, 68, 68, 0.6); font-weight: 900;">🔥 CỰC HOT</span></div>
+                            <div class="linkbio-pill-desc">Siêu công cụ dọn dẹp hệ thống, UAD Debloater &amp; tối ưu Gaming qua Shizuku v8.0.0 mới nhất</div>
+                        </div>
+                        <div class="linkbio-pill-action" onclick="openDirectDownload(event, 'brotx'); event.stopPropagation();">
+                            <span>Tải ngay!</span> <span>➔</span>
+                        </div>
+                    </div>
+
                     <div class="linkbio-pill" data-app-id="shizukunext" href="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/rushiranpise/Shizuku-Next/releases/download/v14.0.33-next/shizuku-v14.0.33-next.apk" onclick="handlePillClick(event, 'shizukunext')">
                         <img src="icon_shizukunext.png" alt="Shizuku-Next" class="linkbio-pill-img">
                         <div class="linkbio-pill-content">
@@ -2417,9 +3125,6 @@
                         <div class="linkbio-cat-sub">Ép xung cảm ứng 1000Hz Digitizer • Vuốt tâm ms • Ghìm tâm trục X/Y qua Shizuku</div>
                     </div>
                     <div class="linkbio-set-header-right">
-                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set2')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
-                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
-                        </button>
                         <div class="set-chevron">▼</div>
                     </div>
                 </div>
@@ -2500,9 +3205,6 @@
                         <div class="linkbio-cat-sub">Đánh chặn luồng hệ thống • Tường lửa chặn mạng ngầm không hao pin VPN</div>
                     </div>
                     <div class="linkbio-set-header-right">
-                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set3')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
-                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
-                        </button>
                         <div class="set-chevron">▼</div>
                     </div>
                 </div>
@@ -2593,9 +3295,6 @@
                         <div class="linkbio-cat-sub">Bơm Shizuku qua cổng Root giả lập • Task Manager Windows • Ép Deep Doze 0s</div>
                     </div>
                     <div class="linkbio-set-header-right">
-                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set4')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
-                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
-                        </button>
                         <div class="set-chevron">▼</div>
                     </div>
                 </div>
@@ -2676,9 +3375,6 @@
                         <div class="linkbio-cat-sub">Tắt bóng bán dẫn OLED • Khóa sóng 4G/5G chống giật Ping • Chia sẻ file P2P</div>
                     </div>
                     <div class="linkbio-set-header-right">
-                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set5')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
-                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
-                        </button>
                         <div class="set-chevron">▼</div>
                     </div>
                 </div>
@@ -2759,9 +3455,6 @@
                         <div class="linkbio-cat-sub">Bộ ba khởi đầu bắt buộc: Nền tảng cấp quyền ADB không dây, Terminal & Tinh chỉnh</div>
                     </div>
                     <div class="linkbio-set-header-right">
-                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set6')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
-                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
-                        </button>
                         <div class="set-chevron">▼</div>
                     </div>
                 </div>
@@ -2812,9 +3505,6 @@
                         <div class="linkbio-cat-sub">Đo FPS từ tầng hiển thị SurfaceFlinger, gỡ app hệ thống & tùy biến Monet</div>
                     </div>
                     <div class="linkbio-set-header-right">
-                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set7')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
-                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
-                        </button>
                         <div class="set-chevron">▼</div>
                     </div>
                 </div>
@@ -2895,9 +3585,6 @@
                         <div class="linkbio-cat-sub">Tách âm lượng từng app, tắt màn hình khi cày game, chặn văng sàn TMĐT</div>
                     </div>
                     <div class="linkbio-set-header-right">
-                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set8')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
-                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
-                        </button>
                         <div class="set-chevron">▼</div>
                     </div>
                 </div>
@@ -2988,9 +3675,6 @@
                         <div class="linkbio-cat-sub">Can thiệp Phenotype.db, cấu hình Modem VoLTE/VoWiFi, luồng Raw Display 120Hz</div>
                     </div>
                     <div class="linkbio-set-header-right">
-                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set9')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
-                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
-                        </button>
                         <div class="set-chevron">▼</div>
                     </div>
                 </div>
@@ -3091,9 +3775,6 @@
                         <div class="linkbio-cat-sub">Kiểm soát WakeLocks • Ép Deep Doze 5s • Dọn rác UFS (sm fstrim) • Event-Driven</div>
                     </div>
                     <div class="linkbio-set-header-right">
-                        <button type="button" class="btn-set-all-download" onclick="openSetDownload(event, 'set10')" title="Tải trọn bộ các ứng dụng trong set này qua Link4M">
-                            <span>📦 Tải Trọn Bộ SET</span> <span>➔</span>
-                        </button>
                         <div class="set-chevron">▼</div>
                     </div>
                 </div>
@@ -3176,7 +3857,7 @@
 
         <!-- ==================== CẨM NANG & QUY TRÌNH HƯỚNG DẪN TỐI ƯU TOÀN DIỆN A-Z ==================== -->
         <!-- ==================== CẨM NANG & QUY TRÌNH HƯỚNG DẪN TỐI ƯU TOÀN DIỆN A-Z ==================== -->
-        <section class="section-wrap" id="guide-combo" style="max-width: 920px; margin: 36px auto 44px auto;">
+        <section class="section-wrap" id="guide-combo" style="width: 100%; margin: 36px auto 44px auto;">
             <div class="optimization-guide-card">
                 
                 <div class="guide-header-badge">
@@ -3623,6 +4304,226 @@ settings put secure multi_press_timeout 200</code></pre>
             </div>
         </section>
 
+        
+        <!-- ==================== BROTX V8 INTEGRATED ENGINE & PROFILES ==================== -->
+        <section class="section-wrap" id="brotx-v8" style="margin-top: 32px; margin-bottom: 32px;">
+            <div class="section-title-wrap">
+                <span class="section-badge" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(249, 115, 22, 0.25)); border-color: #ef4444; color: #ff6b6b; box-shadow: 0 0 16px rgba(239, 68, 68, 0.4);">🔥 TÍCH HỢP TOÀN DIỆN MÔ HÌNH BROTX V8 (V8.0.0)</span>
+                <h2 class="section-title">Hệ Thống 64 Cờ &amp; 4 Hồ Sơ Cấu Hình BrotX v8</h2>
+                <p class="section-desc">Giao tiếp trực tiếp qua Shizuku IPC (UID 2000) • 100% No Root • Bảo toàn Knox 0x0 • Tự động snapshot hoàn tác xuất xưởng • Speed Mode QoS socket mạng &amp; Cảnh báo Debloater 3 lớp.</p>
+            </div>
+
+            <!-- 4 Core Profiles of BrotX v8 -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 28px;">
+                
+                <!-- Profile 1: Factory Stock -->
+                <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; backdrop-filter: blur(14px);">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span style="font-size: 26px;">🏭</span>
+                            <span style="font-size: 10.5px; font-weight: 800; background: rgba(255, 255, 255, 0.08); color: #cbd5e1; border: 1px solid rgba(255, 255, 255, 0.2); padding: 3px 8px; border-radius: 999px;">XUẤT XƯỞNG</span>
+                        </div>
+                        <div style="font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 6px;">Mặc Định Nhà Sản Xuất</div>
+                        <div style="font-size: 11px; color: #94a3b8; font-weight: 600; margin-bottom: 12px;">Factory Stock Snapshot</div>
+                        <div style="font-size: 12px; color: #cbd5e1; line-height: 1.55; margin-bottom: 16px;">
+                            • Hoàn tác 100% toàn bộ 64 cờ về bản snapshot xuất xưởng.<br>
+                            • Reset độ phân giải, density, hoạt ảnh và xung nhịp về gốc.<br>
+                            • An toàn tuyệt đối trước khi cập nhật OTA hoặc đi bảo hành máy.
+                        </div>
+                    </div>
+                    <button type="button" onclick="applyBrotxProfileUi('factory_stock')" style="width: 100%; padding: 12px; font-size: 12px; font-weight: 800; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); color: #f1f5f9; cursor: pointer; transition: all 0.2s;">
+                        🏭 Khôi Phục Snapshot Xuất Xưởng
+                    </button>
+                </div>
+
+                <!-- Profile 2: Balanced Smooth -->
+                <div style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(15, 23, 42, 0.9) 100%); border: 1.5px solid #06b6d4; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; backdrop-filter: blur(14px); box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span style="font-size: 26px;">⚖️</span>
+                            <span style="font-size: 10.5px; font-weight: 800; background: rgba(6, 182, 212, 0.2); color: #22d3ee; border: 1px solid #06b6d4; padding: 3px 8px; border-radius: 999px;">KHUYÊN DÙNG</span>
+                        </div>
+                        <div style="font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 6px;">Cân Bằng Mượt Mà</div>
+                        <div style="font-size: 11px; color: #38bdf8; font-weight: 600; margin-bottom: 12px;">Balanced Smooth v8</div>
+                        <div style="font-size: 12px; color: #cbd5e1; line-height: 1.55; margin-bottom: 16px;">
+                            • Hoạt ảnh 0.5x, quét thích ứng trần, AdGuard DNS DoT chặn rác.<br>
+                            • Kích hoạt <b>Speed Mode (DSCP QoS)</b> socket mạng, giảm sụt ping.<br>
+                            • Tắt <b>App Standby Buckets</b>: Nhận thông báo Zalo/Telegram 0ms.<br>
+                            • Ngắt sạc ở 80%/85%, chống ngâm pin trần 4.4V qua đêm.
+                        </div>
+                    </div>
+                    <button type="button" onclick="applyBrotxProfileUi('balanced_smooth')" style="width: 100%; padding: 12px; font-size: 12px; font-weight: 800; border-radius: 12px; border: none; background: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%); color: #fff; cursor: pointer; box-shadow: 0 4px 16px rgba(6, 182, 212, 0.4); transition: all 0.2s;">
+                        ⚖️ Kích Hoạt Cân Bằng Mượt Mà
+                    </button>
+                </div>
+
+                <!-- Profile 3: Gaming Boost -->
+                <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(249, 115, 22, 0.08) 50%, rgba(15, 23, 42, 0.95) 100%); border: 1.5px solid #ef4444; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; backdrop-filter: blur(14px); box-shadow: 0 0 24px rgba(239, 68, 68, 0.35);">
+                    <div style="position: absolute; top: 10px; right: 10px;">
+                        <span style="font-size: 10px; font-weight: 900; background: linear-gradient(135deg, #ef4444, #f97316); color: #fff; padding: 3px 8px; border-radius: 6px; box-shadow: 0 0 10px rgba(239,68,68,0.6);">FLAGSHIP (HOT)</span>
+                    </div>
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                            <span style="font-size: 26px;">🚀</span>
+                            <span style="font-size: 11px; font-weight: 800; color: #ff6b6b; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); padding: 2px 7px; border-radius: 6px;">UNLEASHING</span>
+                        </div>
+                        <div style="font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 6px;">Hiệu Năng Chơi Game</div>
+                        <div style="font-size: 11px; color: #fca5a5; font-weight: 600; margin-bottom: 12px;">Gaming Boost v8 (Full Power)</div>
+                        <div style="font-size: 12px; color: #cbd5e1; line-height: 1.55; margin-bottom: 16px;">
+                            • Speed Mode QoS mạng, điều phối đa nhân CPU (<code>multicore_packet_scheduler</code>).<br>
+                            • Cảm ứng 0ms xuyên cửa sổ nổi HUD, kéo tâm headshot chuẩn xác.<br>
+                            • Bypass giới hạn nhiệt GOS, triệt tiêu RAM Plus &amp; ZRAM, giữ Wi-Fi thức 100%.<br>
+                            • Ép quét trần <b>144Hz</b> theo tấm nền • Tự động tắt ANGLE bảo vệ GPU Mali.
+                        </div>
+                    </div>
+                    <button type="button" onclick="applyBrotxProfileUi('gaming_boost')" style="width: 100%; padding: 12px; font-size: 12px; font-weight: 900; border-radius: 12px; border: none; background: linear-gradient(135deg, #ef4444 0%, #f97316 100%); color: #fff; cursor: pointer; box-shadow: 0 4px 18px rgba(239, 68, 68, 0.5); transition: all 0.2s;">
+                        🚀 Kích Hoạt Gaming Boost v8
+                    </button>
+                </div>
+
+                <!-- Profile 4: Ultra Battery Saver -->
+                <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; backdrop-filter: blur(14px);">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span style="font-size: 26px;">🔋</span>
+                            <span style="font-size: 10.5px; font-weight: 800; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #10b981; padding: 3px 8px; border-radius: 999px;">TIẾT KIỆM PIN</span>
+                        </div>
+                        <div style="font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 6px;">Siêu Tiết Kiệm Pin</div>
+                        <div style="font-size: 11px; color: #6ee7b7; font-weight: 600; margin-bottom: 12px;">Ultra Battery Saver v8</div>
+                        <div style="font-size: 12px; color: #cbd5e1; line-height: 1.55; margin-bottom: 16px;">
+                            • Cố định 60Hz, ngắt micro và camera quét mắt giữ sáng màn hình.<br>
+                            • Tắt quét sóng Bluetooth BLE và Wi-Fi tìm mạng ngầm, tắt giữ 4G khi có Wi-Fi.<br>
+                            • Giới hạn tối đa 2 tiến trình đệm trong RAM, duy trì thời lượng pin tối đa.
+                        </div>
+                    </div>
+                    <button type="button" onclick="applyBrotxProfileUi('ultra_battery_saver')" style="width: 100%; padding: 12px; font-size: 12px; font-weight: 800; border-radius: 12px; border: none; background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: #042f1a; cursor: pointer; box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35); transition: all 0.2s;">
+                        🔋 Bật Siêu Tiết Kiệm Pin
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6 New Exclusive V8 Tweak Toggles -->
+            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 18px; padding: 22px; margin-bottom: 28px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 16px;">
+                    <div>
+                        <div style="font-size: 16px; font-weight: 800; color: #fff;">⚡ 6 Cờ Tinh Chỉnh Độc Quyền Bản v8</div>
+                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Can thiệp sâu vào hàng đợi mạng, chính sách Standby đa nhiệm và xung chấn motor rung</div>
+                    </div>
+                    <span style="font-size: 11px; font-weight: 800; color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); padding: 4px 10px; border-radius: 8px;">6 / 6 CỜ MỚI</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+                    
+                    <!-- Toggle 1: Speed Mode -->
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <div>
+                            <div style="font-size: 13.5px; font-weight: 700; color: #fff;">Speed Mode (QoS Mạng Game)</div>
+                            <div style="font-size: 11px; color: #94a3b8; font-family: monospace;">global.speed_mode = 1</div>
+                            <div style="font-size: 11px; color: #cbd5e1; margin-top: 3px;">Gán nhãn ưu tiên socket mạng, giảm sụt ping game</div>
+                        </div>
+                        <button type="button" class="btn-brotx-toggle active" data-active="true" onclick="toggleBrotxFlagUi('global', 'speed_mode', this)">ĐANG BẬT (1)</button>
+                    </div>
+
+                    <!-- Toggle 2: App Standby -->
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <div>
+                            <div style="font-size: 13.5px; font-weight: 700; color: #fff;">Tắt App Standby Buckets</div>
+                            <div style="font-size: 11px; color: #94a3b8; font-family: monospace;">global.app_standby_enabled = 0</div>
+                            <div style="font-size: 11px; color: #cbd5e1; margin-top: 3px;">Trị trễ thông báo Zalo/Telegram/FB, nhận tin 0ms</div>
+                        </div>
+                        <button type="button" class="btn-brotx-toggle active" data-active="true" onclick="toggleBrotxFlagUi('global', 'app_standby_enabled', this)">ĐANG BẬT (0)</button>
+                    </div>
+
+                    <!-- Toggle 3: Verifier Verify ADB -->
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <div>
+                            <div style="font-size: 13.5px; font-weight: 700; color: #fff;">Tắt quét ADB Verify</div>
+                            <div style="font-size: 11px; color: #94a3b8; font-family: monospace;">global.verifier_verify_adb_installs = 0</div>
+                            <div style="font-size: 11px; color: #cbd5e1; margin-top: 3px;">Bỏ qua quét bảo mật, cài đặt APK qua Shizuku siêu tốc</div>
+                        </div>
+                        <button type="button" class="btn-brotx-toggle active" data-active="true" onclick="toggleBrotxFlagUi('global', 'verifier_verify_adb_installs', this)">ĐANG BẬT (0)</button>
+                    </div>
+
+                    <!-- Toggle 4: DeviceConfig Sync Disabled -->
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <div>
+                            <div style="font-size: 13.5px; font-weight: 700; color: #fff;">Chặn DeviceConfig OTA Sync</div>
+                            <div style="font-size: 11px; color: #94a3b8; font-family: monospace;">global.device_config_sync_disabled = 1</div>
+                            <div style="font-size: 11px; color: #cbd5e1; margin-top: 3px;">Ngăn Play Services tự động ghi đè tham số hệ thống</div>
+                        </div>
+                        <button type="button" class="btn-brotx-toggle active" data-active="true" onclick="toggleBrotxFlagUi('global', 'device_config_sync_disabled', this)">ĐANG BẬT (1)</button>
+                    </div>
+
+                    <!-- Toggle 5: Navigation Gestures Vibrate -->
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <div>
+                            <div style="font-size: 13.5px; font-weight: 700; color: #fff;">Tắt rung cử chỉ vuốt mép</div>
+                            <div style="font-size: 11px; color: #94a3b8; font-family: monospace;">secure.navigation_gestures_vibrate = 0</div>
+                            <div style="font-size: 11px; color: #cbd5e1; margin-top: 3px;">Vuốt điều hướng Back/Home êm ái, bảo vệ motor rung</div>
+                        </div>
+                        <button type="button" class="btn-brotx-toggle active" data-active="true" onclick="toggleBrotxFlagUi('secure', 'navigation_gestures_vibrate', this)">ĐANG BẬT (0)</button>
+                    </div>
+
+                    <!-- Toggle 6: Charging Vibration -->
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <div>
+                            <div style="font-size: 13.5px; font-weight: 700; color: #fff;">Tắt rung khi cắm sạc</div>
+                            <div style="font-size: 11px; color: #94a3b8; font-family: monospace;">secure.charging_vibration_enabled = 0</div>
+                            <div style="font-size: 11px; color: #cbd5e1; margin-top: 3px;">Giữ máy yên tĩnh khi cắm sạc đêm, chống mòn motor</div>
+                        </div>
+                        <button type="button" class="btn-brotx-toggle active" data-active="true" onclick="toggleBrotxFlagUi('secure', 'charging_vibration_enabled', this)">ĐANG BẬT (0)</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 3-Layer Safe Debloater -->
+            <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 18px; padding: 22px; margin-bottom: 28px;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                    <span style="font-size: 24px;">🛡️</span>
+                    <div>
+                        <div style="font-size: 16px; font-weight: 800; color: #fff;">Trình Gỡ Ứng Dụng An Toàn 3 Lớp (Debloater v8)</div>
+                        <div style="font-size: 12px; color: #fca5a5;">Phân biệt phân vùng thời gian thực • Đóng băng app người dùng tránh mất APK • Chống màn hình đen</div>
+                    </div>
+                </div>
+
+                <div style="font-size: 12px; color: #cbd5e1; line-height: 1.5; margin-bottom: 16px; background: rgba(0,0,0,0.25); border-radius: 10px; padding: 12px;">
+                    • <b>Nguyên tắc 1:</b> Tự động kiểm tra đường dẫn <code>pm path</code>. Nếu là app rác trong <code>/system/</code> sẽ gỡ sạch; Nếu là app người dùng trong <code>/data/app/</code> sẽ <b>Đóng Băng (Disable)</b> để giữ nguyên file APK gốc.<br>
+                    • <b>Nguyên tắc 2:</b> Khóa tự động: Tuyệt đối không cho phép gỡ Launcher, Bàn phím IME hoặc WebView để tránh lỗi màn hình đen.<br>
+                    • <b>Nguyên tắc 3:</b> Hỗ trợ mở lại và khôi phục ứng dụng đã đóng băng chỉ với 1 chạm bất kỳ lúc nào.
+                </div>
+
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="text" id="brotxDebloatPkgInput" placeholder="Nhập package cần gỡ (vd: com.facebook.katana, com.ss.android.ugc.trill...)" style="flex: 1; min-width: 260px; padding: 12px 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; color: #fff; font-size: 13px; font-family: monospace;">
+                    <button type="button" onclick="handleSafeDebloatUi()" style="padding: 12px 20px; font-size: 12.5px; font-weight: 800; border-radius: 12px; border: none; background: linear-gradient(135deg, #ef4444 0%, #f97316 100%); color: #fff; cursor: pointer; box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4); display: flex; align-items: center; gap: 8px;">
+                        <span>🗑️</span> <span>GỠ / ĐÓNG BĂNG AN TOÀN</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Smart Tweaks Search across 64 Flags -->
+            <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 18px; padding: 22px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+                    <div>
+                        <div style="font-size: 16px; font-weight: 800; color: #fff;">🔍 Tìm Kiếm Tinh Chỉnh Thông Minh (64 Cờ Hệ Thống)</div>
+                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Hỗ trợ gõ tiếng Việt không dấu (vd: bo loc, hoat anh, speed_mode, standby, fstrim, samsung, mali...)</div>
+                    </div>
+                    <span style="font-size: 11px; font-weight: 800; color: #38bdf8; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25); padding: 4px 10px; border-radius: 8px;">64 CỜ TOÀN HỆ THỐNG</span>
+                </div>
+
+                <div style="position: relative; margin-bottom: 16px;">
+                    <input type="text" id="brotxSmartSearchInput" placeholder="Tìm nhanh cờ (vd: speed_mode, 144hz, standby, fstrim, zram, mali, samsung...)" oninput="filterBrotxFlags(this.value)" style="width: 100%; padding: 12px 14px 12px 38px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; color: #fff; font-size: 13px;">
+                    <span style="position: absolute; left: 14px; top: 12px; color: #94a3b8;">🔍</span>
+                </div>
+
+                <div id="brotxFlagsListContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; max-height: 480px; overflow-y: auto; padding-right: 4px;">
+                    <!-- Flags rendered dynamically via JS -->
+                </div>
+            </div>
+
+        </section>
+
+
         <!-- ==================== 4. CHI TIẾT TÍNH NĂNG & HƯỚNG DẪN A-Z ==================== -->
         <section class="section-wrap reveal-pop" id="features">
             <div class="section-title-wrap">
@@ -3956,64 +4857,263 @@ settings put secure multi_press_timeout 200</code></pre>
             </div>
         </section>
 
-        <!-- ==================== 8. HƯỚNG DẪN KÍCH HOẠT SHIZUKU ==================== -->
-        <section class="section-wrap reveal-pop" id="guide">
+        <!-- ==================== 8. HƯỚNG DẪN KÍCH HOẠT SHIZUKU ĐA DÒNG MÁY ==================== -->
+        <div id="shizuku-guide"></div>
+        <section class="section-wrap" id="guide">
             <div class="section-title-wrap">
-                <span class="section-badge">HƯỚNG DẪN CÀI ĐẶT</span>
-                <h2 class="section-title">Kích Hoạt Shizuku Chỉ Với Vài Bước</h2>
-                <p class="section-desc">Shizuku là cầu nối cấp quyền ADB Shell an toàn tuyệt đối, không cần Root, không mất bảo hành máy.</p>
+                <span class="section-badge" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(168, 85, 247, 0.2)); border-color: #06b6d4; color: #38bdf8;">⚡ HƯỚNG DẪN SETUP &amp; TỰ ĐỘNG HÓA</span>
+                <h2 class="section-title">Trung Tâm Cài Đặt &amp; Kích Hoạt Shizuku Cho Mọi Dòng Máy</h2>
+                <p class="section-desc">Cấp quyền ADB Shell UID 2000 siêu tốc • Tự động 100% bằng máy tính hoặc ghép nối Wi-Fi không dây • An toàn tuyệt đối không Root!</p>
             </div>
 
             <div class="guide-box">
+                <!-- Navigation Tabs -->
                 <div class="guide-tab-nav">
-                    <button type="button" class="btn-guide-tab active" id="btnGuideWifi" onclick="switchGuideTab('wifi')">
-                        📶 Cách 1: Qua Wi-Fi (Không Cần Máy Tính)
+                    <button type="button" class="btn-guide-tab active" id="btnGuideAuto" onclick="switchGuideTab('auto')">
+                        💻 1-Click Tự Động (PC)
                     </button>
-                    <button type="button" class="btn-guide-tab" id="btnGuideAdb" onclick="switchGuideTab('adb')">
-                        💻 Cách 2: Qua Máy Tính (Lệnh ADB 1 Dòng)
+                    <button type="button" class="btn-guide-tab" id="btnGuideXiaomi" onclick="switchGuideTab('xiaomi')">
+                        📱 Xiaomi / HyperOS
+                    </button>
+                    <button type="button" class="btn-guide-tab" id="btnGuideSamsung" onclick="switchGuideTab('samsung')">
+                        📱 Samsung One UI
+                    </button>
+                    <button type="button" class="btn-guide-tab" id="btnGuideOppo" onclick="switchGuideTab('oppo')">
+                        📱 OPPO / Realme
+                    </button>
+                    <button type="button" class="btn-guide-tab" id="btnGuideApps" onclick="switchGuideTab('apps')">
+                        ⚡ Cấp Quyền FlowOp &amp; BrotX
+                    </button>
+                    <button type="button" class="btn-guide-tab" id="btnGuideVideo" onclick="switchGuideTab('video')">
+                        🎬 Video HD &amp; Mẹo
                     </button>
                 </div>
 
-                <!-- Tab Wi-Fi -->
-                <div id="guideContentWifi">
+                <!-- 1. TAB: 1-CLICK TỰ ĐỘNG QUA MÁY TÍNH -->
+                <div id="guideContentAuto">
+                    <img src="shizuku_guide_auto_pc.png" alt="Hướng dẫn tự động kích hoạt Shizuku bằng PC" class="guide-img-responsive" loading="lazy">
+                    
+                    <div style="background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.4); border-radius: 14px; padding: 16px 20px; margin-bottom: 20px;">
+                        <div style="font-weight: 800; color: #e9d5ff; font-size: 15px; margin-bottom: 6px;">🚀 TỰ ĐỘNG HÓA 100% — KHÔNG CẦN THAO TÁC THỦ CÔNG:</div>
+                        <div style="font-size: 13px; color: #cbd5e1; line-height: 1.6;">
+                            Chỉ cần cắm cáp kết nối điện thoại vào máy tính và chạy file script <b>.bat</b>. Máy tính sẽ tự động nhận diện thiết bị, tự động cài đặt cả 2 app <b>FlowOptimize.apk</b> + <b>BrotX-v8.apk</b>, tự động kích hoạt <b>Shizuku Server</b> và tự cấp trước tất cả đặc quyền hệ thống!
+                        </div>
+                    </div>
+
                     <div class="guide-step">
                         <div class="step-icon">1</div>
                         <div class="step-text">
-                            <b>Bật Tùy Chọn Nhà Phát Triển:</b> Vào <i>Cài đặt</i> -> <i>Giới thiệu điện thoại</i> -> Chạm liên tục 7 lần vào <i>Số bản dựng</i>.
+                            <b>Bật Gỡ Lỗi USB:</b> Trên điện thoại, vào <i>Cài đặt</i> &rarr; <i>Tùy chọn nhà phát triển</i> &rarr; Bật <b>Gỡ lỗi USB</b> (USB Debugging). Dùng cáp kết nối điện thoại với máy tính PC hoặc Laptop.
                         </div>
                     </div>
                     <div class="guide-step">
                         <div class="step-icon">2</div>
                         <div class="step-text">
-                            <b>Bật Gỡ Lỗi Không Dây (Wireless Debugging):</b> Kết nối cùng mạng Wi-Fi, vào <i>Tùy chọn nhà phát triển</i> -> Bật <i>Gỡ lỗi không dây</i>.
+                            <b>Tải &amp; Chạy Script Tự Động 1-Click:</b> Bấm nút tải bên dưới hoặc chạy file <code>TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat</code> có sẵn trên Desktop:
+                            <div style="margin: 12px 0;">
+                                <a href="TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat" download class="btn-download-action" style="display: inline-flex; align-items: center; gap: 8px; max-width: 340px; padding: 12px 22px; border-radius: 12px; font-weight: 800; background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%); color: #fff; text-decoration: none; box-shadow: 0 4px 18px rgba(168, 85, 247, 0.4);">
+                                    <span>⚡ TẢI SCRIPT TỰ ĐỘNG (.BAT)</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="guide-step">
                         <div class="step-icon">3</div>
                         <div class="step-text">
-                            <b>Ghép Đôi Mã 6 Số:</b> Mở app Shizuku -> Chọn <i>Ghép đôi</i> -> Nhập mã 6 số từ thông báo hệ thống -> Bấm <i>Start</i> trong Shizuku!
+                            <b>Hoặc Chạy Lệnh ADB Thủ Công (Nếu Bạn Muốn):</b> Mở CMD hoặc PowerShell trên máy tính và dán dòng lệnh kích hoạt Shizuku:
+                            <div class="code-box" style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+                                <span style="word-break: break-all;">adb shell sh /sdcard/Android/data/moe.shizuku.privileged.api/start.sh</span>
+                                <button type="button" onclick="copyAdbCommand()" style="background: #38bdf8; color: #000; border: none; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 11px; cursor: pointer; flex-shrink: 0;">SAO CHÉP</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tab ADB -->
-                <div id="guideContentAdb" style="display: none;">
+                <!-- 2. TAB: XIAOMI / HYPEROS / MIUI -->
+                <div id="guideContentXiaomi" style="display: none;">
+                    <img src="shizuku_guide_xiaomi.png" alt="Hướng dẫn cài Shizuku cho Xiaomi HyperOS MIUI" class="guide-img-responsive" loading="lazy">
+                    
+                    <div style="background: rgba(255, 105, 0, 0.12); border: 1px solid rgba(255, 105, 0, 0.4); border-radius: 14px; padding: 16px 20px; margin-bottom: 20px;">
+                        <div style="font-weight: 800; color: #fdba74; font-size: 15px; margin-bottom: 6px;">⚠️ ĐẶC ĐIỂM SỐNG CÒN CỦA DÒNG MÁY XIAOMI / POCO:</div>
+                        <div style="font-size: 13px; color: #fed7aa; line-height: 1.6;">
+                            Hệ điều hành MIUI và Xiaomi HyperOS có cơ chế bảo mật kép. Để Shizuku có quyền điều khiển và gán cờ tối ưu, bạn <b>bắt buộc phải bật đủ 3 công tắc</b> trong Tùy chọn nhà phát triển!
+                        </div>
+                    </div>
+
                     <div class="guide-step">
                         <div class="step-icon">1</div>
                         <div class="step-text">
-                            <b>Bật Gỡ Lỗi USB:</b> Vào <i>Cài đặt</i> -> <i>Tùy chọn nhà phát triển</i> -> Bật <i>Gỡ lỗi USB</i> và cắm cáp kết nối điện thoại vào máy tính.
+                            <b>Mở Nhà Phát Triển:</b> Vào <i>Cài đặt</i> &rarr; <i>Giới thiệu điện thoại</i> &rarr; Chạm liên tục <b>7 lần</b> vào dòng <i>Phiên bản OS</i> (hoặc <i>Phiên bản MIUI</i>) đến khi xuất hiện thông báo: <i>"Bạn đã là nhà phát triển!"</i>.
                         </div>
                     </div>
                     <div class="guide-step">
                         <div class="step-icon">2</div>
                         <div class="step-text">
-                            <b>Chạy Lệnh Kích Hoạt 1 Dòng Duy Nhất:</b> Mở CMD hoặc PowerShell trên máy tính và dán dòng lệnh sau:
-                            <div class="code-box">
-                                <span>adb shell sh /sdcard/Android/data/moe.shizuku.privileged.api/start.sh</span>
-                            </div>
+                            <b>Bật 3 Công Tắc Bắt Buộc:</b> Vào <i>Cài đặt bổ sung</i> &rarr; <i>Tùy chọn cho nhà phát triển</i> và gạt bật:
+                            <br>• [ON] <b>Gỡ lỗi USB</b> (USB Debugging)
+                            <br>• [ON] <b>Cài đặt qua USB</b> (Install via USB)
+                            <br>• [ON] <b>Gỡ lỗi USB (Cài đặt bảo mật)</b> <i>(Lưu ý: Mục này yêu cầu máy có lắp SIM mạng và đăng nhập Mi Account)</i>.
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-icon">3</div>
+                        <div class="step-text">
+                            <b>Ghép Nối Wi-Fi Không Dây:</b> Kết nối cùng mạng Wi-Fi &rarr; Bật <b>Gỡ lỗi không dây</b> &rarr; Bấm <i>Ghép nối bằng mã</i>. Mở app Shizuku bấm <b>Ghép đôi</b> &rarr; Nhập mã 6 số từ thông báo &rarr; Quay lại Shizuku bấm <b>Bắt đầu (Start)</b>!
                         </div>
                     </div>
                 </div>
+
+                <!-- 3. TAB: SAMSUNG ONE UI -->
+                <div id="guideContentSamsung" style="display: none;">
+                    <img src="shizuku_guide_samsung.png" alt="Hướng dẫn kích hoạt Shizuku cho Samsung One UI" class="guide-img-responsive" loading="lazy">
+                    
+                    <div style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 16px 20px; margin-bottom: 20px;">
+                        <div style="font-weight: 800; color: #bae6fd; font-size: 15px; margin-bottom: 6px;">💡 MẸO VÀNG: DÙNG CHIA ĐÔI MÀN HÌNH (SPLIT SCREEN)</div>
+                        <div style="font-size: 13px; color: #e0f2fe; line-height: 1.6;">
+                            Trên Samsung One UI, nếu bạn vuốt thoát Cài đặt để mở Shizuku, hệ thống sẽ tự đổi cổng Port khiến ghép nối thất bại. <b>Hãy mở Chia đôi màn hình hoặc Cửa sổ nổi</b> để vừa xem mã vừa gõ vào thông báo Shizuku siêu dễ!
+                        </div>
+                    </div>
+
+                    <div class="guide-step">
+                        <div class="step-icon">1</div>
+                        <div class="step-text">
+                            <b>Mở Nhà Phát Triển:</b> Vào <i>Cài đặt</i> &rarr; <i>Thông tin điện thoại</i> &rarr; <i>Thông tin phần mềm</i> &rarr; Chạm <b>7 lần</b> vào <i>Số hiệu bản tạo</i> &rarr; Nhập mã PIN mở khóa máy.
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-icon">2</div>
+                        <div class="step-text">
+                            <b>Bật Gỡ Lỗi Không Dây:</b> Kết nối Wi-Fi &rarr; Vào <i>Cài đặt cho người phát triển</i> &rarr; Gạt bật <b>Gỡ lỗi không dây</b> (Wireless Debugging).
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-icon">3</div>
+                        <div class="step-text">
+                            <b>Nhập Mã 6 Số &amp; Khởi Động:</b> Bấm <i>Ghép nối bằng mã</i>. Kéo thanh thông báo xuống, nhập mã 6 số vào hộp thoại của Shizuku. Xong xuôi mở Shizuku bấm <b>Bắt đầu (Start)</b>. Màn hình báo <i>"Shizuku đang chạy"</i> là hoàn tất!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. TAB: OPPO / REALME / ONEPLUS -->
+                <div id="guideContentOppo" style="display: none;">
+                    <img src="shizuku_guide_oppo_realme.png" alt="Hướng dẫn cài Shizuku cho Oppo Realme ColorOS" class="guide-img-responsive" loading="lazy">
+                    
+                    <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 16px 20px; margin-bottom: 20px;">
+                        <div style="font-weight: 800; color: #a7f3d0; font-size: 15px; margin-bottom: 6px;">⚡ KHẮC PHỤC LỖI TỰ NGẮT KẾT NỐI SAU 10 PHÚT:</div>
+                        <div style="font-size: 13px; color: #d1fae5; line-height: 1.6;">
+                            ColorOS và Realme UI có cơ chế tự động tắt gỡ lỗi sau 10 phút không dùng cáp. Bạn cần tắt tùy chọn này để Shizuku duy trì quyền hoạt động 24/7!
+                        </div>
+                    </div>
+
+                    <div class="guide-step">
+                        <div class="step-icon">1</div>
+                        <div class="step-text">
+                            <b>Mở Nhà Phát Triển:</b> Vào <i>Cài đặt</i> &rarr; <i>Giới thiệu thiết bị</i> &rarr; <i>Phiên bản</i> &rarr; Chạm <b>7 lần</b> vào <i>Số bản dựng</i>.
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-icon">2</div>
+                        <div class="step-text">
+                            <b>Tắt Giới Hạn 10 Phút:</b> Vào <i>Cài đặt hệ thống</i> &rarr; <i>Tùy chọn cho nhà phát triển</i>:
+                            <br>• [OFF] <b>TẮT</b> mục <i>"Tự động tắt gỡ lỗi sau 10 phút"</i>.
+                            <br>• [ON] <b>BẬT</b> mục <i>"Vô hiệu hóa giám sát quyền"</i> (Disable permission monitoring).
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-icon">3</div>
+                        <div class="step-text">
+                            <b>Ghép Đôi Shizuku &amp; Sửa Thanh Pin Trắng:</b> Bật <i>Gỡ lỗi không dây</i> &rarr; Ghép đôi mã 6 số &rarr; Mở <b>FlowOptimize</b> bấm <b>⚡ Sửa Thanh Pin Trắng</b> để đưa thanh trạng thái về màu trắng nguyên bản không bị đổi sang màu xanh dương!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. TAB: CẤP QUYỀN FLOWOP & BROTX V8 -->
+                <div id="guideContentApps" style="display: none;">
+                    <img src="shizuku_guide_flowop_brotx.png" alt="Cấp quyền Shizuku cho FlowOp và BrotX v8" class="guide-img-responsive" loading="lazy">
+                    
+                    <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 14px; padding: 16px 20px; margin-bottom: 20px;">
+                        <div style="font-weight: 800; color: #fca5a5; font-size: 15px; margin-bottom: 6px;">👑 BƯỚC CUỐI CÙNG: ỦY QUYỀN ĐỂ BUNG HIỆU NĂNG</div>
+                        <div style="font-size: 13px; color: #fecaca; line-height: 1.6;">
+                            Sau khi Shizuku báo <i>"Đang chạy"</i>, bạn cần cấp phép cho <b>FlowOptimize</b> và <b>BrotX Optimizer</b> để hai ứng dụng có quyền can thiệp phần cứng và kích hoạt 64 cờ tối ưu!
+                        </div>
+                    </div>
+
+                    <div class="guide-step">
+                        <div class="step-icon">1</div>
+                        <div class="step-text">
+                            <b>Tải &amp; Cài Đặt Bộ Đôi Ứng Dụng:</b> Tải về file APK cài đặt chính thức (qua popup xác minh an toàn):
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
+                                <button type="button" onclick="openUnlockModal('brotx')" class="btn-download-action brotx" style="padding: 10px 18px; font-size: 12px; font-weight: 800; border-radius: 10px; border: none; cursor: pointer;">🔥 TẢI BROTX V8</button>
+                                <button type="button" onclick="openUnlockModal('flowopt')" class="btn-download-action" style="padding: 10px 18px; font-size: 12px; font-weight: 800; border-radius: 10px; border: none; cursor: pointer; background: linear-gradient(135deg, #ec4899, #f43f5e); color: #fff;">🌸 TẢI FLOWOP (FLOWOPTIMIZE)</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-icon">2</div>
+                        <div class="step-text">
+                            <b>Bật Ủy Quyền Trong Shizuku:</b> Mở app <b>Shizuku</b> &rarr; Bấm vào dòng <b>Ứng dụng được ủy quyền</b> (Authorized Applications) &rarr; Gạt <b>BẬT (ON)</b> cho:
+                            <br>• [ON] <b>FlowOptimize</b> (com.example.gameoptimizer)
+                            <br>• [ON] <b>BrotX Optimizer</b> (com.brotx.optimizer)
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <div class="step-icon">3</div>
+                        <div class="step-text">
+                            <b>Áp Dụng Model Tối Ưu:</b> Mở <b>FlowOp</b> hoặc <b>BrotX V8</b> &rarr; Chọn Model <b>Gaming Boost</b> (Mở khóa 120Hz, Speed Mode DSCP QoS, hạ 720p/540p) &rarr; Trải nghiệm game mượt mà không nóng máy!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. TAB: VIDEO HƯỚNG DẪN & MẸO -->
+                <div id="guideContentVideo" style="display: none;">
+                    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 20px; padding: 26px; box-shadow: 0 16px 40px rgba(0,0,0,0.7); text-align: center;">
+                        <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #f87171; padding: 6px 16px; border-radius: 999px; font-size: 12px; font-weight: 800; margin-bottom: 14px;">
+                            🎬 VIDEO WALKTHROUGH &amp; TUTORIAL
+                        </div>
+                        <h3 style="font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 8px;">Video Hướng Dẫn Kích Hoạt Shizuku &amp; Thiết Lập Bộ Ba Flowly</h3>
+                        <p style="font-size: 13px; color: #94a3b8; max-width: 600px; margin: 0 auto 20px auto;">
+                            Xem video trực quan từng bước trên kênh TikTok <b>@xxd5974</b> để thao tác chuẩn xác 100% trên điện thoại của bạn.
+                        </p>
+
+                        <!-- Video Preview Box -->
+                        <div style="position: relative; max-width: 640px; margin: 0 auto 24px auto; border-radius: 16px; overflow: hidden; border: 1px solid rgba(56, 189, 248, 0.3); background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+                            <img src="shizuku_guide_overview.png" onerror="this.src='shizuku_guide_auto_pc.png'" alt="Video Preview Shizuku" style="width: 100%; height: auto; opacity: 0.85; display: block;">
+                            <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.45);">
+                                <a href="https://www.tiktok.com/@xxd5974" target="_blank" rel="noopener" style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #ef4444, #f97316); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 26px; text-decoration: none; box-shadow: 0 0 30px rgba(239, 68, 68, 0.7); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1.0)'">
+                                    ▶
+                                </a>
+                                <span style="margin-top: 10px; font-size: 13px; font-weight: 800; color: #fff; text-shadow: 0 2px 8px #000;">BẤM ĐỂ XEM VIDEO TRÊN TIKTOK</span>
+                            </div>
+                        </div>
+
+                        <!-- Timestamps -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; text-align: left; max-width: 640px; margin: 0 auto 20px auto;">
+                            <div style="background: rgba(0,0,0,0.3); padding: 10px 14px; border-radius: 10px; font-size: 12px;">
+                                <b style="color: #38bdf8;">00:00</b> - Bật Tùy chọn nhà phát triển
+                            </div>
+                            <div style="background: rgba(0,0,0,0.3); padding: 10px 14px; border-radius: 10px; font-size: 12px;">
+                                <b style="color: #38bdf8;">00:45</b> - Ghép đôi Shizuku bằng Wi-Fi
+                            </div>
+                            <div style="background: rgba(0,0,0,0.3); padding: 10px 14px; border-radius: 10px; font-size: 12px;">
+                                <b style="color: #38bdf8;">01:30</b> - Cấp quyền cho FlowOptimize
+                            </div>
+                            <div style="background: rgba(0,0,0,0.3); padding: 10px 14px; border-radius: 10px; font-size: 12px;">
+                                <b style="color: #38bdf8;">02:15</b> - Kích hoạt 64 cờ BrotX V8 120Hz
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                            <a href="https://www.tiktok.com/@xxd5974" target="_blank" rel="noopener" class="btn-channel btn-channel-tiktok" style="font-size: 13px; padding: 10px 20px;">
+                                <span>🎵 KÊNH TIKTOK: @xxd5974</span> ➔
+                            </a>
+                            <a href="https://t.me/FlowOpVip" target="_blank" rel="noopener" class="btn-channel btn-channel-telegram" style="font-size: 13px; padding: 10px 20px;">
+                                <span>✈️ HỘI NHÓM TELEGRAM FLOWOP</span> ➔
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -4228,24 +5328,32 @@ settings put secure multi_press_timeout 200</code></pre>
             }
         }
 
-        // 4. Shizuku Guide Tab Switcher
+        // 4. Universal Shizuku Guide Tab Switcher
         function switchGuideTab(tabKey) {
-            const btnWifi = document.getElementById('btnGuideWifi');
-            const btnAdb = document.getElementById('btnGuideAdb');
-            const contentWifi = document.getElementById('guideContentWifi');
-            const contentAdb = document.getElementById('guideContentAdb');
+            const tabs = ['auto', 'xiaomi', 'samsung', 'oppo', 'apps', 'video'];
+            tabs.forEach(t => {
+                const btn = document.getElementById('btnGuide' + t.charAt(0).toUpperCase() + t.slice(1));
+                const content = document.getElementById('guideContent' + t.charAt(0).toUpperCase() + t.slice(1));
+                if (btn) {
+                    if (t === tabKey) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                }
+                if (content) {
+                    content.style.display = (t === tabKey) ? 'block' : 'none';
+                }
+            });
+        }
 
-            if (tabKey === 'wifi') {
-                btnWifi.classList.add('active');
-                btnAdb.classList.remove('active');
-                contentWifi.style.display = 'block';
-                contentAdb.style.display = 'none';
-            } else {
-                btnAdb.classList.add('active');
-                btnWifi.classList.remove('active');
-                contentWifi.style.display = 'none';
-                contentAdb.style.display = 'block';
-            }
+        function copyAdbCommand() {
+            const cmd = "adb shell sh /sdcard/Android/data/moe.shizuku.privileged.api/start.sh";
+            navigator.clipboard.writeText(cmd).then(() => {
+                alert("Đã sao chép lệnh ADB vào khay nhớ tạm!");
+            }).catch(() => {
+                prompt("Sao chép lệnh ADB bên dưới:", cmd);
+            });
         }
 
         // 5. EXACT TIKTOK FOLLOW + 8s LINK4M UNLOCK LOGIC
@@ -4262,7 +5370,7 @@ settings put secure multi_press_timeout 200</code></pre>
                 direct_apk: "FlowS.apk"
             },
             flowoptimize: {
-                destination_apk: "https://gofile.io/d/xPjjCyoA",
+                destination_apk: "https://gofile.io/d/TytolAEu",
                 direct_apk: "FlowOptimize.apk"
             },
             flowultra: {
@@ -4293,12 +5401,11 @@ settings put secure multi_press_timeout 200</code></pre>
         function openUnlockModal(appKey) {
             currentTargetApp = appKey;
             const modal = document.getElementById('unlockDownloadModal');
-            const icon = document.getElementById('detailModalAppIcon');
+            const icon = document.getElementById('modalAppIcon') || document.getElementById('detailModalAppIcon');
             const title = document.getElementById('modalAppTitle');
             const sub = document.getElementById('modalAppSub');
             const linkBtnLabel = document.getElementById('txtFinalLink4mLabel');
             const finalBtn = document.getElementById('btnFinalLink4m');
-            // directBtn removed
             const banner = document.getElementById('unlockBannerText');
             const btnTikTok = document.getElementById('btnFollowTikTok');
             const verifyingBox = document.getElementById('unlockVerifyingBox');
@@ -4331,13 +5438,13 @@ settings put secure multi_press_timeout 200</code></pre>
             } else if (appKey === 'flowultra') {
                 if (icon) icon.src = 'flowultra_logo.png';
                 if (title) title.textContent = 'FlowUltra - Hardware Suite (v1.0.5)';
-                if (sub) sub.textContent = '20 Open-Source Engines • Shappky 4-Stage • Deep Doze • AFK 0-Nits';
+                if (sub) sub.textContent = '20 Open-Source Engines • Shappky 4-Stage • Deep Doze';
                 if (linkBtnLabel) linkBtnLabel.textContent = 'CHUYỂN SANG TẢI FLOWULTRA →';
                 if (finalBtn) {
                     finalBtn.style.background = 'linear-gradient(135deg, #d97706 0%, #f59e0b 100%)';
                     finalBtn.style.color = '#050811';
                 }
-            } else {
+            } else if (appKey === 'flowopt' || appKey === 'flowoptimize') {
                 if (icon) icon.src = 'app_logo.png';
                 if (title) title.textContent = 'FlowOptimize Ultra Pro (v2.6)';
                 if (sub) sub.textContent = 'Bản Anime • 7 Theme Sắc Nét • HUD PopUp • Chẩn Đoán Hãng';
@@ -4346,9 +5453,58 @@ settings put secure multi_press_timeout 200</code></pre>
                     finalBtn.style.background = 'linear-gradient(135deg, #f472b6 0%, #ec4899 100%)';
                     finalBtn.style.color = '#fff';
                 }
+            } else if (appKey === 'brotx') {
+                if (icon) icon.src = 'icon_brotx.png';
+                if (title) title.textContent = 'BrotX Optimizer v8 (v8.0.0)';
+                if (sub) sub.textContent = 'Siêu Công Cụ Dọn Dẹp UAD & Tối Ưu Gaming';
+                if (linkBtnLabel) linkBtnLabel.textContent = 'CHUYỂN SANG TẢI BROTX V8 →';
+                if (finalBtn) {
+                    finalBtn.style.background = 'linear-gradient(135deg, #ef4444 0%, #f97316 100%)';
+                    finalBtn.style.color = '#fff';
+                }
+            } else if (appKey === 'shizuku') {
+                if (icon) icon.src = 'icon_shizuku.png';
+                if (title) title.textContent = 'Shizuku Official (v13.5.4)';
+                if (sub) sub.textContent = 'Nền Tảng Cấp Quyền ADB 100% Không Cần Root';
+                if (linkBtnLabel) linkBtnLabel.textContent = 'CHUYỂN SANG TẢI SHIZUKU →';
+                if (finalBtn) {
+                    finalBtn.style.background = 'linear-gradient(135deg, #0284c7 0%, #06b6d4 100%)';
+                    finalBtn.style.color = '#fff';
+                }
+            } else if (appKey === 'shizukunext') {
+                if (icon) icon.src = 'icon_shizukunext.png';
+                if (title) title.textContent = 'Shizuku-Next (Watchdog 24/7)';
+                if (sub) sub.textContent = 'Tự Phục Hồi Kết Nối ADB & Hỗ Trợ Modules (v14.0.33)';
+                if (linkBtnLabel) linkBtnLabel.textContent = 'CHUYỂN SANG TẢI SHIZUKU-NEXT →';
+                if (finalBtn) {
+                    finalBtn.style.background = 'linear-gradient(135deg, #0284c7 0%, #38bdf8 100%)';
+                    finalBtn.style.color = '#fff';
+                }
+            } else if (typeof appKey === 'string' && appKey.startsWith('set')) {
+                const setNum = appKey.replace('set', '').toUpperCase();
+                if (icon) icon.src = 'app_logo.png';
+                if (title) title.textContent = 'Trọn Bộ SET ' + setNum;
+                if (sub) sub.textContent = 'Gói Ứng Dụng Tối Ưu Chuyên Sâu Tầng Hệ Thống';
+                if (linkBtnLabel) linkBtnLabel.textContent = 'CHUYỂN SANG TẢI TRỌN BỘ SET ' + setNum + ' →';
+                if (finalBtn) {
+                    finalBtn.style.background = 'linear-gradient(135deg, #0284c7 0%, #38bdf8 100%)';
+                    finalBtn.style.color = '#fff';
+                }
+            } else {
+                const appInfo = (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS[appKey]) || 
+                                (typeof APP_DETAILS_DATA !== 'undefined' && APP_DETAILS_DATA[appKey]) || {};
+                const appName = appInfo.name || appInfo.title || (appKey ? String(appKey).toUpperCase() : 'ỨNG DỤNG');
+                if (icon) icon.src = appInfo.icon || 'app_logo.png';
+                if (title) title.textContent = appName;
+                if (sub) sub.textContent = appInfo.tag || 'Ứng Dụng Tối Ưu Android Qua Shizuku';
+                if (linkBtnLabel) linkBtnLabel.textContent = 'CHUYỂN SANG TẢI ' + appName.toUpperCase() + ' →';
+                if (finalBtn) {
+                    finalBtn.style.background = 'linear-gradient(135deg, #38bdf8 0%, #00ff66 100%)';
+                    finalBtn.style.color = '#050811';
+                }
             }
 
-            modal.classList.add('active');
+            if (modal) modal.classList.add('active');
 
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);
             if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
@@ -4369,30 +5525,30 @@ settings put secure multi_press_timeout 200</code></pre>
             const tiktokUrl = globalConfig.tiktok || 'https://www.tiktok.com/@xxd5974';
             window.open(tiktokUrl, '_blank');
 
-            document.getElementById('btnFollowTikTok').style.display = 'none';
-            document.getElementById('unlockVerifyingBox').style.display = 'block';
+            const btnTikTok = document.getElementById('btnFollowTikTok');
+            if (btnTikTok) {
+                btnTikTok.disabled = true;
+                btnTikTok.innerHTML = '<span style="font-size: 16px;">⏳</span> <span>ĐANG XÁC THỰC KÊNH TIKTOK...</span>';
+                btnTikTok.style.opacity = '0.75';
+                btnTikTok.style.pointerEvents = 'none';
+            }
+
+            // Phần đếm ngược 8s ẩn đi hoàn toàn (không hiện thanh đếm ngược làm rối)
+            const verifyingBox = document.getElementById('unlockVerifyingBox');
+            if (verifyingBox) verifyingBox.style.display = 'none';
 
             const banner = document.getElementById('unlockBannerText');
             if (banner) {
-                banner.innerHTML = '⏳ <b>Bước 2:</b> Đang xác nhận Follow TikTok... Vui lòng đợi trong <b>8 giây</b> để mở khóa link tải!';
+                banner.innerHTML = '⏳ <b>Hệ thống đang xác thực theo dõi TikTok...</b> Vui lòng chờ vài giây để mở khóa link tải!';
             }
 
-            let count = 8.0;
-            const numEl = document.getElementById('unlockCountdownNum');
-            const barEl = document.getElementById('unlockProgressBar');
-
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);
-            unlockTimerInterval = setInterval(() => {
-                count -= 0.1;
-                const pct = Math.min(100, Math.round(((8.0 - count) / 8.0) * 100));
-                if (barEl) barEl.style.width = pct + '%';
-                if (numEl) numEl.textContent = Math.max(0, Math.ceil(count));
+            if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
 
-                if (count <= 0) {
-                    clearInterval(unlockTimerInterval);
-                    completeUnlock();
-                }
-            }, 100);
+            // 8 giây chạy ngầm ẩn đi rồi mở khóa nút Link4m
+            unlockHiddenTimeout = setTimeout(() => {
+                completeUnlock();
+            }, 8000);
         }
 
                 let isLink4mRedirecting = false;
@@ -4431,39 +5587,57 @@ settings put secure multi_press_timeout 200</code></pre>
         }
 
         function completeUnlock() {
-            document.getElementById('unlockVerifyingBox').style.display = 'none';
-            document.getElementById('btnFollowTikTok').style.display = 'none';
+            const verifyingBox = document.getElementById('unlockVerifyingBox');
+            const btnTikTok = document.getElementById('btnFollowTikTok');
             const finalBtn = document.getElementById('btnFinalLink4m');
-            // directBtn removed
-            finalBtn.style.display = 'flex';
-            
+
+            if (verifyingBox) verifyingBox.style.display = 'none';
+            if (btnTikTok) btnTikTok.style.display = 'none';
+            if (finalBtn) finalBtn.style.display = 'flex';
 
             const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
-            let dest = '';
-            let directApk = 'FlowS.apk';
+            let link4mUrl = '';
 
             if (currentTargetApp === 'flows') {
-                dest = (globalConfig.flows && globalConfig.flows.destination_apk) || 'https://gofile.io/d/j6tNGeVu';
-                directApk = (globalConfig.flows && globalConfig.flows.direct_apk) || 'FlowS.apk';
+                const dest = (globalConfig.flows && globalConfig.flows.destination_apk) || 'https://gofile.io/d/j6tNGeVu';
+                link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
             } else if (currentTargetApp === 'flowultra') {
-                dest = (globalConfig.flowultra && globalConfig.flowultra.destination_apk) || 'https://gofile.io/d/4qt6zQyQ';
-                directApk = (globalConfig.flowultra && globalConfig.flowultra.direct_apk) || 'FlowUltra.apk';
+                const dest = (globalConfig.flowultra && globalConfig.flowultra.destination_apk) || 'https://gofile.io/d/4qt6zQyQ';
+                link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
+            } else if (currentTargetApp === 'flowopt' || currentTargetApp === 'flowoptimize') {
+                const dest = (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || 'https://gofile.io/d/TytolAEu';
+                link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
+            } else if (currentTargetApp === 'brotx') {
+                const dest = 'https://gofile.io/d/OsI6BnC7';
+                link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
+            } else if (currentTargetApp === 'shizuku') {
+                const dest = 'https://gofile.io/d/DkhZ4xaM';
+                link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
+            } else if (currentTargetApp === 'shizukunext') {
+                const dest = 'https://gofile.io/d/AdqIc0Gp';
+                link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
+            } else if (typeof currentTargetApp === 'string' && currentTargetApp.startsWith('set')) {
+                link4mUrl = (typeof SET_LINKS !== 'undefined' && SET_LINKS[currentTargetApp]) ||
+                            ('https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent('https://github.com/RikkaApps/Shizuku/releases'));
             } else {
-                dest = (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || 'https://gofile.io/d/xPjjCyoA';
-                directApk = (globalConfig.flowoptimize && globalConfig.flowoptimize.direct_apk) || 'FlowOptimize.apk';
+                const appInfo = (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS[currentTargetApp]) || null;
+                if (appInfo && appInfo.link4m) {
+                    link4mUrl = appInfo.link4m;
+                } else if (appInfo && appInfo.dest) {
+                    link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(appInfo.dest);
+                } else {
+                    link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent('https://github.com/RikkaApps/Shizuku/releases');
+                }
             }
 
-            const link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
-            finalBtn.href = link4mUrl;
-
-
+            if (finalBtn) {
+                finalBtn.href = link4mUrl;
+            }
 
             const banner = document.getElementById('unlockBannerText');
             if (banner) {
                 banner.innerHTML = '✅ <b>Bước 3 (Hoàn tất):</b> Đã mở khóa thành công! Hãy bấm nút bên dưới để nhận link tải APK về máy.';
             }
-
-// Auto-redirect disabled: User clicks explicitly to prevent duplicate requests & anti-click errors
         }
 
         document.addEventListener('DOMContentLoaded', fetchConfig);
@@ -4472,12 +5646,26 @@ settings put secure multi_press_timeout 200</code></pre>
     <!-- Random Gateway Rotation (Layma.net / Link4M / YeuMoney) -->
     <script>
     const APP_TRIPLE_LINKS = {
+    "brotx": {
+        "name": "BrotX Optimizer v8",
+        "dest": "https://gofile.io/d/OsI6BnC7",
+        "layma": "",
+        "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/OsI6BnC7",
+        "yeumoney": ""
+    },
     "shizuku": {
-        "name": "Shizuku",
-        "dest": "https://github.com/RikkaApps/Shizuku/releases/download/v13.5.4.r1049.0e5b723/shizuku-v13.5.4.r1049.0e5b723-release.apk",
+        "name": "Shizuku Official",
+        "dest": "https://gofile.io/d/DkhZ4xaM",
         "layma": "https://layma.net/QzYgSkak4",
-        "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases/download/v13.5.4.r1049.0e5b723/shizuku-v13.5.4.r1049.0e5b723-release.apk",
+        "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/DkhZ4xaM",
         "yeumoney": "https://yeumoney.com/b1q0ZDmE"
+    },
+    "shizukunext": {
+        "name": "Shizuku-Next",
+        "dest": "https://gofile.io/d/AdqIc0Gp",
+        "layma": "https://layma.net/gUneGnnyG",
+        "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/AdqIc0Gp",
+        "yeumoney": "https://yeumoney.com/6-Qcc"
     },
     "ashell": {
         "name": "aShell You",
@@ -4925,6 +6113,28 @@ settings put secure multi_press_timeout 200</code></pre>
     
     // ALL 36 APPS DETAILS DATA
     const APP_DETAILS_DATA = {
+    "brotx": {
+        "name": "BrotX Optimizer v8",
+        "icon": "icon_brotx.png",
+        "tag": "🔥 CỰC HOT",
+        "tagClass": "pill-tag-hot",
+        "required": "🔌 App yêu cầu: Shizuku hoặc Shizuku-Next",
+        "source": "BrotX Optimizer (v8.0.0)",
+        "features": [
+            "Bản nâng cấp v8 mới nhất tối ưu hóa hiệu năng và dọn dẹp hệ thống chuyên sâu",
+            "Tích hợp Universal Android Debloater (UAD) gỡ bỏ bloatware rác an toàn 100%",
+            "Tối ưu xung nhịp CPU/GPU qua Shizuku, giảm giật lag triệt để cho game thủ",
+            "Giao diện hiện đại, trực quan, hỗ trợ đầy đủ từ Android 9 đến Android 15"
+        ],
+        "guide": [
+            "<b>Bước 1:</b> Tải và cài đặt file <code>BrotX-v8.apk</code>.",
+            "<b>Bước 2:</b> Mở ứng dụng và cấp quyền <b>Shizuku</b> khi được yêu cầu.",
+            "<b>Bước 3:</b> Chọn các danh mục cần tối ưu hoặc chạy tính năng UAD Debloater để dọn sạch ứng dụng rác.",
+            "<b>Bước 4:</b> Khởi động game và tận hưởng hiệu năng mượt mà không còn giật lag."
+        ],
+        "command": "pm grant com.brotx.optimizer moe.shizuku.manager.permission.API_V23"
+    },
+
     "shizukunext": {
         "name": "Shizuku-Next",
         "icon": "icon_shizukunext.png",
@@ -6062,7 +7272,8 @@ settings put secure multi_press_timeout 200</code></pre>
 
     function triggerModalDownload() {
         if (!currentModalAppId) return;
-        openRandomDownload(null, currentModalAppId);
+        closeAppModal();
+        openUnlockModal(currentModalAppId);
     }
 
     function copyModalCommand() {
@@ -6153,26 +7364,23 @@ settings put secure multi_press_timeout 200</code></pre>
     }
 
     // Open Set Full Download (Link4M Only)
+        // Open Set Full Download -> Must follow TikTok + 8s verification
     function openSetDownload(event, setId) {
         if (event) {
             event.preventDefault();
             event.stopPropagation();
         }
-        const link = SET_LINKS[setId] || "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases";
-        window.open(link, '_blank', 'noopener,noreferrer');
+        openUnlockModal(setId);
     }
 
-    // Open Individual App Download (Link4M Only)
+    // Open Individual App Download -> Must follow TikTok + 8s verification
     function openDirectDownload(event, appId) {
         if (event) {
             event.preventDefault();
             event.stopPropagation();
         }
-        const app = APP_TRIPLE_LINKS[appId];
-        if (!app) return;
-        // Gom lại 1 link Link4M duy nhất (loại bỏ hoàn toàn Layma & YeuMoney)
-        const link = app.link4m || app.dest;
-        window.open(link, '_blank', 'noopener,noreferrer');
+        closeAppModal();
+        openUnlockModal(appId);
     }
 
     // Alias for compatibility
@@ -6180,24 +7388,375 @@ settings put secure multi_press_timeout 200</code></pre>
         openDirectDownload(event, appId);
     }
 
-    // Direct open from Detail Modal
+    // Direct open from Detail Modal -> Must follow TikTok + 8s verification
     function openDetailDownload() {
         if (!currentModalAppId) return;
-        openDirectDownload(null, currentModalAppId);
+        closeAppModal();
+        openUnlockModal(currentModalAppId);
     }
 
-    // Set href on DOM load
+    // Set click handlers on DOM load (no direct href to bypass modal)
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.linkbio-pill[data-app-id]').forEach(pill => {
-            const id = pill.getAttribute('data-app-id');
-            const app = APP_TRIPLE_LINKS[id];
-            if (app && app.link4m) {
-                pill.href = app.link4m;
-            }
+            pill.removeAttribute('href');
+            pill.style.cursor = 'pointer';
         });
     });
 
-    </script>
+    
+    // ==================== BROTX V8 ENGINE JAVASCRIPT BRIDGE ====================
+    const BROTX_FLAGS_DATA = [
+        { table: "system", key: "window_animation_scale", name: "Tỉ lệ hoạt ảnh cửa sổ", desc: "Rút ngắn thời gian mở pop-up", val: "0.5" },
+        { table: "system", key: "transition_animation_scale", name: "Tỉ lệ hoạt ảnh chuyển tiếp", desc: "Tăng tốc chuyển trang ứng dụng", val: "0.5" },
+        { table: "system", key: "animator_duration_scale", name: "Thời lượng chuyển động", desc: "Rút ngắn hoạt cảnh nội bộ", val: "0.5" },
+        { table: "global", key: "disable_window_blurs", name: "Tắt làm mờ nền cửa sổ", desc: "Giảm tải GPU tầm trung", val: "1" },
+        { table: "secure", key: "accessibility_reduce_transparency", name: "Giảm đồ họa trong suốt", desc: "Loại bỏ trong suốt, giảm giật khung hình", val: "1" },
+        { table: "system", key: "peak_refresh_rate", name: "Tần số quét trần màn hình", desc: "Khóa trần Hz hỗ trợ lên đến 144Hz", val: "144.0" },
+        { table: "system", key: "min_refresh_rate", name: "Tần số quét sàn màn hình", desc: "Ngăn màn hình tự ý tụt quét khi đọc báo", val: "60.0" },
+        { table: "global", key: "game_driver_all_apps", name: "Ép nạp GPU Game Driver", desc: "Bắt buộc hệ thống nạp Game Driver", val: "1" },
+        { table: "global", key: "angle_gl_driver_all_angle", name: "Ép ANGLE Vulkan", desc: "Ép đa luồng Adreno; tắt an toàn cho Mali", val: "1" },
+        { table: "secure", key: "long_press_timeout", name: "Thời gian nhấn giữ màn hình", desc: "Giảm độ trễ nhấn giữ từ 400ms xuống 250ms", val: "250" },
+        { table: "secure", key: "tap_duration_threshold", name: "Ngưỡng thời gian chạm", desc: "Nhận lệnh chạm tức thì 0ms", val: "0" },
+        { table: "secure", key: "touch_blocking_period", name: "Khóa ngắt chạm liên tục", desc: "Loại bỏ khoảng ngắt giữa các lần chạm", val: "0" },
+        { table: "system", key: "pointer_speed", name: "Tốc độ con trỏ & gia tốc", desc: "Tăng độ nhạy vuốt ngón tay", val: "2" },
+        { table: "secure", key: "block_untrusted_touches", name: "Chạm 0ms xuyên cửa sổ nổi", desc: "Cảm ứng tức thì qua HUD nổi & crosshair", val: "0" },
+        { table: "secure", key: "navigation_gestures_vibrate", name: "Tắt rung cử chỉ vuốt", desc: "Tắt rung vuốt điều hướng viền (Mới V8)", val: "0" },
+        { table: "secure", key: "charging_vibration_enabled", name: "Tắt rung khi cắm sạc", desc: "Giữ máy yên tĩnh khi sạc đêm (Mới V8)", val: "0" },
+        { table: "global", key: "speed_mode", name: "Speed Mode (QoS Mạng Game)", desc: "Ưu tiên socket mạng game, giảm ping (Mới V8)", val: "1" },
+        { table: "global", key: "private_dns_specifier", name: "AdGuard DNS DoT", desc: "Chặn quảng cáo và tên miền theo dõi", val: "dns.adguard-dns.com" },
+        { table: "global", key: "wifi_power_save", name: "Giữ Wi-Fi luôn thức", desc: "Ngăn ăng-ten ngủ gật, giảm sụt ping", val: "0" },
+        { table: "global", key: "multicore_packet_scheduler", name: "Điều phối mạng đa nhân", desc: "Chia tải xử lý gói mạng sang nhiều nhân CPU", val: "1" },
+        { table: "global", key: "app_standby_enabled", name: "Tắt App Standby đa nhiệm", desc: "Nhận thông báo Zalo/Telegram 0ms (Mới V8)", val: "0" },
+        { table: "global", key: "verifier_verify_adb_installs", name: "Tắt quét ADB Verify", desc: "Cài đặt APK siêu tốc bỏ qua quét (Mới V8)", val: "0" },
+        { table: "global", key: "device_config_sync_disabled", name: "Chặn DeviceConfig OTA Sync", desc: "Chặn Play Services ghi đè cờ (Mới V8)", val: "1" },
+        { table: "global", key: "fstrim_mandatory_interval", name: "Lịch dọn chip nhớ fstrim", desc: "Dọn dẹp chip nhớ flash mỗi 24 giờ", val: "86400000" },
+        { table: "system", key: "ram_expand_size_list", name: "Tắt RAM Plus (Samsung)", desc: "Tắt RAM ảo, chạy thuần RAM vật lý", val: "0" },
+        { table: "secure", key: "game_auto_temperature_control", name: "Bypass GOS hạ xung (Samsung)", desc: "Bỏ qua GOS tự bóp xung khi máy ấm", val: "0" },
+        { table: "system", key: "power_mode", name: "PowerKeeper Turbo (Xiaomi)", desc: "Duy trì xung cao khi tác vụ nặng", val: "2" },
+        { table: "global", key: "protect_battery", name: "Bảo vệ pin ngắt sạc 80%", desc: "Chống ngâm điện áp trần 4.4V qua đêm", val: "1" }
+    ];
+
+    function applyBrotxProfileUi(profileKey) {
+        if (window.Android && window.Android.applyBrotxProfile) {
+            try {
+                const resStr = window.Android.applyBrotxProfile(profileKey);
+                const res = JSON.parse(resStr);
+                if (res.success) {
+                    alert('✅ ĐÃ KÍCH HOẠT HỒ SƠ BROTX V8: ' + profileKey.toUpperCase() + '\n• Áp dụng thành công: ' + res.appliedCount + ' cờ hệ thống\n• Màn hình tối đa: ' + (res.maxHz ? res.maxHz + 'Hz' : 'Tự động'));
+                } else {
+                    alert('❌ Lỗi: ' + (res.message || 'Không thể kích hoạt'));
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        } else {
+            let profileName = 'Gaming Boost v8';
+            if (profileKey === 'factory_stock') profileName = 'Mặc định nhà sản xuất (Factory Stock)';
+            if (profileKey === 'balanced_smooth') profileName = 'Cân bằng mượt mà (Balanced Smooth v8)';
+            if (profileKey === 'ultra_battery_saver') profileName = 'Siêu tiết kiệm pin (Ultra Battery Saver v8)';
+            alert('🚀 [MÔ PHỎNG BROTX V8]: Đã chọn hồ sơ ' + profileName + '!\n• Chạy trên ứng dụng FlowOptimize để áp dụng trực tiếp 1-chạm qua Shizuku.');
+        }
+    }
+
+    function toggleBrotxFlagUi(table, key, btnEl) {
+        const isCurrentlyOn = btnEl.getAttribute('data-active') === 'true';
+        const targetVal = isCurrentlyOn ? '0' : '1';
+        
+        if (window.Android && window.Android.applyBrotxSingleFlag) {
+            try {
+                const resStr = window.Android.applyBrotxSingleFlag(table, key, targetVal);
+                const res = JSON.parse(resStr);
+                if (res.success) {
+                    btnEl.setAttribute('data-active', !isCurrentlyOn ? 'true' : 'false');
+                    btnEl.classList.toggle('active', !isCurrentlyOn);
+                    btnEl.textContent = !isCurrentlyOn ? 'ĐANG BẬT (' + targetVal + ')' : 'ĐANG TẮT (' + targetVal + ')';
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        } else {
+            btnEl.setAttribute('data-active', !isCurrentlyOn ? 'true' : 'false');
+            btnEl.classList.toggle('active', !isCurrentlyOn);
+            btnEl.textContent = !isCurrentlyOn ? 'ĐANG BẬT (' + targetVal + ')' : 'ĐANG TẮT (' + targetVal + ')';
+            alert('⚡ Đã chuyển cờ ' + table + '.' + key + ' = ' + targetVal + ' (Chế độ mô phỏng web)');
+        }
+    }
+
+    function handleSafeDebloatUi() {
+        const pkgInput = document.getElementById('brotxDebloatPkgInput');
+        const pkg = (pkgInput ? pkgInput.value : '').trim();
+        if (!pkg) {
+            alert('Vui lòng nhập tên gói tin package (vd: com.facebook.katana)');
+            return;
+        }
+        if (window.Android && window.Android.safeDebloatPackageV8) {
+            try {
+                const resStr = window.Android.safeDebloatPackageV8(pkg);
+                const res = JSON.parse(resStr);
+                alert((res.success ? '✅ ' : '❌ ') + (res.note || res.message));
+            } catch (e) {
+                console.error(e);
+            }
+        } else {
+            alert('🛡️ [BẢO VỆ 3 LỚP BROTX V8]:\n• Phát hiện gói tin: ' + pkg + '\n• Nếu là app người dùng (/data/app/): Tự động Đóng Băng để giữ file APK gốc.\n• Nếu là app hệ thống (/system/): Gỡ sạch an toàn.');
+        }
+    }
+
+    function filterBrotxFlags(query) {
+        query = (query || '').toLowerCase().trim();
+        const container = document.getElementById('brotxFlagsListContainer');
+        if (!container) return;
+
+        // Strip accents for unaccented Vietnamese search
+        const normalize = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        const normQuery = normalize(query);
+
+        const filtered = BROTX_FLAGS_DATA.filter(f => {
+            if (!normQuery) return true;
+            return normalize(f.name).includes(normQuery) || 
+                   normalize(f.desc).includes(normQuery) || 
+                   f.key.toLowerCase().includes(normQuery) || 
+                   f.table.toLowerCase().includes(normQuery);
+        });
+
+        renderBrotxFlagsList(filtered);
+    }
+
+    function renderBrotxFlagsList(list) {
+        const container = document.getElementById('brotxFlagsListContainer');
+        if (!container) return;
+        container.innerHTML = '';
+
+        list.forEach(f => {
+            const item = document.createElement('div');
+            item.style.cssText = 'background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px;';
+            item.innerHTML = `
+                <div style="min-width: 0;">
+                    <div style="font-size: 13px; font-weight: 700; color: #fff; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${f.name}</div>
+                    <div style="font-size: 10.5px; color: #94a3b8; font-family: monospace;">${f.table}.${f.key}</div>
+                    <div style="font-size: 11px; color: #cbd5e1; margin-top: 2px;">${f.desc}</div>
+                </div>
+                <button type="button" onclick="toggleBrotxFlagUi('${f.table}', '${f.key}', this)" style="padding: 6px 12px; font-size: 11px; font-weight: 800; border-radius: 8px; border: 1px solid rgba(56,189,248,0.3); background: rgba(56,189,248,0.1); color: #38bdf8; cursor: pointer; white-space: nowrap;">Áp Dụng</button>
+            `;
+            container.appendChild(item);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        filterBrotxFlags('');
+        detectUserDevice();
+    });
+
+    // SMART DEVICE DETECTOR LOGIC
+    function detectUserDevice() {
+        const ua = navigator.userAgent;
+        let brand = "ANDROID";
+        let model = "Thiết bị Android";
+        let targetTab = "auto";
+        let badgeColor = "#0284c7";
+        let advice = "Khuyên dùng: Kích hoạt Shizuku UID 2000 để mở khóa 120Hz & dọn RAM sạch sẽ!";
+
+        // Detect GPU via WebGL if available
+        let gpu = "";
+        try {
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            if (gl) {
+                const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                if (debugInfo) {
+                    gpu = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) || "";
+                }
+            }
+        } catch (e) {}
+
+        if (/Xiaomi|Redmi|POCO|MIUI/i.test(ua)) {
+            brand = "XIAOMI / POCO";
+            model = "Xiaomi / Redmi / HyperOS";
+            targetTab = "xiaomi";
+            badgeColor = "#ff6900";
+            advice = "Bắt buộc bật 3 công tắc bảo mật (lắp SIM & Mi Account) để mở khóa 120Hz & hạ 720p!";
+        } else if (/Samsung|SM-[A-Z0-9]+/i.test(ua)) {
+            brand = "SAMSUNG";
+            model = "Samsung Galaxy (One UI)";
+            targetTab = "samsung";
+            badgeColor = "#0284c7";
+            advice = "Dùng mẹo Chia Đôi Màn Hình (Split Screen) để ghép đôi Shizuku 100% không bị nhảy mã!";
+        } else if (/OPPO|Realme|OnePlus|CPH|RMX/i.test(ua)) {
+            brand = "OPPO / REALME";
+            model = "ColorOS / Realme UI";
+            targetTab = "oppo";
+            badgeColor = "#10b981";
+            advice = "Tắt mục 'Tự động ngắt sau 10 phút' & Dùng tính năng Sửa Thanh Pin Trắng độc quyền!";
+        } else if (/vivo|V2[0-9]{3}|iQOO/i.test(ua)) {
+            brand = "VIVO / IQOO";
+            model = "Vivo / OriginOS / Funtouch";
+            targetTab = "oppo";
+            badgeColor = "#3b82f6";
+            advice = "Bật Gỡ lỗi USB & Không dây để tối ưu 64 cờ BrotX V8 không giật lag!";
+        } else if (/Pixel/i.test(ua)) {
+            brand = "GOOGLE PIXEL";
+            model = "Google Pixel (Android Thuần)";
+            targetTab = "auto";
+            badgeColor = "#a855f7";
+            advice = "Android thuần chuẩn hóa - Kích hoạt Wireless Debugging hoặc PC 1-Click trong 5 giây!";
+        } else if (/iPhone|iPad|Macintosh/i.test(ua)) {
+            brand = "APPLE iOS";
+            model = "Thiết bị Apple iOS (iPhone/iPad)";
+            badgeColor = "#ec4899";
+            advice = "Bộ công cụ Flowly thiết kế chuyên sâu cho Android. Hãy mở link này trên điện thoại Android của bạn để cài đặt!";
+        } else if (/Windows/i.test(ua)) {
+            brand = "WINDOWS PC";
+            model = "Máy tính Windows (PC/Laptop)";
+            targetTab = "auto";
+            badgeColor = "#7c3aed";
+            advice = "Bạn có thể cắm cáp USB và chạy ngay file TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat trên Desktop!";
+        }
+
+        const devNameEl = document.getElementById('detectedDevName');
+        const devBadgeEl = document.getElementById('detectedBrandBadge');
+        const devAdviceEl = document.getElementById('detectedDevAdvice');
+
+        if (devNameEl) {
+            devNameEl.textContent = model + (gpu ? ` (${gpu.split(';')[0].replace(/Direct3D.*/,'').trim()})` : '');
+        }
+        if (devBadgeEl) {
+            devBadgeEl.textContent = brand;
+            devBadgeEl.style.background = badgeColor;
+        }
+        if (devAdviceEl) {
+            devAdviceEl.textContent = advice;
+        }
+
+        if (targetTab && typeof switchGuideTab === 'function') {
+            switchGuideTab(targetTab);
+        }
+    }
+
+    
+    /* ==================== HAPTIC & DYNAMIC CAPSULE LOGIC ==================== */
+    function triggerHaptic(type = 'light') {
+        try {
+            if (window.Android && typeof window.Android.triggerHaptic === 'function') {
+                window.Android.triggerHaptic(type);
+            } else if (window.FlowOpEngine && typeof window.FlowOpEngine.triggerHaptic === 'function') {
+                window.FlowOpEngine.triggerHaptic(type);
+            } else if (navigator.vibrate) {
+                const patterns = {
+                    light: 12,
+                    medium: 22,
+                    heavy: 45,
+                    success: [15, 40, 30],
+                    warning: [20, 30, 20, 30, 40],
+                    click: 10,
+                    selection: 14
+                };
+                navigator.vibrate(patterns[type] || 15);
+            }
+        } catch (e) {}
+    }
+
+    let isCapsuleExpanded = false;
+    function toggleCapsuleExpand(forceState) {
+        const cap = document.getElementById('dynamicCapsule');
+        if (!cap) return;
+        isCapsuleExpanded = (forceState !== undefined) ? forceState : !isCapsuleExpanded;
+        if (isCapsuleExpanded) {
+            cap.classList.add('is-expanded');
+            triggerHaptic('medium');
+        } else {
+            cap.classList.remove('is-expanded');
+            triggerHaptic('light');
+        }
+    }
+
+    function quickCapsuleBoost(e) {
+        if (e) e.stopPropagation();
+        triggerHaptic('success');
+        if (window.FlowOpEngine && typeof window.FlowOpEngine.applyProfile === 'function') {
+            window.FlowOpEngine.applyProfile(0);
+        } else if (window.Android && typeof window.Android.boostRamQuick === 'function') {
+            window.Android.boostRamQuick();
+        }
+        const btn = e ? e.currentTarget : null;
+        if (btn) {
+            const org = btn.innerHTML;
+            btn.innerHTML = '<span>✓</span> <span>ĐÃ BOOST XONG!</span>';
+            setTimeout(() => { btn.innerHTML = org; }, 2000);
+        }
+    }
+
+    function quickCapsuleCool(e) {
+        if (e) e.stopPropagation();
+        triggerHaptic('success');
+        if (window.Android && typeof window.Android.triggerUltraCoolingMode === 'function') {
+            window.Android.triggerUltraCoolingMode();
+        }
+        const btn = e ? e.currentTarget : null;
+        if (btn) {
+            const org = btn.innerHTML;
+            btn.innerHTML = '<span>❄️</span> <span>ĐANG HẠ NHIỆT...</span>';
+            setTimeout(() => { btn.innerHTML = org; }, 2000);
+        }
+    }
+
+    function updateDynamicCapsuleTelemetry() {
+        let telemetry = null;
+        try {
+            if (window.Android && typeof window.Android.getLiveTelemetryJson === 'function') {
+                const raw = window.Android.getLiveTelemetryJson();
+                telemetry = JSON.parse(raw);
+            }
+        } catch (e) {}
+
+        const fpsEl = document.getElementById('capsuleFpsVal');
+        const tempEl = document.getElementById('capsuleTempVal');
+        const liveFpsEl = document.getElementById('capsuleLiveFps');
+        const liveTempEl = document.getElementById('capsuleLiveTemp');
+        const livePingEl = document.getElementById('capsuleLivePing');
+        const thermalStateEl = document.getElementById('capsuleThermalState');
+        const dotEl = document.getElementById('capsuleShizukuDot');
+
+        if (telemetry && telemetry.success) {
+            const fps = telemetry.fps || 120;
+            const temp = telemetry.temp_c || 36.5;
+            const ping = telemetry.ping_ms || 15;
+            const thermal = telemetry.thermal_status || 'COOL';
+
+            if (fpsEl) fpsEl.textContent = `${Math.round(fps)} FPS`;
+            if (liveFpsEl) liveFpsEl.textContent = `${fps.toFixed(1)} FPS`;
+            if (tempEl) {
+                tempEl.textContent = `${temp.toFixed(1)}°C`;
+                tempEl.className = 'capsule-val ' + (thermal === 'HOT' ? 'val-hot' : (thermal === 'WARM' ? 'val-warm' : 'val-cool'));
+            }
+            if (liveTempEl) {
+                liveTempEl.textContent = `${temp.toFixed(1)}°C`;
+                liveTempEl.className = 'cap-metric-val ' + (thermal === 'HOT' ? 'val-hot' : (thermal === 'WARM' ? 'val-warm' : 'val-cool'));
+            }
+            if (livePingEl) livePingEl.textContent = `${ping} ms`;
+            if (thermalStateEl) {
+                thermalStateEl.textContent = thermal === 'HOT' ? 'Cảnh báo nóng (>43°C)' : (thermal === 'WARM' ? 'Ấm nhẹ (39-42°C)' : 'Mát mẻ (<38°C)');
+            }
+            if (dotEl) dotEl.className = 'capsule-glow-dot active';
+        } else {
+            const mockFps = 118 + Math.floor(Math.random() * 5);
+            const mockTemp = (36.2 + Math.random() * 0.8).toFixed(1);
+            const mockPing = 12 + Math.floor(Math.random() * 6);
+            if (fpsEl) fpsEl.textContent = `${mockFps} FPS`;
+            if (liveFpsEl) liveFpsEl.textContent = `${mockFps}.0 FPS`;
+            if (tempEl) tempEl.textContent = `${mockTemp}°C`;
+            if (liveTempEl) liveTempEl.textContent = `${mockTemp}°C`;
+            if (livePingEl) livePingEl.textContent = `${mockPing} ms`;
+        }
+    }
+    setInterval(updateDynamicCapsuleTelemetry, 2500);
+
+    // Auto-attach haptics to all interactive elements
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('button, a, .liquid-card, .btn-download-action, .btn-guide-tab, .btn-brotx-toggle').forEach(el => {
+            el.addEventListener('touchstart', () => triggerHaptic('light'), { passive: true });
+        });
+    });
+</script>
 
 
     <!-- ==================== APP DETAIL & INSTALLATION GUIDE MODAL ==================== -->

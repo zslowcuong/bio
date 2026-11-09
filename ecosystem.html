@@ -2785,6 +2785,34 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 3. Shizuku-Next (WATCHDOG 24/7 & ADB MODULES) -->
+                <div class="app-download-card shizuku" style="border-color: rgba(56, 189, 248, 0.45);">
+                    <div>
+                        <div class="app-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <img src="icon_shizukunext.png" alt="Shizuku-Next" class="app-icon-img" style="border-color: #38bdf8; width: 52px; height: 52px; border-radius: 14px; object-fit: cover; box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);">
+                                <div>
+                                    <div class="app-title" style="font-size: 18px; font-weight: 900; color: #fff;">Shizuku-Next</div>
+                                    <span class="app-sub-badge" style="background: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.4);">WATCHDOG (v14.0.33)</span>
+                                </div>
+                            </div>
+                            <span style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.28), rgba(99, 102, 241, 0.28)); border: 1.5px solid #38bdf8; color: #38bdf8; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 999px; box-shadow: 0 0 14px rgba(56, 189, 248, 0.5); white-space: nowrap;">⚡ WATCHDOG 24/7</span>
+                        </div>
+                        <div class="app-bullets">
+                            • 🔄 <b>Watchdog Tự Hồi Sinh:</b> Tự động kết nối lại khi bị hệ thống ngắt, duy trì 24/7 không cần bật lại thủ công.<br>
+                            • 📦 <b>Hỗ Trợ ADB Modules:</b> Nạp module tối ưu chuyên sâu không cần quyền Root.<br>
+                            • ⚡ <b>Cấp Quyền Siêu Tốc:</b> Tương thích hoàn hảo Android 11 đến Android 15 mới nhất.<br>
+                            • 🛡️ <b>0% Xung Đột:</b> Có thể cài song song hoặc thay thế Shizuku bản gốc mượt mà.
+                        </div>
+                    </div>
+                    <div style="margin-top: 16px;">
+                        <button type="button" onclick="openUnlockModal('shizukunext')" class="btn-download-action shizuku" style="background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);">
+                            <span>⚡</span>
+                            <span>TẢI SHIZUKU-NEXT</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -5436,11 +5464,20 @@ settings put secure multi_press_timeout 200</code></pre>
                 }
             } else if (appKey === 'shizuku') {
                 if (icon) icon.src = 'icon_shizuku.png';
-                if (title) title.textContent = 'Shizuku - Nền Tảng Cấp Quyền ADB';
-                if (sub) sub.textContent = 'Hoạt Động 100% Không Cần Root (v13.5.4)';
+                if (title) title.textContent = 'Shizuku Official (v13.5.4)';
+                if (sub) sub.textContent = 'Nền Tảng Cấp Quyền ADB 100% Không Cần Root';
                 if (linkBtnLabel) linkBtnLabel.textContent = 'CHUYỂN SANG TẢI SHIZUKU →';
                 if (finalBtn) {
                     finalBtn.style.background = 'linear-gradient(135deg, #0284c7 0%, #06b6d4 100%)';
+                    finalBtn.style.color = '#fff';
+                }
+            } else if (appKey === 'shizukunext') {
+                if (icon) icon.src = 'icon_shizukunext.png';
+                if (title) title.textContent = 'Shizuku-Next (Watchdog 24/7)';
+                if (sub) sub.textContent = 'Tự Phục Hồi Kết Nối ADB & Hỗ Trợ Modules (v14.0.33)';
+                if (linkBtnLabel) linkBtnLabel.textContent = 'CHUYỂN SANG TẢI SHIZUKU-NEXT →';
+                if (finalBtn) {
+                    finalBtn.style.background = 'linear-gradient(135deg, #0284c7 0%, #38bdf8 100%)';
                     finalBtn.style.color = '#fff';
                 }
             } else if (typeof appKey === 'string' && appKey.startsWith('set')) {
@@ -5488,30 +5525,30 @@ settings put secure multi_press_timeout 200</code></pre>
             const tiktokUrl = globalConfig.tiktok || 'https://www.tiktok.com/@xxd5974';
             window.open(tiktokUrl, '_blank');
 
-            document.getElementById('btnFollowTikTok').style.display = 'none';
-            document.getElementById('unlockVerifyingBox').style.display = 'block';
+            const btnTikTok = document.getElementById('btnFollowTikTok');
+            if (btnTikTok) {
+                btnTikTok.disabled = true;
+                btnTikTok.innerHTML = '<span style="font-size: 16px;">⏳</span> <span>ĐANG XÁC THỰC KÊNH TIKTOK...</span>';
+                btnTikTok.style.opacity = '0.75';
+                btnTikTok.style.pointerEvents = 'none';
+            }
+
+            // Phần đếm ngược 8s ẩn đi hoàn toàn (không hiện thanh đếm ngược làm rối)
+            const verifyingBox = document.getElementById('unlockVerifyingBox');
+            if (verifyingBox) verifyingBox.style.display = 'none';
 
             const banner = document.getElementById('unlockBannerText');
             if (banner) {
-                banner.innerHTML = '⏳ <b>Bước 2:</b> Đang xác nhận Follow TikTok... Vui lòng đợi trong <b>8 giây</b> để mở khóa link tải!';
+                banner.innerHTML = '⏳ <b>Hệ thống đang xác thực theo dõi TikTok...</b> Vui lòng chờ vài giây để mở khóa link tải!';
             }
 
-            let count = 8.0;
-            const numEl = document.getElementById('unlockCountdownNum');
-            const barEl = document.getElementById('unlockProgressBar');
-
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);
-            unlockTimerInterval = setInterval(() => {
-                count -= 0.1;
-                const pct = Math.min(100, Math.round(((8.0 - count) / 8.0) * 100));
-                if (barEl) barEl.style.width = pct + '%';
-                if (numEl) numEl.textContent = Math.max(0, Math.ceil(count));
+            if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
 
-                if (count <= 0) {
-                    clearInterval(unlockTimerInterval);
-                    completeUnlock();
-                }
-            }, 100);
+            // 8 giây chạy ngầm ẩn đi rồi mở khóa nút Link4m
+            unlockHiddenTimeout = setTimeout(() => {
+                completeUnlock();
+            }, 8000);
         }
 
                 let isLink4mRedirecting = false;
@@ -5571,11 +5608,14 @@ settings put secure multi_press_timeout 200</code></pre>
                 const dest = (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || 'https://gofile.io/d/TytolAEu';
                 link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
             } else if (currentTargetApp === 'brotx') {
-                link4mUrl = (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS['brotx'] && APP_TRIPLE_LINKS['brotx'].link4m) ||
-                            ('https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent('https://raw.githubusercontent.com/7dzuong/bio/main/BrotX-v8.apk'));
+                const dest = 'https://gofile.io/d/OsI6BnC7';
+                link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
             } else if (currentTargetApp === 'shizuku') {
-                link4mUrl = (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS['shizuku'] && APP_TRIPLE_LINKS['shizuku'].link4m) ||
-                            ('https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent('https://github.com/RikkaApps/Shizuku/releases'));
+                const dest = 'https://gofile.io/d/DkhZ4xaM';
+                link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
+            } else if (currentTargetApp === 'shizukunext') {
+                const dest = 'https://gofile.io/d/AdqIc0Gp';
+                link4mUrl = 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(dest);
             } else if (typeof currentTargetApp === 'string' && currentTargetApp.startsWith('set')) {
                 link4mUrl = (typeof SET_LINKS !== 'undefined' && SET_LINKS[currentTargetApp]) ||
                             ('https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent('https://github.com/RikkaApps/Shizuku/releases'));
@@ -5608,18 +5648,24 @@ settings put secure multi_press_timeout 200</code></pre>
     const APP_TRIPLE_LINKS = {
     "brotx": {
         "name": "BrotX Optimizer v8",
-        "dest": "BrotX-v8.apk",
+        "dest": "https://gofile.io/d/OsI6BnC7",
         "layma": "",
-        "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//raw.githubusercontent.com/7dzuong/bio/main/BrotX-v8.apk",
+        "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/OsI6BnC7",
         "yeumoney": ""
     },
-
     "shizuku": {
-        "name": "Shizuku",
-        "dest": "https://github.com/RikkaApps/Shizuku/releases/download/v13.5.4.r1049.0e5b723/shizuku-v13.5.4.r1049.0e5b723-release.apk",
+        "name": "Shizuku Official",
+        "dest": "https://gofile.io/d/DkhZ4xaM",
         "layma": "https://layma.net/QzYgSkak4",
-        "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//github.com/RikkaApps/Shizuku/releases/download/v13.5.4.r1049.0e5b723/shizuku-v13.5.4.r1049.0e5b723-release.apk",
+        "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/DkhZ4xaM",
         "yeumoney": "https://yeumoney.com/b1q0ZDmE"
+    },
+    "shizukunext": {
+        "name": "Shizuku-Next",
+        "dest": "https://gofile.io/d/AdqIc0Gp",
+        "layma": "https://layma.net/gUneGnnyG",
+        "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/AdqIc0Gp",
+        "yeumoney": "https://yeumoney.com/6-Qcc"
     },
     "ashell": {
         "name": "aShell You",

@@ -65,13 +65,29 @@
     "direct_apk": "FlowUltra.apk"
   },
   "tools_store": {
+    "brotx": {
+      "name": "BrotX Optimizer v8 🔥",
+      "tag": "HOT & NEW",
+      "desc": "Siêu công cụ dọn dẹp UAD & tối ưu hóa gaming qua ADB",
+      "file": "BrotX-v8.apk",
+      "gofile": "https://gofile.io/d/OsI6BnC7",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/OsI6BnC7"
+    },
     "shizuku": {
-      "name": "Shizuku 🐱",
+      "name": "Shizuku Official 🐱",
       "tag": "BẮT BUỘC",
-      "desc": "Chạy ứng dụng tối ưu không cần Root qua ADB",
+      "desc": "Chạy ứng dụng tối ưu không cần Root qua ADB Shell UID 2000",
       "file": "Shizuku.apk",
       "gofile": "https://gofile.io/d/DkhZ4xaM",
       "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/DkhZ4xaM"
+    },
+    "shizukunext": {
+      "name": "Shizuku-Next ⚡",
+      "tag": "WATCHDOG 24/7",
+      "desc": "Watchdog tự động hồi sinh kết nối & hỗ trợ ADB Modules",
+      "file": "Shizuku-Next.apk",
+      "gofile": "https://gofile.io/d/AdqIc0Gp",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/AdqIc0Gp"
     },
     "toolpc": {
       "name": "Tool Kích Hoạt Shizuku (PC) 💻",

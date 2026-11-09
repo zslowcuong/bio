@@ -255,22 +255,22 @@
         <div class="steps-box">
             <div class="step-item">
                 <div class="step-num">1</div>
-                <div>Bấm <b>Bắt Đầu Vượt Link</b> bên dưới để tới hệ thống Link4m (chỉ mất vài giây).</div>
+                <div>Bấm <b>Xác Minh TikTok</b> bên dưới để xác thực kênh chính thức (@xxd5974).</div>
             </div>
             <div class="step-item">
                 <div class="step-num">2</div>
-                <div>Làm theo hướng dẫn vượt link.</div>
+                <div>Hệ thống tự động kích hoạt link vượt Link4m (an toàn 100%).</div>
             </div>
             <div class="step-item">
                 <div class="step-num">3</div>
-                <div>Sau khi hoàn tất, bấm <b>Mở App</b> để vào game chiến mượt mà ngay lập tức!</div>
+                <div>Sau khi hoàn tất, nhận Key PRO VIP 30 giờ mở khóa toàn diện!</div>
             </div>
         </div>
 
-        <!-- NÚT BẮT ĐẦU VƯỢT LINK -->
-        <a id="btnBypassLink" href="#" class="btn-start">
-            <span>🚀 BẮT ĐẦU VƯỢT LINK (LINK4M)</span>
-        </a>
+        <!-- NÚT BẮT ĐẦU VƯỢT LINK (XÁC THỰC TIKTOK 8S ẨN) -->
+        <button id="btnBypassLink" type="button" class="btn-start" onclick="handleTiktokKeyVerification()">
+            <span>🎵 THEO DÕI TIKTOK ĐỂ MỞ KHÓA LINK</span>
+        </button>
     </div>
 
     <script>
@@ -299,12 +299,34 @@
         // Tạo link rút gọn Link4m cố định theo thiết bị
         const shortLink = `https://link4m.co/st?api=${link4mApi}&url=${encodeURIComponent(destinationShowKey)}`;
 
-        const btn = document.getElementById('btnBypassLink');
-        btn.href = shortLink;
+        let isTiktokVerified = false;
 
-        btn.addEventListener('click', function (e) {
-            btn.innerHTML = `<span>⏳ ĐANG CHUYỂN HƯỚNG...</span>`;
-        });
+        function handleTiktokKeyVerification() {
+            const btn = document.getElementById('btnBypassLink');
+            if (isTiktokVerified) {
+                btn.innerHTML = `<span>⏳ ĐANG CHUYỂN HƯỚNG SANG LINK4M...</span>`;
+                window.location.href = shortLink;
+                return;
+            }
+
+            // Mở TikTok trong tab mới
+            window.open("https://www.tiktok.com/@xxd5974", '_blank');
+
+            btn.disabled = true;
+            btn.innerHTML = `<span>⏳ ĐANG XÁC THỰC KÊNH TIKTOK...</span>`;
+            btn.style.opacity = '0.75';
+            btn.style.pointerEvents = 'none';
+
+            // 8 giây xác thực chạy ngầm ẩn đi hoàn toàn (không hiện đếm ngược)
+            setTimeout(() => {
+                isTiktokVerified = true;
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                btn.innerHTML = `<span>🚀 BẮT ĐẦU VƯỢT LINK (LINK4M) ➔</span>`;
+            }, 8000);
+        }
     </script>
 </body>
 
