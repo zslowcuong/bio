@@ -1101,6 +1101,153 @@
       box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
     }
 
+  
+    /* ========================================================== */
+    /* ✏️ BẢNG VẼ ĐIỆN TỬ & STYLUS ANNOTATION STUDIO             */
+    /* ========================================================== */
+    .drawing-toolbar-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: #0b1120;
+      border: 1.5px solid #1e293b;
+      padding: 8px 14px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      user-select: none;
+    }
+    .drawing-tools-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .draw-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
+    .draw-btn:hover {
+      background: #334155;
+      color: #fff;
+    }
+    .draw-btn.active {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: #fff;
+      border-color: #f59e0b;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+    }
+    .draw-color-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #334155;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .draw-color-btn:hover {
+      transform: scale(1.15);
+    }
+    .draw-color-btn.active {
+      border-color: #fff;
+      transform: scale(1.2);
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    /* Drawing Canvas Overlays */
+    .flash-morph-card, .desk-station-card {
+      position: relative !important;
+    }
+    .drawing-canvas-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 25;
+      pointer-events: none;
+      touch-action: none;
+      border-radius: 16px;
+    }
+    .drawing-canvas-overlay.drawing-active {
+      pointer-events: auto;
+      cursor: crosshair;
+    }
+
+    /* Side-by-side Scratchpad View */
+    .flash-dual-layout {
+      display: flex;
+      gap: 16px;
+      align-items: stretch;
+      width: 100%;
+    }
+    .flash-dual-main {
+      flex: 1;
+      min-width: 0;
+    }
+    .flash-scratchpad-panel {
+      flex: 1;
+      min-width: 320px;
+      background: #090e17;
+      border: 1.5px solid #1e293b;
+      border-radius: 16px;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    }
+    .scratchpad-header {
+      background: #0e1626;
+      border-bottom: 1.5px solid #1e293b;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+    .scratchpad-body {
+      flex: 1;
+      position: relative;
+      min-height: 420px;
+      background-size: 24px 24px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    }
+    .scratchpad-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    @media (max-width: 900px) {
+      .flash-dual-layout {
+        flex-direction: column;
+      }
+      .flash-scratchpad-panel {
+        min-height: 350px;
+      }
+    }
+
   </style>
 </head>
 
@@ -1207,8 +1354,67 @@
         </div>
 
         <!-- Flash Morph Card Viewport -->
-        <div class="flash-morph-wrapper">
-          <div class="desk-card flash-morph-card" id="flash-card">
+        
+        <!-- ✏️ THANH CÔNG CỤ BÚT VẼ & NOTE BẢNG VẼ ĐIỆN TỬ -->
+        <div class="drawing-toolbar-wrap" id="flash-drawing-toolbar">
+          <div class="drawing-tools-group">
+            <button class="draw-btn" id="btn-draw-toggle" onclick="toggleDrawingMode('flash')" title="Bật/Tắt bút vẽ (Phím W)">
+              <span>✏️</span> <span id="draw-toggle-text">Bật Bút Vẽ Note (W)</span>
+            </button>
+            <div id="draw-tools-sub" style="display:none; align-items:center; gap:6px;">
+              <button class="draw-btn active" id="draw-tool-pen" onclick="setDrawingTool('pen')" title="Bút Viết Mực (Phím P)">
+                ✏️ Bút Mực
+              </button>
+              <button class="draw-btn" id="draw-tool-hl" onclick="setDrawingTool('highlighter')" title="Bút Dạ Quang Tô Vàng (Phím H)">
+                🖍️ Dạ Quang
+              </button>
+              <button class="draw-btn" id="draw-tool-eraser" onclick="setDrawingTool('eraser')" title="Gôm Tẩy (Phím E)">
+                🧽 Tẩy
+              </button>
+
+              <div style="width:1px; height:20px; background:#334155; margin:0 4px;"></div>
+
+              <!-- Color Palette -->
+              <div style="display:flex; gap:5px; align-items:center;">
+                <button class="draw-color-btn active" style="background:#facc15;" onclick="setDrawingColor('#facc15', this)" title="Vàng Neon"></button>
+                <button class="draw-color-btn" style="background:#ef4444;" onclick="setDrawingColor('#ef4444', this)" title="Đỏ Cảnh Báo"></button>
+                <button class="draw-color-btn" style="background:#10b981;" onclick="setDrawingColor('#10b981', this)" title="Xanh Lục"></button>
+                <button class="draw-color-btn" style="background:#38bdf8;" onclick="setDrawingColor('#38bdf8', this)" title="Xanh Lam"></button>
+                <button class="draw-color-btn" style="background:#ffffff;" onclick="setDrawingColor('#ffffff', this)" title="Trắng Phấn"></button>
+              </div>
+
+              <!-- Size selector -->
+              <select id="draw-size-select" class="filter-select" style="padding:4px 8px; font-size:12px; height:32px;" onchange="setDrawingSize(this.value)">
+                <option value="2">Nét Mảnh (2px)</option>
+                <option value="4" selected>Nét Vừa (4px)</option>
+                <option value="8">Nét Dày (8px)</option>
+                <option value="16">Cực Dày (16px)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="drawing-tools-group">
+            <button class="draw-btn" onclick="clearCurrentCanvas('flash')" title="Xóa toàn bộ nét trên câu này (Phím C)">
+              🗑️ Xóa Nét
+            </button>
+            <button class="draw-btn" onclick="downloadAnnotatedCard('flash')" title="Tải ảnh câu hỏi kèm ghi chú viết tay (.png)">
+              📸 Lưu Ảnh Note
+            </button>
+            <button class="draw-btn" id="btn-toggle-scratchpad" onclick="toggleScratchpad()" title="Mở bảng nháp kẻ ô bên cạnh (Phím S)">
+              📐 Bảng Nháp Cạnh Bên
+            </button>
+            <label style="font-size:11.5px; color:var(--text-muted); display:inline-flex; align-items:center; gap:4px; cursor:pointer; margin-left:4px;">
+              <input type="checkbox" id="draw-auto-clear" checked style="accent-color:#f59e0b;"> Tự xóa khi qua câu
+            </label>
+          </div>
+        </div>
+
+        <div class="flash-dual-layout" id="flash-dual-container">
+          <div class="flash-dual-main">
+            <div class="flash-morph-wrapper">
+              <div class="desk-card flash-morph-card" id="flash-card">
+                <!-- HTML5 Canvas Overlay for stylus drawing -->
+                <canvas id="flash-drawing-canvas" class="drawing-canvas-overlay"></canvas>
             <div class="desk-header">
               <div class="station-badge-large">
                 <span>⚡</span> <span id="flash-card-station-num">CÂU SỐ 1</span>
@@ -1242,11 +1448,28 @@
                 <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(50)" title="Tiến 50 câu">+50 ⏩</button>
               </div>
             </div>
+          
+            </div>
+          </div>
+
+          <!-- Bảng Nháp Kẻ Ô Bên Cạnh (Scratchpad) -->
+          <div class="flash-scratchpad-panel" id="flash-scratchpad">
+            <div class="scratchpad-header">
+              <span>📐 BẢNG NHÁP ĐIỆN TỬ (VẼ TỰ DO / SƠ ĐỒ)</span>
+              <div style="display:flex; gap:6px;">
+                <button class="draw-btn" style="padding:2px 8px; font-size:11px;" onclick="clearScratchpad()">Xóa Nháp</button>
+                <button class="draw-btn" style="padding:2px 8px; font-size:11px;" onclick="toggleScratchpad()">Đóng ✕</button>
+              </div>
+            </div>
+            <div class="scratchpad-body" id="scratchpad-body">
+              <canvas id="scratchpad-canvas" class="scratchpad-canvas"></canvas>
+            </div>
           </div>
         </div>
 
         <div class="shortcut-legend">
-          Phím tắt Flash: <kbd>Space</kbd> Tạm dừng / Tiếp tục • <kbd>→</kbd> Nhảy câu tiếp • <kbd>←</kbd> Quay lại câu
+          Phím tắt Flash: <kbd>Space</kbd> Tạm dừng / Tiếp tục • <kbd>→</kbd> Nhảy câu tiếp • <kbd>←</kbd> Quay lại câu trước • <kbd>W</kbd> Bút vẽ • <kbd>P</kbd> Bút mực • <kbd>H</kbd> Dạ quang • <kbd>E</kbd> Tẩy • <kbd>C</kbd> Xóa nét • <kbd>S</kbd> Bảng nháp
+         <kbd>Space</kbd> Tạm dừng / Tiếp tục • <kbd>→</kbd> Nhảy câu tiếp • <kbd>←</kbd> Quay lại câu
           trước
         </div>
       </div>
@@ -1582,6 +1805,8 @@
         </div>
 
         <div class="desk-card active-station" id="desk-card">
+          <!-- Canvas Overlay for stylus in station mode -->
+          <canvas id="station-drawing-canvas" class="drawing-canvas-overlay"></canvas>
           <div class="desk-header">
             <div class="station-badge-large">
               <span>🚩</span> <span id="desk-station-number">TRẠM SỐ 1 / 40</span>
@@ -1919,6 +2144,305 @@
     }
 
     // INIT
+    
+    // ==========================================================
+    // ✏️ STYLUS & GRAPHIC TABLET IN-APP DRAWING STUDIO ENGINE
+    // ==========================================================
+    let drawModeActive = false;
+    let currentDrawTool = 'pen'; // 'pen' | 'highlighter' | 'eraser'
+    let currentDrawColor = '#facc15';
+    let currentDrawSize = 4;
+    let isDrawing = false;
+    let lastPoint = { x: 0, y: 0, pressure: 1 };
+    let scratchpadActive = false;
+
+    // Canvas references
+    let flashCanvas, flashCtx;
+    let stationCanvas, stationCtx;
+    let scratchpadCanvas, scratchpadCtx;
+
+    function initDrawingStudio() {
+      flashCanvas = document.getElementById('flash-drawing-canvas');
+      if (flashCanvas) {
+        flashCtx = flashCanvas.getContext('2d');
+        bindCanvasPointerEvents(flashCanvas, flashCtx);
+        syncCanvasSize(flashCanvas);
+      }
+
+      stationCanvas = document.getElementById('station-drawing-canvas');
+      if (stationCanvas) {
+        stationCtx = stationCanvas.getContext('2d');
+        bindCanvasPointerEvents(stationCanvas, stationCtx);
+        syncCanvasSize(stationCanvas);
+      }
+
+      scratchpadCanvas = document.getElementById('scratchpad-canvas');
+      if (scratchpadCanvas) {
+        scratchpadCtx = scratchpadCanvas.getContext('2d');
+        bindCanvasPointerEvents(scratchpadCanvas, scratchpadCtx);
+        syncCanvasSize(scratchpadCanvas);
+      }
+
+      window.addEventListener('resize', () => {
+        if (flashCanvas) syncCanvasSize(flashCanvas, true);
+        if (stationCanvas) syncCanvasSize(stationCanvas, true);
+        if (scratchpadCanvas) syncCanvasSize(scratchpadCanvas, true);
+      });
+    }
+
+    function syncCanvasSize(canvas, preserve = false) {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      let tempImg = null;
+      if (preserve && canvas.width > 0 && canvas.height > 0) {
+        tempImg = canvas.toDataURL();
+      }
+
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      if (tempImg) {
+        const img = new Image();
+        img.onload = () => {
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        };
+        img.src = tempImg;
+      }
+    }
+
+    function toggleDrawingMode(targetMode) {
+      drawModeActive = !drawModeActive;
+      const btn = document.getElementById('btn-draw-toggle');
+      const text = document.getElementById('draw-toggle-text');
+      const subTools = document.getElementById('draw-tools-sub');
+
+      if (drawModeActive) {
+        if (btn) btn.classList.add('active');
+        if (text) text.textContent = '✍️ Đang Bật Bút (W)';
+        if (subTools) subTools.style.display = 'inline-flex';
+
+        if (flashCanvas) {
+          syncCanvasSize(flashCanvas);
+          flashCanvas.classList.add('drawing-active');
+        }
+        if (stationCanvas) {
+          syncCanvasSize(stationCanvas);
+          stationCanvas.classList.add('drawing-active');
+        }
+      } else {
+        if (btn) btn.classList.remove('active');
+        if (text) text.textContent = '✏️ Bật Bút Vẽ Note (W)';
+        if (subTools) subTools.style.display = 'none';
+
+        if (flashCanvas) flashCanvas.classList.remove('drawing-active');
+        if (stationCanvas) stationCanvas.classList.remove('drawing-active');
+      }
+    }
+
+    function setDrawingTool(tool) {
+      currentDrawTool = tool;
+      document.querySelectorAll('#draw-tools-sub .draw-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`draw-tool-${tool === 'highlighter' ? 'hl' : tool}`);
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    function setDrawingColor(color, el) {
+      currentDrawColor = color;
+      document.querySelectorAll('.draw-color-btn').forEach(b => b.classList.remove('active'));
+      if (el) el.classList.add('active');
+      if (currentDrawTool === 'eraser') {
+        setDrawingTool('pen');
+      }
+    }
+
+    function setDrawingSize(size) {
+      currentDrawSize = parseInt(size) || 4;
+    }
+
+    function clearCurrentCanvas(type) {
+      if (type === 'flash' && flashCtx && flashCanvas) {
+        flashCtx.clearRect(0, 0, flashCanvas.width, flashCanvas.height);
+      } else if (type === 'station' && stationCtx && stationCanvas) {
+        stationCtx.clearRect(0, 0, stationCanvas.width, stationCanvas.height);
+      }
+    }
+
+    function clearScratchpad() {
+      if (scratchpadCtx && scratchpadCanvas) {
+        scratchpadCtx.clearRect(0, 0, scratchpadCanvas.width, scratchpadCanvas.height);
+      }
+    }
+
+    function toggleScratchpad() {
+      scratchpadActive = !scratchpadActive;
+      const panel = document.getElementById('flash-scratchpad');
+      const btn = document.getElementById('btn-toggle-scratchpad');
+      if (!panel) return;
+
+      if (scratchpadActive) {
+        panel.style.display = 'flex';
+        if (btn) btn.classList.add('active');
+        setTimeout(() => {
+          if (scratchpadCanvas) syncCanvasSize(scratchpadCanvas);
+        }, 50);
+      } else {
+        panel.style.display = 'none';
+        if (btn) btn.classList.remove('active');
+      }
+    }
+
+    function bindCanvasPointerEvents(canvas, ctx) {
+      canvas.addEventListener('pointerdown', (e) => {
+        if (!drawModeActive && canvas !== scratchpadCanvas) return;
+        canvas.setPointerCapture(e.pointerId);
+        isDrawing = true;
+
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const pressure = (e.pressure && e.pressure > 0) ? e.pressure : 0.6;
+
+        lastPoint = { x, y, pressure };
+
+        // Start path
+        ctx.beginPath();
+        applyDrawingStyles(ctx, pressure);
+        ctx.arc(x, y, (currentDrawTool === 'highlighter' ? 10 : currentDrawSize / 2), 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+      });
+
+      canvas.addEventListener('pointermove', (e) => {
+        if (!isDrawing) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const pressure = (e.pressure && e.pressure > 0) ? e.pressure : 0.6;
+
+        applyDrawingStyles(ctx, pressure);
+
+        // Smooth quadratic curve midpoint
+        const midX = (lastPoint.x + x) / 2;
+        const midY = (lastPoint.y + y) / 2;
+
+        ctx.quadraticCurveTo(lastPoint.x, lastPoint.y, midX, midY);
+        ctx.stroke();
+
+        lastPoint = { x, y, pressure };
+      });
+
+      const stopDrawing = (e) => {
+        if (!isDrawing) return;
+        isDrawing = false;
+        try { canvas.releasePointerCapture(e.pointerId); } catch(err){}
+        ctx.closePath();
+      };
+
+      canvas.addEventListener('pointerup', stopDrawing);
+      canvas.addEventListener('pointercancel', stopDrawing);
+    }
+
+    function applyDrawingStyles(ctx, pressure = 0.6) {
+      if (currentDrawTool === 'eraser') {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.lineWidth = currentDrawSize * 4;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
+        ctx.fillStyle = 'rgba(0,0,0,1)';
+      } else if (currentDrawTool === 'highlighter') {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.lineWidth = 22;
+        ctx.lineCap = 'square';
+        ctx.lineJoin = 'miter';
+        // Convert current color to 40% translucent
+        ctx.strokeStyle = hexToRgba(currentDrawColor, 0.38);
+        ctx.fillStyle = hexToRgba(currentDrawColor, 0.38);
+      } else {
+        // Pen tool with stylus pressure dynamics
+        ctx.globalCompositeOperation = 'source-over';
+        const dynamicWidth = Math.max(1.5, currentDrawSize * (0.6 + pressure * 0.8));
+        ctx.lineWidth = dynamicWidth;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = currentDrawColor;
+        ctx.fillStyle = currentDrawColor;
+      }
+    }
+
+    function hexToRgba(hex, alpha = 0.4) {
+      let c = hex.replace('#', '');
+      if (c.length === 3) c = c.split('').map(x => x + x).join('');
+      const num = parseInt(c, 16);
+      const r = (num >> 16) & 255;
+      const g = (num >> 8) & 255;
+      const b = num & 255;
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    // Function to download Question card + handwritten notes merged as HD PNG
+    function downloadAnnotatedCard(type) {
+      const q = (type === 'flash') ? flashList[currentFlashIdx] : stationExamList[currentStationIdx];
+      const canvasSrc = (type === 'flash') ? flashCanvas : stationCanvas;
+      if (!q || !canvasSrc) return;
+
+      const exportCanvas = document.createElement('canvas');
+      exportCanvas.width = canvasSrc.width || 800;
+      exportCanvas.height = Math.max(canvasSrc.height || 600, 500);
+      const expCtx = exportCanvas.getContext('2d');
+
+      // 1. Fill dark theme background
+      expCtx.fillStyle = '#0f172a';
+      expCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+
+      // Card border
+      expCtx.strokeStyle = '#334155';
+      expCtx.lineWidth = 3;
+      expCtx.strokeRect(10, 10, exportCanvas.width - 20, exportCanvas.height - 20);
+
+      // 2. Draw Question header text
+      expCtx.fillStyle = '#38bdf8';
+      expCtx.font = 'bold 15px sans-serif';
+      expCtx.fillText(`${q.chapter} (Gốc: #${q.orig_num})`, 25, 42);
+
+      // 3. Question stem
+      expCtx.fillStyle = '#ffffff';
+      expCtx.font = 'bold 18px sans-serif';
+      const cleanStem = (q.question || '').replace(/<[^>]*>/g, '');
+      wrapText(expCtx, cleanStem, 25, 75, exportCanvas.width - 50, 26);
+
+      // 4. Overlay user's drawing
+      expCtx.drawImage(canvasSrc, 0, 0);
+
+      // 5. Trigger download
+      const link = document.createElement('a');
+      link.download = `MoPhoi_Cau_${currentFlashIdx + 1}_Note.png`;
+      link.href = exportCanvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+      const words = text.split(' ');
+      let line = '';
+      for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > maxWidth && n > 0) {
+          ctx.fillText(line, x, y);
+          line = words[n] + ' ';
+          y += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, x, y);
+    }
+
     async function init() {
       try {
         // 1. Try local storage for PROGRESS first
@@ -1961,6 +2485,7 @@
           }
         }
 
+        initDrawingStudio();
         initDropdowns();
         filterFlashQuestions();
         filterStationMode();
@@ -2165,6 +2690,12 @@
     }
 
     function loadFlashQuestionCard() {
+      // Check auto-clear drawing canvas
+      const autoClear = document.getElementById('draw-auto-clear');
+      if (autoClear && autoClear.checked && flashCtx && flashCanvas) {
+        flashCtx.clearRect(0, 0, flashCanvas.width, flashCanvas.height);
+      }
+      setTimeout(() => { if (flashCanvas) syncCanvasSize(flashCanvas); }, 60);
       if (!flashList.length) return;
       const q = flashList[currentFlashIdx];
       flashRevealed = false;
@@ -3261,6 +3792,34 @@
       }
 
       if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
+
+      // Stylus & Drawing Hotkeys
+      const k = e.key.toLowerCase();
+      if (k === 'w') {
+        e.preventDefault();
+        toggleDrawingMode('flash');
+        return;
+      } else if (k === 'p' && drawModeActive) {
+        e.preventDefault();
+        setDrawingTool('pen');
+        return;
+      } else if (k === 'h' && drawModeActive) {
+        e.preventDefault();
+        setDrawingTool('highlighter');
+        return;
+      } else if (k === 'e' && drawModeActive) {
+        e.preventDefault();
+        setDrawingTool('eraser');
+        return;
+      } else if (k === 'c' && drawModeActive) {
+        e.preventDefault();
+        clearCurrentCanvas('flash');
+        return;
+      } else if (k === 's') {
+        e.preventDefault();
+        toggleScratchpad();
+        return;
+      }
 
       const activeTab = document.querySelector('.tab-content.active');
       if (!activeTab) return;
