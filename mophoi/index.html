@@ -1152,11 +1152,32 @@
       <div class="station-exam-container">
         <!-- Control Bar -->
         <div class="station-control-bar">
-          <div style="display:flex; align-items:center; gap:10px;">
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
             <select id="flash-chapter-filter" class="filter-select" onchange="filterFlashQuestions()">
               <option value="all">Tất cả 16 bài học (1.287 câu)</option>
             </select>
-            <div style="font-size:13px; color:var(--text-muted);">
+
+            <!-- Hộp Tua Nhanh & Chọn Câu Hỏi -->
+            <div class="flash-jump-box" style="display:inline-flex; align-items:center; gap:6px; background:#0b1120; border:1.5px solid var(--border); padding:4px 10px; border-radius:10px;">
+              <span style="font-size:12.5px; color:var(--text-muted); font-weight:700;">Tua tới câu:</span>
+              <input type="number" id="flash-jump-input" min="1" max="1287" value="1" 
+                     style="width:68px; background:#1e293b; border:1.5px solid #38bdf8; border-radius:6px; color:#38bdf8; text-align:center; font-weight:800; font-size:14px; padding:3px 6px;"
+                     onkeydown="if(event.key==='Enter') jumpToFlashQuestion(this.value)"
+                     title="Nhập số câu (ví dụ 85) rồi nhấn Enter để chuyển ngay">
+              <span style="font-size:13px; color:var(--text-muted); font-weight:700;" id="flash-jump-total">/ 1.287</span>
+              <button class="btn btn-secondary btn-sm" onclick="jumpToFlashQuestion(document.getElementById('flash-jump-input').value)" 
+                      style="padding:3px 10px; font-size:12px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-weight:800; cursor:pointer;"
+                      title="Nhảy tới số câu đã nhập">
+                ⏩ Đi
+              </button>
+            </div>
+
+            <!-- Nút Tiếp Tục Từ Câu Đang Làm Dở Lần Trước -->
+            <button id="btn-flash-resume" class="btn btn-sm" onclick="resumeLastFlashQuestion()" 
+                    style="display:none; background: linear-gradient(135deg, #f59e0b, #ef4444); color:#ffffff; border:none; font-weight:800; border-radius:8px; padding:6px 14px; font-size:12.5px; align-items:center; gap:6px; box-shadow: 0 0 14px rgba(245, 158, 11, 0.4); cursor:pointer;">
+              🔁 Tiếp tục từ câu <span id="flash-resume-num">85</span>
+            </button>
+            <div style="font-size:13px; color:var(--text-muted); display:none;">
               Câu: <b id="flash-index-indicator">1 / 1.287</b>
             </div>
           </div>
@@ -1213,9 +1234,12 @@
             <div
               style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:14px; font-size:13px; color:var(--text-muted);">
               <div>Mẹo: Bạn có thể click trực tiếp vào đáp án để kiểm tra ngay mà không cần đợi hết 7s!</div>
-              <div style="display:flex; gap:10px;">
+              <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(-10)" title="Lùi 10 câu">-10</button>
                 <button class="btn btn-secondary btn-sm" onclick="prevFlashQ()">◀ Câu trước (←)</button>
                 <button class="btn btn-secondary btn-sm" onclick="nextFlashQ()">Bỏ qua sang câu sau (→) ▶</button>
+                <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(10)" title="Tiến 10 câu">+10</button>
+                <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(50)" title="Tiến 50 câu">+50 ⏩</button>
               </div>
             </div>
           </div>
@@ -1509,7 +1533,7 @@
     <section id="tab-station" class="tab-content">
       <div class="station-exam-container">
         <div class="station-control-bar">
-          <div style="display:flex; align-items:center; gap:10px;">
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
             <select id="station-chapter-filter" class="filter-select" onchange="filterStationMode()">
               <option value="all">Tất cả 16 bài học (1.287 câu)</option>
             </select>
@@ -1519,6 +1543,27 @@
               <option value="50">Đề thi: 50 Trạm</option>
               <option value="all">Tất cả câu trong bài</option>
             </select>
+
+            <!-- Hộp Tua Nhanh & Chọn Trạm -->
+            <div class="station-jump-box" style="display:inline-flex; align-items:center; gap:6px; background:#0b1120; border:1.5px solid var(--border); padding:4px 10px; border-radius:10px;">
+              <span style="font-size:12.5px; color:var(--text-muted); font-weight:700;">Tua tới trạm:</span>
+              <input type="number" id="station-jump-input" min="1" max="1287" value="1" 
+                     style="width:68px; background:#1e293b; border:1.5px solid #10b981; border-radius:6px; color:#34d399; text-align:center; font-weight:800; font-size:14px; padding:3px 6px;"
+                     onkeydown="if(event.key==='Enter') jumpToStationQuestion(this.value)"
+                     title="Nhập số thứ tự trạm rồi nhấn Enter để chuyển ngay">
+              <span style="font-size:13px; color:var(--text-muted); font-weight:700;" id="station-jump-total">/ 40</span>
+              <button class="btn btn-secondary btn-sm" onclick="jumpToStationQuestion(document.getElementById('station-jump-input').value)" 
+                      style="padding:3px 10px; font-size:12px; background:#10b981; color:#fff; border:none; border-radius:6px; font-weight:800; cursor:pointer;"
+                      title="Nhảy tới trạm đã nhập">
+                ⏩ Đi
+              </button>
+            </div>
+
+            <!-- Nút Tiếp Tục Từ Trạm Đang Làm Dở Lần Trước -->
+            <button id="btn-station-resume" class="btn btn-sm" onclick="resumeLastStationQuestion()" 
+                    style="display:none; background: linear-gradient(135deg, #10b981, #06b6d4); color:#ffffff; border:none; font-weight:800; border-radius:8px; padding:6px 14px; font-size:12.5px; align-items:center; gap:6px; box-shadow: 0 0 14px rgba(16, 185, 129, 0.4); cursor:pointer;">
+              🔁 Tiếp tục từ trạm <span id="station-resume-num">1</span>
+            </button>
           </div>
 
           <div style="display:flex; align-items:center; gap:12px;">
@@ -1556,12 +1601,16 @@
             <!-- Rendered by JS -->
           </div>
 
-          <div class="station-footer">
-            <button class="btn btn-secondary" onclick="prevStationQuestion()">◀ Trạm trước (←)</button>
-            <div style="display:flex; gap:10px;">
-              <button class="btn btn-secondary" id="btn-reveal-station" onclick="revealStationAnswer()">👁️ Xem Đáp Án
-                (Space)</button>
+          <div class="station-footer" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div style="display:flex; gap:6px; align-items:center;">
+              <button class="btn btn-secondary btn-sm" onclick="jumpRelativeStation(-10)" title="Lùi 10 trạm">-10</button>
+              <button class="btn btn-secondary" onclick="prevStationQuestion()">◀ Trạm trước (←)</button>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+              <button class="btn btn-secondary" id="btn-reveal-station" onclick="revealStationAnswer()">👁️ Xem Đáp Án (Space)</button>
               <button class="btn btn-primary" onclick="nextStationQuestion()">Trạm tiếp theo (→) ▶</button>
+              <button class="btn btn-secondary btn-sm" onclick="jumpRelativeStation(10)" title="Tiến 10 trạm">+10</button>
+              <button class="btn btn-secondary btn-sm" onclick="jumpRelativeStation(50)" title="Tiến 50 trạm">+50 ⏩</button>
             </div>
           </div>
         </div>
@@ -2012,6 +2061,109 @@
       startFlashCycle();
     }
 
+    
+    // ==========================================================
+    // ⏩ TUA NHANH & RESUME HỌC TIẾP (FLASH & CHẠY TRẠM)
+    // ==========================================================
+    function jumpToFlashQuestion(targetNum) {
+      let val = parseInt(targetNum);
+      if (isNaN(val) || val < 1) val = 1;
+      if (val > flashList.length) val = flashList.length;
+      currentFlashIdx = val - 1;
+      loadFlashQuestionCard();
+      if (flashIsPlaying) {
+        stopFlashTimer();
+        startFlashCycle();
+      }
+    }
+
+    function jumpRelativeFlash(delta) {
+      let target = currentFlashIdx + 1 + delta;
+      if (target < 1) target = 1;
+      if (target > flashList.length) target = flashList.length;
+      jumpToFlashQuestion(target);
+    }
+
+    function checkLastFlashResume() {
+      const saved = localStorage.getItem('mo_phoi_last_flash_idx');
+      const resumeBtn = document.getElementById('btn-flash-resume');
+      if (!resumeBtn) return;
+
+      let targetIdx = null;
+      if (saved !== null) {
+        const idx = parseInt(saved);
+        if (!isNaN(idx) && idx > 0 && idx < flashList.length) {
+          targetIdx = idx;
+        }
+      } else if (PROGRESS && PROGRESS.mastered_questions && PROGRESS.mastered_questions.length > 0) {
+        const answeredSet = new Set([...(PROGRESS.mastered_questions || []), ...(PROGRESS.wrong_questions || [])]);
+        for (let i = flashList.length - 1; i >= 0; i--) {
+          if (answeredSet.has(flashList[i].id)) {
+            targetIdx = Math.min(i + 1, flashList.length - 1);
+            break;
+          }
+        }
+      }
+
+      if (targetIdx !== null && targetIdx !== currentFlashIdx) {
+        document.getElementById('flash-resume-num').textContent = targetIdx + 1;
+        resumeBtn.style.display = 'inline-flex';
+      } else {
+        resumeBtn.style.display = 'none';
+      }
+    }
+
+    function resumeLastFlashQuestion() {
+      const resumeBtn = document.getElementById('btn-flash-resume');
+      const targetText = document.getElementById('flash-resume-num').textContent;
+      const num = parseInt(targetText);
+      if (!isNaN(num) && num >= 1 && num <= flashList.length) {
+        jumpToFlashQuestion(num);
+        if (resumeBtn) resumeBtn.style.display = 'none';
+      }
+    }
+
+    function jumpToStationQuestion(targetNum) {
+      let val = parseInt(targetNum);
+      if (isNaN(val) || val < 1) val = 1;
+      if (val > stationExamList.length) val = stationExamList.length;
+      currentStationIdx = val - 1;
+      renderCurrentStationDesk();
+    }
+
+    function jumpRelativeStation(delta) {
+      let target = currentStationIdx + 1 + delta;
+      if (target < 1) target = 1;
+      if (target > stationExamList.length) target = stationExamList.length;
+      jumpToStationQuestion(target);
+    }
+
+    function checkLastStationResume() {
+      const saved = localStorage.getItem('mo_phoi_last_station_idx');
+      const resumeBtn = document.getElementById('btn-station-resume');
+      if (!resumeBtn) return;
+
+      if (saved !== null) {
+        const idx = parseInt(saved);
+        if (!isNaN(idx) && idx > 0 && idx < stationExamList.length && idx !== currentStationIdx) {
+          document.getElementById('station-resume-num').textContent = idx + 1;
+          resumeBtn.style.display = 'inline-flex';
+          return;
+        }
+      }
+      resumeBtn.style.display = 'none';
+    }
+
+    function resumeLastStationQuestion() {
+      const targetText = document.getElementById('station-resume-num').textContent;
+      const num = parseInt(targetText);
+      if (!isNaN(num) && num >= 1 && num <= stationExamList.length) {
+        jumpToStationQuestion(num);
+        const resumeBtn = document.getElementById('btn-station-resume');
+        if (resumeBtn) resumeBtn.style.display = 'none';
+      }
+    }
+
     function loadFlashQuestionCard() {
       if (!flashList.length) return;
       const q = flashList[currentFlashIdx];
@@ -2022,6 +2174,21 @@
       document.getElementById('flash-card-station-num').textContent = `CÂU ${currentFlashIdx + 1} / ${flashList.length}`;
       document.getElementById('flash-card-chapter').textContent = q.chapter;
       document.getElementById('flash-card-orig-num').textContent = `#Gốc: ${q.orig_num}`;
+
+      // Synchronize jump input
+      const jumpInput = document.getElementById('flash-jump-input');
+      if (jumpInput && document.activeElement !== jumpInput) {
+        jumpInput.value = currentFlashIdx + 1;
+        jumpInput.max = flashList.length;
+      }
+      const jumpTotal = document.getElementById('flash-jump-total');
+      if (jumpTotal) {
+        jumpTotal.textContent = `/ ${flashList.length}`;
+      }
+
+      // Save last flash position
+      localStorage.setItem('mo_phoi_last_flash_idx', currentFlashIdx);
+      checkLastFlashResume();
 
       // Question with yellow highlights
       document.getElementById('flash-question-prompt').innerHTML = q.question_html || q.question;
@@ -2211,6 +2378,21 @@
       document.getElementById('desk-station-number').textContent = `TRẠM SỐ ${currentStationIdx + 1} / ${stationExamList.length}`;
       document.getElementById('desk-chapter-tag').textContent = q.chapter;
       document.getElementById('desk-question-prompt').innerHTML = q.question_html || q.question;
+
+      // Synchronize station jump input
+      const stJumpInput = document.getElementById('station-jump-input');
+      if (stJumpInput && document.activeElement !== stJumpInput) {
+        stJumpInput.value = currentStationIdx + 1;
+        stJumpInput.max = stationExamList.length;
+      }
+      const stJumpTotal = document.getElementById('station-jump-total');
+      if (stJumpTotal) {
+        stJumpTotal.textContent = `/ ${stationExamList.length}`;
+      }
+
+      // Save last station position
+      localStorage.setItem('mo_phoi_last_station_idx', currentStationIdx);
+      checkLastStationResume();
 
       const isStarred = PROGRESS.starred_questions.includes(q.id);
       const starBtn = document.getElementById('btn-star-station');
