@@ -229,6 +229,8 @@
     }
 
     .desk-card {
+      width: 100%;
+      box-sizing: border-box;
       background: var(--bg-card);
       border: 2px solid var(--border);
       border-radius: var(--radius);
@@ -1188,15 +1190,13 @@
     }
 
     /* Side-by-side Scratchpad View */
-    .flash-dual-layout {
-      display: flex;
-      gap: 16px;
-      align-items: stretch;
+    .flash-morph-wrapper {
       width: 100%;
+      position: relative;
     }
-    .flash-dual-main {
-      flex: 1;
-      min-width: 0;
+    .desk-card.flash-morph-card {
+      width: 100%;
+      position: relative;
     }
     .flash-scratchpad-panel {
       flex: 1;
@@ -1353,8 +1353,6 @@
           </div>
         </div>
 
-        <!-- Flash Morph Card Viewport -->
-        
         <!-- ✏️ THANH CÔNG CỤ BÚT VẼ & NOTE BẢNG VẼ ĐIỆN TỬ -->
         <div class="drawing-toolbar-wrap" id="flash-drawing-toolbar">
           <div class="drawing-tools-group">
@@ -1400,8 +1398,8 @@
             <button class="draw-btn" onclick="downloadAnnotatedCard('flash')" title="Tải ảnh câu hỏi kèm ghi chú viết tay (.png)">
               📸 Lưu Ảnh Note
             </button>
-            <button class="draw-btn" id="btn-toggle-scratchpad" onclick="toggleScratchpad()" title="Mở bảng nháp kẻ ô bên cạnh (Phím S)">
-              📐 Bảng Nháp Cạnh Bên
+            <button class="draw-btn" id="btn-toggle-scratchpad" onclick="toggleScratchpad()" title="Mở bảng nháp kẻ ô bên dưới (Phím S)">
+              📐 Bảng Nháp Kẻ Ô
             </button>
             <label style="font-size:11.5px; color:var(--text-muted); display:inline-flex; align-items:center; gap:4px; cursor:pointer; margin-left:4px;">
               <input type="checkbox" id="draw-auto-clear" checked style="accent-color:#f59e0b;"> Tự xóa khi qua câu
@@ -1409,20 +1407,19 @@
           </div>
         </div>
 
-        <div class="flash-dual-layout" id="flash-dual-container">
-          <div class="flash-dual-main">
-            <div class="flash-morph-wrapper">
-              <div class="desk-card flash-morph-card" id="flash-card">
-                <!-- HTML5 Canvas Overlay for stylus drawing -->
-                <canvas id="flash-drawing-canvas" class="drawing-canvas-overlay"></canvas>
+        <!-- Flash Morph Card Viewport -->
+        <div class="flash-morph-wrapper" style="width:100%; position:relative;">
+          <div class="desk-card flash-morph-card" id="flash-card" style="width:100%; position:relative; box-sizing:border-box;">
+            <!-- HTML5 Canvas Overlay for stylus drawing -->
+            <canvas id="flash-drawing-canvas" class="drawing-canvas-overlay"></canvas>
+
             <div class="desk-header">
               <div class="station-badge-large">
                 <span>⚡</span> <span id="flash-card-station-num">CÂU SỐ 1</span>
               </div>
               <div style="display:flex; gap:8px; align-items:center;">
                 <span class="chapter-tag" id="flash-card-chapter">BÀI HỌC</span>
-                <span style="font-size:13px; color:var(--accent); font-weight:700;" id="flash-card-orig-num">#Gốc:
-                  1</span>
+                <span style="font-size:13px; color:var(--accent); font-weight:700;" id="flash-card-orig-num">#Gốc: 1</span>
               </div>
             </div>
 
@@ -1437,40 +1434,35 @@
             </div>
 
             <!-- Hint footer -->
-            <div
-              style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:14px; font-size:13px; color:var(--text-muted);">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:14px; font-size:13px; color:var(--text-muted); flex-wrap:wrap; gap:10px;">
               <div>Mẹo: Bạn có thể click trực tiếp vào đáp án để kiểm tra ngay mà không cần đợi hết 7s!</div>
               <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                 <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(-10)" title="Lùi 10 câu">-10</button>
                 <button class="btn btn-secondary btn-sm" onclick="prevFlashQ()">◀ Câu trước (←)</button>
-                <button class="btn btn-secondary btn-sm" onclick="nextFlashQ()">Bỏ qua sang câu sau (→) ▶</button>
+                <button class="btn btn-primary btn-sm" onclick="nextFlashQ()">Bỏ qua sang câu sau (→) ▶</button>
                 <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(10)" title="Tiến 10 câu">+10</button>
                 <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(50)" title="Tiến 50 câu">+50 ⏩</button>
               </div>
             </div>
-          
+          </div>
+        </div>
+
+        <!-- Bảng Nháp Kẻ Ô Mở Rộng Bên Dưới (Scratchpad) -->
+        <div class="flash-scratchpad-panel" id="flash-scratchpad" style="display:none; width:100%; margin-top:14px;">
+          <div class="scratchpad-header">
+            <span>📐 BẢNG NHÁP ĐIỆN TỬ (VẼ TỰ DO / SƠ ĐỒ / GHI CHÚ)</span>
+            <div style="display:flex; gap:6px;">
+              <button class="draw-btn" style="padding:2px 8px; font-size:11px;" onclick="clearScratchpad()">Xóa Nháp</button>
+              <button class="draw-btn" style="padding:2px 8px; font-size:11px;" onclick="toggleScratchpad()">Đóng ✕</button>
             </div>
           </div>
-
-          <!-- Bảng Nháp Kẻ Ô Bên Cạnh (Scratchpad) -->
-          <div class="flash-scratchpad-panel" id="flash-scratchpad">
-            <div class="scratchpad-header">
-              <span>📐 BẢNG NHÁP ĐIỆN TỬ (VẼ TỰ DO / SƠ ĐỒ)</span>
-              <div style="display:flex; gap:6px;">
-                <button class="draw-btn" style="padding:2px 8px; font-size:11px;" onclick="clearScratchpad()">Xóa Nháp</button>
-                <button class="draw-btn" style="padding:2px 8px; font-size:11px;" onclick="toggleScratchpad()">Đóng ✕</button>
-              </div>
-            </div>
-            <div class="scratchpad-body" id="scratchpad-body">
-              <canvas id="scratchpad-canvas" class="scratchpad-canvas"></canvas>
-            </div>
+          <div class="scratchpad-body" id="scratchpad-body" style="height:350px;">
+            <canvas id="scratchpad-canvas" class="scratchpad-canvas"></canvas>
           </div>
         </div>
 
         <div class="shortcut-legend">
           Phím tắt Flash: <kbd>Space</kbd> Tạm dừng / Tiếp tục • <kbd>→</kbd> Nhảy câu tiếp • <kbd>←</kbd> Quay lại câu trước • <kbd>W</kbd> Bút vẽ • <kbd>P</kbd> Bút mực • <kbd>H</kbd> Dạ quang • <kbd>E</kbd> Tẩy • <kbd>C</kbd> Xóa nét • <kbd>S</kbd> Bảng nháp
-         <kbd>Space</kbd> Tạm dừng / Tiếp tục • <kbd>→</kbd> Nhảy câu tiếp • <kbd>←</kbd> Quay lại câu
-          trước
         </div>
       </div>
     </section>
