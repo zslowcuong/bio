@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mô Phôi Master • Chạy Trạm Trắc Nghiệm K48 (Flash 7 Giây & Mindset)</title>
+  
+  <!-- FONT CHỮ CHUYÊN BIỆT CHO TIẾNG VIỆT & TỐI ƯU TRÍ NHỚ (BE VIETNAM PRO & LEXEND) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Lexend:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #080c14;
+      --bg-card: #131a29;
+      --bg-card-hover: #1c263a;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --success: #10b981;
+      --success-bg: rgba(16, 185, 129, 0.15);
+      --danger: #ef4444;
+      --danger-bg: rgba(239, 68, 68, 0.15);
+      --warning: #f59e0b;
+      --border: #222f46;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Be Vietnam Pro', 'Lexend', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TÔ VÀNG TỪ KHÓA LIÊN KẾT */
+    mark.kw-hl {
+      background: #fef08a !important;
+      color: #0f172a !important;
+      padding: 2px 7px;
+      margin: 0 2px;
+      border-radius: 5px;
+      font-weight: 800 !important;
+      letter-spacing: 0.2px;
+      box-shadow: 0 0 12px rgba(254, 240, 138, 0.5);
+      display: inline;
+      line-height: 1.4;
+      border: 1px solid rgba(234, 179, 8, 0.6);
+    }
+
+    /* HEADER */
+    header {
+      background: rgba(19, 26, 41, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-urgent {
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.04); }
+    }
+
+    .logo-title {
+      font-size: 18px;
+      font-weight: 800;
+      background: linear-gradient(to right, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 6px;
+      background: #080c14;
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .nav-tab {
+      padding: 8px 15px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: none;
+      background: transparent;
+    }
+
+    .nav-tab:hover {
+      color: var(--text-main);
+    }
+
+    .nav-tab.active {
+      background: var(--accent);
+      color: #080c14;
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+
+    .nav-tab.highlight-tab {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(129, 140, 248, 0.2));
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+    }
+    .nav-tab.highlight-tab.active {
+      background: var(--accent);
+      color: #080c14;
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .stat-pill {
+      background: #080c14;
+      padding: 5px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+    .stat-pill b {
+      color: var(--accent);
+    }
+
+    /* MAIN CONTAINER */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tab-content {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .tab-content.active {
+      display: flex;
+    }
+
+    /* GENERAL CARDS */
+    .station-exam-container {
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .station-control-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 20px;
+      gap: 12px;
+    }
+
+    .desk-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.45);
+      position: relative;
+    }
+
+    .desk-card.active-station {
+      border-color: #38bdf8;
+    }
+
+    .desk-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    .station-badge-large {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 16px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chapter-tag {
+      font-size: 13px;
+      color: var(--text-muted);
+      background: #080c14;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .question-prompt {
+      font-size: 22.5px;
+      font-weight: 700;
+      line-height: 1.65;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-btn {
+      padding: 16px 20px;
+      background: #080c14;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-main);
+      font-size: 16.5px;
+      line-height: 1.5;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .option-btn:hover {
+      border-color: var(--accent);
+      background: #192335;
+    }
+
+    .option-btn .opt-key {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: #192335;
+      border: 1px solid var(--border);
+      font-weight: 800;
+      margin-right: 14px;
+      color: var(--accent);
+      flex-shrink: 0;
+      font-size: 14px;
+    }
+
+    .option-btn.selected-correct, .option-btn.flash-target {
+      background: rgba(16, 185, 129, 0.22) !important;
+      border-color: var(--success) !important;
+      color: #34d399 !important;
+      font-weight: 700;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.35);
+      transform: scale(1.01);
+    }
+
+    .option-btn.selected-wrong {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: var(--danger);
+      color: #f87171;
+    }
+
+    .option-btn.reveal-target {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+    }
+
+    /* ======================================================== */
+    /* ⚡ ANIMATION MORPH & PROGRESS BAR CHO FLASH TRẮC NGHIỆM */
+    /* ======================================================== */
+    .flash-morph-wrapper {
+      position: relative;
+      perspective: 1000px;
+    }
+
+    .flash-morph-card {
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease;
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .flash-morph-card.morph-out {
+      transform: translateY(-24px) scale(0.97);
+      opacity: 0;
+      filter: blur(5px);
+    }
+
+    .flash-morph-card.morph-in {
+      animation: cardInMorph 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes cardInMorph {
+      0% {
+        transform: translateY(28px) scale(0.96);
+        opacity: 0;
+        filter: blur(5px);
+      }
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    /* THANH ĐẾM NGƯỢC TIẾN ĐỘ 7S */
+    .flash-progress-track {
+      width: 100%;
+      height: 8px;
+      background: #080c14;
+      border-radius: 9999px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .flash-progress-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #34d399);
+      border-radius: 9999px;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+
+    .flash-progress-fill.revealed {
+      background: linear-gradient(90deg, #10b981, #34d399);
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.7);
+    }
+
+    .flash-status-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding: 0 4px;
+    }
+
+    .flash-status-banner .status-badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .flash-status-banner .status-badge.revealing {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    /* ACTION BUTTONS */
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #080c14;
+    }
+    .btn-primary:hover {
+      background: #7dd3fc;
+    }
+
+    .btn-secondary {
+      background: #1c263a;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: #2a3854;
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+    .btn-success:hover {
+      background: #059669;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    /* FORM CONTROLS */
+    .filter-select, .search-input {
+      background: #080c14;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      outline: none;
+      font-weight: 500;
+    }
+
+    /* CHEAT SHEET TABLE */
+    .cheat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    table.cheat-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
+
+    table.cheat-table th, table.cheat-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    table.cheat-table th {
+      background: #080c14;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    table.cheat-table tr:hover td {
+      background: rgba(56, 189, 248, 0.04);
+    }
+
+    /* MINDSET GUIDE SECTION */
+    .mindset-box {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      line-height: 1.7;
+    }
+
+    .mindset-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: #080c14;
+      padding: 18px 20px;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      font-weight: 900;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-size: 16.5px;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+    .step-content p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+    }
+
+    .shortcut-legend {
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+    kbd {
+      background: #080c14;
+      border: 1px solid var(--border);
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-family: 'Lexend', monospace;
+      color: var(--accent);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-area">
+      <span class="badge-urgent">KỲ THI 11.11 • FLASH 7S & MINDSET</span>
+      <h1 class="logo-title">MÔ PHÔI MASTER • K48</h1>
+    </div>
+
+    <nav class="nav-tabs">
+      <button class="nav-tab highlight-tab active" onclick="switchTab('flash')">
+        ⚡ Flash Trắc Nghiệm (Tự Động 7s)
+      </button>
+      <button class="nav-tab" onclick="switchTab('station')">
+        ⏱️ Chạy Trạm (Có Bấm Giờ)
+      </button>
+      <button class="nav-tab" onclick="switchTab('cheatsheet')">
+        📋 Bảng Từ Khóa Vàng
+      </button>
+      <button class="nav-tab" onclick="switchTab('mindset')">
+        🎯 Mindset & Thao Tác Bút Chì
+      </button>
+      <button class="nav-tab" onclick="switchTab('wrong')">
+        ❌ Kho Câu Hay Sai (<span id="stat-wrong-badge">0</span>)
+      </button>
+    </nav>
+
+    <div class="stats-bar">
+      <div class="stat-pill">Đã thuộc: <b id="stat-passed">0</b>/<span id="stat-total-q">1.287</span></div>
+      <div class="stat-pill">Độ chính xác: <b id="stat-accuracy" style="color:var(--success)">0%</b></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================================================== -->
+    <!-- ⚡ TAB 1: FLASH TRẮC NGHIỆM TỰ ĐỘNG 7 GIÂY (MORPH ANIMATION) -->
+    <!-- ========================================================== -->
+    <section id="tab-flash" class="tab-content active">
+      <div class="station-exam-container">
+        <!-- Control Bar -->
+        <div class="station-control-bar">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <select id="flash-chapter-filter" class="filter-select" onchange="filterFlashQuestions()">
+              <option value="all">Tất cả 16 bài học (1.287 câu)</option>
+            </select>
+            <div style="font-size:13px; color:var(--text-muted);">
+              Câu: <b id="flash-index-indicator">1 / 1.287</b>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:12px;">
+            <select id="flash-speed-select" class="filter-select" onchange="setFlashDuration(this.value)">
+              <option value="7" selected>⏱️ Tốc độ: 7 giây (Khuyến nghị chuẩn)</option>
+              <option value="5">⏱️ Tốc độ: 5 giây (Bơm não cực nhanh)</option>
+              <option value="10">⏱️ Tốc độ: 10 giây (Thong thả)</option>
+              <option value="15">⏱️ Tốc độ: 15 giây</option>
+            </select>
+            <button class="btn btn-primary btn-sm" id="btn-flash-play" onclick="toggleFlashPlay()">
+              ⏸️ Tạm Dừng
+            </button>
+          </div>
+        </div>
+
+        <!-- Thanh đếm ngược tiến độ & trạng thái -->
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div class="flash-status-banner">
+            <div>Đang suy nghĩ (Thử nhớ đáp án)...</div>
+            <div id="flash-status-badge" class="status-badge">Đếm ngược: 7s</div>
+          </div>
+          <div class="flash-progress-track">
+            <div id="flash-progress-bar" class="flash-progress-fill" style="width: 100%;"></div>
+          </div>
+        </div>
+
+        <!-- Flash Morph Card Viewport -->
+        <div class="flash-morph-wrapper">
+          <div class="desk-card flash-morph-card" id="flash-card">
+            <div class="desk-header">
+              <div class="station-badge-large">
+                <span>⚡</span> <span id="flash-card-station-num">CÂU SỐ 1</span>
+              </div>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <span class="chapter-tag" id="flash-card-chapter">BÀI HỌC</span>
+                <span style="font-size:13px; color:var(--accent); font-weight:700;" id="flash-card-orig-num">#Gốc: 1</span>
+              </div>
+            </div>
+
+            <!-- Câu hỏi có từ khóa tô vàng -->
+            <div class="question-prompt" id="flash-question-prompt">
+              Đang nạp câu hỏi...
+            </div>
+
+            <!-- 4 Đáp án A, B, C, D (sau 7s đáp án đúng sẽ bung ánh sáng xanh + tô vàng) -->
+            <div class="options-list" id="flash-options-list">
+              <!-- Rendered by JS -->
+            </div>
+
+            <!-- Hint footer -->
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:14px; font-size:13px; color:var(--text-muted);">
+              <div>Mẹo: Bạn có thể click trực tiếp vào đáp án để kiểm tra ngay mà không cần đợi hết 7s!</div>
+              <div style="display:flex; gap:10px;">
+                <button class="btn btn-secondary btn-sm" onclick="prevFlashQ()">◀ Câu trước (←)</button>
+                <button class="btn btn-secondary btn-sm" onclick="nextFlashQ()">Bỏ qua sang câu sau (→) ▶</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="shortcut-legend">
+          Phím tắt Flash: <kbd>Space</kbd> Tạm dừng / Tiếp tục • <kbd>→</kbd> Nhảy câu tiếp • <kbd>←</kbd> Quay lại câu trước
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!-- ⏱️ TAB 2: CHẠY TRẠM TRẮC NGHIỆM SIMULATOR (THI THẬT) -->
+    <!-- ========================================================== -->
+    <section id="tab-station" class="tab-content">
+      <div class="station-exam-container">
+        <div class="station-control-bar">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <select id="station-chapter-filter" class="filter-select" onchange="filterStationMode()">
+              <option value="all">Tất cả 16 bài học (1.287 câu)</option>
+            </select>
+            <select id="station-count-select" class="filter-select" onchange="filterStationMode()">
+              <option value="40" selected>Đề thi: 40 Trạm (Chuẩn thi)</option>
+              <option value="30">Đề thi: 30 Trạm</option>
+              <option value="50">Đề thi: 50 Trạm</option>
+              <option value="all">Tất cả câu trong bài</option>
+            </select>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:12px;">
+            <select id="timer-duration-select" class="filter-select" onchange="setStationTimerDuration(this.value)">
+              <option value="45" selected>⏱️ 45 giây / Trạm (Chuẩn thi)</option>
+              <option value="30">⏱️ 30 giây / Trạm (Tốc độ)</option>
+              <option value="60">⏱️ 60 giây / Trạm</option>
+              <option value="0">⏱️ Không bấm giờ</option>
+            </select>
+            <div id="station-timer-box" style="font-family:'Lexend',monospace; font-size:24px; font-weight:900; color:var(--accent); background:#080c14; padding:6px 16px; border-radius:10px; border:2px solid var(--border);">45s</div>
+            <button class="btn btn-secondary btn-sm" id="btn-timer-toggle" onclick="toggleStationTimer()">⏸️ Dừng</button>
+          </div>
+        </div>
+
+        <div class="desk-card active-station" id="desk-card">
+          <div class="desk-header">
+            <div class="station-badge-large">
+              <span>🚩</span> <span id="desk-station-number">TRẠM SỐ 1 / 40</span>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <span class="chapter-tag" id="desk-chapter-tag">BÀI 1. BÀI MỞ ĐẦU</span>
+              <button class="btn btn-secondary btn-sm" id="btn-star-station" onclick="toggleStarCurrentStation()">⭐</button>
+            </div>
+          </div>
+
+          <div class="question-prompt" id="desk-question-prompt">
+            Đang tải câu hỏi trạm...
+          </div>
+
+          <div class="options-list" id="desk-options-list">
+            <!-- Rendered by JS -->
+          </div>
+
+          <div class="station-footer">
+            <button class="btn btn-secondary" onclick="prevStationQuestion()">◀ Trạm trước (←)</button>
+            <div style="display:flex; gap:10px;">
+              <button class="btn btn-secondary" id="btn-reveal-station" onclick="revealStationAnswer()">👁️ Xem Đáp Án (Space)</button>
+              <button class="btn btn-primary" onclick="nextStationQuestion()">Trạm tiếp theo (→) ▶</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="shortcut-legend">
+          Phím tắt: Bấm <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> (hoặc <kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd>) để chọn đáp án • <kbd>Space</kbd> Lật đáp án • <kbd>←</kbd> <kbd>→</kbd> Đổi trạm
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!-- 📋 TAB 3: BẢNG TỪ KHÓA VÀNG (CHEAT SHEET) -->
+    <!-- ========================================================== -->
+    <section id="tab-cheatsheet" class="tab-content">
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div class="station-control-bar">
+          <input type="text" id="cheat-filter-input" class="search-input" placeholder="🔍 Lọc từ khóa trong bảng..." oninput="renderCheatTable()" />
+          <select id="cheat-chapter-filter" class="filter-select" onchange="renderCheatTable()">
+            <option value="all">Tất cả bài học</option>
+          </select>
+          <div style="font-size:12px; color:var(--text-muted);">
+            💡 <i>Các từ khóa liên kết giữa câu hỏi và đáp án đều được tô vàng nổi bật!</i>
+          </div>
+        </div>
+
+        <div class="cheat-card">
+          <table class="cheat-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">#</th>
+                <th style="width: 48%;">Từ Khóa Trong Đề Thi (Tô Vàng)</th>
+                <th style="width: 35%;">Từ Khóa Đáp Án (Tô Vàng)</th>
+                <th style="width: 17%;">Bài Học</th>
+              </tr>
+            </thead>
+            <tbody id="cheat-table-body">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!-- 🎯 TAB 4: MINDSET & THAO TÁC PHÒNG THI THỰC CHIẾN -->
+    <!-- ========================================================== -->
+    <section id="tab-mindset" class="tab-content">
+      <div class="station-exam-container">
+        <div class="mindset-box">
+          <div style="border-bottom:1px solid var(--border); padding-bottom:14px;">
+            <h2 style="color:var(--accent); font-size:22px; font-weight:800; display:flex; align-items:center; gap:8px;">
+              <span>🎯</span> CHIẾN THUẬT PHÒNG THI: QUẢN LÝ TAY, BÚT CHÌ & TỜ PHIẾU TÔ
+            </h2>
+            <p style="color:var(--text-muted); font-size:14.5px; margin-top:4px;">
+              Đặc thù thi trắc nghiệm chạy trạm: <b>Đề dán cố định trên bàn, bạn cầm tờ phiếu tô di chuyển qua từng trạm</b>. Áp lực lớn nhất không phải là câu hỏi khó, mà là <b>TÔ LỆCH DÒNG</b> hoặc <b>CUỐNG TAY KHI CHUÔNG REO</b>.
+            </p>
+          </div>
+
+          <!-- Bước 1 -->
+          <div class="mindset-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>QUY TẮC "TAY TRÁI ĐỊNH VỊ SINH TỬ" (CHỐNG LỆCH DÒNG 100%)</h4>
+              <p>
+                - Tờ giấy trắc nghiệm luôn cầm bằng tay trái.<br/>
+                - <b>Ngay khi bước chân tới bàn trạm:</b> Mắt nhìn số trạm dán trên bàn (VD: Trạm 16) ➔ <b>Ngón tay cái hoặc ngón trỏ tay trái ĐÈ CHẶT vào dòng số 16</b> trên tờ phiếu tô.<br/>
+                - <b style="color:var(--danger)">Tuyệt đối không nhấc ngón tay trái ra</b> cho đến khi tay phải đã tô đen xong ô tròn đó. Đây là mỏ neo duy nhất bảo vệ bạn không bao giờ bị tô lệch dòng khi đang vội!
+              </p>
+            </div>
+          </div>
+
+          <!-- Bước 2 -->
+          <div class="mindset-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>QUẢN LÝ BÚT MỰC VS BÚT CHÌ: CẤT BÚT MỰC NGAY KHI VIẾT XONG</h4>
+              <p>
+                - <b>Bút mực:</b> Chỉ dùng trong 2 phút đầu giờ để điền Họ tên, MSSV, Mã đề, Lớp. Sau khi điền xong ➔ <b>CẤT NGAY VÀO TÚI ÁO</b> hoặc cất vào hộp bút.<br/>
+                - <b>Bút chì (2B):</b> Cầm sẵn trên tay phải xuyên suốt cả buổi chạy trạm. Nên dùng loại chì 2B chuốt đầu hơi tù (không chuốt quá nhọn để chỉ cần xoay 2 vòng là kín ô tròn, tiết kiệm 3 giây/câu).
+              </p>
+            </div>
+          </div>
+
+          <!-- Bước 3 -->
+          <div class="mindset-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>NHỊP THỞ 4 BƯỚC TRONG 30s - 45s TẠI MỖI BÀN TRẠM</h4>
+              <p>
+                - <b>0 - 3s (Tiếp cận):</b> Chân bước vào bàn, mắt đọc số trạm, ngón tay trái khóa dòng trên phiếu.<br/>
+                - <b>4 - 10s (Bắt cặp từ khóa):</b> Mắt quét đề tìm cụm từ khóa vàng đã học ở chế độ Flash 7s. Thấy từ khóa ➔ Chốt ngay chữ cái A, B, C hoặc D.<br/>
+                - <b>11 - 15s (Tô chì dứt khoát):</b> Tay phải xoay chì tô kín ô. Ngón tay trái vẫn giữ nguyên vị trí.<br/>
+                - <b>16s - chuông reo (Xả stress):</b> Thả lỏng vai, hít thở sâu 1 nhịp, chuẩn bị nhấc chân.<br/>
+                - <b>Chuông "KENG":</b> Bước dứt khoát sang bàn kế tiếp, mắt chuyển sang số bàn mới.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bước 4 -->
+          <div class="mindset-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>NGUYÊN TẮC "BUÔNG BỎ" KHI GẶP CÂU CHƯA NHỚ (KHÔNG ĐỨNG ĐƠ NÃO)</h4>
+              <p>
+                - Nếu sau 7 giây mà não vẫn trống rỗng: <b>TÔ NGAY 1 ĐÁP ÁN THEO TRỰC GIÁC ĐẦU TIÊN</b> (VD luôn chọn C hoặc B), sau đó dùng bút chì chấm một nốt nhỏ bên cạnh số câu.<br/>
+                - <b style="color:var(--warning)">Tuyệt đối không bỏ trống dòng:</b> Bỏ trống dòng rất dễ khiến trạm sau tô nhầm vào dòng trống đó.<br/>
+                - Khi chuông reo: <b>QUÊN HOÀN TOÀN CÂU VỪA RỒI</b>. Không tiếc nuối, không vừa đi vừa nghĩ về câu cũ, dành 100% sự tập trung cho bàn trạm mới trước mặt!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!-- ❌ TAB 5: KHO CÂU HAY SAI -->
+    <!-- ========================================================== -->
+    <section id="tab-wrong" class="tab-content">
+      <div class="station-exam-container">
+        <div class="station-control-bar">
+          <div style="font-weight:700; color:var(--danger); font-size:16px;">
+            ❌ DANH SÁCH CÂU CẦN PHẢI ÔN LẠI (<span id="wrong-total-count">0</span> câu)
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="startWrongStationExam()">
+            🚀 Chạy Trạm Luyện Riêng Kho Câu Này
+          </button>
+        </div>
+
+        <div id="wrong-items-container" style="display:flex; flex-direction:column; gap:12px;">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="questions_data.js"></script>
+  <script>
+    // DATA STATE
+    let ALL_QUESTIONS = [];
+    let PROGRESS = {
+      starred_questions: [],
+      wrong_questions: [],
+      mastered_questions: []
+    };
+
+    // ==========================================
+    // ⚡ FLASH 7S STATE
+    // ==========================================
+    let flashList = [];
+    let currentFlashIdx = 0;
+    let flashDuration = 7; // mặc định 7 giây
+    let flashTimer = null;
+    let flashTimeElapsed = 0; // ms
+    let flashIsPlaying = true;
+    let flashRevealed = false;
+    let flashIntervalStep = 100; // ms
+
+    // STATION EXAM STATE
+    let stationExamList = [];
+    let currentStationIdx = 0;
+    let stationTimer = null;
+    let stationTimerDuration = 45;
+    let stationTimerLeft = 45;
+    let stationTimerPaused = false;
+    let stationAnswered = false;
+
+    // AUDIO SYNTHESIZER
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playAudioTone(freq, type, dur) {
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + dur);
+      } catch (e) {}
+    }
+    function soundWarningBeep() { playAudioTone(880, 'sine', 0.12); }
+    function soundChimeSoft() {
+      playAudioTone(587.33, 'triangle', 0.35); // D5
+      setTimeout(() => playAudioTone(880, 'sine', 0.4), 80); // A5
+    }
+    function soundStationBell() {
+      playAudioTone(523.25, 'triangle', 0.8);
+      setTimeout(() => playAudioTone(659.25, 'sine', 0.8), 120);
+    }
+
+    // INIT
+    async function init() {
+      try {
+        // 1. Try local storage for PROGRESS first
+        try {
+          const savedProg = localStorage.getItem('mo_phoi_progress');
+          if (savedProg) PROGRESS = JSON.parse(savedProg);
+        } catch (e) {}
+
+        // 2. Load questions: if QUESTIONS_DATA is loaded statically via script, use it directly!
+        if (typeof window.QUESTIONS_DATA !== 'undefined' && Array.isArray(window.QUESTIONS_DATA) && window.QUESTIONS_DATA.length > 0) {
+          ALL_QUESTIONS = window.QUESTIONS_DATA;
+        } else {
+          // Fallback to fetch API
+          try {
+            const qRes = await fetch('/api/questions');
+            ALL_QUESTIONS = await qRes.json();
+          } catch (e) {
+            try {
+              const qResLocal = await fetch('./questions_data.js');
+              ALL_QUESTIONS = await qResLocal.json();
+            } catch (err) {
+              console.error("Could not fetch questions:", err);
+            }
+          }
+        }
+
+        // 3. Fallback progress from server if local storage was empty
+        if (!PROGRESS || (!PROGRESS.starred_questions && !PROGRESS.wrong_questions)) {
+          try {
+            const pRes = await fetch('/api/progress');
+            PROGRESS = await pRes.json();
+          } catch (e) {
+            PROGRESS = {
+              starred_questions: [],
+              wrong_questions: [],
+              mastered_questions: [],
+              mastered_stations: [],
+              needs_review_stations: []
+            };
+          }
+        }
+
+        initDropdowns();
+        filterFlashQuestions();
+        filterStationMode();
+        renderCheatTable();
+        renderWrongList();
+        updateGlobalStats();
+
+        window.addEventListener('keydown', handleKeyNavigation);
+      } catch (e) {
+        console.error("Init err:", e);
+      }
+    }
+
+    function initDropdowns() {
+      const chapters = [...new Set(ALL_QUESTIONS.map(q => q.chapter).filter(Boolean))];
+      const selects = [
+        document.getElementById('flash-chapter-filter'),
+        document.getElementById('station-chapter-filter'),
+        document.getElementById('cheat-chapter-filter')
+      ];
+
+      selects.forEach(sel => {
+        if (!sel) return;
+        if (sel.options[0]) {
+          sel.options[0].textContent = `Tất cả 16 bài học (${ALL_QUESTIONS.length} câu)`;
+        }
+        chapters.forEach(ch => {
+          const opt = document.createElement('option');
+          opt.value = ch;
+          const count = ALL_QUESTIONS.filter(q => q.chapter === ch).length;
+          opt.textContent = `${ch} (${count} câu)`;
+          sel.appendChild(opt);
+        });
+      });
+      const totalEl = document.getElementById('stat-total-q');
+      if (totalEl) totalEl.textContent = ALL_QUESTIONS.length;
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+
+      const targetTab = document.getElementById(`tab-${tabId}`);
+      if (targetTab) targetTab.classList.add('active');
+
+      const btn = Array.from(document.querySelectorAll('.nav-tab')).find(b => b.getAttribute('onclick').includes(tabId));
+      if (btn) btn.classList.add('active');
+
+      if (tabId === 'flash') {
+        flashIsPlaying = true;
+        document.getElementById('btn-flash-play').textContent = '⏸️ Tạm Dừng';
+        startFlashCycle();
+      } else {
+        stopFlashTimer();
+      }
+
+      if (tabId === 'station') {
+        startStationTimer();
+      } else {
+        stopStationTimer();
+      }
+
+      if (tabId === 'wrong') {
+        renderWrongList();
+      }
+    }
+
+    // ==========================================================
+    // ⚡ TAB 1: FLASH TRẮC NGHIỆM 7S ANIMATION MORPH LOGIC
+    // ==========================================================
+    function filterFlashQuestions() {
+      const ch = document.getElementById('flash-chapter-filter').value;
+      flashList = ALL_QUESTIONS.filter(q => {
+        if (ch !== 'all' && q.chapter !== ch) return false;
+        return true;
+      });
+
+      currentFlashIdx = 0;
+      loadFlashQuestionCard();
+    }
+
+    function setFlashDuration(val) {
+      flashDuration = parseInt(val);
+      startFlashCycle();
+    }
+
+    function loadFlashQuestionCard() {
+      if (!flashList.length) return;
+      const q = flashList[currentFlashIdx];
+      flashRevealed = false;
+
+      // Update meta
+      document.getElementById('flash-index-indicator').textContent = `${currentFlashIdx + 1} / ${flashList.length}`;
+      document.getElementById('flash-card-station-num').textContent = `CÂU ${currentFlashIdx + 1} / ${flashList.length}`;
+      document.getElementById('flash-card-chapter').textContent = q.chapter;
+      document.getElementById('flash-card-orig-num').textContent = `#Gốc: ${q.orig_num}`;
+
+      // Question with yellow highlights
+      document.getElementById('flash-question-prompt').innerHTML = q.question_html || q.question;
+
+      // Options list (chưa hiện đáp án đúng)
+      const optList = document.getElementById('flash-options-list');
+      optList.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+
+      q.options.forEach((optText, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerHTML = `
+          <div>
+            <span class="opt-key">${letters[idx] || (idx+1)}</span>
+            <span>${optText.replace(/^[a-e]\.\s*/i, '')}</span>
+          </div>
+        `;
+        // User can click option to test early
+        btn.onclick = () => onFlashOptionClick(idx);
+        optList.appendChild(btn);
+      });
+
+      // Update status banner
+      const statusBadge = document.getElementById('flash-status-badge');
+      statusBadge.textContent = `Đếm ngược: ${flashDuration}s`;
+      statusBadge.classList.remove('revealing');
+
+      const pBar = document.getElementById('flash-progress-bar');
+      pBar.style.width = '100%';
+      pBar.classList.remove('revealed');
+
+      startFlashCycle();
+    }
+
+    function startFlashCycle() {
+      stopFlashTimer();
+      if (!flashIsPlaying) return;
+
+      flashTimeElapsed = 0;
+      const totalMs = flashDuration * 1000;
+
+      flashTimer = setInterval(() => {
+        flashTimeElapsed += flashIntervalStep;
+        const remainingMs = Math.max(0, totalMs - flashTimeElapsed);
+        const pct = (remainingMs / totalMs) * 100;
+
+        document.getElementById('flash-progress-bar').style.width = `${pct}%`;
+        const secLeft = Math.ceil(remainingMs / 1000);
+        document.getElementById('flash-status-badge').textContent = `Đếm ngược: ${secLeft}s`;
+
+        if (flashTimeElapsed >= totalMs && !flashRevealed) {
+          revealFlashAnswerAndAdvance();
+        }
+      }, flashIntervalStep);
+    }
+
+    function stopFlashTimer() {
+      if (flashTimer) clearInterval(flashTimer);
+    }
+
+    function toggleFlashPlay() {
+      flashIsPlaying = !flashIsPlaying;
+      const btn = document.getElementById('btn-flash-play');
+      if (flashIsPlaying) {
+        btn.textContent = '⏸️ Tạm Dừng';
+        startFlashCycle();
+      } else {
+        btn.textContent = '▶️ Tiếp Tục';
+        stopFlashTimer();
+      }
+    }
+
+    function onFlashOptionClick(chosenIdx) {
+      if (flashRevealed) return;
+      const q = flashList[currentFlashIdx];
+      const optButtons = document.querySelectorAll('#flash-options-list .option-btn');
+
+      if (chosenIdx !== q.correct_idx && optButtons[chosenIdx]) {
+        optButtons[chosenIdx].classList.add('selected-wrong');
+      }
+      revealFlashAnswerAndAdvance();
+    }
+
+    function revealFlashAnswerAndAdvance() {
+      flashRevealed = true;
+      stopFlashTimer();
+
+      const q = flashList[currentFlashIdx];
+      const optButtons = document.querySelectorAll('#flash-options-list .option-btn');
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+
+      // Highlight target with sound
+      if (q.correct_idx !== null && optButtons[q.correct_idx]) {
+        const targetBtn = optButtons[q.correct_idx];
+        targetBtn.classList.add('flash-target');
+        // Inject the highlighted answer HTML
+        targetBtn.innerHTML = `
+          <div>
+            <span class="opt-key" style="background:var(--success); color:#080c14;">${letters[q.correct_idx]}</span>
+            <span>${(q.options_html && q.options_html[q.correct_idx]) ? q.options_html[q.correct_idx].replace(/^[a-e]\.\s*/i, '') : q.options[q.correct_idx]}</span>
+          </div>
+          <span style="font-size:12px; font-weight:800; background:rgba(16,185,129,0.3); padding:3px 8px; border-radius:5px;">✅ ĐÁP ÁN</span>
+        `;
+        soundChimeSoft();
+      }
+
+      const statusBadge = document.getElementById('flash-status-badge');
+      statusBadge.textContent = 'ĐÃ HIỆN ĐÁP ÁN!';
+      statusBadge.classList.add('revealing');
+
+      const pBar = document.getElementById('flash-progress-bar');
+      pBar.style.width = '100%';
+      pBar.classList.add('revealed');
+
+      // Giữ đáp án 1.8s để mắt chụp ảnh, sau đó kích hoạt ANIMATION MORPH sang câu mới
+      if (flashIsPlaying) {
+        setTimeout(() => {
+          if (flashIsPlaying) {
+            triggerMorphTransition();
+          }
+        }, 1800);
+      }
+    }
+
+    function triggerMorphTransition() {
+      const card = document.getElementById('flash-card');
+      card.classList.add('morph-out');
+
+      setTimeout(() => {
+        if (currentFlashIdx < flashList.length - 1) {
+          currentFlashIdx++;
+        } else {
+          currentFlashIdx = 0; // loop
+        }
+        card.classList.remove('morph-out');
+        card.classList.add('morph-in');
+        loadFlashQuestionCard();
+
+        setTimeout(() => {
+          card.classList.remove('morph-in');
+        }, 450);
+      }, 400);
+    }
+
+    function nextFlashQ() {
+      triggerMorphTransition();
+    }
+
+    function prevFlashQ() {
+      if (currentFlashIdx > 0) {
+        currentFlashIdx--;
+        loadFlashQuestionCard();
+      }
+    }
+
+    // ==========================================
+    // ⏱️ TAB 2: CHẠY TRẠM SIMULATOR
+    // ==========================================
+    function filterStationMode() {
+      const ch = document.getElementById('station-chapter-filter').value;
+      const countVal = document.getElementById('station-count-select').value;
+
+      let pool = ALL_QUESTIONS.filter(q => {
+        if (ch !== 'all' && q.chapter !== ch) return false;
+        return true;
+      });
+
+      if (countVal !== 'all') {
+        const limit = parseInt(countVal);
+        pool = [...pool].sort(() => Math.random() - 0.5).slice(0, limit);
+      }
+
+      stationExamList = pool;
+      currentStationIdx = 0;
+      renderCurrentStationDesk();
+    }
+
+    function renderCurrentStationDesk() {
+      if (!stationExamList.length) return;
+      const q = stationExamList[currentStationIdx];
+      stationAnswered = false;
+
+      document.getElementById('desk-station-number').textContent = `TRẠM SỐ ${currentStationIdx + 1} / ${stationExamList.length}`;
+      document.getElementById('desk-chapter-tag').textContent = q.chapter;
+      document.getElementById('desk-question-prompt').innerHTML = q.question_html || q.question;
+
+      const isStarred = PROGRESS.starred_questions.includes(q.id);
+      const starBtn = document.getElementById('btn-star-station');
+      starBtn.textContent = isStarred ? '⭐ Đã gắn sao' : '☆ Gắn sao';
+      starBtn.style.color = isStarred ? '#f59e0b' : 'inherit';
+
+      const optList = document.getElementById('desk-options-list');
+      optList.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+
+      q.options.forEach((optText, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerHTML = `
+          <div>
+            <span class="opt-key">${letters[idx] || (idx+1)}</span>
+            <span>${optText.replace(/^[a-e]\.\s*/i, '')}</span>
+          </div>
+        `;
+        btn.onclick = () => selectStationAnswer(idx);
+        optList.appendChild(btn);
+      });
+
+      document.getElementById('btn-reveal-station').textContent = '👁️ Xem Đáp Án (Space)';
+      resetStationTimer();
+    }
+
+    function selectStationAnswer(chosenIdx) {
+      if (stationAnswered) return;
+      stationAnswered = true;
+
+      const q = stationExamList[currentStationIdx];
+      const optButtons = document.querySelectorAll('#desk-options-list .option-btn');
+      const isCorrect = (chosenIdx === q.correct_idx);
+
+      if (q.correct_idx !== null && optButtons[q.correct_idx]) {
+        const letters = ['A', 'B', 'C', 'D', 'E'];
+        optButtons[q.correct_idx].innerHTML = `
+          <div>
+            <span class="opt-key">${letters[q.correct_idx]}</span>
+            <span>${(q.options_html && q.options_html[q.correct_idx]) ? q.options_html[q.correct_idx].replace(/^[a-e]\.\s*/i, '') : q.options[q.correct_idx]}</span>
+          </div>
+        `;
+      }
+
+      if (isCorrect) {
+        optButtons[chosenIdx].classList.add('selected-correct');
+        soundWarningBeep();
+        if (!PROGRESS.mastered_questions.includes(q.id)) {
+          PROGRESS.mastered_questions.push(q.id);
+        }
+        PROGRESS.wrong_questions = PROGRESS.wrong_questions.filter(id => id !== q.id);
+      } else {
+        optButtons[chosenIdx].classList.add('selected-wrong');
+        if (q.correct_idx !== null && optButtons[q.correct_idx]) {
+          optButtons[q.correct_idx].classList.add('reveal-target');
+        }
+        if (!PROGRESS.wrong_questions.includes(q.id)) {
+          PROGRESS.wrong_questions.push(q.id);
+        }
+      }
+
+      saveProgress();
+      updateGlobalStats();
+    }
+
+    function revealStationAnswer() {
+      const q = stationExamList[currentStationIdx];
+      const optButtons = document.querySelectorAll('#desk-options-list .option-btn');
+
+      if (q.correct_idx !== null && optButtons[q.correct_idx]) {
+        const letters = ['A', 'B', 'C', 'D', 'E'];
+        optButtons[q.correct_idx].classList.add('reveal-target');
+        optButtons[q.correct_idx].innerHTML = `
+          <div>
+            <span class="opt-key">${letters[q.correct_idx]}</span>
+            <span>${(q.options_html && q.options_html[q.correct_idx]) ? q.options_html[q.correct_idx].replace(/^[a-e]\.\s*/i, '') : q.options[q.correct_idx]}</span>
+          </div>
+        `;
+      }
+      document.getElementById('btn-reveal-station').textContent = 'Ẩn Đáp Án';
+    }
+
+    function nextStationQuestion() {
+      if (currentStationIdx < stationExamList.length - 1) {
+        currentStationIdx++;
+        renderCurrentStationDesk();
+      } else {
+        soundStationBell();
+        alert('🎉 Bạn đã hoàn thành toàn bộ các trạm thi!');
+      }
+    }
+
+    function prevStationQuestion() {
+      if (currentStationIdx > 0) {
+        currentStationIdx--;
+        renderCurrentStationDesk();
+      }
+    }
+
+    function toggleStarCurrentStation() {
+      const q = stationExamList[currentStationIdx];
+      if (!q) return;
+      const idx = PROGRESS.starred_questions.indexOf(q.id);
+      if (idx >= 0) {
+        PROGRESS.starred_questions.splice(idx, 1);
+      } else {
+        PROGRESS.starred_questions.push(q.id);
+      }
+      saveProgress();
+      renderCurrentStationDesk();
+      updateGlobalStats();
+    }
+
+    // STATION TIMER
+    function setStationTimerDuration(val) {
+      stationTimerDuration = parseInt(val);
+      resetStationTimer();
+    }
+
+    function startStationTimer() {
+      stopStationTimer();
+      if (stationTimerDuration <= 0) {
+        document.getElementById('station-timer-box').textContent = '∞';
+        return;
+      }
+      stationTimerLeft = stationTimerDuration;
+      stationTimerPaused = false;
+      document.getElementById('station-timer-box').textContent = `${stationTimerLeft}s`;
+
+      stationTimer = setInterval(() => {
+        if (stationTimerPaused) return;
+        stationTimerLeft--;
+        document.getElementById('station-timer-box').textContent = `${stationTimerLeft}s`;
+
+        if (stationTimerLeft === 5) soundWarningBeep();
+        if (stationTimerLeft <= 0) {
+          soundStationBell();
+          revealStationAnswer();
+          setTimeout(() => nextStationQuestion(), 1400);
+        }
+      }, 1000);
+    }
+
+    function stopStationTimer() {
+      if (stationTimer) clearInterval(stationTimer);
+    }
+
+    function resetStationTimer() {
+      stopStationTimer();
+      startStationTimer();
+    }
+
+    function toggleStationTimer() {
+      stationTimerPaused = !stationTimerPaused;
+      document.getElementById('btn-timer-toggle').textContent = stationTimerPaused ? '▶️ Tiếp' : '⏸️ Dừng';
+    }
+
+    // ==========================================
+    // 📋 TAB 3: CHEAT SHEET TABLE
+    // ==========================================
+    function renderCheatTable() {
+      const ch = document.getElementById('cheat-chapter-filter').value;
+      const s = document.getElementById('cheat-filter-input').value.toLowerCase().trim();
+      const tbody = document.getElementById('cheat-table-body');
+      tbody.innerHTML = '';
+
+      const filtered = ALL_QUESTIONS.filter(q => {
+        if (ch !== 'all' && q.chapter !== ch) return false;
+        if (s) {
+          const matchQ = q.question.toLowerCase().includes(s);
+          const matchA = (q.clean_ans || q.correct_text || '').toLowerCase().includes(s);
+          if (!matchQ && !matchA) return false;
+        }
+        return true;
+      });
+
+      filtered.forEach((q, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="color:var(--text-muted); font-size:12px;">${idx+1}</td>
+          <td>${q.question_html || q.question}</td>
+          <td>${(q.options_html && q.options_html[q.correct_idx]) ? q.options_html[q.correct_idx] : `<mark class="kw-hl">${q.clean_ans || q.correct_text}</mark>`}</td>
+          <td style="font-size:12px; color:var(--text-muted); font-weight:600;">${q.chapter.replace(/^BÀI\s+\d+[\.:\s]*/i, '')}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ==========================================
+    // ❌ TAB 5: KHO CÂU HAY SAI
+    // ==========================================
+    function renderWrongList() {
+      const container = document.getElementById('wrong-items-container');
+      const wrongSet = new Set(PROGRESS.wrong_questions);
+      const wrongQuestions = ALL_QUESTIONS.filter(q => wrongSet.has(q.id));
+
+      document.getElementById('wrong-total-count').textContent = wrongQuestions.length;
+      document.getElementById('stat-wrong-badge').textContent = wrongQuestions.length;
+      container.innerHTML = '';
+
+      if (!wrongQuestions.length) {
+        container.innerHTML = `
+          <div style="background:var(--bg-card); padding:30px; text-align:center; border-radius:12px; color:var(--text-muted);">
+            🎉 Hiện tại không có câu nào trong kho câu sai! Bạn đang làm rất tốt!
+          </div>
+        `;
+        return;
+      }
+
+      wrongQuestions.forEach((q, idx) => {
+        const item = document.createElement('div');
+        item.style.cssText = 'background:var(--bg-card); border:1.5px solid var(--border); border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:10px;';
+        item.innerHTML = `
+          <div style="display:flex; justify-content:space-between; font-size:12.5px; color:var(--text-muted);">
+            <span>${q.chapter} (Gốc: #${q.orig_num})</span>
+            <button class="btn btn-secondary btn-sm" onclick="removeWrongItem(${q.id})">Đã thuộc (Xóa)</button>
+          </div>
+          <div style="font-size:16px; font-weight:700; line-height:1.5;">${q.question_html || q.question}</div>
+          <div style="font-size:15px; color:var(--success); font-weight:700;">👉 ${(q.options_html && q.options_html[q.correct_idx]) ? q.options_html[q.correct_idx] : q.correct_text}</div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function removeWrongItem(qid) {
+      PROGRESS.wrong_questions = PROGRESS.wrong_questions.filter(id => id !== qid);
+      saveProgress();
+      renderWrongList();
+      updateGlobalStats();
+    }
+
+    function startWrongStationExam() {
+      const wrongSet = new Set(PROGRESS.wrong_questions);
+      const wrongQuestions = ALL_QUESTIONS.filter(q => wrongSet.has(q.id));
+      if (!wrongQuestions.length) {
+        alert('Kho câu sai đang trống!');
+        return;
+      }
+      stationExamList = [...wrongQuestions];
+      currentStationIdx = 0;
+      switchTab('station');
+      renderCurrentStationDesk();
+    }
+
+    // ==========================================
+    // KEYBOARD NAVIGATION
+    // ==========================================
+    function handleKeyNavigation(e) {
+      if (['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)) return;
+
+      const activeTab = document.querySelector('.tab-content.active');
+      if (!activeTab) return;
+
+      if (activeTab.id === 'tab-flash') {
+        if (e.code === 'Space') {
+          e.preventDefault();
+          toggleFlashPlay();
+        } else if (e.code === 'ArrowRight') {
+          nextFlashQ();
+        } else if (e.code === 'ArrowLeft') {
+          prevFlashQ();
+        }
+      } else if (activeTab.id === 'tab-station') {
+        if (e.key === '1' || e.key.toLowerCase() === 'a') selectStationAnswer(0);
+        else if (e.key === '2' || e.key.toLowerCase() === 'b') selectStationAnswer(1);
+        else if (e.key === '3' || e.key.toLowerCase() === 'c') selectStationAnswer(2);
+        else if (e.key === '4' || e.key.toLowerCase() === 'd') selectStationAnswer(3);
+        else if (e.code === 'Space') {
+          e.preventDefault();
+          revealStationAnswer();
+        } else if (e.code === 'ArrowRight') {
+          nextStationQuestion();
+        } else if (e.code === 'ArrowLeft') {
+          prevStationQuestion();
+        } else if (e.key.toLowerCase() === 's') {
+          toggleStarCurrentStation();
+        }
+      }
+    }
+
+    function updateGlobalStats() {
+      const passed = PROGRESS.mastered_questions.length;
+      document.getElementById('stat-passed').textContent = passed;
+      document.getElementById('stat-total-q').textContent = ALL_QUESTIONS.length;
+      const pct = ALL_QUESTIONS.length ? Math.round((passed / ALL_QUESTIONS.length) * 100) : 0;
+      document.getElementById('stat-accuracy').textContent = `${pct}%`;
+      document.getElementById('stat-wrong-badge').textContent = PROGRESS.wrong_questions.length;
+    }
+
+    async function saveProgress() {
+      // 1. Always save to localStorage immediately so user's progress is preserved per device
+      try {
+        localStorage.setItem('mo_phoi_progress', JSON.stringify(PROGRESS));
+      } catch (e) {}
+
+      // 2. If backend server is reachable, save to server too
+      try {
+        await fetch('/api/progress', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(PROGRESS)
+        });
+      } catch (e) {}
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
