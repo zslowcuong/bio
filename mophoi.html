@@ -2017,6 +2017,111 @@ body.theme-light .vip-mnemonic-text {
   font-size: 13.5px;
 }
 
+
+/* ========================================================== */
+/* ⏱️ REALTIME ETA DASHBOARD & NOTEBOOKLM TREE STYLES */
+/* ========================================================== */
+.realtime-eta-dashboard {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+.eta-speed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.eta-speed-card {
+  background: var(--bg-body);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.eta-speed-card:hover {
+  transform: translateY(-2px);
+  border-color: #38bdf8;
+  box-shadow: 0 6px 16px rgba(56, 189, 248, 0.2);
+}
+.eta-speed-card.active-speed {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+}
+.eta-speed-badge {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  width: fit-content;
+}
+.eta-total-duration {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--text-main);
+  font-family: 'Playfair Display', serif;
+}
+.eta-finish-time {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* NotebookLM Knowledge Tree Canvas */
+.notebooklm-canvas {
+  background: radial-gradient(circle at center, rgba(56,189,248,0.03) 0%, transparent 70%), var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+body.theme-light .notebooklm-canvas {
+  background: #f8fafc;
+}
+.notebooklm-source-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.notebooklm-node {
+  background: var(--bg-body);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  position: relative;
+}
+.notebooklm-node:hover {
+  border-color: #38bdf8;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+}
+.notebooklm-node.selected {
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.04);
+}
+
 </style>
 </head>
 
@@ -2063,7 +2168,7 @@ body.theme-light .vip-mnemonic-text {
     </nav>
 
     <div class="stats-bar">
-      <div class="stat-pill">Đã thuộc: <b id="stat-passed">0</b>/<span id="stat-total-q">1.357</span></div>
+      <div class="stat-pill">Đã thuộc: <b id="stat-passed">0</b>/<span id="stat-total-q">1.314</span></div>
       <div class="stat-pill">Độ chính xác: <b id="stat-accuracy" style="color:var(--success)">0%</b></div>
     </div>
   
@@ -2081,9 +2186,62 @@ body.theme-light .vip-mnemonic-text {
       <div class="station-exam-container">
         <!-- Control Bar -->
         <div class="station-control-bar">
+          <!-- Toggle High-Yield Curation -->
+          <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(239, 68, 68, 0.1); border:1.5px solid rgba(239, 68, 68, 0.4); border-radius:8px; padding:6px 12px; cursor:pointer;" onclick="toggleFlashHighYieldFilter()">
+            <input type="checkbox" id="chk-flash-high-yield" style="cursor:pointer;" onchange="toggleFlashHighYieldFilter()">
+            <label for="chk-flash-high-yield" style="cursor:pointer; font-weight:800; font-size:12.5px; color:#f87171; user-select:none;">
+              🔥 Chỉ Câu Chắc Chắn Thi (814 câu tinh hoa)
+            </label>
+          </div>
+          <button onclick="switchTab('branch-tree')" class="btn-read-lecture-quick" style="padding:6px 12px; font-size:12.5px; font-weight:700; background:rgba(16,185,129,0.15); border-color:#10b981; color:#34d399;">
+            🌳 Mở Sơ Đồ Cây NotebookLM
+          </button>
+        </div>
+
+        <!-- ⏱️ REALTIME ESTIMATED TIME OF COMPLETION (ETA) DASHBOARD -->
+        <div class="realtime-eta-dashboard" id="flash-eta-dashboard">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:18px;">⏱️</span>
+              <span style="font-weight:800; font-size:14px; color:var(--text-main);">DỰ TOÁN THỜI GIAN THỰC HOÀN THÀNH:</span>
+              <span class="stat-pill" id="flash-eta-scope-label" style="font-weight:700; color:#38bdf8;">Đang chọn: 1.314 câu</span>
+            </div>
+            <div style="font-size:12.5px; color:var(--text-muted);">
+              Đồng hồ: <b id="flash-eta-clock" style="color:var(--text-main);">--:--:--</b>
+            </div>
+          </div>
+
+          <div class="eta-speed-grid">
+            <div class="eta-speed-card" onclick="applyFlashSpeed(45)" id="eta-card-45" title="Bấm để chọn tốc độ 45 giây/câu">
+              <div class="eta-speed-badge">⚡ 45 GIÂY / CÂU (KỸ CÀNG)</div>
+              <div class="eta-total-duration" id="eta-dur-45">--</div>
+              <div class="eta-finish-time" id="eta-time-45">Về đích lúc: --:--</div>
+            </div>
+
+            <div class="eta-speed-card" onclick="applyFlashSpeed(30)" id="eta-card-30" title="Bấm để chọn tốc độ 30 giây/câu">
+              <div class="eta-speed-badge" style="background:rgba(56,189,248,0.2); color:#38bdf8;">⚡ 30 GIÂY / CÂU (TIÊU CHUẨN)</div>
+              <div class="eta-total-duration" id="eta-dur-30">--</div>
+              <div class="eta-finish-time" id="eta-time-30">Về đích lúc: --:--</div>
+            </div>
+
+            <div class="eta-speed-card" onclick="applyFlashSpeed(15)" id="eta-card-15" title="Bấm để chọn tốc độ 15 giây/câu">
+              <div class="eta-speed-badge" style="background:rgba(245,158,11,0.2); color:#fbbf24;">⚡ 15 GIÂY / CÂU (SIÊU TỐC)</div>
+              <div class="eta-total-duration" id="eta-dur-15">--</div>
+              <div class="eta-finish-time" id="eta-time-15">Về đích lúc: --:--</div>
+            </div>
+
+            <div class="eta-speed-card active-speed" onclick="applyFlashSpeed(7)" id="eta-card-7" title="Bấm để chọn tốc độ 7 giây/câu">
+              <div class="eta-speed-badge" style="background:rgba(236,72,153,0.2); color:#f472b6;">⚡ 7 GIÂY / CÂU (PHẢN XẠ)</div>
+              <div class="eta-total-duration" id="eta-dur-7">--</div>
+              <div class="eta-finish-time" id="eta-time-7">Về đích lúc: --:--</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="station-control-bar" style="margin-top:0;">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
             <select id="flash-chapter-filter" class="filter-select" onchange="onFlashChapterFilterChange()">
-              <option value="all">Tất cả tất cả bài học (1.357 câu) (1.357 câu)</option>
+              <option value="all">Tất cả tất cả bài học (1.314 câu) (1.314 câu)</option>
             </select>
 
             <!-- Bộ Lọc Dạng Câu Hỏi Trọng Tâm -->
@@ -2096,7 +2254,7 @@ body.theme-light .vip-mnemonic-text {
               <option value="archetype" selected>🔀 Sắp xếp: Gom nhóm dạng câu (Chuẩn học)</option>
               <option value="orig_num">🔢 Sắp xếp: Theo số câu gốc (#1 → #N)</option>
             </select>
-              <option value="all">Tất cả tất cả bài học (1.357 câu) (1.357 câu)</option>
+              <option value="all">Tất cả tất cả bài học (1.314 câu) (1.314 câu)</option>
             </select>
 
             <!-- Hộp Tua Nhanh & Chọn Câu Hỏi -->
@@ -2106,7 +2264,7 @@ body.theme-light .vip-mnemonic-text {
                      style="width:68px; background:#1e293b; border:1.5px solid #38bdf8; border-radius:6px; color:#38bdf8; text-align:center; font-weight:800; font-size:14px; padding:3px 6px;"
                      onkeydown="if(event.key==='Enter') jumpToFlashQuestion(this.value)"
                      title="Nhập số câu (ví dụ 85) rồi nhấn Enter để chuyển ngay">
-              <span style="font-size:13px; color:var(--text-muted); font-weight:700;" id="flash-jump-total">/ 1.357</span>
+              <span style="font-size:13px; color:var(--text-muted); font-weight:700;" id="flash-jump-total">/ 1.314</span>
               <button class="btn btn-secondary btn-sm" onclick="jumpToFlashQuestion(document.getElementById('flash-jump-input').value)" 
                       style="padding:3px 10px; font-size:12px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-weight:800; cursor:pointer;"
                       title="Nhảy tới số câu đã nhập">
@@ -2120,7 +2278,7 @@ body.theme-light .vip-mnemonic-text {
               🔁 Tiếp tục từ câu <span id="flash-resume-num">85</span>
             </button>
             <div style="font-size:13px; color:var(--text-muted); display:none;">
-              Câu: <b id="flash-index-indicator">1 / 1.357</b>
+              Câu: <b id="flash-index-indicator">1 / 1.314</b>
             </div>
           </div>
 
@@ -2329,7 +2487,7 @@ body.theme-light .vip-mnemonic-text {
       <!-- 1. SETUP / DASHBOARD VIEW -->
       <div id="lockin-setup-view">
         <div class="lockin-hero">
-          <h2>🔥 CHẾ ĐỘ LOCK-IN • CHIẾN DỊCH VƯỢT CẠN 1.357 CÂU</h2>
+          <h2>🔥 CHẾ ĐỘ LOCK-IN • CHIẾN DỊCH VƯỢT CẠN 1.314 CÂU</h2>
           <p>
             Cam kết tập trung 100%, không lướt mạng xã hội, không xao nhãng. Chinh phục mục tiêu số lượng câu hỏi trong
             thời gian ấn định với đồng hồ đếm ngược, theo dõi tốc độ (Pace), chuỗi đúng (Streak) và kích hoạt sóng não
@@ -2400,7 +2558,7 @@ body.theme-light .vip-mnemonic-text {
                 học:</label>
               <select id="lockin-chapter-select" class="filter-select" style="width:100%;"
                 onchange="onLockinChapterChange()">
-                <option value="all">Tất cả tất cả bài học (1.357 câu) (1.357 câu)</option>
+                <option value="all">Tất cả tất cả bài học (1.314 câu) (1.314 câu)</option>
               </select>
             </div>
             <div>
@@ -2445,7 +2603,7 @@ body.theme-light .vip-mnemonic-text {
         <!-- 48-Hour Exam Schedule Table -->
         <div class="schedule-table-wrap">
           <div class="schedule-header">
-            <h3>📅 LỘ TRÌNH 6 PHIÊN LOCK-IN ĐÁNH BẬT 1.357 CÂU (TỐI 9.11 ➔ 11.11)</h3>
+            <h3>📅 LỘ TRÌNH 6 PHIÊN LOCK-IN ĐÁNH BẬT 1.314 CÂU (TỐI 9.11 ➔ 11.11)</h3>
             <span style="font-size:13px; color:var(--text-muted);">Chia nhỏ mục tiêu • Chắc thắng 100%</span>
           </div>
 
@@ -2604,7 +2762,7 @@ body.theme-light .vip-mnemonic-text {
         <div class="station-control-bar">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
             <select id="station-chapter-filter" class="filter-select" onchange="onStationChapterFilterChange()">
-              <option value="all">Tất cả tất cả bài học (1.357 câu) (1.357 câu)</option>
+              <option value="all">Tất cả tất cả bài học (1.314 câu) (1.314 câu)</option>
             </select>
             <select id="station-type-filter" class="filter-select" onchange="onStationTypeFilterChange(this.value)" style="border-color:#10b981; max-width:240px;" title="Lọc dạng câu hỏi trạm">
               <option value="all">⚡ Tất cả dạng câu</option>
@@ -2614,7 +2772,7 @@ body.theme-light .vip-mnemonic-text {
               <option value="archetype">🔀 Thứ tự: Gom nhóm theo dạng câu</option>
               <option value="orig_num">🔢 Thứ tự: Theo số câu gốc</option>
             </select>
-              <option value="all">Tất cả tất cả bài học (1.357 câu) (1.357 câu)</option>
+              <option value="all">Tất cả tất cả bài học (1.314 câu) (1.314 câu)</option>
             </select>
             <select id="station-count-select" class="filter-select" onchange="filterStationMode()">
               <option value="40" selected>Đề thi: 40 Trạm (Chuẩn thi)</option>
@@ -2951,7 +3109,7 @@ body.theme-light .vip-mnemonic-text {
         <div class="speed-toolbar">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
             <select id="speed-chapter-filter" class="filter-select" onchange="onSpeedFilterChange()">
-              <option value="all">⚡ Tất cả tất cả bài học (1.357 câu) (1.357 câu)</option>
+              <option value="all">⚡ Tất cả tất cả bài học (1.314 câu) (1.314 câu)</option>
             </select>
 
             <select id="speed-type-filter" class="filter-select" onchange="onSpeedFilterChange()" style="border-color:#0284c7;">
@@ -3126,6 +3284,47 @@ body.theme-light .vip-mnemonic-text {
     <!-- ========================================================== -->
     <section id="tab-branch-tree" class="tab-content">
       <div class="branch-tree-container">
+        
+        <!-- ⏱️ REALTIME ETA DASHBOARD FOR TREE-BRANCH -->
+        <div class="realtime-eta-dashboard" style="border-color:rgba(16,185,129,0.3); background:linear-gradient(135deg, rgba(16,185,129,0.06), rgba(6,182,212,0.06)); margin-bottom:18px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:18px;">⏱️</span>
+              <span style="font-weight:800; font-size:14px; color:var(--text-main);">REALTIME DỰ TOÁN THỜI GIAN THEO MỐC TỐC ĐỘ:</span>
+              <span class="stat-pill" id="tree-eta-scope-label" style="font-weight:700; color:#10b981;">Bài đang chọn</span>
+            </div>
+            <!-- High Yield Checkbox in Tree -->
+            <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(239, 68, 68, 0.1); border:1px solid #ef4444; border-radius:6px; padding:3px 10px; cursor:pointer;" onclick="toggleTreeHighYieldFilter()">
+              <input type="checkbox" id="chk-tree-high-yield" style="cursor:pointer;" onchange="toggleTreeHighYieldFilter()">
+              <label for="chk-tree-high-yield" style="cursor:pointer; font-weight:800; font-size:12px; color:#f87171; user-select:none;">
+                🔥 Lọc Chỉ Câu Chắc Chắn Thi
+              </label>
+            </div>
+          </div>
+
+          <div class="eta-speed-grid">
+            <div class="eta-speed-card">
+              <div class="eta-speed-badge">⚡ 45 GIÂY / CÂU</div>
+              <div class="eta-total-duration" id="tree-dur-45">--</div>
+              <div class="eta-finish-time" id="tree-time-45">Về đích: --:--</div>
+            </div>
+            <div class="eta-speed-card">
+              <div class="eta-speed-badge" style="background:rgba(56,189,248,0.2); color:#38bdf8;">⚡ 30 GIÂY / CÂU</div>
+              <div class="eta-total-duration" id="tree-dur-30">--</div>
+              <div class="eta-finish-time" id="tree-time-30">Về đích: --:--</div>
+            </div>
+            <div class="eta-speed-card">
+              <div class="eta-speed-badge" style="background:rgba(245,158,11,0.2); color:#fbbf24;">⚡ 15 GIÂY / CÂU</div>
+              <div class="eta-total-duration" id="tree-dur-15">--</div>
+              <div class="eta-finish-time" id="tree-time-15">Về đích: --:--</div>
+            </div>
+            <div class="eta-speed-card">
+              <div class="eta-speed-badge" style="background:rgba(236,72,153,0.2); color:#f472b6;">⚡ 7 GIÂY / CÂU</div>
+              <div class="eta-total-duration" id="tree-dur-7">--</div>
+              <div class="eta-finish-time" id="tree-time-7">Về đích: --:--</div>
+            </div>
+          </div>
+        </div>
         
         <!-- Top Control Bar -->
         <div class="tree-header-card">
@@ -4084,7 +4283,7 @@ body.theme-light .vip-mnemonic-text {
       selects.forEach(sel => {
         if (!sel) return;
         if (sel.options[0]) {
-          sel.options[0].textContent = `Tất cả tất cả bài học (1.357 câu) (${ALL_QUESTIONS.length} câu)`;
+          sel.options[0].textContent = `Tất cả tất cả bài học (1.314 câu) (${ALL_QUESTIONS.length} câu)`;
         }
         const wrongOpt = document.createElement('option');
         wrongOpt.value = '__WRONG_ONLY__';
@@ -4256,7 +4455,11 @@ body.theme-light .vip-mnemonic-text {
       if (sel) sel.value = chapterName;
 
       // Group questions of this chapter by type_id
-      const chapterQs = (window.QUESTIONS_DATA || []).filter(q => q.chapter === chapterName);
+      let chapterQs = (window.QUESTIONS_DATA || []).filter(q => q.chapter === chapterName);
+      if (isTreeHighYieldOnly) {
+        chapterQs = chapterQs.filter(q => q.is_high_yield);
+      }
+      updateTreeEtaDashboard(chapterQs.length);
       const groups = {};
 
       chapterQs.forEach(q => {
@@ -4297,8 +4500,11 @@ body.theme-light .vip-mnemonic-text {
 
       // Render Root
       rootEl.innerHTML = `
-        <span class="flash-lec-badge" style="background:#10b981; color:#fff; font-size:11px;">GỐC BÀI HỌC</span>
-        <h3 class="lecture-heading-serif" style="font-size:22px; color:var(--text-main); margin:8px 0 6px 0;">${chapterName}</h3>
+        <div style="display:flex; justify-content:center; align-items:center; gap:8px; margin-bottom:8px;">
+          <span class="notebooklm-source-pill">✨ NOTEBOOKLM KNOWLEDGE TREE</span>
+          <span class="flash-lec-badge" style="background:#10b981; color:#fff; font-size:11px;">NGUỒN BÀI HỌC GỐC</span>
+        </div>
+        <h3 class="lecture-heading-serif" style="font-size:24px; color:var(--text-main); margin:0 0 6px 0; font-weight:900;">${chapterName}</h3>
         <div style="display:flex; justify-content:center; gap:16px; font-size:13px; color:var(--text-muted); font-weight:600; flex-wrap:wrap;">
           <span>⚡ Tổng số: <b>${chapterQs.length} câu hỏi</b></span>
           <span>🌳 Phân chia: <b>${branches.length} nhánh dạng câu hỏi</b></span>
@@ -4660,6 +4866,133 @@ body.theme-light .vip-mnemonic-text {
       }
     }
 
+    
+    // ==========================================================
+    // ⏱️ REALTIME TIME ESTIMATOR (45s, 30s, 15s, 7s) & ETA CLOCK
+    // ==========================================================
+    let isFlashHighYieldOnly = false;
+    let isTreeHighYieldOnly = false;
+    let etaClockInterval = null;
+
+    function startRealtimeEtaClock() {
+      if (etaClockInterval) clearInterval(etaClockInterval);
+      updateRealtimeClock();
+      etaClockInterval = setInterval(updateRealtimeClock, 1000);
+    }
+
+    function updateRealtimeClock() {
+      const now = new Date();
+      const timeStr = now.toTimeString().split(' ')[0];
+      const el = document.getElementById('flash-eta-clock');
+      if (el) el.textContent = timeStr;
+    }
+
+    function calculateDurAndEta(count, secondsPerQ) {
+      if (!count || count <= 0) return { durStr: '0 phút', finishStr: '--:--' };
+      const totalSeconds = count * secondsPerQ;
+      const minutes = totalSeconds / 60;
+      const hours = minutes / 60;
+
+      let durStr = '';
+      if (hours >= 1) {
+        const h = Math.floor(hours);
+        const m = Math.round(minutes % 60);
+        durStr = `${h}h ${m < 10 ? '0' : ''}${m}m`;
+      } else {
+        durStr = `${Math.max(1, Math.round(minutes))} phút`;
+      }
+
+      // Calculate Target Finish Time
+      const finishDate = new Date(Date.now() + totalSeconds * 1000);
+      const finishHours = finishDate.getHours();
+      const finishMinutes = finishDate.getMinutes();
+      const finishStr = `Về đích lúc: ${finishHours < 10 ? '0' : ''}${finishHours}:${finishMinutes < 10 ? '0' : ''}${finishMinutes}`;
+
+      return { durStr, finishStr };
+    }
+
+    function updateFlashEtaDashboard() {
+      const questions = getEffectiveFlashQuestions();
+      const count = questions.length;
+
+      const label = document.getElementById('flash-eta-scope-label');
+      if (label) {
+        const chapter = document.getElementById('flash-chapter-filter')?.value || 'all';
+        label.textContent = `Đang chọn: ${count} câu ${isFlashHighYieldOnly ? '(🔥 Tinh hoa chắc chắn thi)' : ''}`;
+      }
+
+      // Update 4 cards
+      [45, 30, 15, 7].forEach(sec => {
+        const res = calculateDurAndEta(count, sec);
+        const durEl = document.getElementById(`eta-dur-${sec}`);
+        const timeEl = document.getElementById(`eta-time-${sec}`);
+        if (durEl) durEl.textContent = res.durStr;
+        if (timeEl) timeEl.textContent = res.finishStr;
+      });
+    }
+
+    function updateTreeEtaDashboard(chapterQsCount) {
+      const count = chapterQsCount;
+      const label = document.getElementById('tree-eta-scope-label');
+      if (label) {
+        label.textContent = `${currentTreeChapter}: ${count} câu ${isTreeHighYieldOnly ? '(🔥 Chắc chắn thi)' : ''}`;
+      }
+
+      [45, 30, 15, 7].forEach(sec => {
+        const res = calculateDurAndEta(count, sec);
+        const durEl = document.getElementById(`tree-dur-${sec}`);
+        const timeEl = document.getElementById(`tree-time-${sec}`);
+        if (durEl) durEl.textContent = res.durStr;
+        if (timeEl) timeEl.textContent = res.finishStr;
+      });
+    }
+
+    function applyFlashSpeed(sec) {
+      const sel = document.getElementById('flash-speed-select');
+      if (sel) {
+        sel.value = String(sec);
+        setFlashDuration(sec);
+      }
+      // Highlight card
+      [45, 30, 15, 7].forEach(s => {
+        const card = document.getElementById(`eta-card-${s}`);
+        if (card) card.classList.toggle('active-speed', s === sec);
+      });
+      showToast(`⏱️ Đã đặt tốc độ Flash: ${sec} giây / câu!`);
+    }
+
+    function toggleFlashHighYieldFilter() {
+      const chk = document.getElementById('chk-flash-high-yield');
+      isFlashHighYieldOnly = chk ? chk.checked : !isFlashHighYieldOnly;
+      if (chk) chk.checked = isFlashHighYieldOnly;
+
+      // Reload Flash questions
+      onFlashChapterFilterChange();
+      updateFlashEtaDashboard();
+      showToast(isFlashHighYieldOnly ? "🔥 Đã kích hoạt Bộ Lọc: Chỉ câu chắc chắn thi!" : "Đã chuyển sang xem Tất cả câu hỏi.");
+    }
+
+    function toggleTreeHighYieldFilter() {
+      const chk = document.getElementById('chk-tree-high-yield');
+      isTreeHighYieldOnly = chk ? chk.checked : !isTreeHighYieldOnly;
+      if (chk) chk.checked = isTreeHighYieldOnly;
+
+      loadBranchTreeForChapter(currentTreeChapter);
+      showToast(isTreeHighYieldOnly ? "🔥 Sơ đồ cây: Chỉ lọc câu chắc chắn thi!" : "Sơ đồ cây: Xem tất cả câu.");
+    }
+
+    function getEffectiveFlashQuestions() {
+      let list = window.QUESTIONS_DATA || [];
+      const curChap = document.getElementById('flash-chapter-filter')?.value || 'all';
+      if (curChap !== 'all') {
+        list = list.filter(q => q.chapter === curChap);
+      }
+      if (isFlashHighYieldOnly) {
+        list = list.filter(q => q.is_high_yield);
+      }
+      return list;
+    }
+
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
@@ -4850,6 +5183,7 @@ body.theme-light .vip-mnemonic-text {
     }
 
     function onFlashChapterFilterChange() {
+      setTimeout(updateFlashEtaDashboard, 50);
       selectedFlashType = 'all';
       filterFlashQuestions();
     }
@@ -5963,7 +6297,7 @@ body.theme-light .vip-mnemonic-text {
         return txt.includes(lowerKw);
       });
       if (!matched.length) {
-        alert(`Không tìm thấy câu hỏi với từ khóa "${kw}" trong 1.357 câu.`);
+        alert(`Không tìm thấy câu hỏi với từ khóa "${kw}" trong 1.314 câu.`);
         return;
       }
       stationExamList = matched;
@@ -6752,7 +7086,7 @@ Chỉ còn ${remaining} câu nữa là cán đích. Bạn có chắc muốn dừ
       const sel = document.getElementById('speed-chapter-filter');
       if (!sel) return;
       const chapters = [...new Set(ALL_QUESTIONS.map(q => q.chapter || 'Chưa phân loại'))];
-      sel.innerHTML = '<option value="all">⚡ Tất cả tất cả bài học (1.357 câu) (' + ALL_QUESTIONS.length + ' câu)</option>';
+      sel.innerHTML = '<option value="all">⚡ Tất cả tất cả bài học (1.314 câu) (' + ALL_QUESTIONS.length + ' câu)</option>';
       chapters.forEach(c => {
         const count = ALL_QUESTIONS.filter(q => q.chapter === c).length;
         const opt = document.createElement('option');
@@ -7141,7 +7475,7 @@ Chỉ còn ${remaining} câu nữa là cán đích. Bạn có chắc muốn dừ
       const banner = document.getElementById('flash-lecture-banner');
       if (!banner) return;
       if (chapterName === 'all') {
-        document.getElementById('flash-lec-title').textContent = 'Toàn bộ tất cả bài học (1.357 câu) (1.357 câu trắc nghiệm)';
+        document.getElementById('flash-lec-title').textContent = 'Toàn bộ tất cả bài học (1.314 câu) (1.314 câu trắc nghiệm)';
         document.getElementById('flash-lec-desc').textContent = 'Tổng hợp ngân hàng đề thi Mô Phôi K48. Đọc bài giảng từng bài để đạt điểm tối đa.';
       } else if (window.LECTURES_DATA && window.LECTURES_DATA[chapterName]) {
         const item = window.LECTURES_DATA[chapterName];
