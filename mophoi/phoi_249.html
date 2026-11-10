@@ -1,0 +1,2639 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ôn Tập Phôi Thai Học VIP • Flash 7 Giây (249 Câu Có Đáp Án)</title>
+  <style>
+    :root {
+      --bg-dark: #080c14;
+      --bg-card: #131a29;
+      --bg-card-hover: #1c263a;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --success: #10b981;
+      --success-bg: rgba(16, 185, 129, 0.15);
+      --danger: #ef4444;
+      --danger-bg: rgba(239, 68, 68, 0.15);
+      --warning: #f59e0b;
+      --border: #222f46;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Be Vietnam Pro', 'Lexend', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TÔ VÀNG TỪ KHÓA LIÊN KẾT */
+    mark.kw-hl {
+      background: #fef08a !important;
+      color: #0f172a !important;
+      padding: 2px 7px;
+      margin: 0 2px;
+      border-radius: 5px;
+      font-weight: 800 !important;
+      letter-spacing: 0.2px;
+      box-shadow: 0 0 12px rgba(254, 240, 138, 0.5);
+      display: inline;
+      line-height: 1.4;
+      border: 1px solid rgba(234, 179, 8, 0.6);
+    }
+
+    /* HEADER */
+    header {
+      background: rgba(19, 26, 41, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-urgent {
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.85;
+        transform: scale(1.04);
+      }
+    }
+
+    .logo-title {
+      font-size: 18px;
+      font-weight: 800;
+      background: linear-gradient(to right, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 6px;
+      background: #080c14;
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .nav-tab {
+      padding: 8px 15px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: none;
+      background: transparent;
+    }
+
+    .nav-tab:hover {
+      color: var(--text-main);
+    }
+
+    .nav-tab.active {
+      background: var(--accent);
+      color: #080c14;
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+
+    .nav-tab.highlight-tab {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(129, 140, 248, 0.2));
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+    }
+
+    .nav-tab.highlight-tab.active {
+      background: var(--accent);
+      color: #080c14;
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .stat-pill {
+      background: #080c14;
+      padding: 5px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .stat-pill b {
+      color: var(--accent);
+    }
+
+    /* MAIN CONTAINER */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tab-content {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .tab-content.active {
+      display: flex;
+    }
+
+    /* GENERAL CARDS */
+    .station-exam-container {
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .station-control-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 20px;
+      gap: 12px;
+    }
+
+    .desk-card {
+      width: 100%;
+      box-sizing: border-box;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.45);
+      position: relative;
+    }
+
+    .desk-card.active-station {
+      border-color: #38bdf8;
+    }
+
+    .desk-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    .station-badge-large {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 16px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chapter-tag {
+      font-size: 13px;
+      color: var(--text-muted);
+      background: #080c14;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .question-prompt {
+      font-size: 22.5px;
+      font-weight: 700;
+      line-height: 1.65;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-btn {
+      padding: 16px 20px;
+      background: #080c14;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-main);
+      font-size: 16.5px;
+      line-height: 1.5;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .option-btn:hover {
+      border-color: var(--accent);
+      background: #192335;
+    }
+
+    .option-btn .opt-key {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: #192335;
+      border: 1px solid var(--border);
+      font-weight: 800;
+      margin-right: 14px;
+      color: var(--accent);
+      flex-shrink: 0;
+      font-size: 14px;
+    }
+
+    .option-btn.selected-correct,
+    .option-btn.flash-target {
+      background: rgba(16, 185, 129, 0.22) !important;
+      border-color: var(--success) !important;
+      color: #34d399 !important;
+      font-weight: 700;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.35);
+      transform: scale(1.01);
+    }
+
+    .option-btn.selected-wrong {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: var(--danger);
+      color: #f87171;
+    }
+
+    .option-btn.reveal-target {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+    }
+
+    /* ======================================================== */
+    /* ⚡ ANIMATION MORPH & PROGRESS BAR CHO FLASH TRẮC NGHIỆM */
+    /* ======================================================== */
+    .flash-morph-wrapper {
+      position: relative;
+      perspective: 1000px;
+    }
+
+    .flash-morph-card {
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease;
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .flash-morph-card.morph-out {
+      transform: translateY(-24px) scale(0.97);
+      opacity: 0;
+      filter: blur(5px);
+    }
+
+    .flash-morph-card.morph-in {
+      animation: cardInMorph 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes cardInMorph {
+      0% {
+        transform: translateY(28px) scale(0.96);
+        opacity: 0;
+        filter: blur(5px);
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    /* THANH ĐẾM NGƯỢC TIẾN ĐỘ 7S */
+    .flash-progress-track {
+      width: 100%;
+      height: 8px;
+      background: #080c14;
+      border-radius: 9999px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .flash-progress-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #34d399);
+      border-radius: 9999px;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+
+    .flash-progress-fill.revealed {
+      background: linear-gradient(90deg, #10b981, #34d399);
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.7);
+    }
+
+    .flash-status-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding: 0 4px;
+    }
+
+    .flash-status-banner .status-badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .flash-status-banner .status-badge.revealing {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    /* ACTION BUTTONS */
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #080c14;
+    }
+
+    .btn-primary:hover {
+      background: #7dd3fc;
+    }
+
+    .btn-secondary {
+      background: #1c263a;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #2a3854;
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+
+    .btn-success:hover {
+      background: #059669;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    /* FORM CONTROLS */
+    .filter-select,
+    .search-input {
+      background: #080c14;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      outline: none;
+      font-weight: 500;
+    }
+
+    /* CHEAT SHEET TABLE */
+    .cheat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    table.cheat-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
+
+    table.cheat-table th,
+    table.cheat-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    table.cheat-table th {
+      background: #080c14;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    table.cheat-table tr:hover td {
+      background: rgba(56, 189, 248, 0.04);
+    }
+
+    /* MINDSET GUIDE SECTION */
+    .mindset-box {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      line-height: 1.7;
+    }
+
+    .mindset-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: #080c14;
+      padding: 18px 20px;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      font-weight: 900;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-size: 16.5px;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+    }
+
+    .shortcut-legend {
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    kbd {
+      background: #080c14;
+      border: 1px solid var(--border);
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-family: 'Lexend', monospace;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ========================================================== */
+    /* 🔥 LOCK-IN MODE STYLES                                    */
+    /* ========================================================== */
+    .lockin-hero {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(245, 158, 11, 0.1));
+      border: 1.5px solid rgba(245, 158, 11, 0.4);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .lockin-hero h2 {
+      font-size: 24px;
+      font-weight: 900;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .lockin-hero p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .sprint-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .sprint-card {
+      background: #111827;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sprint-card:hover {
+      border-color: #f59e0b;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.2);
+    }
+
+    .sprint-card.active-preset {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.08);
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
+    }
+
+    .sprint-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .sprint-badge.warmup {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+    }
+
+    .sprint-badge.pomodoro {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+    }
+
+    .sprint-badge.marathon {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+    }
+
+    .sprint-badge.chapter {
+      background: rgba(168, 85, 247, 0.2);
+      color: #c084fc;
+    }
+
+    .sprint-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .sprint-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .sprint-meta {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* Lock-in Arena Active */
+    .lockin-arena-container {
+      display: none;
+      background: #0d121d;
+      border: 2px solid #f59e0b;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 0 40px rgba(245, 158, 11, 0.15);
+    }
+
+    .lockin-hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1.5px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .hud-timer-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hud-timer {
+      font-family: 'Lexend', monospace;
+      font-size: 32px;
+      font-weight: 900;
+      color: #ef4444;
+      background: #080c14;
+      padding: 6px 18px;
+      border-radius: 12px;
+      border: 2px solid rgba(239, 68, 68, 0.5);
+      letter-spacing: 1px;
+      animation: pulseTimerGlow 2s infinite;
+    }
+
+    @keyframes pulseTimerGlow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 25px rgba(239, 68, 68, 0.5);
+      }
+    }
+
+    .hud-stat {
+      text-align: center;
+    }
+
+    .hud-stat-val {
+      font-family: 'Lexend', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .hud-stat-lbl {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .hud-streak {
+      font-family: 'Lexend', sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+      color: #f59e0b;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 6px 14px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hud-pace {
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: #111827;
+      border: 1px solid var(--border);
+    }
+
+    .hud-pace.ahead {
+      color: #10b981;
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    .hud-pace.behind {
+      color: #f59e0b;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    .lockin-progress-bar-wrap {
+      width: 100%;
+      height: 9px;
+      background: #1f2937;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .lockin-progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #f59e0b, #ef4444);
+      transition: width 0.3s ease;
+    }
+
+    /* Schedule Timeline */
+    .schedule-table-wrap {
+      background: #111827;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 24px;
+    }
+
+    .schedule-header {
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .schedule-header h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .schedule-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 140px 130px;
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    .schedule-row:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .schedule-time {
+      font-family: 'Lexend', monospace;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #60a5fa;
+    }
+
+    .schedule-content h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .schedule-content p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .schedule-stat {
+      font-family: 'Lexend', monospace;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #fbbf24;
+    }
+
+    .btn-sprint-launch {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: #ffffff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-sprint-launch:hover {
+      transform: scale(1.04);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+    }
+
+    /* Modal Victory */
+    .lockin-victory-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lockin-victory-box {
+      background: #111827;
+      border: 2px solid #10b981;
+      border-radius: 20px;
+      max-width: 520px;
+      width: 100%;
+      padding: 32px 28px;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(16, 185, 129, 0.3);
+      animation: victoryPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes victoryPop {
+      0% {
+        transform: scale(0.85);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .schedule-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        text-align: left;
+      }
+
+      .hud-timer {
+        font-size: 24px;
+        padding: 4px 12px;
+      }
+
+      .lockin-hud {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+  
+    /* ========================================================== */
+    /* 🗺️ BẢN ĐỒ BIỂU MÔ & CƠ QUAN STYLES                         */
+    /* ========================================================== */
+    .epimap-search-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .epimap-input {
+      flex: 1;
+      min-width: 260px;
+      padding: 12px 18px;
+      background: #111827;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 15px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    .epimap-input:focus {
+      outline: none;
+      border-color: #10b981;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+    }
+
+    .epimap-tag-filter {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .epimap-tag {
+      background: #111827;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .epimap-tag:hover, .epimap-tag.active {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: #10b981;
+      color: #34d399;
+    }
+
+    .epimap-table-wrap {
+      background: #111827;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow-x: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .epimap-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+    .epimap-table th {
+      background: #080c14;
+      padding: 14px 18px;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #34d399;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .epimap-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .epimap-table tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .organ-badge {
+      display: inline-block;
+      font-family: 'Lexend', sans-serif;
+      font-weight: 800;
+      color: #ffffff;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+    .epi-badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34d399;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .trap-note {
+      background: rgba(239, 68, 68, 0.1);
+      border-left: 3px solid #ef4444;
+      padding: 6px 10px;
+      border-radius: 0 6px 6px 0;
+      font-size: 12.5px;
+      color: #fca5a5;
+      margin-top: 6px;
+    }
+
+    /* Wrong interactive arena */
+    .wrong-action-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 1.5px solid var(--border);
+      margin-bottom: 18px;
+    }
+    .wrong-retake-btn {
+      background: linear-gradient(135deg, #ef4444, #f59e0b);
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .wrong-retake-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+    }
+
+  
+    /* ========================================================== */
+    /* ✏️ BẢNG VẼ ĐIỆN TỬ & STYLUS ANNOTATION STUDIO             */
+    /* ========================================================== */
+    .drawing-toolbar-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: #0b1120;
+      border: 1.5px solid #1e293b;
+      padding: 8px 14px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      user-select: none;
+    }
+    .drawing-tools-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .draw-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
+    .draw-btn:hover {
+      background: #334155;
+      color: #fff;
+    }
+    .draw-btn.active {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: #fff;
+      border-color: #f59e0b;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+    }
+    .draw-color-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #334155;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .draw-color-btn:hover {
+      transform: scale(1.15);
+    }
+    .draw-color-btn.active {
+      border-color: #fff;
+      transform: scale(1.2);
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    /* Drawing Canvas Overlays */
+    .flash-morph-card, .desk-station-card {
+      position: relative !important;
+    }
+    .drawing-canvas-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 25;
+      pointer-events: none;
+      touch-action: none;
+      border-radius: 16px;
+    }
+    .drawing-canvas-overlay.drawing-active {
+      pointer-events: auto;
+      cursor: crosshair;
+    }
+
+    /* Side-by-side Scratchpad View */
+    .flash-morph-wrapper {
+      width: 100%;
+      position: relative;
+    }
+    .desk-card.flash-morph-card {
+      width: 100%;
+      position: relative;
+    }
+    .flash-scratchpad-panel {
+      flex: 1;
+      min-width: 320px;
+      background: #090e17;
+      border: 1.5px solid #1e293b;
+      border-radius: 16px;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    }
+    .scratchpad-header {
+      background: #0e1626;
+      border-bottom: 1.5px solid #1e293b;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+    .scratchpad-body {
+      flex: 1;
+      position: relative;
+      min-height: 420px;
+      background-size: 24px 24px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    }
+    .scratchpad-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    @media (max-width: 900px) {
+      .flash-dual-layout {
+        flex-direction: column;
+      }
+      .flash-scratchpad-panel {
+        min-height: 350px;
+      }
+    }
+
+  
+    /* ========================================================== */
+    /* 📓 DEDICATED SIDE-BY-SIDE NOTE STUDIO & INK SCRIBBLE       */
+    /* ========================================================== */
+    .station-exam-container.wide-mode {
+      max-width: 1560px !important;
+      transition: max-width 0.3s ease;
+    }
+
+    .study-split-layout {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+      align-items: stretch;
+      margin-top: 10px;
+    }
+
+    .study-card-col {
+      flex: 1.15;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .study-note-col {
+      flex: 0.85;
+      min-width: 380px;
+      background: #090e17;
+      border: 1.5px solid #1e293b;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.45);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .note-studio-header {
+      background: #0d1527;
+      border-bottom: 1.5px solid #1e293b;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .note-studio-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .note-studio-toolbar {
+      background: #080c14;
+      border-bottom: 1px solid #1e293b;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      user-select: none;
+    }
+
+    .note-canvas-body {
+      flex: 1;
+      min-height: 460px;
+      position: relative;
+      background-color: #050811;
+      touch-action: none;
+      cursor: crosshair;
+      overflow: hidden;
+    }
+
+    /* Paper background styles */
+    .note-canvas-body.paper-grid {
+      background-size: 24px 24px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    }
+    .note-canvas-body.paper-lined {
+      background-size: 100% 28px;
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    }
+    .note-canvas-body.paper-blank {
+      background-image: none;
+    }
+
+    .note-canvas-element {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+
+    .note-status-saved {
+      font-size: 11px;
+      color: #34d399;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .note-status-saved.visible {
+      opacity: 1;
+    }
+
+    @media (max-width: 1024px) {
+      .study-split-layout {
+        flex-direction: column;
+      }
+      .study-note-col {
+        min-height: 480px;
+      }
+    }
+
+  
+    /* ========================================================== */
+    /* 📊 DẠNG CÂU HỎI (QUESTION ARCHETYPES) STYLING              */
+    /* ========================================================== */
+    .archetypes-banner-card {
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid #1e293b;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-top: 10px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .arch-banner-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .arch-banner-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    .arch-banner-count-badge {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 2px 9px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+    }
+
+    .arch-chips-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .arch-chip {
+      background: #0b1120;
+      border: 1.5px solid #334155;
+      color: #cbd5e1;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+    }
+
+    .arch-chip:hover {
+      background: #1e293b;
+      border-color: #38bdf8;
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(56, 189, 248, 0.25);
+    }
+
+    .arch-chip.active {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.4), rgba(13, 148, 136, 0.4));
+      border-color: #38bdf8;
+      color: #38bdf8;
+      font-weight: 800;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
+    }
+
+    .arch-chip-count {
+      background: rgba(255, 255, 255, 0.09);
+      border-radius: 10px;
+      padding: 1px 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    .arch-chip.active .arch-chip-count {
+      background: rgba(56, 189, 248, 0.3);
+      color: #e0f2fe;
+    }
+
+    .arch-desc-box {
+      background: rgba(2, 132, 199, 0.1);
+      border-left: 3px solid #38bdf8;
+      padding: 6px 12px;
+      border-radius: 0 6px 6px 0;
+      font-size: 12px;
+      color: #93c5fd;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .arch-badge {
+      font-size: 12px;
+      font-weight: 700;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 3px 10px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      max-width: 320px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 0.2s;
+    }
+
+    .arch-badge:hover {
+      background: rgba(56, 189, 248, 0.22);
+      border-color: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+    }
+    
+  
+    /* ========================================================== */
+    /* 🎨 TYPOGRAPHY: MONTSERRAT + PLAYFAIR DISPLAY               */
+    /* ========================================================== */
+    * {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
+    h1, h2, h3, h4, .brand-title, .logo-title, .tab-header-title,
+    .lecture-card-title, .arch-banner-title, .speed-title,
+    .station-desk-num, .lecture-heading-serif {
+      font-family: 'Playfair Display', Georgia, serif !important;
+      letter-spacing: 0.3px;
+    }
+
+    /* ========================================================== */
+    /* ☀️ GIAO DIỆN TRẮNG (LIGHT THEME) STYLING                   */
+    /* ========================================================== */
+    body.theme-light {
+      --bg-dark: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --accent: #0284c7;
+      --accent-glow: rgba(2, 132, 199, 0.15);
+      --success: #16a34a;
+      --success-bg: rgba(22, 163, 74, 0.12);
+      --danger: #dc2626;
+      --danger-bg: rgba(220, 38, 38, 0.12);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+    }
+
+    body.theme-light header {
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid #e2e8f0;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    body.theme-light .card,
+    body.theme-light .station-desk,
+    body.theme-light .archetypes-banner-card,
+    body.theme-light .lecture-card,
+    body.theme-light .speed-skim-card,
+    body.theme-light .lecture-box-container {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+      color: #0f172a !important;
+    }
+
+    body.theme-light .filter-select,
+    body.theme-light input,
+    body.theme-light select {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      border: 1.5px solid #cbd5e1 !important;
+    }
+
+    body.theme-light .nav-tab {
+      background: #e2e8f0;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    body.theme-light .nav-tab:hover {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+
+    body.theme-light .nav-tab.active {
+      background: #0284c7 !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3) !important;
+      border-color: #0284c7 !important;
+    }
+
+    body.theme-light .station-desk-question,
+    body.theme-light .speed-q-text {
+      color: #0f172a !important;
+      font-weight: 700;
+    }
+
+    body.theme-light .desk-option-btn,
+    body.theme-light .speed-opt-btn {
+      background: #f8fafc !important;
+      border: 1.5px solid #e2e8f0 !important;
+      color: #1e293b !important;
+    }
+
+    body.theme-light .desk-option-btn:hover {
+      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+    }
+
+    body.theme-light .desk-option-btn.correct-choice,
+    body.theme-light .speed-opt-btn.correct-choice {
+      background: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.25) !important;
+    }
+
+    body.theme-light mark.kw-hl {
+      background: #fef08a !important;
+      color: #0f172a !important;
+      box-shadow: 0 0 10px rgba(234, 179, 8, 0.4) !important;
+      border: 1px solid rgba(202, 138, 4, 0.5) !important;
+    }
+
+    body.theme-light .lecture-step-box,
+    body.theme-light .lecture-alert-box {
+      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #1e293b !important;
+    }
+
+    body.theme-light .lecture-table th {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+    }
+
+    body.theme-light .lecture-table td {
+      border-color: #e2e8f0 !important;
+      color: #1e293b !important;
+    }
+
+    /* THEME TOGGLE BUTTON */
+    .btn-theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1.5px solid #38bdf8;
+      background: rgba(15, 23, 42, 0.85);
+      color: #f1f5f9;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.2);
+    }
+
+    body.theme-light .btn-theme-toggle {
+      background: #ffffff;
+      color: #0284c7;
+      border-color: #0284c7;
+      box-shadow: 0 2px 10px rgba(2, 132, 199, 0.15);
+    }
+
+    .btn-theme-toggle:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35);
+    }
+
+    /* ========================================================== */
+    /* ⚡ SPEED-SKIM (CHẾ ĐỘ LƯỚT CỰC NHANH) STYLING             */
+    /* ========================================================== */
+    .speed-skim-container {
+      max-width: 1100px;
+      margin: 18px auto;
+      padding: 0 14px;
+    }
+
+    .speed-toolbar {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .speed-feed-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .speed-feed-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .speed-feed-card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(56, 189, 248, 0.15);
+    }
+
+    .speed-feed-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .speed-correct-box {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1.5px solid #10b981;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    body.theme-light .speed-correct-box {
+      background: #ecfdf5;
+      border-color: #10b981;
+      color: #065f46;
+    }
+
+    /* ========================================================== */
+    /* 📖 BÀI GIẢNG (LECTURE) STYLING                            */
+    /* ========================================================== */
+    .lecture-container {
+      max-width: 1000px;
+      margin: 16px auto;
+      padding: 0 14px;
+    }
+
+    .flash-lecture-banner {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(99, 102, 241, 0.15));
+      border: 1.5px solid rgba(56, 189, 248, 0.4);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-top: 12px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    body.theme-light .flash-lecture-banner {
+      background: linear-gradient(135deg, #e0f2fe, #e0e7ff);
+      border-color: #38bdf8;
+    }
+
+    .flash-lec-badge {
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-read-lecture-quick {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-read-lecture-quick:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-start-flash-cta {
+      background: #10b981;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-start-flash-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    }
+
+    .lecture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .lecture-chapter-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .lecture-chapter-card:hover, .lecture-chapter-card.selected {
+      border-color: #38bdf8;
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);
+    }
+
+    .lecture-chapter-card.selected {
+      border-width: 2px;
+      border-color: #38bdf8;
+    }
+
+    .lecture-box-container {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-top: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    }
+
+    .lecture-step-box {
+      background: rgba(15, 23, 42, 0.7);
+      border-left: 4px solid #38bdf8;
+      padding: 12px 16px;
+      margin: 12px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .lecture-alert-box {
+      background: rgba(234, 179, 8, 0.1);
+      border-left: 4px solid #eab308;
+      padding: 12px 16px;
+      margin: 12px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .lecture-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 13px;
+    }
+
+    .lecture-table th, .lecture-table td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    .lecture-table th {
+      background: rgba(30, 41, 59, 0.8);
+      font-weight: 700;
+      color: #38bdf8;
+    }
+    
+  
+/* ========================================================== */
+/* 🌳 TREE-BRANCH MASTERY FLOW STYLES (SƠ ĐỒ CÂY PHÂN NHÁNH) */
+/* ========================================================== */
+.branch-tree-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.tree-header-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15));
+  border: 1.5px solid rgba(16, 185, 129, 0.4);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+.tree-diagram-wrapper {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.tree-root-box {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  border: 2px solid #10b981;
+  border-radius: 14px;
+  padding: 18px 26px;
+  max-width: 650px;
+  margin: 0 auto 24px auto;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+  position: relative;
+}
+body.theme-light .tree-root-box {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border-color: #059669;
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.15);
+}
+.tree-stem-line {
+  width: 3px;
+  height: 24px;
+  background: #10b981;
+  margin: 0 auto;
+}
+.tree-branches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+.tree-branch-card {
+  background: var(--bg-body);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border-top: 4px solid #10b981;
+}
+.tree-branch-card:hover {
+  transform: translateY(-4px);
+  border-color: #10b981;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
+}
+.tree-branch-card.completed {
+  border-top-color: #059669;
+  background: rgba(16, 185, 129, 0.04);
+}
+.vip-pro-mnemonic-box {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(236, 72, 153, 0.08));
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeInMnemonic 0.3s ease;
+}
+body.theme-light .vip-pro-mnemonic-box {
+  background: linear-gradient(135deg, #fffbeb, #fdf2f8);
+  border-color: #f59e0b;
+}
+@keyframes fadeInMnemonic {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.vip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #f59e0b;
+  color: #000;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.vip-mnemonic-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fbbf24;
+  line-height: 1.45;
+}
+body.theme-light .vip-mnemonic-text {
+  color: #b45309;
+}
+.vip-nature-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+}
+.checklist-mnemonic-item {
+  background: var(--bg-body);
+  border-left: 4px solid #10b981;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  font-size: 13.5px;
+}
+
+
+/* ========================================================== */
+/* ⏱️ REALTIME ETA DASHBOARD & NOTEBOOKLM TREE STYLES */
+/* ========================================================== */
+.realtime-eta-dashboard {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+.eta-speed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.eta-speed-card {
+  background: var(--bg-body);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.eta-speed-card:hover {
+  transform: translateY(-2px);
+  border-color: #38bdf8;
+  box-shadow: 0 6px 16px rgba(56, 189, 248, 0.2);
+}
+.eta-speed-card.active-speed {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+}
+.eta-speed-badge {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  width: fit-content;
+}
+.eta-total-duration {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--text-main);
+  font-family: 'Playfair Display', serif;
+}
+.eta-finish-time {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* NotebookLM Knowledge Tree Canvas */
+.notebooklm-canvas {
+  background: radial-gradient(circle at center, rgba(56,189,248,0.03) 0%, transparent 70%), var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+body.theme-light .notebooklm-canvas {
+  background: #f8fafc;
+}
+.notebooklm-source-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.notebooklm-node {
+  background: var(--bg-body);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  position: relative;
+}
+.notebooklm-node:hover {
+  border-color: #38bdf8;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+}
+.notebooklm-node.selected {
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.04);
+}
+
+
+    
+    
+  </style>
+  <style>
+    /* Specific adjustments for 249 Phôi app */
+    .phoi-badge-vip {
+      background: linear-gradient(135deg, #0284c7, #9333ea);
+      color: #fff;
+      font-weight: 800;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-area">
+      <span class="phoi-badge-vip">🎯 ÔN TẬP PHÔI THAI HỌC • FILE 1 - 11.2026</span>
+      <h1 class="logo-title">PHÔI THAI HỌC VIP • FLASH 7S</h1>
+    </div>
+
+    <nav class="nav-tabs">
+      <button class="nav-tab active highlight-tab" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.35), rgba(168, 85, 247, 0.35)); border: 1.5px solid #38bdf8; color: #38bdf8; font-weight: 800;">
+        ⚡ Flash Trắc Nghiệm 7s
+      </button>
+      <a class="nav-tab" href="phoi_249_dap_an.html" target="_blank" style="text-decoration:none; color:inherit;">
+        📋 Tra Cứu Toàn Bộ Đáp Án
+      </a>
+      <a class="nav-tab" href="phoi_249_dap_an.csv" target="_blank" style="text-decoration:none; color:inherit;">
+        📊 File Excel (CSV)
+      </a>
+      <a class="nav-tab" href="phoi_249_dap_an.txt" target="_blank" style="text-decoration:none; color:inherit;">
+        📄 File TXT
+      </a>
+      <a class="nav-tab" href="index.html" style="text-decoration:none; color:inherit; background:rgba(255,255,255,0.08);">
+        🏠 Về Bộ 1.314 Câu Mô Phôi
+      </a>
+    </nav>
+
+    <div class="stats-bar">
+      <div class="stat-pill">Đã thuộc: <b id="stat-passed">0</b>/<span id="stat-total-q">257</span></div>
+      <div class="stat-pill">Độ chính xác: <b id="stat-accuracy" style="color:var(--success)">0%</b></div>
+    </div>
+  
+    <button id="btn-theme-toggle" class="btn-theme-toggle" onclick="toggleMophoiTheme()" title="Chuyển chế độ Giao diện Trắng / Tối">
+      <span id="theme-toggle-icon">☀️</span> <span id="theme-toggle-text">Giao diện trắng</span>
+    </button>
+  </header>
+
+  <main>
+    <section id="tab-flash" class="tab-content active">
+      <div class="station-exam-container">
+        
+        <!-- Controls Bar -->
+        <div class="station-control-bar">
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <select id="flash-chapter-filter" class="filter-select" onchange="onChapterChange()">
+              <option value="all">-- Tất cả 249 câu Phôi thai học --</option>
+            </select>
+
+            <div style="display:inline-flex; align-items:center; gap:6px;">
+              <span style="font-size:12px; color:var(--text-muted); font-weight:600;">Nhảy tới câu:</span>
+              <input type="number" id="flash-jump-input" min="1" max="257" style="width:65px; padding:6px 8px; border-radius:6px; border:1px solid var(--border); background:var(--card-bg); color:var(--text); font-weight:700; text-align:center; font-size:13px;" placeholder="Số...">
+              <button onclick="jumpToFlashQuestion()" class="btn-primary" style="padding:6px 12px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer;">Đi ➔</button>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <div style="display:inline-flex; align-items:center; gap:6px; background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:4px 10px;">
+              <span style="font-size:12px; color:var(--text-muted);">⚡ Tốc độ:</span>
+              <select id="flash-speed-select" onchange="onSpeedChange()" style="background:transparent; border:none; color:var(--text); font-weight:700; font-size:13px; cursor:pointer; outline:none;">
+                <option value="5000">5 giây (Thử thách)</option>
+                <option value="7000" selected>7 giây (Khuyến nghị chuẩn)</option>
+                <option value="10000">10 giây (Thư thả)</option>
+                <option value="15000">15 giây (Đọc kỹ)</option>
+              </select>
+            </div>
+
+            <button id="flash-pause-btn" onclick="toggleFlashPause()" class="btn-primary" style="padding:6px 14px; font-size:12.5px; font-weight:700; border-radius:8px; cursor:pointer;">
+              ⏸ Tạm Dừng
+            </button>
+          </div>
+        </div>
+
+        <!-- Progress countdown bar -->
+        <div style="margin: 12px 0 8px 0; display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--text-muted);">
+          <span id="flash-timer-status" style="font-weight:600;">Đang suy nghĩ (Thử nhớ đáp án)...</span>
+          <span id="flash-time-badge" style="font-family:monospace; font-weight:700; background:rgba(0,0,0,0.25); padding:2px 8px; border-radius:4px; border:1px solid var(--border);">Đếm ngược: 7s</span>
+        </div>
+        <div style="height:6px; width:100%; background:rgba(255,255,255,0.08); border-radius:3px; overflow:hidden; margin-bottom:16px;">
+          <div id="flash-progress-bar" style="height:100%; width:100%; background:linear-gradient(90deg, #10b981, #06b6d4); transition:width 0.1s linear;"></div>
+        </div>
+
+        <!-- DRAWING STUDIO BAR -->
+        <div id="drawing-studio-bar" class="drawing-studio-container" style="margin-bottom:14px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:rgba(15,23,42,0.4); border:1px solid var(--border); border-radius:10px; padding:8px 12px;">
+          <button id="btn-toggle-draw" onclick="toggleDrawingMode()" class="btn-draw-tool" style="font-size:12.5px; font-weight:700; padding:5px 12px; border-radius:6px; cursor:pointer; background:#f59e0b; color:#000; border:none;">
+            ✏️ Bật Bút Vẽ (W)
+          </button>
+          <div id="drawing-controls-panel" style="display:none; align-items:center; gap:8px; flex-wrap:wrap;">
+            <button onclick="setDrawingTool('pen')" id="tool-pen" class="btn-draw-subtool active" style="padding:4px 8px; border-radius:4px; font-size:12px; font-weight:600; cursor:pointer; background:var(--primary); color:#fff; border:none;">🖊️ Bút Mực</button>
+            <button onclick="setDrawingTool('highlighter')" id="tool-hl" class="btn-draw-subtool" style="padding:4px 8px; border-radius:4px; font-size:12px; font-weight:600; cursor:pointer; background:rgba(255,255,255,0.1); color:var(--text); border:1px solid var(--border);">🖍️ Dạ Quang</button>
+            <button onclick="setDrawingTool('eraser')" id="tool-eraser" class="btn-draw-subtool" style="padding:4px 8px; border-radius:4px; font-size:12px; font-weight:600; cursor:pointer; background:rgba(255,255,255,0.1); color:var(--text); border:1px solid var(--border);">🧹 Tẩy</button>
+            <div style="display:inline-flex; gap:4px; align-items:center;">
+              <span class="color-dot" style="width:14px; height:14px; border-radius:50%; background:#ef4444; display:inline-block; cursor:pointer;" onclick="setDrawColor('#ef4444')"></span>
+              <span class="color-dot" style="width:14px; height:14px; border-radius:50%; background:#f59e0b; display:inline-block; cursor:pointer;" onclick="setDrawColor('#f59e0b')"></span>
+              <span class="color-dot" style="width:14px; height:14px; border-radius:50%; background:#10b981; display:inline-block; cursor:pointer;" onclick="setDrawColor('#10b981')"></span>
+              <span class="color-dot" style="width:14px; height:14px; border-radius:50%; background:#38bdf8; display:inline-block; cursor:pointer;" onclick="setDrawColor('#38bdf8')"></span>
+              <span class="color-dot" style="width:14px; height:14px; border-radius:50%; background:#ffffff; display:inline-block; cursor:pointer;" onclick="setDrawColor('#ffffff')"></span>
+            </div>
+            <button onclick="clearCanvas()" style="padding:4px 8px; border-radius:4px; font-size:12px; font-weight:600; cursor:pointer; background:rgba(239,68,68,0.2); color:#f87171; border:1px solid #ef4444;">🗑️ Xóa Nét</button>
+          </div>
+        </div>
+
+        <!-- MAIN QUESTION CARD -->
+        <div class="station-card" id="flash-main-card" style="position:relative;">
+          <canvas id="drawing-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:15; border-radius:12px;"></canvas>
+
+          <div class="station-card-header">
+            <span class="station-badge" id="flash-q-index">⚡ CÂU 1 / 257</span>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <span id="flash-chapter-badge" style="font-size:12px; color:var(--text-muted); font-weight:600;">Bài 16: Mở đầu về Phôi thai học</span>
+              <span class="station-source" id="flash-q-source">#Gốc: 3</span>
+            </div>
+          </div>
+
+          <div class="question-stem" id="flash-stem" style="min-height:55px; font-size:18px; line-height:1.6; margin-bottom:18px;">
+            Đang tải câu hỏi...
+          </div>
+
+          <div class="options-list" id="flash-options-container" style="display:flex; flex-direction:column; gap:10px;">
+            <!-- Options dynamically inserted -->
+          </div>
+
+          <!-- Bottom Footer Navigation -->
+          <div style="margin-top:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-top:1px solid var(--border); padding-top:14px;">
+            <div style="display:flex; gap:6px;">
+              <button onclick="stepQuestion(-10)" class="btn-subtle" style="padding:6px 10px; font-size:12px; font-weight:700;">-10</button>
+              <button onclick="stepQuestion(-1)" class="btn-subtle" style="padding:6px 12px; font-size:13px; font-weight:700;">◀ Câu trước (◄)</button>
+              <button onclick="skipNextQuestion()" class="btn-subtle" style="padding:6px 12px; font-size:13px; font-weight:700;">Bỏ qua sang câu sau (►) ▶</button>
+              <button onclick="stepQuestion(10)" class="btn-subtle" style="padding:6px 10px; font-size:12px; font-weight:700;">+10</button>
+              <button onclick="stepQuestion(50)" class="btn-subtle" style="padding:6px 10px; font-size:12px; font-weight:700;">+50 ⏩</button>
+            </div>
+            <div style="font-size:12px; color:var(--text-muted);">
+              Mẹo: Bạn có thể click trực tiếp vào đáp án để kiểm tra ngay mà không cần đợi hết 7s!
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:15px; text-align:center; font-size:12px; color:var(--text-muted);">
+          Phím tắt: <b>Space</b> Tạm dừng/Tiếp tục • <b>►</b> Nhảy câu tiếp • <b>◄</b> Quay lại câu trước • <b>W</b> Bật bút
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script src="phoi_249_data.js"></script>
+  <script>
+    // DATA & STATE
+    let QUESTIONS = window.PHOI_249_DATA || [];
+    let currentPool = [...QUESTIONS];
+    let currentIdx = 0;
+    let isPaused = false;
+    let isRevealed = false;
+    let timerDuration = 7000;
+    let timerElapsed = 0;
+    let timerInterval = null;
+    let userClicked = false;
+
+    // Progress
+    let masteredIds = new Set();
+    let totalAttempts = 0;
+    let correctAttempts = 0;
+
+    // Init Dropdowns
+    const chFilter = document.getElementById('flash-chapter-filter');
+    const chSet = new Set();
+    QUESTIONS.forEach(q => chSet.add(q.chapter));
+    Array.from(chSet).forEach(ch => {
+      const opt = document.createElement('option');
+      opt.value = ch;
+      const count = QUESTIONS.filter(q => q.chapter === ch).length;
+      opt.textContent = `${ch} (${count} câu)`;
+      chFilter.appendChild(opt);
+    });
+
+    function onChapterChange() {
+      const sel = chFilter.value;
+      if (sel === 'all') {
+        currentPool = [...QUESTIONS];
+      } else {
+        currentPool = QUESTIONS.filter(q => q.chapter === sel);
+      }
+      currentIdx = 0;
+      document.getElementById('flash-jump-input').max = currentPool.length;
+      renderQuestion();
+    }
+
+    function onSpeedChange() {
+      timerDuration = parseInt(document.getElementById('flash-speed-select').value) || 7000;
+      resetTimer();
+    }
+
+    function toggleFlashPause() {
+      isPaused = !isPaused;
+      document.getElementById('flash-pause-btn').textContent = isPaused ? '▶ Tiếp Tục' : '⏸ Tạm Dừng';
+      document.getElementById('flash-timer-status').textContent = isPaused ? 'Đã tạm dừng' : (isRevealed ? 'Đáp án' : 'Đang suy nghĩ (Thử nhớ đáp án)...');
+    }
+
+    function renderQuestion() {
+      if (currentPool.length === 0) return;
+      if (currentIdx >= currentPool.length) currentIdx = 0;
+      if (currentIdx < 0) currentIdx = currentPool.length - 1;
+
+      const q = currentPool[currentIdx];
+      isRevealed = false;
+      userClicked = false;
+
+      // Update Header
+      document.getElementById('flash-q-index').textContent = `⚡ CÂU ${currentIdx + 1} / ${currentPool.length}`;
+      document.getElementById('flash-chapter-badge').textContent = q.chapter;
+      document.getElementById('flash-q-source').textContent = `#Gốc: ${q.orig_num}`;
+      document.getElementById('flash-jump-input').value = currentIdx + 1;
+      document.getElementById('flash-timer-status').textContent = 'Đang suy nghĩ (Thử nhớ đáp án)...';
+
+      // Stem
+      document.getElementById('flash-stem').innerHTML = q.question_html || q.question;
+
+      // Options
+      const container = document.getElementById('flash-options-container');
+      container.innerHTML = '';
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.id = `opt-btn-${idx}`;
+        btn.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + idx)}</span> <span class="option-text">${opt.replace(/^[a-e]\.\s*/i, '')}</span>`;
+        btn.onclick = () => onOptionClick(idx);
+        container.appendChild(btn);
+      });
+
+      // Clear drawing canvas on question change
+      clearCanvas();
+
+      resetTimer();
+    }
+
+    function onOptionClick(chosenIdx) {
+      if (isRevealed) return;
+      userClicked = true;
+      const q = currentPool[currentIdx];
+      totalAttempts++;
+
+      if (chosenIdx === q.correct_idx) {
+        correctAttempts++;
+        masteredIds.add(q.id);
+        const btn = document.getElementById(`opt-btn-${chosenIdx}`);
+        if (btn) btn.classList.add('selected-correct');
+      } else {
+        const btn = document.getElementById(`opt-btn-${chosenIdx}`);
+        if (btn) btn.classList.add('selected-wrong');
+      }
+
+      updateStats();
+      revealAnswerAndAdvance();
+    }
+
+    function revealAnswerAndAdvance() {
+      if (isRevealed) return;
+      isRevealed = true;
+      clearInterval(timerInterval);
+
+      const q = currentPool[currentIdx];
+      const optButtons = document.querySelectorAll('#flash-options-container .option-btn');
+      
+      // Highlight correct option
+      if (optButtons[q.correct_idx]) {
+        optButtons[q.correct_idx].classList.add('reveal-target');
+        const textSpan = optButtons[q.correct_idx].querySelector('.option-text');
+        if (textSpan && q.options_html && q.options_html[q.correct_idx]) {
+          textSpan.innerHTML = q.options_html[q.correct_idx].replace(/^[a-e]\.\s*/i, '');
+        }
+        // Add checkmark
+        const check = document.createElement('span');
+        check.style.cssText = 'float:right; font-weight:800; color:var(--success); font-size:13px;';
+        check.textContent = '✓ ĐÁP ÁN';
+        optButtons[q.correct_idx].appendChild(check);
+      }
+
+      document.getElementById('flash-timer-status').textContent = 'Đáp án đã hiện';
+      document.getElementById('flash-progress-bar').style.width = '100%';
+
+      // Advance after delay
+      setTimeout(() => {
+        if (!isPaused) {
+          currentIdx++;
+          renderQuestion();
+        }
+      }, 1800);
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerElapsed = 0;
+      updateTimerUI();
+
+      timerInterval = setInterval(() => {
+        if (isPaused || isRevealed) return;
+        timerElapsed += 100;
+        updateTimerUI();
+
+        if (timerElapsed >= timerDuration) {
+          revealAnswerAndAdvance();
+        }
+      }, 100);
+    }
+
+    function updateTimerUI() {
+      const remainMs = Math.max(0, timerDuration - timerElapsed);
+      const remainSec = Math.ceil(remainMs / 1000);
+      document.getElementById('flash-time-badge').textContent = `Đếm ngược: ${remainSec}s`;
+      const pct = Math.min(100, (timerElapsed / timerDuration) * 100);
+      document.getElementById('flash-progress-bar').style.width = `${pct}%`;
+    }
+
+    function stepQuestion(delta) {
+      currentIdx += delta;
+      renderQuestion();
+    }
+
+    function skipNextQuestion() {
+      currentIdx++;
+      renderQuestion();
+    }
+
+    function jumpToFlashQuestion() {
+      const val = parseInt(document.getElementById('flash-jump-input').value);
+      if (!isNaN(val) && val >= 1 && val <= currentPool.length) {
+        currentIdx = val - 1;
+        renderQuestion();
+      }
+    }
+
+    function updateStats() {
+      document.getElementById('stat-passed').textContent = masteredIds.size;
+      document.getElementById('stat-total-q').textContent = QUESTIONS.length;
+      const acc = totalAttempts > 0 ? Math.round((correctAttempts / totalAttempts) * 100) : 0;
+      document.getElementById('stat-accuracy').textContent = `${acc}%`;
+    }
+
+    // Theme Toggle
+    function toggleMophoiTheme() {
+      document.body.classList.toggle('light-theme');
+      const isLight = document.body.classList.contains('light-theme');
+      document.getElementById('theme-toggle-icon').textContent = isLight ? '🌙' : '☀️';
+      document.getElementById('theme-toggle-text').textContent = isLight ? 'Giao diện tối' : 'Giao diện trắng';
+    }
+
+    // Drawing Canvas
+    let isDrawingMode = false;
+    let canvas, ctx;
+    let isDrawing = false;
+    let drawColor = '#f59e0b';
+    let drawSize = 4;
+    let drawAlpha = 1.0;
+
+    function initCanvas() {
+      canvas = document.getElementById('drawing-canvas');
+      if (!canvas) return;
+      ctx = canvas.getContext('2d');
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      canvas.addEventListener('mousedown', startDraw);
+      canvas.addEventListener('mousemove', drawMove);
+      canvas.addEventListener('mouseup', endDraw);
+      canvas.addEventListener('mouseleave', endDraw);
+
+      // Touch for tablets & pens
+      canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const t = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        isDrawing = true;
+        ctx.beginPath();
+        ctx.moveTo(t.clientX - rect.left, t.clientY - rect.top);
+      }, { passive: false });
+
+      canvas.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        if (!isDrawing) return;
+        const t = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        ctx.lineTo(t.clientX - rect.left, t.clientY - rect.top);
+        ctx.stroke();
+      }, { passive: false });
+
+      canvas.addEventListener('touchend', () => isDrawing = false);
+    }
+
+    function resizeCanvas() {
+      const card = document.getElementById('flash-main-card');
+      if (card && canvas) {
+        canvas.width = card.offsetWidth;
+        canvas.height = card.offsetHeight;
+      }
+    }
+
+    function toggleDrawingMode() {
+      isDrawingMode = !isDrawingMode;
+      const panel = document.getElementById('drawing-controls-panel');
+      const btn = document.getElementById('btn-toggle-draw');
+      if (isDrawingMode) {
+        panel.style.display = 'inline-flex';
+        btn.textContent = '✏️ Đang Bật Bút (W)';
+        btn.style.background = '#10b981';
+        btn.style.color = '#fff';
+        canvas.style.pointerEvents = 'auto';
+        resizeCanvas();
+      } else {
+        panel.style.display = 'none';
+        btn.textContent = '✏️ Bật Bút Vẽ (W)';
+        btn.style.background = '#f59e0b';
+        btn.style.color = '#000';
+        canvas.style.pointerEvents = 'none';
+      }
+    }
+
+    function setDrawingTool(tool) {
+      document.querySelectorAll('.btn-draw-subtool').forEach(b => b.classList.remove('active'));
+      if (tool === 'pen') {
+        document.getElementById('tool-pen').classList.add('active');
+        ctx.globalCompositeOperation = 'source-over';
+        drawSize = 4;
+        drawAlpha = 1.0;
+      } else if (tool === 'highlighter') {
+        document.getElementById('tool-hl').classList.add('active');
+        ctx.globalCompositeOperation = 'source-over';
+        drawSize = 18;
+        drawAlpha = 0.35;
+      } else if (tool === 'eraser') {
+        document.getElementById('tool-eraser').classList.add('active');
+        ctx.globalCompositeOperation = 'destination-out';
+        drawSize = 25;
+      }
+    }
+
+    function setDrawColor(col) {
+      drawColor = col;
+      if (ctx.globalCompositeOperation !== 'destination-out') {
+        ctx.strokeStyle = drawColor;
+      }
+    }
+
+    function clearCanvas() {
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    function startDraw(e) {
+      if (!isDrawingMode) return;
+      isDrawing = true;
+      ctx.beginPath();
+      ctx.lineWidth = drawSize;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      if (ctx.globalCompositeOperation !== 'destination-out') {
+        ctx.strokeStyle = drawColor;
+        ctx.globalAlpha = drawAlpha;
+      }
+      ctx.moveTo(e.offsetX, e.offsetY);
+    }
+
+    function drawMove(e) {
+      if (!isDrawing) return;
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+    }
+
+    function endDraw() {
+      isDrawing = false;
+    }
+
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      if (e.code === 'Space') {
+        e.preventDefault();
+        toggleFlashPause();
+      } else if (e.code === 'ArrowRight') {
+        e.preventDefault();
+        skipNextQuestion();
+      } else if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+        stepQuestion(-1);
+      } else if (e.key === 'w' || e.key === 'W') {
+        toggleDrawingMode();
+      } else if (e.key === 'c' || e.key === 'C') {
+        clearCanvas();
+      }
+    });
+
+    // Boot
+    window.addEventListener('DOMContentLoaded', () => {
+      initCanvas();
+      renderQuestion();
+      updateStats();
+    });
+  </script>
+</body>
+</html>
