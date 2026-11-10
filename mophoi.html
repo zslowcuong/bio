@@ -2123,137 +2123,7 @@ body.theme-light .notebooklm-canvas {
 }
 
 
-    /* ========================================================== */
-    /* 💡 EXPLANATION BOX STYLING (VÌ SAO ĐÚNG & VÌ SAO SAI)       */
-    /* ========================================================== */
-    .explanation-box {
-      background: rgba(11, 17, 32, 0.95);
-      backdrop-filter: blur(8px);
-      border: 1.5px solid #1e293b;
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-top: 14px;
-      margin-bottom: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-      transition: all 0.3s ease;
-      animation: slideDownFade 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes slideDownFade {
-      from {
-        opacity: 0;
-        transform: translateY(-8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .exp-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 10px;
-      margin-bottom: 12px;
-    }
-
-    .exp-title {
-      font-size: 14px;
-      font-weight: 800;
-      color: #38bdf8;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      letter-spacing: 0.3px;
-    }
-
-    .exp-content {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      font-size: 13.5px;
-      line-height: 1.6;
-    }
-
-    .exp-correct-block {
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      border-left: 4px solid #10b981;
-      padding: 10px 14px;
-      border-radius: 6px;
-      color: #ecfdf5;
-    }
-
-    .exp-block-title {
-      font-weight: 800;
-      font-size: 13px;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .exp-correct-title {
-      color: #34d399;
-    }
-
-    .exp-incorrect-block {
-      background: rgba(239, 68, 68, 0.06);
-      border: 1px solid rgba(239, 68, 68, 0.25);
-      border-left: 4px solid #f87171;
-      padding: 10px 14px;
-      border-radius: 6px;
-      color: #fef2f2;
-    }
-
-    .exp-incorrect-title {
-      color: #f87171;
-    }
-
-    .exp-incorrect-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .exp-incorrect-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 13px;
-      color: #cbd5e1;
-      background: rgba(0, 0, 0, 0.25);
-      padding: 7px 11px;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .exp-opt-badge {
-      background: rgba(239, 68, 68, 0.25);
-      color: #fca5a5;
-      font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-size: 11.5px;
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      flex-shrink: 0;
-    }
-
-    .exp-key-block {
-      background: rgba(245, 158, 11, 0.08);
-      border: 1px solid rgba(245, 158, 11, 0.25);
-      border-left: 4px solid #f59e0b;
-      padding: 8px 14px;
-      border-radius: 6px;
-      font-size: 13px;
-      color: #fef3c7;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    
     
   </style>
 </head>
@@ -2416,10 +2286,6 @@ body.theme-light .notebooklm-canvas {
           </div>
 
           <div style="display:flex; align-items:center; gap:12px;">
-            <label style="font-size:12px; color:var(--text-muted); display:inline-flex; align-items:center; gap:5px; cursor:pointer; background:#0b1120; border:1.5px solid var(--border); padding:4px 10px; border-radius:8px;" title="Khi click chọn đáp án, tự động dừng đếm ngược để bạn có đủ thời gian đọc giải thích chi tiết">
-              <input type="checkbox" id="flash-pause-on-exp" checked style="accent-color:#38bdf8;">
-              <span style="font-weight:700; color:#38bdf8;">⏸️ Dừng đọc giải thích</span>
-            </label>
             <select id="flash-speed-select" class="filter-select" onchange="setFlashDuration(this.value)">
               <option value="7" selected>⏱️ Tốc độ: 7 giây (Khuyến nghị chuẩn)</option>
               <option value="5">⏱️ Tốc độ: 5 giây (Bơm não cực nhanh)</option>
@@ -2536,21 +2402,8 @@ body.theme-light .notebooklm-canvas {
                   <!-- Rendered by JS -->
                 </div>
 
-                <!-- 💡 HỘP GIẢI THÍCH CHI TIẾT ĐÁP ÁN (VÌ SAO ĐÚNG & VÌ SAO SAI) -->
-                <div id="flash-explanation-box" class="explanation-box" style="display:none;">
-                  <div class="exp-header">
-                    <div class="exp-title">
-                      <span>💡</span>
-                      <span>GIẢI THÍCH CHI TIẾT & PHÂN TÍCH ĐÁP ÁN</span>
-                    </div>
-                    <div style="display:flex; gap:8px; align-items:center;">
-                      <button class="btn btn-secondary btn-sm" id="btn-toggle-exp-flash" onclick="toggleExplanationDetails('flash')" style="padding:2px 8px; font-size:11px;">Thu gọn ▲</button>
-                    </div>
-                  </div>
-                  <div class="exp-content" id="flash-exp-content">
-                    <!-- Rendered by renderExplanationBox() -->
-                  </div>
-                </div>
+                
+
 
                 <!-- Hint footer -->
                 <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:14px; font-size:13px; color:var(--text-muted); flex-wrap:wrap; gap:10px;">
@@ -2994,21 +2847,8 @@ body.theme-light .notebooklm-canvas {
             <!-- Rendered by JS -->
           </div>
 
-          <!-- 💡 HỘP GIẢI THÍCH CHI TIẾT TRẠM THI -->
-          <div id="station-explanation-box" class="explanation-box" style="display:none;">
-            <div class="exp-header">
-              <div class="exp-title">
-                <span>💡</span>
-                <span>GIẢI THÍCH CHI TIẾT & PHÂN TÍCH ĐÁP ÁN</span>
-              </div>
-              <div style="display:flex; gap:8px; align-items:center;">
-                <button class="btn btn-secondary btn-sm" id="btn-toggle-exp-station" onclick="toggleExplanationDetails('station')" style="padding:2px 8px; font-size:11px;">Thu gọn ▲</button>
-              </div>
-            </div>
-            <div class="exp-content" id="station-exp-content">
-              <!-- Rendered by renderExplanationBox() -->
-            </div>
-          </div>
+          
+
 
           <div class="station-footer" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <div style="display:flex; gap:6px; align-items:center;">
@@ -5558,9 +5398,6 @@ body.theme-light .notebooklm-canvas {
 
     function loadFlashQuestionCard() {
       // Check auto-clear drawing canvas
-      const expBox = document.getElementById('flash-explanation-box');
-      if (expBox) expBox.style.display = 'none';
-
       const autoClear = document.getElementById('draw-auto-clear');
       if (autoClear && autoClear.checked && flashCtx && flashCanvas) {
         flashCtx.clearRect(0, 0, flashCanvas.width, flashCanvas.height);
@@ -5680,90 +5517,7 @@ body.theme-light .notebooklm-canvas {
     }
 
     
-    // ==========================================================
-    // 💡 GIẢI THÍCH CHI TIẾT ĐÁP ÁN (VÌ SAO ĐÚNG & VÌ SAO CÒN LẠI SAI)
-    // ==========================================================
-    function renderExplanationBox(mode, q) {
-      const box = document.getElementById(`${mode}-explanation-box`);
-      const content = document.getElementById(`${mode}-exp-content`);
-      if (!box || !content) return;
-
-      const exp = q.explanation;
-      if (!exp) {
-        box.style.display = 'none';
-        return;
-      }
-
-      const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-      const correctLetter = (q.correct_idx !== undefined && q.correct_idx !== null && letters[q.correct_idx]) ? letters[q.correct_idx] : 'Đáp án đúng';
-
-      let html = `
-        <!-- VÌ SAO ĐÚNG -->
-        <div class="exp-correct-block">
-          <div class="exp-block-title exp-correct-title">
-            <span>✅</span>
-            <span>VÌ SAO ĐÁP ÁN [${correctLetter}] ĐÚNG:</span>
-          </div>
-          <div>${exp.why_correct || ''}</div>
-        </div>
-      `;
-
-      if (exp.why_incorrect && exp.why_incorrect.length > 0) {
-        html += `
-          <!-- VÌ SAO CÁC ĐÁP ÁN CÒN LẠI SAI -->
-          <div class="exp-incorrect-block">
-            <div class="exp-block-title exp-incorrect-title">
-              <span>❌</span>
-              <span>VÌ SAO CÁC ĐÁP ÁN CÒN LẠI SAI (PHÂN TÍCH BẪY ĐỀ THI):</span>
-            </div>
-            <div class="exp-incorrect-list">
-        `;
-
-        exp.why_incorrect.forEach(item => {
-          html += `
-            <div class="exp-incorrect-item">
-              <span class="exp-opt-badge">${item.opt ? item.opt.toUpperCase() : ''}</span>
-              <div>
-                <b>${item.text}:</b> ${item.reason}
-              </div>
-            </div>
-          `;
-        });
-
-        html += `
-            </div>
-          </div>
-        `;
-      }
-
-      if (exp.key_takeaway) {
-        html += `
-          <div class="exp-key-block">
-            <div>${exp.key_takeaway}</div>
-          </div>
-        `;
-      }
-
-      content.innerHTML = html;
-      content.style.display = 'flex';
-      const toggleBtn = document.getElementById(`btn-toggle-exp-${mode}`);
-      if (toggleBtn) toggleBtn.textContent = 'Thu gọn ▲';
-      box.style.display = 'block';
-    }
-
-    function toggleExplanationDetails(mode) {
-      const content = document.getElementById(`${mode}-exp-content`);
-      const btn = document.getElementById(`btn-toggle-exp-${mode}`);
-      if (!content || !btn) return;
-
-      if (content.style.display === 'none') {
-        content.style.display = 'flex';
-        btn.textContent = 'Thu gọn ▲';
-      } else {
-        content.style.display = 'none';
-        btn.textContent = 'Mở rộng ▼';
-      }
-    }
+    
     
     function onFlashOptionClick(chosenIdx) {
       if (flashRevealed) return;
@@ -5773,18 +5527,6 @@ body.theme-light .notebooklm-canvas {
       if (chosenIdx !== q.correct_idx && optButtons[chosenIdx]) {
         optButtons[chosenIdx].classList.add('selected-wrong');
       }
-
-      // If user enabled pause on explanation, automatically pause timer so they can read comfortably
-      const pauseOnExp = document.getElementById('flash-pause-on-exp');
-      if (pauseOnExp && pauseOnExp.checked) {
-        if (flashIsPlaying) {
-          flashIsPlaying = false;
-          stopFlashTimer();
-          const playBtn = document.getElementById('btn-flash-play');
-          if (playBtn) playBtn.innerHTML = '▶️ Tiếp Tục';
-        }
-      }
-
       revealFlashAnswerAndAdvance();
     }
 
@@ -5796,7 +5538,7 @@ body.theme-light .notebooklm-canvas {
       const optButtons = document.querySelectorAll('#flash-options-list .option-btn');
       const letters = ['A', 'B', 'C', 'D', 'E'];
 
-      // Highlight target with sound
+      // Highlight target (KHÔNG phát âm thanh tích tích theo yêu cầu)
       if (q.correct_idx !== null && optButtons[q.correct_idx]) {
         const targetBtn = optButtons[q.correct_idx];
         targetBtn.classList.add('flash-target');
@@ -5808,7 +5550,6 @@ body.theme-light .notebooklm-canvas {
           </div>
           <span style="font-size:12px; font-weight:800; background:rgba(16,185,129,0.3); padding:3px 8px; border-radius:5px;">✅ ĐÁP ÁN</span>
         `;
-        soundChimeSoft();
       }
 
       const statusBadge = document.getElementById('flash-status-badge');
@@ -5819,17 +5560,13 @@ body.theme-light .notebooklm-canvas {
       pBar.style.width = '100%';
       pBar.classList.add('revealed');
 
-      // Render Explanation (Vì sao đúng & Vì sao còn lại sai)
-      renderExplanationBox('flash', q);
-
-      // Nếu đang bật chế độ tự chạy flash (không pause):
-      // Cho thời gian 4.5 giây để đọc giải thích, sau đó tự chuyển sang câu mới
+      // Giữ đáp án 1.8s để mắt chụp ảnh, sau đó chuyển câu mượt mà
       if (flashIsPlaying) {
         setTimeout(() => {
           if (flashIsPlaying) {
             triggerMorphTransition();
           }
-        }, 4500);
+        }, 1800);
       }
     }
 
@@ -5911,8 +5648,6 @@ body.theme-light .notebooklm-canvas {
 
     function renderCurrentStationDesk() {
       if (!stationExamList.length) return;
-      const stationExpBox = document.getElementById('station-explanation-box');
-      if (stationExpBox) stationExpBox.style.display = 'none';
       const q = stationExamList[currentStationIdx];
       stationAnswered = false;
 
@@ -6008,7 +5743,7 @@ body.theme-light .notebooklm-canvas {
       }
 
       // Render Explanation
-      renderExplanationBox('station', q);
+      
 
       saveProgress();
       updateGlobalStats();
@@ -6029,7 +5764,7 @@ body.theme-light .notebooklm-canvas {
         `;
       }
       document.getElementById('btn-reveal-station').textContent = 'Ẩn Đáp Án';
-      renderExplanationBox('station', q);
+      
     }
 
     function nextStationQuestion() {
