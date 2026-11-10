@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bảng Tra Cứu Toàn Bộ 1.314 Đáp Án Mô Phôi - K48</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --correct-bg: rgba(16, 185, 129, 0.15);
+      --correct-border: #10b981;
+      --correct-text: #34d399;
+    }
+    body.light-mode {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --correct-bg: #ecfdf5;
+      --correct-border: #10b981;
+      --correct-text: #047857;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding: 20px; font-size: 15px; line-height: 1.5; }
+    .header { max-width: 1200px; margin: 0 auto 20px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; position: sticky; top: 10px; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+    .title-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 15px; }
+    h1 { font-size: 20px; font-weight: 700; color: var(--accent); }
+    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); cursor: pointer; font-size: 13px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+    .btn:hover { background: var(--border); }
+    .btn-primary { background: #0284c7; color: #fff; border-color: #0284c7; }
+    .btn-primary:hover { background: #0369a1; }
+    .controls-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .search-box { flex: 1; min-width: 250px; padding: 9px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 14px; }
+    .filter-select { padding: 9px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 14px; min-width: 220px; }
+    .main-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+    .q-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; transition: transform 0.1s; }
+    .q-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; font-size: 12px; }
+    .badge { padding: 2px 8px; border-radius: 4px; font-weight: 600; background: var(--border); color: var(--text-muted); }
+    .badge-ch { background: rgba(56, 189, 248, 0.2); color: var(--accent); }
+    .badge-ans { background: rgba(16, 185, 129, 0.2); color: var(--correct-text); }
+    .q-stem { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+    .opts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    @media (max-width: 768px) { .opts-grid { grid-template-columns: 1fr; } }
+    .opt-item { padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border); font-size: 14px; background: rgba(0,0,0,0.1); }
+    .opt-correct { background: var(--correct-bg); border-color: var(--correct-border); color: var(--correct-text); font-weight: 600; }
+    .stats-bar { font-size: 13px; color: var(--text-muted); margin-top: 5px; }
+
+    /* Print styles */
+    @media print {
+      body { background: #fff !important; color: #000 !important; font-size: 12pt; padding: 0; }
+      .header, .btn-group, .controls-row { display: none !important; }
+      .main-container { max-width: 100% !important; }
+      .q-card { page-break-inside: avoid; border: 1px solid #ccc !important; background: #fff !important; color: #000 !important; margin-bottom: 10px; padding: 10px; }
+      .opt-correct { border: 1px solid #000 !important; font-weight: bold !important; text-decoration: underline; background: #eee !important; color: #000 !important; }
+      .badge { border: 1px solid #999; color: #000 !important; background: #fff !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="title-row">
+      <div>
+        <h1>📋 Ngân Hàng Đáp Án 1.314 Câu Mô Phôi - K48</h1>
+        <div class="stats-bar" id="stats-display">Đang hiển thị 1.314 / 1.314 câu hỏi</div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ In / Lưu PDF (Ctrl+P)</button>
+        <button class="btn" onclick="downloadTxt()">📄 Tải File .TXT</button>
+        <button class="btn" onclick="downloadCsv()">📊 Tải File .CSV (Excel)</button>
+        <button class="btn" onclick="toggleTheme()" id="theme-btn">☀️ Giao diện sáng</button>
+        <a class="btn" href="index.html">⬅️ Quay lại Web Học</a>
+      </div>
+    </div>
+    <div class="controls-row">
+      <input type="text" id="search-input" class="search-box" placeholder="🔍 Tìm kiếm câu hỏi hoặc đáp án (gõ từ khóa bất kỳ)..." oninput="filterQuestions()">
+      <select id="chapter-filter" class="filter-select" onchange="filterQuestions()">
+        <option value="ALL">-- Tất cả các bài (18 bài - 1.314 câu) --</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="main-container" id="questions-list"></div>
+
+  <script src="questions_data.js"></script>
+  <script>
+    const qData = window.QUESTIONS_DATA || [];
+    const container = document.getElementById('questions-list');
+    const chFilter = document.getElementById('chapter-filter');
+    const searchInput = document.getElementById('search-input');
+    const statsDisplay = document.getElementById('stats-display');
+
+    // Populate chapters
+    const chaptersSet = new Set();
+    qData.forEach(q => { if (q.chapter) chaptersSet.add(q.chapter); });
+    Array.from(chaptersSet).forEach(ch => {
+      const opt = document.createElement('option');
+      opt.value = ch;
+      const count = qData.filter(q => q.chapter === ch).length;
+      opt.textContent = `${ch} (${count} câu)`;
+      chFilter.appendChild(opt);
+    });
+
+    function renderList(list) {
+      container.innerHTML = '';
+      if (list.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding: 40px; color: var(--text-muted)">Không tìm thấy câu hỏi nào phù hợp với từ khóa!</div>';
+        statsDisplay.textContent = 'Hiển thị 0 / ' + qData.length + ' câu';
+        return;
+      }
+      statsDisplay.textContent = `Hiển thị ${list.length} / ${qData.length} câu hỏi`;
+
+      const frag = document.createDocumentFragment();
+      list.forEach(q => {
+        const card = document.createElement('div');
+        card.className = 'q-card';
+        
+        const cIdx = q.correct_idx;
+        const cLetter = (cIdx !== null && cIdx >= 0 && cIdx < 26) ? String.fromCharCode(65 + cIdx) : '';
+
+        let optsHtml = '';
+        (q.options || []).forEach((opt, idx) => {
+          const isCorr = (idx === cIdx);
+          const cls = isCorr ? 'opt-item opt-correct' : 'opt-item';
+          const mark = isCorr ? ' <strong style="float:right">✓ ĐÁP ÁN</strong>' : '';
+          optsHtml += `<div class="${cls}">${opt}${mark}</div>`;
+        });
+
+        card.innerHTML = `
+          <div class="q-meta">
+            <span class="badge">Câu ${q.id}</span>
+            <span class="badge badge-ch">${q.chapter || 'Chưa phân loại'}</span>
+            <span class="badge">Gốc #${q.orig_num || q.id}</span>
+            <span class="badge badge-ans">Đáp án: ${cLetter}</span>
+          </div>
+          <div class="q-stem">${q.question}</div>
+          <div class="opts-grid">${optsHtml}</div>
+        `;
+        frag.appendChild(card);
+      });
+      container.appendChild(frag);
+    }
+
+    function filterQuestions() {
+      const kw = (searchInput.value || '').toLowerCase().trim();
+      const selCh = chFilter.value;
+
+      const filtered = qData.filter(q => {
+        if (selCh !== 'ALL' && q.chapter !== selCh) return false;
+        if (!kw) return true;
+        
+        if ((q.question || '').toLowerCase().includes(kw)) return true;
+        if ((q.correct_text || '').toLowerCase().includes(kw)) return true;
+        for (let opt of (q.options || [])) {
+          if (opt.toLowerCase().includes(kw)) return true;
+        }
+        return false;
+      });
+
+      renderList(filtered);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
+      document.getElementById('theme-btn').textContent = isLight ? '🌙 Giao diện tối' : '☀️ Giao diện sáng';
+    }
+
+    function downloadTxt() {
+      window.open('full_dap_an_1314_cau.txt', '_blank');
+    }
+
+    function downloadCsv() {
+      window.open('full_dap_an_1314_cau.csv', '_blank');
+    }
+
+    // Initial render
+    renderList(qData);
+  </script>
+</body>
+</html>
