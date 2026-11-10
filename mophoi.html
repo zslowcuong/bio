@@ -1886,7 +1886,138 @@
       color: #38bdf8;
     }
     
-  </style>
+  
+/* ========================================================== */
+/* 🌳 TREE-BRANCH MASTERY FLOW STYLES (SƠ ĐỒ CÂY PHÂN NHÁNH) */
+/* ========================================================== */
+.branch-tree-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.tree-header-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15));
+  border: 1.5px solid rgba(16, 185, 129, 0.4);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+.tree-diagram-wrapper {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.tree-root-box {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  border: 2px solid #10b981;
+  border-radius: 14px;
+  padding: 18px 26px;
+  max-width: 650px;
+  margin: 0 auto 24px auto;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+  position: relative;
+}
+body.theme-light .tree-root-box {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border-color: #059669;
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.15);
+}
+.tree-stem-line {
+  width: 3px;
+  height: 24px;
+  background: #10b981;
+  margin: 0 auto;
+}
+.tree-branches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+.tree-branch-card {
+  background: var(--bg-body);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border-top: 4px solid #10b981;
+}
+.tree-branch-card:hover {
+  transform: translateY(-4px);
+  border-color: #10b981;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
+}
+.tree-branch-card.completed {
+  border-top-color: #059669;
+  background: rgba(16, 185, 129, 0.04);
+}
+.vip-pro-mnemonic-box {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(236, 72, 153, 0.08));
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeInMnemonic 0.3s ease;
+}
+body.theme-light .vip-pro-mnemonic-box {
+  background: linear-gradient(135deg, #fffbeb, #fdf2f8);
+  border-color: #f59e0b;
+}
+@keyframes fadeInMnemonic {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.vip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #f59e0b;
+  color: #000;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.vip-mnemonic-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fbbf24;
+  line-height: 1.45;
+}
+body.theme-light .vip-mnemonic-text {
+  color: #b45309;
+}
+.vip-nature-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+}
+.checklist-mnemonic-item {
+  background: var(--bg-body);
+  border-left: 4px solid #10b981;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  font-size: 13.5px;
+}
+
+</style>
 </head>
 
 <body>
@@ -1901,6 +2032,9 @@
     <nav class="nav-tabs">
       <button class="nav-tab highlight-tab active" onclick="switchTab('flash')">
         ⚡ Flash Trắc Nghiệm (Tự Động 7s)
+      </button>
+      <button class="nav-tab highlight-tab" onclick="switchTab('branch-tree')" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 182, 212, 0.25)); border: 1.5px solid #10b981; color: #34d399; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+        <span style="font-size:16px;">🌳</span> Phân Nhánh Dạng Câu Hỏi
       </button>
       <button class="nav-tab" onclick="switchTab('speed-skim')" style="border-color:#38bdf8; color:#38bdf8; font-weight:700;">⚡ Lướt Cực Nhanh (Speed-Skim)</button>
       <button class="nav-tab" onclick="switchTab('mnemonics-az')" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.25), rgba(168, 85, 247, 0.25)); border: 1.5px solid #ec4899; color: #f472b6; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
@@ -2986,6 +3120,197 @@
       </div>
     </section>
 
+  
+    <!-- ========================================================== -->
+    <!-- 🌳 TAB: CÂY PHÂN NHÁNH DẠNG CÂU HỎI & PREVIEW & THỰC HÀNH -->
+    <!-- ========================================================== -->
+    <section id="tab-branch-tree" class="tab-content">
+      <div class="branch-tree-container">
+        
+        <!-- Top Control Bar -->
+        <div class="tree-header-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+            <div>
+              <span class="flash-lec-badge" style="background:#10b981; color:#fff;">TÍNH NĂNG ĐỘT PHÁ • PHÂN NHÁNH THỰC CHIẾN</span>
+              <h2 class="lecture-heading-serif" style="font-size:26px; color:#34d399; margin:8px 0 6px 0;">🌳 Sơ Đồ Cây Phân Nhánh Dạng Câu Hỏi & Mẹo VIP PRO</h2>
+              <p style="font-size:14px; color:var(--text-muted); margin:0;">
+                Học theo cấu trúc cây: Chọn nhánh dạng ➔ Preview full nội dung & mẹo ➔ Làm full câu hỏi có Mẹo VIP PRO ➔ Tóm tắt toàn bài & Mindset.
+              </p>
+            </div>
+            
+            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+              <select id="tree-chapter-select" class="filter-select" onchange="onTreeChapterSelectChange(this.value)" style="min-width:250px; font-weight:700;">
+                <!-- Populated dynamically -->
+              </select>
+              <button onclick="startTreeSequentialMode()" class="btn-read-lecture-quick" style="background:#10b981; color:#ffffff; font-weight:800; padding:10px 18px;">
+                🚀 Học Tuần Tự Tất Cả Nhánh
+              </button>
+              <button onclick="showCurrentLessonFinalSummary()" class="btn-read-lecture-quick" style="background:rgba(236,72,153,0.2); border-color:#ec4899; color:#f472b6; font-weight:700; padding:10px 18px;">
+                📋 Xem Tóm Tắt & Mindset Bài
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 1: SƠ ĐỒ CÂY PHÂN NHÁNH (TREE VIEW) -->
+        <div id="tree-view-screen" class="tree-diagram-wrapper">
+          <!-- Gốc cây (Root Node) -->
+          <div id="tree-root-node" class="tree-root-box">
+            <!-- Render dynamically -->
+          </div>
+          
+          <div class="tree-stem-line"></div>
+
+          <div style="text-align:center; margin-top:8px; margin-bottom:12px;">
+            <span style="font-size:13px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">
+              👇 CÁC NHÁNH DẠNG CÂU HỎI TRỌNG TÂM CỦA BÀI (CHỌN NHÁNH ĐỂ BƯỚC VÀO PREVIEW) 👇
+            </span>
+          </div>
+
+          <!-- Các nhánh (Branches Grid) -->
+          <div id="tree-branches-container" class="tree-branches-grid">
+            <!-- Render dynamically -->
+          </div>
+        </div>
+
+        <!-- VIEW 2: PREVIEW CHIẾN LƯỢC CHO DẠNG CÂU HỎI (PREVIEW SCREEN) -->
+        <div id="tree-preview-screen" class="tree-diagram-wrapper" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:12px;">
+            <button onclick="backToTreeView()" class="btn-control" style="font-weight:700;">⬅️ Quay Lại Sơ Đồ Cây</button>
+            <span id="preview-branch-badge" class="flash-lec-badge" style="background:#38bdf8; color:#0f172a;">DẠNG 1</span>
+          </div>
+
+          <div id="preview-content-area">
+            <!-- Render dynamically -->
+          </div>
+
+          <div style="text-align:center; margin-top:24px; padding-top:20px; border-top:1px solid var(--border);">
+            <button id="btn-start-branch-practice" onclick="startCurrentBranchPractice()" class="btn-read-lecture-quick" 
+              style="background:linear-gradient(135deg, #10b981, #059669); color:#fff; font-size:16px; font-weight:900; padding:14px 32px; box-shadow:0 6px 20px rgba(16,185,129,0.3);">
+              🚀 BẮT ĐẦU CHIẾN FULL CÂU HỎI DẠNG NÀY (TỪ CÂU 1 ĐẾN HẾT)
+            </button>
+          </div>
+        </div>
+
+        <!-- VIEW 3: LÀM TRẮC NGHIỆM DẠNG ĐÓ (PRACTICE SCREEN VỚI MẸO VIP PRO) -->
+        <div id="tree-practice-screen" class="tree-diagram-wrapper" style="display:none;">
+          <!-- Practice Header -->
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; border-bottom:1px solid var(--border); padding-bottom:12px; flex-wrap:wrap; gap:10px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <button onclick="backToBranchPreview()" class="btn-control" style="font-size:12.5px;">📖 Xem Lại Preview Dạng</button>
+              <button onclick="backToTreeView()" class="btn-control" style="font-size:12.5px;">🌳 Sơ Đồ Cây</button>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span id="practice-branch-title" style="font-weight:700; color:#38bdf8; font-size:14px;">Nhánh: ...</span>
+              <span id="practice-progress-badge" class="stat-pill" style="font-weight:700;">Câu 1 / 10</span>
+              <span id="practice-score-badge" class="stat-pill" style="color:var(--success); font-weight:700;">Đúng: 0/0</span>
+            </div>
+          </div>
+
+          <!-- Question Body -->
+          <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:22px; margin-bottom:18px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <span id="practice-q-num" style="font-weight:800; color:#10b981; font-size:15px;">CÂU 1:</span>
+              <span id="practice-q-type-badge" class="flash-lec-badge" style="font-size:11px;">LOẠI CÂU</span>
+            </div>
+            
+            <h3 id="practice-q-text" class="lecture-heading-serif" style="font-size:18px; color:var(--text-main); line-height:1.55; margin:0 0 16px 0;">
+              <!-- Question text -->
+            </h3>
+
+            <!-- 4 Options -->
+            <div id="practice-options-list" style="display:flex; flex-direction:column; gap:10px;">
+              <!-- Render dynamically -->
+            </div>
+
+            <!-- VIP Pro Mnemonic Box (Shows on answer / reveal) -->
+            <div id="practice-vip-box" class="vip-pro-mnemonic-box" style="display:none;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span class="vip-badge">✨ MẸO GHI NHỚ & HỌC THUỘC CỰC VIP PRO ĐỂ MAI THI</span>
+                <span style="font-size:12px; color:var(--text-muted);">Ghim ngay vào não 🧠</span>
+              </div>
+              <div id="practice-vip-mnemonic" class="vip-mnemonic-text">
+                <!-- Mnemonic text -->
+              </div>
+              <div id="practice-vip-nature" class="vip-nature-text">
+                <!-- Biological nature -->
+              </div>
+              <div id="practice-vip-trap" style="font-size:12.5px; color:#f87171; line-height:1.45;">
+                <!-- Trap note -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Footer -->
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <button onclick="prevBranchQuestion()" class="btn-control" id="btn-prev-branch-q">⬅️ Câu Trước</button>
+            <div style="display:flex; gap:10px;">
+              <button onclick="revealCurrentAnswerAndMnemonic()" class="btn-control" style="border-color:#f59e0b; color:#fbbf24; font-weight:700;">💡 Hiện Mẹo & Đáp Án</button>
+              <button onclick="nextBranchQuestion()" class="btn-read-lecture-quick" id="btn-next-branch-q" style="background:#10b981; color:#fff; font-weight:800; padding:10px 22px;">Câu Tiếp Theo ➡️</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 4: TỔNG KẾT FULL NỘI DUNG & FULL MẸO & MINDSET (SUMMARY SCREEN) -->
+        <div id="tree-summary-screen" class="tree-diagram-wrapper" style="display:none;">
+          <div style="text-align:center; margin-bottom:24px;">
+            <div style="font-size:48px; margin-bottom:8px;">🏆</div>
+            <h2 class="lecture-heading-serif" style="font-size:26px; color:#10b981; margin:0 0 6px 0;">
+              XUẤT SẮC! HOÀN THÀNH TOÀN BỘ CÁC DẠNG CÂU HỎI
+            </h2>
+            <p style="font-size:14px; color:var(--text-muted); margin:0;" id="summary-lesson-title">
+              Bài: ...
+            </p>
+          </div>
+
+          <!-- 3 Tabs or Cards: Full Nội Dung, Full Mẹo Đã Chỉ Ra, Mindset -->
+          <div style="display:grid; grid-template-columns:1fr; gap:20px;">
+            
+            <!-- Card 1: BẢNG TỔNG HỢP FULL MẸO ĐÃ CHỈ RA TRONG TỪNG CÂU HỎI CỦA BÀI -->
+            <div style="background:var(--bg-card); border:1.5px solid #10b981; border-radius:14px; padding:20px;">
+              <h3 class="lecture-heading-serif" style="color:#10b981; font-size:18px; margin-top:0; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+                <span>💡</span> BẢNG TỔNG HỢP FULL MẸO ĐÃ CHỈ RA TRONG TỪNG CÂU HỎI (QUICK CRAM CHECKLIST ĐỂ MAI THI)
+              </h3>
+              <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">
+                Đọc lướt qua toàn bộ thần chú phản xạ đã được chỉ ra trong bài này trước khi bước vào phòng thi:
+              </p>
+              <div id="summary-all-mnemonics-list" style="max-height:400px; overflow-y:auto; padding-right:8px;">
+                <!-- Render dynamically -->
+              </div>
+            </div>
+
+            <!-- Card 2: FULL NỘI DUNG BÀI HỌC CỐT LÕI -->
+            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:20px;">
+              <h3 class="lecture-heading-serif" style="color:#38bdf8; font-size:18px; margin-top:0; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+                <span>📖</span> TÓM TẮT FULL NỘI DUNG BÀI HỌC
+              </h3>
+              <div id="summary-full-content-area" style="font-size:13.5px; color:var(--text-muted); line-height:1.6;">
+                <!-- Render dynamically -->
+              </div>
+            </div>
+
+            <!-- Card 3: MINDSET & CHIẾN THUẬT PHÒNG THI -->
+            <div style="background:linear-gradient(135deg, rgba(236,72,153,0.08), rgba(168,85,247,0.08)); border:1.5px solid rgba(236,72,153,0.35); border-radius:14px; padding:20px;">
+              <h3 class="lecture-heading-serif" style="color:#f472b6; font-size:18px; margin-top:0; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+                <span>🎯</span> MINDSET & CHIẾN THUẬT PHÒNG THI CỦA BÀI NÀY
+              </h3>
+              <div id="summary-mindset-area">
+                <!-- Render dynamically -->
+              </div>
+            </div>
+
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:14px; margin-top:24px; padding-top:16px; border-top:1px solid var(--border); flex-wrap:wrap;">
+            <button onclick="backToTreeView()" class="btn-control" style="font-weight:700;">🌳 Về Lại Sơ Đồ Cây</button>
+            <button onclick="repeatCurrentLessonPractice()" class="btn-control" style="border-color:#10b981; color:#34d399; font-weight:700;">🔄 Ôn Lại Bài Này</button>
+            <button onclick="goToNextLessonTree()" class="btn-read-lecture-quick" style="background:#10b981; color:#fff; font-weight:800; padding:10px 24px;">⏭️ Chuyển Sang Bài Kế Tiếp</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <script src="mophoi/lectures_data.js"></script>
@@ -3876,6 +4201,463 @@
       });
 
       container.innerHTML = html;
+    }
+
+    
+    // ==========================================================
+    // 🌳 CONTROLLER: SƠ ĐỒ CÂY PHÂN NHÁNH (TREE-BRANCH MASTERY)
+    // ==========================================================
+    let currentTreeChapter = "Bài 1: Bài mở đầu";
+    let currentTreeBranches = [];
+    let currentActiveBranch = null;
+    let currentBranchQuestions = [];
+    let currentBranchQuestionIndex = 0;
+    let currentBranchScore = 0;
+    let currentBranchAnswered = {};
+    let isSequentialTreeMode = false;
+    let currentSequentialBranchIndex = 0;
+
+    function initBranchTreeView() {
+      populateTreeChapterSelect();
+      loadBranchTreeForChapter(currentTreeChapter);
+    }
+
+    function populateTreeChapterSelect() {
+      const sel = document.getElementById('tree-chapter-select');
+      if (!sel || !window.QUESTIONS_DATA) return;
+
+      // Extract unique chapters from QUESTIONS_DATA
+      const chapters = [];
+      const seen = new Set();
+      window.QUESTIONS_DATA.forEach(q => {
+        if (!seen.has(q.chapter)) {
+          seen.add(q.chapter);
+          chapters.push(q.chapter);
+        }
+      });
+
+      let html = '';
+      chapters.forEach(c => {
+        const count = window.QUESTIONS_DATA.filter(q => q.chapter === c).length;
+        html += `<option value="${c}">${c} (${count} câu)</option>`;
+      });
+      sel.innerHTML = html;
+      sel.value = currentTreeChapter;
+    }
+
+    function onTreeChapterSelectChange(c) {
+      currentTreeChapter = c;
+      loadBranchTreeForChapter(c);
+    }
+
+    function loadBranchTreeForChapter(chapterName) {
+      currentTreeChapter = chapterName;
+      const sel = document.getElementById('tree-chapter-select');
+      if (sel) sel.value = chapterName;
+
+      // Group questions of this chapter by type_id
+      const chapterQs = (window.QUESTIONS_DATA || []).filter(q => q.chapter === chapterName);
+      const groups = {};
+
+      chapterQs.forEach(q => {
+        const tId = q.type_id || 'general';
+        if (!groups[tId]) {
+          groups[tId] = {
+            type_id: tId,
+            type_name: q.type_name || 'Đại Cương',
+            type_desc: q.type_desc || 'Kiến thức cốt lõi',
+            type_rank: q.type_rank || 50,
+            questions: []
+          };
+        }
+        groups[tId].questions.push(q);
+      });
+
+      // Sort branches by type_rank
+      currentTreeBranches = Object.values(groups).sort((a, b) => a.type_rank - b.type_rank);
+
+      renderBranchTreeView(chapterName, chapterQs, currentTreeBranches);
+      showScreen('tree-view-screen');
+    }
+
+    function renderBranchTreeView(chapterName, chapterQs, branches) {
+      const rootEl = document.getElementById('tree-root-node');
+      const branchesEl = document.getElementById('tree-branches-container');
+      if (!rootEl || !branchesEl) return;
+
+      // Get progress from localStorage
+      const progKey = `mophoi_tree_prog_${chapterName}`;
+      const savedProg = JSON.parse(localStorage.getItem(progKey) || '{}');
+
+      let totalPassed = 0;
+      branches.forEach(b => {
+        b.passed = (savedProg[b.type_id] || []).length;
+        totalPassed += b.passed;
+      });
+
+      // Render Root
+      rootEl.innerHTML = `
+        <span class="flash-lec-badge" style="background:#10b981; color:#fff; font-size:11px;">GỐC BÀI HỌC</span>
+        <h3 class="lecture-heading-serif" style="font-size:22px; color:var(--text-main); margin:8px 0 6px 0;">${chapterName}</h3>
+        <div style="display:flex; justify-content:center; gap:16px; font-size:13px; color:var(--text-muted); font-weight:600; flex-wrap:wrap;">
+          <span>⚡ Tổng số: <b>${chapterQs.length} câu hỏi</b></span>
+          <span>🌳 Phân chia: <b>${branches.length} nhánh dạng câu hỏi</b></span>
+          <span>✅ Đã làm đúng: <b style="color:var(--success);">${totalPassed}/${chapterQs.length}</b></span>
+        </div>
+        <div style="background:var(--border); height:6px; border-radius:3px; margin-top:12px; overflow:hidden;">
+          <div style="background:#10b981; height:100%; width:${Math.min(100, Math.round((totalPassed/chapterQs.length)*100))}%; transition:width 0.3s ease;"></div>
+        </div>
+      `;
+
+      // Render Branches Grid
+      let bHtml = '';
+      branches.forEach((b, idx) => {
+        const isComplete = b.passed >= b.questions.length;
+        bHtml += `
+          <div class="tree-branch-card ${isComplete ? 'completed' : ''}">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span class="flash-lec-badge" style="background:rgba(56,189,248,0.15); color:#38bdf8; font-size:11px;">NHÁNH ${idx + 1}</span>
+                <span style="font-size:12px; font-weight:700; color:${isComplete ? 'var(--success)' : 'var(--text-muted)'};">
+                  ${isComplete ? '✅ Đã hoàn thành' : `${b.passed}/${b.questions.length} câu`}
+                </span>
+              </div>
+              <h4 class="lecture-heading-serif" style="font-size:16px; color:var(--text-main); margin:0 0 8px 0; font-weight:800;">
+                ${b.type_name}
+              </h4>
+              <p style="font-size:13px; color:var(--text-muted); line-height:1.45; margin:0 0 14px 0;">
+                ${b.type_desc}
+              </p>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px dashed var(--border);">
+              <span style="font-size:12px; color:#38bdf8; font-weight:700;">⚡ ${b.questions.length} câu</span>
+              <button onclick="openBranchPreview('${b.type_id}')" class="btn-read-lecture-quick" style="padding:6px 14px; font-size:12.5px; font-weight:700;">
+                🎯 Vào Nhánh Này
+              </button>
+            </div>
+          </div>
+        `;
+      });
+      branchesEl.innerHTML = bHtml;
+    }
+
+    function openBranchPreview(typeId) {
+      const branch = currentTreeBranches.find(b => b.type_id === typeId);
+      if (!branch) return;
+      currentActiveBranch = branch;
+
+      document.getElementById('preview-branch-badge').textContent = branch.type_name;
+      
+      // Get lecture info for this chapter if exists
+      const lec = (window.LECTURES_DATA && window.LECTURES_DATA[currentTreeChapter]) || {};
+      
+      // Build smart preview content for this question type
+      const area = document.getElementById('preview-content-area');
+      area.innerHTML = `
+        <div style="background:rgba(56,189,248,0.06); border:1.5px solid rgba(56,189,248,0.3); border-radius:14px; padding:20px; margin-bottom:20px;">
+          <h3 class="lecture-heading-serif" style="color:#38bdf8; font-size:20px; margin-top:0; margin-bottom:10px;">
+            ${branch.type_name}
+          </h3>
+          <p style="font-size:14px; color:var(--text-muted); line-height:1.5; margin:0;">
+            <b>Bản chất trọng tâm:</b> ${branch.type_desc}. Dạng câu hỏi này tập trung vào các đặc điểm vi thể, vị trí phân bố hoặc các cơ chế sinh học đặc thù của <b>${currentTreeChapter}</b>.
+          </p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:16px; margin-bottom:20px;">
+          <div style="background:var(--bg-body); border:1px solid var(--border); border-radius:12px; padding:16px;">
+            <h4 class="lecture-heading-serif" style="color:#10b981; font-size:15px; margin-top:0; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+              <span>💡</span> CHIẾN THUẬT PHẢN XẠ 5 GIÂY
+            </h4>
+            <ul style="margin:0; padding-left:18px; font-size:13px; color:var(--text-muted); line-height:1.5;">
+              <li>Đọc lướt nhanh từ khóa in đậm trong câu hỏi trước khi nhìn 4 đáp án.</li>
+              <li>Bắt cặp phản xạ: <b>Từ khóa câu hỏi ➔ Từ khóa đáp án đúng</b>.</li>
+              <li>Loại trừ nhanh 2 phương án chắc chắn sai (mang tính tuyệt đối hoặc sai vị trí giải phẫu).</li>
+            </ul>
+          </div>
+
+          <div style="background:var(--bg-body); border:1px solid var(--border); border-radius:12px; padding:16px;">
+            <h4 class="lecture-heading-serif" style="color:#f87171; font-size:15px; margin-top:0; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+              <span>⚠️</span> CÁC BẪY ĐỀ THI HAY GÀI
+            </h4>
+            <ul style="margin:0; padding-left:18px; font-size:13px; color:var(--text-muted); line-height:1.5;">
+              <li>Cẩn thận chữ <b>KHÔNG, NGOẠI TRỪ, SAI</b> ở cuối câu.</li>
+              <li>Tránh nhầm lẫn giữa các cấu trúc có tên gần giống nhau hoặc các mốc thời gian tuần thai.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="background:rgba(245,158,11,0.06); border-left:4px solid #f59e0b; border-radius:0 10px 10px 0; padding:14px 18px; font-size:13.5px; color:var(--text-main);">
+          ⚡ <b>Gợi ý thi cử:</b> Dạng câu hỏi này có <b>${branch.questions.length} câu</b> trong ngân hàng. Hãy hoàn thành trọn vẹn từ câu 1 đến câu ${branch.questions.length} để ghi nhớ 100% mẹo VIP PRO!
+        </div>
+      `;
+
+      showScreen('tree-preview-screen');
+    }
+
+    function startCurrentBranchPractice() {
+      if (!currentActiveBranch) return;
+      currentBranchQuestions = currentActiveBranch.questions;
+      currentBranchQuestionIndex = 0;
+      currentBranchScore = 0;
+      currentBranchAnswered = {};
+
+      document.getElementById('practice-branch-title').textContent = `Nhánh: ${currentActiveBranch.type_name}`;
+      renderCurrentBranchQuestion();
+      showScreen('tree-practice-screen');
+    }
+
+    function renderCurrentBranchQuestion() {
+      if (!currentBranchQuestions || currentBranchQuestions.length === 0) return;
+      const q = currentBranchQuestions[currentBranchQuestionIndex];
+      const total = currentBranchQuestions.length;
+
+      document.getElementById('practice-progress-badge').textContent = `Câu ${currentBranchQuestionIndex + 1} / ${total}`;
+      document.getElementById('practice-score-badge').textContent = `Đúng: ${currentBranchScore}/${Object.keys(currentBranchAnswered).length}`;
+      document.getElementById('practice-q-num').textContent = `CÂU ${currentBranchQuestionIndex + 1} (Gốc #${q.orig_num || q.id}):`;
+      document.getElementById('practice-q-type-badge').textContent = q.type_name || 'DẠNG CÂU';
+
+      // Question HTML with highlight
+      document.getElementById('practice-q-text').innerHTML = q.question_html || q.question;
+
+      // Render 4 options
+      const optList = document.getElementById('practice-options-list');
+      let oHtml = '';
+      (q.options || []).forEach((opt, idx) => {
+        const isChosen = currentBranchAnswered[q.id] === idx;
+        const isCorrect = idx === q.correct_idx;
+        const hasAnswered = currentBranchAnswered[q.id] !== undefined;
+
+        let style = 'padding:12px 16px; border-radius:8px; border:1px solid var(--border); background:var(--bg-body); cursor:pointer; font-size:14px; transition:all 0.2s;';
+        if (hasAnswered) {
+          if (isCorrect) {
+            style += ' border-color:#10b981; background:rgba(16,185,129,0.15); color:#34d399; font-weight:700;';
+          } else if (isChosen) {
+            style += ' border-color:#ef4444; background:rgba(239,68,68,0.15); color:#f87171;';
+          }
+        }
+
+        const optText = (hasAnswered && isCorrect && q.options_html && q.options_html[idx]) ? q.options_html[idx] : opt;
+
+        oHtml += `
+          <div onclick="selectBranchOption(${idx})" style="${style}">
+            ${optText}
+          </div>
+        `;
+      });
+      optList.innerHTML = oHtml;
+
+      // VIP Pro Mnemonic Box
+      const vipBox = document.getElementById('practice-vip-box');
+      if (currentBranchAnswered[q.id] !== undefined) {
+        showVipBoxForQuestion(q);
+      } else {
+        vipBox.style.display = 'none';
+      }
+
+      // Next / Prev buttons
+      document.getElementById('btn-prev-branch-q').disabled = currentBranchQuestionIndex === 0;
+      const nextBtn = document.getElementById('btn-next-branch-q');
+      if (currentBranchQuestionIndex === total - 1) {
+        nextBtn.innerHTML = '🎉 Hoàn Thành Nhánh ➔';
+        nextBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+      } else {
+        nextBtn.innerHTML = 'Câu Tiếp Theo ➡️';
+        nextBtn.style.background = '#10b981';
+      }
+    }
+
+    function selectBranchOption(idx) {
+      const q = currentBranchQuestions[currentBranchQuestionIndex];
+      if (currentBranchAnswered[q.id] !== undefined) return; // already answered
+
+      currentBranchAnswered[q.id] = idx;
+      if (idx === q.correct_idx) {
+        currentBranchScore++;
+        // save to localStorage progress
+        saveBranchProgress(currentTreeChapter, currentActiveBranch.type_id, q.id);
+      }
+
+      renderCurrentBranchQuestion();
+    }
+
+    function revealCurrentAnswerAndMnemonic() {
+      const q = currentBranchQuestions[currentBranchQuestionIndex];
+      if (currentBranchAnswered[q.id] === undefined) {
+        currentBranchAnswered[q.id] = -1; // reveal
+      }
+      renderCurrentBranchQuestion();
+    }
+
+    function showVipBoxForQuestion(q) {
+      const vipBox = document.getElementById('practice-vip-box');
+      vipBox.style.display = 'flex';
+
+      // Build 5s reflex mnemonic
+      const cleanAns = (q.correct_text || '').replace(/^[a-d]\.\s*/i, '').trim();
+      const qHl = q.q_highlight || q.question.substring(0, 35);
+      const aHl = q.a_highlight || cleanAns.split(',')[0].trim();
+
+      document.getElementById('practice-vip-mnemonic').innerHTML = `
+        💡 Thần chú phản xạ 5s: Thấy <i>"${qHl}..."</i> ➔ Bắt ngay <mark class="kw-hl" style="background:#fef08a; color:#000; padding:2px 6px; border-radius:4px; font-weight:800;">"${aHl}"</mark>!
+      `;
+
+      document.getElementById('practice-vip-nature').innerHTML = `
+        <b>Bản chất cơ chế:</b> ${q.type_desc || q.type_name || 'Kiến thức cốt lõi'}. Đáp án đúng chính xác 100% là <b>"${cleanAns}"</b>.
+      `;
+
+      document.getElementById('practice-vip-trap').innerHTML = `
+        ⚠️ <b>Mẹo nhớ khi thi:</b> Đọc kỹ từng chữ, không bị đánh lừa bởi các phương án chứa từ đảo ngữ hoặc các chi tiết phủ định!
+      `;
+    }
+
+    function prevBranchQuestion() {
+      if (currentBranchQuestionIndex > 0) {
+        currentBranchQuestionIndex--;
+        renderCurrentBranchQuestion();
+      }
+    }
+
+    function nextBranchQuestion() {
+      if (currentBranchQuestionIndex < currentBranchQuestions.length - 1) {
+        currentBranchQuestionIndex++;
+        renderCurrentBranchQuestion();
+      } else {
+        // Finished this branch!
+        onBranchCompleted();
+      }
+    }
+
+    function onBranchCompleted() {
+      showToast(`🎉 Xuất sắc! Bạn vừa hoàn thành nhánh: ${currentActiveBranch.type_name}!`);
+
+      if (isSequentialTreeMode) {
+        // Go to next branch
+        currentSequentialBranchIndex++;
+        if (currentSequentialBranchIndex < currentTreeBranches.length) {
+          openBranchPreview(currentTreeBranches[currentSequentialBranchIndex].type_id);
+          return;
+        }
+      }
+
+      // Show Final Summary
+      showCurrentLessonFinalSummary();
+    }
+
+    function startTreeSequentialMode() {
+      isSequentialTreeMode = true;
+      currentSequentialBranchIndex = 0;
+      if (currentTreeBranches.length > 0) {
+        openBranchPreview(currentTreeBranches[0].type_id);
+      }
+    }
+
+    function showCurrentLessonFinalSummary() {
+      const chapterName = currentTreeChapter;
+      document.getElementById('summary-lesson-title').textContent = `${chapterName} (Toàn bộ các dạng câu hỏi)`;
+
+      // 1. All mnemonics from questions of this chapter
+      const chapterQs = (window.QUESTIONS_DATA || []).filter(q => q.chapter === chapterName);
+      const listEl = document.getElementById('summary-all-mnemonics-list');
+      let mHtml = '';
+      chapterQs.forEach((q, idx) => {
+        const cleanAns = (q.correct_text || '').replace(/^[a-d]\.\s*/i, '').trim();
+        const qHl = q.q_highlight || q.question.substring(0, 30);
+        const aHl = q.a_highlight || cleanAns.split(',')[0].trim();
+        mHtml += `
+          <div class="checklist-mnemonic-item">
+            <div style="font-weight:700; color:var(--text-main); margin-bottom:4px;">
+              Câu ${idx + 1}: ${q.question}
+            </div>
+            <div style="color:#fbbf24; font-weight:700; font-size:13px;">
+              💡 Phản xạ 5s: <i>"${qHl}"</i> ➔ Bắt ngay <b>"${aHl}"</b>
+            </div>
+            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+              Đáp án: ${cleanAns}
+            </div>
+          </div>
+        `;
+      });
+      listEl.innerHTML = mHtml;
+
+      // 2. Full Content from LECTURES_DATA
+      const lec = (window.LECTURES_DATA && window.LECTURES_DATA[chapterName]) || {};
+      const contentEl = document.getElementById('summary-full-content-area');
+      if (lec.content_sections && lec.content_sections.length > 0) {
+        contentEl.innerHTML = lec.content_sections.map(s => `
+          <div style="margin-bottom:14px;">
+            <h4 style="color:#38bdf8; font-size:15px; margin:0 0 6px 0;">${s.heading}</h4>
+            <div>${s.html}</div>
+          </div>
+        `).join('');
+      } else {
+        contentEl.innerHTML = '<p>Toàn bộ kiến thức cốt lõi đã được giải mã chi tiết trong từng câu hỏi.</p>';
+      }
+
+      // 3. Mindset & Traps
+      const mindsetEl = document.getElementById('summary-mindset-area');
+      let tHtml = '<ul style="margin:0; padding-left:18px; font-size:13.5px; color:var(--text-muted); line-height:1.6;">';
+      (lec.traps || [
+        "Đọc kỹ các câu hỏi chứa từ 'KHÔNG PHẢI' hoặc 'NGOẠI TRỪ'.",
+        "Chú ý các mốc tuần thai phôi và thứ tự phân cắt.",
+        "Nhận diện đặc điểm vi thể dựa trên hình dạng nhân và màng đáy."
+      ]).forEach(tr => {
+        tHtml += `<li><b>Cảnh báo:</b> ${tr}</li>`;
+      });
+      (lec.mnemonics || []).forEach(mn => {
+        tHtml += `<li style="color:#fbbf24;"><b>Thần chú:</b> ${mn}</li>`;
+      });
+      tHtml += '</ul>';
+      mindsetEl.innerHTML = tHtml;
+
+      showScreen('tree-summary-screen');
+    }
+
+    function saveBranchProgress(chapterName, typeId, qId) {
+      const progKey = `mophoi_tree_prog_${chapterName}`;
+      const saved = JSON.parse(localStorage.getItem(progKey) || '{}');
+      if (!saved[typeId]) saved[typeId] = [];
+      if (!saved[typeId].includes(qId)) {
+        saved[typeId].push(qId);
+        localStorage.setItem(progKey, JSON.stringify(saved));
+      }
+    }
+
+    function showScreen(screenId) {
+      ['tree-view-screen', 'tree-preview-screen', 'tree-practice-screen', 'tree-summary-screen'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = (id === screenId) ? 'block' : 'none';
+      });
+      const topEl = document.getElementById('tab-branch-tree');
+      if (topEl) topEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function backToTreeView() {
+      isSequentialTreeMode = false;
+      loadBranchTreeForChapter(currentTreeChapter);
+      showScreen('tree-view-screen');
+    }
+
+    function backToBranchPreview() {
+      showScreen('tree-preview-screen');
+    }
+
+    function repeatCurrentLessonPractice() {
+      loadBranchTreeForChapter(currentTreeChapter);
+    }
+
+    function goToNextLessonTree() {
+      const sel = document.getElementById('tree-chapter-select');
+      if (!sel) return;
+      const idx = sel.selectedIndex;
+      if (idx < sel.options.length - 1) {
+        sel.selectedIndex = idx + 1;
+        onTreeChapterSelectChange(sel.value);
+      } else {
+        showToast("🎉 Bạn đã duyệt hết tất cả các bài học trong sơ đồ cây!");
+        sel.selectedIndex = 0;
+        onTreeChapterSelectChange(sel.value);
+      }
     }
 
     function switchTab(tabId) {
