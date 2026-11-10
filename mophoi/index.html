@@ -2141,9 +2141,9 @@ body.theme-light .notebooklm-canvas {
       <button class="nav-tab highlight-tab active" onclick="switchTab('flash')">
         ⚡ Flash Trắc Nghiệm (Tự Động 7s)
       </button>
-      <a class="nav-tab highlight-tab" href="phoi_249.html" target="_blank" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.35), rgba(168, 85, 247, 0.35)); border: 1.5px solid #38bdf8; color: #38bdf8; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; text-decoration: none;" title="Phần riêng Ôn Tập 249 Câu Phôi Thai Học chuẩn đáp án đề 11.2026 (Flash 7s, Bút vẽ, Ghi chú)">
+      <button class="nav-tab highlight-tab" onclick="switchFlashToPhoi249()" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.35), rgba(168, 85, 247, 0.35)); border: 1.5px solid #38bdf8; color: #38bdf8; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;" title="Tích hợp trực tiếp: 249 Câu Ôn Tập Phôi Thai Học (Flash 7s, Bút vẽ, Đề 11.2026)">
         <span style="font-size:16px;">🎯</span> 249 Câu Phôi Thai VIP
-      </a>
+      </button>
       <button class="nav-tab highlight-tab" onclick="switchTab('branch-tree')" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 182, 212, 0.25)); border: 1.5px solid #10b981; color: #34d399; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
         <span style="font-size:16px;">🌳</span> Phân Nhánh Dạng Câu Hỏi
       </button>
@@ -3528,6 +3528,7 @@ body.theme-light .notebooklm-canvas {
   </main>
 
   <script src="lectures_data.js"></script>
+  <script src="phoi_249_data.js"></script>
   <script src="questions_data.js"></script>
   <script src="lectures_data.js"></script>
   <script>
@@ -4313,6 +4314,31 @@ body.theme-light .notebooklm-canvas {
           opt.textContent = `${ch} (${count} câu)`;
           sel.appendChild(opt);
         });
+
+        // Tích hợp phân hệ 249 câu Phôi Thai Học VIP trực tiếp vào dropdown
+        if (window.PHOI_249_DATA && window.PHOI_249_DATA.length > 0) {
+          const phoiGroup = document.createElement('optgroup');
+          phoiGroup.label = "🎯 BỘ 249 CÂU ÔN TẬP PHÔI THAI HỌC (ĐỀ 11.2026)";
+
+          const phoiAllOpt = document.createElement('option');
+          phoiAllOpt.value = '__PHOI_249_ALL__';
+          phoiAllOpt.textContent = `⭐ Tất cả 249 câu Phôi Thai Học (${window.PHOI_249_DATA.length} câu)`;
+          phoiAllOpt.style.fontWeight = 'bold';
+          phoiAllOpt.style.background = '#0284c7';
+          phoiAllOpt.style.color = '#fff';
+          phoiGroup.appendChild(phoiAllOpt);
+
+          const phoiChapters = [...new Set(window.PHOI_249_DATA.map(q => q.chapter).filter(Boolean))];
+          phoiChapters.forEach(ch => {
+            const count = window.PHOI_249_DATA.filter(q => q.chapter === ch).length;
+            const opt = document.createElement('option');
+            opt.value = `__PHOI__${ch}`;
+            opt.textContent = `🎯 ${ch} (${count} câu)`;
+            phoiGroup.appendChild(opt);
+          });
+
+          sel.appendChild(phoiGroup);
+        }
       });
       const totalEl = document.getElementById('stat-total-q');
       if (totalEl) totalEl.textContent = ALL_QUESTIONS.length;
@@ -5254,14 +5280,22 @@ body.theme-light .notebooklm-canvas {
       // Update Banner & Archetypes dropdown
       updateFlashArchetypesUI(ch);
 
-      // 1. Filter by Chapter
-      let pool = ALL_QUESTIONS.filter(q => {
-        if (ch === '__WRONG_ONLY__') {
-          return (PROGRESS.wrong_questions || []).includes(q.id);
-        }
-        if (ch !== 'all' && q.chapter !== ch) return false;
-        return true;
-      });
+      // 1. Filter by Chapter (Hỗ trợ cả 1.314 câu Mô Phôi và 249 câu Phôi Thai VIP)
+      let pool;
+      if (ch === '__PHOI_249_ALL__') {
+        pool = [...(window.PHOI_249_DATA || [])];
+      } else if (ch && ch.startsWith('__PHOI__')) {
+        const phoiChap = ch.replace('__PHOI__', '');
+        pool = (window.PHOI_249_DATA || []).filter(q => q.chapter === phoiChap);
+      } else {
+        pool = ALL_QUESTIONS.filter(q => {
+          if (ch === '__WRONG_ONLY__') {
+            return (PROGRESS.wrong_questions || []).includes(q.id);
+          }
+          if (ch !== 'all' && q.chapter !== ch) return false;
+          return true;
+        });
+      }
 
       // 2. Filter by Archetype (if active)
       if (selectedFlashType && selectedFlashType !== 'all') {
@@ -7483,7 +7517,17 @@ Chỉ còn ${remaining} câu nữa là cán đích. Bạn có chắc muốn dừ
       showToast(`⚡ Đã chuyển sang Chế độ Flash 7s cho: ${currentSelectedLectureChapter}`);
     }
 
-    function openLectureTabForCurrentChapter() {
+    
+    function switchFlashToPhoi249() {
+      switchTab('flash');
+      const sel = document.getElementById('flash-chapter-filter');
+      if (sel) {
+        sel.value = '__PHOI_249_ALL__';
+        onFlashChapterFilterChange();
+      }
+      showToast("🎯 Đã chuyển sang: BỘ 249 CÂU ÔN TẬP PHÔI THAI HỌC (FILE 1 - 11.2026)!");
+    }
+function openLectureTabForCurrentChapter() {
       const flashSel = document.getElementById('flash-chapter-filter');
       const cur = flashSel ? flashSel.value : 'all';
       switchTab('lecture');
