@@ -1903,7 +1903,10 @@
         ⚡ Flash Trắc Nghiệm (Tự Động 7s)
       </button>
       <button class="nav-tab" onclick="switchTab('speed-skim')" style="border-color:#38bdf8; color:#38bdf8; font-weight:700;">⚡ Lướt Cực Nhanh (Speed-Skim)</button>
-      <button class="nav-tab" onclick="switchTab('lecture')" style="border-color:#a855f7; color:#c084fc; font-weight:700;">📖 Full Bài Giảng (16 Bài)</button>
+      <button class="nav-tab" onclick="switchTab('mnemonics-az')" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.25), rgba(168, 85, 247, 0.25)); border: 1.5px solid #ec4899; color: #f472b6; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+        <span style="font-size:16px;">🧠</span> Full Mẹo Ghi Nhớ A-Z
+      </button>
+      <button class="nav-tab" onclick="switchTab('lecture')" style="border-color:#a855f7; color:#c084fc; font-weight:700;">📖 Full Bài Giảng (Tất Cả Các Bài)</button>
       <button class="nav-tab lockin-tab" onclick="switchTab('lockin')"
         style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(245, 158, 11, 0.2)); border: 1.5px solid #f59e0b; color: #fbbf24; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
         <span style="font-size:16px;">🔥</span> Chế Độ Lock-In
@@ -1926,7 +1929,7 @@
     </nav>
 
     <div class="stats-bar">
-      <div class="stat-pill">Đã thuộc: <b id="stat-passed">0</b>/<span id="stat-total-q">1.287</span></div>
+      <div class="stat-pill">Đã thuộc: <b id="stat-passed">0</b>/<span id="stat-total-q">1.357</span></div>
       <div class="stat-pill">Độ chính xác: <b id="stat-accuracy" style="color:var(--success)">0%</b></div>
     </div>
   
@@ -1946,7 +1949,7 @@
         <div class="station-control-bar">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
             <select id="flash-chapter-filter" class="filter-select" onchange="onFlashChapterFilterChange()">
-              <option value="all">Tất cả 16 bài học (1.287 câu)</option>
+              <option value="all">Tất cả tất cả bài học (1.357 câu) (1.357 câu)</option>
             </select>
 
             <!-- Bộ Lọc Dạng Câu Hỏi Trọng Tâm -->
@@ -1959,7 +1962,7 @@
               <option value="archetype" selected>🔀 Sắp xếp: Gom nhóm dạng câu (Chuẩn học)</option>
               <option value="orig_num">🔢 Sắp xếp: Theo số câu gốc (#1 → #N)</option>
             </select>
-              <option value="all">Tất cả 16 bài học (1.287 câu)</option>
+              <option value="all">Tất cả tất cả bài học (1.357 câu) (1.357 câu)</option>
             </select>
 
             <!-- Hộp Tua Nhanh & Chọn Câu Hỏi -->
@@ -1969,7 +1972,7 @@
                      style="width:68px; background:#1e293b; border:1.5px solid #38bdf8; border-radius:6px; color:#38bdf8; text-align:center; font-weight:800; font-size:14px; padding:3px 6px;"
                      onkeydown="if(event.key==='Enter') jumpToFlashQuestion(this.value)"
                      title="Nhập số câu (ví dụ 85) rồi nhấn Enter để chuyển ngay">
-              <span style="font-size:13px; color:var(--text-muted); font-weight:700;" id="flash-jump-total">/ 1.287</span>
+              <span style="font-size:13px; color:var(--text-muted); font-weight:700;" id="flash-jump-total">/ 1.357</span>
               <button class="btn btn-secondary btn-sm" onclick="jumpToFlashQuestion(document.getElementById('flash-jump-input').value)" 
                       style="padding:3px 10px; font-size:12px; background:#0284c7; color:#fff; border:none; border-radius:6px; font-weight:800; cursor:pointer;"
                       title="Nhảy tới số câu đã nhập">
@@ -1983,7 +1986,7 @@
               🔁 Tiếp tục từ câu <span id="flash-resume-num">85</span>
             </button>
             <div style="font-size:13px; color:var(--text-muted); display:none;">
-              Câu: <b id="flash-index-indicator">1 / 1.287</b>
+              Câu: <b id="flash-index-indicator">1 / 1.357</b>
             </div>
           </div>
 
@@ -2192,7 +2195,7 @@
       <!-- 1. SETUP / DASHBOARD VIEW -->
       <div id="lockin-setup-view">
         <div class="lockin-hero">
-          <h2>🔥 CHẾ ĐỘ LOCK-IN • CHIẾN DỊCH VƯỢT CẠN 1.287 CÂU</h2>
+          <h2>🔥 CHẾ ĐỘ LOCK-IN • CHIẾN DỊCH VƯỢT CẠN 1.357 CÂU</h2>
           <p>
             Cam kết tập trung 100%, không lướt mạng xã hội, không xao nhãng. Chinh phục mục tiêu số lượng câu hỏi trong
             thời gian ấn định với đồng hồ đếm ngược, theo dõi tốc độ (Pace), chuỗi đúng (Streak) và kích hoạt sóng não
@@ -2263,7 +2266,7 @@
                 học:</label>
               <select id="lockin-chapter-select" class="filter-select" style="width:100%;"
                 onchange="onLockinChapterChange()">
-                <option value="all">Tất cả 16 bài học (1.287 câu)</option>
+                <option value="all">Tất cả tất cả bài học (1.357 câu) (1.357 câu)</option>
               </select>
             </div>
             <div>
@@ -2308,7 +2311,7 @@
         <!-- 48-Hour Exam Schedule Table -->
         <div class="schedule-table-wrap">
           <div class="schedule-header">
-            <h3>📅 LỘ TRÌNH 6 PHIÊN LOCK-IN ĐÁNH BẬT 1.287 CÂU (TỐI 9.11 ➔ 11.11)</h3>
+            <h3>📅 LỘ TRÌNH 6 PHIÊN LOCK-IN ĐÁNH BẬT 1.357 CÂU (TỐI 9.11 ➔ 11.11)</h3>
             <span style="font-size:13px; color:var(--text-muted);">Chia nhỏ mục tiêu • Chắc thắng 100%</span>
           </div>
 
@@ -2467,7 +2470,7 @@
         <div class="station-control-bar">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
             <select id="station-chapter-filter" class="filter-select" onchange="onStationChapterFilterChange()">
-              <option value="all">Tất cả 16 bài học (1.287 câu)</option>
+              <option value="all">Tất cả tất cả bài học (1.357 câu) (1.357 câu)</option>
             </select>
             <select id="station-type-filter" class="filter-select" onchange="onStationTypeFilterChange(this.value)" style="border-color:#10b981; max-width:240px;" title="Lọc dạng câu hỏi trạm">
               <option value="all">⚡ Tất cả dạng câu</option>
@@ -2477,7 +2480,7 @@
               <option value="archetype">🔀 Thứ tự: Gom nhóm theo dạng câu</option>
               <option value="orig_num">🔢 Thứ tự: Theo số câu gốc</option>
             </select>
-              <option value="all">Tất cả 16 bài học (1.287 câu)</option>
+              <option value="all">Tất cả tất cả bài học (1.357 câu) (1.357 câu)</option>
             </select>
             <select id="station-count-select" class="filter-select" onchange="filterStationMode()">
               <option value="40" selected>Đề thi: 40 Trạm (Chuẩn thi)</option>
@@ -2814,7 +2817,7 @@
         <div class="speed-toolbar">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
             <select id="speed-chapter-filter" class="filter-select" onchange="onSpeedFilterChange()">
-              <option value="all">⚡ Tất cả 16 bài học (1.287 câu)</option>
+              <option value="all">⚡ Tất cả tất cả bài học (1.357 câu) (1.357 câu)</option>
             </select>
 
             <select id="speed-type-filter" class="filter-select" onchange="onSpeedFilterChange()" style="border-color:#0284c7;">
@@ -2890,7 +2893,7 @@
         <div class="card" style="padding: 18px 22px; margin-bottom: 16px;">
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <div>
-              <h2 class="lecture-heading-serif" style="font-size:22px; color:#38bdf8; margin-bottom:4px;">📖 Kho Tóm Tắt Toàn Diện 16 Bài Giảng Mô Phôi</h2>
+              <h2 class="lecture-heading-serif" style="font-size:22px; color:#38bdf8; margin-bottom:4px;">📖 Kho Tóm Tắt Toàn Diện Tất Cả Các Bài Giảng Mô Phôi</h2>
               <p style="font-size:12.5px; color:var(--text-muted); margin:0;">Học kỹ lý thuyết cốt lõi, bảng tra cứu cơ quan vi thể trước khi bước vào Chế độ Flash 7s.</p>
             </div>
             <div>
@@ -2936,10 +2939,58 @@
       </div>
     </section>
     
+  
+    <!-- ========================================================== -->
+    <!-- 🧠 TAB: FULL MẸO GHI NHỚ TOÀN TẬP TỪ A-Z (PHẢN XẠ 10 GIÂY) -->
+    <!-- ========================================================== -->
+    <section id="tab-mnemonics-az" class="tab-content">
+      <div class="station-exam-container" style="max-width:1300px; margin:0 auto; padding:20px;">
+        <!-- Banner Intro -->
+        <div style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(168, 85, 247, 0.15)); border: 1.5px solid rgba(236, 72, 153, 0.4); border-radius: 14px; padding: 22px 28px; margin-bottom: 24px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+            <div>
+              <span class="flash-lec-badge" style="background:#ec4899; color:#fff;">KHO THẦN CHÚ A-Z ĐỘC QUYỀN</span>
+              <h2 class="lecture-heading-serif" style="font-size:26px; color:#f472b6; margin:8px 0 6px 0;">🧠 Full Mẹo Ghi Nhớ & Phản Xạ 10 Giây Từ A Đến Z</h2>
+              <p style="font-size:14px; color:var(--text-muted); margin:0;">
+                Gom trọn toàn bộ câu thần chú phản xạ, bản chất sinh học, quy tắc nhận diện vi thể và mốc phôi thai học cốt lõi từ Bài 1 đến Bài 23.
+              </p>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button onclick="switchTab('flash')" class="btn-read-lecture-quick" style="padding:10px 18px; font-weight:700;">⚡ Vào Flash Luyện Luôn</button>
+              <button onclick="switchTab('speed-skim')" class="btn-read-lecture-quick" style="background:#38bdf8; color:#0f172a; padding:10px 18px; font-weight:700;">🚀 Chế Độ Lướt Siêu Tốc</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Bar: Search + Letter Pills -->
+        <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:16px 20px; margin-bottom:24px;">
+          <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-bottom:14px;">
+            <div style="position:relative; flex:1; min-width:260px;">
+              <input type="text" id="mnemonics-search-input" placeholder="🔍 Gõ từ khóa tra cứu thần tốc (AMH, Sertoli, Leydig, Wolff, Muller, Henle, Bánh nhau, Gai nhau...)" 
+                oninput="onMnemonicsSearchInput(this.value)"
+                style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid var(--border); background:var(--bg-body); color:var(--text-main); font-size:14px; font-family:'Montserrat', sans-serif;">
+            </div>
+            <span style="font-size:13px; color:var(--text-muted); font-weight:600;" id="mnemonics-match-count">Hiển thị: 20 mục mẹo</span>
+          </div>
+
+          <!-- Letters Row -->
+          <div id="mnemonics-letter-pills" style="display:flex; gap:8px; flex-wrap:wrap;">
+            <!-- Generated dynamically -->
+          </div>
+        </div>
+
+        <!-- Mnemonics Grid -->
+        <div id="mnemonics-cards-container" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(360px, 1fr)); gap:18px;">
+          <!-- Generated dynamically -->
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <script src="lectures_data.js"></script>
   <script src="questions_data.js"></script>
+  <script src="lectures_data.js"></script>
   <script>
     // DATA STATE
     let ALL_QUESTIONS = [];
@@ -3708,7 +3759,7 @@
       selects.forEach(sel => {
         if (!sel) return;
         if (sel.options[0]) {
-          sel.options[0].textContent = `Tất cả 16 bài học (${ALL_QUESTIONS.length} câu)`;
+          sel.options[0].textContent = `Tất cả tất cả bài học (1.357 câu) (${ALL_QUESTIONS.length} câu)`;
         }
         const wrongOpt = document.createElement('option');
         wrongOpt.value = '__WRONG_ONLY__';
@@ -3726,6 +3777,105 @@
       });
       const totalEl = document.getElementById('stat-total-q');
       if (totalEl) totalEl.textContent = ALL_QUESTIONS.length;
+    }
+
+    
+    // ==========================================
+    // 🧠 LOGIC TAB MẸO GHI NHỚ A-Z
+    // ==========================================
+    let currentSelectedLetter = 'ALL';
+    let currentMnemonicsSearch = '';
+
+    function initMnemonicsAZView() {
+      renderLetterPills();
+      filterAndRenderMnemonics();
+    }
+
+    function renderLetterPills() {
+      const container = document.getElementById('mnemonics-letter-pills');
+      if (!container || !window.MNEMONICS_AZ) return;
+      
+      const lettersSet = new Set();
+      window.MNEMONICS_AZ.forEach(m => lettersSet.add(m.letter.toUpperCase()));
+      const letters = Array.from(lettersSet).sort();
+
+      let html = `<button class="nav-tab ${currentSelectedLetter === 'ALL' ? 'active' : ''}" onclick="selectMnemonicsLetter('ALL')" style="padding:4px 12px; font-size:12.5px;">Tất Cả (${window.MNEMONICS_AZ.length})</button>`;
+      letters.forEach(l => {
+        const count = window.MNEMONICS_AZ.filter(m => m.letter.toUpperCase() === l).length;
+        const isSel = currentSelectedLetter === l;
+        html += `<button class="nav-tab ${isSel ? 'active' : ''}" onclick="selectMnemonicsLetter('${l}')" style="padding:4px 10px; font-size:12.5px; font-weight:700;">${l} (${count})</button>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function selectMnemonicsLetter(letter) {
+      currentSelectedLetter = letter;
+      renderLetterPills();
+      filterAndRenderMnemonics();
+    }
+
+    function onMnemonicsSearchInput(query) {
+      currentMnemonicsSearch = (query || '').trim().toLowerCase();
+      filterAndRenderMnemonics();
+    }
+
+    function filterAndRenderMnemonics() {
+      const container = document.getElementById('mnemonics-cards-container');
+      const countEl = document.getElementById('mnemonics-match-count');
+      if (!container || !window.MNEMONICS_AZ) return;
+
+      let list = window.MNEMONICS_AZ;
+      if (currentSelectedLetter !== 'ALL') {
+        list = list.filter(m => m.letter.toUpperCase() === currentSelectedLetter);
+      }
+      if (currentMnemonicsSearch) {
+        list = list.filter(m => 
+          m.term.toLowerCase().includes(currentMnemonicsSearch) ||
+          m.summary.toLowerCase().includes(currentMnemonicsSearch) ||
+          m.mnemonic.toLowerCase().includes(currentMnemonicsSearch) ||
+          m.details.toLowerCase().includes(currentMnemonicsSearch) ||
+          m.badge.toLowerCase().includes(currentMnemonicsSearch)
+        );
+      }
+
+      if (countEl) countEl.textContent = `Hiển thị: ${list.length} mục mẹo`;
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align:center; padding:40px; color:var(--text-muted);">
+            <div style="font-size:36px; margin-bottom:8px;">🔍</div>
+            <div style="font-size:16px; font-weight:700;">Không tìm thấy mẹo nào khớp với từ khóa "${currentMnemonicsSearch}"</div>
+            <div style="font-size:13px; margin-top:4px;">Thử tìm kiếm với các từ: AMH, Sertoli, Leydig, Wolff, Muller, Henle, Bánh nhau...</div>
+          </div>`;
+        return;
+      }
+
+      let html = '';
+      list.forEach(m => {
+        html += `
+          <div class="lecture-chapter-card" style="display:flex; flex-direction:column; justify-content:space-between; border-top: 3px solid #ec4899;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+                <span style="font-size:32px; font-weight:900; color:#ec4899; font-family:'Playfair Display', serif; line-height:1;">${m.letter}</span>
+                <span class="flash-lec-badge" style="background:rgba(236,72,153,0.15); color:#f472b6; border:1px solid rgba(236,72,153,0.3); font-size:11px;">${m.badge}</span>
+              </div>
+              <h3 class="lecture-heading-serif" style="font-size:17px; color:var(--text-main); margin:0 0 8px 0; font-weight:800;">
+                ${m.term}
+              </h3>
+              <div style="background:rgba(236,72,153,0.08); border-left:3px solid #ec4899; border-radius:0 6px 6px 0; padding:8px 12px; margin-bottom:10px; font-weight:700; color:#fbbf24; font-size:13.5px; line-height:1.45;">
+                ${m.mnemonic}
+              </div>
+              <div style="font-size:13px; color:var(--text-muted); line-height:1.5; margin-bottom:10px;">
+                <b>Tóm tắt:</b> ${m.summary}
+              </div>
+            </div>
+            <div style="border-top:1px dashed var(--border); padding-top:10px; font-size:12px; color:var(--text-muted); line-height:1.45;">
+              <b>Bản chất sâu:</b> ${m.details}
+            </div>
+          </div>`;
+      });
+
+      container.innerHTML = html;
     }
 
     function switchTab(tabId) {
@@ -5031,7 +5181,7 @@
         return txt.includes(lowerKw);
       });
       if (!matched.length) {
-        alert(`Không tìm thấy câu hỏi với từ khóa "${kw}" trong 1.287 câu.`);
+        alert(`Không tìm thấy câu hỏi với từ khóa "${kw}" trong 1.357 câu.`);
         return;
       }
       stationExamList = matched;
@@ -5820,7 +5970,7 @@ Chỉ còn ${remaining} câu nữa là cán đích. Bạn có chắc muốn dừ
       const sel = document.getElementById('speed-chapter-filter');
       if (!sel) return;
       const chapters = [...new Set(ALL_QUESTIONS.map(q => q.chapter || 'Chưa phân loại'))];
-      sel.innerHTML = '<option value="all">⚡ Tất cả 16 bài học (' + ALL_QUESTIONS.length + ' câu)</option>';
+      sel.innerHTML = '<option value="all">⚡ Tất cả tất cả bài học (1.357 câu) (' + ALL_QUESTIONS.length + ' câu)</option>';
       chapters.forEach(c => {
         const count = ALL_QUESTIONS.filter(q => q.chapter === c).length;
         const opt = document.createElement('option');
@@ -6100,6 +6250,72 @@ Chỉ còn ${remaining} câu nữa là cán đích. Bạn có chắc muốn dừ
         objList.innerHTML = (data.objectives || []).map(o => `<li>${o}</li>`).join('');
       }
 
+      // 1. Core Question Types & Biological Nature
+      const typesBox = document.getElementById('lec-view-core-types');
+      if (typesBox) {
+        if (data.core_types && data.core_types.length > 0) {
+          typesBox.style.display = 'block';
+          typesBox.innerHTML = `
+            <div style="background: rgba(56, 189, 248, 0.08); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 12px; padding: 16px 20px; margin-bottom: 24px;">
+              <h4 class="lecture-heading-serif" style="color: #38bdf8; font-size: 17px; margin-top: 0; margin-bottom: 12px; display:flex; align-items:center; gap:8px;">
+                <span>⚡</span> TỔNG HỢP CÁC DẠNG CÂU HỎI TRỌNG TÂM & BẢN CHẤT CƠ CHẾ SINH HỌC
+              </h4>
+              <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px;">
+                ${data.core_types.map(t => `
+                  <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:12px 14px;">
+                    <div style="font-weight:700; color:#38bdf8; font-size:13.5px; margin-bottom:4px;">${t.type}</div>
+                    <div style="font-size:12.5px; color:var(--text-muted); line-height:1.45;">${t.nature}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>`;
+        } else {
+          typesBox.style.display = 'none';
+        }
+      }
+
+      // 2. 10-Second Reflex Mnemonics
+      const mneBox = document.getElementById('lec-view-mnemonics');
+      if (mneBox) {
+        if (data.mnemonics && data.mnemonics.length > 0) {
+          mneBox.style.display = 'block';
+          mneBox.innerHTML = `
+            <div style="background: rgba(236, 72, 153, 0.08); border: 1.5px solid rgba(236, 72, 153, 0.35); border-radius: 12px; padding: 16px 20px; margin-bottom: 24px;">
+              <h4 class="lecture-heading-serif" style="color: #f472b6; font-size: 17px; margin-top: 0; margin-bottom: 10px; display:flex; align-items:center; gap:8px;">
+                <span>💡</span> THẦN CHÚ PHẢN XẠ 10 GIÂY CỐT LÕI
+              </h4>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                ${data.mnemonics.map(m => `
+                  <div style="background:var(--bg-card); border-left:4px solid #ec4899; border-radius:0 8px 8px 0; padding:10px 14px; font-weight:600; font-size:13.5px; color:var(--text-main);">
+                    ${m}
+                  </div>
+                `).join('')}
+              </div>
+            </div>`;
+        } else {
+          mneBox.style.display = 'none';
+        }
+      }
+
+      // 3. Traps
+      const trapsBox = document.getElementById('lec-view-traps');
+      if (trapsBox) {
+        if (data.traps && data.traps.length > 0) {
+          trapsBox.style.display = 'block';
+          trapsBox.innerHTML = `
+            <div style="background: rgba(239, 68, 68, 0.08); border: 1.5px solid rgba(239, 68, 68, 0.35); border-radius: 12px; padding: 16px 20px; margin-bottom: 24px;">
+              <h4 class="lecture-heading-serif" style="color: #f87171; font-size: 17px; margin-top: 0; margin-bottom: 10px; display:flex; align-items:center; gap:8px;">
+                <span>⚠️</span> BẪY ĐỀ THI KINH ĐIỂN CẦN TRÁNH
+              </h4>
+              <ul style="margin:0; padding-left:20px; font-size:13.5px; color:var(--text-muted); line-height:1.5;">
+                ${data.traps.map(tr => `<li style="margin-bottom:6px;">${tr}</li>`).join('')}
+              </ul>
+            </div>`;
+        } else {
+          trapsBox.style.display = 'none';
+        }
+      }
+
       const secList = document.getElementById('lec-view-sections');
       if (secList) {
         let secHtml = '';
@@ -6143,7 +6359,7 @@ Chỉ còn ${remaining} câu nữa là cán đích. Bạn có chắc muốn dừ
       const banner = document.getElementById('flash-lecture-banner');
       if (!banner) return;
       if (chapterName === 'all') {
-        document.getElementById('flash-lec-title').textContent = 'Toàn bộ 16 bài học (1.287 câu trắc nghiệm)';
+        document.getElementById('flash-lec-title').textContent = 'Toàn bộ tất cả bài học (1.357 câu) (1.357 câu trắc nghiệm)';
         document.getElementById('flash-lec-desc').textContent = 'Tổng hợp ngân hàng đề thi Mô Phôi K48. Đọc bài giảng từng bài để đạt điểm tối đa.';
       } else if (window.LECTURES_DATA && window.LECTURES_DATA[chapterName]) {
         const item = window.LECTURES_DATA[chapterName];
