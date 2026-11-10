@@ -9,9 +9,10 @@
   <!-- FONT CHỮ CHUYÊN BIỆT CHO TIẾNG VIỆT & TỐI ƯU TRÍ NHỚ (BE VIETNAM PRO & LEXEND) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Lexend:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+    <!-- FONT CHỮ MONTSERRAT & PLAYFAIR DISPLAY (CHUẨN Y KHOA ĐẲNG CẤP) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -1511,6 +1512,380 @@
       box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
     }
     
+  
+    /* ========================================================== */
+    /* 🎨 TYPOGRAPHY: MONTSERRAT + PLAYFAIR DISPLAY               */
+    /* ========================================================== */
+    * {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+
+    h1, h2, h3, h4, .brand-title, .logo-title, .tab-header-title,
+    .lecture-card-title, .arch-banner-title, .speed-title,
+    .station-desk-num, .lecture-heading-serif {
+      font-family: 'Playfair Display', Georgia, serif !important;
+      letter-spacing: 0.3px;
+    }
+
+    /* ========================================================== */
+    /* ☀️ GIAO DIỆN TRẮNG (LIGHT THEME) STYLING                   */
+    /* ========================================================== */
+    body.theme-light {
+      --bg-dark: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --accent: #0284c7;
+      --accent-glow: rgba(2, 132, 199, 0.15);
+      --success: #16a34a;
+      --success-bg: rgba(22, 163, 74, 0.12);
+      --danger: #dc2626;
+      --danger-bg: rgba(220, 38, 38, 0.12);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+    }
+
+    body.theme-light header {
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid #e2e8f0;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    body.theme-light .card,
+    body.theme-light .station-desk,
+    body.theme-light .archetypes-banner-card,
+    body.theme-light .lecture-card,
+    body.theme-light .speed-skim-card,
+    body.theme-light .lecture-box-container {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+      color: #0f172a !important;
+    }
+
+    body.theme-light .filter-select,
+    body.theme-light input,
+    body.theme-light select {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      border: 1.5px solid #cbd5e1 !important;
+    }
+
+    body.theme-light .nav-tab {
+      background: #e2e8f0;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    body.theme-light .nav-tab:hover {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+
+    body.theme-light .nav-tab.active {
+      background: #0284c7 !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3) !important;
+      border-color: #0284c7 !important;
+    }
+
+    body.theme-light .station-desk-question,
+    body.theme-light .speed-q-text {
+      color: #0f172a !important;
+      font-weight: 700;
+    }
+
+    body.theme-light .desk-option-btn,
+    body.theme-light .speed-opt-btn {
+      background: #f8fafc !important;
+      border: 1.5px solid #e2e8f0 !important;
+      color: #1e293b !important;
+    }
+
+    body.theme-light .desk-option-btn:hover {
+      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+    }
+
+    body.theme-light .desk-option-btn.correct-choice,
+    body.theme-light .speed-opt-btn.correct-choice {
+      background: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.25) !important;
+    }
+
+    body.theme-light mark.kw-hl {
+      background: #fef08a !important;
+      color: #0f172a !important;
+      box-shadow: 0 0 10px rgba(234, 179, 8, 0.4) !important;
+      border: 1px solid rgba(202, 138, 4, 0.5) !important;
+    }
+
+    body.theme-light .lecture-step-box,
+    body.theme-light .lecture-alert-box {
+      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #1e293b !important;
+    }
+
+    body.theme-light .lecture-table th {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+    }
+
+    body.theme-light .lecture-table td {
+      border-color: #e2e8f0 !important;
+      color: #1e293b !important;
+    }
+
+    /* THEME TOGGLE BUTTON */
+    .btn-theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1.5px solid #38bdf8;
+      background: rgba(15, 23, 42, 0.85);
+      color: #f1f5f9;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.2);
+    }
+
+    body.theme-light .btn-theme-toggle {
+      background: #ffffff;
+      color: #0284c7;
+      border-color: #0284c7;
+      box-shadow: 0 2px 10px rgba(2, 132, 199, 0.15);
+    }
+
+    .btn-theme-toggle:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35);
+    }
+
+    /* ========================================================== */
+    /* ⚡ SPEED-SKIM (CHẾ ĐỘ LƯỚT CỰC NHANH) STYLING             */
+    /* ========================================================== */
+    .speed-skim-container {
+      max-width: 1100px;
+      margin: 18px auto;
+      padding: 0 14px;
+    }
+
+    .speed-toolbar {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .speed-feed-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .speed-feed-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .speed-feed-card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(56, 189, 248, 0.15);
+    }
+
+    .speed-feed-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .speed-correct-box {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1.5px solid #10b981;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    body.theme-light .speed-correct-box {
+      background: #ecfdf5;
+      border-color: #10b981;
+      color: #065f46;
+    }
+
+    /* ========================================================== */
+    /* 📖 BÀI GIẢNG (LECTURE) STYLING                            */
+    /* ========================================================== */
+    .lecture-container {
+      max-width: 1000px;
+      margin: 16px auto;
+      padding: 0 14px;
+    }
+
+    .flash-lecture-banner {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(99, 102, 241, 0.15));
+      border: 1.5px solid rgba(56, 189, 248, 0.4);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-top: 12px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    body.theme-light .flash-lecture-banner {
+      background: linear-gradient(135deg, #e0f2fe, #e0e7ff);
+      border-color: #38bdf8;
+    }
+
+    .flash-lec-badge {
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-read-lecture-quick {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-read-lecture-quick:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-start-flash-cta {
+      background: #10b981;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-start-flash-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    }
+
+    .lecture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .lecture-chapter-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .lecture-chapter-card:hover, .lecture-chapter-card.selected {
+      border-color: #38bdf8;
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);
+    }
+
+    .lecture-chapter-card.selected {
+      border-width: 2px;
+      border-color: #38bdf8;
+    }
+
+    .lecture-box-container {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-top: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    }
+
+    .lecture-step-box {
+      background: rgba(15, 23, 42, 0.7);
+      border-left: 4px solid #38bdf8;
+      padding: 12px 16px;
+      margin: 12px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .lecture-alert-box {
+      background: rgba(234, 179, 8, 0.1);
+      border-left: 4px solid #eab308;
+      padding: 12px 16px;
+      margin: 12px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .lecture-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 13px;
+    }
+
+    .lecture-table th, .lecture-table td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    .lecture-table th {
+      background: rgba(30, 41, 59, 0.8);
+      font-weight: 700;
+      color: #38bdf8;
+    }
+    
   </style>
 </head>
 
@@ -1527,6 +1902,8 @@
       <button class="nav-tab highlight-tab active" onclick="switchTab('flash')">
         ⚡ Flash Trắc Nghiệm (Tự Động 7s)
       </button>
+      <button class="nav-tab" onclick="switchTab('speed-skim')" style="border-color:#38bdf8; color:#38bdf8; font-weight:700;">⚡ Lướt Cực Nhanh (Speed-Skim)</button>
+      <button class="nav-tab" onclick="switchTab('lecture')" style="border-color:#a855f7; color:#c084fc; font-weight:700;">📖 Full Bài Giảng (16 Bài)</button>
       <button class="nav-tab lockin-tab" onclick="switchTab('lockin')"
         style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(245, 158, 11, 0.2)); border: 1.5px solid #f59e0b; color: #fbbf24; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
         <span style="font-size:16px;">🔥</span> Chế Độ Lock-In
@@ -1552,7 +1929,12 @@
       <div class="stat-pill">Đã thuộc: <b id="stat-passed">0</b>/<span id="stat-total-q">1.287</span></div>
       <div class="stat-pill">Độ chính xác: <b id="stat-accuracy" style="color:var(--success)">0%</b></div>
     </div>
-  </header>
+  
+      <!-- Nút chuyển đổi Giao diện Trắng / Đen -->
+      <button id="btn-theme-toggle" class="btn-theme-toggle" onclick="toggleMophoiTheme()" title="Chuyển chế độ Giao diện Trắng / Tối">
+        <span id="theme-toggle-icon">☀️</span> <span id="theme-toggle-text">Giao diện trắng</span>
+      </button>
+    </header>
 
   <main>
     <!-- ========================================================== -->
@@ -2422,8 +2804,142 @@
         </div>
       </div>
     </section>
+  
+    <!-- ================================================================ -->
+    <!-- ⚡ TAB 8: LƯỚT CỰC NHANH (SPEED-SKIM RAPID BROWSE)                 -->
+    <!-- ================================================================ -->
+    <section id="tab-speed-skim" class="tab-content">
+      <div class="speed-skim-container">
+        <!-- Control Toolbar -->
+        <div class="speed-toolbar">
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <select id="speed-chapter-filter" class="filter-select" onchange="onSpeedFilterChange()">
+              <option value="all">⚡ Tất cả 16 bài học (1.287 câu)</option>
+            </select>
+
+            <select id="speed-type-filter" class="filter-select" onchange="onSpeedFilterChange()" style="border-color:#0284c7;">
+              <option value="all">Tất cả các dạng câu</option>
+            </select>
+
+            <input type="text" id="speed-search-input" placeholder="🔍 Tìm nhanh từ khóa câu hỏi / đáp án..." 
+                   class="filter-select" style="min-width: 220px;" oninput="onSpeedSearchInput(this.value)">
+          </div>
+
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <!-- View Mode Toggle: Stream vs Rapid Card -->
+            <div style="display:inline-flex; border:1px solid var(--border); border-radius:8px; overflow:hidden;">
+              <button id="btn-speed-mode-stream" class="nav-tab active" style="padding:6px 12px; font-size:12px;" onclick="setSpeedMode('stream')">📜 Cuộn Dòng Vô Hạn</button>
+              <button id="btn-speed-mode-card" class="nav-tab" style="padding:6px 12px; font-size:12px;" onclick="setSpeedMode('card')">⚡ Chiếu Thẻ Siêu Tốc</button>
+            </div>
+
+            <!-- Chỉ hiện câu hỏi + đáp án đúng -->
+            <label style="font-size:12.5px; display:inline-flex; align-items:center; gap:6px; cursor:pointer; user-select:none;">
+              <input type="checkbox" id="chk-speed-correct-only" checked onchange="renderSpeedSkim()">
+              <span style="font-weight:600;">Chỉ hiện đáp án đúng (Visual Anchor)</span>
+            </label>
+
+            <!-- Tốc độ Autoplay khi chiếu thẻ -->
+            <div id="speed-card-speed-ctrl" style="display:none; align-items:center; gap:6px;">
+              <span style="font-size:12px; color:var(--text-muted);">Tốc độ:</span>
+              <select id="speed-autoplay-rate" class="filter-select" style="padding:4px 8px; font-size:12px;" onchange="onSpeedRateChange()">
+                <option value="0.5">0.5 giây / câu (Thần tốc)</option>
+                <option value="1.0" selected>1.0 giây / câu (Chuẩn mắt)</option>
+                <option value="1.5">1.5 giây / câu</option>
+                <option value="2.0">2.0 giây / câu</option>
+                <option value="manual">Thủ công (Phím Space/Mũi tên)</option>
+              </select>
+              <button id="btn-speed-card-play" class="btn-read-lecture-quick" style="padding:4px 10px; font-size:12px;" onclick="toggleSpeedCardPlay()">▶️ Chạy</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress Counter -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; font-size:12.5px; color:var(--text-muted);">
+          <div>Hiển thị: <b id="speed-count-display" style="color:#38bdf8;">0</b> câu trắc nghiệm</div>
+          <div>Mẹo: Dùng phím <b>Space</b> hoặc <b>→ / ←</b> để lướt vèo vèo</div>
+        </div>
+
+        <!-- Container 1: Stream Feed (Cuộn Dòng Vô Hạn) -->
+        <div id="speed-stream-container" class="speed-feed-list"></div>
+
+        <!-- Container 2: Rapid Card (Chiếu Thẻ Siêu Tốc) -->
+        <div id="speed-card-container" style="display:none;">
+          <div class="card speed-skim-card" style="padding: 24px; position:relative; min-height: 280px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <span id="speed-card-badge" class="flash-lec-badge">CÂU 1 / 1287</span>
+              <span id="speed-card-chapter" style="font-size:12px; color:var(--text-muted);">Bài 2: Biểu mô</span>
+            </div>
+            <div id="speed-card-question" class="speed-q-text" style="font-size:17px; line-height:1.5; margin-bottom:16px;"></div>
+            <div id="speed-card-options-box" style="display:flex; flex-direction:column; gap:8px;"></div>
+            
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px; border-top:1px solid var(--border); padding-top:14px;">
+              <button class="nav-tab" onclick="prevSpeedCard()">⬅️ Câu Trước</button>
+              <div style="font-size:12px; color:var(--text-muted);">(Nhấn Space: Tạm dừng / Tiếp tục)</div>
+              <button class="btn-read-lecture-quick" onclick="nextSpeedCard()">Câu Tiếp ➡️</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- 📖 TAB 9: FULL BÀI GIẢNG (16 BÀI HỌC TRỌNG TÂM MÔ PHÔI)           -->
+    <!-- ================================================================ -->
+    <section id="tab-lecture" class="tab-content">
+      <div class="lecture-container">
+        <div class="card" style="padding: 18px 22px; margin-bottom: 16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h2 class="lecture-heading-serif" style="font-size:22px; color:#38bdf8; margin-bottom:4px;">📖 Kho Tóm Tắt Toàn Diện 16 Bài Giảng Mô Phôi</h2>
+              <p style="font-size:12.5px; color:var(--text-muted); margin:0;">Học kỹ lý thuyết cốt lõi, bảng tra cứu cơ quan vi thể trước khi bước vào Chế độ Flash 7s.</p>
+            </div>
+            <div>
+              <select id="lecture-chapter-dropdown" class="filter-select" onchange="onLectureDropdownChange(this.value)" style="border-color:#a855f7; font-weight:700; min-width:260px;">
+                <!-- Populated via JS -->
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16 Chapters Grid Quick Navigator -->
+        <div id="lecture-chapters-grid" class="lecture-grid"></div>
+
+        <!-- Single Chapter Full Lecture View Box -->
+        <div id="lecture-content-box" class="lecture-box-container" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; border-bottom:1.5px solid var(--border); padding-bottom:14px; margin-bottom:16px;">
+            <div>
+              <span id="lec-view-badge" class="flash-lec-badge">BÀI GIẢNG CỐT LÕI</span>
+              <h1 id="lec-view-title" class="lecture-heading-serif" style="font-size:24px; color:var(--text-main); margin-top:8px;">Bài 2: Biểu mô</h1>
+              <div id="lec-view-count" style="font-size:13px; color:#38bdf8; margin-top:4px;">118 câu trắc nghiệm thực chiến</div>
+            </div>
+            <button class="btn-start-flash-cta" style="padding:10px 20px; font-size:14px;" onclick="startFlashForCurrentLecture()">
+              🚀 TÔI ĐÃ THUỘC BÀI ➔ BƯỚC VÀO FLASH 7S NGAY!
+            </button>
+          </div>
+
+          <!-- Objectives -->
+          <div style="background:rgba(2, 132, 199, 0.08); border:1px solid rgba(56, 189, 248, 0.3); border-radius:10px; padding:14px 18px; margin-bottom:20px;">
+            <h4 style="color:#38bdf8; margin-bottom:8px; font-size:14px; font-weight:800;">🎯 MỤC TIÊU HỌC TẬP & NẮM BẮT TRỌNG TÂM:</h4>
+            <ul id="lec-view-objectives" style="padding-left:20px; font-size:13.5px; line-height:1.6;"></ul>
+          </div>
+
+          <!-- Body Sections -->
+          <div id="lec-view-sections" style="line-height:1.7; font-size:14px;"></div>
+
+          <!-- Bottom Action CTA -->
+          <div style="display:flex; justify-content:center; margin-top:30px; padding-top:20px; border-top:1.5px solid var(--border);">
+            <button class="btn-start-flash-cta" style="padding:14px 28px; font-size:15px; border-radius:30px; box-shadow:0 6px 20px rgba(16, 185, 129, 0.4);" onclick="startFlashForCurrentLecture()">
+              🚀 BẮT ĐẦU FLASH 7S CHO BÀI HỌC NÀY (CÓ BẤM GIỜ) ➔
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    
   </main>
 
+  <script src="mophoi/lectures_data.js"></script>
+  <script src="lectures_data.js"></script>
   <script src="mophoi/questions_data.js"></script>
   <script>
     // DATA STATE
@@ -3120,6 +3636,8 @@
     }
 
     async function init() {
+      initMophoiTheme();
+      initLectureView();
       try {
         // 1. Try local storage for PROGRESS first
         try {
@@ -3169,6 +3687,9 @@
         renderCheatTable();
         renderWrongList();
         updateGlobalStats();
+        initSpeedSkim();
+        initLectureView();
+        updateFlashLectureBanner('all');
 
         window.addEventListener('keydown', handleKeyNavigation);
       } catch (e) {
@@ -5252,6 +5773,391 @@ Chỉ còn ${remaining} câu nữa là cán đích. Bạn có chắc muốn dừ
     }
 
     window.onload = init;
+  
+    /* ========================================================== */
+    /* ☀️ THEME MANAGER: GIAO DIỆN TRẮNG & ĐEN (WHITE / DARK)     */
+    /* ========================================================== */
+    function initMophoiTheme() {
+      const saved = localStorage.getItem('mophoi_theme');
+      if (saved === 'light') {
+        document.body.classList.add('theme-light');
+        updateThemeBtnUi(true);
+      } else {
+        document.body.classList.remove('theme-light');
+        updateThemeBtnUi(false);
+      }
+    }
+
+    function toggleMophoiTheme() {
+      const isLight = document.body.classList.toggle('theme-light');
+      localStorage.setItem('mophoi_theme', isLight ? 'light' : 'dark');
+      updateThemeBtnUi(isLight);
+      showToast(isLight ? '☀️ Đã bật Giao diện Trắng tinh khôi (Font Montserrat & Playfair)' : '🌙 Đã bật Giao diện Tối chuyên sâu');
+    }
+
+    function updateThemeBtnUi(isLight) {
+      const icon = document.getElementById('theme-toggle-icon');
+      const text = document.getElementById('theme-toggle-text');
+      if (icon) icon.textContent = isLight ? '🌙' : '☀️';
+      if (text) text.textContent = isLight ? 'Giao diện tối' : 'Giao diện trắng';
+    }
+
+    /* ========================================================== */
+    /* ⚡ SPEED-SKIM LOGIC (CHẾ ĐỘ LƯỚT CỰC NHANH)               */
+    /* ========================================================== */
+    let speedMode = 'stream'; // 'stream' or 'card'
+    let speedFilteredQuestions = [];
+    let speedCardIdx = 0;
+    let speedAutoplayTimer = null;
+    let speedIsAutoplaying = false;
+
+    function initSpeedSkim() {
+      populateSpeedChapterDropdown();
+      populateSpeedTypeDropdown();
+      renderSpeedSkim();
+    }
+
+    function populateSpeedChapterDropdown() {
+      const sel = document.getElementById('speed-chapter-filter');
+      if (!sel) return;
+      const chapters = [...new Set(ALL_QUESTIONS.map(q => q.chapter || 'Chưa phân loại'))];
+      sel.innerHTML = '<option value="all">⚡ Tất cả 16 bài học (' + ALL_QUESTIONS.length + ' câu)</option>';
+      chapters.forEach(c => {
+        const count = ALL_QUESTIONS.filter(q => q.chapter === c).length;
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = `${c} (${count} câu)`;
+        sel.appendChild(opt);
+      });
+    }
+
+    function populateSpeedTypeDropdown() {
+      const sel = document.getElementById('speed-type-filter');
+      if (!sel) return;
+      const types = [...new Set(ALL_QUESTIONS.map(q => q.type_name).filter(Boolean))];
+      sel.innerHTML = '<option value="all">⚡ Tất cả các dạng câu</option>';
+      types.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = t;
+        sel.appendChild(opt);
+      });
+    }
+
+    function setSpeedMode(mode) {
+      speedMode = mode;
+      document.getElementById('btn-speed-mode-stream').classList.toggle('active', mode === 'stream');
+      document.getElementById('btn-speed-mode-card').classList.toggle('active', mode === 'card');
+      document.getElementById('speed-stream-container').style.display = mode === 'stream' ? 'flex' : 'none';
+      document.getElementById('speed-card-container').style.display = mode === 'card' ? 'block' : 'none';
+      document.getElementById('speed-card-speed-ctrl').style.display = mode === 'card' ? 'inline-flex' : 'none';
+      if (mode === 'card') {
+        speedCardIdx = 0;
+        renderSpeedCard();
+      } else {
+        stopSpeedAutoplay();
+      }
+    }
+
+    function onSpeedFilterChange() {
+      renderSpeedSkim();
+    }
+
+    function onSpeedSearchInput(val) {
+      renderSpeedSkim();
+    }
+
+    function filterSpeedQuestions() {
+      const chVal = document.getElementById('speed-chapter-filter') ? document.getElementById('speed-chapter-filter').value : 'all';
+      const typeVal = document.getElementById('speed-type-filter') ? document.getElementById('speed-type-filter').value : 'all';
+      const sVal = (document.getElementById('speed-search-input') ? document.getElementById('speed-search-input').value : '').toLowerCase().trim();
+
+      let pool = ALL_QUESTIONS;
+      if (chVal !== 'all') pool = pool.filter(q => q.chapter === chVal);
+      if (typeVal !== 'all') pool = pool.filter(q => q.type_name === typeVal);
+      if (sVal) {
+        pool = pool.filter(q => {
+          const qText = (q.question || '').toLowerCase();
+          const ansText = (q.correct_text || '').toLowerCase();
+          return qText.includes(sVal) || ansText.includes(sVal);
+        });
+      }
+      return pool;
+    }
+
+    function renderSpeedSkim() {
+      speedFilteredQuestions = filterSpeedQuestions();
+      const countEl = document.getElementById('speed-count-display');
+      if (countEl) countEl.textContent = speedFilteredQuestions.length;
+
+      if (speedMode === 'stream') {
+        renderSpeedStream();
+      } else {
+        renderSpeedCard();
+      }
+    }
+
+    function renderSpeedStream() {
+      const container = document.getElementById('speed-stream-container');
+      if (!container) return;
+      if (speedFilteredQuestions.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding:30px; color:var(--text-muted);">Không tìm thấy câu hỏi nào phù hợp.</div>';
+        return;
+      }
+
+      const showCorrectOnly = document.getElementById('chk-speed-correct-only') ? document.getElementById('chk-speed-correct-only').checked : true;
+      let html = '';
+
+      const limit = Math.min(speedFilteredQuestions.length, 500);
+      for (let i = 0; i < limit; i++) {
+        const q = speedFilteredQuestions[i];
+        const letter = ['A', 'B', 'C', 'D'][q.correct_idx] || 'A';
+        const qHl = q.question_html || q.question;
+        const ansHl = (q.options_html && q.options_html[q.correct_idx]) || q.correct_text || (q.options && q.options[q.correct_idx]) || '';
+
+        html += `
+        <div class="speed-feed-card">
+          <div class="speed-feed-header">
+            <span class="flash-lec-badge">CÂU #${q.orig_num || (i + 1)}</span>
+            <span style="font-size:11.5px; color:var(--text-muted);">${q.chapter || ''}</span>
+          </div>
+          <div class="speed-q-text" style="font-size:15px; line-height:1.55; margin-bottom:8px;">${qHl}</div>
+          <div class="speed-correct-box">
+            <span style="font-size:18px;">🎯</span>
+            <div style="font-size:14.5px; font-weight:700;">
+              <span style="color:#10b981; margin-right:6px;">[${letter}]</span> ${ansHl}
+            </div>
+          </div>
+        </div>`;
+      }
+
+      if (speedFilteredQuestions.length > limit) {
+        html += `<div style="text-align:center; padding:16px; color:var(--text-muted); font-size:13px;">(Đang hiển thị 500 / ${speedFilteredQuestions.length} câu. Hãy lọc theo bài để học chi tiết hơn).</div>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function renderSpeedCard() {
+      if (speedFilteredQuestions.length === 0) return;
+      if (speedCardIdx >= speedFilteredQuestions.length) speedCardIdx = 0;
+      if (speedCardIdx < 0) speedCardIdx = speedFilteredQuestions.length - 1;
+
+      const q = speedFilteredQuestions[speedCardIdx];
+      const letter = ['A', 'B', 'C', 'D'][q.correct_idx] || 'A';
+      const qHl = q.question_html || q.question;
+
+      document.getElementById('speed-card-badge').textContent = `CÂU ${speedCardIdx + 1} / ${speedFilteredQuestions.length} (#${q.orig_num || (speedCardIdx + 1)})`;
+      document.getElementById('speed-card-chapter').textContent = q.chapter || '';
+      document.getElementById('speed-card-question').innerHTML = qHl;
+
+      const optBox = document.getElementById('speed-card-options-box');
+      const showCorrectOnly = document.getElementById('chk-speed-correct-only') ? document.getElementById('chk-speed-correct-only').checked : true;
+
+      if (showCorrectOnly) {
+        const ansHl = (q.options_html && q.options_html[q.correct_idx]) || q.correct_text || (q.options && q.options[q.correct_idx]) || '';
+        optBox.innerHTML = `
+          <div class="speed-correct-box" style="padding:14px; font-size:16px;">
+            <span style="font-size:22px;">🎯</span>
+            <div><b style="color:#10b981;">[${letter}]</b> ${ansHl}</div>
+          </div>`;
+      } else {
+        let optHtml = '';
+        (q.options || []).forEach((optStr, idx) => {
+          const isCorrect = idx === q.correct_idx;
+          const optHl = (q.options_html && q.options_html[idx]) || optStr;
+          const curLetter = ['A', 'B', 'C', 'D'][idx] || '';
+          optHtml += `
+            <div class="speed-opt-btn ${isCorrect ? 'correct-choice' : ''}" style="padding:10px 14px; border-radius:8px; font-size:14px;">
+              <b>${curLetter}.</b> ${optHl} ${isCorrect ? ' ✅' : ''}
+            </div>`;
+        });
+        optBox.innerHTML = optHtml;
+      }
+    }
+
+    function nextSpeedCard() {
+      if (speedFilteredQuestions.length === 0) return;
+      speedCardIdx = (speedCardIdx + 1) % speedFilteredQuestions.length;
+      renderSpeedCard();
+    }
+
+    function prevSpeedCard() {
+      if (speedFilteredQuestions.length === 0) return;
+      speedCardIdx = (speedCardIdx - 1 + speedFilteredQuestions.length) % speedFilteredQuestions.length;
+      renderSpeedCard();
+    }
+
+    function toggleSpeedCardPlay() {
+      if (speedIsAutoplaying) {
+        stopSpeedAutoplay();
+      } else {
+        startSpeedAutoplay();
+      }
+    }
+
+    function startSpeedAutoplay() {
+      stopSpeedAutoplay();
+      const rateVal = document.getElementById('speed-autoplay-rate') ? document.getElementById('speed-autoplay-rate').value : '1.0';
+      if (rateVal === 'manual') return;
+      const ms = parseFloat(rateVal) * 1000;
+      speedIsAutoplaying = true;
+      const btn = document.getElementById('btn-speed-card-play');
+      if (btn) btn.textContent = '⏸️ Dừng';
+      speedAutoplayTimer = setInterval(() => {
+        nextSpeedCard();
+      }, ms);
+    }
+
+    function stopSpeedAutoplay() {
+      if (speedAutoplayTimer) {
+        clearInterval(speedAutoplayTimer);
+        speedAutoplayTimer = null;
+      }
+      speedIsAutoplaying = false;
+      const btn = document.getElementById('btn-speed-card-play');
+      if (btn) btn.textContent = '▶️ Chạy';
+    }
+
+    function onSpeedRateChange() {
+      if (speedIsAutoplaying) {
+        startSpeedAutoplay();
+      }
+    }
+
+    /* ========================================================== */
+    /* 📖 FULL BÀI GIẢNG (16 BÀI HỌC) LOGIC                       */
+    /* ========================================================== */
+    let currentSelectedLectureChapter = 'Bài 2: Biểu mô';
+
+    function initLectureView() {
+      populateLectureDropdown();
+      renderLectureChaptersGrid();
+      if (window.LECTURES_DATA && window.LECTURES_DATA[currentSelectedLectureChapter]) {
+        selectLecture(currentSelectedLectureChapter);
+      } else {
+        const first = Object.keys(window.LECTURES_DATA || {})[0];
+        if (first) selectLecture(first);
+      }
+    }
+
+    function populateLectureDropdown() {
+      const sel = document.getElementById('lecture-chapter-dropdown');
+      if (!sel || !window.LECTURES_DATA) return;
+      sel.innerHTML = '';
+      Object.keys(window.LECTURES_DATA).forEach(c => {
+        const item = window.LECTURES_DATA[c];
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = `${item.icon || '📖'} ${item.title} (${item.question_count} câu)`;
+        sel.appendChild(opt);
+      });
+      sel.value = currentSelectedLectureChapter;
+    }
+
+    function renderLectureChaptersGrid() {
+      const container = document.getElementById('lecture-chapters-grid');
+      if (!container || !window.LECTURES_DATA) return;
+      let html = '';
+      Object.keys(window.LECTURES_DATA).forEach(c => {
+        const item = window.LECTURES_DATA[c];
+        const isSel = c === currentSelectedLectureChapter;
+        html += `
+          <div class="lecture-chapter-card ${isSel ? 'selected' : ''}" onclick="selectLecture('${c}')">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:22px;">${item.icon || '📖'}</span>
+              <span class="flash-lec-badge">${item.badge || 'MÔ CƠ BẢN'}</span>
+            </div>
+            <div class="lecture-heading-serif" style="font-size:14.5px; font-weight:700; color:var(--text-main); margin-top:4px;">${item.title}</div>
+            <div style="font-size:12px; color:#38bdf8; font-weight:600;">⚡ ${item.question_count} câu hỏi trắc nghiệm</div>
+          </div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function onLectureDropdownChange(c) {
+      selectLecture(c);
+    }
+
+    function selectLecture(chapterName) {
+      if (!window.LECTURES_DATA || !window.LECTURES_DATA[chapterName]) return;
+      currentSelectedLectureChapter = chapterName;
+      const data = window.LECTURES_DATA[chapterName];
+
+      const dd = document.getElementById('lecture-chapter-dropdown');
+      if (dd) dd.value = chapterName;
+
+      renderLectureChaptersGrid();
+
+      const box = document.getElementById('lecture-content-box');
+      if (box) box.style.display = 'block';
+
+      document.getElementById('lec-view-badge').textContent = data.badge || 'BÀI GIẢNG CỐT LÕI';
+      document.getElementById('lec-view-title').textContent = data.title;
+      document.getElementById('lec-view-count').textContent = `⚡ ${data.question_count} câu hỏi trắc nghiệm thực chiến đã được giải mã 100%`;
+
+      const objList = document.getElementById('lec-view-objectives');
+      if (objList) {
+        objList.innerHTML = (data.objectives || []).map(o => `<li>${o}</li>`).join('');
+      }
+
+      const secList = document.getElementById('lec-view-sections');
+      if (secList) {
+        let secHtml = '';
+        (data.content_sections || []).forEach(sec => {
+          secHtml += `
+            <div style="margin-bottom:24px;">
+              <h3 class="lecture-heading-serif" style="font-size:17px; color:#38bdf8; margin-bottom:8px; border-bottom:1px solid var(--border); padding-bottom:4px;">
+                ${sec.heading}
+              </h3>
+              ${sec.html}
+            </div>`;
+        });
+        secList.innerHTML = secHtml;
+      }
+
+      box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function startFlashForCurrentLecture() {
+      // 1. Switch to flash tab
+      switchTab('flash');
+      // 2. Select this chapter in flash dropdown
+      const sel = document.getElementById('flash-chapter-filter');
+      if (sel) {
+        sel.value = currentSelectedLectureChapter;
+        onFlashChapterFilterChange();
+      }
+      showToast(`⚡ Đã chuyển sang Chế độ Flash 7s cho: ${currentSelectedLectureChapter}`);
+    }
+
+    function openLectureTabForCurrentChapter() {
+      const flashSel = document.getElementById('flash-chapter-filter');
+      const cur = flashSel ? flashSel.value : 'all';
+      switchTab('lecture');
+      if (cur !== 'all' && window.LECTURES_DATA && window.LECTURES_DATA[cur]) {
+        selectLecture(cur);
+      }
+    }
+
+    function updateFlashLectureBanner(chapterName) {
+      const banner = document.getElementById('flash-lecture-banner');
+      if (!banner) return;
+      if (chapterName === 'all') {
+        document.getElementById('flash-lec-title').textContent = 'Toàn bộ 16 bài học (1.287 câu trắc nghiệm)';
+        document.getElementById('flash-lec-desc').textContent = 'Tổng hợp ngân hàng đề thi Mô Phôi K48. Đọc bài giảng từng bài để đạt điểm tối đa.';
+      } else if (window.LECTURES_DATA && window.LECTURES_DATA[chapterName]) {
+        const item = window.LECTURES_DATA[chapterName];
+        document.getElementById('flash-lec-title').textContent = `${item.title} (${item.question_count} câu)`;
+        document.getElementById('flash-lec-desc').textContent = item.objectives && item.objectives[0] ? item.objectives[0] : 'Nắm vững lý thuyết cốt lõi & bẫy trắc nghiệm trước khi thi.';
+      }
+    }
+
+    function scrollDownToFlashDesk() {
+      const desk = document.querySelector('.station-desk');
+      if (desk) desk.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
   </script>
 
   <!-- Modal Lock-in Victory -->
