@@ -2277,6 +2277,136 @@ body.theme-light .notebooklm-canvas {
       background: rgba(245, 158, 11, 0.12) !important;
     }
 
+    /* ========================================================== */
+    /* 🗣️ VIETNAMESE VOICE STUDIO BAR & TOAST UI                  */
+    /* ========================================================== */
+    .flash-voice-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.12), rgba(16, 185, 129, 0.10));
+      border: 1.5px solid rgba(56, 189, 248, 0.45);
+      border-radius: 12px;
+      padding: 10px 16px;
+      box-shadow: 0 4px 18px rgba(14, 165, 233, 0.12);
+    }
+    body.theme-light .flash-voice-bar {
+      background: linear-gradient(135deg, #f0f9ff, #ecfdf5);
+      border-color: #0284c7;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.10);
+    }
+    .flash-voice-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .flash-voice-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-voice-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      border: 1.5px solid #475569;
+      background: #1e293b;
+      color: #cbd5e1;
+      transition: all 0.2s ease;
+    }
+    .btn-voice-toggle.voice-on {
+      background: linear-gradient(135deg, #0284c7, #10b981);
+      color: #ffffff;
+      border-color: #34d399;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+    }
+    .btn-voice-toggle.voice-speaking {
+      animation: voicePulse 1.15s infinite ease-in-out;
+    }
+    @keyframes voicePulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(56, 189, 248, 0.45); }
+      50% { box-shadow: 0 0 22px rgba(16, 185, 129, 0.90); }
+    }
+    body.theme-light .btn-voice-toggle:not(.voice-on) {
+      background: #ffffff;
+      color: #334155;
+      border-color: #cbd5e1;
+    }
+    .voice-live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #7dd3fc;
+    }
+    body.theme-light .voice-live-pill {
+      background: #ffffff;
+      border-color: #0284c7;
+      color: #0369a1;
+    }
+    .voice-alert-strip {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      line-height: 1.45;
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.55);
+      color: #fde68a;
+    }
+    body.theme-light .voice-alert-strip {
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .app-toast-popup {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 99999;
+      background: rgba(15, 23, 42, 0.96);
+      color: #f8fafc;
+      border: 1.5px solid #38bdf8;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 13.5px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      max-width: 390px;
+    }
+    .app-toast-popup.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    body.theme-light .app-toast-popup {
+      background: #ffffff;
+      color: #0f172a;
+      border-color: #0284c7;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.16);
+    }
+
   </style>
 </head>
 
@@ -2418,8 +2548,6 @@ body.theme-light .notebooklm-canvas {
               <option value="archetype" selected>🔀 Sắp xếp: Gom nhóm dạng câu (Chuẩn học)</option>
               <option value="orig_num">🔢 Sắp xếp: Theo số câu gốc (#1 → #N)</option>
             </select>
-              <option value="all">Tất cả tất cả bài học (1.314 câu) (1.314 câu)</option>
-            </select>
 
             <!-- Hộp Tua Nhanh & Chọn Câu Hỏi -->
             <div class="flash-jump-box" style="display:inline-flex; align-items:center; gap:6px; background:#0b1120; border:1.5px solid var(--border); padding:4px 10px; border-radius:10px;">
@@ -2459,10 +2587,62 @@ body.theme-light .notebooklm-canvas {
           </div>
         </div>
 
+        <!-- 🗣️ BẢNG ĐIỀU KHIỂN GIỌNG ĐỌC TIẾNG VIỆT (WEB SPEECH API) -->
+        <div id="flash-voice-bar" class="flash-voice-bar">
+          <div class="flash-voice-row">
+            <div class="flash-voice-group">
+              <button id="btn-flash-voice-toggle" class="btn-voice-toggle voice-on" onclick="toggleFlashVoice()" title="Bật/Tắt đọc câu hỏi & đáp án bằng giọng Tiếng Việt (Phím V)">
+                <span id="flash-voice-icon">🔊</span>
+                <span id="flash-voice-btn-text">Giọng Đọc VN: ĐANG BẬT (V)</span>
+              </button>
+
+              <select id="flash-voice-flow" class="filter-select" onchange="onFlashVoiceFlowChange(this.value)" title="Chế độ phối hợp giọng đọc và đếm ngược" style="font-size:12.5px; padding:6px 10px;">
+                <option value="think">🧠 Đọc đề → Đợi hết giờ → Đọc đáp án → Qua câu</option>
+                <option value="continuous">🎧 Nghe liên tục (Đọc đề → Đọc đáp án luôn → Qua câu)</option>
+              </select>
+
+              <select id="flash-voice-rate" class="filter-select" onchange="onFlashVoiceRateChange(this.value)" title="Tốc độ giọng đọc Tiếng Việt" style="font-size:12.5px; padding:6px 10px;">
+                <option value="0.88">🐢 Chậm (0.88x)</option>
+                <option value="1">🗣️ Chuẩn (1.0x)</option>
+                <option value="1.08" selected>🗣️ Tự nhiên (1.08x)</option>
+                <option value="1.2">⚡ Nhanh nhẹ (1.2x)</option>
+                <option value="1.35">🚀 Tăng tốc (1.35x)</option>
+                <option value="1.5">⚡ Siêu tốc (1.5x)</option>
+              </select>
+
+              <select id="flash-voice-select" class="filter-select" onchange="onFlashVoiceSelectChange(this.value)" title="Chọn giọng đọc Tiếng Việt có sẵn trên trình duyệt" style="max-width:255px; font-size:12.5px; padding:6px 10px;">
+                <option value="auto">🎙️ Tự động chọn giọng Tiếng Việt chuẩn nhất</option>
+              </select>
+            </div>
+
+            <div class="flash-voice-group">
+              <span id="flash-voice-live-pill" class="voice-live-pill">⏳ Đang kiểm tra giọng VN...</span>
+              <button class="btn btn-secondary btn-sm" onclick="replayCurrentFlashVoice()" style="padding:6px 11px; font-size:12.5px; border-radius:8px; cursor:pointer;" title="Nghe đọc lại câu hỏi hoặc đáp án hiện tại (Phím R)">
+                🔁 Đọc lại (R)
+              </button>
+              <button class="btn btn-secondary btn-sm" onclick="testFlashVoice()" style="padding:6px 11px; font-size:12.5px; border-radius:8px; cursor:pointer;" title="Nghe thử câu mẫu Tiếng Việt để chỉnh tốc độ">
+                🔉 Thử giọng
+              </button>
+            </div>
+          </div>
+
+          <div id="flash-voice-alert" class="voice-alert-strip">
+            <span id="flash-voice-alert-text"></span>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <button id="flash-voice-unlock-btn" onclick="unlockAndPlayFlashVoice()" style="display:none; background:linear-gradient(135deg,#0284c7,#10b981); color:#fff; border:none; border-radius:7px; padding:5px 12px; font-size:12px; font-weight:800; cursor:pointer;">
+                ▶️ Mở Khóa &amp; Đọc Ngay
+              </button>
+              <button id="flash-voice-alert-close" onclick="dismissFlashVoiceWarning()" style="display:none; background:transparent; color:inherit; border:1px solid currentColor; border-radius:6px; padding:3px 8px; font-size:11.5px; font-weight:700; cursor:pointer;">
+                ✕ Đã hiểu
+              </button>
+            </div>
+          </div>
+        </div>
+
         <!-- Thanh đếm ngược tiến độ & trạng thái -->
         <div style="display:flex; flex-direction:column; gap:8px;">
           <div class="flash-status-banner">
-            <div>Đang suy nghĩ (Thử nhớ đáp án)...</div>
+            <div id="flash-status-text">Đang suy nghĩ (Thử nhớ đáp án)...</div>
             <div id="flash-status-badge" class="status-badge">Đếm ngược: 7s</div>
           </div>
           <div class="flash-progress-track">
@@ -2568,7 +2748,7 @@ body.theme-light .notebooklm-canvas {
 
                 <!-- Hint footer -->
                 <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:14px; font-size:13px; color:var(--text-muted); flex-wrap:wrap; gap:10px;">
-                  <div>Mẹo: Bạn có thể click trực tiếp vào đáp án để kiểm tra ngay mà không cần đợi hết 7s!</div>
+                  <div>Mẹo: Click trực tiếp đáp án để kiểm tra ngay • Phím <b>V</b> bật/tắt đọc tiếng Việt • <b>R</b> đọc lại.</div>
                   <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                     <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(-10)" title="Lùi 10 câu">-10</button>
                     <button class="btn btn-secondary btn-sm" onclick="prevFlashQ()">◀ Câu trước (←)</button>
@@ -3880,10 +4060,10 @@ body.theme-light .notebooklm-canvas {
 
   </main>
 
-  <script src="mophoi/lectures_data.js"></script>
-  <script src="mophoi/phoi_249_data.js"></script>
-  <script src="mophoi/questions_data.js"></script>
-  <script src="mophoi/lectures_data.js"></script>
+  <script src="mophoi/lectures_data.js?v=20261111_v4"></script>
+  <script src="mophoi/phoi_249_data.js?v=20261111_v4"></script>
+  <script src="mophoi/questions_data.js?v=20261111_v4"></script>
+  <script src="mophoi/lectures_data.js?v=20261111_v4"></script>
   <script>
     // DATA STATE
     let ALL_QUESTIONS = [];
@@ -3894,7 +4074,7 @@ body.theme-light .notebooklm-canvas {
     };
 
     // ==========================================
-    // ⚡ FLASH 7S STATE
+    // ⚡ FLASH 7S & VIETNAMESE VOICE STATE
     // ==========================================
     let flashList = [];
     let currentFlashIdx = 0;
@@ -3904,6 +4084,711 @@ body.theme-light .notebooklm-canvas {
     let flashIsPlaying = true;
     let flashRevealed = false;
     let flashIntervalStep = 100; // ms
+
+    let flashVoiceEnabled = (localStorage.getItem('mophoi_flash_voice_enabled') ?? 'true') === 'true';
+    let flashVoiceFlow = localStorage.getItem('mophoi_flash_voice_flow') || 'think'; // 'think' | 'continuous'
+    let flashVoiceRate = parseFloat(localStorage.getItem('mophoi_flash_voice_rate') || '1.08');
+    if (isNaN(flashVoiceRate) || flashVoiceRate < 0.6 || flashVoiceRate > 2.2) flashVoiceRate = 1.08;
+    let flashVoiceURI = localStorage.getItem('mophoi_flash_voice_uri') || 'auto';
+
+    let flashCycleToken = 0;
+    let flashUtteranceSeq = 0;
+    let flashAdvanceTimeout = null;
+    let flashMorphTimeout = null;
+    let flashVoiceWatchdogTimeout = null;
+    let flashVoiceStartDelayTimeout = null;
+
+    let flashPromptSpeechDone = true;
+    let flashAnswerSpeechDone = true;
+    let flashPendingReveal = false;
+    let flashVoiceAutoplayBlocked = false;
+    let flashVoiceNeedsGesture = false;
+    let flashVoiceHasVi = false;
+    let flashVoiceWarningDismissed = sessionStorage.getItem('mophoi_voice_warn_dismissed') === '1';
+    let flashVoiceUnlockBound = false;
+    let flashAvailableVoices = [];
+    let appToastTimeout = null;
+
+    function showToast(msg, durationMs = 2800) {
+      try {
+        let el = document.getElementById('app-toast-popup');
+        if (!el) {
+          el = document.createElement('div');
+          el.id = 'app-toast-popup';
+          el.className = 'app-toast-popup';
+          document.body.appendChild(el);
+        }
+        el.textContent = msg;
+        el.classList.add('show');
+        if (appToastTimeout) clearTimeout(appToastTimeout);
+        appToastTimeout = setTimeout(() => {
+          el.classList.remove('show');
+        }, durationMs);
+      } catch (e) { }
+    }
+
+    function renderCurrentFlashQ() {
+      loadFlashQuestionCard();
+    }
+
+    function decodeHtmlEntitiesForSpeech(str) {
+      return (str || '')
+        .replace(/&nbsp;/gi, ' ')
+        .replace(/&amp;/gi, '&')
+        .replace(/&lt;/gi, '<')
+        .replace(/&gt;/gi, '>')
+        .replace(/&quot;/gi, '"')
+        .replace(/&#39;/gi, "'");
+    }
+
+    function formatMedicalTextForSpeech(raw) {
+      let s = String(raw || '');
+      s = s.replace(/<[^>]*>/g, ' ');
+      s = decodeHtmlEntitiesForSpeech(s);
+      s = s.replace(/[≠➃$●•■◆◇★☆]+/g, ' ');
+      s = s.replace(/5\s*α[-\s]?/gi, '5 an pha ')
+           .replace(/α/g, 'an pha')
+           .replace(/β/g, 'bê ta')
+           .replace(/γ/g, 'gam ma')
+           .replace(/δ/g, 'đen ta');
+      s = s.replace(/\s*(=>|->|➔|→)\s*/g, ', đến ');
+      s = s.replace(/(\S)\s*>\s*(\S)/g, '$1, đến $2');
+      s = s.replace(/(ngày\s+)?\b(\d{1,2})\/(\d{1,2})\/(\d{4})\b/gi, 'ngày $2 tháng $3 năm $4');
+      s = s.replace(/¼/g, '1 phần 4')
+           .replace(/⅕/g, '1 phần 5')
+           .replace(/⅘/g, '4 phần 5')
+           .replace(/⅓/g, '1 phần 3')
+           .replace(/⅔/g, '2 phần 3')
+           .replace(/½/g, '1 phần 2')
+           .replace(/¾/g, '3 phần 4');
+      s = s.replace(/\b1\/([1-9]),000\b/g, '1 phần $1 nghìn');
+      s = s.replace(/\/phút\b/gi, ' trên phút')
+           .replace(/\/giờ\b/gi, ' trên giờ')
+           .replace(/\/ngày\b/gi, ' trên ngày');
+      s = s.replace(/\b(\d+)\/(\d+)\b/g, '$1 phần $2');
+      s = s.replace(/([A-Za-zÀ-ỹ]+)\/([A-Za-zÀ-ỹ]+)/g, '$1 hoặc $2');
+      s = s.replace(/(\d+)\s*[–—\-]\s*(\d+)/g, '$1 đến $2');
+      s = s.replace(/^([1-6])\.\s+/g, 'Ý $1: ');
+      s = s.replace(/(\s|:)([1-6])\.\s+/g, '. Ý $2: ');
+      s = s.replace(/~(\d+)/g, 'khoảng $1');
+      s = s.replace(/(^|[\s\d.,])µm\b/g, '$1 mi cờ rô mét')
+           .replace(/\bnm\b/g, 'na nô mét')
+           .replace(/\bmm\b/g, 'mi li mét')
+           .replace(/\bcm\b/g, 'xăng ti mét')
+           .replace(/\bml\b/gi, 'mi li lít')
+           .replace(/m²/g, 'mét vuông')
+           .replace(/(\d+)\s*g\b/g, '$1 gam')
+           .replace(/°/g, ' độ ');
+      s = s.replace(/(tinh bào|noãn bào|cực cầu|giảm phân|phế bào|collagen\s+typ|collagen\s+type|typ|loại|cấp|bậc|nhánh|giai đoạn|lần|thế hệ)\s+(IV|III|II|I)\b/gi, function(_, prefix, rom) {
+        const map = { 'I': '1', 'II': '2', 'III': '3', 'IV': '4' };
+        return prefix + ' ' + (map[rom.toUpperCase()] || rom);
+      });
+      s = s.replace(/\bTAFII\b/g, 'T A F 2')
+           .replace(/\bH\.E\b/gi, 'hát e')
+           .replace(/\bP\.A\.S\b/gi, 'pát')
+           .replace(/\bPAS\b/g, 'pát')
+           .replace(/\bCO2\b/g, 'xê ô hai')
+           .replace(/\bO2\b/g, 'ô xy')
+           .replace(/\bCO\b/g, 'xê ô')
+           .replace(/\bHCl\b/g, 'hát xê lờ')
+           .replace(/\bpH\b/g, 'pê hát')
+           .replace(/\bIVF\b/g, 'I V F')
+           .replace(/\bKHV\b/g, 'kính hiển vi')
+           .replace(/\bNST\b/g, 'nhiễm sắc thể')
+           .replace(/\bMLK\b/g, 'mô liên kết')
+           .replace(/\bĐTĐ\b/g, 'đái tháo đường')
+           .replace(/\bMTTT\b/g, 'mạc treo tràng')
+           .replace(/\bĐM\b/g, 'động mạch')
+           .replace(/\bTM\b/g, 'tĩnh mạch')
+           .replace(/\bTB\b/g, 'tế bào')
+           .replace(/\bTK\b/g, 'thần kinh')
+           .replace(/\bKĐH\b/g, 'kim đồng hồ')
+           .replace(/\bAMH\b/g, 'A M H')
+           .replace(/\bMIS\b/g, 'M I S')
+           .replace(/\bFSH\b/g, 'F S H')
+           .replace(/\bSRY\b/g, 'S R Y')
+           .replace(/\bTDF\b/g, 'T D F')
+           .replace(/\bATP\b/g, 'A T P')
+           .replace(/\bADH\b/g, 'A D H')
+           .replace(/\bTSH\b/g, 'T S H')
+           .replace(/\bMSH\b/g, 'M S H')
+           .replace(/\bLH\b/g, 'L H')
+           .replace(/\bCT\b/g, 'C T')
+           .replace(/\bIg([AGMDE])\b/g, 'I g $1')
+           .replace(/\bhCG\b/g, 'hát xê gê')
+           .replace(/\bhPL\b/g, 'hát pê lờ')
+           .replace(/\bhCS\b/g, 'hát xê ét');
+      s = s.replace(/\s+[–—\-]\s+/g, ', ');
+      s = s.replace(/\s+/g, ' ').trim();
+      return s;
+    }
+
+    function chunkTextForSpeech(text, maxLen = 175) {
+      const clean = (text || '').replace(/\s+/g, ' ').trim();
+      if (!clean) return [];
+      if (clean.length <= maxLen) return [clean];
+
+      const rawParts = clean.match(/[^.!?;:]+[.!?;:]*/g) || [clean];
+      const chunks = [];
+      let buf = '';
+
+      rawParts.forEach(rawPart => {
+        const part = rawPart.trim();
+        if (!part) return;
+        if (part.length > maxLen) {
+          if (buf) { chunks.push(buf); buf = ''; }
+          const subParts = part.match(/[^,]+,?/g) || [part];
+          let sBuf = '';
+          subParts.forEach(rawSp => {
+            const sp = rawSp.trim();
+            if (!sp) return;
+            if ((sBuf ? sBuf + ' ' + sp : sp).length <= maxLen) {
+              sBuf = sBuf ? sBuf + ' ' + sp : sp;
+            } else {
+              if (sBuf) chunks.push(sBuf);
+              if (sp.length > maxLen) {
+                const words = sp.split(' ');
+                let wBuf = '';
+                words.forEach(w => {
+                  if ((wBuf ? wBuf + ' ' + w : w).length <= maxLen) {
+                    wBuf = wBuf ? wBuf + ' ' + w : w;
+                  } else {
+                    if (wBuf) chunks.push(wBuf);
+                    wBuf = w;
+                  }
+                });
+                sBuf = wBuf;
+              } else {
+                sBuf = sp;
+              }
+            }
+          });
+          if (sBuf) chunks.push(sBuf);
+        } else if ((buf ? buf + ' ' + part : part).length <= maxLen) {
+          buf = buf ? buf + ' ' + part : part;
+        } else {
+          if (buf) chunks.push(buf);
+          buf = part;
+        }
+      });
+      if (buf) chunks.push(buf);
+      return chunks;
+    }
+
+    function canBrowserSpeakNow() {
+      if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
+        return false;
+      }
+      if (flashVoiceAutoplayBlocked) return false;
+      if (navigator.userActivation && !navigator.userActivation.hasBeenActive) {
+        flashVoiceNeedsGesture = true;
+        return false;
+      }
+      flashVoiceNeedsGesture = false;
+      return true;
+    }
+
+    function cancelFlashSpeech() {
+      flashUtteranceSeq++;
+      if (flashVoiceWatchdogTimeout) {
+        clearTimeout(flashVoiceWatchdogTimeout);
+        flashVoiceWatchdogTimeout = null;
+      }
+      if (flashVoiceStartDelayTimeout) {
+        clearTimeout(flashVoiceStartDelayTimeout);
+        flashVoiceStartDelayTimeout = null;
+      }
+      if ('speechSynthesis' in window) {
+        try { window.speechSynthesis.cancel(); } catch (e) { }
+      }
+      updateFlashVoiceSpeakingBadge(false);
+    }
+
+    function isVietnameseVoiceObj(v) {
+      if (!v) return false;
+      const lang = (v.lang || '').toLowerCase();
+      const name = (v.name || '').toLowerCase();
+      return lang.startsWith('vi') || name.includes('vietnam') || name.includes('tiếng việt') || name.includes('hoaimy') || name.includes('namminh') || name.includes('microsoft an');
+    }
+
+    function rankVietnameseVoice(v) {
+      const name = (v.name || '').toLowerCase();
+      let score = 0;
+      if (isVietnameseVoiceObj(v)) score += 1000;
+      if (name.includes('hoaimy') || name.includes('namminh')) score += 400;
+      if (name.includes('natural') || name.includes('online')) score += 200;
+      if (name.includes('google')) score += 150;
+      if (!v.localService) score += 20;
+      return score;
+    }
+
+    function getSelectedSpeechVoice() {
+      const voices = ('speechSynthesis' in window) ? (window.speechSynthesis.getVoices() || []) : [];
+      if (!voices.length) return null;
+      if (flashVoiceURI && flashVoiceURI !== 'auto') {
+        const found = voices.find(v => v.voiceURI === flashVoiceURI || v.name === flashVoiceURI);
+        if (found) return found;
+      }
+      const viVoices = voices.filter(isVietnameseVoiceObj).sort((a, b) => rankVietnameseVoice(b) - rankVietnameseVoice(a));
+      return viVoices.length ? viVoices[0] : null;
+    }
+
+    function refreshFlashVoiceList() {
+      if (!('speechSynthesis' in window)) {
+        flashVoiceHasVi = false;
+        updateFlashVoiceUI();
+        return;
+      }
+      const rawVoices = window.speechSynthesis.getVoices() || [];
+      flashAvailableVoices = [...rawVoices];
+      const viVoices = rawVoices.filter(isVietnameseVoiceObj).sort((a, b) => rankVietnameseVoice(b) - rankVietnameseVoice(a));
+      flashVoiceHasVi = viVoices.length > 0;
+
+      const sel = document.getElementById('flash-voice-select');
+      if (sel) {
+        sel.innerHTML = '';
+        const autoOpt = document.createElement('option');
+        autoOpt.value = 'auto';
+        autoOpt.textContent = viVoices.length
+          ? `⭐ Tự động (${viVoices[0].name.replace(/Microsoft\s+/i, '').replace(/\s*-\s*Vietnamese.*$/i, '').trim()})`
+          : '⚠️ Chưa thấy giọng VN — Dùng mặc định trình duyệt';
+        sel.appendChild(autoOpt);
+
+        viVoices.forEach(v => {
+          const opt = document.createElement('option');
+          opt.value = v.voiceURI;
+          opt.textContent = `⭐ ${v.name} (${v.lang})`;
+          sel.appendChild(opt);
+        });
+
+        const otherVoices = rawVoices.filter(v => !isVietnameseVoiceObj(v));
+        if (otherVoices.length && !viVoices.length) {
+          otherVoices.slice(0, 8).forEach(v => {
+            const opt = document.createElement('option');
+            opt.value = v.voiceURI;
+            opt.textContent = `🌐 ${v.name} (${v.lang})`;
+            sel.appendChild(opt);
+          });
+        }
+
+        if (flashVoiceURI !== 'auto' && rawVoices.some(v => v.voiceURI === flashVoiceURI)) {
+          sel.value = flashVoiceURI;
+        } else {
+          flashVoiceURI = 'auto';
+          sel.value = 'auto';
+        }
+      }
+
+      updateFlashVoiceUI();
+    }
+
+    function updateFlashVoiceSpeakingBadge(isSpeaking, label) {
+      const btn = document.getElementById('btn-flash-voice-toggle');
+      const pill = document.getElementById('flash-voice-live-pill');
+      if (btn) {
+        btn.classList.toggle('voice-speaking', Boolean(flashVoiceEnabled && isSpeaking));
+      }
+      if (pill) {
+        if (!('speechSynthesis' in window)) {
+          pill.textContent = '❌ Trình duyệt không hỗ trợ đọc giọng nói';
+        } else if (!flashVoiceEnabled) {
+          pill.textContent = '🔇 Đang tắt đọc';
+        } else if (isSpeaking && label) {
+          pill.textContent = label;
+        } else if (flashVoiceNeedsGesture || flashVoiceAutoplayBlocked) {
+          pill.textContent = '🔒 Chờ 1 click để bật âm thanh';
+        } else if (flashVoiceHasVi) {
+          const v = getSelectedSpeechVoice();
+          const shortName = v ? v.name.replace(/Microsoft\s+/i, '').replace(/Online\s*\(Natural\)/i, 'AI').replace(/\s*-\s*Vietnamese.*$/i, '').trim() : 'vi-VN';
+          pill.textContent = `✅ Giọng VN: ${shortName}`;
+        } else if (flashAvailableVoices.length > 0) {
+          pill.textContent = '⚠️ Thiếu giọng vi-VN (Khuyên dùng Edge)';
+        } else {
+          pill.textContent = '🎙️ Sẵn sàng (vi-VN)';
+        }
+      }
+    }
+
+    function updateFlashVoiceUI() {
+      const toggleBtn = document.getElementById('btn-flash-voice-toggle');
+      const icon = document.getElementById('flash-voice-icon');
+      const txt = document.getElementById('flash-voice-btn-text');
+      const flowSel = document.getElementById('flash-voice-flow');
+      const rateSel = document.getElementById('flash-voice-rate');
+      const alertStrip = document.getElementById('flash-voice-alert');
+      const alertText = document.getElementById('flash-voice-alert-text');
+      const unlockBtn = document.getElementById('flash-voice-unlock-btn');
+      const closeBtn = document.getElementById('flash-voice-alert-close');
+
+      if (toggleBtn) toggleBtn.classList.toggle('voice-on', flashVoiceEnabled);
+      if (icon) icon.textContent = flashVoiceEnabled ? '🔊' : '🔇';
+      if (txt) txt.textContent = flashVoiceEnabled ? 'Giọng Đọc VN: ĐANG BẬT (V)' : 'Giọng Đọc VN: ĐANG TẮT (V)';
+      if (flowSel && flowSel.value !== flashVoiceFlow) flowSel.value = flashVoiceFlow;
+      if (rateSel) {
+        const matchedOpt = Array.from(rateSel.options).find(o => Math.abs(parseFloat(o.value) - flashVoiceRate) < 0.02);
+        if (matchedOpt) rateSel.value = matchedOpt.value;
+      }
+
+      if (alertStrip && alertText && unlockBtn && closeBtn) {
+        const canSpeakNow = !(navigator.userActivation && !navigator.userActivation.hasBeenActive) && !flashVoiceAutoplayBlocked;
+        if (!flashVoiceEnabled || !('speechSynthesis' in window)) {
+          alertStrip.style.display = 'none';
+        } else if (!canSpeakNow) {
+          alertStrip.style.display = 'flex';
+          alertText.innerHTML = '🎙️ <b>Giọng đọc Tiếng Việt đã sẵn sàng!</b> Do chính sách trình duyệt, hãy bấm 1 lần để cho phép phát âm thanh:';
+          unlockBtn.style.display = 'inline-flex';
+          closeBtn.style.display = 'none';
+        } else if (flashAvailableVoices.length > 0 && !flashVoiceHasVi && !flashVoiceWarningDismissed) {
+          alertStrip.style.display = 'flex';
+          alertText.innerHTML = '⚠️ <b>Trình duyệt hiện tại trên máy chỉ có giọng Tiếng Anh</b> nên đọc chữ Việt có thể bị lơ lớ. <b>Mẹo chuẩn nhất:</b> Mở link web này bằng <b>Microsoft Edge</b> (cài sẵn trên Windows, có giọng <b>HoaiMy Tiếng Việt AI</b> siêu mượt) hoặc cài gói <b>Vietnamese Speech</b> trong Windows Settings.';
+          unlockBtn.style.display = 'none';
+          closeBtn.style.display = 'inline-flex';
+        } else {
+          alertStrip.style.display = 'none';
+        }
+      }
+
+      updateFlashVoiceSpeakingBadge(false);
+    }
+
+    function dismissFlashVoiceWarning() {
+      flashVoiceWarningDismissed = true;
+      sessionStorage.setItem('mophoi_voice_warn_dismissed', '1');
+      updateFlashVoiceUI();
+    }
+
+    function speakFlashText(rawText, phase, token, onDone) {
+      const chunks = chunkTextForSpeech(rawText, 175);
+      if (!chunks.length || !flashVoiceEnabled || !('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
+        if (typeof onDone === 'function') onDone(true);
+        return;
+      }
+
+      const wasSpeaking = window.speechSynthesis.speaking || window.speechSynthesis.pending;
+      cancelFlashSpeech();
+      const mySeq = ++flashUtteranceSeq;
+      let finished = false;
+      let chunkIdx = 0;
+
+      const finish = (aborted = false) => {
+        if (finished) return;
+        finished = true;
+        if (flashVoiceWatchdogTimeout) {
+          clearTimeout(flashVoiceWatchdogTimeout);
+          flashVoiceWatchdogTimeout = null;
+        }
+        if (mySeq === flashUtteranceSeq) {
+          updateFlashVoiceSpeakingBadge(false);
+        }
+        if (token === flashCycleToken && mySeq === flashUtteranceSeq && typeof onDone === 'function') {
+          onDone(aborted);
+        }
+      };
+
+      const speakNextChunk = () => {
+        if (finished || mySeq !== flashUtteranceSeq || token !== flashCycleToken) return;
+        if (chunkIdx >= chunks.length) {
+          finish(false);
+          return;
+        }
+
+        const chunk = chunks[chunkIdx];
+        const utter = new SpeechSynthesisUtterance(chunk);
+        const pickedVoice = getSelectedSpeechVoice();
+        if (pickedVoice) {
+          utter.voice = pickedVoice;
+          utter.lang = pickedVoice.lang || 'vi-VN';
+        } else {
+          utter.lang = 'vi-VN';
+        }
+        utter.rate = flashVoiceRate;
+        utter.pitch = 1.0;
+
+        if (flashVoiceWatchdogTimeout) clearTimeout(flashVoiceWatchdogTimeout);
+        const maxWaitMs = Math.max(7000, Math.round((chunk.length / Math.max(flashVoiceRate, 0.7)) * 135) + 5500);
+        flashVoiceWatchdogTimeout = setTimeout(() => {
+          if (finished || mySeq !== flashUtteranceSeq || token !== flashCycleToken) return;
+          chunkIdx++;
+          speakNextChunk();
+        }, maxWaitMs);
+
+        utter.onstart = () => {
+          if (mySeq !== flashUtteranceSeq || token !== flashCycleToken) return;
+          flashVoiceAutoplayBlocked = false;
+          flashVoiceNeedsGesture = false;
+          updateFlashVoiceSpeakingBadge(
+            true,
+            phase === 'answer' ? '🔊 Đang đọc đáp án...' : '🗣️ Đang đọc câu hỏi...'
+          );
+        };
+
+        utter.onend = () => {
+          if (finished || mySeq !== flashUtteranceSeq || token !== flashCycleToken) return;
+          if (flashVoiceWatchdogTimeout) {
+            clearTimeout(flashVoiceWatchdogTimeout);
+            flashVoiceWatchdogTimeout = null;
+          }
+          chunkIdx++;
+          speakNextChunk();
+        };
+
+        utter.onerror = (ev) => {
+          if (finished || mySeq !== flashUtteranceSeq || token !== flashCycleToken) return;
+          if (flashVoiceWatchdogTimeout) {
+            clearTimeout(flashVoiceWatchdogTimeout);
+            flashVoiceWatchdogTimeout = null;
+          }
+          const errCode = ev && ev.error ? ev.error : '';
+          if (errCode === 'canceled' || errCode === 'interrupted') {
+            return;
+          }
+          if (errCode === 'not-allowed') {
+            flashVoiceAutoplayBlocked = true;
+            flashVoiceNeedsGesture = true;
+            updateFlashVoiceUI();
+            finish(true);
+            return;
+          }
+          chunkIdx++;
+          speakNextChunk();
+        };
+
+        try {
+          window.speechSynthesis.speak(utter);
+        } catch (err) {
+          finish(true);
+        }
+      };
+
+      const startRunner = () => {
+        if (finished || mySeq !== flashUtteranceSeq || token !== flashCycleToken) return;
+        speakNextChunk();
+      };
+
+      if (wasSpeaking) {
+        flashVoiceStartDelayTimeout = setTimeout(startRunner, 50);
+      } else {
+        startRunner();
+      }
+    }
+
+    function updateFlashStatusUI(text, badgeText, revealingState) {
+      const statusEl = document.getElementById('flash-status-text');
+      const badgeEl = document.getElementById('flash-status-badge');
+      if (statusEl && text !== null && text !== undefined) statusEl.textContent = text;
+      if (badgeEl && badgeText !== null && badgeText !== undefined) {
+        badgeEl.textContent = badgeText;
+        if (revealingState === true) badgeEl.classList.add('revealing');
+        else if (revealingState === false) badgeEl.classList.remove('revealing');
+      }
+    }
+
+    function buildFlashPromptSpeech(q) {
+      if (!q) return '';
+      return formatMedicalTextForSpeech(q.question || q.question_html || '');
+    }
+
+    function buildFlashAnswerSpeech(q) {
+      if (!q) return '';
+      const letters = ['A', 'B', 'C', 'D', 'E'];
+      const hasIdx = (q.correct_idx !== null && q.correct_idx !== undefined && q.options && q.options[q.correct_idx]);
+      const corrLetter = hasIdx ? (letters[q.correct_idx] || q.correct_letter || '') : (q.correct_letter || '');
+      const rawOpt = hasIdx ? q.options[q.correct_idx] : (q.correct_text || '');
+      const cleanOpt = formatMedicalTextForSpeech(String(rawOpt).replace(/^[a-e]\.\s*/i, '').trim());
+      if (corrLetter && cleanOpt) return `Đáp án ${corrLetter}: ${cleanOpt}`;
+      if (cleanOpt) return `Đáp án đúng: ${cleanOpt}`;
+      return '';
+    }
+
+    function unlockAndPlayFlashVoice() {
+      flashVoiceAutoplayBlocked = false;
+      flashVoiceNeedsGesture = false;
+      if (!flashVoiceEnabled) {
+        flashVoiceEnabled = true;
+        localStorage.setItem('mophoi_flash_voice_enabled', 'true');
+      }
+      updateFlashVoiceUI();
+      if (!flashIsPlaying) {
+        flashIsPlaying = true;
+        const btn = document.getElementById('btn-flash-play');
+        if (btn) btn.textContent = '⏸️ Tạm Dừng';
+      }
+      resumeCurrentFlashCard(true);
+      showToast('🔊 Đã kích hoạt Giọng Đọc Tiếng Việt!');
+    }
+
+    function toggleFlashVoice() {
+      flashVoiceAutoplayBlocked = false;
+      flashVoiceNeedsGesture = false;
+      flashVoiceEnabled = !flashVoiceEnabled;
+      localStorage.setItem('mophoi_flash_voice_enabled', flashVoiceEnabled ? 'true' : 'false');
+      updateFlashVoiceUI();
+
+      if (flashVoiceEnabled) {
+        if (flashIsPlaying) {
+          resumeCurrentFlashCard(true);
+        } else {
+          replayCurrentFlashVoice();
+        }
+        showToast('🔊 Đã BẬT giọng đọc Tiếng Việt!');
+      } else {
+        cancelFlashSpeech();
+        if (!flashRevealed) {
+          flashPromptSpeechDone = true;
+          if (flashPendingReveal && flashIsPlaying) {
+            flashPendingReveal = false;
+            revealFlashAnswerAndAdvance();
+          } else if (flashIsPlaying) {
+            updateFlashStatusUI('Đang suy nghĩ (Thử nhớ đáp án)...', null, false);
+            if (!flashTimer) startFlashCycle(true);
+          }
+        } else if (flashIsPlaying && !flashAdvanceTimeout) {
+          const myToken = flashCycleToken;
+          flashAdvanceTimeout = setTimeout(() => {
+            if (myToken === flashCycleToken && flashIsPlaying) triggerMorphTransition();
+          }, 1200);
+        }
+        showToast('🔇 Đã TẮT giọng đọc.');
+      }
+    }
+
+    function onFlashVoiceFlowChange(val) {
+      flashVoiceFlow = (val === 'continuous') ? 'continuous' : 'think';
+      localStorage.setItem('mophoi_flash_voice_flow', flashVoiceFlow);
+      flashVoiceAutoplayBlocked = false;
+      flashVoiceNeedsGesture = false;
+      updateFlashVoiceUI();
+      if (flashIsPlaying && !flashRevealed) {
+        resumeCurrentFlashCard(false);
+      }
+      showToast(flashVoiceFlow === 'continuous'
+        ? '🎧 Đã chuyển: Nghe liên tục (Đọc đề → Đọc đáp án luôn)'
+        : '🧠 Đã chuyển: Đọc đề → Đợi hết đếm ngược → Đọc đáp án');
+    }
+
+    function onFlashVoiceRateChange(val) {
+      const r = parseFloat(val);
+      flashVoiceRate = (!isNaN(r) && r >= 0.6 && r <= 2.2) ? r : 1.08;
+      localStorage.setItem('mophoi_flash_voice_rate', String(flashVoiceRate));
+      showToast(`🗣️ Tốc độ đọc: ${flashVoiceRate}x`);
+      if (flashVoiceEnabled && canBrowserSpeakNow() && document.getElementById('tab-flash')?.classList.contains('active')) {
+        if (!flashRevealed && flashIsPlaying) resumeCurrentFlashCard(true);
+      }
+    }
+
+    function onFlashVoiceSelectChange(val) {
+      flashVoiceURI = val || 'auto';
+      localStorage.setItem('mophoi_flash_voice_uri', flashVoiceURI);
+      updateFlashVoiceUI();
+      if (flashVoiceEnabled && canBrowserSpeakNow()) {
+        testFlashVoice();
+      }
+    }
+
+    function testFlashVoice() {
+      flashVoiceAutoplayBlocked = false;
+      flashVoiceNeedsGesture = false;
+      if (!('speechSynthesis' in window)) {
+        showToast('❌ Trình duyệt của bạn không hỗ trợ đọc giọng nói.');
+        return;
+      }
+      refreshFlashVoiceList();
+      const myToken = flashCycleToken;
+      const sample = 'Xin chào, đây là giọng đọc mô phôi tiếng Việt. Đáp án A: biểu mô lát tầng không sừng hóa.';
+      const prevEnabled = flashVoiceEnabled;
+      flashVoiceEnabled = true;
+      updateFlashVoiceUI();
+      speakFlashText(sample, 'prompt', myToken, () => {
+        flashVoiceEnabled = prevEnabled;
+        updateFlashVoiceUI();
+      });
+    }
+
+    function replayCurrentFlashVoice() {
+      flashVoiceAutoplayBlocked = false;
+      flashVoiceNeedsGesture = false;
+      if (!flashList.length) return;
+      const q = flashList[currentFlashIdx];
+      if (!q) return;
+
+      if (!flashVoiceEnabled) {
+        flashVoiceEnabled = true;
+        localStorage.setItem('mophoi_flash_voice_enabled', 'true');
+        updateFlashVoiceUI();
+      }
+
+      if (!flashRevealed) {
+        if (flashIsPlaying) {
+          resumeCurrentFlashCard(true);
+        } else {
+          const myToken = ++flashCycleToken;
+          speakFlashText(buildFlashPromptSpeech(q), 'prompt', myToken, () => {
+            flashPromptSpeechDone = true;
+          });
+        }
+      } else {
+        if (flashIsPlaying) {
+          flashAnswerSpeechDone = false;
+          const ansToken = ++flashCycleToken;
+          if (flashAdvanceTimeout) { clearTimeout(flashAdvanceTimeout); flashAdvanceTimeout = null; }
+          updateFlashStatusUI('🔊 Đang đọc lại đáp án đúng...', '🗣️ Đọc đáp án', true);
+          speakFlashText(buildFlashAnswerSpeech(q), 'answer', ansToken, (aborted) => {
+            if (ansToken !== flashCycleToken) return;
+            flashAnswerSpeechDone = true;
+            if (!flashIsPlaying) return;
+            updateFlashStatusUI('✅ Đã đọc xong đáp án — chuẩn bị chuyển câu...', 'Chuyển câu...', true);
+            flashAdvanceTimeout = setTimeout(() => {
+              if (ansToken === flashCycleToken && flashIsPlaying) triggerMorphTransition();
+            }, aborted ? 1600 : 650);
+          });
+        } else {
+          const myToken = ++flashCycleToken;
+          speakFlashText(buildFlashAnswerSpeech(q), 'answer', myToken, () => {
+            flashAnswerSpeechDone = true;
+          });
+        }
+      }
+    }
+
+    function bindFlashVoiceGestureUnlock() {
+      if (flashVoiceUnlockBound) return;
+      flashVoiceUnlockBound = true;
+      const onFirstActivation = (ev) => {
+        if (!flashVoiceNeedsGesture && !flashVoiceAutoplayBlocked) return;
+        if (ev.target && ev.target.closest && ev.target.closest('#flash-voice-unlock-btn, #btn-flash-voice-toggle')) {
+          return;
+        }
+        const tag = ev.target && ev.target.tagName ? ev.target.tagName.toUpperCase() : '';
+        if (tag === 'SELECT' || tag === 'OPTION') return;
+
+        setTimeout(() => {
+          if (navigator.userActivation && navigator.userActivation.hasBeenActive) {
+            flashVoiceAutoplayBlocked = false;
+            flashVoiceNeedsGesture = false;
+            updateFlashVoiceUI();
+            const isFlashTab = document.getElementById('tab-flash')?.classList.contains('active');
+            if (isFlashTab && flashVoiceEnabled && flashIsPlaying && !flashRevealed && 'speechSynthesis' in window && !window.speechSynthesis.speaking) {
+              resumeCurrentFlashCard(true);
+            }
+          }
+        }, 60);
+      };
+      document.addEventListener('pointerdown', onFirstActivation, true);
+      document.addEventListener('keydown', onFirstActivation, true);
+    }
+
+    function initFlashVoiceSystem() {
+      refreshFlashVoiceList();
+      if ('speechSynthesis' in window) {
+        try {
+          window.speechSynthesis.onvoiceschanged = refreshFlashVoiceList;
+        } catch (e) { }
+        setTimeout(refreshFlashVoiceList, 350);
+        setTimeout(refreshFlashVoiceList, 1200);
+      }
+      bindFlashVoiceGestureUnlock();
+      updateFlashVoiceUI();
+    }
 
     // STATION EXAM STATE
     let stationExamList = [];
@@ -4625,6 +5510,7 @@ body.theme-light .notebooklm-canvas {
         initDrawingStudio();
         initSideNoteStudio();
         initDropdowns();
+        initFlashVoiceSystem();
         filterFlashQuestions();
         filterStationMode();
         renderCheatTable();
@@ -5414,8 +6300,9 @@ body.theme-light .notebooklm-canvas {
       if (tabId !== 'lockin') { stopLockinFocusAudio(); }
       if (tabId === 'flash') {
         flashIsPlaying = true;
-        document.getElementById('btn-flash-play').textContent = '⏸️ Tạm Dừng';
-        startFlashCycle();
+        const playBtn = document.getElementById('btn-flash-play');
+        if (playBtn) playBtn.textContent = '⏸️ Tạm Dừng';
+        resumeCurrentFlashCard(false);
       } else {
         stopFlashTimer();
       }
@@ -5706,8 +6593,10 @@ body.theme-light .notebooklm-canvas {
     }
 
     function setFlashDuration(val) {
-      flashDuration = parseInt(val);
-      startFlashCycle();
+      flashDuration = parseInt(val) || 7;
+      if (!flashRevealed) {
+        startFlashCycle(false);
+      }
     }
 
     
@@ -5715,15 +6604,12 @@ body.theme-light .notebooklm-canvas {
     // ⏩ TUA NHANH & RESUME HỌC TIẾP (FLASH & CHẠY TRẠM)
     // ==========================================================
     function jumpToFlashQuestion(targetNum) {
+      stopFlashTimer();
       let val = parseInt(targetNum);
       if (isNaN(val) || val < 1) val = 1;
       if (val > flashList.length) val = flashList.length;
       currentFlashIdx = val - 1;
       loadFlashQuestionCard();
-      if (flashIsPlaying) {
-        stopFlashTimer();
-        startFlashCycle();
-      }
     }
 
     function jumpRelativeFlash(delta) {
@@ -5814,6 +6700,8 @@ body.theme-light .notebooklm-canvas {
     }
 
     function loadFlashQuestionCard() {
+      stopFlashTimer();
+
       // Check auto-clear drawing canvas
       const autoClear = document.getElementById('draw-auto-clear');
       if (autoClear && autoClear.checked && flashCtx && flashCanvas) {
@@ -5823,6 +6711,10 @@ body.theme-light .notebooklm-canvas {
       if (!flashList.length) return;
       const q = flashList[currentFlashIdx];
       flashRevealed = false;
+      flashPromptSpeechDone = false;
+      flashAnswerSpeechDone = false;
+      flashPendingReveal = false;
+      flashTimeElapsed = 0;
 
       // Update meta
       document.getElementById('flash-index-indicator').textContent = `${currentFlashIdx + 1} / ${flashList.length}`;
@@ -5878,64 +6770,174 @@ body.theme-light .notebooklm-canvas {
             <span>${optText.replace(/^[a-e]\.\s*/i, '')}</span>
           </div>
         `;
-        // User can click option to test early
         btn.onclick = () => onFlashOptionClick(idx);
         optList.appendChild(btn);
       });
 
       // Update status banner
-      const statusBadge = document.getElementById('flash-status-badge');
-      statusBadge.textContent = `Đếm ngược: ${flashDuration}s`;
-      statusBadge.classList.remove('revealing');
+      updateFlashStatusUI('Đang suy nghĩ (Thử nhớ đáp án)...', `Đếm ngược: ${flashDuration}s`, false);
 
       const pBar = document.getElementById('flash-progress-bar');
       pBar.style.width = '100%';
       pBar.classList.remove('revealed');
 
-      startFlashCycle();
+      updateFlashVoiceUI();
+
+      if (flashIsPlaying) {
+        resumeCurrentFlashCard(true);
+      } else {
+        updateFlashStatusUI('⏸️ Đã tạm dừng', null, null);
+      }
     }
 
-    function startFlashCycle() {
-      stopFlashTimer();
+    function startFlashCycle(preserveElapsed = false) {
+      if (flashTimer) { clearInterval(flashTimer); flashTimer = null; }
       if (!flashIsPlaying) return;
+      const flashTab = document.getElementById('tab-flash');
+      if (flashTab && !flashTab.classList.contains('active')) return;
 
-      flashTimeElapsed = 0;
-      const totalMs = flashDuration * 1000;
+      if (!preserveElapsed) {
+        flashTimeElapsed = 0;
+      }
 
+      const useVoice = flashVoiceEnabled && canBrowserSpeakNow();
+      if (useVoice && flashVoiceFlow === 'continuous') {
+        const pBar = document.getElementById('flash-progress-bar');
+        if (pBar) pBar.style.width = '100%';
+        updateFlashStatusUI('🎧 Nghe liên tục: Đang đọc câu hỏi...', '🗣️ Đang đọc đề', false);
+        return;
+      }
+
+      const totalMs = Math.max(1000, flashDuration * 1000);
       flashTimer = setInterval(() => {
         flashTimeElapsed += flashIntervalStep;
         const remainingMs = Math.max(0, totalMs - flashTimeElapsed);
         const pct = (remainingMs / totalMs) * 100;
 
-        document.getElementById('flash-progress-bar').style.width = `${pct}%`;
+        const pBar = document.getElementById('flash-progress-bar');
+        if (pBar) pBar.style.width = `${pct}%`;
+
         const secLeft = Math.ceil(remainingMs / 1000);
-        document.getElementById('flash-status-badge').textContent = `Đếm ngược: ${secLeft}s`;
 
         if (flashTimeElapsed >= totalMs && !flashRevealed) {
-          revealFlashAnswerAndAdvance();
+          if (flashVoiceEnabled && canBrowserSpeakNow() && !flashPromptSpeechDone) {
+            clearInterval(flashTimer);
+            flashTimer = null;
+            flashPendingReveal = true;
+            updateFlashStatusUI('🗣️ Đang đọc nốt câu hỏi...', 'Chờ đọc xong đề', false);
+          } else {
+            revealFlashAnswerAndAdvance();
+          }
+          return;
         }
+
+        const badge = document.getElementById('flash-status-badge');
+        if (badge) badge.textContent = `Đếm ngược: ${secLeft}s`;
       }, flashIntervalStep);
     }
 
     function stopFlashTimer() {
-      if (flashTimer) clearInterval(flashTimer);
+      flashCycleToken++;
+      if (flashTimer) { clearInterval(flashTimer); flashTimer = null; }
+      if (flashAdvanceTimeout) { clearTimeout(flashAdvanceTimeout); flashAdvanceTimeout = null; }
+      if (flashMorphTimeout) { clearTimeout(flashMorphTimeout); flashMorphTimeout = null; }
+      cancelFlashSpeech();
+      const card = document.getElementById('flash-card');
+      if (card) card.classList.remove('morph-out');
     }
 
-    function toggleFlashPlay() {
-      flashIsPlaying = !flashIsPlaying;
-      const btn = document.getElementById('btn-flash-play');
-      if (flashIsPlaying) {
-        btn.textContent = '⏸️ Tạm Dừng';
-        startFlashCycle();
+    function resumeCurrentFlashCard(forceRespeak = false) {
+      if (!flashList.length) return;
+      const q = flashList[currentFlashIdx];
+      if (!q) return;
+      const flashTab = document.getElementById('tab-flash');
+      if (flashTab && !flashTab.classList.contains('active')) return;
+
+      if (flashAdvanceTimeout) { clearTimeout(flashAdvanceTimeout); flashAdvanceTimeout = null; }
+      if (flashMorphTimeout) { clearTimeout(flashMorphTimeout); flashMorphTimeout = null; }
+      const myToken = ++flashCycleToken;
+
+      if (!flashRevealed) {
+        const canSpeak = flashVoiceEnabled && canBrowserSpeakNow();
+        if (canSpeak && (forceRespeak || !flashPromptSpeechDone)) {
+          flashPromptSpeechDone = false;
+          flashPendingReveal = false;
+          if (flashVoiceFlow === 'continuous') {
+            startFlashCycle(false);
+          } else {
+            updateFlashStatusUI('🗣️ Đang đọc câu hỏi & đếm ngược suy nghĩ...', `Đếm ngược: ${flashDuration}s`, false);
+            startFlashCycle(!forceRespeak && flashTimeElapsed > 0 && flashTimeElapsed < flashDuration * 1000 - 1500);
+          }
+          speakFlashText(buildFlashPromptSpeech(q), 'prompt', myToken, (aborted) => {
+            if (myToken !== flashCycleToken || flashRevealed) return;
+            flashPromptSpeechDone = true;
+            if (!flashIsPlaying) return;
+            if (flashVoiceFlow === 'continuous') {
+              updateFlashStatusUI('✅ Đọc xong đề — chuẩn bị đọc đáp án...', 'Mở đáp án...', false);
+              flashAdvanceTimeout = setTimeout(() => {
+                if (myToken === flashCycleToken && !flashRevealed && flashIsPlaying) {
+                  revealFlashAnswerAndAdvance();
+                }
+              }, aborted ? 1200 : 380);
+            } else if (flashPendingReveal) {
+              flashPendingReveal = false;
+              flashAdvanceTimeout = setTimeout(() => {
+                if (myToken === flashCycleToken && !flashRevealed && flashIsPlaying) {
+                  revealFlashAnswerAndAdvance();
+                }
+              }, 260);
+            } else {
+              updateFlashStatusUI('Đang suy nghĩ (Thử nhớ đáp án)...', null, false);
+            }
+          });
+        } else {
+          flashPromptSpeechDone = true;
+          flashPendingReveal = false;
+          updateFlashStatusUI('Đang suy nghĩ (Thử nhớ đáp án)...', null, false);
+          startFlashCycle(true);
+        }
       } else {
-        btn.textContent = '▶️ Tiếp Tục';
-        stopFlashTimer();
+        const canSpeak = flashVoiceEnabled && canBrowserSpeakNow();
+        if (canSpeak && (forceRespeak || !flashAnswerSpeechDone)) {
+          flashAnswerSpeechDone = false;
+          updateFlashStatusUI('🔊 Đang đọc đáp án đúng...', '🗣️ Đọc đáp án', true);
+          speakFlashText(buildFlashAnswerSpeech(q), 'answer', myToken, (aborted) => {
+            if (myToken !== flashCycleToken) return;
+            flashAnswerSpeechDone = true;
+            if (!flashIsPlaying) return;
+            updateFlashStatusUI('✅ Đã đọc xong đáp án — chuẩn bị chuyển câu...', 'Chuyển câu...', true);
+            flashAdvanceTimeout = setTimeout(() => {
+              if (myToken === flashCycleToken && flashIsPlaying) {
+                triggerMorphTransition();
+              }
+            }, aborted ? 1600 : 650);
+          });
+        } else if (flashIsPlaying) {
+          flashAdvanceTimeout = setTimeout(() => {
+            if (myToken === flashCycleToken && flashIsPlaying) {
+              triggerMorphTransition();
+            }
+          }, 900);
+        }
       }
     }
 
-    
-    
-    
+    function toggleFlashPlay() {
+      flashVoiceAutoplayBlocked = false;
+      flashVoiceNeedsGesture = false;
+      flashIsPlaying = !flashIsPlaying;
+      updateFlashVoiceUI();
+      const btn = document.getElementById('btn-flash-play');
+      if (flashIsPlaying) {
+        if (btn) btn.textContent = '⏸️ Tạm Dừng';
+        resumeCurrentFlashCard(false);
+      } else {
+        if (btn) btn.textContent = '▶️ Tiếp Tục';
+        stopFlashTimer();
+        updateFlashStatusUI('⏸️ Đã tạm dừng', null, null);
+      }
+    }
+
     function onFlashOptionClick(chosenIdx) {
       if (flashRevealed) return;
       const q = flashList[currentFlashIdx];
@@ -5948,10 +6950,15 @@ body.theme-light .notebooklm-canvas {
     }
 
     function revealFlashAnswerAndAdvance() {
-      flashRevealed = true;
+      if (flashRevealed) return;
       stopFlashTimer();
+      const myToken = flashCycleToken;
+      flashRevealed = true;
+      flashPendingReveal = false;
+      flashAnswerSpeechDone = false;
 
       const q = flashList[currentFlashIdx];
+      if (!q) return;
       const optButtons = document.querySelectorAll('#flash-options-list .option-btn');
       const letters = ['A', 'B', 'C', 'D', 'E'];
 
@@ -5959,7 +6966,6 @@ body.theme-light .notebooklm-canvas {
       if (q.correct_idx !== null && optButtons[q.correct_idx]) {
         const targetBtn = optButtons[q.correct_idx];
         targetBtn.classList.add('flash-target');
-        // Inject the highlighted answer HTML
         targetBtn.innerHTML = `
           <div>
             <span class="opt-key" style="background:var(--success); color:#080c14;">${letters[q.correct_idx]}</span>
@@ -5969,29 +6975,51 @@ body.theme-light .notebooklm-canvas {
         `;
       }
 
-      const statusBadge = document.getElementById('flash-status-badge');
-      statusBadge.textContent = 'ĐÃ HIỆN ĐÁP ÁN!';
-      statusBadge.classList.add('revealing');
-
       const pBar = document.getElementById('flash-progress-bar');
-      pBar.style.width = '100%';
-      pBar.classList.add('revealed');
+      if (pBar) {
+        pBar.style.width = '100%';
+        pBar.classList.add('revealed');
+      }
 
-      // Giữ đáp án 1.8s để mắt chụp ảnh, sau đó chuyển câu mượt mà
-      if (flashIsPlaying) {
-        setTimeout(() => {
-          if (flashIsPlaying) {
-            triggerMorphTransition();
-          }
-        }, 1800);
+      const flashTab = document.getElementById('tab-flash');
+      const isFlashActive = !flashTab || flashTab.classList.contains('active');
+      const shouldSpeak = isFlashActive && flashVoiceEnabled && canBrowserSpeakNow();
+
+      if (shouldSpeak) {
+        updateFlashStatusUI('🔊 Đang đọc đáp án đúng...', '🗣️ Đọc đáp án', true);
+        speakFlashText(buildFlashAnswerSpeech(q), 'answer', myToken, (aborted) => {
+          if (myToken !== flashCycleToken) return;
+          flashAnswerSpeechDone = true;
+          if (!flashIsPlaying) return;
+          updateFlashStatusUI('✅ Đã đọc xong đáp án — chuẩn bị chuyển câu...', 'Chuyển câu...', true);
+          flashAdvanceTimeout = setTimeout(() => {
+            if (myToken === flashCycleToken && flashIsPlaying) {
+              triggerMorphTransition();
+            }
+          }, aborted ? 1600 : 650);
+        });
+      } else {
+        flashAnswerSpeechDone = !flashVoiceEnabled;
+        updateFlashStatusUI(flashIsPlaying ? 'ĐÃ HIỆN ĐÁP ÁN!' : '⏸️ Đã hiện đáp án (Đang tạm dừng)', 'ĐÃ HIỆN ĐÁP ÁN!', true);
+        if (flashIsPlaying) {
+          flashAdvanceTimeout = setTimeout(() => {
+            if (myToken === flashCycleToken && flashIsPlaying) {
+              triggerMorphTransition();
+            }
+          }, 1800);
+        }
       }
     }
 
     function triggerMorphTransition() {
+      stopFlashTimer();
+      const myToken = flashCycleToken;
       const card = document.getElementById('flash-card');
+      if (!card) return;
       card.classList.add('morph-out');
 
-      setTimeout(() => {
+      flashMorphTimeout = setTimeout(() => {
+        if (myToken !== flashCycleToken) return;
         if (currentFlashIdx < flashList.length - 1) {
           currentFlashIdx++;
         } else {
@@ -6012,10 +7040,13 @@ body.theme-light .notebooklm-canvas {
     }
 
     function prevFlashQ() {
+      stopFlashTimer();
       if (currentFlashIdx > 0) {
         currentFlashIdx--;
-        loadFlashQuestionCard();
+      } else if (flashList.length > 0) {
+        currentFlashIdx = flashList.length - 1;
       }
+      loadFlashQuestionCard();
     }
 
     // ==========================================
@@ -6855,11 +7886,11 @@ body.theme-light .notebooklm-canvas {
       }
       flashList = [...wrongQuestions];
       currentFlashIdx = 0;
-      switchTab('flash');
-      renderCurrentFlashQ();
       flashIsPlaying = true;
-      document.getElementById('btn-flash-play').textContent = '⏸️ Tạm Dừng';
-      startFlashCycle();
+      const playBtn = document.getElementById('btn-flash-play');
+      if (playBtn) playBtn.textContent = '⏸️ Tạm Dừng';
+      loadFlashQuestionCard();
+      switchTab('flash');
     }
 
     function clearAllWrongQuestions() {
@@ -7008,6 +8039,12 @@ body.theme-light .notebooklm-canvas {
           nextFlashQ();
         } else if (e.code === 'ArrowLeft') {
           prevFlashQ();
+        } else if (k === 'v') {
+          e.preventDefault();
+          toggleFlashVoice();
+        } else if (k === 'r') {
+          e.preventDefault();
+          replayCurrentFlashVoice();
         }
       } else if (activeTab.id === 'tab-station') {
         if (e.key === '1' || e.key.toLowerCase() === 'a') selectStationAnswer(0);
