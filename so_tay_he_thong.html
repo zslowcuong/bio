@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <title>Sổ Tay Hệ Thống Hóa Cốt Lõi 4 Trang • Mô Phôi K48</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --paper: #ffffff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --blue: #0369a1;
+      --blue-bg: #e0f2fe;
+      --teal: #0f766e;
+      --teal-bg: #ccfbf1;
+      --purple: #6d28d9;
+      --purple-bg: #ede9fe;
+      --amber: #b45309;
+      --amber-bg: #fef3c7;
+      --red: #b91c1c;
+      --red-bg: #fee2e2;
+    }
+    * { box-sizing: border-box; font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-size: 11.5px; line-height: 1.42; }
+    .toolbar {
+      position: sticky; top: 0; z-index: 100;
+      background: #0f172a; color: #f8fafc; padding: 10px 18px;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.25);
+    }
+    .toolbar-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .toolbar h1 { font-size: 15px; margin: 0; font-weight: 800; color: #38bdf8; }
+    .toolbar-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .btn {
+      border: none; border-radius: 7px; padding: 7px 13px; font-size: 12px; font-weight: 700;
+      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn-print { background: #10b981; color: #fff; }
+    .btn-recall { background: #f59e0b; color: #0f172a; }
+    .btn-back { background: #334155; color: #f8fafc; }
+    .btn-jump { background: #1e293b; color: #93c5fd; border: 1px solid #334155; padding: 5px 10px; font-size: 11px; }
+    .search-box {
+      padding: 6px 10px; border-radius: 7px; border: 1px solid #475569;
+      background: #1e293b; color: #fff; font-size: 12px; width: 220px;
+    }
+
+    .pages-wrap { max-width: 1020px; margin: 16px auto; padding: 0 12px 40px; }
+    .sheet {
+      background: var(--paper); border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px 20px; margin-bottom: 18px; box-shadow: 0 4px 18px rgba(15,23,42,0.06);
+      page-break-after: always; break-after: page;
+    }
+    .sheet:last-child { page-break-after: auto; break-after: auto; }
+    .sheet-head {
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 2.5px solid var(--ink); padding-bottom: 6px; margin-bottom: 10px;
+    }
+    .sheet-title { font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.3px; }
+    .sheet-badge {
+      background: var(--ink); color: #fff; font-weight: 800; font-size: 10.5px;
+      padding: 3px 9px; border-radius: 999px;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .box { border: 1px solid var(--border); border-radius: 7px; padding: 8px 10px; margin-bottom: 8px; }
+    .box-title {
+      font-size: 12px; font-weight: 800; margin: 0 0 6px 0; padding: 3px 7px;
+      border-radius: 4px; display: inline-block;
+    }
+    .t-blue { background: var(--blue-bg); color: var(--blue); }
+    .t-teal { background: var(--teal-bg); color: var(--teal); }
+    .t-purple { background: var(--purple-bg); color: var(--purple); }
+    .t-amber { background: var(--amber-bg); color: var(--amber); }
+    .t-red { background: var(--red-bg); color: var(--red); }
+
+    table { width: 100%; border-collapse: collapse; margin-bottom: 6px; font-size: 11px; }
+    th, td { border: 1px solid var(--border); padding: 4px 6px; text-align: left; vertical-align: top; }
+    th { background: #f8fafc; font-weight: 800; color: var(--ink); }
+    ul { margin: 3px 0 3px 16px; padding: 0; }
+    li { margin-bottom: 2.5px; }
+    .kw { background: #fef08a; padding: 0 3px; border-radius: 3px; font-weight: 700; color: #0f172a; }
+    .trap { color: var(--red); font-weight: 700; }
+
+    /* Active Recall Hide Mode */
+    body.hide-recall .rc {
+      color: transparent !important;
+      background: #cbd5e1 !important;
+      border-radius: 3px;
+      user-select: none;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    body.hide-recall .rc:hover,
+    body.hide-recall .rc.revealed {
+      color: inherit !important;
+      background: #fef9c3 !important;
+    }
+    .hit-row { outline: 2px solid #f59e0b; background: #fffbeb !important; }
+
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    @media print {
+      @page { size: A4 portrait; margin: 8mm; }
+      body { background: #fff; font-size: 10px; line-height: 1.32; }
+      .toolbar { display: none !important; }
+      .pages-wrap { max-width: 100%; margin: 0; padding: 0; }
+      .sheet { box-shadow: none; border: none; padding: 0; margin: 0; }
+      table { font-size: 9.5px; }
+      th, td { padding: 3px 4px; }
+      body.hide-recall .rc { color: inherit !important; background: transparent !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar no-print">
+    <div class="toolbar-left">
+      <h1>📘 SỔ TAY HỆ THỐNG CỐT LÕI 4 TRANG • MÔ PHÔI K48</h1>
+      <a class="btn btn-jump" href="#page-1">Trang 1: Mô Đại Cương</a>
+      <a class="btn btn-jump" href="#page-2">Trang 2: Mô Cơ Quan</a>
+      <a class="btn btn-jump" href="#page-3">Trang 3: Phôi Tuần 1-3 & Phần Phụ</a>
+      <a class="btn btn-jump" href="#page-4">Trang 4: Phôi Cơ Quan & Bẫy</a>
+    </div>
+    <div class="toolbar-actions">
+      <input type="text" class="search-box" id="hb-search" placeholder="🔍 Tìm nhanh (Wolff, Diad, Paneth...)" oninput="filterHandbook(this.value)">
+      <button class="btn btn-recall" id="btn-hb-recall" onclick="toggleRecall()">👁️ Che Đáp Án (Tự Test)</button>
+      <button class="btn btn-print" onclick="window.print()">🖨️ In / Lưu PDF (4 Trang A4)</button>
+      <a class="btn btn-back" href="index.html">⚡ Về Web Ôn Thi</a>
+    </div>
+  </div>
+
+  <div class="pages-wrap">
+    <!-- ==================== TRANG 1 ==================== -->
+    <section class="sheet" id="page-1">
+      <div class="sheet-head">
+        <span class="sheet-title" style="color:var(--blue)">TRANG 1/4: MÔ HỌC ĐẠI CƯƠNG (BÀI 1 → BÀI 5)</span>
+        <span class="sheet-badge">KỸ THUẬT • BIỂU MÔ • LIÊN KẾT • CƠ • THẦN KINH</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="box">
+          <div class="box-title t-blue">1. Danh Nhân, Kính Hiển Vi & Thuốc Nhuộm (Bài 1)</div>
+          <table>
+            <tr><th>Mục</th><th>Chốt nhớ ngay (Chống nhầm)</th></tr>
+            <tr><td>Lịch sử</td><td class="rc"><b>Malpighi</b> (ông tổ Mô học) • <b>Hooke</b> (từ "Tế bào" từ nút chai) • <b>Bichat</b> (thuật ngữ "Mô") • <b>Brown</b> (Nhân) • <b>Schleiden & Schwann</b> (Thuyết TB) • <b>Henle & Koelliker</b> (Sách Mô học người)</td></tr>
+            <tr><td>Phân giải & Kính</td><td class="rc">Mắt: <b>0,2 mm</b> • Quang học: <b>0,2 µm</b> (lát vùi nến, hình thái TB) • Điện tử truyền qua <b>TEM: 1 nm</b> (chi tiết dưới TB) • Quét <b>SEM: ảnh 3 chiều (3D)</b></td></tr>
+            <tr><td>Nhuộm</td><td class="rc"><b>H.E</b> (thường quy): Hematoxylin ưa base (xanh tím → Nhân), Eosin ưa acid (hồng → Bào tương) • <b>PAS</b>: Glycogen/Màng đáy • <b>Sudan</b>: Mỡ • <b>AgNO₃</b>: Sợi lưới</td></tr>
+          </table>
+        </div>
+
+        <div class="box">
+          <div class="box-title t-teal">2. Mô Liên Kết – Sụn – Xương (Bài 3)</div>
+          <table>
+            <tr><th>Nhóm</th><th>Chốt phân biệt nhanh</th></tr>
+            <tr><td>Tế bào MLK</td><td class="rc"><b>Lưu trú:</b> Trung mô (đa năng), Nguyên bào sợi/Tế bào sợi (hình thoi), Chu bào (ôm ngoài mao mạch, điều chỉnh lòng mạch), Mỡ, Nội mô, Sắc tố (melanin)<br><b>Di động:</b> Đại thực bào, <b>Tương bào</b> (từ Lympho B → tiết Ig), <b>Dưỡng bào</b> (Heparin + Histamin)</td></tr>
+            <tr><td>3 Loại Sụn</td><td class="rc">Không có mạch máu (nuôi bằng khuếch tán qua màng sụn).<br><b>Sụn trong</b> (khí quản, khớp) • <b>Sụn chun</b> (vành tai, nắp thanh quản) • <b>Sụn xơ</b> (đĩa gian đốt sống, khớp mu)</td></tr>
+            <tr><td>Xương</td><td class="rc"><b>Tạo cốt bào</b> (sinh chất nền) → <b>Cốt bào</b> (nằm trong ổ xương, nhánh nối qua vi quản) • <b>Hủy cốt bào</b> (đa nhân khổng lồ nằm ở <b>hốc Howship</b>) • Đơn vị xương đặc = <b>Hệ thống Havers</b></td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="box-title t-blue">3. Phân Loại Biểu Mô Phủ & Biểu Mô Tuyến (Bài 2) — <span class="trap">BẪY: Biểu mô KHÔNG chứa mạch máu, luôn tựa trên màng đáy!</span></div>
+        <table>
+          <tr><th>Loại Biểu Mô</th><th>Hình thái & Đặc điểm lõi</th><th>Phân bố điển hình (Gặp là khoanh ngay)</th></tr>
+          <tr><td><b>Lát đơn</b></td><td class="rc">1 hàng TB dẹt, nhân dẹt</td><td class="rc"><b>Nội mô</b> (mạch máu, tim) • <b>Trung biểu mô</b> (màng bụng/phổi/tim) • Lá thành bao Bowman • Phế bào I</td></tr>
+          <tr><td><b>Vuông đơn</b></td><td class="rc">1 hàng TB hình vuông</td><td class="rc"><b>Ống lượn gần, ống lượn xa, ống góp</b> • Nang tuyến giáp • Tiểu cầu tuyến mồ hôi • Ống thẳng tinh hoàn</td></tr>
+          <tr><td><b>Trụ đơn</b></td><td class="rc">1 hàng TB cao, nhân bầu dục</td><td class="rc"><b>Dạ dày</b> (tiết nhầy đồng nhất, KHÔNG có TB đài) • <b>Ruột non/già</b> (vi nhung mao + TB đài) • Ống ra tinh hoàn • Tử cung</td></tr>
+          <tr><td><b>Giả tầng có lông chuyển</b></td><td class="rc">Mọi TB đều tựa màng đáy nhưng cao thấp khác nhau; TB đáy sinh sản</td><td class="rc"><b>Đường dẫn khí</b> (khoang mũi hô hấp, thanh quản, khí quản, phế quản); <span class="trap">Riêng mào tinh = Trụ giả tầng có LÔNG GIẢ</span></td></tr>
+          <tr><td><b>Lát tầng KHÔNG sừng</b></td><td class="rc">Nhiều hàng TB (đáy, trung gian, bề mặt có nhân)</td><td class="rc"><b>Thực quản</b> • <b>Hầu phần tiếp xúc thức ăn</b> • <b>2 dây thanh âm</b> • Giác mạc • Âm đạo</td></tr>
+          <tr><td><b>Lát tầng SỪNG HÓA</b></td><td class="rc">Lớp trên cùng mất nhân hóa sừng</td><td class="rc"><b>Biểu bì da</b> (5 lớp: Sinh sản – Gai – Hạt – Bóng – Sừng)</td></tr>
+          <tr><td><b>Chuyển tiếp (Niệu mạc)</b></td><td class="rc">Thay đổi số hàng TB theo độ căng</td><td class="rc"><b>Đài thận, Bể thận, Niệu quản, Bàng quang</b>, đoạn gần niệu đạo</td></tr>
+        </table>
+      </div>
+
+      <div class="grid-2">
+        <div class="box">
+          <div class="box-title t-purple">4. Ma Trận 3 Loại Mô Cơ (Bài 4 — Nguồn gốc Trung bì phôi)</div>
+          <table>
+            <tr><th>Tiêu chí</th><th>Cơ Vân</th><th>Cơ Tim</th><th>Cơ Trơn</th></tr>
+            <tr><td>Hình & Nhân</td><td class="rc">Trụ dài, <b>đa nhân ngoại vi</b></td><td class="rc">Phân nhánh, <b>1–2 nhân trung tâm</b></td><td class="rc">Hình thoi, <b>1 nhân trung tâm</b></td></tr>
+            <tr><td>Vân & Ống T</td><td class="rc">Có vân ngang • Bộ ba <b>Triad</b> hoàn chỉnh</td><td class="rc">Cơ vân đặc biệt • Bộ ba <b>Diad</b> + <b>Vạch bậc thang</b></td><td class="rc">Không vân • Có <b>thể đặc</b> • Không có ống T</td></tr>
+            <tr><td>Vận động</td><td class="rc">Theo ý muốn • Troponin</td><td class="rc">Không theo ý muốn (tự phát nhịp)</td><td class="rc">Không theo ý muốn • <b>Calmodulin</b></td></tr>
+          </table>
+        </div>
+
+        <div class="box">
+          <div class="box-title t-red">5. Mô Thần Kinh: Nơron & TK Đệm (Bài 5)</div>
+          <table>
+            <tr><th>Phân loại</th><th>Cấu trúc & Vị trí chuẩn thi</th></tr>
+            <tr><td>Nơron <b>2 cực</b></td><td class="rc">Chỉ có ở <b>Võng mạc mắt</b> • <b>Niêm mạc khứu giác</b> • <b>Hạch tiền đình & Hạch xoắn tai trong</b></td></tr>
+            <tr><td>Nơron <b>1 cực giả</b></td><td class="rc">Hạch gai rễ sau tủy • Hạch cảm giác dây sọ • <span class="trap">Nhân nhai cầu não (BẪY!)</span></td></tr>
+            <tr><td>Nơron <b>đa cực</b></td><td class="rc">TB Purkinje (vỏ tiểu não) • TB tháp (vỏ đại não) • Sừng trước tủy sống • Thể <b>Nissl</b> = tổng hợp protein</td></tr>
+            <tr><td>TK Đệm TW & NB</td><td class="rc"><b>TW:</b> Sao (hàng rào máu-não) • Ít nhánh (tạo myelin TW) • <b>Vi đệm</b> (thực bào, nguồn gốc <b>trung bì/monocyte</b>) • Nội tủy<br><b>Ngoại biên:</b> Schwann (tạo myelin NB) • Vệ tinh</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TRANG 2 ==================== -->
+    <section class="sheet" id="page-2">
+      <div class="sheet-head">
+        <span class="sheet-title" style="color:var(--teal)">TRANG 2/4: MÔ HỌC CƠ QUAN (BÀI 6 → BÀI 12)</span>
+        <span class="sheet-badge">MẠCH • HÔ HẤP • TIÊU HÓA • THẬN • SINH DỤC • MIỄN DỊCH • DA</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="box">
+          <div class="box-title t-blue">1. Hệ Tim Mạch & 3 Loại Mao Mạch (Bài 6)</div>
+          <ul>
+            <li><b>Tim:</b> Áo trong = nội mô <b>lát đơn</b>; Áo giữa = <b>cơ tim</b>; Áo ngoài = mô liên kết.</li>
+            <li><b>Động mạch:</b> Áo trong có <b>màng ngăn chun trong</b> (lớp dưới nội mô = MLK thưa); <b>Màng ngăn chun ngoài</b> nằm giữa <b>áo giữa và áo ngoài</b>. ĐM lớn = chun; ĐM vừa = cơ.</li>
+            <li><b>3 Mao mạch (Cực hay hỏi):</b>
+              <span class="rc"><b>(1) Liên tục/Kín:</b> não, phổi, cơ, tuyến ức • <b>(2) Có lỗ thủng (cửa sổ):</b> thận, ruột, tuyến nội tiết • <b>(3) Kiểu xoang:</b> gan, lách, tủy xương đỏ.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <div class="box-title t-teal">2. Chuyển Tiếp Đường Hô Hấp (Bài 7)</div>
+          <ul>
+            <li><b>Phần dẫn khí trên:</b> Khoang mũi hô hấp, hầu khí, thanh quản, khí quản = <b>Trụ giả tầng có lông chuyển</b> (TB đài = hình ly; <b>TB đáy</b> = sinh sản).</li>
+            <li><span class="trap">Ngoại lệ hay bẫy:</span> <span class="rc">Trần mũi (khứu giác) = nơron 2 cực; <b>Hầu tiếp xúc thức ăn & 2 dây thanh âm</b> = <b>Lát tầng không sừng hóa</b>.</span></li>
+            <li><b>Tiểu phế quản:</b> Bắt đầu mất sụn & tuyến; cơ Reisseisen dày tương đối. <b>Tiểu PQ tận:</b> Lát/vuông đơn + <b>Tế bào Clara</b>.</li>
+            <li><b>Phế nang:</b> <span class="rc"><b>Phế bào I</b> (lát, 95% diện tích trao đổi khí) • <b>Phế bào II</b> (vuông, tiết <b>Surfactant</b>) • TB bụi (đại thực bào).</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="box-title t-amber">3. Ống Tiêu Hóa & Tuyến Tiêu Hóa (Bài 8 — Đã chuẩn hóa 107 câu)</div>
+        <div class="grid-2">
+          <div>
+            <ul>
+              <li><b>4 tầng chung:</b> Niêm mạc (Biểu mô + Lớp đệm + Cơ niêm) – Dưới niêm – Cơ – Thanh mạc/Vỏ ngoài.</li>
+              <li><b>Ranh giới bẫy thi:</b> <b>Cơ niêm</b> nằm giữa <span class="rc"><b>lớp đệm & tầng dưới niêm</b></span> • <b>Tầng dưới niêm</b> gắn <span class="rc"><b>tầng cơ với tầng niêm mạc</b></span> • Lớp đệm <b>luôn chứa ống tuyến</b>.</li>
+              <li><b>Tầng dưới niêm CÓ TUYẾN:</b> Chỉ ở <span class="rc"><b>Thực quản</b> và <b>Tá tràng (tuyến Brunner)</b></span>!</li>
+              <li><b>Tầng cơ:</b> Trơn toàn bộ trừ <span class="rc"><b>Thực quản</b> và <b>Hậu môn</b></span> có cơ vân; Dạ dày có thêm lớp <b>cơ xiên ở TRONG CÙNG</b> (<span class="trap">nói ngoài cùng là SAI</span>); Ruột non lớp trong <b>vòng</b>, ngoài <b>dọc</b>.</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li><b>Dạ dày (Tuyến đáy vị):</b> TB chính (<span class="rc">ưa base, <b>Pepsinogen</b></span>) • TB thành/viền (<span class="rc">ưa acid, <b>HCl & yếu tố nội</b></span>) • TB cổ (tiết nhầy).</li>
+              <li><b>Ruột non:</b> <b>Van ngang</b> phát triển nhất ở <span class="rc"><b>hỗng tràng</b> (làm tăng S gấp 3 lần)</span>; Tuyến Lieberkuhn đáy có <span class="rc"><b>TB Paneth</b> (tiết lysozyme)</span>; Hồi tràng có <span class="rc"><b>mảng Peyer</b></span>.</li>
+              <li><b>Gan:</b> <span class="rc"><b>TB Kupffer</b> (đại thực bào ở xoang)</span> • <span class="rc"><b>TB Ito</b> (khoảng Disse, dự trữ Vitamin A)</span>.</li>
+              <li><b>Tụy:</b> Ngoại tiết có <span class="rc"><b>TB trung tâm nang tụy</b></span> • Nội tiết Langerhans: <b>α</b> (Glucagon), <b>β</b> (Insulin), <b>δ</b> (Somatostatin).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="box">
+          <div class="box-title t-blue">4. Hệ Tiết Niệu (Bài 9)</div>
+          <ul>
+            <li>Đơn vị cấu tạo & chức năng: <b>Nephron</b> (nước tiểu đầu vào <b>khoang Bowman</b>).</li>
+            <li><b>Màng lọc cầu thận:</b> <span class="rc">Nội mô có cửa sổ + Màng đáy chung + Khe lọc giữa các chân podocyte.</span></li>
+            <li><b>Phức hợp cận tiểu cầu:</b> <span class="rc">Vết đặc (Macula densa ở <b>ống lượn xa</b>) + TB cận tiểu cầu (tiết <b>Renin</b>) + TB gian mao mạch ngoài.</span></li>
+            <li><b>Ống lượn gần vs Xa:</b> Cả 2 đều <b>vuông đơn</b>; Gần có <span class="rc"><b>diềm bàn chải cao</b>, bào tương đậm, tiết <b>Creatinin</b></span>; Xa lòng rộng, không diềm bàn chải. Tế bào kẽ thận tiết <b>Erythropoietin</b>.</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <div class="box-title t-purple">5. Hệ Sinh Sản Nam & Nữ (Bài 10)</div>
+          <ul>
+            <li><b>Biểu mô tinh</b> = TB dòng tinh (không có "Tinh bào III"!) + <b>TB Sertoli</b> (<span class="rc">hàng rào máu–tinh hoàn, nâng đỡ, tiết ABP & AMH</span>). Mô kẽ có <b>TB Leydig</b> (<span class="rc">tiết <b>Testosterone</b></span>).</li>
+            <li><b>Đường dẫn tinh:</b> Ống thẳng (<span class="rc"><b>vuông đơn</b></span>) → Ống ra (<span class="rc"><b>trụ đơn</b></span>) → <b>Ống mào tinh</b> (<span class="rc"><b>trụ giả tầng có lông giả</b></span>). Lớp bao ống sinh tinh có <b>TB dạng cơ</b>.</li>
+            <li><b>Nữ:</b> Dưới biểu mô buồng trứng là <b>màng trắng</b>; Nang trứng thứ cấp lợp bởi <span class="rc"><b>biểu mô vuông tầng</b></span>. Nội mạc tử cung: 3 pha (Hành kinh – Tăng sinh – Chế tiết).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:0">
+        <div class="box" style="margin-bottom:0">
+          <div class="box-title t-teal">6. Tạo Máu & Miễn Dịch (Bài 11)</div>
+          <ul>
+            <li>Tạo máu phôi đầu tiên ở <span class="rc"><b>thành túi noãn hoàng</b></span>; xương đầu tiên tạo máu = <span class="rc"><b>xương đòn</b> (cuối tháng 2)</span>; tủy tạo huyết giàu <b>mao mạch kiểu xoang</b>.</li>
+            <li><b>TB lưới</b> tổng hợp sợi lưới & biệt hóa thành <span class="rc"><b>TB sợi và TB mỡ</b></span> (<span class="trap">TB lưới KHÔNG phải TB tạo máu</span>).</li>
+            <li><b>Nguyên phát:</b> <span class="rc"><b>Tủy xương đỏ & Tuyến ức</b></span> (biệt hóa <b>KHÔNG phụ thuộc kháng nguyên</b>, chỉ ~<b>30%</b> lympho T trưởng thành đi ra). <b>Thứ phát:</b> Hạch, Lách, MALT (tạo <b>Tương bào</b> miễn dịch thể dịch, T hiệu lực/T nhớ).</li>
+          </ul>
+        </div>
+
+        <div class="box" style="margin-bottom:0">
+          <div class="box-title t-red">7. Da & Phần Phụ Thuộc Da (Bài 12)</div>
+          <ul>
+            <li>Biểu bì da: <b>Lát tầng sừng hóa</b>. Thứ tự từ <b>NGOÀI → TRONG</b>: <span class="rc"><b>Sừng → Bóng → Hạt → Gai → Sinh sản (Đáy)</b></span> (<span class="trap">đừng đọc ngược!</span>).</li>
+            <li><b>Lớp gai</b> nối nhau bởi <b>thể liên kết</b>; Lớp hạt chứa hạt <b>keratohyalin</b>; Hạ bì chứa <b>tiểu thùy mỡ</b>.</li>
+            <li><b>TB đặc biệt biểu bì:</b> <span class="rc"><b>TB sắc tố</b> (lớp sinh sản, điều hòa bởi <b>MSH</b>) • <b>Merkel</b> (xúc giác) • <b>Langerhans</b> (từ <b>monocyte</b>, phản ứng quá mẫn)</span>. <span class="trap">TB nội mô / TB Sao KHÔNG thuộc biểu bì da!</span></li>
+            <li>Tiểu cầu mồ hôi: <span class="rc"><b>Vuông đơn</b></span> (chế tiết bán hủy & toàn vẹn); Ống bài xuất: <span class="rc"><b>Vuông tầng</b></span>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TRANG 3 ==================== -->
+    <section class="sheet" id="page-3">
+      <div class="sheet-head">
+        <span class="sheet-title" style="color:var(--purple)">TRANG 3/4: PHÔI THAI ĐẠI CƯƠNG & PHẦN PHỤ (BÀI 13/16, 14/17, 15/18)</span>
+        <span class="sheet-badge">GIAO TỬ • MỐC TUẦN 1–3 • 3 LÁ PHÔI • HÀNG RÀO NHAU THAI</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="box">
+          <div class="box-title t-purple">1. Giao Tử & Thụ Tinh (Bài 17 Mức 1–3 / Bộ 249)</div>
+          <ul>
+            <li><b>TB mầm nguyên thủy:</b> Sinh ra từ <span class="rc"><b>Hạ bì phôi</b> (Key 249)</span> → di cư dọc <span class="rc"><b>mạc treo ruột sau</b></span> đến tuyến sinh dục (lạc chỗ → <span class="rc"><b>U quái</b></span>).</li>
+            <li><b>Noãn (Nữ):</b> Nguyên phân max <span class="rc"><b>7 triệu</b></span>, thoái hóa nhiều ở <b>vùng tủy</b>; Dừng giảm phân I ở trạng thái <span class="rc"><b>Diplotene</b></span> (chất ức chế do <b>TB nang dẹt</b> tiết). Hoàn tất GP I <span class="rc"><b>trước rụng trứng</b></span> (cực cầu 1 nằm giữa màng TB hạt & màng trong suốt). Hoàn tất GP II <span class="rc"><b>khi tinh trùng xâm nhập</b></span>. Trứng sống tối đa <span class="rc"><b>24 giờ</b></span>.</li>
+            <li><b>Tinh (Nam):</b> GP bắt đầu lúc <span class="rc"><b>dậy thì</b></span>; Tinh nguyên bào A nguyên phân tái tạo; Thời gian tạo tinh trùng <span class="rc"><b>9–10 tuần (64–74 ngày)</b></span>, <span class="rc"><b>300 triệu/ngày</b></span> (Key 249). Lõi đuôi từ <b>trung tử</b>, giữ <b>ty thể</b>. Mào tinh bọc áo <b>glycoprotein</b>, cởi áo trong <b>đường sinh dục nữ</b>.</li>
+            <li><b>Thụ tinh:</b> Xảy ra ở <span class="rc"><b>đoạn bóng vòi tử cung</b></span>, đỉnh LH phóng noãn sau <b>28–36h</b>, hoàn thành khi <span class="rc"><b>2 tiền nhân hòa màng</b></span>.</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <div class="box-title t-blue">2. Timeline Chuẩn Ngày 1 → Tuần 3 & 38 Tuần</div>
+          <table>
+            <tr><th>Thời điểm</th><th>Sự kiện cốt lõi (Không được nhầm ngày!)</th></tr>
+            <tr><td>Ngày 3–4</td><td class="rc"><b>Phôi dâu</b> (12–16 tế bào, di chuyển đồng thời phân cắt nhờ lông chuyển vòi trứng)</td></tr>
+            <tr><td>Ngày 5–6</td><td class="rc">Thoát màng trong suốt → <b>Phôi nang</b></td></tr>
+            <tr><td>Ngày 6–7</td><td class="rc">Bắt đầu <b>làm tổ</b> bằng <b>cực phôi</b> vào <b>lớp chức năng</b> nội mạc tử cung</td></tr>
+            <tr><td>Ngày 8 (T2)</td><td class="rc"><b>Đĩa phôi 2 lá:</b> <b>Thượng bì</b> (tiếp xúc khoang ối, tạo cơ thể) + <b>Hạ bì</b> (tiếp xúc túi noãn hoàng nguyên thủy)</td></tr>
+            <tr><td>Ngày 12–13</td><td class="rc">Ngày 12: xuất hiện <b>trung bì ngoài phôi</b> • Ngày 13: biểu mô tử cung liền lại</td></tr>
+            <tr><td>Tuần 3</td><td class="rc"><b>Đường nguyên thủy</b> → <b>Phôi 3 lá</b> (Thượng bì tạo cả 3 lá) • <b>Dây sống</b> (chống đỡ/cảm ứng) • <b>Gai nhau cấp 1</b> (đầu tuần 3) & <b>tiểu đảo máu</b> ở trung bì túi noãn hoàng</td></tr>
+            <tr><td>Tuần 38</td><td class="rc">Thai đủ tháng tính từ ngày thụ tinh = <b>38 tuần</b></td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="box-title t-teal">3. Bản Đồ Dẫn Xuất 3 Lá Phôi & Mào Thần Kinh (Gặp câu "Có nguồn gốc từ lá phôi nào?" → Tra 1 giây!)</div>
+        <table>
+          <tr><th>Lá phôi</th><th>Cấu trúc con được tạo thành</th></tr>
+          <tr><td><b>NGOẠI BÌ</b></td><td class="rc"><b>Da</b> (biểu bì, lông, móng, tuyến mồ hôi/bã/vú) • <b>Ống thần kinh</b> (Não, Tủy sống, Võng mạc) • <b>Mào thần kinh</b> (Hạch TK, TB Schwann, Tủy thượng thận, TB sắc tố, Hạch ruột) • Men răng, giác mạc, thủy tinh thể</td></tr>
+          <tr><td><b>TRUNG BÌ</b></td><td class="rc"><b>Bộ xương</b> • <b>Mô cơ</b> • <b>Mô liên kết</b> • <b>Hệ tim mạch</b> • <b>Tế bào máu & bạch huyết</b> • <b>Hệ niệu – sinh dục</b> (Dải sinh thận từ <b>trung bì trung gian</b>) • Tầng cơ, liên kết, thanh mạc ống tiêu hóa (<b>trung bì lá tạng</b>)</td></tr>
+          <tr><td><b>NỘI BÌ</b></td><td class="rc"><b>Biểu mô ống tiêu hóa</b> (từ thực quản đến hậu môn) • <b>Biểu mô đường hô hấp</b> (thanh quản, khí quản, phế quản) • <b>Biểu mô họng, tuyến giáp, cận giáp</b> • Nhu mô & đường dẫn <b>Gan, Tụy</b></td></tr>
+        </table>
+      </div>
+
+      <div class="box" style="margin-bottom:0">
+        <div class="box-title t-amber">4. Các Phần Phụ Phôi Thai & Bánh Nhau (Bài 18 — 78 câu VIP)</div>
+        <div class="grid-2">
+          <div>
+            <ul>
+              <li><b>Bánh nhau:</b> Phần con (<span class="rc"><b>Màng đệm lông</b> = lá nuôi + trung bì ngoài phôi</span>) + Phần mẹ (<span class="rc"><b>Màng rụng đáy</b> = đĩa đáy, TB rụng to nhiều lipid/glycogen</span>).</li>
+              <li><b>3 Cấp Gai Nhau:</b> <b>Cấp 1</b> (đầu T3: lõi lá nuôi TB + bọc lá nuôi hợp bào) → <b>Cấp 2</b> (+ trung bì ngoài phôi) → <b>Cấp 3</b> (+ mạch máu). <b>Gai nhau tận</b> = trao đổi chất; <b>Gai nhau bám</b> = neo vào bao lá nuôi TB (cuối T3).</li>
+              <li><b>Hợp bào vs Tế bào:</b> <span class="rc"><b>Hợp bào</b> tách hốc tạo <b>hồ máu</b>, phủ bề mặt vách nhau, <b>tiết TOÀN BỘ hormon nhau thai</b> (hCG, hCS/hPL, hCT [gây ĐTĐ thai kỳ], hCACTH, Progesterone, Estrogen)</span>; <span class="rc"><b>Lá nuôi TB</b> xâm nhập ĐM xoắn & <b>tiêu biến dần từ tháng 4</b> (mạnh ở gai nhau tận)</span>.</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li><b>Biến mất 2 khoang:</b> Khoang tử cung biến mất do <span class="rc"><b>Màng rụng bao dính vào Màng rụng thành</b></span> • Khoang đệm biến mất do <span class="rc"><b>Khoang ối tiến ra sát nhập Màng đệm nhẵn</b> (ở cực đối phôi)</span>.</li>
+              <li><b>Hàng rào máu–nhau cuối tháng 1 (4 lớp ngoài→trong):</b> <span class="rc">Lá nuôi hợp bào → Lá nuôi TB → Mô liên kết → Nội mô</span> (<span class="trap">KHÔNG có nội mô ĐM xoắn! IgG vẫn qua được!</span>).</li>
+              <li><b>Số liệu nhau đủ tháng:</b> Chiếm <span class="rc"><b>15–30%</b> S tử cung • ĐK <b>15–25 cm</b> • Nặng <b>~400g</b> • <b>15–20 múi</b> (do vách màng rụng chia từ tháng 4) • <b>80–100</b> ĐM xoắn • <b>150 ml</b> máu (đổi <b>3–4 lần/phút</b>) • S gai nhau <b>4–14 m²</b> • Thai nhận <b>20–30 ml O₂/phút</b> (30–40 theo câu file 2)</span>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TRANG 4 ==================== -->
+    <section class="sheet" id="page-4">
+      <div class="sheet-head">
+        <span class="sheet-title" style="color:var(--red)">TRANG 4/4: PHÔI HÔ HẤP, TIÊU HÓA, NIỆU–DỤC & QUY LUẬT BẪY THI</span>
+        <span class="sheet-badge">BÀI 18 • BÀI 23 (TIẾT NIỆU & SINH DỤC) • TOP BẪY PHỦ ĐỊNH</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="box">
+          <div class="box-title t-teal">1. Phôi Thai Hô Hấp & Tiêu Hóa (Bài 18)</div>
+          <ul>
+            <li><b>4 đoạn ống ruột nguyên thủy:</b> Ruột họng → Ruột trước (<span class="rc"><b>ĐM thân tạng</b>: thực quản, dạ dày, gan, tụy, đầu tá tràng</span>) → Ruột giữa (<span class="rc"><b>ĐM mạc treo tràng trên</b>: sau tá tràng → 2/3 phải ĐT ngang</span>) → Ruột sau (<span class="rc"><b>ĐM mạc treo tràng dưới</b>: 1/3 trái ĐT ngang → ống hậu môn</span>).</li>
+            <li><b>Hô hấp:</b> Tuần 4 mầm phổi từ mặt bụng cuối ruột họng; Mào khí-thực quản tách đôi (bất thường → <span class="rc"><b>Tịt thực quản trên + Rò đoạn dưới chiếm 90%</b>; đơn thuần 8% → <b>đa ối</b>; <b>VACTERL</b></span>). Thanh quản: biểu mô = nội bì; sụn & cơ = <b>cung họng 4 & 6</b>.</li>
+            <li><b>Cây phế quản & Trưởng thành phổi:</b> PQ cấp I phải → <span class="rc"><b>3 nhánh</b> cấp II</span>; trái → <span class="rc"><b>2 nhánh</b></span>. <b>Phế bào II</b> (surfactant) xuất hiện cuối <span class="rc"><b>tháng thứ 6</b></span>; Trẻ sinh non sống được từ cuối <span class="rc"><b>tháng thứ 7</b></span>; Lúc sinh mới có <span class="rc"><b>1/4 (hoặc 1/6)</b> phế nang trưởng thành</span>.</li>
+            <li><b>Xoay ống tiêu hóa & Gan–Tụy:</b> Dạ dày xoay <span class="rc"><b>90° cùng chiều KĐH</b></span> quanh trục dọc (mặt trái → trước; bờ sau → bờ cong lớn bên trái). Quai ruột giữa xoay <span class="rc"><b>270° ngược chiều KĐH</b></span> (90° + 180°). Gan tạo mật <span class="rc"><b>tuần 12</b></span>, tuần 10 nặng 10% (sinh còn 5%).</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <div class="box-title t-blue">2. Phôi Thai Hệ Tiết Niệu (Bài 23 — 25 câu VIP)</div>
+          <ul>
+            <li><b>Nguồn gốc:</b> Hai <b>dải sinh thận</b> từ <span class="rc"><b>trung bì trung gian</b></span> → 3 thế hệ: Tiền thận → Trung thận → Hậu thận.</li>
+            <li><b>Trung thận:</b> Hoạt động tạo nước tiểu <span class="rc"><b>tuần 6 – tuần 10</b></span>; gắn với thành cơ thể bằng <b>mạc treo niệu–sinh dục</b>; ống trung thận dọc = <b>ống Wolff</b> cắm vào ổ nhớp (<span class="trap">Bẫy SAI: Đầu GẦN ống ngang nối nhau tạo ống dọc là SAI, phải là ĐẦU XA!</span>).</li>
+            <li><b>Hậu thận (Thận vĩnh viễn, từ tuần thứ 5) — TÁCH BẠCH 2 NGUỒN:</b>
+              <ul>
+                <li><b>Nụ niệu quản</b> (mọc từ <span class="rc"><b>thành sau đoạn cuối ống Wolff</b></span>) → <span class="rc"><b>Niệu quản, Bể thận, Đài thận lớn (nhánh cấp 1), Đài thận nhỏ (nhánh cấp 3–6), Ống góp</b></span>.</li>
+                <li><b>Mầm sinh hậu thận</b> → <span class="rc"><b>Tiểu cầu thận, Ống lượn gần, Quai Henle (ống hậu thận), Ống lượn xa</b></span>.</li>
+              </ul>
+            </li>
+            <li><b>Xoang niệu–sinh dục (Đầu → Đuôi):</b> <span class="rc">Đoạn bàng quang (tạo bàng quang) → Đoạn chậu → Đoạn mầm sinh dục ngoài.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="box-title t-purple">3. Bảng Chuyển Hóa Hệ Sinh Dục Nam vs Nữ (Bài 23 — 40 câu VIP)</div>
+        <p style="margin:2px 0 6px 0;">
+          <b>Mốc chung:</b> Giới tính di truyền chốt <span class="rc"><b>ngay sau thụ tinh</b></span> • Giai đoạn trung tính: <span class="rc"><b>Tuần 3 → cuối tuần 6</b></span> • TB mầm vào xong vào <span class="rc"><b>tuần thứ 6</b></span> (chính TB mầm cảm ứng tạo buồng trứng hay tinh hoàn!).
+        </p>
+        <table>
+          <tr><th>Cấu trúc phôi</th><th>Hướng NAM (Gen <b>SRY</b> → protein <b>TDF</b> → <b>SOX9</b>)</th><th>Hướng NỮ (<b>TAFII 105, DAX1</b>)</th></tr>
+          <tr><td><b>Dây sinh dục & Tuyến</b></td><td class="rc">Dây sinh dục nguyên thủy (từ biểu mô thành cơ thể) → Dây tinh hoàn (TB mầm + <b>Sertoli</b>) ngăn bởi <b>màng trắng</b> (MLK đặc). Tháng 4 hình <b>móng ngựa, CHƯA có lòng ống</b> (đến dậy thì mới có!). <b>Leydig</b> (từ trung mô) tiết <b>Testosterone từ tuần 8</b>.</td><td class="rc">Dây sinh dục nguyên thủy thoái hóa → <b>Tuần 7</b> tạo <b>dây sinh dục thứ phát (vỏ)</b> → bọc noãn thành nang trứng nguyên thủy.</td></tr>
+          <tr><td><b>Ống Wolff</b> (Trung thận)</td><td class="rc">Phát triển nhờ <b>Testosterone</b>: ống thận ngang → <b>ống ra</b>; đoạn xoắn → <b>mào tinh hoàn</b>; ống dọc → <b>ống dẫn tinh</b>, túi tinh.</td><td class="rc"><b>Thoái hóa</b> (không có Testosterone).</td></tr>
+          <tr><td><b>Ống Müller</b> (Cận trung thận)</td><td class="rc"><b>Thoái hóa</b> dưới tác dụng hormon <b>AMH (MIS)</b> do tế bào <b>Sertoli</b> tiết.</td><td class="rc">Phát triển tạo <b>vòi tử cung, tử cung, phần trên âm đạo</b>.</td></tr>
+          <tr><td><b>Sinh dục ngoài & Di cư</b></td><td class="rc">Hormon trực tiếp tạo dương vật: <b>5α-dihydrotestosterone (DHT)</b> • Tinh hoàn đến vùng bẹn lúc <span class="kw">tuần thứ 12</span> (dây chằng kéo từ <b>cực dưới</b> đến lồi bìu).</td><td class="rc">Củ SD → âm vật • Nếp niệu đạo → môi bé • Gờ môi bìu → môi lớn.</td></tr>
+        </table>
+      </div>
+
+      <div class="box" style="border: 1.5px solid #ef4444; background: #fef2f2; margin-bottom:0">
+        <div class="box-title t-red">4. 6 Quy Luật "Bẫy Đề Thi Phủ Định" (Áp dụng cho 277 câu CHỌN CÂU SAI / NGOẠI TRỪ / KHÔNG)</div>
+        <div class="grid-2">
+          <div>
+            <ul>
+              <li><span class="trap">Bẫy 1 – Đảo đầu/cuối, trong/ngoài:</span> Dạ dày cơ xiên ở <i>trong cùng</i> (đề lừa: <i>ngoài cùng</i>); Ống ngang trung thận nối ở <i>đầu xa</i> (đề lừa: <i>đầu gần</i>); Dây chằng kéo gắn <i>cực dưới</i> tinh hoàn (đề lừa: <i>cực trên</i>); Lớp da ngoài→trong bắt đầu từ <i>Sừng</i>.</li>
+              <li><span class="trap">Bẫy 2 – Từ tuyệt đối:</span> Thấy chữ <b>"tất cả"</b>, <b>"luôn luôn"</b>, <b>"không bao giờ"</b>, <b>"hoàn toàn"</b> (VD: <i>"tất cả kháng thể đều không qua nhau thai"</i>, <i>"dây rốn luôn cắm đúng giữa tâm"</i>, <i>"tủy vàng thay thế hoàn toàn tủy đỏ"</i>) → 90% là CÂU SAI!</li>
+              <li><span class="trap">Bẫy 3 – Đổi vai trò 2 cấu trúc song sinh:</span> <b>Hợp bào</b> tiết hormon vs <b>Lá nuôi TB</b> xâm nhập mạch; <b>Nụ niệu quản</b> (đài/bể/niệu quản/ống góp) vs <b>Mầm sinh hậu thận</b> (nephron); <b>Sertoli</b> (AMH) vs <b>Leydig</b> (Testosterone).</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li><span class="trap">Bẫy 4 – Lệch mốc 1 đơn vị tuần/tháng:</span> Sinh dục trung tính bắt đầu <b>tuần 3</b> (lừa: tuần 6); Dây sinh dục thứ phát nữ <b>tuần 7</b>; Màng rụng <b>bao</b> (phủ phôi) vs <b>đáy</b> (bánh nhau) vs <b>thành</b>; Đĩa phôi 2 lá (tuần 2, ngày 8) vs 3 lá (tuần 3).</li>
+              <li><span class="trap">Bẫy 5 – Số lượng & Kích thước:</span> Nơi đặt số sai nhẹ trong câu SAI (150 ml máu vs lừa 135 ml; Diện tích gai 4–14 m² vs lừa 10–20 m²; Thai nhận 20–30 ml O₂ vs lừa 30–40 ml ở file 1).</li>
+              <li><span class="trap">Bẫy 6 – Cấy 1 cấu trúc lạ:</span> <i>"Tinh bào III"</i> (không có!), <i>"TB Paneth/Kupffer ở ống sinh tinh"</i>, <i>"Mao mạch xơ"</i>, <i>"Mô hạt/mô viêm"</i> trong 4 mô cơ bản, <i>"Nơron dinh dưỡng"</i>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function toggleRecall() {
+      const active = document.body.classList.toggle('hide-recall');
+      const btn = document.getElementById('btn-hb-recall');
+      btn.textContent = active ? '👀 Đang Che (Click Ô Để Mở)' : '👁️ Che Đáp Án (Tự Test)';
+      btn.style.background = active ? '#ef4444' : '#f59e0b';
+      btn.style.color = active ? '#fff' : '#0f172a';
+    }
+    document.querySelectorAll('.rc').forEach(el => {
+      el.addEventListener('click', () => {
+        if (document.body.classList.contains('hide-recall')) {
+          el.classList.toggle('revealed');
+        }
+      });
+    });
+    function filterHandbook(val) {
+      const q = (val || '').trim().toLowerCase();
+      document.querySelectorAll('tr, li').forEach(el => {
+        el.classList.remove('hit-row');
+        if (!q) { el.style.opacity = '1'; return; }
+        if (el.textContent.toLowerCase().includes(q)) {
+          el.classList.add('hit-row');
+          el.style.opacity = '1';
+        } else if (el.tagName === 'TR' && el.querySelector('th')) {
+          el.style.opacity = '1';
+        } else {
+          el.style.opacity = '0.28';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

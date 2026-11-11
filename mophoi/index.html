@@ -2128,6 +2128,155 @@ body.theme-light .notebooklm-canvas {
 
     
     
+
+    /* ========================================================== */
+    /* 🧭 TAB: MA TRẬN TỔNG HỢP CHỐNG NHẦM (SYSTEMIZATION STUDIO) */
+    /* ========================================================== */
+    .matrix-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .matrix-hero {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.16), rgba(56, 189, 248, 0.14));
+      border: 1.5px solid rgba(245, 158, 11, 0.45);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 18px;
+    }
+    .matrix-controls {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+    }
+    .matrix-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .matrix-pill {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .matrix-pill.active, .matrix-pill:hover {
+      background: rgba(56, 189, 248, 0.22);
+      border-color: #38bdf8;
+      color: #38bdf8;
+    }
+    .matrix-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 18px;
+    }
+    .matrix-block-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #38bdf8;
+      margin: 0 0 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .matrix-table th, .matrix-table td {
+      border: 1px solid var(--border);
+      padding: 9px 11px;
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .matrix-table th {
+      background: rgba(56, 189, 248, 0.1);
+      color: #7dd3fc;
+      font-weight: 800;
+    }
+    body.theme-light .matrix-table th {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+    .matrix-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 860px) {
+      .matrix-grid-2 { grid-template-columns: 1fr; }
+    }
+    .matrix-subcard {
+      background: rgba(15, 23, 42, 0.45);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    body.theme-light .matrix-subcard {
+      background: #f8fafc;
+    }
+    .matrix-subcard h4 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      color: #fbbf24;
+    }
+    body.theme-light .matrix-subcard h4 {
+      color: #b45309;
+    }
+    .matrix-subcard ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .matrix-subcard li {
+      margin-bottom: 5px;
+    }
+    .recall-ans {
+      transition: all 0.15s;
+    }
+    body.matrix-recall-hidden .recall-ans {
+      color: transparent !important;
+      background: #334155 !important;
+      border-radius: 5px;
+      user-select: none;
+      cursor: pointer;
+    }
+    body.theme-light.matrix-recall-hidden .recall-ans {
+      background: #cbd5e1 !important;
+    }
+    body.matrix-recall-hidden .recall-ans:hover,
+    body.matrix-recall-hidden .recall-ans.matrix-revealed {
+      color: inherit !important;
+      background: rgba(250, 204, 21, 0.18) !important;
+    }
+    .matrix-trap-badge {
+      color: #f87171;
+      font-weight: 800;
+    }
+    body.theme-light .matrix-trap-badge {
+      color: #dc2626;
+    }
+    .matrix-hit {
+      outline: 2px solid #f59e0b;
+      background: rgba(245, 158, 11, 0.12) !important;
+    }
+
   </style>
 </head>
 
@@ -2146,6 +2295,9 @@ body.theme-light .notebooklm-canvas {
       </button>
       <button class="nav-tab highlight-tab" onclick="switchFlashToPhoi249()" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.35), rgba(168, 85, 247, 0.35)); border: 1.5px solid #38bdf8; color: #38bdf8; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;" title="Tích hợp trực tiếp: 249 Câu Ôn Tập Phôi Thai Học (Flash 7s, Bút vẽ, Đề 11.2026)">
         <span style="font-size:16px;">🎯</span> 249 Câu Phôi Thai VIP
+      </button>
+            <button class="nav-tab highlight-tab" onclick="switchTab('matrix')" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.28), rgba(239, 68, 68, 0.22)); border: 1.5px solid #f59e0b; color: #fbbf24; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;" title="Hệ thống hóa toàn diện Mô Phôi bằng Ma trận đối chiếu chống nhầm + Sổ tay In PDF 4 trang">
+        <span style="font-size:16px;">🧭</span> Ma Trận Chống Nhầm
       </button>
       <button class="nav-tab highlight-tab" onclick="switchTab('branch-tree')" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 182, 212, 0.25)); border: 1.5px solid #10b981; color: #34d399; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
         <span style="font-size:16px;">🌳</span> Phân Nhánh Dạng Câu Hỏi
@@ -3528,12 +3680,210 @@ body.theme-light .notebooklm-canvas {
       </div>
     </section>
 
+
+    <!-- ========================================================== -->
+    <!-- 🧭 TAB: MA TRẬN TỔNG HỢP CHỐNG NHẦM & HỆ THỐNG HÓA        -->
+    <!-- ========================================================== -->
+    <section id="tab-matrix" class="tab-content">
+      <div class="matrix-container">
+        <div class="matrix-hero">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+            <div>
+              <span class="flash-lec-badge" style="background:#f59e0b; color:#0f172a; font-weight:800;">XƯƠNG SỐNG HỆ THỐNG HÓA</span>
+              <h2 class="lecture-heading-serif" style="font-size:24px; color:#fbbf24; margin:8px 0 4px 0;">🧭 Ma Trận Chống Nhầm & Hệ Thống Xuyên Suốt 23 Bài</h2>
+              <p style="font-size:13.5px; color:var(--text-muted); margin:0;">
+                Gom toàn bộ các cặp dễ lú nhất (Mô đại cương, Tầng cơ quan, Timeline Phôi thai, Bảng chuyển hóa Tiết niệu–Sinh dục, Quy luật Bẫy Phủ Định) vào một màn hình đối chiếu ngang.
+              </p>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button onclick="switchFlashToTraps()" class="btn-read-lecture-quick" style="background:linear-gradient(135deg,#ef4444,#dc2626); color:#fff; padding:9px 16px; font-weight:800; border:none; border-radius:8px; cursor:pointer;" title="Lọc ngay toàn bộ 277 câu Bẫy SAI / NGOẠI TRỪ / KHÔNG từ cả 1.314 và 249 câu">
+                🔥 Luyện 277 Câu Bẫy Phủ Định
+              </button>
+              <button onclick="switchToMixedStationExam()" class="btn-read-lecture-quick" style="background:linear-gradient(135deg,#10b981,#059669); color:#fff; padding:9px 16px; font-weight:800; border:none; border-radius:8px; cursor:pointer;" title="Thi thử 40 trạm trộn ngẫu nhiên cả Mô Học + 249 Phôi Thai để test phản xạ thật">
+                🎲 Chạy Trạm Trộn 40 Câu
+              </button>
+              <a href="so_tay_he_thong.html" target="_blank" class="btn-read-lecture-quick" style="background:linear-gradient(135deg,#38bdf8,#0284c7); color:#fff; padding:9px 16px; font-weight:800; text-decoration:none; border-radius:8px; display:inline-flex; align-items:center; gap:5px;" title="Mở Sổ Tay 4 Trang A4 định dạng chuẩn in / xuất PDF">
+                🖨️ Sổ Tay In / PDF (4 Trang)
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="matrix-controls">
+          <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+            <input type="text" id="matrix-search-input" oninput="filterMatrixContent(this.value)"
+              placeholder="🔍 Lọc nhanh trong bảng (Wolff, Diad, Paneth, tuần 6, mào thần kinh, Leydig, Sừng...)"
+              style="flex:1; min-width:250px; padding:10px 14px; border-radius:8px; border:1px solid var(--border); background:var(--bg-dark); color:var(--text-main); font-size:13.5px;">
+            <button id="btn-matrix-recall" onclick="toggleMatrixRecall()" class="btn-control"
+              style="border-color:#f59e0b; color:#fbbf24; font-weight:800; padding:9px 14px;">
+              👁️ Che Cột Chốt Đáp Án (Tự Test Nhớ)
+            </button>
+          </div>
+          <div class="matrix-pills" id="matrix-block-pills">
+            <button class="matrix-pill active" onclick="filterMatrixBlock('all', this)">📚 Hiện Cả 6 Khối</button>
+            <button class="matrix-pill" onclick="filterMatrixBlock('blk-1', this)">1. Mô Đại Cương (B1–B5)</button>
+            <button class="matrix-pill" onclick="filterMatrixBlock('blk-2', this)">2. Mô Cơ Quan (B6–B12)</button>
+            <button class="matrix-pill" onclick="filterMatrixBlock('blk-3', this)">3. Phôi Tuần 1–3 & 3 Lá Phôi</button>
+            <button class="matrix-pill" onclick="filterMatrixBlock('blk-4', this)">4. Phần Phụ & Nhau Thai</button>
+            <button class="matrix-pill" onclick="filterMatrixBlock('blk-5', this)">5. Phôi Hô Hấp, Tiêu Hóa & Niệu-Dục</button>
+            <button class="matrix-pill" onclick="filterMatrixBlock('blk-6', this)">6. 6 Quy Luật Bẫy Phủ Định</button>
+          </div>
+        </div>
+
+        <!-- KHỐI 1: MÔ ĐẠI CƯƠNG -->
+        <div class="matrix-block" data-mblock="blk-1">
+          <h3 class="matrix-block-title">🔬 KHỐI 1: MÔ HỌC ĐẠI CƯƠNG (BÀI 1 → BÀI 5)</h3>
+          <table class="matrix-table">
+            <tr><th style="width:24%">Nhóm hay nhầm</th><th>Đối chiếu nhanh & Chốt từ khóa chuẩn K48</th></tr>
+            <tr><td><b>Kính hiển vi & Nhuộm</b></td><td class="recall-ans">Mắt: <b>0,2 mm</b> • Quang học: <b>0,2 µm</b> (vùi nến, H.E) • <b>TEM</b>: 1 nm (chi tiết dưới TB) • <b>SEM</b>: ảnh <b>3 chiều (3D)</b>.<br>Hematoxylin (ưa base, xanh tím → <b>Nhân</b>); Eosin (ưa acid, đỏ hồng → <b>Bào tương</b>); PAS (Glycogen, Màng đáy); Sudan (Mỡ); AgNO₃ (Sợi lưới).</td></tr>
+            <tr><td><b>Mô Cơ: Vân vs Tim vs Trơn</b></td><td class="recall-ans"><b>Cơ vân:</b> Trụ dài, <b>đa nhân ngoại vi</b>, vân ngang, <b>Triad</b> hoàn chỉnh, theo ý muốn, Troponin.<br><b>Cơ tim:</b> Phân nhánh, <b>1–2 nhân trung tâm</b>, <b>vạch bậc thang</b>, <b>Diad</b> (không hoàn chỉnh), không theo ý muốn.<br><b>Cơ trơn:</b> Hình thoi, <b>1 nhân trung tâm</b>, không vân, có <b>thể đặc</b>, không ống T, <b>Calmodulin</b>.</td></tr>
+            <tr><td><b>Phân loại Nơron (Cực)</b></td><td class="recall-ans"><b>2 cực:</b> Chỉ ở <b>võng mạc mắt, niêm mạc khứu giác, hạch tiền đình & hạch xoắn tai trong</b>.<br><b>1 cực giả:</b> Hạch gai rễ sau, hạch sọ cảm giác, <span class="matrix-trap-badge">nhân nhai cầu não (bẫy!)</span>.<br><b>Đa cực:</b> Purkinje (vỏ tiểu não), Tháp (vỏ đại não), Sừng trước tủy. Thể <b>Nissl</b> = tổng hợp protein.</td></tr>
+            <tr><td><b>6 TK Đệm (TW vs NB)</b></td><td class="recall-ans"><b>Trung ương:</b> TB Sao (hàng rào máu–não) • Ít nhánh (myelin TW) • <b>Vi đệm</b> (thực bào, nguồn gốc <b>trung bì/monocyte</b>) • Nội tủy.<br><b>Ngoại biên:</b> Schwann (myelin NB) • TB Vệ tinh.</td></tr>
+            <tr><td><b>TB Liên kết & Sụn–Xương</b></td><td class="recall-ans"><b>Tương bào</b> (từ Lympho B → tiết kháng thể Ig) • <b>Dưỡng bào</b> (Heparin + Histamin) • <b>Chu bào</b> (ôm ngoài mao mạch).<br><b>Sụn</b> không có mạch máu (Trong: khớp/khí quản; Chun: vành tai/nắp thanh quản; Xơ: đĩa gian đốt sống).<br><b>Hủy cốt bào</b> (đa nhân, nằm hốc <b>Howship</b>); đơn vị xương đặc = <b>Hệ Havers</b>.</td></tr>
+          </table>
+        </div>
+
+        <!-- KHỐI 2: MÔ CƠ QUAN -->
+        <div class="matrix-block" data-mblock="blk-2">
+          <h3 class="matrix-block-title">🫀 KHỐI 2: MÔ HỌC CƠ QUAN (BÀI 6 → BÀI 12)</h3>
+          <div class="matrix-grid-2">
+            <div class="matrix-subcard">
+              <h4>🩸 Mạch Máu & Hô Hấp (Bài 6–7)</h4>
+              <ul>
+                <li><b>3 Mao mạch:</b> <span class="recall-ans"><b>Kín/Liên tục</b> (não, phổi, cơ, tuyến ức) • <b>Cửa sổ</b> (thận, ruột, nội tiết) • <b>Kiểu xoang</b> (gan, lách, tủy xương đỏ).</span></li>
+                <li><b>Màng ngăn chun:</b> <span class="recall-ans">Trong ở áo trong; <b>Ngoài</b> là ranh giới <b>áo giữa & áo ngoài</b>.</span></li>
+                <li><b>Biểu mô Hô hấp:</b> <span class="recall-ans">Mũi hô hấp, hầu khí, thanh quản, khí quản = <b>Trụ giả tầng có lông chuyển</b> (TB đáy sinh sản). <span class="matrix-trap-badge">Bẫy:</span> Hầu thức ăn & 2 dây thanh âm = <b>Lát tầng không sừng</b>!</span></li>
+                <li><b>Tiểu PQ tận & Phế nang:</b> <span class="recall-ans">Tiểu PQ mất sụn/tuyến (cơ Reisseisen); Tiểu PQ tận có <b>TB Clara</b>; <b>Phế bào I</b> (95% S trao đổi khí); <b>Phế bào II</b> (Surfactant).</span></li>
+              </ul>
+            </div>
+            <div class="matrix-subcard">
+              <h4>🍽️ Ống Tiêu Hóa, Gan, Tụy (Bài 8)</h4>
+              <ul>
+                <li><b>Ranh giới 4 tầng:</b> <span class="recall-ans"><b>Cơ niêm</b> giữa lớp đệm & dưới niêm; <b>Tầng dưới niêm</b> gắn tầng cơ với niêm mạc; Lớp đệm luôn có ống tuyến.</span></li>
+                <li><b>Nơi đặc biệt:</b> <span class="recall-ans">Chỉ <b>Thực quản & Tá tràng (tuyến Brunner)</b> có tuyến tầng dưới niêm! Chỉ <b>Thực quản & Hậu môn</b> có cơ vân! Dạ dày cơ xiên ở <b>TRONG CÙNG</b>.</span></li>
+                <li><b>Tế bào đặc hiệu:</b> <span class="recall-ans">Dạ dày: <b>Chính</b> (pepsinogen, ưa base) vs <b>Thành/viền</b> (HCl & yếu tố nội, ưa acid). Ruột non: Van ngang rõ ở <b>hỗng tràng</b>, đáy tuyến Lieberkuhn có <b>Paneth</b> (lysozyme), hồi tràng có <b>mảng Peyer</b>.</span></li>
+                <li><b>Gan & Tụy:</b> <span class="recall-ans"><b>Kupffer</b> (xoang gan) • <b>Ito</b> (Disse, trữ Vit A) • <b>TB trung tâm nang tụy</b>; Langerhans (α Glucagon, β Insulin, δ Somatostatin).</span></li>
+              </ul>
+            </div>
+            <div class="matrix-subcard">
+              <h4>🫘 Thận & Sinh Sản (Bài 9–10)</h4>
+              <ul>
+                <li><b>Niệu mạc (Chuyển tiếp):</b> <span class="recall-ans">Đài/bể thận, niệu quản, bàng quang. Màng lọc: nội mô cửa sổ + màng đáy + chân podocyte.</span></li>
+                <li><b>Ống thận & Cận cầu thận:</b> <span class="recall-ans">Gần & Xa đều <b>vuông đơn</b>; Gần có <b>diềm bàn chải cao</b>, tiết creatinin. Phức hợp cận tiểu cầu gồm <b>vết đặc</b> (ống lượn xa) + <b>TB cận tiểu cầu</b> (tiết <b>Renin</b>) + gian mao mạch ngoài.</span></li>
+                <li><b>Tinh hoàn:</b> <span class="recall-ans"><b>Sertoli</b> (trong ống, hàng rào máu-tinh hoàn, tiết ABP & AMH) vs <b>Leydig</b> (mô kẽ, Testosterone). Ống thẳng (vuông đơn) → Ống ra (trụ đơn) → <b>Mào tinh (trụ giả tầng có lông giả)</b>.</span></li>
+                <li><b>Buồng trứng:</b> <span class="recall-ans">Dưới biểu mô là màng trắng; Nang thứ cấp = <b>vuông tầng</b>.</span></li>
+              </ul>
+            </div>
+            <div class="matrix-subcard">
+              <h4>🛡️ Tạo Máu, Miễn Dịch & Da (Bài 11–12)</h4>
+              <ul>
+                <li><b>Tạo máu phôi:</b> <span class="recall-ans"><b>Thành túi noãn hoàng</b> đầu tiên → Gan/Lách → Tủy xương (<b>xương đòn</b> cuối tháng 2).</span></li>
+                <li><b>Lympho Nguyên vs Thứ phát:</b> <span class="recall-ans"><b>Nguyên phát:</b> Tủy xương đỏ & Tuyến ức (biệt hóa <b>KHÔNG phụ thuộc KN</b>, ~30% T qua được). <b>TB lưới</b> tạo sợi lưới, TB sợi & mỡ (không tạo máu!).</span></li>
+                <li><b>Biểu bì Da (Ngoài → Trong):</b> <span class="recall-ans"><b>Sừng → Bóng → Hạt → Gai (thể liên kết) → Sinh sản</b>. Hạ bì chứa mỡ.</span></li>
+                <li><b>TB Da:</b> <span class="recall-ans">Sắc tố ở <b>lớp sinh sản</b> (điều hòa MSH); <b>Merkel</b> (xúc giác); <b>Langerhans</b> (từ monocyte); <span class="matrix-trap-badge">TB Sao KHÔNG thuộc biểu bì!</span> Tiểu cầu mồ hôi = <b>vuông đơn</b>, ống bài xuất = <b>vuông tầng</b>.</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- KHỐI 3: PHÔI TUẦN 1-3 & DẪN XUẤT -->
+        <div class="matrix-block" data-mblock="blk-3">
+          <h3 class="matrix-block-title">🧬 KHỐI 3: PHÔI THAI TUẦN 1–3, GIAO TỬ & DẪN XUẤT 3 LÁ PHÔI</h3>
+          <div class="matrix-grid-2">
+            <div class="matrix-subcard">
+              <h4>🗓️ Giao Tử & Mốc Ngày 1 → Tuần 3</h4>
+              <ul>
+                <li><b>TB mầm nguyên thủy:</b> <span class="recall-ans">Từ <b>Hạ bì phôi</b> (Key 249) → qua <b>mạc treo ruột sau</b> → mào sinh dục (lạc chỗ → <b>u quái</b>).</span></li>
+                <li><b>Noãn & Tinh:</b> <span class="recall-ans">Nữ max <b>7 triệu</b>, thoái hóa vùng tủy, dừng GP I ở <b>Diplotene</b> (TB nang dẹt ức chế), xong GP I trước rụng, xong GP II khi thụ tinh; sống <b>24h</b>. Nam tạo tinh trùng <b>9–10 tuần</b>, <b>300 triệu/ngày</b> (Key 249), lõi đuôi từ trung tử, giữ ty thể.</span></li>
+                <li><b>Tuần 1:</b> <span class="recall-ans">Ngày 3–4: Phôi dâu (12–16 TB) • Ngày 5–6: Thoát màng trong suốt → Phôi nang • Ngày 6–7: <b>Làm tổ bằng cực phôi</b> vào <b>lớp chức năng</b> nội mạc.</span></li>
+                <li><b>Tuần 2 & 3:</b> <span class="recall-ans">Ngày 8: <b>Đĩa 2 lá</b> (Thượng bì tiếp xúc ối + Hạ bì tiếp xúc túi noãn hoàng) • Ngày 12: <b>Trung bì ngoài phôi</b> • Tuần 3: <b>Đường nguyên thủy</b> → <b>Phôi 3 lá</b> • Dây sống (chống đỡ phôi).</span></li>
+              </ul>
+            </div>
+            <div class="matrix-subcard">
+              <h4>🌱 Nguồn Gốc 3 Lá Phôi & Mào Thần Kinh</h4>
+              <ul>
+                <li><b>Ngoại bì bề mặt:</b> <span class="recall-ans">Biểu bì da, lông móng, tuyến da-vú, giác mạc/thủy tinh thể, men răng.</span></li>
+                <li><b>Ngoại bì thần kinh:</b> <span class="recall-ans">Não bộ, tủy sống, võng mạc.</span></li>
+                <li><b>Mào thần kinh:</b> <span class="recall-ans">Hạch cảm giác/tự chủ, Schwann, tủy thượng thận, TB sắc tố, hạch ruột.</span></li>
+                <li><b>Trung bì:</b> <span class="recall-ans"><b>Bộ xương, mô cơ, mô liên kết, tim mạch, tế bào máu & bạch huyết, hệ niệu–sinh dục</b> (dải sinh thận từ trung bì trung gian), tầng cơ-MLK ống tiêu hóa.</span></li>
+                <li><b>Nội bì:</b> <span class="recall-ans">Biểu mô <b>ống tiêu hóa, khí quản–phế quản, thanh quản, họng, tuyến giáp</b>, nhu mô gan & tụy.</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- KHỐI 4: PHẦN PHỤ & NHAU THAI -->
+        <div class="matrix-block" data-mblock="blk-4">
+          <h3 class="matrix-block-title">🤰 KHỐI 4: PHẦN PHỤ PHÔI THAI & BÁNH NHAU (BÀI 18 — 78 CÂU)</h3>
+          <table class="matrix-table">
+            <tr><th style="width:26%">Thành phần / Cặp đối lập</th><th>Chốt chuẩn đáp án ngân hàng 249 câu</th></tr>
+            <tr><td><b>2 phần tạo Bánh nhau</b></td><td class="recall-ans">Con: <b>Màng đệm lông</b> (lá nuôi + trung bì ngoài phôi) + Mẹ: <b>Màng rụng đáy</b> (tạo đĩa đáy; TB rụng to nhiều lipid/glycogen).</td></tr>
+            <tr><td><b>3 cấp Gai nhau</b></td><td class="recall-ans"><b>Cấp 1</b> (đầu tuần 3): Lá nuôi TB + Hợp bào → <b>Cấp 2</b> (+ trung bì ngoài phôi) → <b>Cấp 3</b> (+ mạch máu). <b>Gai nhau tận</b> = trao đổi chất; <b>Gai nhau bám</b> = neo vào bao lá nuôi TB.</td></tr>
+            <tr><td><b>Hợp bào vs Lá nuôi TB</b></td><td class="recall-ans"><b>Hợp bào:</b> tạo hồ máu, phủ vách nhau, <b>tiết MỌI hormon (hCG, hCS/hPL, hCT [gây ĐTĐ thai kỳ], hCACTH, Progesterone, Estrogen)</b>.<br><b>Lá nuôi TB:</b> xâm nhập ĐM xoắn mẹ, tạo bao lá nuôi TB (cuối T3), <b>tiêu biến dần từ tháng thứ 4</b> ở gai nhau tận.</td></tr>
+            <tr><td><b>2 Khoang biến mất</b></td><td class="recall-ans"><b>Khoang tử cung</b> mất do <b>Màng rụng bao dính vào Màng rụng thành</b>.<br><b>Khoang đệm</b> mất do <b>Khoang ối tiến ra sát nhập Màng đệm nhẵn</b> (ở cực đối phôi).</td></tr>
+            <tr><td><b>Số liệu nhau đủ tháng</b></td><td class="recall-ans"><b>15–30%</b> S tử cung • ĐK <b>15–25 cm</b> • Nặng <b>~400g</b> • <b>15–20 múi</b> • <b>80–100</b> ĐM xoắn • <b>150 ml</b> máu (đổi <b>3–4 lần/phút</b>) • S gai <b>4–14 m²</b> • Thai nhận <b>20–30 ml O₂/phút</b>.</td></tr>
+          </table>
+        </div>
+
+        <!-- KHỐI 5: PHÔI HÔ HẤP, TIÊU HÓA, TIẾT NIỆU - SINH DỤC -->
+        <div class="matrix-block" data-mblock="blk-5">
+          <h3 class="matrix-block-title">🦋 KHỐI 5: PHÔI HÔ HẤP, TIÊU HÓA (BÀI 18) & TIẾT NIỆU – SINH DỤC (BÀI 23)</h3>
+          <div class="matrix-grid-2" style="margin-bottom:12px;">
+            <div class="matrix-subcard">
+              <h4>🫁 Phôi Hô Hấp & Tiêu Hóa (Bài 18)</h4>
+              <ul>
+                <li><b>Đoạn ruột & ĐM:</b> <span class="recall-ans">Ruột trước (<b>ĐM thân tạng</b>) → Ruột giữa (<b>ĐM MTTT trên</b>, sau tá tràng → 2/3 phải ĐT ngang) → Ruột sau (<b>ĐM MTTT dưới</b>).</span></li>
+                <li><b>Xoay ruột & Dạ dày:</b> <span class="recall-ans">Dạ dày xoay <b>90° cùng chiều KĐH</b> (bờ sau → bờ cong lớn trái). Quai ruột giữa xoay <b>270° ngược chiều KĐH</b> (90° + 180°).</span></li>
+                <li><b>Hô hấp:</b> <span class="recall-ans">Tuần 4 mầm phổi bụng ruột họng; Rò khí-thực quản + tịt đoạn trên = <b>90%</b> → <b>đa ối</b>; Phải chia <b>3</b> PQ cấp II, trái chia <b>2</b>; <b>Phế bào II cuối tháng 6</b>; Sống non <b>cuối tháng 7</b>; Lúc sinh có <b>1/4 (1/6)</b> phế nang. Gan tạo mật <b>tuần 12</b>.</span></li>
+              </ul>
+            </div>
+            <div class="matrix-subcard">
+              <h4>💧 Phôi Tiết Niệu (Bài 23 — 25 câu)</h4>
+              <ul>
+                <li><b>Dải sinh thận:</b> <span class="recall-ans">Từ <b>trung bì trung gian</b>. Trung thận tạo nước tiểu <b>tuần 6–10</b> (ống Wolff cắm vào ổ nhớp).</span></li>
+                <li><b>Nụ niệu quản</b> (từ thành sau cuối ống Wolff): <span class="recall-ans">Tạo <b>Niệu quản, Bể thận, Đài lớn (nhánh 1), Đài nhỏ (nhánh 3–6), Ống góp</b>.</span></li>
+                <li><b>Mầm sinh hậu thận (tuần 5):</b> <span class="recall-ans">Tạo <b>Tiểu cầu thận, Ống lượn gần, Quai Henle, Ống lượn xa</b>.</span></li>
+                <li><b>Xoang niệu–SD (đầu→đuôi):</b> <span class="recall-ans">Đoạn bàng quang → Đoạn chậu → Đoạn mầm SD ngoài.</span></li>
+              </ul>
+            </div>
+          </div>
+          <table class="matrix-table">
+            <tr><th>Hệ Sinh Dục (Tuần 3–cuối T6 trung tính; TB mầm vào xong tuần 6)</th><th>Phôi NAM (<b>SRY → TDF → SOX9</b>)</th><th>Phôi NỮ (<b>TAFII 105, DAX1</b>)</th></tr>
+            <tr><td><b>Tuyến & Dây sinh dục</b></td><td class="recall-ans">Màng trắng ngăn dây tinh hoàn (Sertoli + TB mầm); Tháng 4 hình <b>móng ngựa chưa có lòng ống</b>; <b>Leydig</b> tiết <b>Testosterone từ tuần 8</b>.</td><td class="recall-ans">Dây nguyên thủy thoái hóa; <b>Tuần 7</b> tạo <b>dây sinh dục thứ phát (vỏ)</b> → nang trứng.</td></tr>
+            <tr><td><b>Ống Wolff vs Ống Müller</b></td><td class="recall-ans"><b>Wolff</b> (nhờ Testosterone) → mào tinh, ống dẫn tinh, túi tinh, ống ra.<br><b>Müller thoái hóa</b> nhờ <b>AMH (MIS)</b> của TB Sertoli.</td><td class="recall-ans"><b>Wolff thoái hóa</b>.<br><b>Müller</b> → vòi tử cung, tử cung, phần trên âm đạo.</td></tr>
+            <tr><td><b>Sinh dục ngoài & Di cư</b></td><td class="recall-ans">Hormon trực tiếp tạo dương vật: <b>5α-DHT</b> • Tuần <b>12</b> tinh hoàn tới vùng bẹn (dây chằng kéo từ <b>cực dưới</b> đến lồi bìu).</td><td class="recall-ans">Củ SD → âm vật • Nếp niệu đạo → môi bé • Gờ môi bìu → môi lớn.</td></tr>
+          </table>
+        </div>
+
+        <!-- KHỐI 6: BẪY PHỦ ĐỊNH -->
+        <div class="matrix-block" data-mblock="blk-6" style="border-color:rgba(239,68,68,0.5);">
+          <h3 class="matrix-block-title" style="color:#f87171;">⚠️ KHỐI 6: 6 QUY LUẬT BẪY ĐỀ THI PHỦ ĐỊNH ("CHỌN CÂU SAI / NGOẠI TRỪ / KHÔNG")</h3>
+          <div class="matrix-grid-2">
+            <div class="matrix-subcard">
+              <ul>
+                <li><span class="matrix-trap-badge">1. Đảo vị trí Đầu/Đuôi – Trong/Ngoài:</span> Cơ xiên dạ dày ở <i>trong cùng</i> (bẫy: ngoài cùng); Ống ngang trung thận nối ở <i>đầu xa</i> (bẫy: đầu gần); Dây chằng kéo gắn <i>cực dưới</i> tinh hoàn (bẫy: cực trên); Lớp da ngoài→trong bắt đầu từ <i>Sừng</i>.</li>
+                <li><span class="matrix-trap-badge">2. Từ tuyệt đối ("tất cả / luôn luôn / hoàn toàn"):</span> Thấy "tất cả kháng thể đều không qua nhau thai", "dây rốn luôn cắm đúng giữa tâm", "tủy vàng thay hoàn toàn tủy đỏ" → <b>chọn làm CÂU SAI ngay</b>!</li>
+                <li><span class="matrix-trap-badge">3. Đổi vai trò 2 cấu trúc song sinh:</span> Hợp bào vs Lá nuôi TB; Nụ niệu quản vs Mầm sinh hậu thận; Sertoli (AMH) vs Leydig (Testosterone); Mầm tụy lưng vs bụng.</li>
+              </ul>
+            </div>
+            <div class="matrix-subcard">
+              <ul>
+                <li><span class="matrix-trap-badge">4. Lệch mốc 1 tuần:</span> Sinh dục trung tính từ <b>tuần 3</b> (bẫy: tuần 6); Dây sinh dục thứ phát nữ <b>tuần 7</b>; Nhau thoái hóa gai đối phôi <b>tháng 3</b>, tiêu lá nuôi TB & vách nhau <b>tháng 4</b>.</li>
+                <li><span class="matrix-trap-badge">5. Con số cố ý sửa nhẹ:</span> Hồ máu <b>150 ml</b> (bẫy: 135 ml); S gai nhau <b>4–14 m²</b> (bẫy: 10–20 m²); O₂ qua nhau <b>20–30 ml/phút</b> (bẫy 30–40).</li>
+                <li><span class="matrix-trap-badge">6. Cài tên tế bào không có thật / nhầm chỗ:</span> "Tinh bào III", "Mao mạch xơ", "Mô hạt/viêm", "Paneth ở ống sinh tinh", "Tế bào lưới là TB tạo máu".</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <script src="lectures_data.js?v=20261111_v2"></script>
-  <script src="phoi_249_data.js?v=20261111_v2"></script>
-  <script src="questions_data.js?v=20261111_v2"></script>
-  <script src="lectures_data.js?v=20261111_v2"></script>
+  <script src="lectures_data.js?v=20261111_v3"></script>
+  <script src="phoi_249_data.js?v=20261111_v3"></script>
+  <script src="questions_data.js?v=20261111_v3"></script>
+  <script src="lectures_data.js?v=20261111_v3"></script>
   <script>
     // DATA STATE
     let ALL_QUESTIONS = [];
@@ -4310,6 +4660,20 @@ body.theme-light .notebooklm-canvas {
         wrongOpt.style.color = '#ef4444';
         wrongOpt.style.fontWeight = 'bold';
         sel.appendChild(wrongOpt);
+        const combinedOpt = document.createElement('option');
+        combinedOpt.value = '__ALL_COMBINED__';
+        combinedOpt.textContent = `🌟 TẤT CẢ GỘP CHUNG: 1.314 + 249 Phôi Thai (${ALL_QUESTIONS.length + (window.PHOI_249_DATA ? window.PHOI_249_DATA.length : 0)} câu)`;
+        combinedOpt.style.fontWeight = 'bold';
+        combinedOpt.style.color = '#38bdf8';
+        sel.appendChild(combinedOpt);
+
+        const trapsOpt = document.createElement('option');
+        trapsOpt.value = '__TRAPS_ALL__';
+        trapsOpt.textContent = `🔥 BẪY PHỦ ĐỊNH TỔNG HỢP: SAI / NGOẠI TRỪ / KHÔNG (${getCombinedTrapsPool().length} câu)`;
+        trapsOpt.style.fontWeight = 'bold';
+        trapsOpt.style.color = '#fbbf24';
+        sel.appendChild(trapsOpt);
+
         chapters.forEach(ch => {
           const opt = document.createElement('option');
           opt.value = ch;
@@ -5044,7 +5408,7 @@ body.theme-light .notebooklm-canvas {
       const targetTab = document.getElementById(`tab-${tabId}`);
       if (targetTab) targetTab.classList.add('active');
 
-      const btn = Array.from(document.querySelectorAll('.nav-tab')).find(b => b.getAttribute('onclick').includes(tabId));
+      const btn = Array.from(document.querySelectorAll('.nav-tab')).find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId));
       if (btn) btn.classList.add('active');
 
       if (tabId !== 'lockin') { stopLockinFocusAudio(); }
@@ -5083,14 +5447,27 @@ body.theme-light .notebooklm-canvas {
     let selectedStationType = 'all';
     let stationSortMode = 'random'; // 'random', 'archetype', 'orig_num'
 
-    function getArchetypesForChapter(chapterName) {
-      let pool = ALL_QUESTIONS;
-      if (chapterName === '__WRONG_ONLY__') {
+    function getPoolForChapterValue(chapterName) {
+      if (chapterName === '__PHOI_249_ALL__') {
+        return [...(window.PHOI_249_DATA || [])];
+      } else if (chapterName && chapterName.startsWith('__PHOI__')) {
+        const phoiChap = chapterName.replace('__PHOI__', '');
+        return (window.PHOI_249_DATA || []).filter(q => q.chapter === phoiChap);
+      } else if (chapterName === '__TRAPS_ALL__') {
+        return getCombinedTrapsPool();
+      } else if (chapterName === '__ALL_COMBINED__') {
+        return [...ALL_QUESTIONS, ...(window.PHOI_249_DATA || [])];
+      } else if (chapterName === '__WRONG_ONLY__') {
         const wrongIds = PROGRESS.wrong_questions || [];
-        pool = ALL_QUESTIONS.filter(q => wrongIds.includes(q.id));
+        return ALL_QUESTIONS.filter(q => wrongIds.includes(q.id));
       } else if (chapterName && chapterName !== 'all') {
-        pool = ALL_QUESTIONS.filter(q => q.chapter === chapterName);
+        return ALL_QUESTIONS.filter(q => q.chapter === chapterName);
       }
+      return [...ALL_QUESTIONS];
+    }
+
+    function getArchetypesForChapter(chapterName) {
+      let pool = getPoolForChapterValue(chapterName);
 
       const map = new Map();
       pool.forEach(q => {
@@ -5122,15 +5499,18 @@ body.theme-light .notebooklm-canvas {
         const allOpt = document.createElement('option');
         allOpt.value = 'all';
         
-        let totalInChapter = 0;
+        let totalInChapter = getPoolForChapterValue(ch).length;
         if (ch === '__WRONG_ONLY__') {
-          totalInChapter = (PROGRESS.wrong_questions || []).length;
           allOpt.textContent = `⚡ Tất cả các dạng câu sai (${totalInChapter} câu)`;
+        } else if (ch === '__TRAPS_ALL__') {
+          allOpt.textContent = `🔥 Tất cả bẫy phủ định (${totalInChapter} câu)`;
+        } else if (ch === '__ALL_COMBINED__') {
+          allOpt.textContent = `🌟 Tất cả gộp chung (${totalInChapter} câu)`;
+        } else if (ch === '__PHOI_249_ALL__' || (ch && ch.startsWith('__PHOI__'))) {
+          allOpt.textContent = `🎯 Bộ Phôi Thai VIP (${totalInChapter} câu)`;
         } else if (ch !== 'all') {
-          totalInChapter = ALL_QUESTIONS.filter(q => q.chapter === ch).length;
           allOpt.textContent = `⚡ Tất cả các dạng (${totalInChapter} câu)`;
         } else {
-          totalInChapter = ALL_QUESTIONS.length;
           allOpt.textContent = `⚡ Tất cả 16 bài & dạng câu (${totalInChapter} câu)`;
         }
         typeSelect.appendChild(allOpt);
@@ -5154,6 +5534,14 @@ body.theme-light .notebooklm-canvas {
       let chapterTitle = 'TẤT CẢ 16 BÀI HỌC';
       if (ch === '__WRONG_ONLY__') {
         chapterTitle = 'KHO CÂU HAY SAI';
+      } else if (ch === '__TRAPS_ALL__') {
+        chapterTitle = 'BẪY PHỦ ĐỊNH TỔNG HỢP';
+      } else if (ch === '__ALL_COMBINED__') {
+        chapterTitle = 'TẤT CẢ 1.314 + 249 PHÔI THAI';
+      } else if (ch === '__PHOI_249_ALL__') {
+        chapterTitle = 'BỘ 249 CÂU PHÔI THAI HỌC';
+      } else if (ch && ch.startsWith('__PHOI__')) {
+        chapterTitle = ch.replace('__PHOI__', '').toUpperCase();
       } else if (ch !== 'all') {
         chapterTitle = ch.toUpperCase();
       }
@@ -5283,22 +5671,8 @@ body.theme-light .notebooklm-canvas {
       // Update Banner & Archetypes dropdown
       updateFlashArchetypesUI(ch);
 
-      // 1. Filter by Chapter (Hỗ trợ cả 1.314 câu Mô Phôi và 249 câu Phôi Thai VIP)
-      let pool;
-      if (ch === '__PHOI_249_ALL__') {
-        pool = [...(window.PHOI_249_DATA || [])];
-      } else if (ch && ch.startsWith('__PHOI__')) {
-        const phoiChap = ch.replace('__PHOI__', '');
-        pool = (window.PHOI_249_DATA || []).filter(q => q.chapter === phoiChap);
-      } else {
-        pool = ALL_QUESTIONS.filter(q => {
-          if (ch === '__WRONG_ONLY__') {
-            return (PROGRESS.wrong_questions || []).includes(q.id);
-          }
-          if (ch !== 'all' && q.chapter !== ch) return false;
-          return true;
-        });
-      }
+      // 1. Filter by Chapter (Hỗ trợ cả 1.314, 249 Phôi Thai, Gộp chung & Bẫy phủ định)
+      let pool = getPoolForChapterValue(ch);
 
       // 2. Filter by Archetype (if active)
       if (selectedFlashType && selectedFlashType !== 'all') {
@@ -5653,13 +6027,7 @@ body.theme-light .notebooklm-canvas {
       const sortSelect = document.getElementById('station-sort-select');
       if (sortSelect) stationSortMode = sortSelect.value;
 
-      let pool = ALL_QUESTIONS.filter(q => {
-        if (ch === '__WRONG_ONLY__') {
-          return (PROGRESS.wrong_questions || []).includes(q.id);
-        }
-        if (ch !== 'all' && q.chapter !== ch) return false;
-        return true;
-      });
+      let pool = getPoolForChapterValue(ch);
 
       if (selectedStationType && selectedStationType !== 'all') {
         pool = pool.filter(q => q.type_id === selectedStationType);
