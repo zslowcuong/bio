@@ -127,26 +127,29 @@
 
     .nav-tabs {
       display: flex;
+      flex-wrap: wrap;
       gap: 6px;
       background: #080c14;
-      padding: 4px;
+      padding: 5px;
       border-radius: 12px;
       border: 1px solid var(--border);
     }
 
     .nav-tab {
-      padding: 8px 15px;
+      padding: 7px 12px;
       border-radius: 9px;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
       color: var(--text-muted);
       cursor: pointer;
       transition: all 0.2s ease;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
       border: none;
       background: transparent;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .nav-tab:hover {
@@ -2407,6 +2410,166 @@ body.theme-light .notebooklm-canvas {
       box-shadow: 0 10px 28px rgba(15, 23, 42, 0.16);
     }
 
+    body.theme-light .nav-tabs {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+    body.theme-light .nav-tab {
+      color: #334155;
+    }
+    body.theme-light .nav-tab.active {
+      background: #0284c7;
+      color: #ffffff;
+    }
+
+    /* ========================================================== */
+    /* 🎓 DEEP TUTOR DRAWER & TIME/NUMBER BADGES (FLASH & STATION) */
+    /* ========================================================== */
+    .btn-tutor-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 9px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      border: 1.5px solid #475569;
+      background: #1e293b;
+      color: #e2e8f0;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-tutor-toggle.tutor-on {
+      background: linear-gradient(135deg, #7c3aed, #db2777);
+      color: #ffffff;
+      border-color: #c084fc;
+      box-shadow: 0 0 14px rgba(168, 85, 247, 0.35);
+    }
+    body.theme-light .btn-tutor-toggle:not(.tutor-on) {
+      background: #ffffff;
+      color: #334155;
+      border-color: #cbd5e1;
+    }
+    .timenum-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(245, 158, 11, 0.16);
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      color: #fbbf24;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+    body.theme-light .timenum-badge {
+      background: #fef3c7;
+      color: #b45309;
+      border-color: #f59e0b;
+    }
+    .ocr-clean-pill {
+      display: inline-block;
+      margin-left: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: #7dd3fc;
+      vertical-align: middle;
+    }
+    body.theme-light .ocr-clean-pill {
+      background: #e0f2fe;
+      color: #0369a1;
+      border-color: #38bdf8;
+    }
+    .flash-tutor-drawer,
+    .station-tutor-box {
+      display: none;
+      flex-direction: column;
+      gap: 9px;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.92), rgba(15, 23, 42, 0.96));
+      border: 1.5px solid rgba(168, 85, 247, 0.48);
+      border-radius: 12px;
+      padding: 13px 15px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: #e2e8f0;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.35);
+    }
+    body.theme-light .flash-tutor-drawer,
+    body.theme-light .station-tutor-box {
+      background: linear-gradient(135deg, #faf5ff, #f0f9ff);
+      border-color: #9333ea;
+      color: #0f172a;
+      box-shadow: 0 6px 18px rgba(147, 51, 234, 0.10);
+    }
+    .tutor-drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+      padding-bottom: 7px;
+    }
+    .tutor-topic-tag {
+      font-weight: 800;
+      font-size: 12.5px;
+      color: #d8b4fe;
+    }
+    body.theme-light .tutor-topic-tag {
+      color: #6d28d9;
+    }
+    .tutor-row-mne {
+      background: rgba(245, 158, 11, 0.12);
+      border-left: 3.5px solid #f59e0b;
+      padding: 6px 10px;
+      border-radius: 0 8px 8px 0;
+      font-weight: 700;
+      color: #fde68a;
+    }
+    body.theme-light .tutor-row-mne {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    .tutor-row-why {
+      background: rgba(56, 189, 248, 0.10);
+      border-left: 3.5px solid #38bdf8;
+      padding: 6px 10px;
+      border-radius: 0 8px 8px 0;
+    }
+    body.theme-light .tutor-row-why {
+      background: #e0f2fe;
+      color: #0f172a;
+    }
+    .tutor-row-trap {
+      background: rgba(239, 68, 68, 0.11);
+      border-left: 3.5px solid #ef4444;
+      padding: 6px 10px;
+      border-radius: 0 8px 8px 0;
+      color: #fecaca;
+    }
+    body.theme-light .tutor-row-trap {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    .tutor-row-ocr {
+      background: rgba(234, 179, 8, 0.12);
+      border: 1px dashed rgba(250, 204, 21, 0.55);
+      padding: 5px 10px;
+      border-radius: 7px;
+      font-size: 12.5px;
+      color: #fef08a;
+    }
+    body.theme-light .tutor-row-ocr {
+      background: #fffbeb;
+      color: #854d0e;
+      border-color: #d97706;
+    }
+
   </style>
 </head>
 
@@ -2490,6 +2653,15 @@ body.theme-light .notebooklm-canvas {
           <button onclick="switchTab('branch-tree')" class="btn-read-lecture-quick" style="padding:6px 12px; font-size:12.5px; font-weight:700; background:rgba(16,185,129,0.15); border-color:#10b981; color:#34d399;">
             🌳 Mở Sơ Đồ Cây NotebookLM
           </button>
+          <button onclick="switchFlashToTimeNum()" class="btn-read-lecture-quick" style="padding:6px 12px; font-size:12.5px; font-weight:800; background:linear-gradient(135deg,#f59e0b,#d97706); border:none; color:#fff;" title="Lọc riêng 180 câu chứa Mốc Thời Gian, Tuần/Ngày, Kích Thước &amp; Số Liệu Cố Định">
+            📅 Lọc 180 Câu Mốc &amp; Số Liệu
+          </button>
+          <a href="mophoi/so_tay_moc_so_lieu.html" target="_blank" class="btn-read-lecture-quick" style="padding:6px 12px; font-size:12.5px; font-weight:800; background:linear-gradient(135deg,#0284c7,#0ea5e9); border:none; color:#fff; text-decoration:none; display:inline-flex; align-items:center; gap:5px;" title="Mở Sổ Tay Web có lọc bài + Che Số Tự Điền + In PDF">
+            📘 Sổ Tay Che Số &amp; In PDF
+          </a>
+          <a href="mophoi/so_tay_moc_so_lieu_A4.pdf" download="So_Tay_Moc_Thoi_Gian_So_Lieu_Mo_Phoi_K48.pdf" class="btn-read-lecture-quick" style="padding:6px 12px; font-size:12.5px; font-weight:800; background:linear-gradient(135deg,#10b981,#059669); border:none; color:#fff; text-decoration:none; display:inline-flex; align-items:center; gap:5px;" title="Tải ngay file PDF A4 39 trang hoàn chỉnh để đọc điện thoại / in giấy">
+            📥 Tải PDF A4 Sẵn
+          </a>
         </div>
 
         <!-- ⏱️ REALTIME ESTIMATED TIME OF COMPLETION (ETA) DASHBOARD -->
@@ -2535,7 +2707,7 @@ body.theme-light .notebooklm-canvas {
         <div class="station-control-bar" style="margin-top:0;">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
             <select id="flash-chapter-filter" class="filter-select" onchange="onFlashChapterFilterChange()">
-              <option value="all">Tất cả tất cả bài học (1.314 câu) (1.314 câu)</option>
+              <option value="all">Tất cả bài học (1.314 câu)</option>
             </select>
 
             <!-- Bộ Lọc Dạng Câu Hỏi Trọng Tâm -->
@@ -2552,7 +2724,7 @@ body.theme-light .notebooklm-canvas {
             <!-- Hộp Tua Nhanh & Chọn Câu Hỏi -->
             <div class="flash-jump-box" style="display:inline-flex; align-items:center; gap:6px; background:#0b1120; border:1.5px solid var(--border); padding:4px 10px; border-radius:10px;">
               <span style="font-size:12.5px; color:var(--text-muted); font-weight:700;">Tua tới câu:</span>
-              <input type="number" id="flash-jump-input" min="1" max="1287" value="1" 
+              <input type="number" id="flash-jump-input" min="1" max="1314" value="1" 
                      style="width:68px; background:#1e293b; border:1.5px solid #38bdf8; border-radius:6px; color:#38bdf8; text-align:center; font-weight:800; font-size:14px; padding:3px 6px;"
                      onkeydown="if(event.key==='Enter') jumpToFlashQuestion(this.value)"
                      title="Nhập số câu (ví dụ 85) rồi nhấn Enter để chuyển ngay">
@@ -2596,9 +2768,11 @@ body.theme-light .notebooklm-canvas {
                 <span id="flash-voice-btn-text">Giọng Đọc VN: ĐANG BẬT (V)</span>
               </button>
 
-              <select id="flash-voice-flow" class="filter-select" onchange="onFlashVoiceFlowChange(this.value)" title="Chế độ phối hợp giọng đọc và đếm ngược" style="font-size:12.5px; padding:6px 10px;">
+              <select id="flash-voice-flow" class="filter-select" onchange="onFlashVoiceFlowChange(this.value)" title="Chế độ phối hợp giọng đọc và đếm ngược" style="font-size:12.5px; padding:6px 10px; max-width:340px;">
                 <option value="think">🧠 Đọc đề → Đợi hết giờ → Đọc đáp án → Qua câu</option>
                 <option value="continuous">🎧 Nghe liên tục (Đọc đề → Đọc đáp án luôn → Qua câu)</option>
+                <option value="tutor">🎓 Gia sư chữa câu (Đề → Hết giờ → Đáp án → Giảng + Mẹo → Qua câu)</option>
+                <option value="podcast">🎙️ Podcast Gia Sư (Đọc đề → Đáp án → Giảng chi tiết + Mẹo → Qua câu)</option>
               </select>
 
               <select id="flash-voice-rate" class="filter-select" onchange="onFlashVoiceRateChange(this.value)" title="Tốc độ giọng đọc Tiếng Việt" style="font-size:12.5px; padding:6px 10px;">
@@ -2617,6 +2791,12 @@ body.theme-light .notebooklm-canvas {
 
             <div class="flash-voice-group">
               <span id="flash-voice-live-pill" class="voice-live-pill">⏳ Đang kiểm tra giọng VN...</span>
+              <button id="btn-flash-tutor-toggle" class="btn-tutor-toggle" onclick="toggleFlashTutorDrawer()" title="Bật/Tắt ngăn Gia Sư Giảng Chi Tiết + Bẫy + Mẹo Nhớ khi mở đáp án (Phím G)">
+                🎓 <span id="flash-tutor-btn-text">Gia Sư Giảng: ĐANG TẮT (G)</span>
+              </button>
+              <button class="btn btn-secondary btn-sm" onclick="speakFlashTutorOnly()" style="padding:6px 11px; font-size:12.5px; border-radius:8px; cursor:pointer; border-color:rgba(168,85,247,0.55); color:#d8b4fe; font-weight:700;" title="Nghe Gia Sư giảng giải thích + bẫy + mẹo nhớ ngay cho câu này (Phím T)">
+                🗣️ Nghe Giảng (T)
+              </button>
               <button class="btn btn-secondary btn-sm" onclick="replayCurrentFlashVoice()" style="padding:6px 11px; font-size:12.5px; border-radius:8px; cursor:pointer;" title="Nghe đọc lại câu hỏi hoặc đáp án hiện tại (Phím R)">
                 🔁 Đọc lại (R)
               </button>
@@ -2726,9 +2906,10 @@ body.theme-light .notebooklm-canvas {
                   <div class="station-badge-large">
                     <span>⚡</span> <span id="flash-card-station-num">CÂU SỐ 1</span>
                   </div>
-                  <div style="display:flex; gap:8px; align-items:center;">
+                  <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end;">
                     <span class="chapter-tag" id="flash-card-chapter">BÀI HỌC</span>
                     <span class="arch-badge" id="flash-card-arch-badge" style="display:none;" title="Dạng câu hỏi trọng tâm"></span>
+                    <span class="timenum-badge" id="flash-card-timenum-badge" style="display:none;" title="Mốc thời gian / Số liệu cố định"></span>
                     <span style="font-size:13px; color:var(--accent); font-weight:700;" id="flash-card-orig-num">#Gốc: 1</span>
                   </div>
                 </div>
@@ -2743,12 +2924,12 @@ body.theme-light .notebooklm-canvas {
                   <!-- Rendered by JS -->
                 </div>
 
-                
-
+                <!-- 🎓 NGĂN GIA SƯ GIẢNG CHI TIẾT + BẪY + MẸO NHỚ (Mặc định thu gọn để giữ 7s sạch đẹp) -->
+                <div id="flash-tutor-drawer" class="flash-tutor-drawer" aria-live="polite"></div>
 
                 <!-- Hint footer -->
                 <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:14px; font-size:13px; color:var(--text-muted); flex-wrap:wrap; gap:10px;">
-                  <div>Mẹo: Click trực tiếp đáp án để kiểm tra ngay • Phím <b>V</b> bật/tắt đọc tiếng Việt • <b>R</b> đọc lại.</div>
+                  <div>Mẹo: Click đáp án để kiểm tra • <b>V</b> đọc VN • <b>G</b> mở/đóng Gia Sư • <b>T</b> nghe giảng • <b>R</b> đọc lại.</div>
                   <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
                     <button class="btn btn-secondary btn-sm" onclick="jumpRelativeFlash(-10)" title="Lùi 10 câu">-10</button>
                     <button class="btn btn-secondary btn-sm" onclick="prevFlashQ()">◀ Câu trước (←)</button>
@@ -2905,14 +3086,14 @@ body.theme-light .notebooklm-canvas {
                 học:</label>
               <select id="lockin-chapter-select" class="filter-select" style="width:100%;"
                 onchange="onLockinChapterChange()">
-                <option value="all">Tất cả tất cả bài học (1.314 câu) (1.314 câu)</option>
+                <option value="all">Tất cả bài học (1.314 câu)</option>
               </select>
             </div>
             <div>
               <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Số lượng câu mục
                 tiêu:</label>
               <input type="number" id="lockin-input-count" class="filter-select"
-                style="width:100%; font-family:'Lexend',sans-serif; font-weight:700;" value="50" min="10" max="1287">
+                style="width:100%; font-family:'Lexend',sans-serif; font-weight:700;" value="50" min="10" max="1314">
             </div>
             <div>
               <label style="display:block; font-size:13px; color:var(--text-muted); margin-bottom:6px;">Thời gian cam
@@ -3109,7 +3290,7 @@ body.theme-light .notebooklm-canvas {
         <div class="station-control-bar">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
             <select id="station-chapter-filter" class="filter-select" onchange="onStationChapterFilterChange()">
-              <option value="all">Tất cả tất cả bài học (1.314 câu) (1.314 câu)</option>
+              <option value="all">Tất cả bài học (1.314 câu)</option>
             </select>
             <select id="station-type-filter" class="filter-select" onchange="onStationTypeFilterChange(this.value)" style="border-color:#10b981; max-width:240px;" title="Lọc dạng câu hỏi trạm">
               <option value="all">⚡ Tất cả dạng câu</option>
@@ -3118,8 +3299,6 @@ body.theme-light .notebooklm-canvas {
               <option value="random" selected>🎲 Thứ tự: Ngẫu nhiên (Mô phỏng thi)</option>
               <option value="archetype">🔀 Thứ tự: Gom nhóm theo dạng câu</option>
               <option value="orig_num">🔢 Thứ tự: Theo số câu gốc</option>
-            </select>
-              <option value="all">Tất cả tất cả bài học (1.314 câu) (1.314 câu)</option>
             </select>
             <select id="station-count-select" class="filter-select" onchange="filterStationMode()">
               <option value="40" selected>Đề thi: 40 Trạm (Chuẩn thi)</option>
@@ -3131,7 +3310,7 @@ body.theme-light .notebooklm-canvas {
             <!-- Hộp Tua Nhanh & Chọn Trạm -->
             <div class="station-jump-box" style="display:inline-flex; align-items:center; gap:6px; background:#0b1120; border:1.5px solid var(--border); padding:4px 10px; border-radius:10px;">
               <span style="font-size:12.5px; color:var(--text-muted); font-weight:700;">Tua tới trạm:</span>
-              <input type="number" id="station-jump-input" min="1" max="1287" value="1" 
+              <input type="number" id="station-jump-input" min="1" max="1314" value="1" 
                      style="width:68px; background:#1e293b; border:1.5px solid #10b981; border-radius:6px; color:#34d399; text-align:center; font-weight:800; font-size:14px; padding:3px 6px;"
                      onkeydown="if(event.key==='Enter') jumpToStationQuestion(this.value)"
                      title="Nhập số thứ tự trạm rồi nhấn Enter để chuyển ngay">
@@ -3188,8 +3367,7 @@ body.theme-light .notebooklm-canvas {
             <!-- Rendered by JS -->
           </div>
 
-          
-
+          <div id="station-tutor-box" class="station-tutor-box"></div>
 
           <div class="station-footer" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <div style="display:flex; gap:6px; align-items:center;">
@@ -3459,7 +3637,7 @@ body.theme-light .notebooklm-canvas {
         <div class="speed-toolbar">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
             <select id="speed-chapter-filter" class="filter-select" onchange="onSpeedFilterChange()">
-              <option value="all">⚡ Tất cả tất cả bài học (1.314 câu) (1.314 câu)</option>
+              <option value="all">⚡ Tất cả bài học (1.314 câu)</option>
             </select>
 
             <select id="speed-type-filter" class="filter-select" onchange="onSpeedFilterChange()" style="border-color:#0284c7;">
@@ -3511,7 +3689,7 @@ body.theme-light .notebooklm-canvas {
         <div id="speed-card-container" style="display:none;">
           <div class="card speed-skim-card" style="padding: 24px; position:relative; min-height: 280px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-              <span id="speed-card-badge" class="flash-lec-badge">CÂU 1 / 1287</span>
+              <span id="speed-card-badge" class="flash-lec-badge">CÂU 1 / 1314</span>
               <span id="speed-card-chapter" style="font-size:12px; color:var(--text-muted);">Bài 2: Biểu mô</span>
             </div>
             <div id="speed-card-question" class="speed-q-text" style="font-size:17px; line-height:1.5; margin-bottom:16px;"></div>
@@ -3882,8 +4060,17 @@ body.theme-light .notebooklm-canvas {
               <button onclick="switchToMixedStationExam()" class="btn-read-lecture-quick" style="background:linear-gradient(135deg,#10b981,#059669); color:#fff; padding:9px 16px; font-weight:800; border:none; border-radius:8px; cursor:pointer;" title="Thi thử 40 trạm trộn ngẫu nhiên cả Mô Học + 249 Phôi Thai để test phản xạ thật">
                 🎲 Chạy Trạm Trộn 40 Câu
               </button>
+              <button onclick="switchFlashToTimeNum()" class="btn-read-lecture-quick" style="background:linear-gradient(135deg,#f59e0b,#d97706); color:#fff; padding:9px 16px; font-weight:800; border:none; border-radius:8px; cursor:pointer;" title="Lọc ngay 180 câu Mốc Thời Gian &amp; Số Liệu Cố Định xếp theo dòng thời gian D0 → W38">
+                📅 Luyện 180 Câu Mốc &amp; Số Liệu
+              </button>
+              <a href="mophoi/so_tay_moc_so_lieu.html" target="_blank" class="btn-read-lecture-quick" style="background:linear-gradient(135deg,#0284c7,#6366f1); color:#fff; padding:9px 16px; font-weight:800; text-decoration:none; border-radius:8px; display:inline-flex; align-items:center; gap:5px;" title="Mở Sổ Tay Mốc Thời Gian &amp; Số Liệu (Lọc bài + Che Số Tự Điền + In PDF)">
+                📘 Sổ Tay Số Liệu (Che Số)
+              </a>
+              <a href="mophoi/so_tay_moc_so_lieu_A4.pdf" download="So_Tay_Moc_Thoi_Gian_So_Lieu_Mo_Phoi_K48.pdf" class="btn-read-lecture-quick" style="background:linear-gradient(135deg,#8b5cf6,#ec4899); color:#fff; padding:9px 16px; font-weight:800; text-decoration:none; border-radius:8px; display:inline-flex; align-items:center; gap:5px;" title="Tải trực tiếp PDF A4 Sổ Tay Mốc Thời Gian &amp; Số Liệu">
+                📥 Tải PDF Số Liệu A4
+              </a>
               <a href="mophoi/so_tay_he_thong.html" target="_blank" class="btn-read-lecture-quick" style="background:linear-gradient(135deg,#38bdf8,#0284c7); color:#fff; padding:9px 16px; font-weight:800; text-decoration:none; border-radius:8px; display:inline-flex; align-items:center; gap:5px;" title="Mở Sổ Tay 4 Trang A4 định dạng chuẩn in / xuất PDF">
-                🖨️ Sổ Tay In / PDF (4 Trang)
+                🖨️ Sổ Tay 4 Trang
               </a>
             </div>
           </div>
@@ -4060,10 +4247,10 @@ body.theme-light .notebooklm-canvas {
 
   </main>
 
-  <script src="mophoi/lectures_data.js?v=20261111_v4"></script>
-  <script src="mophoi/phoi_249_data.js?v=20261111_v4"></script>
-  <script src="mophoi/questions_data.js?v=20261111_v4"></script>
-  <script src="mophoi/lectures_data.js?v=20261111_v4"></script>
+  <script src="mophoi/lectures_data.js?v=20261111_v5"></script>
+  <script src="mophoi/phoi_249_data.js?v=20261111_v5"></script>
+  <script src="mophoi/questions_data.js?v=20261111_v5"></script>
+  <script src="mophoi/tutor_data.js?v=20261111_v5"></script>
   <script>
     // DATA STATE
     let ALL_QUESTIONS = [];
@@ -4086,7 +4273,9 @@ body.theme-light .notebooklm-canvas {
     let flashIntervalStep = 100; // ms
 
     let flashVoiceEnabled = (localStorage.getItem('mophoi_flash_voice_enabled') ?? 'true') === 'true';
-    let flashVoiceFlow = localStorage.getItem('mophoi_flash_voice_flow') || 'think'; // 'think' | 'continuous'
+    let flashVoiceFlow = localStorage.getItem('mophoi_flash_voice_flow') || 'think'; // 'think' | 'continuous' | 'tutor' | 'podcast'
+    if (!['think', 'continuous', 'tutor', 'podcast'].includes(flashVoiceFlow)) flashVoiceFlow = 'think';
+    let flashTutorExpanded = (localStorage.getItem('mophoi_flash_tutor_expanded') === 'true');
     let flashVoiceRate = parseFloat(localStorage.getItem('mophoi_flash_voice_rate') || '1.08');
     if (isNaN(flashVoiceRate) || flashVoiceRate < 0.6 || flashVoiceRate > 2.2) flashVoiceRate = 1.08;
     let flashVoiceURI = localStorage.getItem('mophoi_flash_voice_uri') || 'auto';
@@ -4100,6 +4289,8 @@ body.theme-light .notebooklm-canvas {
 
     let flashPromptSpeechDone = true;
     let flashAnswerSpeechDone = true;
+    let flashTutorSpeechDone = true;
+    let stationVoiceActive = false;
     let flashPendingReveal = false;
     let flashVoiceAutoplayBlocked = false;
     let flashVoiceNeedsGesture = false;
@@ -4237,7 +4428,7 @@ body.theme-light .notebooklm-canvas {
         if (!part) return;
         if (part.length > maxLen) {
           if (buf) { chunks.push(buf); buf = ''; }
-          const subParts = part.match(/[^,]+,?/g) || [part];
+          const subParts = part.split(/,\s+/).map((x, idx, arr) => idx < arr.length - 1 ? x + ',' : x);
           let sBuf = '';
           subParts.forEach(rawSp => {
             const sp = rawSp.trim();
@@ -4516,10 +4707,10 @@ body.theme-light .notebooklm-canvas {
           if (mySeq !== flashUtteranceSeq || token !== flashCycleToken) return;
           flashVoiceAutoplayBlocked = false;
           flashVoiceNeedsGesture = false;
-          updateFlashVoiceSpeakingBadge(
-            true,
-            phase === 'answer' ? '🔊 Đang đọc đáp án...' : '🗣️ Đang đọc câu hỏi...'
-          );
+          let spBadge = '🗣️ Đang đọc câu hỏi...';
+          if (phase === 'answer') spBadge = '🔊 Đang đọc đáp án...';
+          else if (phase === 'tutor') spBadge = '🎓 Gia sư đang giảng...';
+          updateFlashVoiceSpeakingBadge(true, spBadge);
         };
 
         utter.onend = () => {
@@ -4583,21 +4774,209 @@ body.theme-light .notebooklm-canvas {
       }
     }
 
+    function escapeHtmlSafe(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function getTutorKeyForQuestion(q) {
+      if (!q) return '';
+      if (q._src === 'PHOI') return 'P_' + q.id;
+      if (q._src === 'MAIN') return 'M_' + q.id;
+      if (window.PHOI_249_DATA && window.PHOI_249_DATA.includes(q)) return 'P_' + q.id;
+      return 'M_' + q.id;
+    }
+
+    function getTutorCardForQuestion(q) {
+      const key = getTutorKeyForQuestion(q);
+      if (!key || !window.TUTOR_MAP || !window.TUTOR_CARDS) return null;
+      const cid = window.TUTOR_MAP[key];
+      return cid ? (window.TUTOR_CARDS[cid] || null) : null;
+    }
+
+    function getTimeNumMetaForQuestion(q) {
+      const key = getTutorKeyForQuestion(q);
+      if (!key || !window.TIMENUM_META) return null;
+      return window.TIMENUM_META[key] || null;
+    }
+
+    function renderPromptWithOcrFixHtml(q, tutor) {
+      if (!q) return '';
+      if (tutor && tutor.clean_q) {
+        let html = escapeHtmlSafe(tutor.clean_q);
+        const hl = (q.q_highlight || '').trim();
+        if (hl && hl.length >= 3) {
+          const escHl = hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          try {
+            html = html.replace(new RegExp('(' + escHl + ')', 'i'), '<mark class="kw-hl">$1</mark>');
+          } catch (e) { }
+        }
+        return html + ' <span class="ocr-clean-pill" title="Đã chuẩn hóa lỗi đánh máy / OCR từ đề gốc">✨ Đề đã làm sạch OCR</span>';
+      }
+      return q.question_html || escapeHtmlSafe(q.question || '');
+    }
+
+    function renderTutorSectionsHtml(q, tutor, isStationMode) {
+      if (!q) return '';
+      const meta = getTimeNumMetaForQuestion(q);
+      const t = tutor || {};
+      const topic = t.topic || q.type_name || 'Giải thích & Mẹo nhớ trọng tâm';
+      const why = t.why || `Đáp án chính xác là "${String(q.correct_text || '').replace(/^[a-e]\.\s*/i, '').trim()}".`;
+      const trap = t.trap || 'Đọc kỹ câu dẫn, tránh đảo chiều vị trí/cơ quan và bẫy phủ định.';
+      const mne = t.mnemonic || q.mnemonic_vip || '';
+      const speakFn = isStationMode ? 'speakStationTutorVoice()' : 'speakFlashTutorOnly()';
+      const closeBtn = isStationMode ? '' : `<button class="btn btn-secondary btn-sm" onclick="toggleFlashTutorDrawer()" style="padding:3px 9px; font-size:11.5px; border-radius:6px; cursor:pointer;" title="Thu gọn ngăn Gia Sư (Phím G)">✖ Thu gọn (G)</button>`;
+
+      return `
+        <div class="tutor-drawer-head">
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <span class="tutor-topic-tag">🎓 ${escapeHtmlSafe(topic)}</span>
+            ${meta ? `<span class="timenum-badge">📅 ${escapeHtmlSafe(meta.chip)} — ${escapeHtmlSafe(meta.label)}</span>` : ''}
+          </div>
+          <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+            <button class="btn btn-secondary btn-sm" onclick="${speakFn}" style="padding:3px 10px; font-size:11.5px; border-radius:6px; cursor:pointer; background:rgba(168,85,247,0.22); border-color:rgba(192,132,252,0.6); color:#f3e8ff; font-weight:700;" title="Nghe Gia Sư đọc giảng giải + mẹo nhớ (Phím T)">
+              🔊 Nghe Giảng (T)
+            </button>
+            ${closeBtn}
+          </div>
+        </div>
+        ${mne ? `<div class="tutor-row-mne">💡 <b>Mẹo nhớ nhanh:</b> ${escapeHtmlSafe(mne)}</div>` : ''}
+        <div class="tutor-row-why">📚 <b>Giải thích bản chất:</b> ${escapeHtmlSafe(why)}</div>
+        <div class="tutor-row-trap">⚠️ <b>Bẫy dễ nhầm:</b> ${escapeHtmlSafe(trap)}</div>
+        ${t.ocr_note ? `<div class="tutor-row-ocr">${escapeHtmlSafe(t.ocr_note)}</div>` : ''}
+      `;
+    }
+
+    function updateFlashTutorToggleUI() {
+      const btn = document.getElementById('btn-flash-tutor-toggle');
+      const txt = document.getElementById('flash-tutor-btn-text');
+      const flowSuggest = (flashVoiceFlow === 'tutor' || flashVoiceFlow === 'podcast');
+      const active = flashTutorExpanded || flowSuggest;
+      if (btn) btn.classList.toggle('tutor-on', active);
+      if (txt) {
+        if (flowSuggest && !flashTutorExpanded) {
+          txt.textContent = 'Gia Sư Giảng: THEO VOICE (G)';
+        } else {
+          txt.textContent = flashTutorExpanded ? 'Gia Sư Giảng: ĐANG BẬT (G)' : 'Gia Sư Giảng: ĐANG TẮT (G)';
+        }
+      }
+    }
+
+    function updateFlashTutorDrawer(q, forceVisible) {
+      const drawer = document.getElementById('flash-tutor-drawer');
+      if (!drawer) return;
+      if (!q) {
+        drawer.style.display = 'none';
+        drawer.innerHTML = '';
+        return;
+      }
+      const tutor = getTutorCardForQuestion(q);
+      drawer.innerHTML = renderTutorSectionsHtml(q, tutor, false);
+      const wantOpen = Boolean(forceVisible) || (flashRevealed && (flashTutorExpanded || flashVoiceFlow === 'tutor' || flashVoiceFlow === 'podcast')) || (flashTutorExpanded && !flashIsPlaying);
+      drawer.style.display = wantOpen ? 'flex' : 'none';
+      updateFlashTutorToggleUI();
+    }
+
+    function toggleFlashTutorDrawer() {
+      flashTutorExpanded = !flashTutorExpanded;
+      localStorage.setItem('mophoi_flash_tutor_expanded', flashTutorExpanded ? 'true' : 'false');
+      updateFlashTutorToggleUI();
+      const q = flashList[currentFlashIdx];
+      updateFlashTutorDrawer(q, flashTutorExpanded);
+      showToast(flashTutorExpanded
+        ? '🎓 Đã BẬT Ngăn Gia Sư Giảng (Bật sẵn chi tiết + Mẹo nhớ mỗi câu)!'
+        : '🎓 Đã THU GỌN Ngăn Gia Sư Giảng (Giữ thẻ 7s gọn nhẹ)!');
+    }
+
     function buildFlashPromptSpeech(q) {
       if (!q) return '';
-      return formatMedicalTextForSpeech(q.question || q.question_html || '');
+      const tutor = getTutorCardForQuestion(q);
+      if (tutor && tutor.spoken_q) return tutor.spoken_q;
+      return formatMedicalTextForSpeech((tutor && tutor.clean_q) || q.question || q.question_html || '');
     }
 
     function buildFlashAnswerSpeech(q) {
       if (!q) return '';
+      const tutor = getTutorCardForQuestion(q);
+      if (tutor && tutor.spoken_a) return tutor.spoken_a;
       const letters = ['A', 'B', 'C', 'D', 'E'];
       const hasIdx = (q.correct_idx !== null && q.correct_idx !== undefined && q.options && q.options[q.correct_idx]);
       const corrLetter = hasIdx ? (letters[q.correct_idx] || q.correct_letter || '') : (q.correct_letter || '');
-      const rawOpt = hasIdx ? q.options[q.correct_idx] : (q.correct_text || '');
+      const rawOpt = (tutor && tutor.clean_a) ? tutor.clean_a : (hasIdx ? q.options[q.correct_idx] : (q.correct_text || ''));
       const cleanOpt = formatMedicalTextForSpeech(String(rawOpt).replace(/^[a-e]\.\s*/i, '').trim());
       if (corrLetter && cleanOpt) return `Đáp án ${corrLetter}: ${cleanOpt}`;
       if (cleanOpt) return `Đáp án đúng: ${cleanOpt}`;
       return '';
+    }
+
+    function buildFlashTutorSpeech(q) {
+      if (!q) return '';
+      const tutor = getTutorCardForQuestion(q);
+      if (tutor && tutor.spoken) return tutor.spoken;
+      const parts = [];
+      if (tutor && tutor.why) parts.push('Giải thích: ' + formatMedicalTextForSpeech(tutor.why));
+      if (tutor && tutor.trap) parts.push('Lưu ý bẫy: ' + formatMedicalTextForSpeech(tutor.trap));
+      if (tutor && tutor.mnemonic) parts.push('Mẹo nhớ: ' + formatMedicalTextForSpeech(tutor.mnemonic));
+      return parts.join('. ') || buildFlashAnswerSpeech(q);
+    }
+
+    function speakFlashTutorOnly() {
+      flashVoiceAutoplayBlocked = false;
+      flashVoiceNeedsGesture = false;
+      if (!flashList.length) return;
+      const q = flashList[currentFlashIdx];
+      if (!q) return;
+      if (!('speechSynthesis' in window)) {
+        showToast('❌ Trình duyệt của bạn không hỗ trợ đọc giọng nói.');
+        return;
+      }
+      if (!flashVoiceEnabled) {
+        flashVoiceEnabled = true;
+        localStorage.setItem('mophoi_flash_voice_enabled', 'true');
+      }
+      // Tạm dừng bộ đếm chuyển câu để nghe giảng trọn vẹn
+      if (flashIsPlaying) {
+        flashIsPlaying = false;
+        stopFlashTimer();
+        const playBtn = document.getElementById('btn-flash-play');
+        if (playBtn) playBtn.textContent = '▶️ Tiếp Tục';
+      } else {
+        if (flashAdvanceTimeout) { clearTimeout(flashAdvanceTimeout); flashAdvanceTimeout = null; }
+        cancelFlashSpeech();
+      }
+      if (!flashRevealed) {
+        revealFlashAnswerAndAdvance(true);
+        return;
+      }
+      updateFlashTutorDrawer(q, true);
+      updateFlashVoiceUI();
+      const myToken = ++flashCycleToken;
+      updateFlashStatusUI('🎓 Gia sư đang giảng chi tiết & mẹo nhớ...', '🎓 Gia sư giảng', true);
+      speakFlashText(buildFlashTutorSpeech(q), 'tutor', myToken, () => {
+        flashTutorSpeechDone = true;
+        updateFlashStatusUI('⏸️ Đã giảng xong (Bấm ▶️ Tiếp Tục hoặc → sang câu mới)', '✅ Đã giảng xong', true);
+      });
+    }
+
+    function speakStationTutorVoice() {
+      if (!stationExamList.length || !('speechSynthesis' in window)) return;
+      const q = stationExamList[currentStationIdx];
+      if (!q) return;
+      const text = buildFlashAnswerSpeech(q) + '. ' + buildFlashTutorSpeech(q);
+      const prevEnabled = flashVoiceEnabled;
+      flashVoiceEnabled = true;
+      flashVoiceAutoplayBlocked = false;
+      flashVoiceNeedsGesture = false;
+      stationVoiceActive = true;
+      const token = ++flashCycleToken;
+      speakFlashText(text, 'tutor', token, () => {
+        stationVoiceActive = false;
+        flashVoiceEnabled = prevEnabled;
+        updateFlashVoiceSpeakingBadge(false);
+      });
     }
 
     function unlockAndPlayFlashVoice() {
@@ -4653,17 +5032,29 @@ body.theme-light .notebooklm-canvas {
     }
 
     function onFlashVoiceFlowChange(val) {
-      flashVoiceFlow = (val === 'continuous') ? 'continuous' : 'think';
+      flashVoiceFlow = ['think', 'continuous', 'tutor', 'podcast'].includes(val) ? val : 'think';
       localStorage.setItem('mophoi_flash_voice_flow', flashVoiceFlow);
       flashVoiceAutoplayBlocked = false;
       flashVoiceNeedsGesture = false;
+      if ((flashVoiceFlow === 'tutor' || flashVoiceFlow === 'podcast' || flashVoiceFlow === 'continuous') && !flashVoiceEnabled) {
+        flashVoiceEnabled = true;
+        localStorage.setItem('mophoi_flash_voice_enabled', 'true');
+      }
       updateFlashVoiceUI();
-      if (flashIsPlaying && !flashRevealed) {
+      updateFlashTutorToggleUI();
+      if (flashList.length) {
+        updateFlashTutorDrawer(flashList[currentFlashIdx], flashRevealed && (flashTutorExpanded || flashVoiceFlow === 'tutor' || flashVoiceFlow === 'podcast'));
+      }
+      if (flashIsPlaying) {
         resumeCurrentFlashCard(false);
       }
-      showToast(flashVoiceFlow === 'continuous'
-        ? '🎧 Đã chuyển: Nghe liên tục (Đọc đề → Đọc đáp án luôn)'
-        : '🧠 Đã chuyển: Đọc đề → Đợi hết đếm ngược → Đọc đáp án');
+      const toastMap = {
+        think: '🧠 Đã chuyển: Đọc đề → Đợi hết giờ → Đọc đáp án → Qua câu',
+        continuous: '🎧 Đã chuyển: Nghe liên tục (Đọc đề → Đọc đáp án luôn)',
+        tutor: '🎓 Đã bật Chế độ Gia Sư Chữa Câu (Đề → Hết giờ → Đáp án → Giảng + Mẹo)',
+        podcast: '🎙️ Đã bật Podcast Gia Sư rảnh tay (Đề → Đáp án → Giảng chi tiết + Mẹo)'
+      };
+      showToast(toastMap[flashVoiceFlow] || toastMap.think);
     }
 
     function onFlashVoiceRateChange(val) {
@@ -4727,24 +5118,46 @@ body.theme-light .notebooklm-canvas {
           });
         }
       } else {
+        const wantTutorLecture = (flashVoiceFlow === 'tutor' || flashVoiceFlow === 'podcast');
         if (flashIsPlaying) {
           flashAnswerSpeechDone = false;
+          flashTutorSpeechDone = !wantTutorLecture;
           const ansToken = ++flashCycleToken;
           if (flashAdvanceTimeout) { clearTimeout(flashAdvanceTimeout); flashAdvanceTimeout = null; }
           updateFlashStatusUI('🔊 Đang đọc lại đáp án đúng...', '🗣️ Đọc đáp án', true);
           speakFlashText(buildFlashAnswerSpeech(q), 'answer', ansToken, (aborted) => {
             if (ansToken !== flashCycleToken) return;
             flashAnswerSpeechDone = true;
-            if (!flashIsPlaying) return;
-            updateFlashStatusUI('✅ Đã đọc xong đáp án — chuẩn bị chuyển câu...', 'Chuyển câu...', true);
-            flashAdvanceTimeout = setTimeout(() => {
-              if (ansToken === flashCycleToken && flashIsPlaying) triggerMorphTransition();
-            }, aborted ? 1600 : 650);
+            if (wantTutorLecture) {
+              updateFlashTutorDrawer(q, true);
+              updateFlashStatusUI('🎓 Gia sư đang giảng chi tiết & mẹo nhớ...', '🎓 Gia sư giảng', true);
+              speakFlashText(buildFlashTutorSpeech(q), 'tutor', ansToken, (tAborted) => {
+                if (ansToken !== flashCycleToken) return;
+                flashTutorSpeechDone = true;
+                if (!flashIsPlaying) return;
+                updateFlashStatusUI('✅ Đã giảng xong — chuẩn bị chuyển câu...', 'Chuyển câu...', true);
+                flashAdvanceTimeout = setTimeout(() => {
+                  if (ansToken === flashCycleToken && flashIsPlaying) triggerMorphTransition();
+                }, tAborted ? 1400 : 750);
+              });
+            } else {
+              if (!flashIsPlaying) return;
+              updateFlashStatusUI('✅ Đã đọc xong đáp án — chuẩn bị chuyển câu...', 'Chuyển câu...', true);
+              flashAdvanceTimeout = setTimeout(() => {
+                if (ansToken === flashCycleToken && flashIsPlaying) triggerMorphTransition();
+              }, aborted ? 1600 : 650);
+            }
           });
         } else {
           const myToken = ++flashCycleToken;
           speakFlashText(buildFlashAnswerSpeech(q), 'answer', myToken, () => {
             flashAnswerSpeechDone = true;
+            if (wantTutorLecture) {
+              updateFlashTutorDrawer(q, true);
+              speakFlashText(buildFlashTutorSpeech(q), 'tutor', myToken, () => {
+                flashTutorSpeechDone = true;
+              });
+            }
           });
         }
       }
@@ -5425,7 +5838,7 @@ body.theme-light .notebooklm-canvas {
       // Title
       expCtx.fillStyle = '#38bdf8';
       expCtx.font = 'bold 20px sans-serif';
-      expCtx.fillText(`MÔ PHÔI MASTER - CÂU ${currentFlashIdx + 1} / 1287`, 35, 52);
+      expCtx.fillText(`MÔ PHÔI MASTER - CÂU ${currentFlashIdx + 1} / ${flashList.length || ALL_QUESTIONS.length || 1314}`, 35, 52);
 
       expCtx.fillStyle = '#94a3b8';
       expCtx.font = '14px sans-serif';
@@ -5494,8 +5907,10 @@ body.theme-light .notebooklm-canvas {
         // 3. Fallback progress from server if local storage was empty
         if (!PROGRESS || (!PROGRESS.starred_questions && !PROGRESS.wrong_questions)) {
           try {
-            const pRes = await fetch('/api/progress');
-            PROGRESS = await pRes.json();
+            if (location.protocol.startsWith('http') && !location.hostname.endsWith('github.io')) {
+              const pRes = await fetch('/api/progress');
+              if (pRes.ok) PROGRESS = await pRes.json();
+            }
           } catch (e) {
             PROGRESS = {
               starred_questions: [],
@@ -5507,10 +5922,17 @@ body.theme-light .notebooklm-canvas {
           }
         }
 
+        ALL_QUESTIONS.forEach(q => { if (q && !q._src) q._src = 'MAIN'; });
+        if (Array.isArray(window.PHOI_249_DATA)) {
+          window.PHOI_249_DATA.forEach(q => { if (q && !q._src) q._src = 'PHOI'; });
+        }
+
         initDrawingStudio();
         initSideNoteStudio();
         initDropdowns();
         initFlashVoiceSystem();
+        updateFlashTutorToggleUI();
+        startRealtimeEtaClock();
         filterFlashQuestions();
         filterStationMode();
         renderCheatTable();
@@ -5538,7 +5960,7 @@ body.theme-light .notebooklm-canvas {
       selects.forEach(sel => {
         if (!sel) return;
         if (sel.options[0]) {
-          sel.options[0].textContent = `Tất cả tất cả bài học (1.314 câu) (${ALL_QUESTIONS.length} câu)`;
+          sel.options[0].textContent = `Tất cả bài học (${ALL_QUESTIONS.length} câu)`;
         }
         const wrongOpt = document.createElement('option');
         wrongOpt.value = '__WRONG_ONLY__';
@@ -5559,6 +5981,16 @@ body.theme-light .notebooklm-canvas {
         trapsOpt.style.fontWeight = 'bold';
         trapsOpt.style.color = '#fbbf24';
         sel.appendChild(trapsOpt);
+
+        const tnPool = getTimeNumPool();
+        if (tnPool.length > 0) {
+          const tnOpt = document.createElement('option');
+          tnOpt.value = '__TIMENUM_ALL__';
+          tnOpt.textContent = `📅 MỐC THỜI GIAN & SỐ LIỆU CỐ ĐỊNH (${tnPool.length} câu)`;
+          tnOpt.style.fontWeight = 'bold';
+          tnOpt.style.color = '#f59e0b';
+          sel.appendChild(tnOpt);
+        }
 
         chapters.forEach(ch => {
           const opt = document.createElement('option');
@@ -5993,22 +6425,22 @@ body.theme-light .notebooklm-canvas {
       const vipBox = document.getElementById('practice-vip-box');
       vipBox.style.display = 'flex';
 
-      // Build 5s reflex mnemonic
-      const cleanAns = (q.correct_text || '').replace(/^[a-d]\.\s*/i, '').trim();
-      const qHl = q.q_highlight || q.question.substring(0, 35);
+      const tutor = getTutorCardForQuestion(q);
+      const cleanAns = ((tutor && tutor.clean_a) || q.correct_text || '').replace(/^[a-e]\.\s*/i, '').trim();
+      const qHl = q.q_highlight || (q.question || '').substring(0, 35);
       const aHl = q.a_highlight || cleanAns.split(',')[0].trim();
 
-      document.getElementById('practice-vip-mnemonic').innerHTML = `
-        💡 Thần chú phản xạ 5s: Thấy <i>"${qHl}..."</i> ➔ Bắt ngay <mark class="kw-hl" style="background:#fef08a; color:#000; padding:2px 6px; border-radius:4px; font-weight:800;">"${aHl}"</mark>!
-      `;
+      document.getElementById('practice-vip-mnemonic').innerHTML = (tutor && tutor.mnemonic)
+        ? `💡 <b>Mẹo nhớ:</b> ${escapeHtmlSafe(tutor.mnemonic)}`
+        : `💡 Thần chú phản xạ 5s: Thấy <i>"${escapeHtmlSafe(qHl)}..."</i> ➔ Bắt ngay <mark class="kw-hl" style="background:#fef08a; color:#000; padding:2px 6px; border-radius:4px; font-weight:800;">"${escapeHtmlSafe(aHl)}"</mark>!`;
 
-      document.getElementById('practice-vip-nature').innerHTML = `
-        <b>Bản chất cơ chế:</b> ${q.type_desc || q.type_name || 'Kiến thức cốt lõi'}. Đáp án đúng chính xác 100% là <b>"${cleanAns}"</b>.
-      `;
+      document.getElementById('practice-vip-nature').innerHTML = (tutor && tutor.why)
+        ? `<b>📚 Giải thích bản chất:</b> ${escapeHtmlSafe(tutor.why)}${tutor.ocr_note ? `<div style="margin-top:4px; color:#facc15; font-size:12.5px;">${escapeHtmlSafe(tutor.ocr_note)}</div>` : ''}`
+        : `<b>Bản chất cơ chế:</b> ${escapeHtmlSafe(q.type_desc || q.type_name || 'Kiến thức cốt lõi')}. Đáp án đúng chính xác 100% là <b>"${escapeHtmlSafe(cleanAns)}"</b>.`;
 
-      document.getElementById('practice-vip-trap').innerHTML = `
-        ⚠️ <b>Mẹo nhớ khi thi:</b> Đọc kỹ từng chữ, không bị đánh lừa bởi các phương án chứa từ đảo ngữ hoặc các chi tiết phủ định!
-      `;
+      document.getElementById('practice-vip-trap').innerHTML = (tutor && tutor.trap)
+        ? `⚠️ <b>Bẫy dễ nhầm:</b> ${escapeHtmlSafe(tutor.trap)}`
+        : `⚠️ <b>Mẹo nhớ khi thi:</b> Đọc kỹ từng chữ, không bị đánh lừa bởi các phương án chứa từ đảo ngữ hoặc các chi tiết phủ định!`;
     }
 
     function prevBranchQuestion() {
@@ -6061,20 +6493,23 @@ body.theme-light .notebooklm-canvas {
       const listEl = document.getElementById('summary-all-mnemonics-list');
       let mHtml = '';
       chapterQs.forEach((q, idx) => {
-        const cleanAns = (q.correct_text || '').replace(/^[a-d]\.\s*/i, '').trim();
-        const qHl = q.q_highlight || q.question.substring(0, 30);
-        const aHl = q.a_highlight || cleanAns.split(',')[0].trim();
+        const tutor = getTutorCardForQuestion(q);
+        const cleanAns = ((tutor && tutor.clean_a) || q.correct_text || '').replace(/^[a-e]\.\s*/i, '').trim();
+        const qText = (tutor && tutor.clean_q) || q.question || '';
+        const mneText = (tutor && tutor.mnemonic) || `Phản xạ nhanh ➔ ${q.a_highlight || cleanAns}`;
+        const whyText = (tutor && tutor.why) || '';
         mHtml += `
           <div class="checklist-mnemonic-item">
             <div style="font-weight:700; color:var(--text-main); margin-bottom:4px;">
-              Câu ${idx + 1}: ${q.question}
+              Câu ${idx + 1}: ${escapeHtmlSafe(qText)}
             </div>
             <div style="color:#fbbf24; font-weight:700; font-size:13px;">
-              💡 Phản xạ 5s: <i>"${qHl}"</i> ➔ Bắt ngay <b>"${aHl}"</b>
+              💡 ${escapeHtmlSafe(mneText)}
             </div>
-            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
-              Đáp án: ${cleanAns}
+            <div style="font-size:12.5px; color:#34d399; font-weight:700; margin-top:2px;">
+              ✅ Đáp án: ${escapeHtmlSafe(cleanAns)}
             </div>
+            ${whyText ? `<div style="font-size:12px; color:var(--text-muted); margin-top:3px;">📚 ${escapeHtmlSafe(whyText)}</div>` : ''}
           </div>
         `;
       });
@@ -6275,13 +6710,33 @@ body.theme-light .notebooklm-canvas {
       showToast(isTreeHighYieldOnly ? "🔥 Sơ đồ cây: Chỉ lọc câu chắc chắn thi!" : "Sơ đồ cây: Xem tất cả câu.");
     }
 
+    function getTimeNumPool() {
+      const ids = window.TIMENUM_IDS || [];
+      if (!ids.length) return [];
+      const mainMap = new Map();
+      (ALL_QUESTIONS || []).forEach(q => mainMap.set(q.id, q));
+      const phoiMap = new Map();
+      (window.PHOI_249_DATA || []).forEach(q => phoiMap.set(q.id, q));
+      const out = [];
+      ids.forEach((key, idx) => {
+        const isPhoi = key.startsWith('P_');
+        const numId = parseInt(key.slice(2), 10);
+        const item = isPhoi ? phoiMap.get(numId) : mainMap.get(numId);
+        if (item) {
+          item._tnOrder = idx;
+          out.push(item);
+        }
+      });
+      return out;
+    }
+
     function getEffectiveFlashQuestions() {
-      let list = window.QUESTIONS_DATA || [];
       const curChap = document.getElementById('flash-chapter-filter')?.value || 'all';
-      if (curChap !== 'all') {
-        list = list.filter(q => q.chapter === curChap);
+      let list = getPoolForChapterValue(curChap);
+      if (selectedFlashType && selectedFlashType !== 'all') {
+        list = list.filter(q => q.type_id === selectedFlashType);
       }
-      if (isFlashHighYieldOnly) {
+      if (isFlashHighYieldOnly && list.some(q => q.is_high_yield)) {
         list = list.filter(q => q.is_high_yield);
       }
       return list;
@@ -6335,7 +6790,9 @@ body.theme-light .notebooklm-canvas {
     let stationSortMode = 'random'; // 'random', 'archetype', 'orig_num'
 
     function getPoolForChapterValue(chapterName) {
-      if (chapterName === '__PHOI_249_ALL__') {
+      if (chapterName === '__TIMENUM_ALL__') {
+        return getTimeNumPool();
+      } else if (chapterName === '__PHOI_249_ALL__') {
         return [...(window.PHOI_249_DATA || [])];
       } else if (chapterName && chapterName.startsWith('__PHOI__')) {
         const phoiChap = chapterName.replace('__PHOI__', '');
@@ -6389,6 +6846,8 @@ body.theme-light .notebooklm-canvas {
         let totalInChapter = getPoolForChapterValue(ch).length;
         if (ch === '__WRONG_ONLY__') {
           allOpt.textContent = `⚡ Tất cả các dạng câu sai (${totalInChapter} câu)`;
+        } else if (ch === '__TIMENUM_ALL__') {
+          allOpt.textContent = `📅 Tất cả Mốc Thời Gian & Số Liệu (${totalInChapter} câu)`;
         } else if (ch === '__TRAPS_ALL__') {
           allOpt.textContent = `🔥 Tất cả bẫy phủ định (${totalInChapter} câu)`;
         } else if (ch === '__ALL_COMBINED__') {
@@ -6398,7 +6857,7 @@ body.theme-light .notebooklm-canvas {
         } else if (ch !== 'all') {
           allOpt.textContent = `⚡ Tất cả các dạng (${totalInChapter} câu)`;
         } else {
-          allOpt.textContent = `⚡ Tất cả 16 bài & dạng câu (${totalInChapter} câu)`;
+          allOpt.textContent = `⚡ Tất cả bài học & dạng câu (${totalInChapter} câu)`;
         }
         typeSelect.appendChild(allOpt);
 
@@ -6418,9 +6877,11 @@ body.theme-light .notebooklm-canvas {
       }
 
       // 2. Render Banner
-      let chapterTitle = 'TẤT CẢ 16 BÀI HỌC';
+      let chapterTitle = 'TẤT CẢ CÁC BÀI HỌC';
       if (ch === '__WRONG_ONLY__') {
         chapterTitle = 'KHO CÂU HAY SAI';
+      } else if (ch === '__TIMENUM_ALL__') {
+        chapterTitle = '📅 MỐC THỜI GIAN & SỐ LIỆU CỐ ĐỊNH';
       } else if (ch === '__TRAPS_ALL__') {
         chapterTitle = 'BẪY PHỦ ĐỊNH TỔNG HỢP';
       } else if (ch === '__ALL_COMBINED__') {
@@ -6558,19 +7019,16 @@ body.theme-light .notebooklm-canvas {
       // Update Banner & Archetypes dropdown
       updateFlashArchetypesUI(ch);
 
-      // 1. Filter by Chapter (Hỗ trợ cả 1.314, 249 Phôi Thai, Gộp chung & Bẫy phủ định)
-      let pool = getPoolForChapterValue(ch);
+      // 1. Filter by Chapter + Archetype + HighYield
+      let pool = [...getEffectiveFlashQuestions()];
 
-      // 2. Filter by Archetype (if active)
-      if (selectedFlashType && selectedFlashType !== 'all') {
-        pool = pool.filter(q => q.type_id === selectedFlashType);
-      }
-
-      // 3. Sorting: Group by Archetype rank or Original question number
+      // 2. Sorting: Keep chronological TIMENUM order when selected, or Archetype rank, or Original number
       const sortSelect = document.getElementById('flash-sort-select');
       if (sortSelect) flashSortMode = sortSelect.value;
 
-      if (flashSortMode === 'archetype') {
+      if (ch === '__TIMENUM_ALL__' && flashSortMode === 'archetype') {
+        pool.sort((a, b) => (a._tnOrder !== undefined ? a._tnOrder : 9999) - (b._tnOrder !== undefined ? b._tnOrder : 9999));
+      } else if (flashSortMode === 'archetype') {
         pool.sort((a, b) => {
           const rankA = a.type_rank !== undefined ? a.type_rank : 50;
           const rankB = b.type_rank !== undefined ? b.type_rank : 50;
@@ -6589,6 +7047,7 @@ body.theme-light .notebooklm-canvas {
 
       flashList = pool;
       currentFlashIdx = 0;
+      updateFlashEtaDashboard();
       loadFlashQuestionCard();
     }
 
@@ -6713,6 +7172,7 @@ body.theme-light .notebooklm-canvas {
       flashRevealed = false;
       flashPromptSpeechDone = false;
       flashAnswerSpeechDone = false;
+      flashTutorSpeechDone = false;
       flashPendingReveal = false;
       flashTimeElapsed = 0;
 
@@ -6753,8 +7213,22 @@ body.theme-light .notebooklm-canvas {
       localStorage.setItem('mo_phoi_last_flash_idx', currentFlashIdx);
       checkLastFlashResume();
 
-      // Question with yellow highlights
-      document.getElementById('flash-question-prompt').innerHTML = q.question_html || q.question;
+      // TimeNum milestone badge if applicable
+      const tnBadge = document.getElementById('flash-card-timenum-badge');
+      if (tnBadge) {
+        const tnMeta = getTimeNumMetaForQuestion(q);
+        if (tnMeta) {
+          tnBadge.textContent = `📅 ${tnMeta.chip}`;
+          tnBadge.title = tnMeta.label || 'Mốc Thời Gian / Số Liệu Cố Định';
+          tnBadge.style.display = 'inline-flex';
+        } else {
+          tnBadge.style.display = 'none';
+        }
+      }
+
+      // Question with yellow highlights + OCR cleanup if present
+      const flashTutorCard = getTutorCardForQuestion(q);
+      document.getElementById('flash-question-prompt').innerHTML = renderPromptWithOcrFixHtml(q, flashTutorCard);
 
       // Options list (chưa hiện đáp án đúng)
       const optList = document.getElementById('flash-options-list');
@@ -6781,6 +7255,7 @@ body.theme-light .notebooklm-canvas {
       pBar.style.width = '100%';
       pBar.classList.remove('revealed');
 
+      updateFlashTutorDrawer(q, false);
       updateFlashVoiceUI();
 
       if (flashIsPlaying) {
@@ -6801,10 +7276,13 @@ body.theme-light .notebooklm-canvas {
       }
 
       const useVoice = flashVoiceEnabled && canBrowserSpeakNow();
-      if (useVoice && flashVoiceFlow === 'continuous') {
+      if (useVoice && (flashVoiceFlow === 'continuous' || flashVoiceFlow === 'podcast')) {
         const pBar = document.getElementById('flash-progress-bar');
         if (pBar) pBar.style.width = '100%';
-        updateFlashStatusUI('🎧 Nghe liên tục: Đang đọc câu hỏi...', '🗣️ Đang đọc đề', false);
+        const flowText = flashVoiceFlow === 'podcast'
+          ? '🎙️ Podcast Gia Sư: Đang đọc câu hỏi...'
+          : '🎧 Nghe liên tục: Đang đọc câu hỏi...';
+        updateFlashStatusUI(flowText, '🗣️ Đang đọc đề', false);
         return;
       }
 
@@ -6857,12 +7335,15 @@ body.theme-light .notebooklm-canvas {
       if (flashMorphTimeout) { clearTimeout(flashMorphTimeout); flashMorphTimeout = null; }
       const myToken = ++flashCycleToken;
 
+      const isContinuousPrompt = (flashVoiceFlow === 'continuous' || flashVoiceFlow === 'podcast');
+      const wantTutorLecture = (flashVoiceFlow === 'tutor' || flashVoiceFlow === 'podcast');
+
       if (!flashRevealed) {
         const canSpeak = flashVoiceEnabled && canBrowserSpeakNow();
         if (canSpeak && (forceRespeak || !flashPromptSpeechDone)) {
           flashPromptSpeechDone = false;
           flashPendingReveal = false;
-          if (flashVoiceFlow === 'continuous') {
+          if (isContinuousPrompt) {
             startFlashCycle(false);
           } else {
             updateFlashStatusUI('🗣️ Đang đọc câu hỏi & đếm ngược suy nghĩ...', `Đếm ngược: ${flashDuration}s`, false);
@@ -6872,7 +7353,7 @@ body.theme-light .notebooklm-canvas {
             if (myToken !== flashCycleToken || flashRevealed) return;
             flashPromptSpeechDone = true;
             if (!flashIsPlaying) return;
-            if (flashVoiceFlow === 'continuous') {
+            if (isContinuousPrompt) {
               updateFlashStatusUI('✅ Đọc xong đề — chuẩn bị đọc đáp án...', 'Mở đáp án...', false);
               flashAdvanceTimeout = setTimeout(() => {
                 if (myToken === flashCycleToken && !flashRevealed && flashIsPlaying) {
@@ -6900,17 +7381,41 @@ body.theme-light .notebooklm-canvas {
         const canSpeak = flashVoiceEnabled && canBrowserSpeakNow();
         if (canSpeak && (forceRespeak || !flashAnswerSpeechDone)) {
           flashAnswerSpeechDone = false;
+          flashTutorSpeechDone = !wantTutorLecture;
           updateFlashStatusUI('🔊 Đang đọc đáp án đúng...', '🗣️ Đọc đáp án', true);
           speakFlashText(buildFlashAnswerSpeech(q), 'answer', myToken, (aborted) => {
             if (myToken !== flashCycleToken) return;
             flashAnswerSpeechDone = true;
+            if (wantTutorLecture && flashIsPlaying) {
+              updateFlashTutorDrawer(q, true);
+              updateFlashStatusUI('🎓 Gia sư đang giảng chi tiết & mẹo nhớ...', '🎓 Gia sư giảng', true);
+              speakFlashText(buildFlashTutorSpeech(q), 'tutor', myToken, (tAborted) => {
+                if (myToken !== flashCycleToken) return;
+                flashTutorSpeechDone = true;
+                if (!flashIsPlaying) return;
+                updateFlashStatusUI('✅ Đã giảng xong — chuẩn bị chuyển câu...', 'Chuyển câu...', true);
+                flashAdvanceTimeout = setTimeout(() => {
+                  if (myToken === flashCycleToken && flashIsPlaying) triggerMorphTransition();
+                }, tAborted ? 1400 : 750);
+              });
+            } else if (flashIsPlaying) {
+              updateFlashStatusUI('✅ Đã đọc xong đáp án — chuẩn bị chuyển câu...', 'Chuyển câu...', true);
+              flashAdvanceTimeout = setTimeout(() => {
+                if (myToken === flashCycleToken && flashIsPlaying) triggerMorphTransition();
+              }, aborted ? 1600 : 650);
+            }
+          });
+        } else if (canSpeak && wantTutorLecture && !flashTutorSpeechDone && flashIsPlaying) {
+          updateFlashTutorDrawer(q, true);
+          updateFlashStatusUI('🎓 Gia sư đang giảng chi tiết & mẹo nhớ...', '🎓 Gia sư giảng', true);
+          speakFlashText(buildFlashTutorSpeech(q), 'tutor', myToken, (tAborted) => {
+            if (myToken !== flashCycleToken) return;
+            flashTutorSpeechDone = true;
             if (!flashIsPlaying) return;
-            updateFlashStatusUI('✅ Đã đọc xong đáp án — chuẩn bị chuyển câu...', 'Chuyển câu...', true);
+            updateFlashStatusUI('✅ Đã giảng xong — chuẩn bị chuyển câu...', 'Chuyển câu...', true);
             flashAdvanceTimeout = setTimeout(() => {
-              if (myToken === flashCycleToken && flashIsPlaying) {
-                triggerMorphTransition();
-              }
-            }, aborted ? 1600 : 650);
+              if (myToken === flashCycleToken && flashIsPlaying) triggerMorphTransition();
+            }, tAborted ? 1400 : 750);
           });
         } else if (flashIsPlaying) {
           flashAdvanceTimeout = setTimeout(() => {
@@ -6949,16 +7454,19 @@ body.theme-light .notebooklm-canvas {
       revealFlashAnswerAndAdvance();
     }
 
-    function revealFlashAnswerAndAdvance() {
+    function revealFlashAnswerAndAdvance(forceTutorSpeech = false) {
       if (flashRevealed) return;
       stopFlashTimer();
       const myToken = flashCycleToken;
       flashRevealed = true;
       flashPendingReveal = false;
       flashAnswerSpeechDone = false;
+      const wantTutorLecture = Boolean(forceTutorSpeech) || (flashVoiceFlow === 'tutor' || flashVoiceFlow === 'podcast');
+      flashTutorSpeechDone = !wantTutorLecture;
 
       const q = flashList[currentFlashIdx];
       if (!q) return;
+      const tutor = getTutorCardForQuestion(q);
       const optButtons = document.querySelectorAll('#flash-options-list .option-btn');
       const letters = ['A', 'B', 'C', 'D', 'E'];
 
@@ -6966,14 +7474,20 @@ body.theme-light .notebooklm-canvas {
       if (q.correct_idx !== null && optButtons[q.correct_idx]) {
         const targetBtn = optButtons[q.correct_idx];
         targetBtn.classList.add('flash-target');
+        const rawOptHtml = (q.options_html && q.options_html[q.correct_idx]) ? q.options_html[q.correct_idx].replace(/^[a-e]\.\s*/i, '') : q.options[q.correct_idx];
+        const cleanOverrideHtml = (tutor && tutor.clean_a)
+          ? `<b>${escapeHtmlSafe(tutor.clean_a.replace(/^[a-e]\.\s*/i, ''))}</b> <span style="font-size:12px; opacity:0.75;">(Gốc dính chữ: ${rawOptHtml})</span>`
+          : rawOptHtml;
         targetBtn.innerHTML = `
           <div>
             <span class="opt-key" style="background:var(--success); color:#080c14;">${letters[q.correct_idx]}</span>
-            <span>${(q.options_html && q.options_html[q.correct_idx]) ? q.options_html[q.correct_idx].replace(/^[a-e]\.\s*/i, '') : q.options[q.correct_idx]}</span>
+            <span>${cleanOverrideHtml}</span>
           </div>
           <span style="font-size:12px; font-weight:800; background:rgba(16,185,129,0.3); padding:3px 8px; border-radius:5px;">✅ ĐÁP ÁN</span>
         `;
       }
+
+      updateFlashTutorDrawer(q, flashTutorExpanded || wantTutorLecture);
 
       const pBar = document.getElementById('flash-progress-bar');
       if (pBar) {
@@ -6990,23 +7504,36 @@ body.theme-light .notebooklm-canvas {
         speakFlashText(buildFlashAnswerSpeech(q), 'answer', myToken, (aborted) => {
           if (myToken !== flashCycleToken) return;
           flashAnswerSpeechDone = true;
-          if (!flashIsPlaying) return;
-          updateFlashStatusUI('✅ Đã đọc xong đáp án — chuẩn bị chuyển câu...', 'Chuyển câu...', true);
-          flashAdvanceTimeout = setTimeout(() => {
-            if (myToken === flashCycleToken && flashIsPlaying) {
-              triggerMorphTransition();
-            }
-          }, aborted ? 1600 : 650);
+          if (wantTutorLecture) {
+            updateFlashTutorDrawer(q, true);
+            updateFlashStatusUI('🎓 Gia sư đang giảng chi tiết & mẹo nhớ...', '🎓 Gia sư giảng', true);
+            speakFlashText(buildFlashTutorSpeech(q), 'tutor', myToken, (tAborted) => {
+              if (myToken !== flashCycleToken) return;
+              flashTutorSpeechDone = true;
+              if (!flashIsPlaying) {
+                updateFlashStatusUI('⏸️ Đã giảng xong (Đang tạm dừng)', '✅ Đã giảng xong', true);
+                return;
+              }
+              updateFlashStatusUI('✅ Đã giảng xong — chuẩn bị chuyển câu...', 'Chuyển câu...', true);
+              flashAdvanceTimeout = setTimeout(() => {
+                if (myToken === flashCycleToken && flashIsPlaying) triggerMorphTransition();
+              }, tAborted ? 1400 : 750);
+            });
+          } else {
+            if (!flashIsPlaying) return;
+            updateFlashStatusUI('✅ Đã đọc xong đáp án — chuẩn bị chuyển câu...', 'Chuyển câu...', true);
+            flashAdvanceTimeout = setTimeout(() => {
+              if (myToken === flashCycleToken && flashIsPlaying) triggerMorphTransition();
+            }, aborted ? 1600 : 650);
+          }
         });
       } else {
         flashAnswerSpeechDone = !flashVoiceEnabled;
         updateFlashStatusUI(flashIsPlaying ? 'ĐÃ HIỆN ĐÁP ÁN!' : '⏸️ Đã hiện đáp án (Đang tạm dừng)', 'ĐÃ HIỆN ĐÁP ÁN!', true);
         if (flashIsPlaying) {
           flashAdvanceTimeout = setTimeout(() => {
-            if (myToken === flashCycleToken && flashIsPlaying) {
-              triggerMorphTransition();
-            }
-          }, 1800);
+            if (myToken === flashCycleToken && flashIsPlaying) triggerMorphTransition();
+          }, flashTutorExpanded ? 3200 : 1800);
         }
       }
     }
@@ -7106,7 +7633,14 @@ body.theme-light .notebooklm-canvas {
           stationArchBadge.style.display = 'none';
         }
       }
-      document.getElementById('desk-question-prompt').innerHTML = q.question_html || q.question;
+      if (stationVoiceActive) { stationVoiceActive = false; cancelFlashSpeech(); }
+      const stTutor = getTutorCardForQuestion(q);
+      document.getElementById('desk-question-prompt').innerHTML = renderPromptWithOcrFixHtml(q, stTutor);
+      const stBox = document.getElementById('station-tutor-box');
+      if (stBox) {
+        stBox.style.display = 'none';
+        stBox.innerHTML = '';
+      }
 
       // Synchronize station jump input
       const stJumpInput = document.getElementById('station-jump-input');
@@ -7184,15 +7718,23 @@ body.theme-light .notebooklm-canvas {
         }
       }
 
-      // Render Explanation
-      
+      // Render Deep Tutor Explanation
+      showStationTutorFeedback(q);
 
       saveProgress();
       updateGlobalStats();
     }
 
+    function showStationTutorFeedback(q) {
+      const box = document.getElementById('station-tutor-box');
+      if (!box || !q) return;
+      box.innerHTML = renderTutorSectionsHtml(q, getTutorCardForQuestion(q), true);
+      box.style.display = 'flex';
+    }
+
     function revealStationAnswer() {
       const q = stationExamList[currentStationIdx];
+      if (!q) return;
       const optButtons = document.querySelectorAll('#desk-options-list .option-btn');
 
       if (q.correct_idx !== null && optButtons[q.correct_idx]) {
@@ -7205,8 +7747,8 @@ body.theme-light .notebooklm-canvas {
           </div>
         `;
       }
-      document.getElementById('btn-reveal-station').textContent = 'Ẩn Đáp Án';
-      
+      document.getElementById('btn-reveal-station').textContent = 'Đã Hiện Đáp Án & Giải Thích';
+      showStationTutorFeedback(q);
     }
 
     function nextStationQuestion() {
@@ -7272,6 +7814,10 @@ body.theme-light .notebooklm-canvas {
 
     function stopStationTimer() {
       if (stationTimer) clearInterval(stationTimer);
+      if (stationVoiceActive) {
+        stationVoiceActive = false;
+        if (typeof cancelFlashSpeech === 'function') cancelFlashSpeech();
+      }
     }
 
     function resetStationTimer() {
@@ -7293,11 +7839,7 @@ body.theme-light .notebooklm-canvas {
       const tbody = document.getElementById('cheat-table-body');
       tbody.innerHTML = '';
 
-      const filtered = ALL_QUESTIONS.filter(q => {
-        if (ch === '__WRONG_ONLY__') {
-          return (PROGRESS.wrong_questions || []).includes(q.id);
-        }
-        if (ch !== 'all' && q.chapter !== ch) return false;
+      const filtered = getPoolForChapterValue(ch).filter(q => {
         if (s) {
           const matchQ = q.question.toLowerCase().includes(s);
           const matchA = (q.clean_ans || q.correct_text || '').toLowerCase().includes(s);
@@ -8042,6 +8584,12 @@ body.theme-light .notebooklm-canvas {
         } else if (k === 'v') {
           e.preventDefault();
           toggleFlashVoice();
+        } else if (k === 'g') {
+          e.preventDefault();
+          toggleFlashTutorDrawer();
+        } else if (k === 't') {
+          e.preventDefault();
+          speakFlashTutorOnly();
         } else if (k === 'r') {
           e.preventDefault();
           replayCurrentFlashVoice();
@@ -8079,8 +8627,9 @@ body.theme-light .notebooklm-canvas {
         localStorage.setItem('mo_phoi_progress', JSON.stringify(PROGRESS));
       } catch (e) { }
 
-      // 2. If backend server is reachable, save to server too
+      // 2. If backend server is reachable (chỉ gọi khi chạy localhost/server.py), save to server too
       try {
+        if (!location.protocol.startsWith('http') || location.hostname.endsWith('github.io')) return;
         await fetch('/api/progress', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -8170,7 +8719,7 @@ body.theme-light .notebooklm-canvas {
 
       if (count === 'chapter') {
         const selectedChap = chapSelect.value;
-        const chapCount = selectedChap === 'all' ? 100 : ALL_QUESTIONS.filter(q => q.chapter === selectedChap).length;
+        const chapCount = selectedChap === 'all' ? 100 : getPoolForChapterValue(selectedChap).length;
         countInput.value = chapCount;
         minInput.value = Math.max(5, Math.round((chapCount * 10) / 60));
       } else {
@@ -8211,14 +8760,7 @@ body.theme-light .notebooklm-canvas {
       lockinAnswerLock = false;
 
       // Filter questions pool
-      let pool = ALL_QUESTIONS;
-      if (chapter && chapter !== 'all') {
-        if (chapter === '__WRONG_ONLY__') {
-          pool = ALL_QUESTIONS.filter(q => (PROGRESS.wrong_questions || []).includes(q.id));
-        } else {
-          pool = ALL_QUESTIONS.filter(q => q.chapter === chapter);
-        }
-      }
+      let pool = getPoolForChapterValue(chapter || 'all');
       if (!pool.length) {
         if (chapter === '__WRONG_ONLY__') {
           alert('🎉 Kho câu sai đang trống! Không có câu nào để ôn luyện.');
@@ -8549,7 +9091,14 @@ Chỉ còn ${remaining} câu nữa là cán đích. Bạn có chắc muốn dừ
       const sel = document.getElementById('speed-chapter-filter');
       if (!sel) return;
       const chapters = [...new Set(ALL_QUESTIONS.map(q => q.chapter || 'Chưa phân loại'))];
-      sel.innerHTML = '<option value="all">⚡ Tất cả tất cả bài học (1.314 câu) (' + ALL_QUESTIONS.length + ' câu)</option>';
+      sel.innerHTML = '<option value="all">⚡ Tất cả bài học (' + ALL_QUESTIONS.length + ' câu)</option>';
+      const tnLen = getTimeNumPool().length;
+      if (tnLen > 0) {
+        const tnOpt = document.createElement('option');
+        tnOpt.value = '__TIMENUM_ALL__';
+        tnOpt.textContent = `📅 Mốc Thời Gian & Số Liệu Cố Định (${tnLen} câu)`;
+        sel.appendChild(tnOpt);
+      }
       chapters.forEach(c => {
         const count = ALL_QUESTIONS.filter(q => q.chapter === c).length;
         const opt = document.createElement('option');
@@ -8600,8 +9149,7 @@ Chỉ còn ${remaining} câu nữa là cán đích. Bạn có chắc muốn dừ
       const typeVal = document.getElementById('speed-type-filter') ? document.getElementById('speed-type-filter').value : 'all';
       const sVal = (document.getElementById('speed-search-input') ? document.getElementById('speed-search-input').value : '').toLowerCase().trim();
 
-      let pool = ALL_QUESTIONS;
-      if (chVal !== 'all') pool = pool.filter(q => q.chapter === chVal);
+      let pool = getPoolForChapterValue(chVal);
       if (typeVal !== 'all') pool = pool.filter(q => q.type_name === typeVal);
       if (sVal) {
         pool = pool.filter(q => {
@@ -8985,6 +9533,20 @@ Chỉ còn ${remaining} câu nữa là cán đích. Bạn có chắc muốn dừ
       return [...q1Traps, ...q2Traps];
     }
 
+    function switchFlashToTimeNum() {
+      switchTab('flash');
+      const sel = document.getElementById('flash-chapter-filter');
+      if (sel) {
+        sel.value = '__TIMENUM_ALL__';
+        selectedFlashType = 'all';
+        filterFlashQuestions();
+        const cnt = getTimeNumPool().length;
+        if (typeof showToast === 'function') {
+          showToast(`📅 Đã lọc ${cnt} câu Mốc Thời Gian & Số Liệu Cố Định (thứ tự D0 → W38 & Số liệu)!`);
+        }
+      }
+    }
+
     function switchFlashToTraps() {
       switchTab('flash');
       const sel = document.getElementById('flash-chapter-filter');
@@ -9037,8 +9599,11 @@ function openLectureTabForCurrentChapter() {
       const banner = document.getElementById('flash-lecture-banner');
       if (!banner) return;
       if (chapterName === 'all') {
-        document.getElementById('flash-lec-title').textContent = 'Toàn bộ tất cả bài học (1.314 câu) (1.314 câu trắc nghiệm)';
+        document.getElementById('flash-lec-title').textContent = `Toàn bộ các bài học (${ALL_QUESTIONS.length || 1314} câu trắc nghiệm)`;
         document.getElementById('flash-lec-desc').textContent = 'Tổng hợp ngân hàng đề thi Mô Phôi K48. Đọc bài giảng từng bài để đạt điểm tối đa.';
+      } else if (chapterName === '__TIMENUM_ALL__') {
+        document.getElementById('flash-lec-title').textContent = `Mốc Thời Gian & Số Liệu Cố Định (${getTimeNumPool().length} câu)`;
+        document.getElementById('flash-lec-desc').textContent = 'Chắt lọc toàn bộ ngày, tuần, tháng phôi thai, kích thước hiển vi, góc xoay và số liệu chuẩn K48.';
       } else if (window.LECTURES_DATA && window.LECTURES_DATA[chapterName]) {
         const item = window.LECTURES_DATA[chapterName];
         document.getElementById('flash-lec-title').textContent = `${item.title} (${item.question_count} câu)`;
