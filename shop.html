@@ -102,6 +102,17 @@
             background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.35);
             border-radius: 14px; padding: 12px 14px; font-size: 12.5px; color: #d1fae5; margin-top: 12px;
         }
+        .app-warn {
+            margin-top: 12px;
+            padding: 11px 14px;
+            border-radius: 13px;
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.45);
+            color: #fde68a;
+            font-size: 12.5px;
+            line-height: 1.55;
+        }
+        .app-warn b { color: #fbbf24; }
 
         .lookup-row { display: flex; gap: 8px; }
         .lookup-row input { flex: 1; padding: 11px 14px; border-radius: 12px; background: rgba(2,6,23,0.85); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-size: 13px; font-weight: 700; }
@@ -195,6 +206,9 @@
                     <div class="sub">Prefix: FLOWEXTRA</div>
                 </button>
             </div>
+            <div class="app-warn">
+                ⚠️ <b>Cảnh báo quan trọng:</b> Phải chọn <b>ĐÚNG ứng dụng</b> bạn đang sử dụng để hệ thống cấp đúng mã Key cho app đó (<b class="appNameInline">FlowOptimize</b>). Key của các app được tách riêng hoàn toàn — <b>nếu chọn nhầm app sẽ không kích hoạt được ứng dụng!</b>
+            </div>
         </div>
 
         <!-- 2. THÔNG TIN THIẾT BỊ -->
@@ -212,7 +226,6 @@
             </div>
             <div class="bank-pill">
                 <span>🏦 TK Nhận Tiền Duy Nhất: <b>10006503497 • TPBANK • TRAN CHI CUONG</b></span>
-                <span id="backendBadge" style="font-weight:800;color:#38bdf8;">Đang kiểm tra cổng Auto Bank...</span>
             </div>
         </div>
 
@@ -338,24 +351,6 @@
             document.querySelectorAll('.app-btn').forEach(b => b.classList.toggle('active', b.dataset.app === selectedAppId));
             document.getElementById('selectedAppLabel').textContent = APPS[selectedAppId].name;
             document.querySelectorAll('.appNameInline').forEach(el => el.textContent = APPS[selectedAppId].name);
-        }
-
-        async function loadBackendStatus() {
-            const badge = document.getElementById('backendBadge');
-            try {
-                const res = await fetch(`${API_BASE}/api/shop?action=status`, { cache: 'no-store' });
-                const data = await res.json();
-                if (data.sepayConfigured) {
-                    badge.textContent = '🟢 Auto Bank SePay 24/7: ĐANG BẬT';
-                    badge.style.color = '#34d399';
-                } else {
-                    badge.textContent = '🟡 Duyệt Chuyển Khoản Qua Telegram / Admin (Chưa gắn SePay API)';
-                    badge.style.color = '#fbbf24';
-                }
-            } catch (e) {
-                badge.textContent = '⚠️ Không kết nối được API Vercel';
-                badge.style.color = '#f87171';
-            }
         }
 
         async function createShopOrder(planCode) {
@@ -496,7 +491,6 @@
         }
 
         selectApp(selectedAppId);
-        loadBackendStatus();
     </script>
 </body>
 </html>
