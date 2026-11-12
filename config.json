@@ -5,7 +5,7 @@
   "api_token": "6ae77b1c1473a714b32b2a3a",
   "tiktok": "https://www.tiktok.com/@xxd5974",
   "telegram": "https://t.me/+dtVBEzwuN2Q4NmI9",
-  "wait_seconds": 3,
+  "wait_seconds": 15,
   "flows": {
     "name": "FlowS Gamer Tuner Edition",
     "version": "v1.2.0",

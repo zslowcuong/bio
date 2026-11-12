@@ -392,8 +392,8 @@
                     <input type="text" id="cfgTelegram" class="field-input" value="https://t.me/+dtVBEzwuN2Q4NmI9" oninput="renderJsonPreview()">
                 </div>
                 <div>
-                    <label class="field-label" for="cfgWaitSeconds">Thời Gian Xác Nhận Modal (Giây)</label>
-                    <input type="number" id="cfgWaitSeconds" class="field-input" value="3" min="0" max="10" oninput="renderJsonPreview()">
+                    <label class="field-label" for="cfgWaitSeconds">Thời Gian Xác Nhận TikTok (Giây)</label>
+                    <input type="number" id="cfgWaitSeconds" class="field-input" value="15" min="15" max="60" oninput="renderJsonPreview()">
                 </div>
                 <div>
                     <label class="field-label" for="cfgCopyright">Chuỗi Bản Quyền</label>
@@ -634,7 +634,7 @@
                 api_token: apiToken,
                 tiktok: document.getElementById('cfgTiktok').value.trim() || "https://www.tiktok.com/@xxd5974",
                 telegram: document.getElementById('cfgTelegram').value.trim() || "https://t.me/+dtVBEzwuN2Q4NmI9",
-                wait_seconds: parseInt(document.getElementById('cfgWaitSeconds').value, 10) || 3,
+                wait_seconds: Math.max(15, parseInt(document.getElementById('cfgWaitSeconds').value, 10) || 15),
                 flows: {
                     name: "FlowS Gamer Tuner Edition",
                     version: fsVer,
