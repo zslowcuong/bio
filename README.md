@@ -3,7 +3,7 @@
 
 ![Flow Banner](app_logo.png)
 
-> **Flow Ecosystem** là bộ ba công cụ tối ưu hóa phần cứng và gaming eSports chuyên sâu dành cho thiết bị Android, phát triển bởi **Flowly Engine**. Toàn bộ ứng dụng hoàn toàn **miễn phí 100%, không cần GetKey, không qua trung gian rút gọn**, hoạt động qua đặc quyền **Shizuku ADB** (Không cần Root máy).
+> **Flow Ecosystem** là bộ ba công cụ tối ưu hóa phần cứng và gaming eSports chuyên sâu dành cho thiết bị Android, phát triển bởi **Flowly Engine**. Toàn bộ tính năng ứng dụng hoàn toàn **miễn phí 100%, không cần GetKey**, hoạt động qua đặc quyền **Shizuku ADB** (Không cần Root máy).
 
 ---
 
@@ -29,13 +29,12 @@
 
 ---
 
-## 📥 Tải Về & Cài Đặt (Direct APK Downloads — Tải Trực Tiếp)
+## 📥 Tải Về & Cài Đặt Chính Thức
 
-| Ứng Dụng | Phiên Bản | Đặc Quyền | Tải Trực Tiếp (APK) | Link Gofile Dự Phòng |
-|---|---|---|---|---|
-| **FlowOptimize - Anime Edition** | v1.6.0 | Shizuku (No Root) | [FlowOptimize.apk](FlowOptimize.apk) | [Gofile Mirror](https://gofile.io/d/Vr3bEORd) |
-| **FlowS - Gamer Tuner** | v1.2.0 | Shizuku (No Root) | [FlowS.apk](FlowS.apk) | [Gofile Mirror](https://gofile.io/d/kzDVlE2G) |
-| **FlowUltra - Hardware Suite** | v1.1.0 | Shizuku (No Root) | [FlowUltra.apk](FlowUltra.apk) | [Gofile Mirror](https://gofile.io/d/p8GZrZNY) |
+Toàn bộ bộ ba ứng dụng **FlowOptimize v1.6.0**, **FlowS v1.2.0**, **FlowUltra v1.1.0** cùng hơn 60 công cụ tối ưu bổ trợ được phát hành miễn phí tại trang Bio chính thức:
+
+- Trang tải chính thức: `https://zslowcuong.github.io/bio/#download`
+- Chọn ứng dụng -> Follow TikTok **@xxd5974** để mở khóa liên kết tải APK.
 
 ---
 

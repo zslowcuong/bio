@@ -2,6 +2,7 @@
   "project": "Flow Ecosystem (FlowS, FlowOptimize, FlowUltra)",
   "copyright": "© Bản quyền thuộc về Flowly Engine",
   "free_forever": true,
+  "api_token": "6ae77b1c1473a714b32b2a3a",
   "tiktok": "https://www.tiktok.com/@xxd5974",
   "telegram": "https://t.me/+dtVBEzwuN2Q4NmI9",
   "wait_seconds": 3,
@@ -12,10 +13,11 @@
     "min_version_code": 3,
     "force_update": false,
     "update_url": "https://zslowcuong.github.io/bio/",
-    "download_url": "https://zslowcuong.github.io/bio/#download",
+    "download_url": "https://zslowcuong.github.io/bio/?dl=flows#download",
     "package": "com.flows.gaming",
     "changelog": "Bản cập nhật v1.2.0 Miễn phí 100% (© Bản quyền thuộc về Flowly Engine): Gỡ bỏ hoàn toàn Key/kích hoạt, Whitelist tự động Xiaomi Game Turbo/Ảnh/Camera, Preset Máy Cấu Hình Cao & Khóa Max Hz chuẩn phần cứng.",
     "destination_apk": "https://gofile.io/d/kzDVlE2G",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/kzDVlE2G",
     "direct_apk": "FlowS.apk"
   },
   "flowoptimize": {
@@ -25,10 +27,11 @@
     "min_version_code": 7,
     "force_update": false,
     "update_url": "https://zslowcuong.github.io/bio/",
-    "download_url": "https://zslowcuong.github.io/bio/#download",
+    "download_url": "https://zslowcuong.github.io/bio/?dl=flowoptimize#download",
     "package": "com.example.gameoptimizer",
     "changelog": "Bản cập nhật v1.6.0 Miễn phí 100% (© Bản quyền thuộc về Flowly Engine): Xóa bỏ hoàn toàn GetKey & Key PRO, Whitelist tự động Game Turbo/Ảnh/Camera, Khóa Hz thích ứng & bảo mật chống crack.",
     "destination_apk": "https://gofile.io/d/Vr3bEORd",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/Vr3bEORd",
     "direct_apk": "FlowOptimize.apk"
   },
   "flowultra": {
@@ -38,10 +41,11 @@
     "min_version_code": 3,
     "force_update": false,
     "update_url": "https://zslowcuong.github.io/bio/",
-    "download_url": "https://zslowcuong.github.io/bio/#download",
+    "download_url": "https://zslowcuong.github.io/bio/?dl=flowultra#download",
     "package": "com.flows.flowultra",
     "changelog": "Bản cập nhật v1.1.0 Miễn phí 100% (© Bản quyền thuộc về Flowly Engine): Gỡ bỏ hoàn toàn Key/bản quyền, Whitelist Xiaomi Game Turbo/Ảnh/Camera, Hardware Suite & Shizuku ADB an toàn.",
     "destination_apk": "https://gofile.io/d/p8GZrZNY",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/p8GZrZNY",
     "direct_apk": "FlowUltra.apk"
   },
   "tools_store": {
@@ -51,7 +55,8 @@
       "desc": "Siêu công cụ dọn dẹp UAD & tối ưu hóa gaming qua ADB",
       "file": "BrotX-v8.apk",
       "gofile": "https://gofile.io/d/RaSXG0aV",
-      "destination_apk": "https://gofile.io/d/RaSXG0aV"
+      "destination_apk": "https://gofile.io/d/RaSXG0aV",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/RaSXG0aV"
     },
     "shizuku": {
       "name": "Shizuku Official 🐱",
@@ -59,7 +64,8 @@
       "desc": "Chạy ứng dụng tối ưu không cần Root qua ADB Shell UID 2000",
       "file": "Shizuku.apk",
       "gofile": "https://gofile.io/d/DkhZ4xaM",
-      "destination_apk": "https://gofile.io/d/DkhZ4xaM"
+      "destination_apk": "https://gofile.io/d/DkhZ4xaM",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/DkhZ4xaM"
     },
     "shizukunext": {
       "name": "Shizuku-Next ⚡",
@@ -67,7 +73,8 @@
       "desc": "Watchdog tự động hồi sinh kết nối & hỗ trợ ADB Modules",
       "file": "Shizuku-Next.apk",
       "gofile": "https://gofile.io/d/AdqIc0Gp",
-      "destination_apk": "https://gofile.io/d/AdqIc0Gp"
+      "destination_apk": "https://gofile.io/d/AdqIc0Gp",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/AdqIc0Gp"
     },
     "toolpc": {
       "name": "Tool Kích Hoạt Shizuku (PC) 💻",
@@ -75,7 +82,8 @@
       "desc": "Tự động cài đặt driver và kích hoạt Shizuku qua cáp USB",
       "file": "TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat",
       "gofile": "https://raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat",
-      "destination_apk": "https://raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat"
+      "destination_apk": "https://raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat"
     }
   }
 }

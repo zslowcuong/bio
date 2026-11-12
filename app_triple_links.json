@@ -3,288 +3,357 @@
     "name": "Shizuku",
     "dest": "https://gofile.io/d/DkhZ4xaM",
     "gofile": "https://gofile.io/d/DkhZ4xaM",
-    "direct_apk": "Shizuku.apk"
+    "direct_apk": "Shizuku.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2FDkhZ4xaM"
   },
   "ashell": {
     "name": "aShell You",
-    "dest": "https://gofile.io/d/1UZYg0rv"
+    "dest": "https://gofile.io/d/1UZYg0rv",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2F1UZYg0rv"
   },
   "canta": {
     "name": "Canta",
-    "dest": "https://gofile.io/d/jpqeDLj1"
+    "dest": "https://gofile.io/d/jpqeDLj1",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2FjpqeDLj1"
   },
   "appmanager": {
     "name": "App Manager",
-    "dest": "https://gofile.io/d/Botbwj5O"
+    "dest": "https://gofile.io/d/Botbwj5O",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2FBotbwj5O"
   },
   "hail": {
     "name": "Hail",
-    "dest": "https://gofile.io/d/Amg5FPbY"
+    "dest": "https://gofile.io/d/Amg5FPbY",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2FAmg5FPbY"
   },
   "optidroid": {
     "name": "OptiDroid",
-    "dest": "https://gofile.io/d/BYHGBBvt"
+    "dest": "https://gofile.io/d/BYHGBBvt",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2FBYHGBBvt"
   },
   "rytunex": {
     "name": "RyTuneX",
-    "dest": "https://gofile.io/d/Lun7iMMH"
+    "dest": "https://gofile.io/d/Lun7iMMH",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2FLun7iMMH"
   },
   "gama": {
     "name": "Gama Booster",
-    "dest": "https://gofile.io/d/DPRkhgtC"
+    "dest": "https://gofile.io/d/DPRkhgtC",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2FDPRkhgtC"
   },
   "shizukunext": {
     "name": "Shizuku-Next",
     "dest": "https://gofile.io/d/AdqIc0Gp",
     "gofile": "https://gofile.io/d/AdqIc0Gp",
-    "direct_apk": "Shizuku-Next.apk"
+    "direct_apk": "Shizuku-Next.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2FAdqIc0Gp"
   },
   "framex": {
     "name": "FrameX",
-    "dest": "https://github.com/MaheshSharan/FrameX-Android/releases/download/v1.5.27/FrameX_v1.5.27-release.apk"
+    "dest": "https://github.com/MaheshSharan/FrameX-Android/releases/download/v1.5.27/FrameX_v1.5.27-release.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FMaheshSharan%2FFrameX-Android%2Freleases%2Fdownload%2Fv1.5.27%2FFrameX_v1.5.27-release.apk"
   },
   "shappky": {
     "name": "Shappky",
-    "dest": "https://github.com/YasserNull/shappky/releases/download/v2.0.0/shappky-v2.0.0-arm64-v8a.apk"
+    "dest": "https://github.com/YasserNull/shappky/releases/download/v2.0.0/shappky-v2.0.0-arm64-v8a.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FYasserNull%2Fshappky%2Freleases%2Fdownload%2Fv2.0.0%2Fshappky-v2.0.0-arm64-v8a.apk"
   },
   "savertuner": {
     "name": "SaverTuner",
-    "dest": "https://codeberg.org/s1m/savertuner/releases/download/1.1.6/savertuner.apk"
+    "dest": "https://codeberg.org/s1m/savertuner/releases/download/1.1.6/savertuner.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fcodeberg.org%2Fs1m%2Fsavertuner%2Freleases%2Fdownload%2F1.1.6%2Fsavertuner.apk"
   },
   "installerx": {
     "name": "InstallerX Revived",
-    "dest": "https://github.com/wxxsfxyzm/InstallerX-Revived/releases/download/26.09/InstallerX-Revived-online-26.09.apk"
+    "dest": "https://github.com/wxxsfxyzm/InstallerX-Revived/releases/download/26.09/InstallerX-Revived-online-26.09.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fwxxsfxyzm%2FInstallerX-Revived%2Freleases%2Fdownload%2F26.09%2FInstallerX-Revived-online-26.09.apk"
   },
   "colorblendr": {
     "name": "ColorBlendr",
-    "dest": "https://github.com/Mahmud0808/ColorBlendr/releases/download/v3.1.2/ColorBlendr.v3.1.2.apk"
+    "dest": "https://github.com/Mahmud0808/ColorBlendr/releases/download/v3.1.2/ColorBlendr.v3.1.2.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FMahmud0808%2FColorBlendr%2Freleases%2Fdownload%2Fv3.1.2%2FColorBlendr.v3.1.2.apk"
   },
   "sharemove": {
     "name": "ShaRemove",
-    "dest": "https://github.com/thejaustin/sharemove/releases/download/v1.0.0-alpha.twenty-five/sharemove-1.0.0-alpha.twenty-five.apk"
+    "dest": "https://github.com/thejaustin/sharemove/releases/download/v1.0.0-alpha.twenty-five/sharemove-1.0.0-alpha.twenty-five.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fthejaustin%2Fsharemove%2Freleases%2Fdownload%2Fv1.0.0-alpha.twenty-five%2Fsharemove-1.0.0-alpha.twenty-five.apk"
   },
   "shizutools": {
     "name": "ShizuTools",
-    "dest": "https://github.com/legendsayantan/ShizuTools/releases/download/v1.4.6/app-release.apk"
+    "dest": "https://github.com/legendsayantan/ShizuTools/releases/download/v1.4.6/app-release.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Flegendsayantan%2FShizuTools%2Freleases%2Fdownload%2Fv1.4.6%2Fapp-release.apk"
   },
   "extinguish": {
     "name": "Extinguish",
-    "dest": "https://github.com/Moderpach/Extinguish/releases/download/0.9.5.1/app-release.apk"
+    "dest": "https://github.com/Moderpach/Extinguish/releases/download/0.9.5.1/app-release.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FModerpach%2FExtinguish%2Freleases%2Fdownload%2F0.9.5.1%2Fapp-release.apk"
   },
   "redirectguard": {
     "name": "Redirect Guard",
-    "dest": "https://github.com/rdevz-ph/RedirectGuard/releases/download/v1.6-hotfix1/RedirectGuard-v1.6-hotfix1-release.apk"
+    "dest": "https://github.com/rdevz-ph/RedirectGuard/releases/download/v1.6-hotfix1/RedirectGuard-v1.6-hotfix1-release.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Frdevz-ph%2FRedirectGuard%2Freleases%2Fdownload%2Fv1.6-hotfix1%2FRedirectGuard-v1.6-hotfix1-release.apk"
   },
   "openmapper": {
     "name": "OpenMapper",
-    "dest": "https://github.com/kinou-p/android-open-mapper/releases/download/v1.4.0/OpenMapper-latest.apk"
+    "dest": "https://github.com/kinou-p/android-open-mapper/releases/download/v1.4.0/OpenMapper-latest.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fkinou-p%2Fandroid-open-mapper%2Freleases%2Fdownload%2Fv1.4.0%2FOpenMapper-latest.apk"
   },
   "extendroid": {
     "name": "Extendroid",
-    "dest": "https://github.com/legendsayantan/Extendroid/releases/download/v1.0.5-no-mediaprojection/Extendroid_v1.0.5_no-mediaprojection.apk"
+    "dest": "https://github.com/legendsayantan/Extendroid/releases/download/v1.0.5-no-mediaprojection/Extendroid_v1.0.5_no-mediaprojection.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Flegendsayantan%2FExtendroid%2Freleases%2Fdownload%2Fv1.0.5-no-mediaprojection%2FExtendroid_v1.0.5_no-mediaprojection.apk"
   },
   "essentials": {
     "name": "Essentials",
-    "dest": "https://github.com/sameerasw/essentials/releases/download/v20.3-beta.2/app-release.apk"
+    "dest": "https://github.com/sameerasw/essentials/releases/download/v20.3-beta.2/app-release.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fsameerasw%2Fessentials%2Freleases%2Fdownload%2Fv20.3-beta.2%2Fapp-release.apk"
   },
   "shizustore": {
     "name": "ShizuStore",
-    "dest": "https://github.com/timschneeb/ShizuStore/releases/download/1.5.0/ShizuStore-1.5.0.apk"
+    "dest": "https://github.com/timschneeb/ShizuStore/releases/download/1.5.0/ShizuStore-1.5.0.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Ftimschneeb%2FShizuStore%2Freleases%2Fdownload%2F1.5.0%2FShizuStore-1.5.0.apk"
   },
   "shizucorefetch": {
     "name": "ShizuCoreFetch",
-    "dest": "https://github.com/elhizazi1/ShizuCoreFetch/releases/download/2.4.0/app-release-sign.apk"
+    "dest": "https://github.com/elhizazi1/ShizuCoreFetch/releases/download/2.4.0/app-release-sign.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Felhizazi1%2FShizuCoreFetch%2Freleases%2Fdownload%2F2.4.0%2Fapp-release-sign.apk"
   },
   "sdmaidse": {
     "name": "SD Maid 2/SE (FOSS)",
-    "dest": "https://github.com/d4rken-org/sdmaid-se/releases/download/v2.2.2-rc0/eu.darken.sdmse-v2.2.2-rc0-20202000-FOSS-RELEASE.apk"
+    "dest": "https://github.com/d4rken-org/sdmaid-se/releases/download/v2.2.2-rc0/eu.darken.sdmse-v2.2.2-rc0-20202000-FOSS-RELEASE.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fd4rken-org%2Fsdmaid-se%2Freleases%2Fdownload%2Fv2.2.2-rc0%2Feu.darken.sdmse-v2.2.2-rc0-20202000-FOSS-RELEASE.apk"
   },
   "obtainium": {
     "name": "Obtainium",
-    "dest": "https://github.com/ImranR98/Obtainium/releases/download/v1.7.4/app-arm64-v8a-release.apk"
+    "dest": "https://github.com/ImranR98/Obtainium/releases/download/v1.7.4/app-arm64-v8a-release.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FImranR98%2FObtainium%2Freleases%2Fdownload%2Fv1.7.4%2Fapp-arm64-v8a-release.apk"
   },
   "galaxymaxhz": {
     "name": "Galaxy Max Hz",
-    "dest": "https://github.com/tribalfs/GalaxyMaxHzPub/releases/download/v9.1/galaxy_max_hz_v9.1.apk"
+    "dest": "https://github.com/tribalfs/GalaxyMaxHzPub/releases/download/v9.1/galaxy_max_hz_v9.1.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Ftribalfs%2FGalaxyMaxHzPub%2Freleases%2Fdownload%2Fv9.1%2Fgalaxy_max_hz_v9.1.apk"
   },
   "wgtunnel": {
     "name": "WG Tunnel",
-    "dest": "https://github.com/zaneschepke/wgtunnel/releases/download/nightly/wgtunnel-standalone-v5.8.3-nightly+git.203a800-arm64.apk"
+    "dest": "https://github.com/wgtunnel/android/releases/latest",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fwgtunnel%2Fandroid%2Freleases%2Flatest"
   },
   "localsend": {
     "name": "LocalSend",
-    "dest": "https://github.com/localsend/localsend/releases/download/v1.18.2/LocalSend-1.18.2-android-arm64v8.apk"
+    "dest": "https://github.com/localsend/localsend/releases/download/v1.18.2/LocalSend-1.18.2-android-arm64v8.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Flocalsend%2Flocalsend%2Freleases%2Fdownload%2Fv1.18.2%2FLocalSend-1.18.2-android-arm64v8.apk"
   },
   "smartdock": {
     "name": "Smart Dock",
-    "dest": "https://github.com/axel358/smartdock/releases/download/1.9.8/SmartDock1.9.8.apk"
+    "dest": "https://github.com/axel358/smartdock/releases/download/1.9.8/SmartDock1.9.8.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Faxel358%2Fsmartdock%2Freleases%2Fdownload%2F1.9.8%2FSmartDock1.9.8.apk"
   },
   "pixels": {
     "name": "Pixels (AMOLED Tuning)",
-    "dest": "https://play.google.com/store/apps/details?id=com.tribalfs.pixels"
+    "dest": "https://play.google.com/store/apps/details?id=com.tribalfs.pixels",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.tribalfs.pixels"
   },
   "netmonster": {
     "name": "NetMonster (Khóa 5G/LTE)",
-    "dest": "https://play.google.com/store/apps/details?id=cz.mroczis.netmonster"
+    "dest": "https://play.google.com/store/apps/details?id=cz.mroczis.netmonster",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcz.mroczis.netmonster"
   },
   "gamelauncherpro": {
     "name": "Game Launcher PRO",
-    "dest": "https://github.com/willygailo/Game-Launcher/releases/download/v20.6.0-PRO/Game_Space.apk"
+    "dest": "https://github.com/willygailo/Game-Launcher/releases/download/v20.6.0-PRO/Game_Space.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fwillygailo%2FGame-Launcher%2Freleases%2Fdownload%2Fv20.6.0-PRO%2FGame_Space.apk"
   },
   "keymapper": {
     "name": "Key Mapper",
-    "dest": "https://github.com/keymapperorg/KeyMapper/releases/download/v4.6.2/keymapper-4.6.2-foss.apk"
+    "dest": "https://github.com/keymapperorg/KeyMapper/releases/download/v4.6.2/keymapper-4.6.2-foss.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fkeymapperorg%2FKeyMapper%2Freleases%2Fdownload%2Fv4.6.2%2Fkeymapper-4.6.2-foss.apk"
   },
   "gamemappermind": {
     "name": "GameMapperMind",
-    "dest": "https://github.com/NanoMindExplorer/GameMapperMind/releases/download/v2.1.4/app-release.apk"
+    "dest": "https://github.com/NanoMindExplorer/GameMapperMind/releases/download/v2.1.4/app-release.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FNanoMindExplorer%2FGameMapperMind%2Freleases%2Fdownload%2Fv2.1.4%2Fapp-release.apk"
   },
   "k2er": {
     "name": "K2er",
-    "dest": "https://play.google.com/store/apps/details?id=com.k2tap.master"
+    "dest": "https://play.google.com/store/apps/details?id=com.k2tap.master",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.k2tap.master"
   },
   "colorosgamespace": {
     "name": "ColorOS Game Space",
-    "dest": "https://www.apkmirror.com/apk/coloros/game-space/"
+    "dest": "https://www.apkmirror.com/apk/coloros/game-space/",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fwww.apkmirror.com%2Fapk%2Fcoloros%2Fgame-space%2F"
   },
   "shizukuplus": {
     "name": "Shizuku+",
-    "dest": "https://github.com/thejaustin/ShizukuPlus/releases/download/v13.6.0.r2551/Shizuku%2B-v13.6.0.r2551.apk"
+    "dest": "https://github.com/thejaustin/ShizukuPlus/releases/download/v13.6.0.r2551/Shizuku%2B-v13.6.0.r2551.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fthejaustin%2FShizukuPlus%2Freleases%2Fdownload%2Fv13.6.0.r2551%2FShizuku%252B-v13.6.0.r2551.apk"
   },
   "shizuwall": {
     "name": "ShizuWall",
-    "dest": "https://github.com/AhmetCanArslan/ShizuWall/releases/download/v4.6.8/ShizuWall-4.6.8.apk"
+    "dest": "https://github.com/AhmetCanArslan/ShizuWall/releases/download/v4.6.8/ShizuWall-4.6.8.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FAhmetCanArslan%2FShizuWall%2Freleases%2Fdownload%2Fv4.6.8%2FShizuWall-4.6.8.apk"
   },
   "nomorebackground": {
     "name": "NoMoreBackground",
-    "dest": "https://github.com/adil192/no_more_background/releases/download/v2.8.2/NoMoreBackground.apk"
+    "dest": "https://github.com/adil192/no_more_background/releases/download/v2.8.2/NoMoreBackground.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fadil192%2Fno_more_background%2Freleases%2Fdownload%2Fv2.8.2%2FNoMoreBackground.apk"
   },
   "corepolicy": {
     "name": "CorePolicy",
-    "dest": "https://github.com/DikyVinus/core_policy/releases/download/v5.0/core_policy-v5.0.zip"
+    "dest": "https://github.com/DikyVinus/core_policy/releases/download/v5.0/core_policy-v5.0.zip",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FDikyVinus%2Fcore_policy%2Freleases%2Fdownload%2Fv5.0%2Fcore_policy-v5.0.zip"
   },
   "adaptivetheme": {
     "name": "Adaptive Theme",
-    "dest": "https://github.com/xLexip/Adaptive-Theme/releases/download/v2.5.1/Adaptive-Theme-v2.5.1-foss.apk"
+    "dest": "https://github.com/xLexip/Adaptive-Theme/releases/download/v2.5.1/Adaptive-Theme-v2.5.1-foss.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FxLexip%2FAdaptive-Theme%2Freleases%2Fdownload%2Fv2.5.1%2FAdaptive-Theme-v2.5.1-foss.apk"
   },
   "shizucallrecorder": {
     "name": "ShizuCallRecorder",
-    "dest": "https://github.com/kitsumed/ShizuCallRecorder/releases/download/v2.0.0/ShizuCallRecorder-2.0.0.apk"
+    "dest": "https://github.com/kitsumed/ShizuCallRecorder/releases/download/v2.0.0/ShizuCallRecorder-2.0.0.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fkitsumed%2FShizuCallRecorder%2Freleases%2Fdownload%2Fv2.0.0%2FShizuCallRecorder-2.0.0.apk"
   },
   "thanox": {
     "name": "Thanox (FOSS)",
-    "dest": "https://github.com/Tornaco/Thanox/releases/download/v9.6/thanox_9.6-prc.3404474.apk"
+    "dest": "https://github.com/Tornaco/Thanox/releases/download/v9.6/thanox_9.6-prc.3404474.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FTornaco%2FThanox%2Freleases%2Fdownload%2Fv9.6%2Fthanox_9.6-prc.3404474.apk"
   },
   "geto": {
     "name": "Geto",
-    "dest": "https://github.com/T31n/Geto/releases/download/v1.17.3/geto-v1.17.3.apk"
+    "dest": "https://github.com/T31n/Geto/releases/download/v1.17.3/geto-v1.17.3.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FT31n%2FGeto%2Freleases%2Fdownload%2Fv1.17.3%2Fgeto-v1.17.3.apk"
   },
   "imd": {
     "name": "IMD (It's My Device)",
-    "dest": "https://github.com/soul-99/SU_IMD/releases/download/v3/IMD_app-release_v3.apk"
+    "dest": "https://github.com/soul-99/SU_IMD/releases/download/v3/IMD_app-release_v3.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fsoul-99%2FSU_IMD%2Freleases%2Fdownload%2Fv3%2FIMD_app-release_v3.apk"
   },
   "pensum": {
     "name": "Pensum Task Manager",
-    "dest": "https://github.com/troikoss/Pensum/releases/download/v0.1.0-beta/app-release.apk"
+    "dest": "https://github.com/troikoss/Pensum/releases/download/v0.1.0-beta/app-release.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Ftroikoss%2FPensum%2Freleases%2Fdownload%2Fv0.1.0-beta%2Fapp-release.apk"
   },
   "enforcedoze": {
     "name": "EnforceDoze",
-    "dest": "https://github.com/Akylas/EnforceDoze/releases/download/v1.10.2/86/app-release.apk"
+    "dest": "https://github.com/Akylas/EnforceDoze/releases/download/v1.10.2/86/app-release.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FAkylas%2FEnforceDoze%2Freleases%2Fdownload%2Fv1.10.2%2F86%2Fapp-release.apk"
   },
   "finevolume": {
     "name": "FineVolume",
-    "dest": "https://github.com/broknhrt2562/finevolume/releases/download/1.0/FineVolume-release.apk"
+    "dest": "https://github.com/broknhrt2562/finevolume/releases/download/1.0/FineVolume-release.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fbroknhrt2562%2Ffinevolume%2Freleases%2Fdownload%2F1.0%2FFineVolume-release.apk"
   },
   "mpmanager": {
     "name": "MP-Manager",
-    "dest": "https://github.com/AbdurazaaqMohammed/MP-Manager/releases/download/1.1.1/MP-Manager.1.1.1.apk"
+    "dest": "https://github.com/AbdurazaaqMohammed/MP-Manager/releases/download/1.1.1/MP-Manager.1.1.1.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FAbdurazaaqMohammed%2FMP-Manager%2Freleases%2Fdownload%2F1.1.1%2FMP-Manager.1.1.1.apk"
   },
   "gmsflags": {
     "name": "GMS Flags",
-    "dest": "https://github.com/polodarb/GMS-Flags/releases/download/1.1.0/gms_flags_1.1.0.apk"
+    "dest": "https://github.com/polodarb/GMS-Flags/releases/download/1.1.0/gms_flags_1.1.0.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fpolodarb%2FGMS-Flags%2Freleases%2Fdownload%2F1.1.0%2Fgms_flags_1.1.0.apk"
   },
   "pixelims": {
     "name": "Pixel IMS",
-    "dest": "https://github.com/kyujin-cho/pixel-volte-patch/releases/download/1.3.2/dev.bluehouse.enablevolte.apk"
+    "dest": "https://github.com/kyujin-cho/pixel-volte-patch/releases/download/1.3.2/dev.bluehouse.enablevolte.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fkyujin-cho%2Fpixel-volte-patch%2Freleases%2Fdownload%2F1.3.2%2Fdev.bluehouse.enablevolte.apk"
   },
   "scrcpyandroid": {
     "name": "Scrcpy-Android",
-    "dest": "https://github.com/zwc456baby/ScrcpyForAndroid/releases/download/v1.6.1/scrcpy-1.6.1-r36-release.apk"
+    "dest": "https://github.com/zwc456baby/ScrcpyForAndroid/releases/download/v1.6.1/scrcpy-1.6.1-r36-release.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fzwc456baby%2FScrcpyForAndroid%2Freleases%2Fdownload%2Fv1.6.1%2Fscrcpy-1.6.1-r36-release.apk"
   },
   "openpods": {
     "name": "AirBattery / OpenPods",
-    "dest": "https://f-droid.org/repo/com.dosse.airpods_24.apk"
+    "dest": "https://f-droid.org/repo/com.dosse.airpods_24.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Ff-droid.org%2Frepo%2Fcom.dosse.airpods_24.apk"
   },
   "fdeai": {
     "name": "Athena / FDE-AI",
-    "dest": "https://github.com/feravolt/FDE.AI-docs/releases/download/26.08.1/FDE.AI-v26.08.1.apk"
+    "dest": "https://github.com/feravolt/FDE.AI-docs/releases/download/26.08.1/FDE.AI-v26.08.1.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fferavolt%2FFDE.AI-docs%2Freleases%2Fdownload%2F26.08.1%2FFDE.AI-v26.08.1.apk"
   },
   "brevent": {
     "name": "Brevent",
-    "dest": "https://play.google.com/store/apps/details?id=me.piebridge.brevent"
+    "dest": "https://play.google.com/store/apps/details?id=me.piebridge.brevent",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dme.piebridge.brevent"
   },
   "sensorsoff": {
     "name": "Sensors Off Tile",
-    "dest": "https://developer.android.com/guide/topics/sensors/sensors_overview"
+    "dest": "https://developer.android.com/guide/topics/sensors/sensors_overview",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fdeveloper.android.com%2Fguide%2Ftopics%2Fsensors%2Fsensors_overview"
   },
   "clipious": {
     "name": "Clipious / ShizuClip",
-    "dest": "https://github.com/lamarios/clipious/releases/download/1.22.15/app-release.apk"
+    "dest": "https://github.com/lamarios/clipious/releases/download/1.22.15/app-release.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Flamarios%2Fclipious%2Freleases%2Fdownload%2F1.22.15%2Fapp-release.apk"
   },
   "idletweaks": {
     "name": "Zero / IdleTweaks",
-    "dest": "https://github.com/bihari-boy/IdleTweaks"
+    "dest": "https://github.com/bihari-boy/IdleTweaks",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fbihari-boy%2FIdleTweaks"
   },
   "betterbatterystats": {
     "name": "BetterBatteryStats (BBS Reloaded)",
-    "dest": "https://github.com/asksven/bbs_reloaded-releases/releases/download/v1.0.0/bbs-reloaded-v1.0.0.apk"
+    "dest": "https://github.com/asksven/bbs_reloaded-releases/releases/download/v1.0.0/bbs-reloaded-v1.0.0.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fasksven%2Fbbs_reloaded-releases%2Freleases%2Fdownload%2Fv1.0.0%2Fbbs-reloaded-v1.0.0.apk"
   },
   "simplehook": {
     "name": "SimpleHook / Vector",
-    "dest": "https://github.com/littleWhiteDuck/SimpleHook/releases/download/v2.0.2/SimpleHookR-root-2.0.2-26081216.apk"
+    "dest": "https://github.com/littleWhiteDuck/SimpleHook/releases/download/v2.0.2/SimpleHookR-root-2.0.2-26081216.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2FlittleWhiteDuck%2FSimpleHook%2Freleases%2Fdownload%2Fv2.0.2%2FSimpleHookR-root-2.0.2-26081216.apk"
   },
   "batterychargelimit": {
     "name": "Rootless Battery Charge Limiter",
-    "dest": "https://github.com/sriharshaarangi/BatteryChargeLimit"
+    "dest": "https://github.com/sriharshaarangi/BatteryChargeLimit",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Fsriharshaarangi%2FBatteryChargeLimit"
   },
   "bluetoothcodec": {
     "name": "Bluetooth Codec Changer",
-    "dest": "https://play.google.com/store/apps/details?id=com.amrg.bluetooth_codec_converter"
+    "dest": "https://play.google.com/store/apps/details?id=com.amrg.bluetooth_codec_converter",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.amrg.bluetooth_codec_converter"
   },
   "diskinfo": {
     "name": "DiskInfo / F2FS-Tuner",
-    "dest": "https://play.google.com/store/apps/details?id=me.kuder.diskinfo"
+    "dest": "https://play.google.com/store/apps/details?id=me.kuder.diskinfo",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dme.kuder.diskinfo"
   },
   "easer": {
     "name": "Chronos / Easer (Event-Driven)",
-    "dest": "https://github.com/renyuneyun/Easer/releases/download/v0.8.2.3/Easer-v0.8.2.3.apk"
+    "dest": "https://github.com/renyuneyun/Easer/releases/download/v0.8.2.3/Easer-v0.8.2.3.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgithub.com%2Frenyuneyun%2FEaser%2Freleases%2Fdownload%2Fv0.8.2.3%2FEaser-v0.8.2.3.apk"
   },
   "brotx": {
     "name": "BrotX Optimizer v8",
     "dest": "https://gofile.io/d/RaSXG0aV",
     "gofile": "https://gofile.io/d/RaSXG0aV",
-    "direct_apk": "BrotX-v8.apk"
+    "direct_apk": "BrotX-v8.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2FRaSXG0aV"
   },
   "magictuner": {
     "name": "Magic Tuner Premium",
-    "dest": "https://gofile.io/d/2gc6ZgYP"
+    "dest": "https://gofile.io/d/2gc6ZgYP",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2F2gc6ZgYP"
   },
   "flowoptimize": {
     "name": "FlowOptimize v1.6.0 (Miễn Phí)",
     "dest": "https://gofile.io/d/Vr3bEORd",
     "gofile": "https://gofile.io/d/Vr3bEORd",
-    "direct_apk": "FlowOptimize.apk"
+    "direct_apk": "FlowOptimize.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2FVr3bEORd"
   },
   "flows": {
     "name": "FlowS v1.2.0 (Miễn Phí)",
     "dest": "https://gofile.io/d/kzDVlE2G",
     "gofile": "https://gofile.io/d/kzDVlE2G",
-    "direct_apk": "FlowS.apk"
+    "direct_apk": "FlowS.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2FkzDVlE2G"
   },
   "flowultra": {
     "name": "FlowUltra v1.1.0 (Miễn Phí)",
     "dest": "https://gofile.io/d/p8GZrZNY",
     "gofile": "https://gofile.io/d/p8GZrZNY",
-    "direct_apk": "FlowUltra.apk"
+    "direct_apk": "FlowUltra.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2Fp8GZrZNY"
   }
 }

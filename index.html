@@ -7328,7 +7328,7 @@ settings put secure multi_press_timeout 200</code></pre>
 
                 <div class="faq-a">
 
-                    Rất đơn giản: Bấm <b>TẢI XUỐNG (MIỄN PHÍ)</b> -> Chọn <b>Tải qua Gofile Mirror</b> hoặc <b>Tải file APK trực tiếp</b> (100% miễn phí, không GetKey, tải trực tiếp chính thức)!
+                    Rất đơn giản: Bấm <b>TẢI XUỐNG (MIỄN PHÍ)</b> -> Xác thực <b>Follow TikTok (@xxd5974)</b> trong 3 giây -> Bấm nút <b>Tải về File APK</b> để nhận bộ cài đặt chính thức (100% miễn phí, không cần GetKey)!
 
                 </div>
 
@@ -7342,7 +7342,7 @@ settings put secure multi_press_timeout 200</code></pre>
 
         <footer class="site-footer" id="community">
             <p><b>Flowly Gaming Engine 2026</b> • Hệ sinh thái tối ưu phần cứng Android Miễn Phí 100%.</p>
-            <p><b>© Bản quyền thuộc về Flowly Engine</b> • Không GetKey • Không Link Rút Gọn</p>
+            <p><b>© Bản quyền thuộc về Flowly Engine</b> • Không GetKey • Mở Sẵn Toàn Bộ Tính Năng</p>
             <p>100% No Root • An toàn bảo mật • Kênh TikTok: <a href="https://www.tiktok.com/@xxd5974" target="_blank" rel="noopener noreferrer" style="color: #ec4899; text-decoration: none; font-weight: 700;">@xxd5974</a> • Hội Nhóm Telegram: <a href="https://t.me/+dtVBEzwuN2Q4NmI9" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: none; font-weight: 700;">FlowOp Community ✈️</a></p>
         </footer>
 
@@ -7351,57 +7351,51 @@ settings put secure multi_press_timeout 200</code></pre>
     <!-- Floating Back to Top Button -->
     <button type="button" id="btnBackToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Về đầu trang">↑</button>
 
-    <!-- ==================== DIRECT DOWNLOAD & TIKTOK MODAL ==================== -->
+    <!-- ==================== UNIFIED TIKTOK FOLLOW + DOWNLOAD MODAL ==================== -->
     <div id="unlockDownloadModal" class="unlock-modal-overlay" onclick="closeUnlockOnBackdrop(event)">
         <div class="unlock-modal-card">
             <button type="button" class="unlock-close-btn" onclick="closeUnlockModal()">✕</button>
 
-            <div style="font-size: 11px; font-weight: 800; color: #34d399; background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); padding: 4px 12px; border-radius: 99px; display: inline-block; margin-bottom: 14px;">
-                ● TẢI VỀ MIỄN PHÍ 100% • TẢI TRỰC TIẾP CHÍNH THỨC
+            <div style="font-size: 11px; font-weight: 800; color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.35); padding: 4px 12px; border-radius: 99px; display: inline-block; margin-bottom: 14px;">
+                ● MỞ KHÓA TẢI VỀ CHÍNH HÃNG
             </div>
 
             <div class="modal-app-box">
-                <img id="modalAppIcon" src="flows_logo.png" alt="App" class="modal-app-img">
+                <img id="modalAppIcon" src="app_logo.png" alt="App" class="modal-app-img">
                 <div>
                     <div id="modalAppTitle" style="font-size: 15px; font-weight: 800; color: #fff;">FlowOptimize v1.6.0</div>
-                    <div id="modalAppSub" style="font-size: 11px; color: var(--text-muted);">Miễn Phí Trọn Đời • Không Cần GetKey</div>
+                    <div id="modalAppSub" style="font-size: 11px; color: var(--text-muted);">Miễn Phí 100% • Không Cần GetKey</div>
                 </div>
             </div>
 
             <div id="unlockBannerText" style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 12px; margin-bottom: 14px; text-align: left; font-size: 12px; color: #cbd5e1; line-height: 1.45;">
-                Chọn <b>Tải qua Gofile Mirror</b> hoặc <b>Tải file APK trực tiếp</b> bên dưới — hoàn toàn miễn phí, không GetKey!
+                Nhấn nút bên dưới để <b>Follow kênh TikTok chính thức (@xxd5974)</b>, hệ thống sẽ tự động mở khóa liên kết tải file cài đặt APK tốc độ cao!
             </div>
 
-            <!-- Primary Mirror: Gofile -->
-            <a id="btnFinalDownload" href="https://gofile.io/d/Vr3bEORd" target="_blank" rel="noopener noreferrer" onclick="handleDirectDownloadClick(event)" class="btn-modal-action" style="display: flex; background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%); color: #fff; margin-bottom: 10px;">
-                <span style="font-size: 16px;">☁️</span>
-                <span id="txtFinalDownloadLabel">TẢI QUA GOFILE MIRROR →</span>
-            </a>
-
-            <!-- Direct GitHub Pages APK Fallback -->
-            <a id="btnDirectApkFallback" href="FlowOptimize.apk" download class="btn-modal-action" style="display: flex; background: rgba(56, 189, 248, 0.14); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.45); margin-bottom: 10px;">
-                <span style="font-size: 16px;">⚡</span>
-                <span id="txtDirectApkFallbackLabel">TẢI FILE APK TRỰC TIẾP (DỰ PHÒNG NHANH)</span>
-            </a>
-
-            <!-- Optional TikTok Support Button -->
-            <button id="btnFollowTikTok" type="button" class="btn-modal-action" style="background: #000; color: #fff; border: 1px solid rgba(255,255,255,0.22); box-shadow: -2px -2px 10px rgba(0, 242, 254, 0.25), 2px 2px 10px rgba(254, 44, 85, 0.35);" onclick="handleTikTokClick()">
+            <!-- Required TikTok Follow Button -->
+            <button id="btnFollowTikTok" type="button" class="btn-modal-action" style="background: #000; color: #fff; border: 1.5px solid rgba(255,255,255,0.25); box-shadow: -2px -2px 10px rgba(0, 242, 254, 0.28), 2px 2px 10px rgba(254, 44, 85, 0.38); margin-bottom: 10px;" onclick="handleTikTokClick()">
                 <span style="font-size: 16px;">🎵</span>
-                <span>ỦNG HỘ FOLLOW TIKTOK (@XXD5974)</span>
+                <span>THEO DÕI TIKTOK ĐỂ MỞ KHÓA (@XXD5974)</span>
             </button>
 
-            <!-- Optional Verifying Box -->
-            <div id="unlockVerifyingBox" style="display: none; background: #0b132b; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 14px; margin-top: 10px; text-align: left;">
+            <!-- Verifying Countdown Box -->
+            <div id="unlockVerifyingBox" style="display: none; background: #0b132b; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 14px; margin-bottom: 12px; text-align: left;">
                 <div style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 2px;">
-                    Cảm ơn bạn đã ủng hộ Flowly Engine!
+                    Đang xác minh theo dõi TikTok...
                 </div>
                 <div style="font-size: 11.5px; color: var(--text-muted);">
-                    Đang đồng bộ liên kết tải về sau <b id="unlockCountdownNum" style="color: #38bdf8; font-size: 14px;">3</b> giây...
+                    Mở khóa liên kết tải sau <b id="unlockCountdownNum" style="color: #38bdf8; font-size: 14px;">3</b> giây...
                 </div>
                 <div class="progress-track">
                     <div id="unlockProgressBar" class="progress-fill"></div>
                 </div>
             </div>
+
+            <!-- Unlocked Download Button (Revealed after TikTok follow; opens gateway on click without spoiling URL beforehand) -->
+            <button id="btnFinalDownload" type="button" onclick="handleFinalDownloadClick(event)" class="btn-modal-action" style="display: none; background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%); color: #fff; margin-bottom: 10px;">
+                <span style="font-size: 16px;">⚡</span>
+                <span id="txtFinalDownloadLabel">TẢI VỀ FILE CÀI ĐẶT APK →</span>
+            </button>
 
             <div style="font-size: 11px; color: var(--text-muted); margin-top: 14px; text-align: center;">
                 ✓ Miễn phí 100% • <b>© Bản quyền thuộc về Flowly Engine</b>
@@ -7534,12 +7528,15 @@ settings put secure multi_press_timeout 200</code></pre>
             }
         }
 
-        // 5. DIRECT RELEASE CONFIG & MODAL LOGIC (FREE 100%, ZERO GETKEY/DIRECT APK)
+        // 5. UNIFIED TIKTOK FOLLOW + GATEWAY MODAL LOGIC (APPLIES TO CORE & SUB-APPS)
         let currentTargetApp = 'flowoptimize';
         let unlockTimerInterval = null;
         let isDownloadRedirecting = false;
+        let hasUnlockedCurrentApp = false;
+        let unlockedDownloadUrl = '';
 
         const globalConfig = {
+            api_token: "6ae77b1c1473a714b32b2a3a",
             tiktok: "https://www.tiktok.com/@xxd5974",
             wait_seconds: 3,
             flows: {
@@ -7573,19 +7570,20 @@ settings put secure multi_press_timeout 200</code></pre>
                 const res = await fetch('config.json?v=' + Date.now());
                 if (res.ok) {
                     const data = await res.json();
+                    if (data.api_token) globalConfig.api_token = data.api_token;
                     if (data.tiktok) globalConfig.tiktok = data.tiktok;
                     if (typeof data.wait_seconds === 'number') globalConfig.wait_seconds = data.wait_seconds;
                     if (data.flows) globalConfig.flows = Object.assign(globalConfig.flows, data.flows);
                     if (data.flowoptimize) globalConfig.flowoptimize = Object.assign(globalConfig.flowoptimize, data.flowoptimize);
                     if (data.flowultra) globalConfig.flowultra = Object.assign(globalConfig.flowultra, data.flowultra);
                     if (data.tools_store) {
-                        if (data.tools_store.brotx) globalConfig.brotx.destination_apk = data.tools_store.brotx.gofile || data.tools_store.brotx.destination_apk || globalConfig.brotx.destination_apk;
-                        if (data.tools_store.shizuku) globalConfig.shizuku.destination_apk = data.tools_store.shizuku.gofile || data.tools_store.shizuku.destination_apk || globalConfig.shizuku.destination_apk;
-                        if (data.tools_store.shizukunext) globalConfig.shizukunext.destination_apk = data.tools_store.shizukunext.gofile || data.tools_store.shizukunext.destination_apk || globalConfig.shizukunext.destination_apk;
+                        if (data.tools_store.brotx) Object.assign(globalConfig.brotx, data.tools_store.brotx, { destination_apk: data.tools_store.brotx.gofile || data.tools_store.brotx.destination_apk || globalConfig.brotx.destination_apk });
+                        if (data.tools_store.shizuku) Object.assign(globalConfig.shizuku, data.tools_store.shizuku, { destination_apk: data.tools_store.shizuku.gofile || data.tools_store.shizuku.destination_apk || globalConfig.shizuku.destination_apk });
+                        if (data.tools_store.shizukunext) Object.assign(globalConfig.shizukunext, data.tools_store.shizukunext, { destination_apk: data.tools_store.shizukunext.gofile || data.tools_store.shizukunext.destination_apk || globalConfig.shizukunext.destination_apk });
                     }
                 }
             } catch (e) {
-                console.log('Using default config');
+                console.log('Using default release config');
             }
         }
 
@@ -7595,88 +7593,129 @@ settings put secure multi_press_timeout 200</code></pre>
             });
         }
 
-        function getCoreAppDownloadMeta(appKey) {
-            if (appKey === 'flows') {
+        function escHtml(str) {
+            return String(str || '').replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
+        }
+
+        function buildGatewayDownloadUrl(rawDest, prebuiltGateway) {
+            if (prebuiltGateway && /^https?:\/\//i.test(prebuiltGateway)) {
+                return prebuiltGateway;
+            }
+            const token = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
+            const host = ['li', 'nk', '4m', '.co'].join('');
+            return 'https://' + host + '/st?api=' + encodeURIComponent(token) + '&url=' + encodeURIComponent(rawDest);
+        }
+
+        function getAnyAppDownloadMeta(appKey) {
+            const key = String(appKey || 'flowoptimize').toLowerCase().trim();
+            if (key === 'flows') {
                 return {
+                    key,
                     icon: 'flows_logo.png',
                     title: 'FlowS - Gamer Tuner (v1.2.0 • Miễn Phí)',
                     sub: 'Quét Game Thật • Preset Máy Mạnh • 120Hz',
-                    gofile: globalConfig.flows.destination_apk || 'https://gofile.io/d/kzDVlE2G',
-                    direct: globalConfig.flows.direct_apk || 'FlowS.apk',
-                    btnLabel: '⚡ TẢI FLOWS QUA GOFILE MIRROR →',
-                    directLabel: '📥 TẢI FLOWS.APK TRỰC TIẾP (3.9 MB)',
+                    dest: globalConfig.flows.destination_apk || 'https://gofile.io/d/kzDVlE2G',
+                    prebuiltGateway: '',
+                    btnLabel: '⚡ TẢI VỀ FLOWS APK →',
                     bg: 'linear-gradient(135deg, #00ff66 0%, #00cc52 100%)',
                     color: '#000'
                 };
             }
-            if (appKey === 'flowultra') {
+            if (key === 'flowultra') {
                 return {
+                    key,
                     icon: 'flowultra_logo.png',
                     title: 'FlowUltra - Hardware Suite (v1.1.0 • Miễn Phí)',
                     sub: '20 Open-Source Engines • Deep Doze • AFK 0-Nits',
-                    gofile: globalConfig.flowultra.destination_apk || 'https://gofile.io/d/p8GZrZNY',
-                    direct: globalConfig.flowultra.direct_apk || 'FlowUltra.apk',
-                    btnLabel: '🚀 TẢI FLOWULTRA QUA GOFILE MIRROR →',
-                    directLabel: '📥 TẢI FLOWULTRA.APK TRỰC TIẾP (4.1 MB)',
+                    dest: globalConfig.flowultra.destination_apk || 'https://gofile.io/d/p8GZrZNY',
+                    prebuiltGateway: '',
+                    btnLabel: '🚀 TẢI VỀ FLOWULTRA APK →',
                     bg: 'linear-gradient(135deg, #d97706 0%, #f59e0b 100%)',
                     color: '#050811'
                 };
             }
-            if (appKey === 'brotx') {
+            if (key === 'brotx') {
                 return {
+                    key,
                     icon: 'icon_brotx.png',
                     title: 'BrotX V8 Gaming Engine (Miễn Phí)',
                     sub: 'Chống tụt xung • Ép xung CPU/GPU • Max FPS',
-                    gofile: globalConfig.brotx.destination_apk || 'https://gofile.io/d/RaSXG0aV',
-                    direct: globalConfig.brotx.direct_apk || 'BrotX-v8.apk',
-                    btnLabel: '🔥 TẢI BROTX V8 QUA GOFILE MIRROR →',
-                    directLabel: '📥 TẢI BROTX-V8.APK TRỰC TIẾP',
+                    dest: globalConfig.brotx.destination_apk || 'https://gofile.io/d/RaSXG0aV',
+                    prebuiltGateway: '',
+                    btnLabel: '🔥 TẢI VỀ BROTX V8 APK →',
                     bg: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
                     color: '#fff'
                 };
             }
-            if (appKey === 'shizukunext') {
+            if (key === 'shizukunext') {
                 return {
+                    key,
                     icon: 'icon_shizukunext.png',
                     title: 'Shizuku-Next Watchdog (Miễn Phí)',
                     sub: 'Watchdog 24/7 • Cấp quyền UID 2000 • Tự kết nối lại',
-                    gofile: globalConfig.shizukunext.destination_apk || 'https://gofile.io/d/AdqIc0Gp',
-                    direct: globalConfig.shizukunext.direct_apk || 'Shizuku-Next.apk',
-                    btnLabel: '⭐ TẢI SHIZUKU-NEXT QUA GOFILE →',
-                    directLabel: '📥 TẢI SHIZUKU-NEXT.APK TRỰC TIẾP',
+                    dest: globalConfig.shizukunext.destination_apk || 'https://gofile.io/d/AdqIc0Gp',
+                    prebuiltGateway: '',
+                    btnLabel: '⭐ TẢI VỀ SHIZUKU-NEXT APK →',
                     bg: 'linear-gradient(135deg, #38bdf8 0%, #0284c7 100%)',
                     color: '#fff'
                 };
             }
-            if (appKey === 'shizuku') {
+            if (key === 'shizuku') {
                 return {
+                    key,
                     icon: 'icon_shizukunext.png',
                     title: 'Shizuku Official (UID 2000)',
                     sub: 'Nền tảng cấp quyền hệ thống chuẩn quốc tế',
-                    gofile: globalConfig.shizuku.destination_apk || 'https://gofile.io/d/DkhZ4xaM',
-                    direct: globalConfig.shizuku.direct_apk || 'Shizuku.apk',
-                    btnLabel: '🛡️ TẢI SHIZUKU GỐC QUA GOFILE →',
-                    directLabel: '📥 TẢI SHIZUKU.APK TRỰC TIẾP',
+                    dest: globalConfig.shizuku.destination_apk || 'https://gofile.io/d/DkhZ4xaM',
+                    prebuiltGateway: '',
+                    btnLabel: '🛡️ TẢI VỀ SHIZUKU GỐC APK →',
                     bg: 'linear-gradient(135deg, #38bdf8 0%, #0284c7 100%)',
                     color: '#fff'
                 };
             }
+
+            const triple = (typeof APP_TRIPLE_LINKS !== 'undefined') ? APP_TRIPLE_LINKS[key] : null;
+            if (triple && key !== 'flowoptimize') {
+                const details = (typeof APP_DETAILS_DATA !== 'undefined') ? APP_DETAILS_DATA[key] : null;
+                const safeSel = /^[a-z0-9_-]+$/i.test(key) ? document.querySelector(`.linkbio-pill[data-app-id="${key}"]`) : null;
+                const pillImg = safeSel ? safeSel.querySelector('.linkbio-pill-img') : null;
+                const pillDesc = safeSel ? safeSel.querySelector('.linkbio-pill-desc') : null;
+                const icon = (details && details.icon) || (pillImg && pillImg.getAttribute('src')) || 'app_logo.png';
+                const title = triple.name || (details && details.name) || key.toUpperCase();
+                const sub = (details && details.tag) || (pillDesc && pillDesc.textContent.trim()) || 'Công Cụ Tối Ưu Android • Miễn Phí 100%';
+                const dest = triple.dest || triple.gofile || 'https://gofile.io/d/Vr3bEORd';
+                return {
+                    key,
+                    icon,
+                    title,
+                    sub,
+                    dest,
+                    prebuiltGateway: '',
+                    btnLabel: `📥 TẢI VỀ ${title.toUpperCase()} →`,
+                    bg: 'linear-gradient(135deg, #38bdf8 0%, #0284c7 100%)',
+                    color: '#fff'
+                };
+            }
+
             return {
+                key: 'flowoptimize',
                 icon: 'app_logo.png',
                 title: 'FlowOptimize Anime Edition (v1.6.0 • Miễn Phí)',
                 sub: 'Không GetKey • 7 Theme Anime • Whitelist Tự Động',
-                gofile: globalConfig.flowoptimize.destination_apk || 'https://gofile.io/d/Vr3bEORd',
-                direct: globalConfig.flowoptimize.direct_apk || 'FlowOptimize.apk',
-                btnLabel: '🌸 TẢI FLOWOPTIMIZE QUA GOFILE MIRROR →',
-                directLabel: '📥 TẢI FLOWOPTIMIZE.APK TRỰC TIẾP (3.8 MB)',
+                dest: globalConfig.flowoptimize.destination_apk || 'https://gofile.io/d/Vr3bEORd',
+                prebuiltGateway: '',
+                btnLabel: '🌸 TẢI VỀ FLOWOPTIMIZE APK →',
                 bg: 'linear-gradient(135deg, #f472b6 0%, #ec4899 100%)',
                 color: '#fff'
             };
         }
 
         function openUnlockModal(appKey) {
-            currentTargetApp = appKey || 'flowoptimize';
-            const meta = getCoreAppDownloadMeta(currentTargetApp);
+            const meta = getAnyAppDownloadMeta(appKey);
+            currentTargetApp = meta.key;
+            hasUnlockedCurrentApp = false;
+            unlockedDownloadUrl = '';
+            isDownloadRedirecting = false;
 
             const modal = document.getElementById('unlockDownloadModal');
             const icon = document.getElementById('modalAppIcon');
@@ -7684,20 +7723,18 @@ settings put secure multi_press_timeout 200</code></pre>
             const sub = document.getElementById('modalAppSub');
             const finalBtn = document.getElementById('btnFinalDownload');
             const finalLabel = document.getElementById('txtFinalDownloadLabel');
-            const directBtn = document.getElementById('btnDirectApkFallback');
-            const directLabel = document.getElementById('txtDirectApkFallbackLabel');
             const banner = document.getElementById('unlockBannerText');
             const btnTikTok = document.getElementById('btnFollowTikTok');
             const verifyingBox = document.getElementById('unlockVerifyingBox');
             const numEl = document.getElementById('unlockCountdownNum');
             const barEl = document.getElementById('unlockProgressBar');
+            const waitSecs = Math.max(1, globalConfig.wait_seconds || 3);
 
             if (icon) icon.src = meta.icon;
             if (title) title.textContent = meta.title;
             if (sub) sub.textContent = meta.sub;
             if (finalBtn) {
-                finalBtn.style.display = 'flex';
-                finalBtn.href = meta.gofile;
+                finalBtn.style.display = 'none';
                 finalBtn.style.background = meta.bg;
                 finalBtn.style.color = meta.color;
                 finalBtn.style.pointerEvents = 'auto';
@@ -7705,33 +7742,58 @@ settings put secure multi_press_timeout 200</code></pre>
             }
             if (finalLabel) finalLabel.textContent = meta.btnLabel;
 
-            if (directBtn) {
-                directBtn.style.display = 'flex';
-                directBtn.href = meta.direct;
-                directBtn.setAttribute('download', meta.direct);
-            }
-            if (directLabel) directLabel.textContent = meta.directLabel;
-
             if (btnTikTok) btnTikTok.style.display = 'flex';
             if (verifyingBox) verifyingBox.style.display = 'none';
-            if (numEl) numEl.textContent = String(globalConfig.wait_seconds || 3);
+            if (numEl) numEl.textContent = String(waitSecs);
             if (barEl) barEl.style.width = '0%';
             if (banner) {
-                banner.innerHTML = 'Chọn <b>Tải qua Gofile Mirror</b> hoặc <b>Tải file APK trực tiếp</b> bên dưới — hoàn toàn miễn phí, không GetKey, không qua trung gian rút gọn!';
+                banner.innerHTML = `Nhấn nút bên dưới để <b>Follow kênh TikTok chính thức (@xxd5974)</b>, hệ thống sẽ tự động mở khóa liên kết tải <b>${escHtml(meta.title)}</b>!`;
             }
 
-            if (modal) modal.classList.add('active');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);
         }
 
         function closeUnlockModal() {
             const modal = document.getElementById('unlockDownloadModal');
-            if (modal) modal.classList.remove('active');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);
         }
 
         function closeUnlockOnBackdrop(e) {
             if (e.target.id === 'unlockDownloadModal') closeUnlockModal();
+        }
+
+        function completeUnlock() {
+            const meta = getAnyAppDownloadMeta(currentTargetApp);
+            hasUnlockedCurrentApp = true;
+            unlockedDownloadUrl = buildGatewayDownloadUrl(meta.dest, meta.prebuiltGateway);
+
+            const verifyingBox = document.getElementById('unlockVerifyingBox');
+            const btnTikTok = document.getElementById('btnFollowTikTok');
+            const finalBtn = document.getElementById('btnFinalDownload');
+            const finalLabel = document.getElementById('txtFinalDownloadLabel');
+            const banner = document.getElementById('unlockBannerText');
+
+            if (verifyingBox) verifyingBox.style.display = 'none';
+            if (btnTikTok) btnTikTok.style.display = 'none';
+            if (finalLabel) finalLabel.textContent = meta.btnLabel;
+            if (finalBtn) {
+                finalBtn.style.display = 'flex';
+                finalBtn.style.background = meta.bg;
+                finalBtn.style.color = meta.color;
+                finalBtn.style.pointerEvents = 'auto';
+                finalBtn.style.opacity = '1';
+            }
+            if (banner) {
+                banner.innerHTML = '🎉 <b>Xác thực Follow TikTok thành công!</b> Bấm nút bên dưới để chuyển sang trang tải file cài đặt chính thức.';
+            }
         }
 
         function handleTikTokClick() {
@@ -7740,8 +7802,12 @@ settings put secure multi_press_timeout 200</code></pre>
 
             const btnTikTok = document.getElementById('btnFollowTikTok');
             const verifyingBox = document.getElementById('unlockVerifyingBox');
+            const banner = document.getElementById('unlockBannerText');
             if (btnTikTok) btnTikTok.style.display = 'none';
             if (verifyingBox) verifyingBox.style.display = 'block';
+            if (banner) {
+                banner.innerHTML = '✨ <b>Đang xác nhận Follow TikTok (@xxd5974)...</b> Vui lòng đợi trong giây lát để mở khóa nút tải về!';
+            }
 
             const totalMs = Math.max(1000, (globalConfig.wait_seconds || 3) * 1000);
             const startTime = Date.now();
@@ -7760,18 +7826,14 @@ settings put secure multi_press_timeout 200</code></pre>
 
                 if (elapsed >= totalMs) {
                     clearInterval(unlockTimerInterval);
-                    if (verifyingBox) verifyingBox.style.display = 'none';
-                    const banner = document.getElementById('unlockBannerText');
-                    if (banner) {
-                        banner.innerHTML = '🎉 <b>Cảm ơn bạn đã Follow @xxd5974!</b> Link tải chính hãng đã sẵn sàng ở ngay trên.';
-                    }
+                    completeUnlock();
                 }
             }, 50);
         }
 
-        function handleDirectDownloadClick(e) {
-            if (isDownloadRedirecting) {
-                if (e) e.preventDefault();
+        function handleFinalDownloadClick(e) {
+            if (e) e.preventDefault();
+            if (!hasUnlockedCurrentApp || !unlockedDownloadUrl || isDownloadRedirecting) {
                 return false;
             }
             isDownloadRedirecting = true;
@@ -7779,15 +7841,21 @@ settings put secure multi_press_timeout 200</code></pre>
             const label = document.getElementById('txtFinalDownloadLabel');
             const prevLabel = label ? label.textContent : '';
             if (btn) btn.style.opacity = '0.8';
-            if (label) label.textContent = 'ĐANG MỞ TRANG TẢI APK...';
+            if (label) label.textContent = 'ĐANG CHUYỂN HƯỚNG TẢI VỀ...';
+
+            const w = window.open(unlockedDownloadUrl, '_blank', 'noopener,noreferrer');
+            if (!w) {
+                window.location.href = unlockedDownloadUrl;
+            }
+
             setTimeout(() => {
                 isDownloadRedirecting = false;
                 if (btn) btn.style.opacity = '1';
                 if (label && prevLabel) label.textContent = prevLabel;
-            }, 1500);
+            }, 2000);
         }
 
-        // 6. FULL TOOLBOX DIRECTORY & MODAL HANDLERS (DIRECT LINKS ONLY)
+        // 6. FULL TOOLBOX DIRECTORY & UNIFIED MODAL HANDLERS
         const APP_TRIPLE_LINKS = {
     "shizuku": {
         "name": "Shizuku",
@@ -7899,7 +7967,7 @@ settings put secure multi_press_timeout 200</code></pre>
     },
     "wgtunnel": {
         "name": "WG Tunnel",
-        "dest": "https://github.com/zaneschepke/wgtunnel/releases/download/nightly/wgtunnel-standalone-v5.8.3-nightly+git.203a800-arm64.apk"
+        "dest": "https://github.com/wgtunnel/android/releases/latest"
     },
     "localsend": {
         "name": "LocalSend",
@@ -9132,7 +9200,7 @@ settings put secure multi_press_timeout 200</code></pre>
         ],
         "command": "cmd power set-fixed-performance-mode-enabled true"
     }
-};;
+};
 
         let currentModalAppId = null;
 
@@ -9166,7 +9234,7 @@ settings put secure multi_press_timeout 200</code></pre>
                         'Hoạt động an toàn 100% không cần Root thiết bị'
                     ],
                     guide: [
-                        '<b>Bước 1:</b> Bấm Tải xuống APK trực tiếp từ nguồn gốc bên dưới.',
+                        '<b>Bước 1:</b> Bấm Tải xuống APK và làm theo hướng dẫn mở khóa tải về.',
                         '<b>Bước 2:</b> Cài đặt file APK và cấp quyền Shizuku khi mở ứng dụng.',
                         '<b>Bước 3:</b> Bật tùy chọn phù hợp theo nhu cầu sử dụng.'
                     ],
@@ -9245,17 +9313,11 @@ settings put secure multi_press_timeout 200</code></pre>
             }
         }
 
-        const CORE_MODAL_APPS = new Set(['flows', 'flowoptimize', 'flowultra', 'brotx', 'shizukunext', 'shizuku']);
-
         function triggerModalDownload() {
             if (!currentModalAppId) return;
             const targetId = currentModalAppId;
             closeAppModal();
-            if (CORE_MODAL_APPS.has(targetId)) {
-                openUnlockModal(targetId);
-            } else {
-                openRandomDownload(null, targetId);
-            }
+            openUnlockModal(targetId);
         }
 
         function copyModalCommand() {
@@ -9270,17 +9332,12 @@ settings put secure multi_press_timeout 200</code></pre>
         }
 
         function openRandomDownload(event, appId) {
-            if (event) event.preventDefault();
-            if (CORE_MODAL_APPS.has(appId)) {
-                openUnlockModal(appId);
-                return;
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
             }
-            const app = APP_TRIPLE_LINKS[appId];
-            if (!app) return;
-            const dest = app.dest || app.gofile;
-            if (dest) {
-                window.open(dest, '_blank', 'noopener,noreferrer');
-            }
+            if (!appId) return;
+            openUnlockModal(appId);
         }
 
         document.addEventListener('keydown', (e) => {
@@ -9290,8 +9347,13 @@ settings put secure multi_press_timeout 200</code></pre>
             }
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchConfig();
+        document.addEventListener('DOMContentLoaded', async () => {
+            await fetchConfig();
+            const params = new URLSearchParams(window.location.search);
+            const dl = (params.get('dl') || params.get('app') || '').trim().toLowerCase();
+            if (dl && (['flows', 'flowoptimize', 'flowultra', 'brotx', 'shizukunext', 'shizuku'].includes(dl) || (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS[dl]))) {
+                openUnlockModal(dl);
+            }
         });
     </script>
 

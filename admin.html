@@ -399,6 +399,10 @@
                     <label class="field-label" for="cfgCopyright">Chuỗi Bản Quyền</label>
                     <input type="text" id="cfgCopyright" class="field-input" value="© Bản quyền thuộc về Flowly Engine" oninput="renderJsonPreview()">
                 </div>
+                <div>
+                    <label class="field-label" for="cfgApiToken">Gateway API Token</label>
+                    <input type="text" id="cfgApiToken" class="field-input" value="6ae77b1c1473a714b32b2a3a" oninput="renderJsonPreview()">
+                </div>
             </div>
 
             <div class="app-config-grid">
@@ -492,8 +496,8 @@
         </div>
 
         <div class="panel-card">
-            <h3 class="panel-title">📦 Danh Mục Link Tải Trực Tiếp (APK & Gofile Mirror)</h3>
-            <p class="panel-desc">Tất cả file tải trực tiếp đều không qua trung gian rút gọn, hoạt động song song với mirror Gofile.</p>
+            <h3 class="panel-title">📦 Danh Mục Quản Lý File APK & Mirror Gofile</h3>
+            <p class="panel-desc">Kho mirror Gofile và file cài đặt nội bộ dành cho quản trị viên — người dùng ngoài trang chủ đi qua cổng Follow TikTok để mở khóa tải về.</p>
             <div class="table-wrap">
                 <table>
                     <thead>
@@ -599,6 +603,11 @@
             }
         }
 
+        function buildGatewayUrl(token, destUrl) {
+            const host = ['li', 'nk', '4m', '.co'].join('');
+            return 'https://' + host + '/st?api=' + encodeURIComponent(token) + '&url=' + encodeURIComponent(destUrl);
+        }
+
         function buildConfigObject() {
             const foCode = parseInt(document.getElementById('foCode').value, 10) || 7;
             const fsCode = parseInt(document.getElementById('fsCode').value, 10) || 3;
@@ -606,6 +615,10 @@
             const foVer = document.getElementById('foVer').value.trim() || 'v1.6.0';
             const fsVer = document.getElementById('fsVer').value.trim() || 'v1.2.0';
             const fuVer = document.getElementById('fuVer').value.trim() || 'v1.1.0';
+            const apiToken = document.getElementById('cfgApiToken').value.trim() || "6ae77b1c1473a714b32b2a3a";
+            const fsDest = document.getElementById('fsGofile').value.trim() || "https://gofile.io/d/kzDVlE2G";
+            const foDest = document.getElementById('foGofile').value.trim() || "https://gofile.io/d/Vr3bEORd";
+            const fuDest = document.getElementById('fuGofile').value.trim() || "https://gofile.io/d/p8GZrZNY";
 
             document.getElementById('statFlowOptVer').textContent = foVer;
             document.getElementById('statFlowOptCode').textContent = foCode;
@@ -618,6 +631,7 @@
                 project: "Flow Ecosystem (FlowS, FlowOptimize, FlowUltra)",
                 copyright: document.getElementById('cfgCopyright').value.trim() || "© Bản quyền thuộc về Flowly Engine",
                 free_forever: true,
+                api_token: apiToken,
                 tiktok: document.getElementById('cfgTiktok').value.trim() || "https://www.tiktok.com/@xxd5974",
                 telegram: document.getElementById('cfgTelegram').value.trim() || "https://t.me/+dtVBEzwuN2Q4NmI9",
                 wait_seconds: parseInt(document.getElementById('cfgWaitSeconds').value, 10) || 3,
@@ -628,10 +642,11 @@
                     min_version_code: fsCode,
                     force_update: false,
                     update_url: "https://zslowcuong.github.io/bio/",
-                    download_url: "https://zslowcuong.github.io/bio/#download",
+                    download_url: "https://zslowcuong.github.io/bio/?dl=flows#download",
                     package: "com.flows.gaming",
                     changelog: document.getElementById('fsChangelog').value.trim(),
-                    destination_apk: document.getElementById('fsGofile').value.trim() || "https://gofile.io/d/kzDVlE2G",
+                    destination_apk: fsDest,
+                    link4m: buildGatewayUrl(apiToken, fsDest),
                     direct_apk: document.getElementById('fsDirect').value.trim() || "FlowS.apk"
                 },
                 flowoptimize: {
@@ -641,10 +656,11 @@
                     min_version_code: foCode,
                     force_update: false,
                     update_url: "https://zslowcuong.github.io/bio/",
-                    download_url: "https://zslowcuong.github.io/bio/#download",
+                    download_url: "https://zslowcuong.github.io/bio/?dl=flowoptimize#download",
                     package: "com.example.gameoptimizer",
                     changelog: document.getElementById('foChangelog').value.trim(),
-                    destination_apk: document.getElementById('foGofile').value.trim() || "https://gofile.io/d/Vr3bEORd",
+                    destination_apk: foDest,
+                    link4m: buildGatewayUrl(apiToken, foDest),
                     direct_apk: document.getElementById('foDirect').value.trim() || "FlowOptimize.apk"
                 },
                 flowultra: {
@@ -654,11 +670,50 @@
                     min_version_code: fuCode,
                     force_update: false,
                     update_url: "https://zslowcuong.github.io/bio/",
-                    download_url: "https://zslowcuong.github.io/bio/#download",
+                    download_url: "https://zslowcuong.github.io/bio/?dl=flowultra#download",
                     package: "com.flows.flowultra",
                     changelog: document.getElementById('fuChangelog').value.trim(),
-                    destination_apk: document.getElementById('fuGofile').value.trim() || "https://gofile.io/d/p8GZrZNY",
+                    destination_apk: fuDest,
+                    link4m: buildGatewayUrl(apiToken, fuDest),
                     direct_apk: document.getElementById('fuDirect').value.trim() || "FlowUltra.apk"
+                },
+                tools_store: {
+                    brotx: {
+                        name: "BrotX Optimizer v8 🔥",
+                        tag: "HOT & NEW",
+                        desc: "Siêu công cụ dọn dẹp UAD & tối ưu hóa gaming qua ADB",
+                        file: "BrotX-v8.apk",
+                        gofile: "https://gofile.io/d/RaSXG0aV",
+                        destination_apk: "https://gofile.io/d/RaSXG0aV",
+                        link4m: buildGatewayUrl(apiToken, "https://gofile.io/d/RaSXG0aV")
+                    },
+                    shizuku: {
+                        name: "Shizuku Official 🐱",
+                        tag: "BẮT BUỘC",
+                        desc: "Chạy ứng dụng tối ưu không cần Root qua ADB Shell UID 2000",
+                        file: "Shizuku.apk",
+                        gofile: "https://gofile.io/d/DkhZ4xaM",
+                        destination_apk: "https://gofile.io/d/DkhZ4xaM",
+                        link4m: buildGatewayUrl(apiToken, "https://gofile.io/d/DkhZ4xaM")
+                    },
+                    shizukunext: {
+                        name: "Shizuku-Next ⚡",
+                        tag: "WATCHDOG 24/7",
+                        desc: "Watchdog tự động hồi sinh kết nối & hỗ trợ ADB Modules",
+                        file: "Shizuku-Next.apk",
+                        gofile: "https://gofile.io/d/AdqIc0Gp",
+                        destination_apk: "https://gofile.io/d/AdqIc0Gp",
+                        link4m: buildGatewayUrl(apiToken, "https://gofile.io/d/AdqIc0Gp")
+                    },
+                    toolpc: {
+                        name: "Tool Kích Hoạt Shizuku (PC) 💻",
+                        tag: "1-CLICK",
+                        desc: "Tự động cài đặt driver và kích hoạt Shizuku qua cáp USB",
+                        file: "TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat",
+                        gofile: "https://raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat",
+                        destination_apk: "https://raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat",
+                        link4m: buildGatewayUrl(apiToken, "https://raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat")
+                    }
                 }
             };
         }
@@ -674,6 +729,7 @@
                 if (res.ok) {
                     const d = await res.json();
                     if (d.copyright) document.getElementById('cfgCopyright').value = d.copyright;
+                    if (d.api_token) document.getElementById('cfgApiToken').value = d.api_token;
                     if (d.tiktok) document.getElementById('cfgTiktok').value = d.tiktok;
                     if (d.telegram) document.getElementById('cfgTelegram').value = d.telegram;
                     if (typeof d.wait_seconds === 'number') document.getElementById('cfgWaitSeconds').value = d.wait_seconds;

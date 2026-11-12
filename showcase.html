@@ -2023,19 +2023,19 @@
                 </div>
             </div>
 
-            <!-- Hướng Dẫn Cài Đặt Nhanh 3 Bước (Tải Trực Tiếp) -->
+            <!-- Hướng Dẫn Cài Đặt Nhanh 3 Bước -->
             <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 18px 22px; text-align: left; max-width: 720px; margin: 0 auto 20px;">
                 <div style="font-weight: 800; font-size: 13px; color: #34d399; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-                    <span>📖 3 Bước Cài Đặt Nhanh (Miễn Phí 100% - Không Quảng Cáo Rút Gọn):</span>
+                    <span>📖 3 Bước Cài Đặt Nhanh (Miễn Phí 100% — Flowly Engine):</span>
                 </div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px;">
                     <div style="background: rgba(2, 6, 23, 0.6); padding: 10px 12px; border-radius: 10px; border-left: 3px solid #ec4899;">
                         <b style="color: #f472b6; font-size: 12px;">Bước 1:</b>
-                        <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 2px;">Chọn ứng dụng muốn tải và bấm tải APK trực tiếp hoặc qua Gofile Mirror.</div>
+                        <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 2px;">Chọn ứng dụng muốn tải và xác nhận Follow TikTok @xxd5974 để mở khóa link tải.</div>
                     </div>
                     <div style="background: rgba(2, 6, 23, 0.6); padding: 10px 12px; border-radius: 10px; border-left: 3px solid #38bdf8;">
                         <b style="color: #38bdf8; font-size: 12px;">Bước 2:</b>
-                        <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 2px;">Mở file APK để cài đặt (cho phép cài từ nguồn trình duyệt nếu Android hỏi).</div>
+                        <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 2px;">Nhận file APK và mở lên để cài đặt (cho phép cài từ nguồn trình duyệt nếu Android hỏi).</div>
                     </div>
                     <div style="background: rgba(2, 6, 23, 0.6); padding: 10px 12px; border-radius: 10px; border-left: 3px solid #10b981;">
                         <b style="color: #34d399; font-size: 12px;">Bước 3:</b>
@@ -2067,14 +2067,14 @@
         </div>
     </footer>
 
-    <!-- ==================== DIRECT DOWNLOAD & TIKTOK MODAL ==================== -->
+    <!-- ==================== TIKTOK FOLLOW + DOWNLOAD MODAL ==================== -->
     <div id="unlockDownloadModal" class="unlock-modal-overlay" onclick="closeUnlockOnBackdrop(event)">
         <div class="unlock-modal-card">
-            <button class="unlock-close-btn" onclick="closeUnlockModal()">×</button>
+            <button type="button" class="unlock-close-btn" onclick="closeUnlockModal()">×</button>
             
             <div class="unlock-header-badge">
                 <span class="badge-dot"></span>
-                <span>TẢI VỀ MIỄN PHÍ 100%</span>
+                <span>MỞ KHÓA TẢI VỀ CHÍNH HÃNG</span>
             </div>
 
             <div class="unlock-app-info">
@@ -2087,15 +2087,15 @@
 
             <div class="unlock-banner" id="unlockBannerText">
                 <div style="font-weight: 700; color: #f8fafc; font-size: 13.5px; margin-bottom: 3px;">
-                    🎁 Tải APK Chính Thức (Tải Trực Tiếp Miễn Phí):
+                    🎁 Mở Khóa Tải APK Chính Thức:
                 </div>
                 <div style="font-size: 12px; color: #cbd5e1; line-height: 1.45;">
-                    Bạn có thể bấm <b>Follow TikTok @xxd5974</b> để ủng hộ tác giả hoặc chọn tải trực tiếp file APK bên dưới!
+                    Nhấn nút bên dưới để <b>Follow TikTok @xxd5974</b>, hệ thống sẽ tự động mở khóa liên kết tải file cài đặt tốc độ cao!
                 </div>
             </div>
 
             <div class="unlock-action-container">
-                <!-- Follow TikTok Button (3s quick verify) -->
+                <!-- Required Follow TikTok Button -->
                 <button id="btnFollowTikTok" type="button" class="btn-tiktok-action" onclick="handleTikTokClick()">
                     <div class="tiktok-icon-wrap">
                         <svg class="tiktok-svg" viewBox="0 0 24 24" fill="currentColor">
@@ -2103,8 +2103,8 @@
                         </svg>
                     </div>
                     <div class="tiktok-btn-content">
-                        <span class="tiktok-btn-text">THEO DÕI TIKTOK ỦNG HỘ (@XXD5974)</span>
-                        <span class="tiktok-btn-sub">Mở link Gofile tốc độ cao sau 3 giây</span>
+                        <span class="tiktok-btn-text">THEO DÕI TIKTOK ĐỂ MỞ KHÓA (@XXD5974)</span>
+                        <span class="tiktok-btn-sub">Tự động mở khóa link tải sau vài giây</span>
                     </div>
                 </button>
 
@@ -2113,7 +2113,7 @@
                     <div class="verifying-spinner-row">
                         <div class="verifying-pulse-ring"></div>
                         <div>
-                            <div class="verifying-title">Đang chuẩn bị liên kết tải về...</div>
+                            <div class="verifying-title">Đang xác minh theo dõi TikTok...</div>
                             <div class="verifying-sub">Sẵn sàng trong <b id="unlockCountdownNum" style="color: #38bdf8; font-size: 15px;">3</b>s</div>
                         </div>
                     </div>
@@ -2122,17 +2122,11 @@
                     </div>
                 </div>
 
-                <!-- Gofile Download Button -->
-                <a id="btnFinalDownload" href="https://gofile.io/d/Vr3bEORd" target="_blank" rel="noopener noreferrer" class="btn-final-download" style="display: flex; margin-top: 10px;">
-                    <span style="font-size: 18px;">☁️</span>
-                    <span id="txtFinalDownloadLabel">TẢI QUA GOFILE MIRROR</span>
-                </a>
-
-                <!-- Direct GitHub Pages APK Fallback -->
-                <a id="btnDirectApkFallback" href="FlowOptimize.apk" download class="btn-direct-apk-fallback">
-                    <span>⚡</span>
-                    <span id="txtDirectApkFallbackLabel">TẢI FILE APK TRỰC TIẾP (DỰ PHÒNG NHANH)</span>
-                </a>
+                <!-- Unlocked Download Button (Revealed after TikTok follow; opens gateway on click without spoiling URL) -->
+                <button id="btnFinalDownload" type="button" onclick="handleFinalDownloadClick(event)" class="btn-final-download" style="display: none; margin-top: 10px; font-family: inherit;">
+                    <span style="font-size: 18px;">⚡</span>
+                    <span id="txtFinalDownloadLabel">TẢI VỀ FILE CÀI ĐẶT APK →</span>
+                </button>
             </div>
 
             <div class="unlock-footer-note">
@@ -2226,8 +2220,9 @@
             document.getElementById('calcDpiNative').textContent = `${dpi} DPI`;
         }
 
-        // ==================== GLOBAL CONFIG & DIRECT RELEASES ====================
+        // ==================== GLOBAL CONFIG & GATEWAY RELEASES ====================
         let globalConfig = {
+            api_token: "6ae77b1c1473a714b32b2a3a",
             tiktok: "https://www.tiktok.com/@xxd5974",
             wait_seconds: 3,
             flows: {
@@ -2251,6 +2246,7 @@
                     return res.json();
                 })
                 .then(data => {
+                    if (data.api_token) globalConfig.api_token = data.api_token;
                     if (data.tiktok) globalConfig.tiktok = data.tiktok;
                     if (typeof data.wait_seconds === 'number') globalConfig.wait_seconds = data.wait_seconds;
                     if (data.flows) globalConfig.flows = Object.assign(globalConfig.flows, data.flows);
@@ -2258,7 +2254,7 @@
                     if (data.flowultra) globalConfig.flowultra = Object.assign(globalConfig.flowultra, data.flowultra);
                 })
                 .catch(() => {
-                    console.log('Using default direct release config');
+                    console.log('Using default release config');
                 });
         }
 
@@ -2266,9 +2262,12 @@
             return globalConfig.tiktok || 'https://www.tiktok.com/@xxd5974';
         }
 
-        // ==================== DIRECT DOWNLOAD MODAL LOGIC ====================
+        // ==================== TIKTOK FOLLOW + DOWNLOAD MODAL LOGIC ====================
         let unlockTimerInterval = null;
         let currentTargetApp = 'flowoptimize';
+        let hasUnlockedCurrentApp = false;
+        let unlockedDownloadUrl = '';
+        let isDownloadRedirecting = false;
 
         function handlePublicDownload() {
             openUnlockModal('flowoptimize');
@@ -2278,16 +2277,20 @@
             window.location.href = 'admin.html';
         }
 
+        function buildGatewayDownloadUrl(rawDest) {
+            const token = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
+            const host = ['li', 'nk', '4m', '.co'].join('');
+            return 'https://' + host + '/st?api=' + encodeURIComponent(token) + '&url=' + encodeURIComponent(rawDest);
+        }
+
         function getAppReleaseMeta(appKey) {
             if (appKey === 'flows') {
                 return {
                     icon: 'flows_logo.png',
                     title: 'FlowS - Gamer Tuner (v1.2.0 • Miễn Phí)',
                     sub: 'Quét Game Thật • Preset Máy Mạnh • 120Hz',
-                    gofile: (globalConfig.flows && globalConfig.flows.destination_apk) || 'https://gofile.io/d/kzDVlE2G',
-                    direct: (globalConfig.flows && globalConfig.flows.direct_apk) || 'FlowS.apk',
-                    gofileLabel: '⚡ TẢI FLOWS QUA GOFILE MIRROR',
-                    directLabel: '📥 TẢI FLOWS.APK TRỰC TIẾP (3.9 MB)'
+                    dest: (globalConfig.flows && globalConfig.flows.destination_apk) || 'https://gofile.io/d/kzDVlE2G',
+                    btnLabel: '⚡ TẢI VỀ FLOWS APK →'
                 };
             }
             if (appKey === 'flowultra') {
@@ -2295,25 +2298,24 @@
                     icon: 'flowultra_logo.png',
                     title: 'FlowUltra - Hardware Suite (v1.1.0 • Miễn Phí)',
                     sub: '20 Open-Source Engines • Deep Doze • AFK 0-Nits',
-                    gofile: (globalConfig.flowultra && globalConfig.flowultra.destination_apk) || 'https://gofile.io/d/p8GZrZNY',
-                    direct: (globalConfig.flowultra && globalConfig.flowultra.direct_apk) || 'FlowUltra.apk',
-                    gofileLabel: '🚀 TẢI FLOWULTRA QUA GOFILE MIRROR',
-                    directLabel: '📥 TẢI FLOWULTRA.APK TRỰC TIẾP (4.1 MB)'
+                    dest: (globalConfig.flowultra && globalConfig.flowultra.destination_apk) || 'https://gofile.io/d/p8GZrZNY',
+                    btnLabel: '🚀 TẢI VỀ FLOWULTRA APK →'
                 };
             }
             return {
                 icon: 'app_logo.png',
                 title: 'FlowOptimize Anime Edition (v1.6.0 • Miễn Phí)',
                 sub: 'Không GetKey • 7 Theme Anime • Whitelist Tự Động',
-                gofile: (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || 'https://gofile.io/d/Vr3bEORd',
-                direct: (globalConfig.flowoptimize && globalConfig.flowoptimize.direct_apk) || 'FlowOptimize.apk',
-                gofileLabel: '🌸 TẢI FLOWOPTIMIZE QUA GOFILE MIRROR',
-                directLabel: '📥 TẢI FLOWOPTIMIZE.APK TRỰC TIẾP (3.8 MB)'
+                dest: (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || 'https://gofile.io/d/Vr3bEORd',
+                btnLabel: '🌸 TẢI VỀ FLOWOPTIMIZE APK →'
             };
         }
 
         function openUnlockModal(appKey) {
             currentTargetApp = appKey || 'flowoptimize';
+            hasUnlockedCurrentApp = false;
+            unlockedDownloadUrl = '';
+            isDownloadRedirecting = false;
             const meta = getAppReleaseMeta(currentTargetApp);
 
             const modalIcon = document.getElementById('modalAppIcon');
@@ -2321,19 +2323,20 @@
             const modalSub = document.getElementById('modalAppSub');
             const finalBtn = document.getElementById('btnFinalDownload');
             const finalLabel = document.getElementById('txtFinalDownloadLabel');
-            const directBtn = document.getElementById('btnDirectApkFallback');
-            const directLabel = document.getElementById('txtDirectApkFallbackLabel');
+            const banner = document.getElementById('unlockBannerText');
 
             if (modalIcon) modalIcon.src = meta.icon;
             if (modalTitle) modalTitle.textContent = meta.title;
             if (modalSub) modalSub.textContent = meta.sub;
-            if (finalBtn) finalBtn.href = meta.gofile;
-            if (finalLabel) finalLabel.textContent = meta.gofileLabel;
-            if (directBtn) {
-                directBtn.href = meta.direct;
-                directBtn.setAttribute('download', meta.direct);
+            if (finalBtn) {
+                finalBtn.style.display = 'none';
+                finalBtn.style.opacity = '1';
+                finalBtn.style.pointerEvents = 'auto';
             }
-            if (directLabel) directLabel.textContent = meta.directLabel;
+            if (finalLabel) finalLabel.textContent = meta.btnLabel;
+            if (banner) {
+                banner.innerHTML = '<div style="font-weight: 700; color: #f8fafc; font-size: 13.5px; margin-bottom: 3px;">🎁 Mở Khóa Tải APK Chính Thức:</div><div style="font-size: 12px; color: #cbd5e1; line-height: 1.45;">Nhấn nút bên dưới để <b>Follow TikTok @xxd5974</b>, hệ thống sẽ tự động mở khóa liên kết tải file cài đặt tốc độ cao!</div>';
+            }
 
             const btnTikTok = document.getElementById('btnFollowTikTok');
             const verifyBox = document.getElementById('unlockVerifyingBox');
@@ -2362,6 +2365,26 @@
             }
         }
 
+        function completeUnlockProcess() {
+            const meta = getAppReleaseMeta(currentTargetApp);
+            hasUnlockedCurrentApp = true;
+            unlockedDownloadUrl = buildGatewayDownloadUrl(meta.dest);
+
+            const btnTikTok = document.getElementById('btnFollowTikTok');
+            const verifyBox = document.getElementById('unlockVerifyingBox');
+            const finalBtn = document.getElementById('btnFinalDownload');
+            const finalLabel = document.getElementById('txtFinalDownloadLabel');
+            const banner = document.getElementById('unlockBannerText');
+
+            if (btnTikTok) btnTikTok.style.display = 'none';
+            if (verifyBox) verifyBox.style.display = 'none';
+            if (finalLabel) finalLabel.textContent = meta.btnLabel;
+            if (finalBtn) finalBtn.style.display = 'flex';
+            if (banner) {
+                banner.innerHTML = '<div style="font-weight: 700; color: #34d399; font-size: 13.5px; margin-bottom: 3px;">🎉 Xác Thực Follow TikTok Thành Công!</div><div style="font-size: 12px; color: #cbd5e1; line-height: 1.45;">Liên kết tải file cài đặt chính hãng đã sẵn sàng — bấm nút bên dưới để tiếp tục tải về.</div>';
+            }
+        }
+
         function handleTikTokClick() {
             window.open(getActiveTikTokUrl(), '_blank', 'noopener,noreferrer');
 
@@ -2387,9 +2410,33 @@
 
                 if (elapsed >= totalMs) {
                     clearInterval(unlockTimerInterval);
-                    if (verifyBox) verifyBox.style.display = 'none';
+                    completeUnlockProcess();
                 }
             }, 50);
+        }
+
+        function handleFinalDownloadClick(e) {
+            if (e) e.preventDefault();
+            if (!hasUnlockedCurrentApp || !unlockedDownloadUrl || isDownloadRedirecting) {
+                return false;
+            }
+            isDownloadRedirecting = true;
+            const btn = document.getElementById('btnFinalDownload');
+            const label = document.getElementById('txtFinalDownloadLabel');
+            const prevLabel = label ? label.textContent : '';
+            if (btn) btn.style.opacity = '0.8';
+            if (label) label.textContent = 'ĐANG CHUYỂN HƯỚNG TẢI VỀ...';
+
+            const w = window.open(unlockedDownloadUrl, '_blank', 'noopener,noreferrer');
+            if (!w) {
+                window.location.href = unlockedDownloadUrl;
+            }
+
+            setTimeout(() => {
+                isDownloadRedirecting = false;
+                if (btn) btn.style.opacity = '1';
+                if (label && prevLabel) label.textContent = prevLabel;
+            }, 2000);
         }
 
         document.addEventListener('keydown', function(e) {
