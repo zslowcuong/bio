@@ -14,7 +14,7 @@
 
     <meta http-equiv="Expires" content="0">
 
-    <title>Flowly — Bộ Ba Ứng Dụng Tối Ưu Android Toàn Diện: FlowS, FlowOptimize & FlowUltra</title>
+    <title>Flowly — Bộ Tứ Ứng Dụng Tối Ưu Android Toàn Diện: FlowS, FlowOptimize, FlowUltra &amp; FlowExtra</title>
 
     <meta name="description" content="FlowS & FlowOptimize - Bộ đôi công cụ tối ưu phần cứng Android chuyên sâu qua Shizuku ADB (100% No Root). Hạ độ phân giải riêng từng game, 7 Theme Anime sắc nét, Crazy Mode đầu 3x, Sửa thanh pin trắng ColorOS.">
 
@@ -929,6 +929,40 @@
             transform: scale(1.02);
 
             box-shadow: 0 6px 26px rgba(245, 158, 11, 0.55);
+
+        }
+
+        .app-download-card.flowextra {
+
+            border-color: rgba(125, 211, 252, 0.42);
+
+            background: linear-gradient(155deg, rgba(6, 15, 36, 0.94), rgba(15, 32, 68, 0.88));
+
+        }
+
+        .app-download-card.flowextra:hover {
+
+            border-color: #7dd3fc;
+
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.35);
+
+        }
+
+        .btn-download-action.flowextra {
+
+            background: linear-gradient(135deg, #0284c7 0%, #7dd3fc 100%);
+
+            color: #04152b;
+
+            box-shadow: 0 4px 18px rgba(56, 189, 248, 0.35);
+
+        }
+
+        .btn-download-action.flowextra:hover {
+
+            transform: scale(1.02);
+
+            box-shadow: 0 6px 26px rgba(125, 211, 252, 0.55);
 
         }
 
@@ -3820,7 +3854,7 @@
 
             <li><a href="#about">Trang Chủ</a></li>
 
-            <li><a href="#download">Tải 3 App</a></li>
+            <li><a href="#download">Tải 4 App</a></li>
 
             <li><a href="#preview">Xem Preview</a></li>
 
@@ -3914,7 +3948,7 @@
 
                 <span class="section-badge">DOWNLOAD &amp; TRẢI NGHIỆM</span>
 
-                <h2 class="section-title">Tải Về Bộ Ba Ứng Dụng Flow & 2 Siêu Công Cụ Hot (BrotX V8 + Shizuku)</h2>
+                <h2 class="section-title">Tải Về Bộ Tứ Ứng Dụng Flow &amp; 2 Siêu Công Cụ Hot (BrotX V8 + Shizuku)</h2>
 
                 <p class="section-desc">Mỗi ứng dụng mang một sứ mệnh tối ưu riêng biệt, hoạt động độc lập và không xung đột!</p>
 
@@ -4066,7 +4100,53 @@
 
                 </div>
 
-                <!-- 4. BrotX V8 (Hot App Gamer) -->
+                <!-- 4. FlowExtra (Kaito Kid 1412 Edition) -->
+
+                <div class="app-download-card flowextra">
+
+                    <div>
+
+                        <div class="app-header">
+
+                            <img src="flowextra_logo.png" alt="FlowExtra" class="app-icon-img" style="border-color: #7dd3fc;">
+
+                            <div>
+
+                                <div class="app-title">FlowExtra</div>
+
+                                <span class="app-sub-badge" style="background: rgba(56, 189, 248, 0.16); color: #7dd3fc;">KAITO KID 1412 (v3.5 • MIỄN PHÍ)</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="app-bullets">
+
+                            • 🎩 <b>Theme Kaito Kid 1412 Edition:</b> Giao diện Midnight Sapphire, HUD kính lúp 1412 cực mượt.<br>
+
+                            • 🎨 <b>Đồ Họa API Unlocker:</b> Chọn &amp; xác minh trực tiếp Vulkan SkiaVk, ANGLE, GameDriver.<br>
+
+                            • ⚡ <b>Ma Trận Xung CPU Từng Cụm:</b> Quét OPP MHz từng cụm, nhiệt đa điểm &amp; khóa xung.<br>
+
+                            • 🌀 <b>1412 Phantom GameSpace:</b> Tự giữ xung khi chơi game &amp; hoàn trả gốc 100% khi thoát.<br>
+
+                            • 🛡️ <b>Tương Thích Android 7–15+:</b> Shizuku UID 2000 &amp; Root, ColorOS/HyperOS/OneUI/Vivo.
+
+                        </div>
+
+                    </div>
+
+                    <button type="button" onclick="openUnlockModal('flowextra')" class="btn-download-action flowextra">
+
+                        <span>🎩</span>
+
+                        <span>TẢI XUỐNG FLOWEXTRA (MIỄN PHÍ)</span>
+
+                    </button>
+
+                </div>
+
+                <!-- 5. BrotX V8 (Hot App Gamer) -->
                 <div class="app-download-card" style="border-color: rgba(239, 68, 68, 0.4); background: rgba(15, 23, 42, 0.88);">
                     <div>
                         <div class="app-header">
@@ -7551,6 +7631,10 @@ settings put secure multi_press_timeout 200</code></pre>
                 destination_apk: "https://gofile.io/d/p8GZrZNY",
                 direct_apk: "FlowUltra.apk"
             },
+            flowextra: {
+                destination_apk: "https://zslowcuong.github.io/bio/FlowExtra.apk",
+                direct_apk: "FlowExtra.apk"
+            },
             brotx: {
                 destination_apk: "https://gofile.io/d/RaSXG0aV",
                 direct_apk: "BrotX-v8.apk"
@@ -7576,6 +7660,7 @@ settings put secure multi_press_timeout 200</code></pre>
                     if (data.flows) globalConfig.flows = Object.assign(globalConfig.flows, data.flows);
                     if (data.flowoptimize) globalConfig.flowoptimize = Object.assign(globalConfig.flowoptimize, data.flowoptimize);
                     if (data.flowultra) globalConfig.flowultra = Object.assign(globalConfig.flowultra, data.flowultra);
+                    if (data.flowextra) globalConfig.flowextra = Object.assign(globalConfig.flowextra, data.flowextra);
                     if (data.tools_store) {
                         if (data.tools_store.brotx) Object.assign(globalConfig.brotx, data.tools_store.brotx, { destination_apk: data.tools_store.brotx.gofile || data.tools_store.brotx.destination_apk || globalConfig.brotx.destination_apk });
                         if (data.tools_store.shizuku) Object.assign(globalConfig.shizuku, data.tools_store.shizuku, { destination_apk: data.tools_store.shizuku.gofile || data.tools_store.shizuku.destination_apk || globalConfig.shizuku.destination_apk });
@@ -7632,6 +7717,19 @@ settings put secure multi_press_timeout 200</code></pre>
                     btnLabel: '🚀 TẢI VỀ FLOWULTRA APK →',
                     bg: 'linear-gradient(135deg, #d97706 0%, #f59e0b 100%)',
                     color: '#050811'
+                };
+            }
+            if (key === 'flowextra') {
+                return {
+                    key,
+                    icon: 'flowextra_logo.png',
+                    title: 'FlowExtra - Kaito Kid 1412 (v3.5 • Miễn Phí)',
+                    sub: 'Graphics API Unlocker • Full CPU MHz • Phantom GameSpace',
+                    dest: globalConfig.flowextra.destination_apk || 'https://zslowcuong.github.io/bio/FlowExtra.apk',
+                    prebuiltGateway: '',
+                    btnLabel: '🎩 TẢI VỀ FLOWEXTRA APK →',
+                    bg: 'linear-gradient(135deg, #0284c7 0%, #7dd3fc 100%)',
+                    color: '#04152b'
                 };
             }
             if (key === 'brotx') {
@@ -8143,6 +8241,11 @@ settings put secure multi_press_timeout 200</code></pre>
         "dest": "https://gofile.io/d/p8GZrZNY",
         "gofile": "https://gofile.io/d/p8GZrZNY",
         "direct_apk": "FlowUltra.apk"
+    },
+    "flowextra": {
+        "name": "FlowExtra v3.5 Kaito Kid 1412 (Miễn Phí)",
+        "dest": "https://zslowcuong.github.io/bio/FlowExtra.apk",
+        "direct_apk": "FlowExtra.apk"
     }
 };
 
@@ -9350,7 +9453,7 @@ settings put secure multi_press_timeout 200</code></pre>
             await fetchConfig();
             const params = new URLSearchParams(window.location.search);
             const dl = (params.get('dl') || params.get('app') || '').trim().toLowerCase();
-            if (dl && (['flows', 'flowoptimize', 'flowultra', 'brotx', 'shizukunext', 'shizuku'].includes(dl) || (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS[dl]))) {
+            if (dl && (['flows', 'flowoptimize', 'flowultra', 'flowextra', 'brotx', 'shizukunext', 'shizuku'].includes(dl) || (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS[dl]))) {
                 openUnlockModal(dl);
             }
         });

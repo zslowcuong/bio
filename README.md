@@ -1,13 +1,13 @@
-# Flow Ecosystem (FlowS, FlowOptimize & FlowUltra) 🚀
+# Flow Ecosystem (FlowS, FlowOptimize, FlowUltra & FlowExtra) 🚀
 ### eSports Gaming Optimizer & Advanced Hardware Suite for Android (100% Free & No Root via Shizuku)
 
 ![Flow Banner](app_logo.png)
 
-> **Flow Ecosystem** là bộ ba công cụ tối ưu hóa phần cứng và gaming eSports chuyên sâu dành cho thiết bị Android, phát triển bởi **Flowly Engine**. Toàn bộ tính năng ứng dụng hoàn toàn **miễn phí 100%, không cần GetKey**, hoạt động qua đặc quyền **Shizuku ADB** (Không cần Root máy).
+> **Flow Ecosystem** là bộ tứ công cụ tối ưu hóa phần cứng và gaming eSports chuyên sâu dành cho thiết bị Android, phát triển bởi **Flowly Engine**. Toàn bộ tính năng ứng dụng hoàn toàn **miễn phí 100%, không cần GetKey**, hoạt động qua đặc quyền **Shizuku ADB** (Không cần Root máy).
 
 ---
 
-## 🌟 Bộ Ba Ứng Dụng (Apps Overview)
+## 🌟 Bộ Tứ Ứng Dụng (Apps Overview)
 
 ### 1. ⚡ FlowS - Gamer Tuner (v1.2.0 — Miễn Phí 100%)
 - **Tự Động Quét Game Thật**: Nhận diện Liên Quân, Free Fire, PUBG Mobile, Tốc Chiến, Roblox...
@@ -27,11 +27,16 @@
 - **Screen-Off Deep Doze & AFK Extinguish 0-Nits**: Tiết kiệm pin tối đa khi tắt màn hình hoặc treo game.
 - **MemHogs Live PSS Tracker & Khôi Phục 1-Chạm**: Đo RAM chuẩn xác & khôi phục toàn diện cài đặt gốc khi cần.
 
+### 4. 🎩 FlowExtra - Kaito Kid 1412 Edition (v3.5 — Miễn Phí 100%)
+- **Đồ Họa API Unlocker + Xác Minh Readback**: Tự động quét GPU/Vulkan/ANGLE/GameDriver và xác minh `debug.hwui.renderer`, `RenderEngine`, `game_overlay` ngay trên card.
+- **Ma Trận Xung CPU Từng Cụm & Preset MHz**: Quét tần số OPP từng cluster (`policy0..N`), đo nhiệt từng zone & khóa xung linh hoạt trên mọi SoC (Snapdragon, Dimensity, Exynos, Tensor).
+- **1412 Phantom GameSpace & Khôi Phục Gốc**: Theo dõi game chạy nền qua Foreground Service, tự hoàn trả mọi cấu hình gốc khi thoát game (Android 7–15+).
+
 ---
 
 ## 📥 Tải Về & Cài Đặt Chính Thức
 
-Toàn bộ bộ ba ứng dụng **FlowOptimize v1.6.0**, **FlowS v1.2.0**, **FlowUltra v1.1.0** cùng hơn 60 công cụ tối ưu bổ trợ được phát hành miễn phí tại trang Bio chính thức:
+Toàn bộ bộ tứ ứng dụng **FlowOptimize v1.6.0**, **FlowS v1.2.0**, **FlowUltra v1.1.0**, **FlowExtra v3.5** cùng hơn 60 công cụ tối ưu bổ trợ được phát hành miễn phí tại trang Bio chính thức:
 
 - Trang tải chính thức: `https://zslowcuong.github.io/bio/#download`
 - Chọn ứng dụng -> Follow TikTok **@xxd5974** để mở khóa liên kết tải APK.

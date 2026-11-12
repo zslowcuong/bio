@@ -1,5 +1,5 @@
 {
-  "project": "Flow Ecosystem (FlowS, FlowOptimize, FlowUltra)",
+  "project": "Flow Ecosystem (FlowS, FlowOptimize, FlowUltra & FlowExtra)",
   "copyright": "© Bản quyền thuộc về Flowly Engine",
   "free_forever": true,
   "api_token": "6ae77b1c1473a714b32b2a3a",
@@ -47,6 +47,20 @@
     "destination_apk": "https://gofile.io/d/p8GZrZNY",
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A//gofile.io/d/p8GZrZNY",
     "direct_apk": "FlowUltra.apk"
+  },
+  "flowextra": {
+    "name": "FlowExtra Kaito Kid 1412 Edition",
+    "version": "v3.5",
+    "version_code": 8,
+    "min_version_code": 8,
+    "force_update": false,
+    "update_url": "https://zslowcuong.github.io/bio/",
+    "download_url": "https://zslowcuong.github.io/bio/?dl=flowextra#download",
+    "package": "com.flowextra.optimizer",
+    "changelog": "Bản cập nhật v3.5 Kaito Kid 1412 Edition Miễn phí 100% (© Bản quyền thuộc về Flowly Engine): Giao diện Midnight Sapphire Kaito Kid, Đồ Họa API Unlocker (Vulkan/ANGLE/GLES) kèm xác minh readback, Ma trận Xung CPU từng cụm & 1412 Phantom GameSpace tương thích Android 7–15+.",
+    "destination_apk": "https://zslowcuong.github.io/bio/FlowExtra.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowExtra.apk",
+    "direct_apk": "FlowExtra.apk"
   },
   "tools_store": {
     "brotx": {

@@ -376,6 +376,11 @@
                 <div class="stat-value" id="statFlowUltraVer" style="color: #fbbf24;">v1.1.0</div>
                 <div class="stat-sub">versionCode: <b id="statFlowUltraCode">3</b> • com.flows.flowultra</div>
             </div>
+            <div class="stat-card">
+                <div class="stat-label">🎩 FlowExtra (1412)</div>
+                <div class="stat-value" id="statFlowExtraVer" style="color: #7dd3fc;">v3.5</div>
+                <div class="stat-sub">versionCode: <b id="statFlowExtraCode">8</b> • com.flowextra.optimizer</div>
+            </div>
         </div>
 
         <div class="panel-card">
@@ -474,6 +479,29 @@
                         <textarea id="fuChangelog" rows="2" class="field-textarea" oninput="renderJsonPreview()">Bản cập nhật v1.1.0 Miễn phí 100% (© Bản quyền thuộc về Flowly Engine): Gỡ bỏ hoàn toàn Key/bản quyền, Whitelist Xiaomi Game Turbo/Ảnh/Camera, Hardware Suite &amp; Shizuku ADB an toàn.</textarea>
                     </div>
                 </div>
+
+                <div class="app-subpanel" style="border-color: rgba(125, 211, 252, 0.35);">
+                    <h4 style="color: #7dd3fc;">🎩 FlowExtra (Kaito Kid 1412)</h4>
+                    <div>
+                        <label class="field-label">Phiên Bản / VersionCode</label>
+                        <div style="display: grid; grid-template-columns: 1fr 90px; gap: 8px;">
+                            <input type="text" id="feVer" class="field-input" value="v3.5" oninput="renderJsonPreview()">
+                            <input type="number" id="feCode" class="field-input" value="8" oninput="renderJsonPreview()">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="field-label">Link Đích APK (GitHub / Mirror)</label>
+                        <input type="text" id="feGofile" class="field-input" value="https://zslowcuong.github.io/bio/FlowExtra.apk" oninput="renderJsonPreview()">
+                    </div>
+                    <div>
+                        <label class="field-label">File APK Trực Tiếp</label>
+                        <input type="text" id="feDirect" class="field-input" value="FlowExtra.apk" oninput="renderJsonPreview()">
+                    </div>
+                    <div>
+                        <label class="field-label">Changelog</label>
+                        <textarea id="feChangelog" rows="2" class="field-textarea" oninput="renderJsonPreview()">Bản cập nhật v3.5 Kaito Kid 1412 Edition Miễn phí 100% (© Bản quyền thuộc về Flowly Engine): Giao diện Midnight Sapphire Kaito Kid, Đồ Họa API Unlocker (Vulkan/ANGLE/GLES) kèm xác minh readback, Ma trận Xung CPU từng cụm &amp; 1412 Phantom GameSpace tương thích Android 7–15+.</textarea>
+                    </div>
+                </div>
             </div>
 
             <div class="actions-bar">
@@ -538,6 +566,16 @@
                             <td>
                                 <a href="FlowUltra.apk" download class="btn-copy-small">Tải APK</a>
                                 <button type="button" class="btn-copy-small" onclick="copyText('https://gofile.io/d/p8GZrZNY')">Copy Gofile</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>FlowExtra 1412</b></td>
+                            <td>v3.5 (code 8)</td>
+                            <td><code>FlowExtra.apk</code></td>
+                            <td><code>https://zslowcuong.github.io/bio/FlowExtra.apk</code></td>
+                            <td>
+                                <a href="FlowExtra.apk" download class="btn-copy-small">Tải APK</a>
+                                <button type="button" class="btn-copy-small" onclick="copyText('https://zslowcuong.github.io/bio/FlowExtra.apk')">Copy URL</button>
                             </td>
                         </tr>
                         <tr>
@@ -612,13 +650,16 @@
             const foCode = parseInt(document.getElementById('foCode').value, 10) || 7;
             const fsCode = parseInt(document.getElementById('fsCode').value, 10) || 3;
             const fuCode = parseInt(document.getElementById('fuCode').value, 10) || 3;
+            const feCode = parseInt(document.getElementById('feCode').value, 10) || 8;
             const foVer = document.getElementById('foVer').value.trim() || 'v1.6.0';
             const fsVer = document.getElementById('fsVer').value.trim() || 'v1.2.0';
             const fuVer = document.getElementById('fuVer').value.trim() || 'v1.1.0';
+            const feVer = document.getElementById('feVer').value.trim() || 'v3.5';
             const apiToken = document.getElementById('cfgApiToken').value.trim() || "6ae77b1c1473a714b32b2a3a";
             const fsDest = document.getElementById('fsGofile').value.trim() || "https://gofile.io/d/kzDVlE2G";
             const foDest = document.getElementById('foGofile').value.trim() || "https://gofile.io/d/Vr3bEORd";
             const fuDest = document.getElementById('fuGofile').value.trim() || "https://gofile.io/d/p8GZrZNY";
+            const feDest = document.getElementById('feGofile').value.trim() || "https://zslowcuong.github.io/bio/FlowExtra.apk";
 
             document.getElementById('statFlowOptVer').textContent = foVer;
             document.getElementById('statFlowOptCode').textContent = foCode;
@@ -626,9 +667,11 @@
             document.getElementById('statFlowSCode').textContent = fsCode;
             document.getElementById('statFlowUltraVer').textContent = fuVer;
             document.getElementById('statFlowUltraCode').textContent = fuCode;
+            document.getElementById('statFlowExtraVer').textContent = feVer;
+            document.getElementById('statFlowExtraCode').textContent = feCode;
 
             return {
-                project: "Flow Ecosystem (FlowS, FlowOptimize, FlowUltra)",
+                project: "Flow Ecosystem (FlowS, FlowOptimize, FlowUltra & FlowExtra)",
                 copyright: document.getElementById('cfgCopyright').value.trim() || "© Bản quyền thuộc về Flowly Engine",
                 free_forever: true,
                 api_token: apiToken,
@@ -676,6 +719,20 @@
                     destination_apk: fuDest,
                     link4m: buildGatewayUrl(apiToken, fuDest),
                     direct_apk: document.getElementById('fuDirect').value.trim() || "FlowUltra.apk"
+                },
+                flowextra: {
+                    name: "FlowExtra Kaito Kid 1412 Edition",
+                    version: feVer,
+                    version_code: feCode,
+                    min_version_code: feCode,
+                    force_update: false,
+                    update_url: "https://zslowcuong.github.io/bio/",
+                    download_url: "https://zslowcuong.github.io/bio/?dl=flowextra#download",
+                    package: "com.flowextra.optimizer",
+                    changelog: document.getElementById('feChangelog').value.trim(),
+                    destination_apk: feDest,
+                    link4m: buildGatewayUrl(apiToken, feDest),
+                    direct_apk: document.getElementById('feDirect').value.trim() || "FlowExtra.apk"
                 },
                 tools_store: {
                     brotx: {
@@ -753,6 +810,13 @@
                         document.getElementById('fuGofile').value = d.flowultra.destination_apk || 'https://gofile.io/d/p8GZrZNY';
                         document.getElementById('fuDirect').value = d.flowultra.direct_apk || 'FlowUltra.apk';
                         if (d.flowultra.changelog) document.getElementById('fuChangelog').value = d.flowultra.changelog;
+                    }
+                    if (d.flowextra) {
+                        document.getElementById('feVer').value = d.flowextra.version || 'v3.5';
+                        document.getElementById('feCode').value = d.flowextra.version_code || 8;
+                        document.getElementById('feGofile').value = d.flowextra.destination_apk || 'https://zslowcuong.github.io/bio/FlowExtra.apk';
+                        document.getElementById('feDirect').value = d.flowextra.direct_apk || 'FlowExtra.apk';
+                        if (d.flowextra.changelog) document.getElementById('feChangelog').value = d.flowextra.changelog;
                     }
                 }
             } catch (e) {
