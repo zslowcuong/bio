@@ -3,95 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Miễn Phí Toàn Bộ Tính Năng • Flowly Engine</title>
+    <title>Key VIP 30 Giờ • Flowly Engine</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #030712; --card-bg: rgba(15, 23, 42, 0.9); }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        :root {
+            --bg: #030712;
+            --card-bg: rgba(15, 23, 42, 0.92);
+            --green: #10b981;
+            --accent: #38bdf8;
+            --gold: #f59e0b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         body {
             background: var(--bg);
-            background-image: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.18), transparent 60%);
+            background-image:
+                radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.18), transparent 60%),
+                radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.1), transparent 50%);
             color: #f8fafc;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px 16px;
+            padding: 20px 14px;
         }
         .container {
-            width: 100%;
-            max-width: 460px;
+            width: 100%; max-width: 460px;
             background: var(--card-bg);
             border: 1px solid rgba(16, 185, 129, 0.35);
-            border-radius: 24px;
-            padding: 28px 22px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            position: relative;
-            overflow: hidden;
+            border-radius: 24px; padding: 26px 20px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(16, 185, 129, 0.25);
+            text-align: center; position: relative; overflow: hidden;
         }
         .container::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0; height: 3.5px;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3.5px;
             background: linear-gradient(90deg, #10b981, #38bdf8, #f59e0b);
         }
-        .badge {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.16);
-            border: 1px solid #10b981;
-            color: #34d399;
-            font-size: 11px; font-weight: 800;
-            padding: 5px 14px; border-radius: 99px;
-            margin-bottom: 14px;
+        .badge-success {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(16, 185, 129, 0.16); border: 1px solid #10b981;
+            color: #34d399; font-size: 11px; font-weight: 800;
+            padding: 5px 13px; border-radius: 99px; margin-bottom: 12px;
         }
-        h1 { font-size: 21px; font-weight: 900; margin-bottom: 8px; }
-        .sub { font-size: 13px; color: #cbd5e1; line-height: 1.55; margin-bottom: 20px; }
-        .btn-main {
-            width: 100%;
-            background: linear-gradient(135deg, #059669, #10b981);
-            color: #fff; font-size: 14px; font-weight: 900;
-            padding: 15px; border-radius: 14px;
-            text-decoration: none;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            margin-bottom: 10px;
+        .logo-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
+        .logo-row img { width: 42px; height: 42px; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.4); object-fit: cover; }
+        h1 { font-size: 20px; font-weight: 900; margin-bottom: 6px; }
+        .sub { font-size: 12.5px; color: #94a3b8; margin-bottom: 18px; line-height: 1.5; }
+        .timer-card {
+            background: rgba(15, 23, 42, 0.72); border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px; padding: 14px; margin-bottom: 16px;
         }
-        .btn-alt {
-            width: 100%;
-            background: rgba(56, 189, 248, 0.12);
-            border: 1px solid rgba(56, 189, 248, 0.35);
-            color: #38bdf8; font-size: 13px; font-weight: 800;
-            padding: 13px; border-radius: 14px;
-            text-decoration: none;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            margin-bottom: 10px;
+        .timer-label { font-size: 11px; font-weight: 800; text-transform: uppercase; color: #38bdf8; margin-bottom: 10px; }
+        .countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .time-box { background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: 10px 4px; }
+        .time-num { font-family: monospace; font-size: 20px; font-weight: 900; color: #38bdf8; line-height: 1; }
+        .time-txt { font-size: 9.5px; font-weight: 700; text-transform: uppercase; color: #64748b; margin-top: 4px; }
+        .key-card {
+            background: rgba(30, 41, 59, 0.65); border: 2px solid #10b981;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.22);
+            border-radius: 16px; padding: 14px; margin-bottom: 16px;
         }
-        .footer {
-            margin-top: 16px; padding-top: 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 11.5px; color: #94a3b8;
+        .key-title { font-size: 11px; font-weight: 800; color: #a7f3d0; text-transform: uppercase; margin-bottom: 8px; }
+        .key-text {
+            font-family: monospace; font-size: 13px; font-weight: 900; color: #fff;
+            background: rgba(15, 23, 42, 0.96); padding: 12px 10px; border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12); word-break: break-all; user-select: all; margin-bottom: 10px;
         }
+        .btn-copy {
+            width: 100%; background: linear-gradient(135deg, #059669, #10b981); color: #fff;
+            font-size: 13.5px; font-weight: 900; padding: 13px; border-radius: 12px; border: none; cursor: pointer;
+            box-shadow: 0 6px 22px rgba(16, 185, 129, 0.45);
+        }
+        .btn-open-app {
+            width: 100%; background: rgba(56, 189, 248, 0.15); color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.4); font-size: 13px; font-weight: 800;
+            padding: 13px; border-radius: 12px; text-decoration: none; display: block; margin-bottom: 14px;
+        }
+        .info-list {
+            background: rgba(15, 23, 42, 0.55); border-radius: 14px; padding: 12px 14px;
+            margin-bottom: 14px; text-align: left; font-size: 12px; border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .info-row { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.04); }
+        .info-row:last-child { border-bottom: none; }
+        .info-label { color: #94a3b8; }
+        .info-val { color: #f8fafc; font-weight: 800; text-align: right; word-break: break-all; }
+        .pro-box {
+            background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: 14px; padding: 12px; font-size: 12px; color: #fde68a; line-height: 1.5;
+        }
+        .pro-box a { display: inline-block; margin-top: 8px; color: #fbbf24; font-weight: 900; text-decoration: none; }
+        #toast {
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: #10b981; color: #fff; padding: 10px 20px; border-radius: 99px;
+            font-size: 13px; font-weight: 800; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease; z-index: 9999; pointer-events: none;
+        }
+        #toast.show { transform: translateX(-50%) translateY(0); }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="badge">🎉 FREE FOREVER • KHÔNG CẦN KEY</div>
-        <h1>Đã Gỡ Bỏ Hệ Thống Key!</h1>
-        <p class="sub">
-            Từ <b>FlowOptimize v1.6.0</b>, toàn bộ tính năng tối ưu eSports đều <b>miễn phí 100%</b> và mở sẵn ngay khi cài đặt. Nếu máy bạn vẫn đang chạy bản cũ bị hỏi Key, hãy tải bản mới nhất bên dưới để cập nhật đè lên.
-        </p>
+        <div class="badge-success">✅ XÁC THỰC LINK THÀNH CÔNG • KHÓA 1 THIẾT BỊ</div>
 
-        <a href="index.html?dl=flowoptimize#download" class="btn-main">
-            <span>⬇️</span>
-            <span>TẢI FLOWOPTIMIZE v1.6.0 APK (MIỄN PHÍ)</span>
-        </a>
-        <a href="index.html#download" class="btn-alt" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.16); color: #e2e8f0;">
-            <span>🏠</span>
-            <span>Mở Trang Tải Bộ 3 Ứng Dụng Flowly</span>
-        </a>
+        <div class="logo-row">
+            <img id="appLogo" src="app_logo.png" alt="Logo">
+            <h1 id="pageTitle">KEY VIP 30 GIỜ</h1>
+        </div>
+        <p class="sub" id="subText">Mã Key VIP bên dưới chỉ dùng để kích hoạt &amp; gia hạn trên đúng thiết bị mang HWID này (mở tối ưu hệ thống; tính năng Game yêu cầu Key PRO).</p>
 
-        <div class="footer">
-            <b>© Bản quyền thuộc về Flowly Engine</b>
+        <div class="timer-card">
+            <div class="timer-label">⏱️ Thời Hạn Key VIP (Ngày : Giờ : Phút : Giây)</div>
+            <div class="countdown-grid">
+                <div class="time-box"><div class="time-num" id="daysBox">01</div><div class="time-txt">Ngày</div></div>
+                <div class="time-box"><div class="time-num" id="hoursBox">06</div><div class="time-txt">Giờ</div></div>
+                <div class="time-box"><div class="time-num" id="minutesBox">00</div><div class="time-txt">Phút</div></div>
+                <div class="time-box"><div class="time-num" id="secondsBox">00</div><div class="time-txt">Giây</div></div>
+            </div>
+        </div>
+
+        <div class="key-card">
+            <div class="key-title" id="keyLabel">🔑 MÃ KEY VIP 30H CỦA BẠN</div>
+            <div class="key-text" id="keyValDisplay">ĐANG KÝ MÃ BẢO MẬT...</div>
+            <button type="button" class="btn-copy" onclick="copyKeyToClipboard()">📋 SAO CHÉP MÃ KEY VIP</button>
+        </div>
+
+        <a id="deepLinkBtn" href="#" class="btn-open-app">🚀 BẤM MỞ APP &amp; TỰ ĐỘNG KÍCH HOẠT NGAY</a>
+
+        <div class="info-list">
+            <div class="info-row"><span class="info-label">Ứng dụng áp dụng:</span><span class="info-val" id="infoApp">...</span></div>
+            <div class="info-row"><span class="info-label">Thiết bị (HWID):</span><span class="info-val" id="infoHwid">...</span></div>
+            <div class="info-row"><span class="info-label">Hạng Key:</span><span class="info-val" style="color:#38bdf8;">VIP 30 Giờ (Hệ Thống)</span></div>
+            <div class="info-row"><span class="info-label">Cấp lúc:</span><span class="info-val" id="infoCreated">...</span></div>
+            <div class="info-row"><span class="info-label">Hết hạn UTC+7:</span><span class="info-val" id="infoExpires" style="color:#f87171;">...</span></div>
+        </div>
+
+        <div class="pro-box">
+            🎮 Cần mở khóa <b>GameSpace, 120/165Hz, Touch 180Hz, GFX Game &amp; Đồ Họa API</b> không giới hạn vượt link?<br>
+            <a id="shopLink" href="shop.html">💎 Mua Key PRO Tuần / Tháng / Vĩnh Viễn (VietQR Tự Động) ➔</a>
         </div>
     </div>
+
+    <div id="toast">✅ Đã sao chép mã Key VIP 30h!</div>
+
+    <script>
+        const APPS = {
+            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP', salt: 'FLOWLY_2026_FLOWOP_SALT_91A4', scheme: 'flowoptimize', pkg: 'com.example.gameoptimizer', logo: 'app_logo.png' },
+            flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS',  salt: 'FLOWLY_2026_FLOWS_SALT_73C8',  scheme: 'flows',        pkg: 'com.flows.gaming',         logo: 'flows_logo.png' },
+            flowultra:    { id: 'flowultra',    name: 'FlowUltra',    prefix: 'FLOWULTRA', salt: 'FLOWLY_2026_FLOWULTRA_SALT_52E9', scheme: 'flowultra', pkg: 'com.flows.flowultra',    logo: 'flowultra_logo.png' },
+            flowextra:    { id: 'flowextra',    name: 'FlowExtra',    prefix: 'FLOWEXTRA', salt: 'FLOWLY_2026_FLOWEXTRA_1412_SALT_84F1', scheme: 'flowextra', pkg: 'com.flowextra.optimizer', logo: 'flowextra_logo.png' }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        let appId = (urlParams.get('app') || urlParams.get('appId') || 'flowoptimize').trim().toLowerCase();
+        if (appId === 'flowop') appId = 'flowoptimize';
+        if (!APPS[appId]) appId = 'flowoptimize';
+        const app = APPS[appId];
+
+        let hwid = (urlParams.get('hwid') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+        if (!hwid || hwid.length < 4) {
+            document.getElementById('keyValDisplay').textContent = '⚠️ THIẾU MÃ HWID! HÃY LẤY KEY TỪ TRONG APP.';
+        }
+
+        document.getElementById('appLogo').src = app.logo;
+        document.getElementById('pageTitle').textContent = `KEY VIP 30H • ${app.name.toUpperCase()}`;
+        document.getElementById('keyLabel').textContent = `🔑 MÃ KEY VIP DÀNH RIÊNG CHO ${app.name.toUpperCase()}`;
+        document.getElementById('infoApp').textContent = `${app.name} (${app.pkg})`;
+        document.getElementById('infoHwid').textContent = hwid || 'CHƯA_CÓ';
+        document.getElementById('shopLink').href = `shop.html?app=${encodeURIComponent(app.id)}${hwid ? '&hwid=' + encodeURIComponent(hwid) : ''}`;
+
+        let generatedKey = '';
+        let expiryMs = Date.now() + 30 * 3600 * 1000;
+        let clockOffsetMs = 0;
+
+        function formatDate(d) {
+            const pad = n => n.toString().padStart(2, '0');
+            return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())} • ${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
+        }
+
+        async function sha256Upper(text) {
+            const enc = new TextEncoder();
+            const buf = await crypto.subtle.digest('SHA-256', enc.encode(text));
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+        }
+
+        async function initVipKey() {
+            if (!hwid || hwid.length < 4) return;
+            let nowMs = Date.now();
+            try {
+                const res = await fetch('https://bio-seven-nu.vercel.app/api/license?action=time', { cache: 'no-store' });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.serverNowUtc) {
+                        clockOffsetMs = Number(data.serverNowUtc) - Date.now();
+                        nowMs = Number(data.serverNowUtc);
+                    }
+                }
+            } catch (_) {}
+
+            expiryMs = nowMs + 30 * 3600 * 1000;
+            const expirySec = Math.floor(expiryMs / 1000);
+            const expiryHex = expirySec.toString(16).toUpperCase();
+            const sigInput = `${app.prefix}:VIP:${hwid}:${expirySec}:${app.salt}`;
+            const hashHex = await sha256Upper(sigInput);
+            const sig8 = hashHex.slice(0, 8);
+
+            generatedKey = `${app.prefix}-VIP-${hwid}-${expiryHex}-${sig8}`;
+            document.getElementById('keyValDisplay').textContent = generatedKey;
+            document.getElementById('infoCreated').textContent = formatDate(new Date(nowMs));
+            document.getElementById('infoExpires').textContent = formatDate(new Date(expiryMs));
+            document.getElementById('deepLinkBtn').href = `${app.scheme}://unlock?key=${encodeURIComponent(generatedKey)}`;
+            updateCountdown();
+        }
+
+        function updateCountdown() {
+            const trustedNow = Date.now() + clockOffsetMs;
+            let diff = Math.max(0, Math.floor((expiryMs - trustedNow) / 1000));
+            const days = Math.floor(diff / 86400);
+            diff %= 86400;
+            const hours = Math.floor(diff / 3600);
+            diff %= 3600;
+            const minutes = Math.floor(diff / 60);
+            const seconds = diff % 60;
+
+            document.getElementById('daysBox').textContent = String(days).padStart(2, '0');
+            document.getElementById('hoursBox').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutesBox').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('secondsBox').textContent = String(seconds).padStart(2, '0');
+
+            if (expiryMs - trustedNow <= 0 && generatedKey) {
+                document.getElementById('keyValDisplay').textContent = 'MÃ KEY ĐÃ HẾT HẠN (VUI LÒNG VƯỢT LẠI)';
+            }
+        }
+
+        function copyKeyToClipboard() {
+            if (!generatedKey) return;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(generatedKey).then(() => showToast('✅ Đã sao chép Key VIP 30h!')).catch(fallbackCopy);
+            } else {
+                fallbackCopy();
+            }
+        }
+
+        function fallbackCopy() {
+            const ta = document.createElement('textarea');
+            ta.value = generatedKey;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast('✅ Đã sao chép Key VIP 30h!');
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2800);
+        }
+
+        initVipKey();
+        setInterval(updateCountdown, 1000);
+    </script>
 </body>
 </html>

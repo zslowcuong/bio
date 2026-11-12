@@ -1,0 +1,9 @@
+{
+  "name": "flowly-bio-api",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  }
+}
+

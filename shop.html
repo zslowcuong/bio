@@ -3,101 +3,500 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Miễn Phí Toàn Bộ Ứng Dụng • Flowly Engine</title>
+    <title>Cửa Hàng Key PRO Tự Động (VietQR) • Flowly Engine</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        :root {
+            --bg: #030712;
+            --card-bg: rgba(15, 23, 42, 0.9);
+            --border: rgba(56, 189, 248, 0.25);
+            --accent: #38bdf8;
+            --green: #10b981;
+            --gold: #f59e0b;
+            --pink: #ec4899;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         body {
-            background: #030712;
+            background: var(--bg);
             background-image:
-                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.16), transparent 60%),
-                radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.12), transparent 50%);
+                radial-gradient(circle at 20% 0%, rgba(56, 189, 248, 0.14), transparent 50%),
+                radial-gradient(circle at 80% 100%, rgba(245, 158, 11, 0.12), transparent 50%);
             color: #f8fafc;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px 16px;
+            padding: 18px 14px 48px;
         }
-        .card {
-            width: 100%;
-            max-width: 500px;
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 24px;
-            padding: 28px 22px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        .wrap { max-width: 900px; margin: 0 auto; }
+        .topbar {
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+            margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .logo { width: 60px; height: 60px; border-radius: 16px; border: 1px solid rgba(56,189,248,0.4); margin-bottom: 14px; }
-        .pill {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.16);
-            border: 1px solid #10b981;
-            color: #34d399;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 5px 12px;
-            border-radius: 99px;
-            margin-bottom: 12px;
+        .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 900; font-size: 16px; }
+        .brand img { width: 36px; height: 36px; border-radius: 10px; border: 1px solid rgba(56, 189, 248, 0.4); object-fit: cover; }
+        .nav-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-pill {
+            padding: 7px 13px; border-radius: 99px; font-size: 12px; font-weight: 800; text-decoration: none;
+            background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.12); color: #e2e8f0;
         }
-        h1 { font-size: 22px; font-weight: 900; margin-bottom: 8px; }
-        p { font-size: 13px; color: #cbd5e1; line-height: 1.6; margin-bottom: 18px; }
-        .dl-grid { display: grid; gap: 10px; margin-bottom: 18px; }
-        .dl-btn {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 13px 16px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 13.5px;
-            background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(255, 255, 255, 0.12); color: #fff;
+        .hero {
+            text-align: center; background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 22px; padding: 24px 18px; margin-bottom: 18px;
         }
-        .dl-btn.fo { border-color: rgba(236, 72, 153, 0.45); background: rgba(236, 72, 153, 0.12); }
-        .dl-btn.fs { border-color: rgba(16, 185, 129, 0.45); background: rgba(16, 185, 129, 0.12); }
-        .dl-btn.fu { border-color: rgba(245, 158, 11, 0.45); background: rgba(245, 158, 11, 0.12); }
-        .home-btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            width: 100%; padding: 14px; border-radius: 14px;
-            background: linear-gradient(135deg, #0284c7, #38bdf8); color: #fff;
-            text-decoration: none; font-size: 14px; font-weight: 900;
+        .hero-badge {
+            display: inline-block; background: rgba(16, 185, 129, 0.16); border: 1px solid #10b981;
+            color: #34d399; font-size: 11px; font-weight: 800; padding: 5px 12px; border-radius: 99px; margin-bottom: 10px;
         }
-        .footer {
-            margin-top: 18px; padding-top: 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 11.5px; color: #94a3b8;
+        .hero h1 { font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+        .hero p { font-size: 13px; color: #cbd5e1; line-height: 1.55; max-width: 680px; margin: 0 auto; }
+
+        .section-card {
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 18px; margin-bottom: 18px;
+        }
+        .section-title { font-size: 14px; font-weight: 900; color: #38bdf8; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
+
+        .app-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        @media (max-width: 640px) { .app-grid { grid-template-columns: repeat(2, 1fr); } }
+        .app-btn {
+            background: rgba(30, 41, 59, 0.72); border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 12px 10px; cursor: pointer; text-align: center; color: #cbd5e1; transition: all 0.2s ease;
+        }
+        .app-btn img { width: 38px; height: 38px; border-radius: 10px; object-fit: cover; margin-bottom: 6px; }
+        .app-btn .name { font-size: 13px; font-weight: 900; color: #fff; }
+        .app-btn .sub { font-size: 10.5px; color: #94a3b8; margin-top: 2px; }
+        .app-btn.active {
+            border-color: #38bdf8; background: rgba(56, 189, 248, 0.16);
+            box-shadow: 0 0 22px rgba(56, 189, 248, 0.28);
+        }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
+        .field label { display: block; font-size: 11.5px; font-weight: 800; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; }
+        .field input {
+            width: 100%; padding: 12px 14px; border-radius: 12px; font-size: 13.5px; font-weight: 700;
+            background: rgba(2, 6, 23, 0.85); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; outline: none;
+        }
+        .field input:focus { border-color: #38bdf8; }
+
+        .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        @media (max-width: 720px) { .plans-grid { grid-template-columns: 1fr; } }
+        .plan-card {
+            background: rgba(15, 23, 42, 0.92); border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px; padding: 20px 18px; display: flex; flex-direction: column; justify-content: space-between;
+            position: relative;
+        }
+        .plan-card.popular { border-color: #f59e0b; box-shadow: 0 0 28px rgba(245, 158, 11, 0.2); }
+        .plan-tag {
+            position: absolute; top: -10px; right: 16px; background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #fff; font-size: 10px; font-weight: 900; padding: 4px 10px; border-radius: 99px;
+        }
+        .plan-name { font-size: 16px; font-weight: 900; margin-bottom: 6px; }
+        .plan-price { font-size: 28px; font-weight: 900; color: #38bdf8; margin-bottom: 12px; }
+        .plan-perks { list-style: none; font-size: 12.5px; color: #cbd5e1; margin-bottom: 18px; line-height: 1.75; }
+        .btn-buy {
+            width: 100%; padding: 13px; border-radius: 13px; border: none; cursor: pointer;
+            background: linear-gradient(135deg, #0284c7, #38bdf8); color: #fff; font-size: 13.5px; font-weight: 900;
+        }
+        .plan-card.popular .btn-buy { background: linear-gradient(135deg, #f59e0b, #ea580c); }
+
+        .bank-pill {
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;
+            background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.35);
+            border-radius: 14px; padding: 12px 14px; font-size: 12.5px; color: #d1fae5; margin-top: 12px;
+        }
+
+        .lookup-row { display: flex; gap: 8px; }
+        .lookup-row input { flex: 1; padding: 11px 14px; border-radius: 12px; background: rgba(2,6,23,0.85); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-size: 13px; font-weight: 700; }
+        .lookup-row button { padding: 11px 18px; border-radius: 12px; border: none; background: #38bdf8; color: #031525; font-weight: 900; cursor: pointer; }
+        .lookup-res { margin-top: 12px; font-size: 12.5px; }
+
+        /* MODAL */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(2, 6, 23, 0.88); backdrop-filter: blur(8px);
+            z-index: 9999; align-items: center; justify-content: center; padding: 14px; overflow-y: auto;
+        }
+        .modal-overlay.show { display: flex; }
+        .modal-box {
+            width: 100%; max-width: 470px; background: #0f172a; border: 1px solid rgba(56, 189, 248, 0.45);
+            border-radius: 24px; padding: 22px 18px; position: relative; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+            max-height: 94vh; overflow-y: auto;
+        }
+        .modal-close {
+            position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.08); border: none;
+            color: #fff; width: 32px; height: 32px; border-radius: 99px; font-weight: 900; cursor: pointer;
+        }
+        .qr-frame {
+            background: #fff; padding: 10px; border-radius: 16px; width: 220px; margin: 12px auto;
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.25);
+        }
+        .qr-frame img { width: 100%; display: block; border-radius: 8px; }
+        .bank-info {
+            background: rgba(30, 41, 59, 0.75); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px; padding: 12px 14px; font-size: 12.5px; margin-bottom: 12px;
+        }
+        .bank-line { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .bank-line:last-child { border-bottom: none; }
+        .copy-mini { background: rgba(56, 189, 248, 0.2); border: 1px solid rgba(56, 189, 248, 0.4); color: #7dd3fc; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 7px; cursor: pointer; }
+        .status-box {
+            border-radius: 14px; padding: 12px; font-size: 12.5px; line-height: 1.5; margin-bottom: 12px;
+            background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.35); color: #fde68a;
+        }
+        .status-box.paid {
+            background: rgba(16, 185, 129, 0.16); border-color: #10b981; color: #a7f3d0;
+        }
+        .key-display {
+            font-family: monospace; font-size: 13.5px; font-weight: 900; color: #fff; background: #020617;
+            padding: 12px; border-radius: 10px; border: 1px solid #10b981; word-break: break-all; margin: 10px 0;
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <img src="app_logo.png" alt="Flowly Engine" class="logo"><br>
-        <span class="pill">🎁 FREE 100% — KHÔNG BÁN KEY</span>
-        <h1>Hệ Sinh Thái Flowly Đã Miễn Phí Toàn Bộ</h1>
-        <p>
-            Chúng tôi đã ngừng bán Key và gỡ bỏ hoàn toàn hệ thống kích hoạt trả phí. Tất cả ứng dụng tối ưu dưới đây đều <b>miễn phí 100%</b> và mở sẵn mọi tính năng cho cộng đồng.
-        </p>
-
-        <div class="dl-grid">
-            <a href="index.html?dl=flowoptimize#download" class="dl-btn fo">
-                <span>🌸 FlowOptimize v1.6.0 (Theme Anime)</span>
-                <span>Tải APK ➔</span>
+    <div class="wrap">
+        <div class="topbar">
+            <a href="index.html" class="brand">
+                <img src="app_logo.png" alt="Flowly">
+                <span>Flowly PRO Store</span>
             </a>
-            <a href="index.html?dl=flows#download" class="dl-btn fs">
-                <span>⚡ FlowS v1.2.0 (Gamer Tuner)</span>
-                <span>Tải APK ➔</span>
-            </a>
-            <a href="index.html?dl=flowultra#download" class="dl-btn fu">
-                <span>🚀 FlowUltra v1.1.0 (Hardware Suite)</span>
-                <span>Tải APK ➔</span>
-            </a>
-            <a href="index.html?dl=flowextra#download" class="dl-btn" style="background: rgba(56, 189, 248, 0.14); border: 1px solid rgba(125, 211, 252, 0.55); color: #7dd3fc;">
-                <span>🎩 FlowExtra v3.5 (Kaito Kid 1412 Edition)</span>
-                <span>Tải APK ➔</span>
-            </a>
+            <div class="nav-pills">
+                <a href="index.html" class="nav-pill">🏠 Trang Chủ</a>
+                <a href="getkey.html" class="nav-pill">🔑 Lấy Key VIP 30h</a>
+                <a href="https://t.me/+dtVBEzwuN2Q4NmI9" target="_blank" class="nav-pill">✈️ Telegram Hỗ Trợ</a>
+            </div>
         </div>
 
-        <a href="index.html#download" class="home-btn">🏠 Về Trang Chủ Flowly Engine Bio</a>
+        <div class="hero">
+            <span class="hero-badge">🏦 VIETQR TECHCOMBANK TỰ ĐỘNG • AN TOÀN TUYỆT ĐỐI</span>
+            <h1>Nâng Cấp Key PRO Chuyên Biệt Cho Game</h1>
+            <p>
+                Mở khóa toàn bộ tính năng Game PRO (GameSpace, 120Hz/165Hz, Touch 180Hz+, Độ phân giải từng Game, Đồ Họa API Vulkan/ANGLE, Xung CPU/GPU MHz) không giới hạn vượt link. Chỉ hỗ trợ <b>Chuyển khoản VietQR Techcombank</b> để đảm bảo xác thực tiền về chính xác 100%.
+            </p>
+        </div>
 
-        <div class="footer">
-            <b>© Bản quyền thuộc về Flowly Engine</b> • <a href="https://t.me/+dtVBEzwuN2Q4NmI9" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: none; font-weight: 700;">Nhóm Telegram Hỗ Trợ</a>
+        <!-- 1. CHỌN ỨNG DỤNG -->
+        <div class="section-card">
+            <div class="section-title">1. Chọn Ứng Dụng Cần Kích Hoạt PRO</div>
+            <div class="app-grid">
+                <button type="button" class="app-btn" data-app="flowoptimize" onclick="selectApp('flowoptimize')">
+                    <img src="app_logo.png" alt="FlowOptimize">
+                    <div class="name">FlowOptimize</div>
+                    <div class="sub">Prefix: FLOWOP</div>
+                </button>
+                <button type="button" class="app-btn" data-app="flows" onclick="selectApp('flows')">
+                    <img src="flows_logo.png" alt="FlowS">
+                    <div class="name">FlowS</div>
+                    <div class="sub">Prefix: FLOWS</div>
+                </button>
+                <button type="button" class="app-btn" data-app="flowultra" onclick="selectApp('flowultra')">
+                    <img src="flowultra_logo.png" alt="FlowUltra">
+                    <div class="name">FlowUltra</div>
+                    <div class="sub">Prefix: FLOWULTRA</div>
+                </button>
+                <button type="button" class="app-btn" data-app="flowextra" onclick="selectApp('flowextra')">
+                    <img src="flowextra_logo.png" alt="FlowExtra">
+                    <div class="name">FlowExtra</div>
+                    <div class="sub">Prefix: FLOWEXTRA</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. THÔNG TIN THIẾT BỊ -->
+        <div class="section-card">
+            <div class="section-title">2. Thông Tin Thiết Bị Nhận Key (Khóa 1-1 Chống Chia Sẻ)</div>
+            <div class="form-grid">
+                <div class="field">
+                    <label>📱 Mã Thiết Bị (HWID trong App)</label>
+                    <input id="hwidInput" placeholder="VD: OPPO_A1B2C3D4" />
+                </div>
+                <div class="field">
+                    <label>📞 SĐT / Zalo Bảo Hành &amp; Tra Cứu</label>
+                    <input id="phoneInput" placeholder="VD: 0912345678" />
+                </div>
+            </div>
+            <div class="bank-pill">
+                <span>🏦 TK Nhận Tiền Duy Nhất: <b>0827353177 • TECHCOMBANK • TRAN CHI CUONG</b></span>
+                <span id="backendBadge" style="font-weight:800;color:#38bdf8;">Đang kiểm tra cổng Auto Bank...</span>
+            </div>
+        </div>
+
+        <!-- 3. CHỌN GÓI -->
+        <div class="section-card">
+            <div class="section-title">3. Chọn Gói Key PRO Cho <span id="selectedAppLabel" style="color:#fff;">FlowOptimize</span></div>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div>
+                        <div class="plan-name">⚡ Gói Tuần (7 Ngày)</div>
+                        <div class="plan-price">15.000đ</div>
+                        <ul class="plan-perks">
+                            <li>✅ Full 100% Tính Năng Game PRO</li>
+                            <li>✅ Không cần vượt link trong 7 ngày</li>
+                            <li>✅ Đếm ngược Ngày/Giờ/Phút/Giây</li>
+                            <li>✅ Khóa riêng cho <b class="appNameInline">FlowOptimize</b></li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-buy" onclick="createShopOrder('7D')">🏦 Mua Gói 7 Ngày • 15K</button>
+                </div>
+
+                <div class="plan-card popular">
+                    <span class="plan-tag">🔥 PHỔ BIẾN NHẤT</span>
+                    <div>
+                        <div class="plan-name">👑 Gói Tháng (30 Ngày)</div>
+                        <div class="plan-price" style="color:#fbbf24;">39.000đ</div>
+                        <ul class="plan-perks">
+                            <li>✅ Full 100% Tính Năng Game PRO</li>
+                            <li>✅ Tiết kiệm 35% so với gói tuần</li>
+                            <li>✅ Tự nhận diện CK &amp; cấp Key ngay</li>
+                            <li>✅ Bảo hành đổi HWID qua Telegram</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-buy" onclick="createShopOrder('30D')">🏦 Mua Gói 30 Ngày • 39K</button>
+                </div>
+
+                <div class="plan-card">
+                    <div>
+                        <div class="plan-name">💎 Gói Vĩnh Viễn</div>
+                        <div class="plan-price" style="color:#34d399;">99.000đ</div>
+                        <ul class="plan-perks">
+                            <li>✅ Mở khóa PRO Trọn Đời Máy</li>
+                            <li>✅ Miễn phí mọi bản cập nhật mới</li>
+                            <li>✅ Tự động đồng bộ lại khi cài lại app</li>
+                            <li>✅ Hỗ trợ VIP ưu tiên trực tiếp</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-buy" style="background:linear-gradient(135deg,#059669,#10b981);" onclick="createShopOrder('LIFE')">💎 Mua Vĩnh Viễn • 99K</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. TRA CỨU ĐƠN HÀNG -->
+        <div class="section-card">
+            <div class="section-title">4. Tra Cứu Lại Đơn Hàng &amp; Mã Key Đã Mua</div>
+            <div class="lookup-row">
+                <input id="lookupInput" placeholder="Nhập Mã Đơn (ORD...), Nội dung CK (FLOW...), HWID hoặc SĐT..." />
+                <button type="button" onclick="lookupOrders()">🔍 Tra Cứu</button>
+            </div>
+            <div id="lookupResults" class="lookup-res"></div>
         </div>
     </div>
+
+    <!-- MODAL THANH TOÁN VIETQR -->
+    <div id="payModal" class="modal-overlay">
+        <div class="modal-box">
+            <button type="button" class="modal-close" onclick="closePayModal()">✕</button>
+            <h2 style="font-size:18px;font-weight:900;margin-bottom:4px;">🏦 Quét QR Chuyển Khoản Techcombank</h2>
+            <p style="font-size:12px;color:#94a3b8;" id="modalOrderSubtitle">Mã đơn: ...</p>
+
+            <div class="qr-frame">
+                <img id="qrImg" src="" alt="VietQR Techcombank">
+            </div>
+
+            <div class="bank-info">
+                <div class="bank-line"><span>Ngân hàng:</span><b>TECHCOMBANK (TCB)</b></div>
+                <div class="bank-line"><span>Số tài khoản:</span><span><b>0827353177</b> <button class="copy-mini" onclick="copyStr('0827353177')">Copy</button></span></div>
+                <div class="bank-line"><span>Chủ tài khoản:</span><b>TRAN CHI CUONG</b></div>
+                <div class="bank-line"><span>Số tiền đúng:</span><b id="modalPrice" style="color:#38bdf8;">0đ</b></div>
+                <div class="bank-line"><span>Nội dung CK:</span><span><b id="modalMemo" style="color:#fbbf24;">FLOW000000</b> <button class="copy-mini" onclick="copyStr(currentOrder?.memo || '')">Copy</button></span></div>
+            </div>
+
+            <div id="modalStatusBox" class="status-box">
+                ⏳ Hệ thống đang chờ giao dịch thực từ Techcombank. Vui lòng giữ nguyên số tiền và nội dung chuyển khoản!
+            </div>
+
+            <div id="modalKeySuccess" style="display:none;">
+                <div style="font-size:12px;font-weight:800;color:#34d399;">🎉 THANH TOÁN THÀNH CÔNG — ĐÂY LÀ KEY PRO CỦA BẠN:</div>
+                <div id="issuedKeyBox" class="key-display"></div>
+                <button type="button" class="btn-buy" style="background:linear-gradient(135deg,#059669,#10b981);margin-bottom:8px;" onclick="copyStr(currentOrder?.key || '')">📋 SAO CHÉP KEY PRO</button>
+                <a id="openAppWithKeyBtn" href="#" style="display:block;text-align:center;padding:12px;border-radius:12px;background:rgba(56,189,248,0.18);border:1px solid #38bdf8;color:#38bdf8;font-weight:800;text-decoration:none;font-size:13px;">🚀 Bấm Mở App &amp; Tự Kích Hoạt Ngay</a>
+            </div>
+
+            <div id="modalPendingBtns" style="display:grid;gap:8px;">
+                <button type="button" class="btn-buy" onclick="checkCurrentOrder(true)">🔄 Tôi Đã Chuyển Khoản — Kiểm Tra Ngay</button>
+                <button type="button" class="btn-buy" style="background:rgba(255,255,255,0.08);color:#cbd5e1;" onclick="notifyAdminPaid()">📢 Gửi Nhắc Telegram Cho Admin</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://bio-seven-nu.vercel.app';
+        const APPS = {
+            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', scheme: 'flowoptimize' },
+            flows:        { id: 'flows',        name: 'FlowS',        scheme: 'flows' },
+            flowultra:    { id: 'flowultra',    name: 'FlowUltra',    scheme: 'flowultra' },
+            flowextra:    { id: 'flowextra',    name: 'FlowExtra',    scheme: 'flowextra' }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        let selectedAppId = (params.get('app') || params.get('appId') || 'flowoptimize').trim().toLowerCase();
+        if (selectedAppId === 'flowop') selectedAppId = 'flowoptimize';
+        if (!APPS[selectedAppId]) selectedAppId = 'flowoptimize';
+
+        const hwidParam = (params.get('hwid') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+        if (hwidParam) document.getElementById('hwidInput').value = hwidParam;
+
+        let currentOrder = null;
+        let pollTimer = null;
+
+        function selectApp(appId) {
+            selectedAppId = APPS[appId] ? appId : 'flowoptimize';
+            document.querySelectorAll('.app-btn').forEach(b => b.classList.toggle('active', b.dataset.app === selectedAppId));
+            document.getElementById('selectedAppLabel').textContent = APPS[selectedAppId].name;
+            document.querySelectorAll('.appNameInline').forEach(el => el.textContent = APPS[selectedAppId].name);
+        }
+
+        async function loadBackendStatus() {
+            const badge = document.getElementById('backendBadge');
+            try {
+                const res = await fetch(`${API_BASE}/api/shop?action=status`, { cache: 'no-store' });
+                const data = await res.json();
+                if (data.sepayConfigured) {
+                    badge.textContent = '🟢 Auto Bank SePay 24/7: ĐANG BẬT';
+                    badge.style.color = '#34d399';
+                } else {
+                    badge.textContent = '🟡 Duyệt Chuyển Khoản Qua Telegram / Admin (Chưa gắn SePay API)';
+                    badge.style.color = '#fbbf24';
+                }
+            } catch (e) {
+                badge.textContent = '⚠️ Không kết nối được API Vercel';
+                badge.style.color = '#f87171';
+            }
+        }
+
+        async function createShopOrder(planCode) {
+            const hwid = (document.getElementById('hwidInput').value || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+            const phone = (document.getElementById('phoneInput').value || '').trim();
+            if (!hwid || hwid.length < 4) {
+                alert('⚠️ Vui lòng mở app cần mua Key ➔ bấm Sao chép Mã HWID và dán vào ô HWID!');
+                document.getElementById('hwidInput').focus();
+                return;
+            }
+            if (!phone || phone.length < 8) {
+                alert('⚠️ Vui lòng nhập SĐT hoặc Zalo hợp lệ để bảo hành & tra cứu đơn hàng!');
+                document.getElementById('phoneInput').focus();
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/api/shop?action=create_order`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ appId: selectedAppId, hwid, phone, planCode })
+                });
+                const data = await res.json();
+                if (!data.success || !data.order) {
+                    alert('❌ Lỗi tạo đơn: ' + (data.error || 'Không rõ'));
+                    return;
+                }
+                openPayModal(data.order);
+            } catch (e) {
+                alert('❌ Lỗi kết nối máy chủ Shop: ' + e.message);
+            }
+        }
+
+        function openPayModal(order) {
+            currentOrder = order;
+            document.getElementById('modalOrderSubtitle').textContent = `${order.appName} • ${order.planName} • HWID: ${order.hwid} • Đơn: ${order.orderCode}`;
+            document.getElementById('qrImg').src = order.qrUrl;
+            document.getElementById('modalPrice').textContent = Number(order.price).toLocaleString('vi-VN') + 'đ';
+            document.getElementById('modalMemo').textContent = order.memo;
+            document.getElementById('modalKeySuccess').style.display = 'none';
+            document.getElementById('modalPendingBtns').style.display = 'grid';
+            const box = document.getElementById('modalStatusBox');
+            box.className = 'status-box';
+            box.textContent = '⏳ Đang chờ giao dịch chuyển khoản thực tế vào 0827353177 TECHCOMBANK. Hệ thống tự kiểm tra mỗi 5 giây...';
+            document.getElementById('payModal').classList.add('show');
+
+            if (pollTimer) clearInterval(pollTimer);
+            pollTimer = setInterval(() => checkCurrentOrder(false), 5000);
+        }
+
+        function closePayModal() {
+            document.getElementById('payModal').classList.remove('show');
+            if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+        }
+
+        async function checkCurrentOrder(manualClick) {
+            if (!currentOrder) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/shop?action=check_order&orderCode=${encodeURIComponent(currentOrder.orderCode)}`, { cache: 'no-store' });
+                const data = await res.json();
+                if (data.order) currentOrder = data.order;
+                const box = document.getElementById('modalStatusBox');
+                if (data.paid && currentOrder.key) {
+                    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+                    box.className = 'status-box paid';
+                    box.textContent = '✅ Đã xác nhận tiền về Techcombank thành công! Key PRO của bạn đã được mở khóa ngay bên dưới.';
+                    document.getElementById('modalPendingBtns').style.display = 'none';
+                    document.getElementById('modalKeySuccess').style.display = 'block';
+                    document.getElementById('issuedKeyBox').textContent = currentOrder.key;
+                    const scheme = APPS[currentOrder.appId]?.scheme || 'flowoptimize';
+                    document.getElementById('openAppWithKeyBtn').href = `${scheme}://unlock?key=${encodeURIComponent(currentOrder.key)}`;
+                } else if (manualClick) {
+                    box.className = 'status-box';
+                    box.textContent = '🔍 ' + (data.message || 'Chưa ghi nhận chuyển khoản khớp nội dung & số tiền.');
+                }
+            } catch (e) {
+                if (manualClick) alert('❌ Lỗi kiểm tra đơn: ' + e.message);
+            }
+        }
+
+        async function notifyAdminPaid() {
+            if (!currentOrder) return;
+            try {
+                await fetch(`${API_BASE}/api/notify`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        eventType: 'CONFIRM_PAID',
+                        orderCode: currentOrder.memo || currentOrder.orderCode,
+                        appName: currentOrder.appName,
+                        phone: currentOrder.phone,
+                        hwid: currentOrder.hwid,
+                        plan: currentOrder.planName,
+                        price: currentOrder.price,
+                        method: 'VIETQR_TCB'
+                    })
+                });
+                alert('📢 Đã gửi thông báo kèm Mã Đơn đến Telegram Admin! Admin sẽ đối chiếu App Techcombank và duyệt Key ngay nếu tiền đã vào.');
+            } catch (e) {
+                alert('❌ Không gửi được nhắc nhở: ' + e.message);
+            }
+        }
+
+        async function lookupOrders() {
+            const q = (document.getElementById('lookupInput').value || '').trim();
+            const out = document.getElementById('lookupResults');
+            if (!q || q.length < 4) {
+                out.innerHTML = '<span style="color:#f87171;">Vui lòng nhập ít nhất 4 ký tự (Mã Đơn, Nội dung CK, HWID hoặc SĐT).</span>';
+                return;
+            }
+            out.innerHTML = '⏳ Đang tra cứu...';
+            try {
+                const res = await fetch(`${API_BASE}/api/shop?action=lookup&q=${encodeURIComponent(q)}`, { cache: 'no-store' });
+                const data = await res.json();
+                const list = data.orders || [];
+                if (!list.length) {
+                    out.innerHTML = '<span style="color:#94a3b8;">Không tìm thấy đơn hàng nào khớp từ khóa này.</span>';
+                    return;
+                }
+                out.innerHTML = list.map(o => `
+                    <div style="background:rgba(30,41,59,0.75);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px;margin-bottom:8px;">
+                        <div style="display:flex;justify-content:space-between;font-weight:800;">
+                            <span>${o.appName} • ${o.planName}</span>
+                            <span style="color:${o.status==='COMPLETED'?'#34d399':'#fbbf24'}">${o.status==='COMPLETED'?'ĐÃ CẤP KEY':'CHỜ THANH TOÁN'}</span>
+                        </div>
+                        <div style="color:#94a3b8;font-size:11.5px;margin-top:4px;">Đơn: ${o.orderCode} • CK: ${o.memo} • HWID: ${o.hwid}</div>
+                        ${o.key ? `<div class="key-display" style="margin:8px 0 6px;">${o.key}</div><button class="copy-mini" onclick="copyStr('${o.key}')">📋 Copy Key</button>` : `<button class="copy-mini" style="margin-top:8px;" onclick='openPayModal(${JSON.stringify(o)})'>🏦 Mở Lại QR Thanh Toán</button>`}
+                    </div>
+                `).join('');
+            } catch (e) {
+                out.innerHTML = `<span style="color:#f87171;">Lỗi tra cứu: ${e.message}</span>`;
+            }
+        }
+
+        function copyStr(txt) {
+            if (!txt) return;
+            navigator.clipboard?.writeText(txt).then(() => alert('📋 Đã sao chép: ' + txt)).catch(() => alert(txt));
+        }
+
+        selectApp(selectedAppId);
+        loadBackendStatus();
+    </script>
 </body>
 </html>

@@ -3,859 +3,503 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Trị OTA & Phân Phối • Flowly Engine Admin</title>
+    <title>Admin Dashboard • Flowly License &amp; Key Manager</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #030712;
-            --card-bg: rgba(15, 23, 42, 0.92);
-            --card-border: rgba(56, 189, 248, 0.22);
+            --card: rgba(15, 23, 42, 0.92);
+            --border: rgba(56, 189, 248, 0.25);
             --accent: #38bdf8;
             --green: #10b981;
-            --amber: #f59e0b;
-            --pink: #ec4899;
+            --gold: #f59e0b;
+            --red: #ef4444;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        body {
-            background: var(--bg);
-            color: #f8fafc;
-            min-height: 100vh;
-            padding: 24px 20px 48px;
-            background-image:
-                radial-gradient(circle at 10% 10%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
-                radial-gradient(circle at 90% 20%, rgba(16, 185, 129, 0.07) 0%, transparent 45%);
-        }
-
-        .container {
-            max-width: 1120px;
-            margin: 0 auto;
-        }
-
-        .header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .brand-title {
-            font-size: 20px;
-            font-weight: 900;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .brand-badge {
-            background: rgba(16, 185, 129, 0.16);
-            border: 1px solid #10b981;
-            color: #34d399;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 4px 12px;
-            border-radius: 99px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 18px;
-            padding: 18px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
-        }
-
-        .stat-label {
-            font-size: 11.5px;
-            font-weight: 800;
-            color: #94a3b8;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-        }
-
-        .stat-value {
-            font-size: 22px;
-            font-weight: 900;
-            color: #fff;
-        }
-
-        .stat-sub {
-            font-size: 11.5px;
-            color: #94a3b8;
-            margin-top: 4px;
-        }
-
-        .panel-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 22px;
-            margin-bottom: 22px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-        }
-
-        .panel-title {
-            font-size: 16px;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-
-        .panel-desc {
-            font-size: 12px;
-            color: #94a3b8;
-            margin-bottom: 16px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 14px;
-        }
-
-        .field-label {
-            font-size: 11px;
-            font-weight: 800;
-            color: #38bdf8;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .field-input, .field-select, .field-textarea {
-            width: 100%;
-            background: #0b1120;
-            border: 1px solid #334155;
-            border-radius: 10px;
-            padding: 10px 12px;
-            color: #f8fafc;
-            font-size: 13px;
-            font-weight: 600;
-            outline: none;
-        }
-
-        .field-input:focus, .field-select:focus, .field-textarea:focus {
-            border-color: var(--accent);
-        }
-
-        .app-config-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-            gap: 16px;
-            margin-top: 16px;
-        }
-
-        .app-subpanel {
-            background: rgba(2, 6, 23, 0.65);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .app-subpanel h4 {
-            font-size: 14px;
-            font-weight: 900;
-            margin-bottom: 2px;
-        }
-
-        .actions-bar {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 18px;
-        }
-
-        .btn-action {
-            background: rgba(56, 189, 248, 0.15);
-            border: 1px solid rgba(56, 189, 248, 0.45);
-            color: #38bdf8;
-            font-size: 13px;
-            font-weight: 800;
-            padding: 10px 18px;
-            border-radius: 12px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .btn-action:hover {
-            background: rgba(56, 189, 248, 0.28);
-            transform: translateY(-1px);
-        }
-
-        .btn-action.green {
-            background: rgba(16, 185, 129, 0.2);
-            border-color: #10b981;
-            color: #34d399;
-        }
-
-        .btn-action.green:hover {
-            background: rgba(16, 185, 129, 0.35);
-        }
-
-        .table-wrap {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-            white-space: nowrap;
-        }
-
-        th {
-            background: rgba(30, 41, 59, 0.75);
-            color: #94a3b8;
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            text-align: left;
-            padding: 12px 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        td {
-            padding: 12px 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            color: #cbd5e1;
-        }
-
-        .btn-copy-small {
-            background: rgba(56, 189, 248, 0.15);
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            color: #38bdf8;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 7px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .preview-json {
-            background: #020617;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 14px;
-            font-family: monospace;
-            font-size: 12px;
-            color: #93c5fd;
-            max-height: 280px;
-            overflow: auto;
-            white-space: pre-wrap;
-            margin-top: 14px;
-        }
-
-        .note-banner {
-            margin-top: 14px;
-            background: rgba(30, 41, 59, 0.65);
-            border-left: 3px solid #38bdf8;
-            border-radius: 8px;
-            padding: 10px 14px;
-            font-size: 12px;
-            color: #cbd5e1;
-            line-height: 1.6;
-        }
-
-        #loginGate {
-            position: fixed;
-            inset: 0;
-            background: rgba(3, 7, 18, 0.98);
-            backdrop-filter: blur(22px);
-            z-index: 9999999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: #f8fafc; min-height: 100vh; padding: 20px 14px 60px; }
+        .wrap { max-width: 1120px; margin: 0 auto; }
         .login-box {
-            background: rgba(15, 23, 42, 0.96);
-            border: 2px solid #38bdf8;
-            border-radius: 20px;
-            padding: 28px 24px;
-            max-width: 360px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 0 40px rgba(56, 189, 248, 0.25);
+            max-width: 420px; margin: 60px auto; background: var(--card); border: 1px solid var(--border);
+            border-radius: 22px; padding: 28px 22px; text-align: center;
         }
-
-        .login-input {
-            width: 100%;
-            background: rgba(30, 41, 59, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 12px;
-            color: #fff;
-            font-size: 14px;
-            text-align: center;
-            margin: 16px 0;
-            outline: none;
+        .login-box input {
+            width: 100%; padding: 13px 14px; border-radius: 12px; background: #020617;
+            border: 1px solid rgba(255,255,255,0.16); color: #fff; font-size: 14px; font-weight: 700; margin: 14px 0;
         }
-
-        .site-footer {
-            text-align: center;
-            font-size: 12px;
-            color: #94a3b8;
-            padding-top: 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        .btn {
+            padding: 11px 16px; border-radius: 12px; border: none; cursor: pointer; font-weight: 800; font-size: 13px;
+            background: linear-gradient(135deg, #0284c7, #38bdf8); color: #fff;
         }
+        .btn.green { background: linear-gradient(135deg, #059669, #10b981); }
+        .btn.gold { background: linear-gradient(135deg, #d97706, #f59e0b); }
+        .btn.red { background: linear-gradient(135deg, #dc2626, #ef4444); }
+        .btn.ghost { background: rgba(255,255,255,0.08); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.14); }
+        .header {
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+            padding-bottom: 14px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .status-strip {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px;
+        }
+        @media (max-width: 780px) { .status-strip { grid-template-columns: repeat(2, 1fr); } }
+        .stat {
+            background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 14px;
+        }
+        .stat .lbl { font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase; }
+        .stat .val { font-size: 18px; font-weight: 900; margin-top: 4px; color: #38bdf8; }
+        .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+        .tab-btn {
+            padding: 10px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(30,41,59,0.7); color: #cbd5e1; font-weight: 800; font-size: 13px; cursor: pointer;
+        }
+        .tab-btn.active { background: rgba(56,189,248,0.2); border-color: #38bdf8; color: #fff; }
+        .panel { display: none; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 18px; }
+        .panel.active { display: block; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        @media (max-width: 780px) { .grid-2 { grid-template-columns: 1fr; } }
+        .event-card {
+            background: rgba(2,6,23,0.65); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 16px;
+        }
+        .field { margin-bottom: 10px; }
+        .field label { display: block; font-size: 11px; font-weight: 800; color: #94a3b8; margin-bottom: 4px; text-transform: uppercase; }
+        .field input, .field select, .field textarea {
+            width: 100%; padding: 10px 12px; border-radius: 10px; background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.14); color: #fff; font-size: 13px; font-weight: 700;
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+        th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid rgba(255,255,255,0.06); vertical-align: middle; }
+        th { color: #38bdf8; font-size: 11px; text-transform: uppercase; }
+        .mono { font-family: monospace; font-weight: 800; }
+        .pill { display: inline-block; padding: 3px 8px; border-radius: 99px; font-size: 10.5px; font-weight: 800; }
+        .pill.ok { background: rgba(16,185,129,0.2); color: #34d399; }
+        .pill.wait { background: rgba(245,158,11,0.2); color: #fbbf24; }
+        .pill.revoked { background: rgba(239,68,68,0.2); color: #f87171; }
     </style>
 </head>
 <body>
-    <div id="loginGate">
-        <div class="login-box">
-            <div style="font-size: 40px; margin-bottom: 8px;">🛡️</div>
-            <h2 style="font-size: 18px; font-weight: 900;">FLOWLY ENGINE ADMIN</h2>
-            <p style="font-size: 12px; color: #94a3b8; margin-top: 4px;">Xác thực quyền quản trị phát hành OTA:</p>
-            <input type="password" id="adminPinInput" class="login-input" placeholder="Nhập mật khẩu quản trị..." onkeydown="if(event.key==='Enter') checkAdminLogin()">
-            <button type="button" onclick="checkAdminLogin()" class="btn-action green" style="width: 100%; justify-content: center; padding: 12px;">
-                ĐĂNG NHẬP
-            </button>
-            <p style="font-size: 11px; color: #64748b; margin-top: 12px;">© Bản quyền thuộc về Flowly Engine</p>
-        </div>
+    <div id="loginView" class="login-box">
+        <h2 style="font-size:20px;font-weight:900;">🔐 Flowly Admin Dashboard</h2>
+        <p style="font-size:12.5px;color:#94a3b8;margin-top:6px;">Quản lý Key Thiết Bị • Duyệt VietQR • Tạo Key Sự Kiện Từng App • Ép Update OTA</p>
+        <input id="pinInput" type="password" placeholder="Nhập Mật Khẩu Admin..." onkeydown="if(event.key==='Enter')doLogin()" />
+        <button class="btn" style="width:100%;" onclick="doLogin()">Đăng Nhập Quản Trị</button>
     </div>
 
-    <div class="container">
-        <div class="header-bar">
-            <div class="brand-title">
-                <span>⚡ FLOWLY ENGINE OTA DASHBOARD</span>
-                <span class="brand-badge">MIỄN PHÍ 100% • KHÔNG KEY • TẢI TRỰC TIẾP</span>
+    <div id="dashView" class="wrap" style="display:none;">
+        <div class="header">
+            <div>
+                <h1 style="font-size:20px;font-weight:900;">🛡️ FLOWLY ADMIN CONTROL CENTER</h1>
+                <div style="font-size:12px;color:#94a3b8;">Tách riêng 4 App (FlowOp • FlowS • FlowUltra • FlowExtra)</div>
             </div>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="index.html" class="btn-action" style="padding: 8px 14px; font-size: 12px;">🏠 Trang Bio</a>
-                <a href="showcase.html" class="btn-action" style="padding: 8px 14px; font-size: 12px;">✨ Showcase</a>
-                <a href="huongdan.html" class="btn-action" style="padding: 8px 14px; font-size: 12px;">📖 Hướng Dẫn</a>
-            </div>
-        </div>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-label">🎁 Chính Sách Sử Dụng</div>
-                <div class="stat-value" style="color: #34d399;">FREE 100%</div>
-                <div class="stat-sub">Đã xóa bỏ hoàn toàn GetKey & Key kích hoạt</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">🌸 FlowOptimize</div>
-                <div class="stat-value" id="statFlowOptVer" style="color: #f472b6;">v1.6.0</div>
-                <div class="stat-sub">versionCode: <b id="statFlowOptCode">7</b> • com.example.gameoptimizer</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">⚡ FlowS</div>
-                <div class="stat-value" id="statFlowSVer" style="color: #4ade80;">v1.2.0</div>
-                <div class="stat-sub">versionCode: <b id="statFlowSCode">3</b> • com.flows.gaming</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">🚀 FlowUltra</div>
-                <div class="stat-value" id="statFlowUltraVer" style="color: #fbbf24;">v1.1.0</div>
-                <div class="stat-sub">versionCode: <b id="statFlowUltraCode">3</b> • com.flows.flowultra</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">🎩 FlowExtra (1412)</div>
-                <div class="stat-value" id="statFlowExtraVer" style="color: #7dd3fc;">v3.5</div>
-                <div class="stat-sub">versionCode: <b id="statFlowExtraCode">8</b> • com.flowextra.optimizer</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <button class="btn ghost" onclick="refreshDashboard()">🔄 Làm Mới Dữ Liệu</button>
+                <a href="shop.html" class="btn ghost" style="text-decoration:none;">🛒 Mở Shop</a>
+                <a href="index.html" class="btn ghost" style="text-decoration:none;">🏠 Trang Chủ</a>
             </div>
         </div>
 
-        <div class="panel-card">
-            <h3 class="panel-title">📡 Quản Lý Phát Hành OTA (`config.json`)</h3>
-            <p class="panel-desc">Cấu hình link Gofile dự phòng, APK trực tiếp trên GitHub Pages, changelog và versionCode cho hệ sinh thái Flowly Engine.</p>
-
-            <div class="form-grid">
-                <div>
-                    <label class="field-label" for="cfgTiktok">Kênh TikTok Chính Thức</label>
-                    <input type="text" id="cfgTiktok" class="field-input" value="https://www.tiktok.com/@xxd5974" oninput="renderJsonPreview()">
-                </div>
-                <div>
-                    <label class="field-label" for="cfgTelegram">Nhóm Telegram Hỗ Trợ</label>
-                    <input type="text" id="cfgTelegram" class="field-input" value="https://t.me/+dtVBEzwuN2Q4NmI9" oninput="renderJsonPreview()">
-                </div>
-                <div>
-                    <label class="field-label" for="cfgWaitSeconds">Thời Gian Xác Nhận TikTok (Giây)</label>
-                    <input type="number" id="cfgWaitSeconds" class="field-input" value="15" min="15" max="60" oninput="renderJsonPreview()">
-                </div>
-                <div>
-                    <label class="field-label" for="cfgCopyright">Chuỗi Bản Quyền</label>
-                    <input type="text" id="cfgCopyright" class="field-input" value="© Bản quyền thuộc về Flowly Engine" oninput="renderJsonPreview()">
-                </div>
-                <div>
-                    <label class="field-label" for="cfgApiToken">Gateway API Token</label>
-                    <input type="text" id="cfgApiToken" class="field-input" value="6ae77b1c1473a714b32b2a3a" oninput="renderJsonPreview()">
-                </div>
-            </div>
-
-            <div class="app-config-grid">
-                <div class="app-subpanel" style="border-color: rgba(236, 72, 153, 0.35);">
-                    <h4 style="color: #f472b6;">🌸 FlowOptimize</h4>
-                    <div>
-                        <label class="field-label">Phiên Bản / VersionCode</label>
-                        <div style="display: grid; grid-template-columns: 1fr 90px; gap: 8px;">
-                            <input type="text" id="foVer" class="field-input" value="v1.6.0" oninput="renderJsonPreview()">
-                            <input type="number" id="foCode" class="field-input" value="7" oninput="renderJsonPreview()">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="field-label">Link Gofile Mirror</label>
-                        <input type="text" id="foGofile" class="field-input" value="https://gofile.io/d/Vr3bEORd" oninput="renderJsonPreview()">
-                    </div>
-                    <div>
-                        <label class="field-label">File APK Trực Tiếp</label>
-                        <input type="text" id="foDirect" class="field-input" value="FlowOptimize.apk" oninput="renderJsonPreview()">
-                    </div>
-                    <div>
-                        <label class="field-label">Changelog</label>
-                        <textarea id="foChangelog" rows="2" class="field-textarea" oninput="renderJsonPreview()">Bản cập nhật v1.6.0 Miễn phí 100% (© Bản quyền thuộc về Flowly Engine): Xóa bỏ hoàn toàn GetKey &amp; Key PRO, Whitelist tự động Game Turbo/Ảnh/Camera, Khóa Hz thích ứng &amp; bảo mật chống crack.</textarea>
-                    </div>
-                </div>
-
-                <div class="app-subpanel" style="border-color: rgba(16, 185, 129, 0.35);">
-                    <h4 style="color: #34d399;">⚡ FlowS</h4>
-                    <div>
-                        <label class="field-label">Phiên Bản / VersionCode</label>
-                        <div style="display: grid; grid-template-columns: 1fr 90px; gap: 8px;">
-                            <input type="text" id="fsVer" class="field-input" value="v1.2.0" oninput="renderJsonPreview()">
-                            <input type="number" id="fsCode" class="field-input" value="3" oninput="renderJsonPreview()">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="field-label">Link Gofile Mirror</label>
-                        <input type="text" id="fsGofile" class="field-input" value="https://gofile.io/d/kzDVlE2G" oninput="renderJsonPreview()">
-                    </div>
-                    <div>
-                        <label class="field-label">File APK Trực Tiếp</label>
-                        <input type="text" id="fsDirect" class="field-input" value="FlowS.apk" oninput="renderJsonPreview()">
-                    </div>
-                    <div>
-                        <label class="field-label">Changelog</label>
-                        <textarea id="fsChangelog" rows="2" class="field-textarea" oninput="renderJsonPreview()">Bản cập nhật v1.2.0 Miễn phí 100% (© Bản quyền thuộc về Flowly Engine): Gỡ bỏ hoàn toàn Key/kích hoạt, Whitelist tự động Xiaomi Game Turbo/Ảnh/Camera, Preset Máy Cấu Hình Cao &amp; Khóa Max Hz chuẩn phần cứng.</textarea>
-                    </div>
-                </div>
-
-                <div class="app-subpanel" style="border-color: rgba(245, 158, 11, 0.35);">
-                    <h4 style="color: #fbbf24;">🚀 FlowUltra</h4>
-                    <div>
-                        <label class="field-label">Phiên Bản / VersionCode</label>
-                        <div style="display: grid; grid-template-columns: 1fr 90px; gap: 8px;">
-                            <input type="text" id="fuVer" class="field-input" value="v1.1.0" oninput="renderJsonPreview()">
-                            <input type="number" id="fuCode" class="field-input" value="3" oninput="renderJsonPreview()">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="field-label">Link Gofile Mirror</label>
-                        <input type="text" id="fuGofile" class="field-input" value="https://gofile.io/d/p8GZrZNY" oninput="renderJsonPreview()">
-                    </div>
-                    <div>
-                        <label class="field-label">File APK Trực Tiếp</label>
-                        <input type="text" id="fuDirect" class="field-input" value="FlowUltra.apk" oninput="renderJsonPreview()">
-                    </div>
-                    <div>
-                        <label class="field-label">Changelog</label>
-                        <textarea id="fuChangelog" rows="2" class="field-textarea" oninput="renderJsonPreview()">Bản cập nhật v1.1.0 Miễn phí 100% (© Bản quyền thuộc về Flowly Engine): Gỡ bỏ hoàn toàn Key/bản quyền, Whitelist Xiaomi Game Turbo/Ảnh/Camera, Hardware Suite &amp; Shizuku ADB an toàn.</textarea>
-                    </div>
-                </div>
-
-                <div class="app-subpanel" style="border-color: rgba(125, 211, 252, 0.35);">
-                    <h4 style="color: #7dd3fc;">🎩 FlowExtra (Kaito Kid 1412)</h4>
-                    <div>
-                        <label class="field-label">Phiên Bản / VersionCode</label>
-                        <div style="display: grid; grid-template-columns: 1fr 90px; gap: 8px;">
-                            <input type="text" id="feVer" class="field-input" value="v3.5" oninput="renderJsonPreview()">
-                            <input type="number" id="feCode" class="field-input" value="8" oninput="renderJsonPreview()">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="field-label">Link Đích APK (GitHub / Mirror)</label>
-                        <input type="text" id="feGofile" class="field-input" value="https://zslowcuong.github.io/bio/FlowExtra.apk" oninput="renderJsonPreview()">
-                    </div>
-                    <div>
-                        <label class="field-label">File APK Trực Tiếp</label>
-                        <input type="text" id="feDirect" class="field-input" value="FlowExtra.apk" oninput="renderJsonPreview()">
-                    </div>
-                    <div>
-                        <label class="field-label">Changelog</label>
-                        <textarea id="feChangelog" rows="2" class="field-textarea" oninput="renderJsonPreview()">Bản cập nhật v3.5 Kaito Kid 1412 Edition Miễn phí 100% (© Bản quyền thuộc về Flowly Engine): Giao diện Midnight Sapphire Kaito Kid, Đồ Họa API Unlocker (Vulkan/ANGLE/GLES) kèm xác minh readback, Ma trận Xung CPU từng cụm &amp; 1412 Phantom GameSpace tương thích Android 7–15+.</textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="actions-bar">
-                <button type="button" class="btn-action green" onclick="downloadUpdatedConfigJson()">
-                    <span>💾</span> Tải config.json Mới
-                </button>
-                <button type="button" class="btn-action" onclick="copyUpdatedConfigJson()">
-                    <span>📋</span> Copy Toàn Bộ config.json
-                </button>
-                <button type="button" class="btn-action" onclick="loadCurrentConfigJson()">
-                    <span>🔄</span> Đồng Bộ Từ config.json Đang Chạy
-                </button>
-            </div>
-
-            <div class="note-banner">
-                💡 <b>Lưu ý kỹ thuật OTA:</b> Trường <code>"force_update": false</code> được giữ nguyên có chủ đích để app FlowOptimize <code>v1.6.0</code> (<code>versionCode: 7</code>) không tự hiện hộp thoại cập nhật lặp. Các máy cài bản cũ (<code>versionCode &lt; 7</code>) sẽ tự động nhận thông báo nâng cấp nhờ <code>min_version_code: 7</code>.
-            </div>
-
-            <pre id="configJsonPreview" class="preview-json"></pre>
+        <div class="status-strip">
+            <div class="stat"><div class="lbl">Database Backend</div><div class="val" id="stDbMode">...</div></div>
+            <div class="stat"><div class="lbl">SePay Auto Bank</div><div class="val" id="stSepay">...</div></div>
+            <div class="stat"><div class="lbl">Tổng Đơn Hàng</div><div class="val" id="stOrders">0</div></div>
+            <div class="stat"><div class="lbl">Key Đã Cấp / Thu Hồi</div><div class="val" id="stKeys">0 / 0</div></div>
         </div>
 
-        <div class="panel-card">
-            <h3 class="panel-title">📦 Danh Mục Quản Lý File APK & Mirror Gofile</h3>
-            <p class="panel-desc">Kho mirror Gofile và file cài đặt nội bộ dành cho quản trị viên — người dùng ngoài trang chủ đi qua cổng Follow TikTok để mở khóa tải về.</p>
-            <div class="table-wrap">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('orders', this)">📦 Đơn Hàng &amp; Quản Lý Key</button>
+            <button class="tab-btn" onclick="switchTab('manual', this)">🔑 Cấp Key PRO Thủ Công</button>
+            <button class="tab-btn" onclick="switchTab('events', this)">🎉 Key Event PRO Từng App (Ngày/Tuần)</button>
+            <button class="tab-btn" onclick="switchTab('config', this)">🚀 Export Config.json &amp; Force Update</button>
+        </div>
+
+        <!-- TAB 1: ORDERS & ISSUED KEYS -->
+        <div id="tab-orders" class="panel active">
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
+                <input id="searchBox" placeholder="🔍 Lọc theo App, HWID, SĐT, Mã Đơn hoặc Key..." oninput="renderTables()" style="flex:1;min-width:240px;padding:10px 12px;border-radius:10px;background:#020617;border:1px solid rgba(255,255,255,0.14);color:#fff;font-size:13px;" />
+                <select id="filterApp" onchange="renderTables()" style="padding:10px 12px;border-radius:10px;background:#020617;border:1px solid rgba(255,255,255,0.14);color:#fff;font-size:13px;">
+                    <option value="">Tất cả 4 App</option>
+                    <option value="flowoptimize">FlowOptimize</option>
+                    <option value="flows">FlowS</option>
+                    <option value="flowultra">FlowUltra</option>
+                    <option value="flowextra">FlowExtra</option>
+                </select>
+            </div>
+
+            <h3 style="font-size:14px;color:#fbbf24;margin-bottom:8px;">📋 Danh Sách Đơn Hàng VietQR</h3>
+            <div style="overflow-x:auto;margin-bottom:22px;">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Ứng Dụng</th>
-                            <th>Phiên Bản</th>
-                            <th>File Trực Tiếp (GitHub Pages)</th>
-                            <th>Link Mirror Gofile</th>
-                            <th>Thao Tác</th>
-                        </tr>
+                        <tr><th>App</th><th>Mã Đơn / CK</th><th>Khách</th><th>HWID</th><th>Gói</th><th>Trạng Thái</th><th>Key / Hành Động</th></tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td><b>FlowOptimize</b></td>
-                            <td>v1.6.0 (code 7)</td>
-                            <td><code>FlowOptimize.apk</code></td>
-                            <td><code>https://gofile.io/d/Vr3bEORd</code></td>
-                            <td>
-                                <a href="FlowOptimize.apk" download class="btn-copy-small">Tải APK</a>
-                                <button type="button" class="btn-copy-small" onclick="copyText('https://gofile.io/d/Vr3bEORd')">Copy Gofile</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>FlowS</b></td>
-                            <td>v1.2.0 (code 3)</td>
-                            <td><code>FlowS.apk</code></td>
-                            <td><code>https://gofile.io/d/kzDVlE2G</code></td>
-                            <td>
-                                <a href="FlowS.apk" download class="btn-copy-small">Tải APK</a>
-                                <button type="button" class="btn-copy-small" onclick="copyText('https://gofile.io/d/kzDVlE2G')">Copy Gofile</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>FlowUltra</b></td>
-                            <td>v1.1.0 (code 3)</td>
-                            <td><code>FlowUltra.apk</code></td>
-                            <td><code>https://gofile.io/d/p8GZrZNY</code></td>
-                            <td>
-                                <a href="FlowUltra.apk" download class="btn-copy-small">Tải APK</a>
-                                <button type="button" class="btn-copy-small" onclick="copyText('https://gofile.io/d/p8GZrZNY')">Copy Gofile</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>FlowExtra 1412</b></td>
-                            <td>v3.5 (code 8)</td>
-                            <td><code>FlowExtra.apk</code></td>
-                            <td><code>https://zslowcuong.github.io/bio/FlowExtra.apk</code></td>
-                            <td>
-                                <a href="FlowExtra.apk" download class="btn-copy-small">Tải APK</a>
-                                <button type="button" class="btn-copy-small" onclick="copyText('https://zslowcuong.github.io/bio/FlowExtra.apk')">Copy URL</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>BrotX V8</b></td>
-                            <td>v8.0</td>
-                            <td><code>BrotX-v8.apk</code></td>
-                            <td><code>https://gofile.io/d/RaSXG0aV</code></td>
-                            <td>
-                                <a href="BrotX-v8.apk" download class="btn-copy-small">Tải APK</a>
-                                <button type="button" class="btn-copy-small" onclick="copyText('https://gofile.io/d/RaSXG0aV')">Copy Gofile</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Shizuku-Next</b></td>
-                            <td>Watchdog 24/7</td>
-                            <td><code>Shizuku-Next.apk</code></td>
-                            <td><code>https://gofile.io/d/AdqIc0Gp</code></td>
-                            <td>
-                                <a href="Shizuku-Next.apk" download class="btn-copy-small">Tải APK</a>
-                                <button type="button" class="btn-copy-small" onclick="copyText('https://gofile.io/d/AdqIc0Gp')">Copy Gofile</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Shizuku Official</b></td>
-                            <td>UID 2000</td>
-                            <td><code>Shizuku.apk</code></td>
-                            <td><code>https://gofile.io/d/DkhZ4xaM</code></td>
-                            <td>
-                                <a href="Shizuku.apk" download class="btn-copy-small">Tải APK</a>
-                                <button type="button" class="btn-copy-small" onclick="copyText('https://gofile.io/d/DkhZ4xaM')">Copy Gofile</button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tbody id="ordersBody"></tbody>
+                </table>
+            </div>
+
+            <h3 style="font-size:14px;color:#38bdf8;margin-bottom:8px;">🔐 Danh Sách Key Thiết Bị Đã Cấp &amp; Thu Hồi</h3>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr><th>App</th><th>HWID</th><th>Gói</th><th>Mã Key</th><th>Trạng Thái</th><th>Quản Lý</th></tr>
+                    </thead>
+                    <tbody id="keysBody"></tbody>
                 </table>
             </div>
         </div>
 
-        <footer class="site-footer">
-            <b>© Bản quyền thuộc về Flowly Engine</b> • Hệ sinh thái tối ưu phần cứng Android Miễn Phí 100%
-        </footer>
+        <!-- TAB 2: MANUAL KEY -->
+        <div id="tab-manual" class="panel">
+            <h3 style="font-size:15px;margin-bottom:12px;">🔑 Cấp Nhanh Key PRO Khóa Theo App &amp; HWID</h3>
+            <div class="grid-2">
+                <div class="field">
+                    <label>Ứng dụng</label>
+                    <select id="mApp">
+                        <option value="flowoptimize">FlowOptimize (FLOWOP-PRO-...)</option>
+                        <option value="flows">FlowS (FLOWS-PRO-...)</option>
+                        <option value="flowultra">FlowUltra (FLOWULTRA-PRO-...)</option>
+                        <option value="flowextra">FlowExtra (FLOWEXTRA-PRO-...)</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Gói thời hạn</label>
+                    <select id="mPlan">
+                        <option value="7D">Gói Tuần (7 Ngày — 15K)</option>
+                        <option value="30D">Gói Tháng (30 Ngày — 39K)</option>
+                        <option value="LIFE">Gói Vĩnh Viễn (Trọn Đời — 99K)</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Mã Thiết Bị (HWID khách gửi)</label>
+                    <input id="mHwid" placeholder="VD: OPPO_A1B2C3D4" />
+                </div>
+                <div class="field">
+                    <label>SĐT / Ghi chú khách hàng</label>
+                    <input id="mPhone" placeholder="VD: Zalo 0912..." />
+                </div>
+            </div>
+            <button class="btn green" onclick="createManualKey()">⚡ Tạo &amp; Lưu Key PRO Ngay</button>
+            <div id="mResult" style="margin-top:14px;display:none;padding:14px;border-radius:12px;background:rgba(16,185,129,0.14);border:1px solid #10b981;">
+                <div style="font-size:12px;color:#a7f3d0;font-weight:800;">✅ Key Đã Cấp:</div>
+                <div id="mKeyVal" class="mono" style="font-size:15px;margin:6px 0;word-break:break-all;"></div>
+                <button class="btn" onclick="copyText(document.getElementById('mKeyVal').textContent)">📋 Sao Chép Key</button>
+            </div>
+        </div>
+
+        <!-- TAB 3: PER-APP EVENT PRO KEYS -->
+        <div id="tab-events" class="panel">
+            <p style="font-size:12.5px;color:#cbd5e1;margin-bottom:14px;line-height:1.55;">
+                Mỗi ứng dụng có <b>Mã Sự Kiện PRO riêng hoàn toàn</b> (tránh xung đột giữa FlowOp / FlowS / FlowUltra / FlowExtra). Bạn có thể tạo theo <b>Ngày</b> hoặc <b>Tuần</b>, bật/tắt bất cứ lúc nào và lưu trực tiếp lên API hoặc xuất file <code>config.json</code>.
+            </p>
+            <div class="grid-2" id="eventCardsGrid"></div>
+        </div>
+
+        <!-- TAB 4: CONFIG.JSON EXPORT / GITHUB PUSH -->
+        <div id="tab-config" class="panel">
+            <h3 style="font-size:15px;margin-bottom:10px;">🚀 Đồng Bộ &amp; Xuất File config.json (Event + Revoked Keys + Update)</h3>
+            <p style="font-size:12.5px;color:#94a3b8;margin-bottom:12px;">
+                Nếu chưa gắn Upstash Redis trên Vercel, bạn có thể bấm xuất file <code>config.json</code> bên dưới và commit lên GitHub (hoặc điền GitHub Personal Access Token 1 lần vào trình duyệt để 1-click đẩy thẳng lên <code>zslowcuong/bio</code>).
+            </p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+                <button class="btn gold" onclick="downloadMergedConfig()">⬇️ Tải config.json Mới</button>
+                <button class="btn" onclick="copyMergedConfig()">📋 Copy JSON</button>
+            </div>
+            <textarea id="configPreview" rows="16" style="width:100%;padding:12px;border-radius:12px;background:#020617;color:#7dd3fc;font-family:monospace;font-size:12px;border:1px solid rgba(255,255,255,0.12);"></textarea>
+        </div>
     </div>
 
     <script>
-        const ADMIN_HASH = "246942076e3359c83467555088158cca0cff87e60f95b6cd85a6aacabf0b5ac0";
+        const API_BASE = 'https://bio-seven-nu.vercel.app';
+        const ADMIN_HASH = '246942076e3359c83467555088158cca0cff87e60f95b6cd85a6aacabf0b5ac0';
+        const APPS_META = [
+            { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP' },
+            { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS' },
+            { id: 'flowultra',    name: 'FlowUltra',    prefix: 'FLOWULTRA' },
+            { id: 'flowextra',    name: 'FlowExtra',    prefix: 'FLOWEXTRA' }
+        ];
 
-        async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        let adminPinHash = sessionStorage.getItem('flow_admin_hash') || '';
+        let dashData = { orders: [], issuedKeys: [], revokedKeys: [], eventKeys: {} };
+        let baseConfig = {};
+
+        async function sha256Hex(str) {
+            const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        async function checkAdminLogin() {
-            const val = document.getElementById('adminPinInput').value.trim();
-            if (!val) return;
-            const hashed = await sha256(val);
-            if (hashed === ADMIN_HASH) {
-                document.getElementById('loginGate').style.display = 'none';
-                loadCurrentConfigJson();
-            } else {
-                alert("Mật khẩu không chính xác! Quyền truy cập bị từ chối.");
-                document.getElementById('adminPinInput').value = '';
+        async function doLogin() {
+            const raw = document.getElementById('pinInput').value || '';
+            const h = await sha256Hex(raw);
+            if (h !== ADMIN_HASH) {
+                alert('❌ Sai mật khẩu Admin!');
+                return;
             }
+            adminPinHash = h;
+            sessionStorage.setItem('flow_admin_hash', h);
+            document.getElementById('loginView').style.display = 'none';
+            document.getElementById('dashView').style.display = 'block';
+            await refreshDashboard();
         }
 
-        function buildGatewayUrl(token, destUrl) {
-            const host = ['li', 'nk', '4m', '.co'].join('');
-            return 'https://' + host + '/st?api=' + encodeURIComponent(token) + '&url=' + encodeURIComponent(destUrl);
+        function switchTab(name, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.getElementById('tab-' + name).classList.add('active');
+            if (name === 'config') renderConfigPreview();
         }
 
-        function buildConfigObject() {
-            const foCode = parseInt(document.getElementById('foCode').value, 10) || 7;
-            const fsCode = parseInt(document.getElementById('fsCode').value, 10) || 3;
-            const fuCode = parseInt(document.getElementById('fuCode').value, 10) || 3;
-            const feCode = parseInt(document.getElementById('feCode').value, 10) || 8;
-            const foVer = document.getElementById('foVer').value.trim() || 'v1.6.0';
-            const fsVer = document.getElementById('fsVer').value.trim() || 'v1.2.0';
-            const fuVer = document.getElementById('fuVer').value.trim() || 'v1.1.0';
-            const feVer = document.getElementById('feVer').value.trim() || 'v3.5';
-            const apiToken = document.getElementById('cfgApiToken').value.trim() || "6ae77b1c1473a714b32b2a3a";
-            const fsDest = document.getElementById('fsGofile').value.trim() || "https://gofile.io/d/kzDVlE2G";
-            const foDest = document.getElementById('foGofile').value.trim() || "https://gofile.io/d/Vr3bEORd";
-            const fuDest = document.getElementById('fuGofile').value.trim() || "https://gofile.io/d/p8GZrZNY";
-            const feDest = document.getElementById('feGofile').value.trim() || "https://zslowcuong.github.io/bio/FlowExtra.apk";
-
-            document.getElementById('statFlowOptVer').textContent = foVer;
-            document.getElementById('statFlowOptCode').textContent = foCode;
-            document.getElementById('statFlowSVer').textContent = fsVer;
-            document.getElementById('statFlowSCode').textContent = fsCode;
-            document.getElementById('statFlowUltraVer').textContent = fuVer;
-            document.getElementById('statFlowUltraCode').textContent = fuCode;
-            document.getElementById('statFlowExtraVer').textContent = feVer;
-            document.getElementById('statFlowExtraCode').textContent = feCode;
-
-            return {
-                project: "Flow Ecosystem (FlowS, FlowOptimize, FlowUltra & FlowExtra)",
-                copyright: document.getElementById('cfgCopyright').value.trim() || "© Bản quyền thuộc về Flowly Engine",
-                free_forever: true,
-                api_token: apiToken,
-                tiktok: document.getElementById('cfgTiktok').value.trim() || "https://www.tiktok.com/@xxd5974",
-                telegram: document.getElementById('cfgTelegram').value.trim() || "https://t.me/+dtVBEzwuN2Q4NmI9",
-                wait_seconds: Math.max(15, parseInt(document.getElementById('cfgWaitSeconds').value, 10) || 15),
-                flows: {
-                    name: "FlowS Gamer Tuner Edition",
-                    version: fsVer,
-                    version_code: fsCode,
-                    min_version_code: fsCode,
-                    force_update: false,
-                    update_url: "https://zslowcuong.github.io/bio/",
-                    download_url: "https://zslowcuong.github.io/bio/?dl=flows#download",
-                    package: "com.flows.gaming",
-                    changelog: document.getElementById('fsChangelog').value.trim(),
-                    destination_apk: fsDest,
-                    link4m: buildGatewayUrl(apiToken, fsDest),
-                    direct_apk: document.getElementById('fsDirect').value.trim() || "FlowS.apk"
-                },
-                flowoptimize: {
-                    name: "FlowOptimize Anime Edition",
-                    version: foVer,
-                    version_code: foCode,
-                    min_version_code: foCode,
-                    force_update: false,
-                    update_url: "https://zslowcuong.github.io/bio/",
-                    download_url: "https://zslowcuong.github.io/bio/?dl=flowoptimize#download",
-                    package: "com.example.gameoptimizer",
-                    changelog: document.getElementById('foChangelog').value.trim(),
-                    destination_apk: foDest,
-                    link4m: buildGatewayUrl(apiToken, foDest),
-                    direct_apk: document.getElementById('foDirect').value.trim() || "FlowOptimize.apk"
-                },
-                flowultra: {
-                    name: "FlowUltra eSports Hardware Suite",
-                    version: fuVer,
-                    version_code: fuCode,
-                    min_version_code: fuCode,
-                    force_update: false,
-                    update_url: "https://zslowcuong.github.io/bio/",
-                    download_url: "https://zslowcuong.github.io/bio/?dl=flowultra#download",
-                    package: "com.flows.flowultra",
-                    changelog: document.getElementById('fuChangelog').value.trim(),
-                    destination_apk: fuDest,
-                    link4m: buildGatewayUrl(apiToken, fuDest),
-                    direct_apk: document.getElementById('fuDirect').value.trim() || "FlowUltra.apk"
-                },
-                flowextra: {
-                    name: "FlowExtra Kaito Kid 1412 Edition",
-                    version: feVer,
-                    version_code: feCode,
-                    min_version_code: feCode,
-                    force_update: false,
-                    update_url: "https://zslowcuong.github.io/bio/",
-                    download_url: "https://zslowcuong.github.io/bio/?dl=flowextra#download",
-                    package: "com.flowextra.optimizer",
-                    changelog: document.getElementById('feChangelog').value.trim(),
-                    destination_apk: feDest,
-                    link4m: buildGatewayUrl(apiToken, feDest),
-                    direct_apk: document.getElementById('feDirect').value.trim() || "FlowExtra.apk"
-                },
-                tools_store: {
-                    brotx: {
-                        name: "BrotX Optimizer v8 🔥",
-                        tag: "HOT & NEW",
-                        desc: "Siêu công cụ dọn dẹp UAD & tối ưu hóa gaming qua ADB",
-                        file: "BrotX-v8.apk",
-                        gofile: "https://gofile.io/d/RaSXG0aV",
-                        destination_apk: "https://gofile.io/d/RaSXG0aV",
-                        link4m: buildGatewayUrl(apiToken, "https://gofile.io/d/RaSXG0aV")
-                    },
-                    shizuku: {
-                        name: "Shizuku Official 🐱",
-                        tag: "BẮT BUỘC",
-                        desc: "Chạy ứng dụng tối ưu không cần Root qua ADB Shell UID 2000",
-                        file: "Shizuku.apk",
-                        gofile: "https://gofile.io/d/DkhZ4xaM",
-                        destination_apk: "https://gofile.io/d/DkhZ4xaM",
-                        link4m: buildGatewayUrl(apiToken, "https://gofile.io/d/DkhZ4xaM")
-                    },
-                    shizukunext: {
-                        name: "Shizuku-Next ⚡",
-                        tag: "WATCHDOG 24/7",
-                        desc: "Watchdog tự động hồi sinh kết nối & hỗ trợ ADB Modules",
-                        file: "Shizuku-Next.apk",
-                        gofile: "https://gofile.io/d/AdqIc0Gp",
-                        destination_apk: "https://gofile.io/d/AdqIc0Gp",
-                        link4m: buildGatewayUrl(apiToken, "https://gofile.io/d/AdqIc0Gp")
-                    },
-                    toolpc: {
-                        name: "Tool Kích Hoạt Shizuku (PC) 💻",
-                        tag: "1-CLICK",
-                        desc: "Tự động cài đặt driver và kích hoạt Shizuku qua cáp USB",
-                        file: "TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat",
-                        gofile: "https://raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat",
-                        destination_apk: "https://raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat",
-                        link4m: buildGatewayUrl(apiToken, "https://raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat")
-                    }
-                }
-            };
-        }
-
-        function renderJsonPreview() {
-            const obj = buildConfigObject();
-            document.getElementById('configJsonPreview').textContent = JSON.stringify(obj, null, 2);
-        }
-
-        async function loadCurrentConfigJson() {
+        async function refreshDashboard() {
             try {
-                const res = await fetch('config.json?v=' + Date.now());
-                if (res.ok) {
-                    const d = await res.json();
-                    if (d.copyright) document.getElementById('cfgCopyright').value = d.copyright;
-                    if (d.api_token) document.getElementById('cfgApiToken').value = d.api_token;
-                    if (d.tiktok) document.getElementById('cfgTiktok').value = d.tiktok;
-                    if (d.telegram) document.getElementById('cfgTelegram').value = d.telegram;
-                    if (typeof d.wait_seconds === 'number') document.getElementById('cfgWaitSeconds').value = d.wait_seconds;
-                    if (d.flowoptimize) {
-                        document.getElementById('foVer').value = d.flowoptimize.version || 'v1.6.0';
-                        document.getElementById('foCode').value = d.flowoptimize.version_code || 7;
-                        document.getElementById('foGofile').value = d.flowoptimize.destination_apk || 'https://gofile.io/d/Vr3bEORd';
-                        document.getElementById('foDirect').value = d.flowoptimize.direct_apk || 'FlowOptimize.apk';
-                        if (d.flowoptimize.changelog) document.getElementById('foChangelog').value = d.flowoptimize.changelog;
-                    }
-                    if (d.flows) {
-                        document.getElementById('fsVer').value = d.flows.version || 'v1.2.0';
-                        document.getElementById('fsCode').value = d.flows.version_code || 3;
-                        document.getElementById('fsGofile').value = d.flows.destination_apk || 'https://gofile.io/d/kzDVlE2G';
-                        document.getElementById('fsDirect').value = d.flows.direct_apk || 'FlowS.apk';
-                        if (d.flows.changelog) document.getElementById('fsChangelog').value = d.flows.changelog;
-                    }
-                    if (d.flowultra) {
-                        document.getElementById('fuVer').value = d.flowultra.version || 'v1.1.0';
-                        document.getElementById('fuCode').value = d.flowultra.version_code || 3;
-                        document.getElementById('fuGofile').value = d.flowultra.destination_apk || 'https://gofile.io/d/p8GZrZNY';
-                        document.getElementById('fuDirect').value = d.flowultra.direct_apk || 'FlowUltra.apk';
-                        if (d.flowultra.changelog) document.getElementById('fuChangelog').value = d.flowultra.changelog;
-                    }
-                    if (d.flowextra) {
-                        document.getElementById('feVer').value = d.flowextra.version || 'v3.5';
-                        document.getElementById('feCode').value = d.flowextra.version_code || 8;
-                        document.getElementById('feGofile').value = d.flowextra.destination_apk || 'https://zslowcuong.github.io/bio/FlowExtra.apk';
-                        document.getElementById('feDirect').value = d.flowextra.direct_apk || 'FlowExtra.apk';
-                        if (d.flowextra.changelog) document.getElementById('feChangelog').value = d.flowextra.changelog;
-                    }
-                }
+                const cfgRes = await fetch('config.json?v=' + Date.now());
+                if (cfgRes.ok) baseConfig = await cfgRes.json();
+            } catch (_) {}
+
+            try {
+                const res = await fetch(`${API_BASE}/api/admin?action=dashboard`, {
+                    headers: { 'X-Admin-Pin': adminPinHash },
+                    cache: 'no-store'
+                });
+                const data = await res.json();
+                if (!data.success) throw new Error(data.error || 'Lỗi tải Admin');
+                dashData = data;
+                document.getElementById('stDbMode').textContent = data.kvConfigured ? '🟢 Upstash Redis' : '🟡 Memory Fallback';
+                document.getElementById('stSepay').textContent = data.sepayConfigured ? '🟢 Đã Kết Nối' : '🟡 Chưa Gắn API';
+                document.getElementById('stOrders').textContent = (data.orders || []).length;
+                document.getElementById('stKeys').textContent = `${(data.issuedKeys || []).length} / ${(data.revokedKeys || []).length}`;
+                renderTables();
+                renderEventCards();
             } catch (e) {
-                console.log('Using default OTA fields');
+                alert('❌ Lỗi kết nối API Admin: ' + e.message);
             }
-            renderJsonPreview();
         }
 
-        function downloadUpdatedConfigJson() {
-            const obj = buildConfigObject();
-            const str = JSON.stringify(obj, null, 2);
+        function renderTables() {
+            const q = (document.getElementById('searchBox').value || '').trim().toUpperCase();
+            const appF = document.getElementById('filterApp').value;
+            const revokedSet = new Set((dashData.revokedKeys || []).map(k => k.toUpperCase()));
+
+            const orders = (dashData.orders || []).filter(o => {
+                if (appF && o.appId !== appF) return false;
+                if (!q) return true;
+                return JSON.stringify(o).toUpperCase().includes(q);
+            });
+
+            document.getElementById('ordersBody').innerHTML = orders.length ? orders.map(o => `
+                <tr>
+                    <td><b>${o.appName || o.appId}</b></td>
+                    <td class="mono">${o.orderCode}<br><span style="color:#fbbf24;font-size:11px;">CK: ${o.memo || '-'}</span></td>
+                    <td>${o.phone || '-'}</td>
+                    <td class="mono">${o.hwid}</td>
+                    <td>${o.planName || o.planCode}<br><span style="color:#38bdf8;">${Number(o.price || 0).toLocaleString('vi-VN')}đ</span></td>
+                    <td><span class="pill ${o.status==='COMPLETED'?'ok':'wait'}">${o.status}</span></td>
+                    <td>
+                        ${o.key
+                            ? `<div class="mono" style="font-size:11px;">${o.key}</div><button class="btn ghost" style="padding:4px 8px;font-size:11px;margin-top:4px;" onclick="copyText('${o.key}')">Copy</button>`
+                            : `<button class="btn green" style="padding:6px 10px;font-size:11.5px;" onclick="approveOrder('${o.orderCode}')">✅ Xác Nhận Tiền &amp; Cấp Key</button>`}
+                    </td>
+                </tr>
+            `).join('') : '<tr><td colspan="7" style="color:#64748b;text-align:center;">Chưa có đơn hàng nào</td></tr>';
+
+            const keys = (dashData.issuedKeys || []).filter(k => {
+                if (appF && k.appId !== appF) return false;
+                if (!q) return true;
+                return JSON.stringify(k).toUpperCase().includes(q);
+            });
+
+            document.getElementById('keysBody').innerHTML = keys.length ? keys.map(k => {
+                const isRev = Boolean(k.revoked || revokedSet.has(String(k.key || '').toUpperCase()));
+                return `
+                    <tr>
+                        <td><b>${k.appId}</b></td>
+                        <td class="mono">${k.hwid}</td>
+                        <td>${k.planName || k.planCode}</td>
+                        <td class="mono" style="font-size:11.5px;">${k.key}</td>
+                        <td><span class="pill ${isRev?'revoked':'ok'}">${isRev?'ĐÃ THU HỒI':'ĐANG HOẠT ĐỘNG'}</span></td>
+                        <td>
+                            <button class="btn ${isRev?'green':'red'}" style="padding:6px 10px;font-size:11px;" onclick="toggleRevoke('${k.key}', ${!isRev})">
+                                ${isRev ? '🔓 Mở Lại Key' : '🚫 Thu Hồi Key'}
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('') : '<tr><td colspan="6" style="color:#64748b;text-align:center;">Chưa có Key nào được cấp</td></tr>';
+        }
+
+        async function approveOrder(orderCode) {
+            if (!confirm(`Xác nhận đã nhận tiền Techcombank cho đơn ${orderCode} và cấp Key PRO ngay?`)) return;
+            const res = await fetch(`${API_BASE}/api/admin?action=approve_order`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPinHash },
+                body: JSON.stringify({ orderCode })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert(`✅ Đã cấp Key PRO:\n${data.order.key}`);
+                await refreshDashboard();
+            } else {
+                alert('❌ Lỗi: ' + data.error);
+            }
+        }
+
+        async function toggleRevoke(key, shouldRevoke) {
+            const action = shouldRevoke ? 'revoke_key' : 'unrevoke_key';
+            const res = await fetch(`${API_BASE}/api/admin?action=${action}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPinHash },
+                body: JSON.stringify({ key })
+            });
+            const data = await res.json();
+            if (data.success) await refreshDashboard();
+            else alert('❌ Lỗi: ' + data.error);
+        }
+
+        async function createManualKey() {
+            const appId = document.getElementById('mApp').value;
+            const planCode = document.getElementById('mPlan').value;
+            const hwid = document.getElementById('mHwid').value.trim().toUpperCase();
+            const phone = document.getElementById('mPhone').value.trim();
+            if (!hwid) return alert('⚠️ Nhập HWID thiết bị!');
+            const res = await fetch(`${API_BASE}/api/admin?action=create_manual_key`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPinHash },
+                body: JSON.stringify({ appId, planCode, hwid, phone })
+            });
+            const data = await res.json();
+            if (data.success) {
+                document.getElementById('mResult').style.display = 'block';
+                document.getElementById('mKeyVal').textContent = data.key;
+                await refreshDashboard();
+            } else {
+                alert('❌ Lỗi: ' + data.error);
+            }
+        }
+
+        function renderEventCards() {
+            const evMap = dashData.eventKeys || baseConfig.event_keys || {};
+            document.getElementById('eventCardsGrid').innerHTML = APPS_META.map(a => {
+                const ev = evMap[a.id] || {};
+                const hrs = Number(ev.duration_hours || 24);
+                return `
+                    <div class="event-card">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                            <b style="font-size:15px;">🎉 Event ${a.name}</b>
+                            <span class="pill ${ev.active ? 'ok' : 'revoked'}">${ev.active ? 'ĐANG BẬT' : 'ĐANG TẮT'}</span>
+                        </div>
+                        <div class="field">
+                            <label>Mã Key Event (Riêng ${a.name})</label>
+                            <div style="display:flex;gap:6px;">
+                                <input id="evKey_${a.id}" value="${ev.key || (a.prefix + '-EVENT-24H')}" />
+                                <button class="btn ghost" onclick="genRandomEventKey('${a.id}', '${a.prefix}')">🎲</button>
+                            </div>
+                        </div>
+                        <div class="grid-2">
+                            <div class="field">
+                                <label>Thời hạn (Ngày / Tuần)</label>
+                                <select id="evDur_${a.id}">
+                                    <option value="24" ${hrs===24?'selected':''}>1 Ngày (24 Giờ)</option>
+                                    <option value="72" ${hrs===72?'selected':''}>3 Ngày (72 Giờ)</option>
+                                    <option value="168" ${hrs===168?'selected':''}>1 Tuần (7 Ngày)</option>
+                                    <option value="336" ${hrs===336?'selected':''}>2 Tuần (14 Ngày)</option>
+                                    <option value="720" ${hrs===720?'selected':''}>1 Tháng (30 Ngày)</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label>Trạng thái</label>
+                                <select id="evAct_${a.id}">
+                                    <option value="true" ${ev.active?'selected':''}>🟢 BẬT SỰ KIỆN</option>
+                                    <option value="false" ${!ev.active?'selected':''}>🔴 TẮT SỰ KIỆN</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Tiêu đề / Ghi chú gửi khách</label>
+                            <input id="evNotice_${a.id}" value="${ev.notice || ('Sự kiện PRO ' + a.name)}" />
+                        </div>
+                        <button class="btn green" style="width:100%;" onclick="saveAppEvent('${a.id}', '${a.name}')">💾 Lưu Key Event ${a.name}</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function genRandomEventKey(appId, prefix) {
+            const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
+            const dur = document.getElementById('evDur_' + appId).value;
+            const tag = dur >= 168 ? Math.round(dur / 168) + 'W' : Math.round(dur / 24) + 'D';
+            document.getElementById('evKey_' + appId).value = `${prefix}-EVT-${tag}-${rand}`;
+        }
+
+        async function saveAppEvent(appId, appName) {
+            const key = document.getElementById('evKey_' + appId).value.trim().toUpperCase();
+            const durationHours = Number(document.getElementById('evDur_' + appId).value || 24);
+            const active = document.getElementById('evAct_' + appId).value === 'true';
+            const notice = document.getElementById('evNotice_' + appId).value.trim();
+
+            const res = await fetch(`${API_BASE}/api/admin?action=save_event_key`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPinHash },
+                body: JSON.stringify({
+                    appId,
+                    active,
+                    key,
+                    duration_hours: durationHours,
+                    expires_at_utc: active ? Date.now() + durationHours * 3600 * 1000 : 0,
+                    title: `🎁 Sự Kiện PRO ${appName}`,
+                    notice
+                })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert(`✅ Đã lưu Event ${appName} (${active ? 'ĐANG BẬT' : 'ĐÃ TẮT'})!`);
+                await refreshDashboard();
+            } else {
+                alert('❌ Lỗi: ' + data.error);
+            }
+        }
+
+        function buildMergedConfigObject() {
+            const cfg = JSON.parse(JSON.stringify(baseConfig || {}));
+            const sanitizedEvents = {};
+            for (const a of APPS_META) {
+                const ev = (dashData.eventKeys && dashData.eventKeys[a.id]) || (cfg.event_keys && cfg.event_keys[a.id]) || { active: false };
+                sanitizedEvents[a.id] = {
+                    active: Boolean(ev.active),
+                    key_sha256: ev.key_sha256 || '',
+                    duration_hours: Number(ev.duration_hours || 24),
+                    expires_at_utc: Number(ev.expires_at_utc || 0),
+                    title: ev.title || `Sự Kiện PRO ${a.name}`,
+                    notice: ev.notice || ''
+                };
+            }
+            cfg.event_keys = sanitizedEvents;
+            cfg.revoked_keys = dashData.revokedKeys || [];
+            return cfg;
+        }
+
+        function renderConfigPreview() {
+            document.getElementById('configPreview').value = JSON.stringify(buildMergedConfigObject(), null, 2);
+        }
+
+        function downloadMergedConfig() {
+            const str = JSON.stringify(buildMergedConfigObject(), null, 2);
             const blob = new Blob([str], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = url;
+            a.href = URL.createObjectURL(blob);
             a.download = 'config.json';
             a.click();
-            URL.revokeObjectURL(url);
         }
 
-        function copyUpdatedConfigJson() {
-            const obj = buildConfigObject();
-            const str = JSON.stringify(obj, null, 2);
-            navigator.clipboard.writeText(str).then(() => {
-                alert('📋 Đã sao chép nội dung config.json vào bộ nhớ tạm!');
-            }).catch(() => {
-                alert(str);
-            });
+        function copyMergedConfig() {
+            const str = JSON.stringify(buildMergedConfigObject(), null, 2);
+            copyText(str);
         }
 
-        function copyText(str) {
-            navigator.clipboard.writeText(str).then(() => {
-                alert('✅ Đã sao chép: ' + str);
-            }).catch(() => {
-                alert(str);
-            });
+        function copyText(t) {
+            navigator.clipboard?.writeText(t).then(() => alert('📋 Đã sao chép!')).catch(() => alert(t));
         }
 
-        document.addEventListener('DOMContentLoaded', renderJsonPreview);
+        if (adminPinHash === ADMIN_HASH) {
+            document.getElementById('loginView').style.display = 'none';
+            document.getElementById('dashView').style.display = 'block';
+            refreshDashboard();
+        }
     </script>
 </body>
 </html>

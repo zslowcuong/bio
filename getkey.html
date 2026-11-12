@@ -3,38 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Miễn Phí 100% — Không Cần Key • Flowly Engine</title>
+    <title>Cổng Lấy Key VIP 30 Giờ • Flowly Engine</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #030712;
-            --card-bg: rgba(15, 23, 42, 0.88);
-            --card-border: rgba(16, 185, 129, 0.35);
+            --card-bg: rgba(15, 23, 42, 0.9);
+            --card-border: rgba(56, 189, 248, 0.28);
             --accent: #38bdf8;
             --green: #10b981;
+            --gold: #f59e0b;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
         body {
             background: var(--bg);
             background-image:
-                radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.16), transparent 60%),
-                radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.1), transparent 50%);
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.16), transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.08), transparent 50%);
             color: #f8fafc;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px 16px;
+            padding: 20px 14px;
         }
         .container {
             width: 100%;
-            max-width: 460px;
+            max-width: 470px;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 24px;
-            padding: 28px 22px;
+            padding: 26px 20px;
             backdrop-filter: blur(20px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(16, 185, 129, 0.25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(56, 189, 248, 0.25);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -43,115 +44,280 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; height: 3.5px;
-            background: linear-gradient(90deg, #10b981, #38bdf8, #ec4899);
+            background: linear-gradient(90deg, #38bdf8, #818cf8, #f59e0b);
         }
-        .logo-wrap {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 68px; height: 68px;
-            border-radius: 18px;
-            background: rgba(16, 185, 129, 0.12);
-            border: 1px solid rgba(16, 185, 129, 0.35);
-            margin-bottom: 14px;
+        .app-tabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 18px;
         }
-        .logo-wrap img { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; }
-        .badge {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.16);
-            border: 1px solid #10b981;
-            color: #34d399;
+        .app-tab {
+            padding: 8px 4px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(30, 41, 59, 0.7);
+            color: #94a3b8;
             font-size: 11px;
             font-weight: 800;
-            padding: 5px 12px;
-            border-radius: 99px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .app-tab.active {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.18);
+            color: #fff;
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.3);
+        }
+        .logo-wrap {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 64px; height: 64px; border-radius: 18px;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.35);
             margin-bottom: 12px;
+        }
+        .logo-wrap img { width: 46px; height: 46px; border-radius: 12px; object-fit: cover; }
+        .badge-prefix {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #7dd3fc;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 99px;
+            margin-bottom: 10px;
+        }
+        h1 { font-size: 20px; font-weight: 900; margin-bottom: 6px; }
+        .sub { font-size: 12.5px; color: #94a3b8; margin-bottom: 18px; line-height: 1.5; }
+        .hwid-card {
+            background: rgba(30, 41, 59, 0.72);
+            border: 1px dashed rgba(56, 189, 248, 0.45);
+            border-radius: 16px;
+            padding: 13px 14px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .hwid-label { font-size: 11px; font-weight: 800; text-transform: uppercase; color: #38bdf8; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+        .hwid-input {
+            width: 100%;
+            font-family: monospace;
+            font-size: 14px;
+            font-weight: 800;
+            color: #f8fafc;
+            background: rgba(15, 23, 42, 0.92);
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            outline: none;
             text-transform: uppercase;
         }
-        h1 { font-size: 21px; font-weight: 900; color: #fff; margin-bottom: 8px; line-height: 1.35; }
-        .sub { font-size: 13px; color: #cbd5e1; margin-bottom: 20px; line-height: 1.55; }
-        .notice-box {
-            background: rgba(30, 41, 59, 0.72);
-            border: 1px solid rgba(56, 189, 248, 0.28);
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 20px;
+        .hwid-input:focus { border-color: #38bdf8; }
+        .tier-note {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: 14px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
             text-align: left;
-            font-size: 12.5px;
-            color: #e2e8f0;
-            line-height: 1.6;
+            font-size: 12px;
+            color: #fde68a;
+            line-height: 1.55;
         }
-        .btn-primary {
-            width: 100%;
-            background: linear-gradient(135deg, #059669, #10b981);
-            color: #fff;
-            font-size: 14px;
-            font-weight: 900;
-            padding: 15px;
-            border-radius: 14px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
-            margin-bottom: 10px;
+        .steps-box {
+            background: rgba(15, 23, 42, 0.55);
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 18px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
-        .btn-secondary {
+        .step-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: 12.5px; color: #cbd5e1; line-height: 1.45; }
+        .step-item:last-child { margin-bottom: 0; }
+        .step-num {
+            min-width: 22px; height: 22px; border-radius: 50%;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #fff; font-size: 11px; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .btn-start {
             width: 100%;
-            background: rgba(56, 189, 248, 0.14);
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            color: #38bdf8;
-            font-size: 13px;
-            font-weight: 800;
-            padding: 13px;
-            border-radius: 14px;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #fff; font-size: 14px; font-weight: 900;
+            padding: 15px; border-radius: 14px; border: none; cursor: pointer;
+            box-shadow: 0 8px 28px rgba(2, 132, 199, 0.45);
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: all 0.2s ease;
+        }
+        .btn-start:active { transform: scale(0.98); }
+        .btn-shop {
+            margin-top: 10px;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(217, 119, 6, 0.16));
+            border: 1px solid rgba(245, 158, 11, 0.5);
+            color: #fbbf24;
+            font-size: 13px; font-weight: 800;
+            padding: 13px; border-radius: 14px;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
         }
         .footer {
-            margin-top: 18px;
-            padding-top: 14px;
+            margin-top: 18px; padding-top: 14px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 11.5px;
-            color: #94a3b8;
+            font-size: 11.5px; color: #94a3b8;
         }
+        .footer a { color: #38bdf8; text-decoration: none; font-weight: 700; }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="app-tabs" id="appTabs">
+            <button type="button" class="app-tab" data-app="flowoptimize" onclick="selectApp('flowoptimize')">🌸 FlowOp</button>
+            <button type="button" class="app-tab" data-app="flows" onclick="selectApp('flows')">⚡ FlowS</button>
+            <button type="button" class="app-tab" data-app="flowultra" onclick="selectApp('flowultra')">🚀 FlowUltra</button>
+            <button type="button" class="app-tab" data-app="flowextra" onclick="selectApp('flowextra')">🎩 FlowExtra</button>
+        </div>
+
         <div class="logo-wrap">
-            <img src="app_logo.png" alt="FlowOptimize Logo">
+            <img id="appLogo" src="app_logo.png" alt="Flow Logo">
         </div>
-        <div class="badge">✅ CHÍNH THỨC MIỄN PHÍ 100%</div>
-        <h1>FlowOptimize Đã Gỡ Bỏ Hoàn Toàn Yêu Cầu Lấy Key</h1>
-        <p class="sub">
-            Từ bản cập nhật <b>FlowOptimize v1.6.0</b> (cùng <b>FlowS v1.2.0</b>, <b>FlowUltra v1.1.0</b> và <b>FlowExtra v3.5</b>), toàn bộ ứng dụng đã mở khóa <b>Miễn Phí Vĩnh Viễn</b> bên trong mã nguồn, không cần nhập Key hay kích hoạt trả phí.
-        </p>
+        <div><span class="badge-prefix" id="appPrefixBadge">APP RIÊNG BIỆT • FLOWOP-VIP</span></div>
+        <h1 id="pageTitle">LẤY KEY VIP 30 GIỜ • FLOWOPTIMIZE</h1>
+        <p class="sub">Key VIP miễn phí sau khi vượt cổng bảo mật sẽ <b>khóa cứng 1-1</b> theo đúng ứng dụng &amp; thiết bị này trong <b>30 giờ</b> (có thể gia hạn tiếp).</p>
 
-        <div class="notice-box">
-            <b>⚠️ Nếu ứng dụng trên máy bạn vẫn hiện màn hình đòi Key:</b><br>
-            Bạn đang dùng phiên bản cũ trước đây. Chỉ cần tải và cài đặt đè bản <b>FlowOptimize v1.6.0</b> tại trang chủ bên dưới là sử dụng được ngay lập tức!
+        <div class="hwid-card">
+            <div class="hwid-label">
+                <span>📱 Mã Thiết Bị (HWID)</span>
+                <span id="hwidLockTag" style="font-size:10px;background:rgba(16,185,129,0.18);color:#34d399;padding:2px 8px;border-radius:6px;">KHÓA 1 MÁY</span>
+            </div>
+            <input id="hwidInput" class="hwid-input" placeholder="DÁN MÃ HWID TỪ TRONG APP VÀO ĐÂY..." oninput="updateGatewayLink()" />
+            <div style="font-size: 11px; color: #94a3b8; margin-top: 6px;">
+                *Mở app ➔ bấm <b>Sao chép HWID</b> hoặc bấm trực tiếp <b>Vượt Link Lấy Key VIP</b> từ trong app để tự điền chuẩn 100%.
+            </div>
         </div>
 
-        <a href="index.html?dl=flowoptimize#download" class="btn-primary">
-            <span>⬇️</span>
-            <span>TẢI NGAY FLOWOPTIMIZE v1.6.0 (MIỄN PHÍ)</span>
-        </a>
+        <div class="tier-note">
+            <b>⚠️ Lưu ý phân quyền VIP vs PRO:</b><br>
+            • <b>Key VIP (30 Giờ Miễn Phí):</b> Mở khóa tối ưu hệ thống, tiết kiệm pin, dọn RAM, fix hiển thị &amp; khôi phục gốc.<br>
+            • <b>Key PRO (Dùng thử 3 ngày / Shop / Event):</b> Mở khóa <b>100% tính năng Game chuyên biệt</b> (GameSpace, 120/165Hz, Touch Boost, GFX/Resolution Game, Graphics API Driver).
+        </div>
 
-        <a href="index.html#download" class="btn-secondary" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.16); color: #e2e8f0;">
-            <span>🏠</span>
-            <span>Về Trang Chủ Bio (Tải Bộ 4 App Miễn Phí)</span>
+        <div class="steps-box">
+            <div class="step-item">
+                <div class="step-num">1</div>
+                <div>Kiểm tra đúng ứng dụng phía trên và Mã <b>HWID</b> thiết bị của bạn.</div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">2</div>
+                <div>Bấm nút xác nhận bên dưới để mở kênh <b>TikTok @xxd5974</b> (xác thực chạy ngầm 15 giây).</div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">3</div>
+                <div>Chuyển sang trang nhận Key VIP <b>30 Giờ</b> chỉ dùng được cho đúng máy này!</div>
+            </div>
+        </div>
+
+        <button id="btnBypassLink" type="button" class="btn-start" onclick="handleTiktokKeyVerification()">
+            <span>🎵 XÁC MINH TIKTOK ĐỂ LẤY KEY VIP 30H</span>
+        </button>
+
+        <a id="shopCtaLink" href="shop.html" class="btn-shop">
+            <span>💎 Mua Key PRO Tuần / Tháng / Vĩnh Viễn (VietQR Tự Động) ➔</span>
         </a>
 
         <div class="footer">
-            <b>© Bản quyền thuộc về Flowly Engine</b><br>
-            Hỗ trợ: <a href="https://t.me/+dtVBEzwuN2Q4NmI9" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: none; font-weight: 700;">Nhóm Telegram FlowOp</a>
+            <b>© Bản quyền thuộc về Flowly Engine</b> •
+            <a href="index.html">Trang Chủ</a> •
+            <a href="https://t.me/+dtVBEzwuN2Q4NmI9" target="_blank" rel="noopener noreferrer">Nhóm Telegram</a>
         </div>
     </div>
+
+    <script>
+        if (window.location.hostname && window.location.hostname.includes('vercel.app')) {
+            window.location.replace('https://zslowcuong.github.io/bio/getkey.html' + window.location.search);
+        }
+
+        const APPS = {
+            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP-VIP', logo: 'app_logo.png' },
+            flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS-VIP',  logo: 'flows_logo.png' },
+            flowultra:    { id: 'flowultra',    name: 'FlowUltra',    prefix: 'FLOWULTRA-VIP', logo: 'flowultra_logo.png' },
+            flowextra:    { id: 'flowextra',    name: 'FlowExtra',    prefix: 'FLOWEXTRA-VIP', logo: 'flowextra_logo.png' }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        let currentAppId = (params.get('app') || params.get('appId') || 'flowoptimize').trim().toLowerCase();
+        if (currentAppId === 'flowop') currentAppId = 'flowoptimize';
+        if (!APPS[currentAppId]) currentAppId = 'flowoptimize';
+
+        const rawHwidParam = (params.get('hwid') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+        if (rawHwidParam) {
+            document.getElementById('hwidInput').value = rawHwidParam;
+        }
+
+        let isTiktokVerified = false;
+        let gatewayTimer = null;
+
+        function selectApp(appId) {
+            currentAppId = APPS[appId] ? appId : 'flowoptimize';
+            const meta = APPS[currentAppId];
+            document.querySelectorAll('.app-tab').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.app === currentAppId);
+            });
+            document.getElementById('appLogo').src = meta.logo;
+            document.getElementById('appPrefixBadge').textContent = `KHÓA THEO APP • ${meta.prefix}`;
+            document.getElementById('pageTitle').textContent = `LẤY KEY VIP 30 GIỜ • ${meta.name.toUpperCase()}`;
+            updateGatewayLink();
+        }
+
+        function getCleanHwid() {
+            return (document.getElementById('hwidInput').value || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+        }
+
+        function buildGatewayUrl(hwid) {
+            const token = '6ae77b1c1473a714b32b2a3a';
+            const dest = `https://zslowcuong.github.io/bio/showkey.html?app=${encodeURIComponent(currentAppId)}&hwid=${encodeURIComponent(hwid)}`;
+            const host = ['li', 'nk', '4m', '.co'].join('');
+            return `https://${host}/st?api=${token}&url=${encodeURIComponent(dest)}`;
+        }
+
+        function updateGatewayLink() {
+            const hwid = getCleanHwid();
+            document.getElementById('shopCtaLink').href = `shop.html?app=${encodeURIComponent(currentAppId)}${hwid ? '&hwid=' + encodeURIComponent(hwid) : ''}`;
+        }
+
+        function handleTiktokKeyVerification() {
+            const hwid = getCleanHwid();
+            if (!hwid || hwid.length < 5) {
+                alert('⚠️ Vui lòng mở app và Sao chép Mã Thiết Bị (HWID) dán vào ô trên trước khi lấy Key VIP!');
+                document.getElementById('hwidInput').focus();
+                return;
+            }
+
+            const btn = document.getElementById('btnBypassLink');
+            if (isTiktokVerified) {
+                btn.innerHTML = '<span>⏳ ĐANG CHUYỂN ĐẾN CỔNG NHẬN KEY VIP...</span>';
+                window.location.href = buildGatewayUrl(hwid);
+                return;
+            }
+
+            window.open('https://www.tiktok.com/@xxd5974', '_blank', 'noopener,noreferrer');
+            btn.disabled = true;
+            btn.style.opacity = '0.78';
+            btn.style.pointerEvents = 'none';
+            btn.innerHTML = '<span>⏳ ĐANG XÁC MINH TIKTOK... (VUI LÒNG ĐỢI)</span>';
+
+            if (gatewayTimer) clearTimeout(gatewayTimer);
+            gatewayTimer = setTimeout(() => {
+                isTiktokVerified = true;
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+                btn.style.background = 'linear-gradient(135deg, #059669, #10b981)';
+                btn.innerHTML = '<span>🚀 MỞ CỔNG NHẬN KEY VIP 30H NGAY ➔</span>';
+            }, 15000);
+        }
+
+        selectApp(currentAppId);
+    </script>
 </body>
 </html>
