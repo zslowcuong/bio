@@ -5,12 +5,14 @@ import {
   dbSetJson,
   getBackendStatus,
   getEventKeysMap,
+  getGlobalResetsMap,
   getRevokedKeysList,
   handlePreflight,
   loadStaticConfig,
   normalizeAppId,
   normalizeHwid,
   parseBody,
+  sanitizeKeyInput,
   sha256Hex,
   verifySignedKeyFormat,
 } from './_shared.js';
@@ -36,7 +38,7 @@ export default async function handler(req, res) {
     const appId = normalizeAppId(req.query?.appId || req.query?.app || body.appId || body.app);
     const hwid = normalizeHwid(req.query?.hwid || body.hwid);
     const widevineHash = String(req.query?.widevineHash || body.widevineHash || '').trim().toUpperCase();
-    const activeKey = String(req.query?.activeKey || body.activeKey || body.key || '').trim().toUpperCase();
+    const activeKey = sanitizeKeyInput(req.query?.activeKey || body.activeKey || body.key || '');
     const appVersionCode = Number(req.query?.versionCode || body.versionCode || 0);
     const deviceModel = String(req.query?.deviceModel || body.deviceModel || '').trim().slice(0, 80);
     const rawClientStart = Number(req.query?.clientTrialStartUtc || body.clientTrialStartUtc || 0);
@@ -50,17 +52,27 @@ export default async function handler(req, res) {
     const appCfg = staticCfg[appId] || {};
     const eventKeysMap = await getEventKeysMap();
     const appEvent = eventKeysMap[appId] || { active: false };
+    const globalResetsMap = await getGlobalResetsMap();
+    const appReset = globalResetsMap[appId] || { active: false };
     const revokedKeys = await getRevokedKeysList();
 
-    const eventKeyPlain = String(appEvent.key || '').trim().toUpperCase();
+    const eventKeyPlain = sanitizeKeyInput(appEvent.key || '');
     const eventKeySha256 = String(appEvent.key_sha256 || (eventKeyPlain ? sha256Hex(eventKeyPlain) : '')).toUpperCase();
     const sanitizedEvent = {
       active: Boolean(appEvent.active && eventKeySha256 && (!appEvent.expires_at_utc || serverNowUtc < Number(appEvent.expires_at_utc))),
       keySha256: eventKeySha256,
-      durationHours: Number(appEvent.duration_hours || 24),
+      durationHours: Number(appEvent.duration_hours || 72),
       expiresAtUtc: Number(appEvent.expires_at_utc || 0),
       title: String(appEvent.title || ''),
       notice: String(appEvent.notice || ''),
+    };
+    const sanitizedReset = {
+      active: Boolean(appReset.active && appReset.resetId),
+      resetId: String(appReset.resetId || ''),
+      durationHours: Number(appReset.duration_hours || 72),
+      title: String(appReset.title || ''),
+      notice: String(appReset.notice || ''),
+      triggeredAtUtc: Number(appReset.triggered_at_utc || 0),
     };
 
     const updateInfo = {
@@ -87,7 +99,11 @@ export default async function handler(req, res) {
 
       if (!record) {
         let inheritedStart = wdvRecord?.trialStartUtc ? Number(wdvRecord.trialStartUtc) : serverNowUtc;
-        if (validClientStart > 0) inheritedStart = Math.min(inheritedStart, validClientStart);
+        let inheritedEnd = wdvRecord?.trialEndUtc ? Number(wdvRecord.trialEndUtc) : (inheritedStart + TRIAL_DURATION_MS);
+        if (!wdvRecord && validClientStart > 0) {
+          inheritedStart = Math.min(inheritedStart, validClientStart);
+          inheritedEnd = inheritedStart + TRIAL_DURATION_MS;
+        }
         record = {
           appId,
           hwid,
@@ -96,30 +112,79 @@ export default async function handler(req, res) {
           firstVersionCode: appVersionCode || 1,
           lastVersionCode: appVersionCode || 1,
           trialStartUtc: inheritedStart,
-          trialEndUtc: inheritedStart + TRIAL_DURATION_MS,
+          trialEndUtc: inheritedEnd,
+          lastResetId: wdvRecord?.lastResetId || '',
+          lastResetAtUtc: Number(wdvRecord?.lastResetAtUtc || 0),
+          appliedResetIds: Array.isArray(wdvRecord?.appliedResetIds) ? [...wdvRecord.appliedResetIds] : [],
           firstSeenUtc: serverNowUtc,
           lastSeenUtc: serverNowUtc,
           installCount: (wdvRecord?.installCount || 0) + 1,
         };
       } else {
-        let earliestStart = wdvRecord?.trialStartUtc
-          ? Math.min(Number(record.trialStartUtc), Number(wdvRecord.trialStartUtc))
-          : Number(record.trialStartUtc);
-        if (validClientStart > 0) earliestStart = Math.min(earliestStart, validClientStart);
+        const wdvResetAt = Number(wdvRecord?.lastResetAtUtc || 0);
+        const recResetAt = Number(record.lastResetAtUtc || 0);
+        const mergedResetIds = Array.from(new Set([
+          ...(Array.isArray(record.appliedResetIds) ? record.appliedResetIds : []),
+          ...(Array.isArray(wdvRecord?.appliedResetIds) ? wdvRecord.appliedResetIds : []),
+        ]));
+
+        let resolvedStart = Number(record.trialStartUtc || serverNowUtc);
+        let resolvedEnd = Number(record.trialEndUtc || (resolvedStart + TRIAL_DURATION_MS));
+        let resolvedResetId = record.lastResetId || '';
+        let resolvedResetAt = recResetAt;
+
+        if (wdvResetAt > recResetAt && wdvRecord?.trialStartUtc && wdvRecord?.trialEndUtc) {
+          resolvedStart = Number(wdvRecord.trialStartUtc);
+          resolvedEnd = Number(wdvRecord.trialEndUtc);
+          resolvedResetId = wdvRecord.lastResetId || resolvedResetId;
+          resolvedResetAt = wdvResetAt;
+        } else if (mergedResetIds.length === 0) {
+          if (wdvRecord?.trialStartUtc && Number(wdvRecord.trialStartUtc) < resolvedStart) {
+            resolvedStart = Number(wdvRecord.trialStartUtc);
+            resolvedEnd = Number(wdvRecord.trialEndUtc || (resolvedStart + TRIAL_DURATION_MS));
+          }
+          if (validClientStart > 0 && validClientStart < resolvedStart) {
+            resolvedStart = validClientStart;
+            resolvedEnd = validClientStart + TRIAL_DURATION_MS;
+          }
+        }
+
         record = {
           ...record,
-          trialStartUtc: earliestStart,
-          trialEndUtc: earliestStart + TRIAL_DURATION_MS,
+          trialStartUtc: resolvedStart,
+          trialEndUtc: resolvedEnd,
+          lastResetId: resolvedResetId,
+          lastResetAtUtc: resolvedResetAt,
+          appliedResetIds: mergedResetIds,
           lastVersionCode: appVersionCode || record.lastVersionCode,
           deviceModel: deviceModel || record.deviceModel,
           lastSeenUtc: serverNowUtc,
         };
       }
 
+      // Auto Reset Day: apply once per resetId across device (tracked on both hwid & widevineHash)
+      let resetAppliedNow = false;
+      const appliedIds = Array.isArray(record.appliedResetIds) ? [...record.appliedResetIds] : [];
+      if (sanitizedReset.active && sanitizedReset.resetId && !appliedIds.includes(sanitizedReset.resetId)) {
+        const resetDurMs = Math.max(1, sanitizedReset.durationHours) * 3600 * 1000;
+        record.trialStartUtc = serverNowUtc;
+        record.trialEndUtc = serverNowUtc + resetDurMs;
+        record.lastResetId = sanitizedReset.resetId;
+        record.lastResetAtUtc = serverNowUtc;
+        record.lastResetHours = sanitizedReset.durationHours;
+        appliedIds.push(sanitizedReset.resetId);
+        record.appliedResetIds = appliedIds.slice(-30);
+        resetAppliedNow = true;
+      }
+
       await dbSetJson(trialKey, record);
       if (wdvStoreKey) {
         await dbSetJson(wdvStoreKey, {
           trialStartUtc: record.trialStartUtc,
+          trialEndUtc: record.trialEndUtc,
+          lastResetId: record.lastResetId || '',
+          lastResetAtUtc: Number(record.lastResetAtUtc || 0),
+          appliedResetIds: record.appliedResetIds || [],
           lastHwid: hwid,
           installCount: record.installCount,
           lastSeenUtc: serverNowUtc,
@@ -148,6 +213,8 @@ export default async function handler(req, res) {
         trialStartUtc: record.trialStartUtc,
         trialEndUtc: record.trialEndUtc,
         trialRemainingMs: Math.max(0, record.trialEndUtc - serverNowUtc),
+        lastResetId: record.lastResetId || '',
+        resetAppliedNow,
         activeKeyRevoked,
         revokedKeys,
         syncedProKey: matchingPro ? {
@@ -156,6 +223,7 @@ export default async function handler(req, res) {
           expiryUtcMs: matchingPro.expiryUtcMs,
         } : null,
         eventConfig: sanitizedEvent,
+        resetConfig: sanitizedReset,
         updateInfo,
         ...status,
       });
@@ -163,16 +231,17 @@ export default async function handler(req, res) {
 
     if (action === 'activate_key') {
       const key = activeKey;
-      if (!hwid || !key) {
-        return res.status(400).json({ success: false, error: 'Thiếu HWID hoặc Mã Key', serverNowUtc });
+      if (!key) {
+        return res.status(400).json({ success: false, error: 'Thiếu Mã Key', reason: 'Vui lòng nhập Mã Key', serverNowUtc });
       }
       if (revokedKeys.includes(key)) {
         return res.status(403).json({ success: false, reason: 'Mã Key này đã bị Admin thu hồi!', revoked: true, serverNowUtc });
       }
 
-      // 1) Check Per-App Event Key first
+      // 1) Check Per-App Event Key first (ZERO HWID lock — works on EVERY device)
       if (sanitizedEvent.active && sha256Hex(key) === sanitizedEvent.keySha256) {
-        const trialKey = `flowly:trial:${appId}:${hwid}`;
+        const deviceSlot = hwid || widevineHash || 'GLOBAL_DEVICE';
+        const trialKey = `flowly:trial:${appId}:${deviceSlot}`;
         const existingRec = (await dbGetJson(trialKey, {})) || {};
         const prevEventClaims = existingRec.eventClaims || {};
         let expiryUtcMs = Number(prevEventClaims[sanitizedEvent.keySha256] || 0);
@@ -183,7 +252,7 @@ export default async function handler(req, res) {
             expiryUtcMs = Math.min(expiryUtcMs, sanitizedEvent.expiresAtUtc);
           }
           prevEventClaims[sanitizedEvent.keySha256] = expiryUtcMs;
-          await dbSetJson(trialKey, { ...existingRec, appId, hwid, eventClaims: prevEventClaims, lastSeenUtc: serverNowUtc });
+          await dbSetJson(trialKey, { ...existingRec, appId, hwid: deviceSlot, eventClaims: prevEventClaims, lastSeenUtc: serverNowUtc });
         }
         if (expiryUtcMs <= serverNowUtc) {
           return res.status(400).json({ success: false, reason: 'Thời gian sử dụng Key Sự Kiện này đã hết hạn trên thiết bị của bạn!', serverNowUtc });
@@ -192,13 +261,17 @@ export default async function handler(req, res) {
           success: true,
           tier: 'PRO_EVENT',
           appId,
-          hwid,
+          hwid: deviceSlot,
           key,
           plan: `EVENT_${sanitizedEvent.durationHours}H`,
           expiryUtcMs,
           serverNowUtc,
-          message: `Kích hoạt Key Sự Kiện PRO cho ${APPS[appId].name} thành công!`,
+          message: `Kích hoạt Key Sự Kiện PRO cho ${APPS[appId].name} (${sanitizedEvent.durationHours}h) thành công trên mọi thiết bị!`,
         });
+      }
+
+      if (!hwid) {
+        return res.status(400).json({ success: false, error: 'Thiếu HWID thiết bị', reason: 'Thiếu HWID thiết bị', serverNowUtc });
       }
 
       // 2) Check cryptographically signed VIP / PRO key

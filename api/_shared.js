@@ -63,6 +63,10 @@ export function normalizeAppId(raw) {
   return null;
 }
 
+export function sanitizeKeyInput(raw) {
+  return String(raw || '').replace(/[\s\u200B-\u200D\uFEFF]+/g, '').toUpperCase();
+}
+
 export function normalizeHwid(raw) {
   return String(raw || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
 }
@@ -87,7 +91,7 @@ export function signVipKey(appId, hwid, expirySec) {
 }
 
 export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
-  const key = String(keyStr || '').trim().toUpperCase();
+  const key = sanitizeKeyInput(keyStr);
   const app = APPS[expectedAppId];
   if (!app || !key) return { valid: false, reason: 'Thiếu thông tin ứng dụng hoặc mã key' };
 
@@ -178,6 +182,7 @@ function getMemoryStore() {
       revokedKeys: [],
       claimedTxIds: {},
       eventKeys: null,
+      globalResets: null,
     };
   }
   return globalThis.__FLOWLY_MEM_DB__;
@@ -227,6 +232,7 @@ export async function dbGetJson(key, defaultVal = null) {
   if (key === 'flowly:revoked_keys') return mem.revokedKeys;
   if (key === 'flowly:claimed_tx') return mem.claimedTxIds;
   if (key === 'flowly:event_keys') return mem.eventKeys ?? defaultVal;
+  if (key === 'flowly:global_resets') return mem.globalResets ?? defaultVal;
   return defaultVal;
 }
 
@@ -243,6 +249,7 @@ export async function dbSetJson(key, val) {
   else if (key === 'flowly:revoked_keys') mem.revokedKeys = val;
   else if (key === 'flowly:claimed_tx') mem.claimedTxIds = val;
   else if (key === 'flowly:event_keys') mem.eventKeys = val;
+  else if (key === 'flowly:global_resets') mem.globalResets = val;
   return false;
 }
 
@@ -266,6 +273,29 @@ export async function getEventKeysMap() {
   for (const appId of Object.keys(APPS)) {
     const src = (kvEvents && kvEvents[appId]) ? kvEvents[appId] : (staticEvents[appId] || { active: false });
     merged[appId] = { ...src };
+  }
+  return merged;
+}
+
+export async function getGlobalResetsMap() {
+  const staticCfg = loadStaticConfig();
+  const staticResets = staticCfg.global_resets || {};
+  const kvResets = await dbGetJson('flowly:global_resets', null);
+  const nowUtc = Date.now();
+  const merged = {};
+  for (const appId of Object.keys(APPS)) {
+    const src = (kvResets && kvResets[appId]) ? kvResets[appId] : (staticResets[appId] || { active: false });
+    const winExp = Number(src.window_expires_at_utc || 0);
+    const active = Boolean(src.active && src.resetId && (!winExp || nowUtc < winExp));
+    merged[appId] = {
+      active,
+      resetId: String(src.resetId || ''),
+      duration_hours: Math.max(1, Number(src.duration_hours || 72)),
+      title: String(src.title || ''),
+      notice: String(src.notice || ''),
+      triggered_at_utc: Number(src.triggered_at_utc || 0),
+      window_expires_at_utc: winExp,
+    };
   }
   return merged;
 }

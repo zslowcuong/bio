@@ -155,7 +155,10 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         let appId = (urlParams.get('app') || urlParams.get('appId') || 'flowoptimize').trim().toLowerCase();
-        if (appId === 'flowop') appId = 'flowoptimize';
+        if (appId === 'flowop' || appId === 'com.example.gameoptimizer') appId = 'flowoptimize';
+        if (appId === 'com.flows.gaming') appId = 'flows';
+        if (appId === 'com.flows.flowultra') appId = 'flowultra';
+        if (appId === 'com.flowextra.optimizer') appId = 'flowextra';
         if (!APPS[appId]) appId = 'flowoptimize';
         const app = APPS[appId];
 

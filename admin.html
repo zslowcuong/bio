@@ -107,7 +107,7 @@
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('orders', this)">📦 Đơn Hàng &amp; Quản Lý Key</button>
             <button class="tab-btn" onclick="switchTab('manual', this)">🔑 Cấp Key PRO Thủ Công</button>
-            <button class="tab-btn" onclick="switchTab('events', this)">🎉 Key Event PRO Từng App (Ngày/Tuần)</button>
+            <button class="tab-btn" onclick="switchTab('events', this)">🎉 Key Event PRO &amp; Reset Day</button>
             <button class="tab-btn" onclick="switchTab('config', this)">🚀 Export Config.json &amp; Force Update</button>
         </div>
 
@@ -183,11 +183,104 @@
             </div>
         </div>
 
-        <!-- TAB 3: PER-APP EVENT PRO KEYS -->
+        <!-- TAB 3: MULTI-DEVICE EVENT PRO KEYS & AUTO RESET DAY -->
         <div id="tab-events" class="panel">
-            <p style="font-size:12.5px;color:#cbd5e1;margin-bottom:14px;line-height:1.55;">
-                Mỗi ứng dụng có <b>Mã Sự Kiện PRO riêng hoàn toàn</b> (tránh xung đột giữa FlowOp / FlowS / FlowUltra / FlowExtra). Bạn có thể tạo theo <b>Ngày</b> hoặc <b>Tuần</b>, bật/tắt bất cứ lúc nào và lưu trực tiếp lên API hoặc xuất file <code>config.json</code>.
-            </p>
+            <!-- SECTION A: BULK / MANUAL MULTI-DEVICE EVENT KEY -->
+            <div class="event-card" style="border-color: rgba(16,185,129,0.45); background: rgba(6, 78, 59, 0.16); margin-bottom: 16px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+                    <div>
+                        <h3 style="font-size:15.5px;font-weight:900;color:#34d399;">🎁 Tạo Key Event PRO Thủ Công (Dùng Trên Mọi Thiết Bị • Không Khóa HWID)</h3>
+                        <p style="font-size:12px;color:#cbd5e1;margin-top:3px;">Người dùng chỉ cần dán mã Key này vào là mở khóa Full PRO + đồng hồ đếm ngược <b>Ngày : Giờ : Phút : Giây</b> ngay trên mọi máy.</p>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                        <button type="button" class="btn ghost" style="padding:6px 10px;font-size:11px;" onclick="presetBulkEvent(72,'3D')">⚡ Mẫu 3 Ngày</button>
+                        <button type="button" class="btn ghost" style="padding:6px 10px;font-size:11px;" onclick="presetBulkEvent(168,'1W')">⚡ Mẫu 1 Tuần</button>
+                        <button type="button" class="btn ghost" style="padding:6px 10px;font-size:11px;" onclick="presetBulkEvent(720,'1M')">⚡ Mẫu 1 Tháng</button>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="field">
+                        <label>Mã Key Event tự đặt (Mọi thiết bị đều nhập được)</label>
+                        <div style="display:flex;gap:6px;">
+                            <input id="bulkEvKey" placeholder="VD: FLOW-FREE-3NGAY hoặc FLOW-VIP-TET" value="FLOW-EVENT-3NGAY" />
+                            <button type="button" class="btn ghost" onclick="genRandomBulkEventKey()">🎲</button>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>App áp dụng</label>
+                        <select id="bulkEvTarget">
+                            <option value="all">🌟 Cả 4 App (FlowOptimize • FlowS • FlowUltra • FlowExtra)</option>
+                            <option value="flowoptimize">🌸 Chỉ FlowOptimize</option>
+                            <option value="flows">⚡ Chỉ FlowS</option>
+                            <option value="flowultra">🚀 Chỉ FlowUltra</option>
+                            <option value="flowextra">🎩 Chỉ FlowExtra</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Thời hạn đếm ngược trên mỗi máy</label>
+                        <select id="bulkEvDur">
+                            <option value="24">1 Ngày (24 Giờ)</option>
+                            <option value="72" selected>3 Ngày (72 Giờ)</option>
+                            <option value="168">1 Tuần (7 Ngày)</option>
+                            <option value="336">2 Tuần (14 Ngày)</option>
+                            <option value="720">1 Tháng (30 Ngày)</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Trạng thái Event</label>
+                        <select id="bulkEvActive">
+                            <option value="true">🟢 BẬT SỰ KIỆN NGAY</option>
+                            <option value="false">🔴 TẮT SỰ KIỆN</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Thông báo hiển thị trong App (hiện trên banner đầu trang &amp; hộp thoại Key)</label>
+                    <input id="bulkEvNotice" value="🎁 Free Key PRO 3 Ngày trên mọi thiết bị! Nhập mã sự kiện để mở khóa 100% tính năng ngay." />
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <button type="button" class="btn green" onclick="saveBulkEventKey()">💾 Áp Dụng Key Event Cho Đã Chọn</button>
+                    <button type="button" class="btn red" onclick="disableAllEvents()">🛑 Tắt Tất Cả Key Event</button>
+                </div>
+            </div>
+
+            <!-- SECTION B: AUTO RESET DAY ALL DEVICES -->
+            <div class="event-card" style="border-color: rgba(245,158,11,0.45); background: rgba(120, 53, 15, 0.16); margin-bottom: 18px;">
+                <h3 style="font-size:15.5px;font-weight:900;color:#fbbf24;margin-bottom:4px;">🔄 Tự Động Reset Day Dùng Thử PRO Trên Mọi Thiết Bị</h3>
+                <p style="font-size:12px;color:#cbd5e1;margin-bottom:12px;">Khi bật Reset Day, mọi thiết bị mở App (kể cả máy đã hết 3 ngày) sẽ <b>tự động được cấp lại Free PRO (3 Ngày / 1 Tuần / 1 Tháng)</b> + đồng hồ đếm ngược &amp; thông báo ngay trên màn hình chính mà không cần nhập key.</p>
+                <div class="grid-2">
+                    <div class="field">
+                        <label>App được Reset Day</label>
+                        <select id="rstTarget">
+                            <option value="all">🌟 Cả 4 App (FlowOptimize • FlowS • FlowUltra • FlowExtra)</option>
+                            <option value="flowoptimize">🌸 Chỉ FlowOptimize</option>
+                            <option value="flows">⚡ Chỉ FlowS</option>
+                            <option value="flowultra">🚀 Chỉ FlowUltra</option>
+                            <option value="flowextra">🎩 Chỉ FlowExtra</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Thời lượng Free PRO cấp lại</label>
+                        <select id="rstDur" onchange="syncResetNoticePreview()">
+                            <option value="24">1 Ngày (24 Giờ)</option>
+                            <option value="72" selected>3 Ngày (72 Giờ)</option>
+                            <option value="168">1 Tuần (7 Ngày)</option>
+                            <option value="720">1 Tháng (30 Ngày)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Thông báo sự kiện Reset Day trong App</label>
+                    <input id="rstNotice" value="🎁 Admin vừa Reset Day tặng Free PRO 3 Ngày cho mọi thiết bị! Mở app để nhận đếm ngược ngay." />
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+                    <button type="button" class="btn gold" onclick="triggerAutoResetDay()">🚀 Kích Hoạt Auto Reset Day Ngay</button>
+                    <button type="button" class="btn red" onclick="clearAutoResetDay('all')">🛑 Tắt Thông Báo Reset (Cả 4 App)</button>
+                </div>
+                <div id="resetStatusList" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;"></div>
+            </div>
+
+            <h3 style="font-size:14px;color:#38bdf8;margin-bottom:10px;">🎛️ Tùy Chỉnh Key Event Riêng Từng Ứng Dụng</h3>
             <div class="grid-2" id="eventCardsGrid"></div>
         </div>
 
@@ -216,7 +309,7 @@
         ];
 
         let adminPinHash = sessionStorage.getItem('flow_admin_hash') || '';
-        let dashData = { orders: [], issuedKeys: [], revokedKeys: [], eventKeys: {} };
+        let dashData = { orders: [], issuedKeys: [], revokedKeys: [], eventKeys: {}, globalResets: {} };
         let baseConfig = {};
 
         async function sha256Hex(str) {
@@ -266,6 +359,7 @@
                 document.getElementById('stKeys').textContent = `${(data.issuedKeys || []).length} / ${(data.revokedKeys || []).length}`;
                 renderTables();
                 renderEventCards();
+                renderResetStatus();
             } catch (e) {
                 alert('❌ Lỗi kết nối API Admin: ' + e.message);
             }
@@ -419,16 +513,150 @@
             }).join('');
         }
 
+        function durHoursToText(hrs) {
+            hrs = Number(hrs || 72);
+            if (hrs >= 720) return '1 Tháng (30 Ngày)';
+            if (hrs >= 168) return Math.round(hrs / 168) + ' Tuần';
+            if (hrs >= 24) return Math.round(hrs / 24) + ' Ngày';
+            return hrs + ' Giờ';
+        }
+
+        function presetBulkEvent(hrs, tag) {
+            document.getElementById('bulkEvDur').value = String(hrs);
+            document.getElementById('bulkEvActive').value = 'true';
+            const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
+            const keyVal = `FLOW-PRO-${tag}-${rand}`;
+            document.getElementById('bulkEvKey').value = keyVal;
+            document.getElementById('bulkEvNotice').value = `🎁 Free Key PRO ${durHoursToText(hrs)} (mọi thiết bị)! Nhập mã ${keyVal} để kích hoạt ngay.`;
+        }
+
+        function genRandomBulkEventKey() {
+            const hrs = Number(document.getElementById('bulkEvDur').value || 72);
+            const tag = hrs >= 720 ? '1M' : (hrs >= 168 ? '1W' : Math.round(hrs / 24) + 'D');
+            const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
+            document.getElementById('bulkEvKey').value = `FLOW-PRO-${tag}-${rand}`;
+        }
+
+        async function saveBulkEventKey() {
+            const appId = document.getElementById('bulkEvTarget').value;
+            const key = document.getElementById('bulkEvKey').value.replace(/[\s\u200B-\u200D\uFEFF]+/g, '').toUpperCase();
+            const durationHours = Number(document.getElementById('bulkEvDur').value || 72);
+            const active = document.getElementById('bulkEvActive').value === 'true';
+            const notice = document.getElementById('bulkEvNotice').value.trim();
+
+            if (active && key.length < 4) return alert('⚠️ Mã Key Event phải từ 4 ký tự trở lên!');
+
+            const res = await fetch(`${API_BASE}/api/admin?action=save_event_key`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPinHash },
+                body: JSON.stringify({
+                    appId,
+                    active,
+                    key,
+                    duration_hours: durationHours,
+                    expires_at_utc: 0,
+                    title: `🎁 Free Key PRO ${durHoursToText(durationHours)}`,
+                    notice
+                })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert(`✅ Đã ${active ? 'BẬT' : 'TẮT'} Key Event (${key}) cho ${appId === 'all' ? 'cả 4 App' : appId} • Thời hạn: ${durHoursToText(durationHours)}!`);
+                await refreshDashboard();
+            } else {
+                alert('❌ Lỗi: ' + data.error);
+            }
+        }
+
+        async function disableAllEvents() {
+            if (!confirm('Tắt Key Event trên cả 4 App?')) return;
+            const res = await fetch(`${API_BASE}/api/admin?action=save_event_key`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPinHash },
+                body: JSON.stringify({ appId: 'all', active: false, key: 'FLOW-OFF', duration_hours: 24, expires_at_utc: 0, notice: '' })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert('🛑 Đã tắt toàn bộ Key Event!');
+                await refreshDashboard();
+            } else {
+                alert('❌ Lỗi: ' + data.error);
+            }
+        }
+
+        function syncResetNoticePreview() {
+            const hrs = Number(document.getElementById('rstDur').value || 72);
+            document.getElementById('rstNotice').value = `🎁 Admin đã Reset Day tặng Free PRO ${durHoursToText(hrs)} cho mọi thiết bị! Mở app để nhận đếm ngược ngay.`;
+        }
+
+        async function triggerAutoResetDay() {
+            const appId = document.getElementById('rstTarget').value;
+            const durationHours = Number(document.getElementById('rstDur').value || 72);
+            const notice = document.getElementById('rstNotice').value.trim();
+            if (!confirm(`Kích hoạt Auto Reset Day (${durHoursToText(durationHours)}) cho ${appId === 'all' ? 'CẢ 4 APP' : appId} trên TẤT CẢ thiết bị?`)) return;
+
+            const res = await fetch(`${API_BASE}/api/admin?action=trigger_trial_reset`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPinHash },
+                body: JSON.stringify({
+                    appId,
+                    duration_hours: durationHours,
+                    title: `🔄 Reset Day Free PRO ${durHoursToText(durationHours)}`,
+                    notice
+                })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert(`🚀 Đã kích hoạt Auto Reset Day (${data.resetId}) thành công!\nTất cả thiết bị khi mở App sẽ tự nhận ${durHoursToText(durationHours)} PRO & thông báo!`);
+                await refreshDashboard();
+            } else {
+                alert('❌ Lỗi: ' + data.error);
+            }
+        }
+
+        async function clearAutoResetDay(appId) {
+            const res = await fetch(`${API_BASE}/api/admin?action=clear_trial_reset`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPinHash },
+                body: JSON.stringify({ appId })
+            });
+            const data = await res.json();
+            if (data.success) {
+                await refreshDashboard();
+            } else {
+                alert('❌ Lỗi: ' + data.error);
+            }
+        }
+
+        function renderResetStatus() {
+            const box = document.getElementById('resetStatusList');
+            if (!box) return;
+            const rstMap = dashData.globalResets || {};
+            box.innerHTML = APPS_META.map(a => {
+                const r = rstMap[a.id] || { active: false };
+                return `
+                    <div style="background:rgba(15,23,42,0.8);border:1px solid ${r.active?'rgba(245,158,11,0.5)':'rgba(255,255,255,0.08)'};border-radius:12px;padding:10px;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                            <b style="font-size:13px;">${a.name}</b>
+                            <span class="pill ${r.active?'ok':'revoked'}">${r.active ? 'ĐANG RESET (' + durHoursToText(r.duration_hours) + ')' : 'ĐANG TẮT'}</span>
+                        </div>
+                        <div style="font-size:11px;color:#94a3b8;word-break:break-word;">${r.active ? (r.notice || r.resetId) : 'Chưa kích hoạt Reset Day'}</div>
+                        ${r.active ? `<button type="button" class="btn ghost" style="padding:4px 8px;font-size:10.5px;margin-top:6px;" onclick="clearAutoResetDay('${a.id}')">Tắt thông báo ${a.name}</button>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
         function genRandomEventKey(appId, prefix) {
             const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
-            const dur = document.getElementById('evDur_' + appId).value;
-            const tag = dur >= 168 ? Math.round(dur / 168) + 'W' : Math.round(dur / 24) + 'D';
+            const dur = Number(document.getElementById('evDur_' + appId).value || 72);
+            const tag = dur >= 720 ? '1M' : (dur >= 168 ? Math.round(dur / 168) + 'W' : Math.round(dur / 24) + 'D');
             document.getElementById('evKey_' + appId).value = `${prefix}-EVT-${tag}-${rand}`;
         }
 
         async function saveAppEvent(appId, appName) {
-            const key = document.getElementById('evKey_' + appId).value.trim().toUpperCase();
-            const durationHours = Number(document.getElementById('evDur_' + appId).value || 24);
+            const key = document.getElementById('evKey_' + appId).value.replace(/[\s\u200B-\u200D\uFEFF]+/g, '').toUpperCase();
+            const durationHours = Number(document.getElementById('evDur_' + appId).value || 72);
             const active = document.getElementById('evAct_' + appId).value === 'true';
             const notice = document.getElementById('evNotice_' + appId).value.trim();
 
@@ -440,8 +668,8 @@
                     active,
                     key,
                     duration_hours: durationHours,
-                    expires_at_utc: active ? Date.now() + durationHours * 3600 * 1000 : 0,
-                    title: `🎁 Sự Kiện PRO ${appName}`,
+                    expires_at_utc: 0,
+                    title: `🎁 Free Key PRO ${durHoursToText(durationHours)} • ${appName}`,
                     notice
                 })
             });
@@ -469,6 +697,7 @@
                 };
             }
             cfg.event_keys = sanitizedEvents;
+            cfg.global_resets = dashData.globalResets || {};
             cfg.revoked_keys = dashData.revokedKeys || [];
             return cfg;
         }

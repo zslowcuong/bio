@@ -246,12 +246,21 @@
 
         const params = new URLSearchParams(window.location.search);
         let currentAppId = (params.get('app') || params.get('appId') || 'flowoptimize').trim().toLowerCase();
-        if (currentAppId === 'flowop') currentAppId = 'flowoptimize';
+        if (currentAppId === 'flowop' || currentAppId === 'com.example.gameoptimizer') currentAppId = 'flowoptimize';
+        if (currentAppId === 'com.flows.gaming') currentAppId = 'flows';
+        if (currentAppId === 'com.flows.flowultra') currentAppId = 'flowultra';
+        if (currentAppId === 'com.flowextra.optimizer') currentAppId = 'flowextra';
         if (!APPS[currentAppId]) currentAppId = 'flowoptimize';
 
         const rawHwidParam = (params.get('hwid') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
         if (rawHwidParam) {
             document.getElementById('hwidInput').value = rawHwidParam;
+            try { sessionStorage.setItem('flow_getkey_hwid', rawHwidParam); } catch (_) {}
+        } else {
+            try {
+                const cached = sessionStorage.getItem('flow_getkey_hwid') || '';
+                if (cached) document.getElementById('hwidInput').value = cached;
+            } catch (_) {}
         }
 
         let isTiktokVerified = false;
@@ -302,19 +311,26 @@
 
             window.open('https://www.tiktok.com/@xxd5974', '_blank', 'noopener,noreferrer');
             btn.disabled = true;
-            btn.style.opacity = '0.78';
+            btn.style.opacity = '0.82';
             btn.style.pointerEvents = 'none';
-            btn.innerHTML = '<span>⏳ ĐANG XÁC MINH TIKTOK... (VUI LÒNG ĐỢI)</span>';
-
-            if (gatewayTimer) clearTimeout(gatewayTimer);
-            gatewayTimer = setTimeout(() => {
-                isTiktokVerified = true;
-                btn.disabled = false;
-                btn.style.opacity = '1';
-                btn.style.pointerEvents = 'auto';
-                btn.style.background = 'linear-gradient(135deg, #059669, #10b981)';
-                btn.innerHTML = '<span>🚀 MỞ CỔNG NHẬN KEY VIP 30H NGAY ➔</span>';
-            }, 15000);
+            const startedAt = Date.now();
+            const updateWaitText = () => {
+                const leftSec = Math.max(0, Math.ceil((15000 - (Date.now() - startedAt)) / 1000));
+                if (leftSec > 0) {
+                    btn.innerHTML = `<span>⏳ ĐANG XÁC MINH TIKTOK... (${leftSec}s)</span>`;
+                } else {
+                    if (gatewayTimer) { clearInterval(gatewayTimer); gatewayTimer = null; }
+                    isTiktokVerified = true;
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    btn.style.pointerEvents = 'auto';
+                    btn.style.background = 'linear-gradient(135deg, #059669, #10b981)';
+                    btn.innerHTML = '<span>🚀 MỞ CỔNG NHẬN KEY VIP 30H NGAY ➔</span>';
+                }
+            };
+            updateWaitText();
+            if (gatewayTimer) clearInterval(gatewayTimer);
+            gatewayTimer = setInterval(updateWaitText, 500);
         }
 
         selectApp(currentAppId);
