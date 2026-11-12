@@ -39,6 +39,8 @@ export default async function handler(req, res) {
     const activeKey = String(req.query?.activeKey || body.activeKey || body.key || '').trim().toUpperCase();
     const appVersionCode = Number(req.query?.versionCode || body.versionCode || 0);
     const deviceModel = String(req.query?.deviceModel || body.deviceModel || '').trim().slice(0, 80);
+    const rawClientStart = Number(req.query?.clientTrialStartUtc || body.clientTrialStartUtc || 0);
+    const validClientStart = rawClientStart > 1700000000000 && rawClientStart <= serverNowUtc ? rawClientStart : 0;
 
     if (!appId) {
       return res.status(400).json({ success: false, error: 'INVALID_APP_ID', serverNowUtc });
@@ -84,7 +86,8 @@ export default async function handler(req, res) {
       }
 
       if (!record) {
-        const inheritedStart = wdvRecord?.trialStartUtc ? Number(wdvRecord.trialStartUtc) : serverNowUtc;
+        let inheritedStart = wdvRecord?.trialStartUtc ? Number(wdvRecord.trialStartUtc) : serverNowUtc;
+        if (validClientStart > 0) inheritedStart = Math.min(inheritedStart, validClientStart);
         record = {
           appId,
           hwid,
@@ -99,9 +102,10 @@ export default async function handler(req, res) {
           installCount: (wdvRecord?.installCount || 0) + 1,
         };
       } else {
-        const earliestStart = wdvRecord?.trialStartUtc
+        let earliestStart = wdvRecord?.trialStartUtc
           ? Math.min(Number(record.trialStartUtc), Number(wdvRecord.trialStartUtc))
           : Number(record.trialStartUtc);
+        if (validClientStart > 0) earliestStart = Math.min(earliestStart, validClientStart);
         record = {
           ...record,
           trialStartUtc: earliestStart,
