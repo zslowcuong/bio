@@ -1475,8 +1475,8 @@
             transition: width 0.08s linear;
         }
 
-        /* Unlocked Final Button */
-        .btn-final-link4m {
+        /* Unlocked Final Download Buttons */
+        .btn-final-download {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1500,9 +1500,32 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        .btn-final-link4m:hover {
+        .btn-final-download:hover {
             transform: translateY(-2px) scale(1.02);
             box-shadow: 0 14px 45px rgba(234, 88, 12, 0.7);
+        }
+
+        .btn-direct-apk-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 10px;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.45);
+            color: #38bdf8;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-size: 12.5px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-direct-apk-fallback:hover {
+            background: rgba(56, 189, 248, 0.22);
+            transform: translateY(-1px);
         }
 
         .unlock-footer-note {
@@ -1917,114 +1940,112 @@
         </div>
     </section>
 
-    <!-- ==================== DOWNLOAD & LINK4M SECTION ==================== -->
+    <!-- ==================== DOWNLOAD SECTION (FREE 100%) ==================== -->
     <section class="section container" id="download">
-        <div class="download-box reveal">
-            <span style="font-size: 11px; font-weight: 800; color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); padding: 4px 14px; border-radius: 99px; display: inline-block; margin-bottom: 14px;">
-                ● LINK TẢI CHÍNH THỨC QUA LINK4M
+        <div class="download-box reveal" style="max-width: 1060px;">
+            <span style="font-size: 11px; font-weight: 800; color: #34d399; background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.38); padding: 4px 14px; border-radius: 99px; display: inline-block; margin-bottom: 14px;">
+                ● LINK TẢI CHÍNH THỨC • MIỄN PHÍ 100% • KHÔNG CẦN KEY
             </span>
-            <h2 class="download-title serif">Tải Về FlowS & FlowOptimize APK</h2>
-            <p style="font-size: 13.5px; color: var(--text-muted); max-width: 650px; margin: 0 auto 24px; line-height: 1.5;">
-                Cả 2 phiên bản đều tương thích hoàn hảo từ Android 8 đến Android 15 qua đặc quyền Shizuku ADB (Không cần Root). Chọn phiên bản bạn yêu thích:
+            <h2 class="download-title serif">Tải Về Bộ Ba FlowS, FlowOptimize &amp; FlowUltra APK</h2>
+            <p style="font-size: 13.5px; color: var(--text-muted); max-width: 700px; margin: 0 auto 24px; line-height: 1.55;">
+                Cả 3 ứng dụng đều miễn phí trọn đời, hỗ trợ Android 8 – 15 qua Shizuku ADB (Không cần Root), tự động Whitelist Xiaomi Game Turbo, Ảnh và Camera!
             </p>
 
             <!-- 3-Card App Download Grid -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 800px; margin: 0 auto 28px; text-align: left;">
-                <!-- App 1: FlowS New Version -->
-                <div style="background: rgba(17, 24, 20, 0.9); border: 1.5px solid rgba(0, 255, 102, 0.5); border-radius: 20px; padding: 22px; box-shadow: 0 10px 30px rgba(0, 255, 102, 0.18); display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; max-width: 980px; margin: 0 auto 28px; text-align: left;">
+                <!-- App 1: FlowS -->
+                <div style="background: rgba(17, 24, 20, 0.92); border: 1.5px solid rgba(0, 255, 102, 0.5); border-radius: 20px; padding: 22px; box-shadow: 0 10px 30px rgba(0, 255, 102, 0.16); display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
                             <img src="flows_logo.png" alt="FlowS Logo" style="width: 52px; height: 52px; border-radius: 14px; border: 1.5px solid #00ff66; object-fit: cover;">
                             <div>
-                                <div style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 900; color: #fff;">FlowS - New Version</div>
-                                <div style="font-size: 11px; color: #00ff66; font-weight: 700;">Gamer GLTool & Magic Tuner (v3.5)</div>
+                                <div style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 900; color: #fff;">FlowS - Gamer Tuner</div>
+                                <div style="font-size: 11px; color: #00ff66; font-weight: 700;">v1.2.0 • Miễn Phí 100%</div>
                             </div>
                         </div>
                         <div style="font-size: 12px; color: #cbd5e1; line-height: 1.55; margin-bottom: 16px;">
-                            ✓ Quét game thật & hạ độ phân giải riêng từng game<br>
-                            ✓ Tự động hoàn trả màn hình gốc khi tắt máy hoặc thoát game<br>
-                            ✓ Khóa 120Hz mượt mà & Chế độ CRAZY đầu 3x<br>
-                            ✓ Nút sửa thanh pin trắng ColorOS / RealmeUI
+                            ✓ Quét game thật &amp; hạ độ phân giải riêng từng game<br>
+                            ✓ Preset Máy Cấu Hình Cao giữ 100% đồ họa + Khóa Max Hz<br>
+                            ✓ Tự động Whitelist Game Turbo, Ảnh &amp; Camera<br>
+                            ✓ Hoàn trả gốc tự động khi tắt màn hình hoặc thoát game
                         </div>
                     </div>
                     <button type="button" onclick="openUnlockModal('flows')" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px 18px; border-radius: 12px; font-size: 13px; font-weight: 800; background: linear-gradient(135deg, #15803d 0%, #00ff66 100%); color: #052e16; border: none; cursor: pointer; transition: transform 0.2s; box-shadow: 0 8px 20px rgba(0, 255, 102, 0.3);">
                         <span>⚡</span>
-                        <span>TẢI FLOWS (VƯỢT KEY LINK4M)</span>
+                        <span>TẢI FLOWS APK (MIỄN PHÍ)</span>
                     </button>
                 </div>
 
-                <!-- App 2: FlowOptimize Ultra Pro -->
-                <div style="background: rgba(15, 23, 42, 0.9); border: 1.5px solid rgba(236, 72, 153, 0.5); border-radius: 20px; padding: 22px; box-shadow: 0 10px 30px rgba(219, 39, 119, 0.2); display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- App 2: FlowOptimize -->
+                <div style="background: rgba(15, 23, 42, 0.92); border: 1.5px solid rgba(236, 72, 153, 0.5); border-radius: 20px; padding: 22px; box-shadow: 0 10px 30px rgba(219, 39, 119, 0.18); display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
                             <img src="app_logo.png" alt="FlowOptimize Logo" style="width: 52px; height: 52px; border-radius: 14px; border: 1.5px solid #ec4899; object-fit: cover;">
                             <div>
-                                <div style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 900; color: #fff;">FlowOptimize Ultra Pro</div>
-                                <div style="font-size: 11px; color: #f472b6; font-weight: 700;">Bản Theme Anime (v2.6)</div>
+                                <div style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 900; color: #fff;">FlowOptimize</div>
+                                <div style="font-size: 11px; color: #f472b6; font-weight: 700;">v1.6.0 • Bản Anime Miễn Phí</div>
                             </div>
                         </div>
                         <div style="font-size: 12px; color: #cbd5e1; line-height: 1.55; margin-bottom: 16px;">
-                            ✓ 5 Theme Anime đỉnh cao (Your Name, Gojo...)<br>
-                            ✓ Bong bóng nổi HUD PopUp hiển thị RAM real-time<br>
-                            ✓ Nút Khôi Phục Toàn Diện 1-Chạm mở lại app ngầm<br>
-                            ✓ Đã tích hợp nút Fix Thanh Pin Trắng
+                            ✓ Mở khóa 100% tính năng, xóa bỏ hoàn toàn GetKey<br>
+                            ✓ 7 Theme Anime đỉnh cao + HUD nổi theo dõi RAM<br>
+                            ✓ Whitelist tự động Xiaomi Game Turbo, Ảnh &amp; Camera<br>
+                            ✓ Khóa Hz thích ứng theo phần cứng &amp; Khôi phục 1-chạm
                         </div>
                     </div>
                     <button type="button" onclick="openUnlockModal('flowoptimize')" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px 18px; border-radius: 12px; font-size: 13px; font-weight: 800; background: linear-gradient(135deg, #0284c7 0%, #db2777 100%); color: #fff; border: none; cursor: pointer; transition: transform 0.2s; box-shadow: 0 8px 20px rgba(219, 39, 119, 0.3);">
-                        <span>🔥</span>
-                        <span>TẢI FLOWOPTIMIZE (LINK4M)</span>
+                        <span>🌸</span>
+                        <span>TẢI FLOWOPTIMIZE APK (MIỄN PHÍ)</span>
                     </button>
                 </div>
-            </div>
 
-            
                 <!-- App 3: FlowUltra Hardware Suite -->
-                <div style="background: rgba(23, 20, 15, 0.9); border: 1.5px solid rgba(245, 158, 11, 0.5); border-radius: 20px; padding: 22px; box-shadow: 0 10px 30px rgba(245, 158, 11, 0.2); display: flex; flex-direction: column; justify-content: space-between;">
+                <div style="background: rgba(23, 20, 15, 0.92); border: 1.5px solid rgba(245, 158, 11, 0.5); border-radius: 20px; padding: 22px; box-shadow: 0 10px 30px rgba(245, 158, 11, 0.18); display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
                             <img src="flowultra_logo.png" alt="FlowUltra Logo" style="width: 52px; height: 52px; border-radius: 14px; border: 1.5px solid #f59e0b; object-fit: cover;">
                             <div>
                                 <div style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 900; color: #fff;">FlowUltra Suite</div>
-                                <div style="font-size: 11px; color: #f59e0b; font-weight: 700;">Hardware & Deep Doze (v1.0.5)</div>
+                                <div style="font-size: 11px; color: #f59e0b; font-weight: 700;">v1.1.0 • Hardware Suite Miễn Phí</div>
                             </div>
                         </div>
                         <div style="font-size: 12px; color: #cbd5e1; line-height: 1.55; margin-bottom: 16px;">
-                            ✓ 20 Engine mã nguồn mở cấp thấp Shappky & Appzuku<br>
-                            ✓ Screen-Off Deep Doze ép CPU ngủ sâu pin đêm &lt; 1%<br>
-                            ✓ Màn hình AFK Extinguish 0-Nits cày game không nóng máy<br>
-                            ✓ Hail Freeze đóng băng app rác 0% CPU &amp; RAM
+                            ✓ 20 Engine cấp thấp Shappky, Appzuku &amp; Deep Doze<br>
+                            ✓ AFK Extinguish 0-Nits cày game màn AMOLED không nóng<br>
+                            ✓ Hail Freeze &amp; Whitelist sẵn Game Turbo / Ảnh / Camera<br>
+                            ✓ Miễn phí 100%, không GetKey, khôi phục cài đặt gốc an toàn
                         </div>
                     </div>
                     <button type="button" onclick="openUnlockModal('flowultra')" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px 18px; border-radius: 12px; font-size: 13px; font-weight: 800; background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%); color: #050811; border: none; cursor: pointer; transition: transform 0.2s; box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);">
                         <span>🚀</span>
-                        <span>TẢI FLOWULTRA (LINK4M)</span>
+                        <span>TẢI FLOWULTRA APK (MIỄN PHÍ)</span>
                     </button>
                 </div>
             </div>
 
-<!-- Hướng Dẫn Vượt Link4M Nhanh Trong 3 Bước -->
-            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 18px 22px; text-align: left; max-width: 680px; margin: 0 auto 20px;">
-                <div style="font-weight: 800; font-size: 13px; color: var(--accent); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-                    <span>📖 3 Bước Vượt Link4M Cực Nhanh (10 Giây):</span>
+            <!-- Hướng Dẫn Cài Đặt Nhanh 3 Bước (Tải Trực Tiếp) -->
+            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 18px 22px; text-align: left; max-width: 720px; margin: 0 auto 20px;">
+                <div style="font-weight: 800; font-size: 13px; color: #34d399; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                    <span>📖 3 Bước Cài Đặt Nhanh (Miễn Phí 100% - Không Quảng Cáo Rút Gọn):</span>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px;">
                     <div style="background: rgba(2, 6, 23, 0.6); padding: 10px 12px; border-radius: 10px; border-left: 3px solid #ec4899;">
                         <b style="color: #f472b6; font-size: 12px;">Bước 1:</b>
-                        <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 2px;">Bấm nút "TẢI VỀ QUA LINK4M" màu đỏ cam ở trên.</div>
+                        <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 2px;">Chọn ứng dụng muốn tải và bấm tải APK trực tiếp hoặc qua Gofile Mirror.</div>
                     </div>
-                    <div style="background: rgba(2, 6, 23, 0.6); padding: 10px 12px; border-radius: 10px; border-left: 3px solid #f59e0b;">
-                        <b style="color: #fbbf24; font-size: 12px;">Bước 2:</b>
-                        <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 2px;">Tích ô xác minh "Tôi không phải người máy" (Captcha).</div>
+                    <div style="background: rgba(2, 6, 23, 0.6); padding: 10px 12px; border-radius: 10px; border-left: 3px solid #38bdf8;">
+                        <b style="color: #38bdf8; font-size: 12px;">Bước 2:</b>
+                        <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 2px;">Mở file APK để cài đặt (cho phép cài từ nguồn trình duyệt nếu Android hỏi).</div>
                     </div>
                     <div style="background: rgba(2, 6, 23, 0.6); padding: 10px 12px; border-radius: 10px; border-left: 3px solid #10b981;">
                         <b style="color: #34d399; font-size: 12px;">Bước 3:</b>
-                        <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 2px;">Chờ đếm ngược vài giây ➔ Bấm "Lấy Link" để tải file APK!</div>
+                        <div style="font-size: 11.5px; color: #cbd5e1; margin-top: 2px;">Mở app, cấp quyền Shizuku và sử dụng ngay — không cần GetKey!</div>
                     </div>
                 </div>
             </div>
 
             <div class="download-note">
-                ✓ Bản chuẩn FlowOptimize tích hợp đầy đủ 5 Theme Anime, Dynamic Aspect Ratio 360p/480p, Dọn RAM thông minh bảo vệ cuộc gọi & Khôi phục nguyên bản 100%.
+                ✓ Bản chuẩn <b>© Bản quyền thuộc về Flowly Engine</b> • Miễn phí 100%, Dynamic Aspect Ratio 360p/480p, Dọn RAM bảo vệ cuộc gọi &amp; Khôi phục nguyên bản 100%.
             </div>
         </div>
     </section>
@@ -2032,47 +2053,49 @@
     <!-- ==================== FOOTER ==================== -->
     <footer class="footer">
         <div class="container">
-            <p><b>FlowOptimize</b> • Flowly Engine Gaming & Hardware Optimizer</p>
-            <p style="margin-top: 4px;">Phát triển chuyên sâu dành cho cộng đồng game thủ Android & eSports.</p>
+            <p><b>Flowly Engine Ecosystem</b> • FlowOptimize, FlowS &amp; FlowUltra</p>
+            <p style="margin-top: 4px;"><b>© Bản quyền thuộc về Flowly Engine</b> • Phát triển dành cho cộng đồng game thủ Android.</p>
             <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap;">
                 <a href="#about" class="back-to-top" style="margin: 0;">↑ Lên Đầu Trang</a>
                 <span style="color: rgba(255,255,255,0.15);">•</span>
-                <a href="javascript:void(0)" onclick="openAdminPortal()" style="color: #64748b; font-size: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; opacity: 0.75; transition: all 0.2s;" onmouseover="this.style.color='#38bdf8'; this.style.opacity='1'" onmouseout="this.style.color='#64748b'; this.style.opacity='0.75'">
-                    <span>🔒 Quản Trị Viên (Admin Portal)</span>
+                <a href="index.html" style="color: #38bdf8; font-size: 12px; text-decoration: none; font-weight: 700;">🏠 Trang Bio Chính</a>
+                <span style="color: rgba(255,255,255,0.15);">•</span>
+                <a href="admin.html" style="color: #64748b; font-size: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; opacity: 0.75; transition: all 0.2s;" onmouseover="this.style.color='#38bdf8'; this.style.opacity='1'" onmouseout="this.style.color='#64748b'; this.style.opacity='0.75'">
+                    <span>🔒 Quản Trị Viên (OTA Portal)</span>
                 </a>
             </div>
         </div>
     </footer>
 
-    <!-- ==================== TIKTOK FOLLOW-TO-UNLOCK MODAL ==================== -->
+    <!-- ==================== DIRECT DOWNLOAD & TIKTOK MODAL ==================== -->
     <div id="unlockDownloadModal" class="unlock-modal-overlay" onclick="closeUnlockOnBackdrop(event)">
         <div class="unlock-modal-card">
             <button class="unlock-close-btn" onclick="closeUnlockModal()">×</button>
             
             <div class="unlock-header-badge">
                 <span class="badge-dot"></span>
-                <span>XÁC MINH MỞ KHÓA TẢI VỀ</span>
+                <span>TẢI VỀ MIỄN PHÍ 100%</span>
             </div>
 
             <div class="unlock-app-info">
-                <img src="app_logo.png" alt="FlowOptimize" class="unlock-app-logo">
+                <img id="modalAppIcon" src="app_logo.png" alt="FlowOptimize" class="unlock-app-logo">
                 <div class="unlock-app-meta">
-                    <h3 class="unlock-app-title">FlowOptimize v2.6 Ultra Pro</h3>
-                    <p class="unlock-app-sub">Dung lượng: <b>7.18 MB</b> • Quyền: <b>Shizuku ADB</b></p>
+                    <h3 id="modalAppTitle" class="unlock-app-title">FlowOptimize v1.6.0 (Miễn Phí)</h3>
+                    <p id="modalAppSub" class="unlock-app-sub">Không cần GetKey • Bản Quyền Flowly Engine • Shizuku ADB</p>
                 </div>
             </div>
 
             <div class="unlock-banner" id="unlockBannerText">
                 <div style="font-weight: 700; color: #f8fafc; font-size: 13.5px; margin-bottom: 3px;">
-                    🎁 Bước mở khóa link tải tốc độ cao:
+                    🎁 Tải APK Chính Thức (Tải Trực Tiếp Miễn Phí):
                 </div>
                 <div style="font-size: 12px; color: #cbd5e1; line-height: 1.45;">
-                    Nhấn nút bên dưới để <b>Follow kênh TikTok chính thức</b> của FlowOptimize để kích hoạt link tải Link4M!
+                    Bạn có thể bấm <b>Follow TikTok @xxd5974</b> để ủng hộ tác giả hoặc chọn tải trực tiếp file APK bên dưới!
                 </div>
             </div>
 
             <div class="unlock-action-container">
-                <!-- State 1: Follow TikTok Button -->
+                <!-- Follow TikTok Button (3s quick verify) -->
                 <button id="btnFollowTikTok" type="button" class="btn-tiktok-action" onclick="handleTikTokClick()">
                     <div class="tiktok-icon-wrap">
                         <svg class="tiktok-svg" viewBox="0 0 24 24" fill="currentColor">
@@ -2080,18 +2103,18 @@
                         </svg>
                     </div>
                     <div class="tiktok-btn-content">
-                        <span class="tiktok-btn-text">THEO DÕI TIKTOK ĐỂ MỞ KHÓA</span>
-                        <span class="tiktok-btn-sub">Bấm để theo dõi kênh & nhận link tải</span>
+                        <span class="tiktok-btn-text">THEO DÕI TIKTOK ỦNG HỘ (@XXD5974)</span>
+                        <span class="tiktok-btn-sub">Mở link Gofile tốc độ cao sau 3 giây</span>
                     </div>
                 </button>
 
-                <!-- State 2: Verifying Progress -->
+                <!-- Verifying Progress -->
                 <div id="unlockVerifyingBox" class="unlock-verifying-box" style="display: none;">
                     <div class="verifying-spinner-row">
                         <div class="verifying-pulse-ring"></div>
                         <div>
-                            <div class="verifying-title">Đang xác minh theo dõi...</div>
-                            <div class="verifying-sub">Hệ thống đang kiểm tra và mở khóa sau <b id="unlockCountdownNum" style="color: #38bdf8; font-size: 15px;">8</b>s</div>
+                            <div class="verifying-title">Đang chuẩn bị liên kết tải về...</div>
+                            <div class="verifying-sub">Sẵn sàng trong <b id="unlockCountdownNum" style="color: #38bdf8; font-size: 15px;">3</b>s</div>
                         </div>
                     </div>
                     <div class="unlock-progress-track">
@@ -2099,145 +2122,21 @@
                     </div>
                 </div>
 
-                <!-- State 3: Ready to Download Link4M Button -->
-                <a id="btnFinalLink4m" href="#" target="_blank" onclick="executeLink4mRedirect(event)" class="btn-final-link4m" style="display: none;">
-                    <span style="font-size: 18px;">🔥</span>
-                    <span>LẤY LINK TẢI FLOWOPTIMIZE (LINK4M)</span>
+                <!-- Gofile Download Button -->
+                <a id="btnFinalDownload" href="https://gofile.io/d/Vr3bEORd" target="_blank" rel="noopener noreferrer" class="btn-final-download" style="display: flex; margin-top: 10px;">
+                    <span style="font-size: 18px;">☁️</span>
+                    <span id="txtFinalDownloadLabel">TẢI QUA GOFILE MIRROR</span>
+                </a>
+
+                <!-- Direct GitHub Pages APK Fallback -->
+                <a id="btnDirectApkFallback" href="FlowOptimize.apk" download class="btn-direct-apk-fallback">
+                    <span>⚡</span>
+                    <span id="txtDirectApkFallbackLabel">TẢI FILE APK TRỰC TIẾP (DỰ PHÒNG NHANH)</span>
                 </a>
             </div>
 
             <div class="unlock-footer-note">
-                <span style="color: #34d399;">✓ Xác minh an toàn 100%</span> • Không virus, không quảng cáo độc hại.
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== ADMIN LOGIN MODAL ==================== -->
-    <div id="adminLoginModal" class="admin-modal-overlay" onclick="closeAdminOnBackdrop(event, 'adminLoginModal')">
-        <div class="admin-card">
-            <button class="admin-close-btn" onclick="closeAdminModal('adminLoginModal')">×</button>
-            <div class="admin-header">
-                <span style="font-size: 26px;">🔐</span>
-                <div>
-                    <h3 class="admin-title">Đăng Nhập Quản Trị Viên</h3>
-                    <p style="font-size: 12px; color: var(--text-muted);">Cổng quản lý Link4M và Tải về dành riêng cho Admin</p>
-                </div>
-            </div>
-
-            <div id="adminLoginError" class="admin-error-box">
-                ⚠️ Sai tài khoản hoặc mật khẩu! Vui lòng kiểm tra lại.
-            </div>
-
-            <form onsubmit="handleAdminLogin(event)">
-                <div class="admin-form-group">
-                    <label class="admin-label" for="adminUsername">Tài khoản Admin:</label>
-                    <input type="text" id="adminUsername" class="admin-input" placeholder="Nhập tài khoản admin..." required autocomplete="username">
-                </div>
-
-                <div class="admin-form-group">
-                    <label class="admin-label" for="adminPassword">Mật khẩu:</label>
-                    <input type="password" id="adminPassword" class="admin-input" placeholder="Nhập mật khẩu..." required autocomplete="current-password">
-                </div>
-
-                <button type="submit" class="admin-btn-primary" style="margin-top: 10px;">
-                    <span>⚡ ĐĂNG NHẬP ADMIN DASHBOARD</span>
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- ==================== ADMIN DASHBOARD MODAL ==================== -->
-    <div id="adminDashboardModal" class="admin-modal-overlay" onclick="closeAdminOnBackdrop(event, 'adminDashboardModal')">
-        <div class="admin-card" style="max-width: 650px;">
-            <button class="admin-close-btn" onclick="closeAdminModal('adminDashboardModal')">×</button>
-            
-            <div class="admin-header" style="justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 28px;">👑</span>
-                    <div>
-                        <h3 class="admin-title">Bảng Điều Khiển Quản Trị</h3>
-                        <div style="display: flex; align-items: center; gap: 8px; margin-top: 2px;">
-                            <span style="background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 8px; border-radius: 99px; font-size: 10.5px; font-weight: 700; border: 1px solid rgba(16, 185, 129, 0.3);">● Online: admin</span>
-                            <span style="font-size: 11px; color: #94a3b8;">FlowOptimize Web Portal</span>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="button" onclick="handleAdminLogout()" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s;">
-                    🚪 Đăng Xuất
-                </button>
-            </div>
-
-            <!-- Mục 1: Link Gốc File APK để đưa vào tab Link4M rút gọn -->
-            <div style="background: rgba(2, 6, 23, 0.6); border: 1px solid #1e293b; border-radius: 14px; padding: 16px; margin-bottom: 20px;">
-                <div style="font-weight: 800; font-size: 13px; color: var(--accent); margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
-                    <span>📋 BƯỚC 1: LINK GỐC FILE APK ĐỂ DÁN VÀO LINK4M</span>
-                    <a href="https://my.link4m.com/member/dashboard" target="_blank" style="background: rgba(245, 158, 11, 0.2); border: 1px solid #f59e0b; color: #fbbf24; padding: 3px 10px; border-radius: 6px; font-size: 11px; text-decoration: none; font-weight: 700;">
-                        🔗 Mở Tab Link4M ↗
-                    </a>
-                </div>
-                <p style="font-size: 11.5px; color: #94a3b8; margin-bottom: 12px;">
-                    Sao chép 1 trong 2 link gốc dưới đây, chuyển sang trang Link4M chọn nút <b>"Rút Gọn Link Mới"</b> và dán vào:
-                </p>
-
-                <div class="admin-form-group" style="margin-bottom: 10px;">
-                    <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">1. Link Gốc Máy Chủ (Tải Tốc Độ Cao):</div>
-                    <div class="admin-copy-row">
-                        <input type="text" id="adminOriginServerUrl" readonly value="">
-                        <button type="button" class="admin-copy-chip" onclick="copyAdminInput('adminOriginServerUrl', this)">Sao Chép</button>
-                    </div>
-                </div>
-
-                <div class="admin-form-group" style="margin-bottom: 4px;">
-                    <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">2. Link Gốc Gofile Cloud (Dự Phòng 100% Vĩnh Viễn):</div>
-                    <div class="admin-copy-row">
-                        <input type="text" id="adminOriginGofileUrl" readonly value="https://gofile.io/d/hjP08Ofv">
-                        <button type="button" class="admin-copy-chip" onclick="copyAdminInput('adminOriginGofileUrl', this)">Sao Chép</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mục 2: Cập Nhật API Token & Cấu Hình Link4M Tự Động -->
-            <div style="background: rgba(2, 6, 23, 0.6); border: 1px solid rgba(236, 72, 153, 0.35); border-radius: 14px; padding: 16px;">
-                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 6px;">
-                    <div style="font-weight: 800; font-size: 13px; color: #f472b6;">
-                        ⚡ CẤU HÌNH LINK4M DYNAMIC API (TỰ ĐỘNG SINH LINK)
-                    </div>
-                    <span style="font-size: 11px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #34d399; padding: 2px 8px; border-radius: 99px; font-weight: 700;">
-                        ● Tự Động 100%
-                    </span>
-                </div>
-                <p style="font-size: 11.5px; color: #94a3b8; margin-bottom: 12px;">
-                    Hệ thống tự động tạo mã phiên mới (3–5 phút) cho từng người dùng, chống hết hạn và chống trùng trên đa thiết bị:
-                </p>
-
-                <div style="margin-bottom: 12px;">
-                    <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">1. API Token Tài Khoản Link4M:</div>
-                    <input type="text" id="adminApiTokenInput" class="admin-input" placeholder="Nhập API Token Link4M (VD: 6ae77b1c1473a714b32b2a3a)" style="margin-bottom: 10px;">
-
-                    <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">2. Link Gốc Tải Về Sau Khi Vượt Link (Destination):</div>
-                    <input type="text" id="adminDestinationInput" class="admin-input" placeholder="Link tải file sau khi vượt link (VD: https://gofile.io/d/hjP08Ofv)" style="margin-bottom: 10px;">
-                    
-                    <div style="font-size: 11.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">3. Link Kênh TikTok (Để Người Dùng Theo Dõi Mở Khóa):</div>
-                    <input type="text" id="adminTikTokActiveInput" class="admin-input" placeholder="Dán link kênh TikTok của bạn (VD: https://www.tiktok.com/@xxd5974)" style="margin-bottom: 12px;">
-
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button type="button" onclick="saveAdminLink4mSettings()" class="admin-btn-primary" style="flex: 2; min-width: 200px; padding: 11px;">
-                            💾 LƯU CẤU HÌNH & ĐỒNG BỘ
-                        </button>
-                        <button type="button" onclick="testActiveLink4m()" class="admin-copy-chip" style="flex: 1; min-width: 130px; font-size: 12px; padding: 11px; text-align: center; border-radius: 10px;">
-                            🚀 TEST TẠO LINK4M MỚI
-                        </button>
-                    </div>
-                </div>
-
-                <div id="adminSaveStatusAlert" style="display: none; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; font-size: 12px; padding: 8px 12px; border-radius: 8px; margin-top: 10px;">
-                    ✓ Đã lưu thành công! Nút tải công khai đã được đồng bộ với API Token mới.
-                </div>
-
-                <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 11.5px; color: #94a3b8;">
-                    API Token đang dùng: <b id="adminCurrentActiveLabel" style="color: #38bdf8; word-break: break-all;">6ae77b1c1473a714b32b2a3a</b>
-                </div>
+                <span style="color: #34d399;">✓ Miễn phí 100%</span> • <b>© Bản quyền thuộc về Flowly Engine</b>
             </div>
         </div>
     </div>
@@ -2259,6 +2158,7 @@
                 rootMargin: '0px 0px -30px 0px'
             });
             reveals.forEach(el => observer.observe(el));
+            fetchServerConfig();
         });
 
         // ==================== SWITCH GUIDE TABS ====================
@@ -2298,50 +2198,52 @@
         // ==================== INTERACTIVE DPI CALCULATOR ====================
         function calculateDpiPreset(w, h, dpi, label) {
             document.querySelectorAll('.phone-chip').forEach(c => c.classList.remove('active'));
-            if (event && event.target) {
+            if (typeof event !== 'undefined' && event && event.target) {
                 event.target.classList.add('active');
             }
             const ratio = h / w;
             const dpiRatio = dpi / w;
 
-            // 360p
             const w360 = 360;
             const h360 = Math.round(w360 * ratio);
             const dpi360 = Math.round(w360 * dpiRatio);
             document.getElementById('calcRes360').textContent = `${w360} x ${h360}`;
             document.getElementById('calcDpi360').textContent = `${dpi360} DPI`;
 
-            // 480p
             const w480 = 480;
             const h480 = Math.round(w480 * ratio);
             const dpi480 = Math.round(w480 * dpiRatio);
             document.getElementById('calcRes480').textContent = `${w480} x ${h480}`;
             document.getElementById('calcDpi480').textContent = `${dpi480} DPI`;
 
-            // 720p
             const w720 = 720;
             const h720 = Math.round(w720 * ratio);
             const dpi720 = Math.round(w720 * dpiRatio);
             document.getElementById('calcRes720').textContent = `${w720} x ${h720}`;
             document.getElementById('calcDpi720').textContent = `${dpi720} DPI`;
 
-            // Native
             document.getElementById('calcResNative').textContent = `${w} x ${h}`;
             document.getElementById('calcDpiNative').textContent = `${dpi} DPI`;
         }
 
-        // ==================== GLOBAL CONFIG & SYNC ====================
-        const ADMIN_USER = 'admin';
-        const ADMIN_PASS = 'Chicuong@789';
-
+        // ==================== GLOBAL CONFIG & DIRECT RELEASES ====================
         let globalConfig = {
-            api_token: "6ae77b1c1473a714b32b2a3a",
-            destination_apk: "https://gofile.io/d/hjP08Ofv",
             tiktok: "https://www.tiktok.com/@xxd5974",
-            wait_seconds: 8
+            wait_seconds: 3,
+            flows: {
+                destination_apk: "https://gofile.io/d/kzDVlE2G",
+                direct_apk: "FlowS.apk"
+            },
+            flowoptimize: {
+                destination_apk: "https://gofile.io/d/Vr3bEORd",
+                direct_apk: "FlowOptimize.apk"
+            },
+            flowultra: {
+                destination_apk: "https://gofile.io/d/p8GZrZNY",
+                direct_apk: "FlowUltra.apk"
+            }
         };
 
-        // Fetch shared server configuration (ensures phone, PC, and all visitors have exact same link)
         function fetchServerConfig() {
             fetch('config.json?v=' + Date.now())
                 .then(res => {
@@ -2349,140 +2251,109 @@
                     return res.json();
                 })
                 .then(data => {
-                    if (data.api_token) globalConfig.api_token = data.api_token;
-                    if (data.destination_apk) globalConfig.destination_apk = data.destination_apk;
                     if (data.tiktok) globalConfig.tiktok = data.tiktok;
-                    if (data.link4m) globalConfig.link4m = data.link4m;
-                    updateAdminUI();
+                    if (typeof data.wait_seconds === 'number') globalConfig.wait_seconds = data.wait_seconds;
+                    if (data.flows) globalConfig.flows = Object.assign(globalConfig.flows, data.flows);
+                    if (data.flowoptimize) globalConfig.flowoptimize = Object.assign(globalConfig.flowoptimize, data.flowoptimize);
+                    if (data.flowultra) globalConfig.flowultra = Object.assign(globalConfig.flowultra, data.flowultra);
                 })
-                .catch(err => {
-                    console.log('Using local config');
-                    updateAdminUI();
+                .catch(() => {
+                    console.log('Using default direct release config');
                 });
         }
 
-        function generateDynamicLink4m() {
-            const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
-            let dest = '';
-            if (currentTargetApp === 'flows') {
-                if (modalIcon) modalIcon.src = 'flows_logo.png';
-                if (modalTitle) modalTitle.textContent = 'FlowS - Gamer Tuner (v3.5)';
-                if (modalSub) modalSub.textContent = 'Game Tuner • Quét Game Thật • 120Hz';
-                if (linkBtn) linkBtn.innerHTML = '<span style="font-size: 18px;">⚡</span><span>LẤY LINK TẢI FLOWS (LINK4M)</span>';
-            } else if (currentTargetApp === 'flowultra') {
-                if (modalIcon) modalIcon.src = 'flowultra_logo.png';
-                if (modalTitle) modalTitle.textContent = 'FlowUltra - Hardware Suite (v1.0.5)';
-                if (modalSub) modalSub.textContent = '20 Open-Source Engines • Deep Doze • AFK 0-Nits';
-                if (linkBtn) linkBtn.innerHTML = '<span style="font-size: 18px;">🚀</span><span>LẤY LINK TẢI FLOWULTRA (LINK4M)</span>';
-            } else {
-                dest = (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || globalConfig.destination_apk || 'https://gofile.io/d/xPjjCyoA';
-            }
-            const nonce = Date.now() + '_' + Math.random().toString(36).substring(2, 7);
-            const sep = dest.includes('?') ? '&' : '?';
-            const uniqueDest = dest + sep + 'session=' + nonce;
-            return 'https://link4m.co/st?api=' + encodeURIComponent(apiToken) + '&url=' + encodeURIComponent(uniqueDest);
-        }
-
-        let preloadedFreshLink = null;
-        async function fetchFreshLink4mApi() {
-            try {
-                const res = await fetch('/api/generate-link4m?app=' + encodeURIComponent(currentTargetApp), { signal: AbortSignal.timeout(4000) });
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data.status === 'success' && data.shortenedUrl) {
-                        preloadedFreshLink = data.shortenedUrl;
-                        return data.shortenedUrl;
-                    }
-                }
-            } catch(e) {}
-            return generateDynamicLink4m();
-        }
-
-        function getActiveLink4m() {
-            return localStorage.getItem('flow_active_link4m') || generateDynamicLink4m();
-        }
-
         function getActiveTikTokUrl() {
-            return localStorage.getItem('flow_active_tiktok') || globalConfig.tiktok || 'https://www.tiktok.com/@xxd5974';
+            return globalConfig.tiktok || 'https://www.tiktok.com/@xxd5974';
         }
 
-        // ==================== TIKTOK FOLLOW-TO-UNLOCK LOGIC ====================
+        // ==================== DIRECT DOWNLOAD MODAL LOGIC ====================
         let unlockTimerInterval = null;
-        let unlockHiddenTimeout = null;
-        let hasUnlocked = false;
+        let currentTargetApp = 'flowoptimize';
 
         function handlePublicDownload() {
-            openUnlockModal();
+            openUnlockModal('flowoptimize');
         }
 
-        let currentTargetApp = 'flows';
-        function handlePublicDownload() {
-            openUnlockModal('flows');
+        function openAdminPortal() {
+            window.location.href = 'admin.html';
+        }
+
+        function getAppReleaseMeta(appKey) {
+            if (appKey === 'flows') {
+                return {
+                    icon: 'flows_logo.png',
+                    title: 'FlowS - Gamer Tuner (v1.2.0 • Miễn Phí)',
+                    sub: 'Quét Game Thật • Preset Máy Mạnh • 120Hz',
+                    gofile: (globalConfig.flows && globalConfig.flows.destination_apk) || 'https://gofile.io/d/kzDVlE2G',
+                    direct: (globalConfig.flows && globalConfig.flows.direct_apk) || 'FlowS.apk',
+                    gofileLabel: '⚡ TẢI FLOWS QUA GOFILE MIRROR',
+                    directLabel: '📥 TẢI FLOWS.APK TRỰC TIẾP (3.9 MB)'
+                };
+            }
+            if (appKey === 'flowultra') {
+                return {
+                    icon: 'flowultra_logo.png',
+                    title: 'FlowUltra - Hardware Suite (v1.1.0 • Miễn Phí)',
+                    sub: '20 Open-Source Engines • Deep Doze • AFK 0-Nits',
+                    gofile: (globalConfig.flowultra && globalConfig.flowultra.destination_apk) || 'https://gofile.io/d/p8GZrZNY',
+                    direct: (globalConfig.flowultra && globalConfig.flowultra.direct_apk) || 'FlowUltra.apk',
+                    gofileLabel: '🚀 TẢI FLOWULTRA QUA GOFILE MIRROR',
+                    directLabel: '📥 TẢI FLOWULTRA.APK TRỰC TIẾP (4.1 MB)'
+                };
+            }
+            return {
+                icon: 'app_logo.png',
+                title: 'FlowOptimize Anime Edition (v1.6.0 • Miễn Phí)',
+                sub: 'Không GetKey • 7 Theme Anime • Whitelist Tự Động',
+                gofile: (globalConfig.flowoptimize && globalConfig.flowoptimize.destination_apk) || 'https://gofile.io/d/Vr3bEORd',
+                direct: (globalConfig.flowoptimize && globalConfig.flowoptimize.direct_apk) || 'FlowOptimize.apk',
+                gofileLabel: '🌸 TẢI FLOWOPTIMIZE QUA GOFILE MIRROR',
+                directLabel: '📥 TẢI FLOWOPTIMIZE.APK TRỰC TIẾP (3.8 MB)'
+            };
         }
 
         function openUnlockModal(appKey) {
-            currentTargetApp = appKey || 'flows';
+            currentTargetApp = appKey || 'flowoptimize';
+            const meta = getAppReleaseMeta(currentTargetApp);
+
             const modalIcon = document.getElementById('modalAppIcon');
             const modalTitle = document.getElementById('modalAppTitle');
             const modalSub = document.getElementById('modalAppSub');
-            const linkBtn = document.getElementById('btnFinalLink4m');
+            const finalBtn = document.getElementById('btnFinalDownload');
+            const finalLabel = document.getElementById('txtFinalDownloadLabel');
+            const directBtn = document.getElementById('btnDirectApkFallback');
+            const directLabel = document.getElementById('txtDirectApkFallbackLabel');
 
-            if (currentTargetApp === 'flows') {
-                if (modalIcon) modalIcon.src = 'flows_logo.png';
-                if (modalTitle) modalTitle.textContent = 'FlowS - Gamer Tuner (v3.5)';
-                if (modalSub) modalSub.textContent = 'Game Tuner • Quét Game Thật • 120Hz';
-                if (linkBtn) linkBtn.innerHTML = '<span style="font-size: 18px;">⚡</span><span>LẤY LINK TẢI FLOWS (LINK4M)</span>';
-            } else if (currentTargetApp === 'flowultra') {
-                if (modalIcon) modalIcon.src = 'flowultra_logo.png';
-                if (modalTitle) modalTitle.textContent = 'FlowUltra - Hardware Suite (v1.0.5)';
-                if (modalSub) modalSub.textContent = '20 Open-Source Engines • Deep Doze • AFK 0-Nits';
-                if (linkBtn) linkBtn.innerHTML = '<span style="font-size: 18px;">🚀</span><span>LẤY LINK TẢI FLOWULTRA (LINK4M)</span>';
-            } else {
-                if (modalIcon) modalIcon.src = 'app_logo.png';
-                if (modalTitle) modalTitle.textContent = 'FlowOptimize Ultra Pro';
-                if (modalSub) modalSub.textContent = 'Bản Theme Anime • Khôi Phục Toàn Diện';
-                if (linkBtn) linkBtn.innerHTML = '<span style="font-size: 18px;">🔥</span><span>LẤY LINK TẢI FLOWOPTIMIZE (LINK4M)</span>';
+            if (modalIcon) modalIcon.src = meta.icon;
+            if (modalTitle) modalTitle.textContent = meta.title;
+            if (modalSub) modalSub.textContent = meta.sub;
+            if (finalBtn) finalBtn.href = meta.gofile;
+            if (finalLabel) finalLabel.textContent = meta.gofileLabel;
+            if (directBtn) {
+                directBtn.href = meta.direct;
+                directBtn.setAttribute('download', meta.direct);
             }
-            hasUnlocked = false;
-            preloadedFreshLink = null;
-            fetchFreshLink4mApi();
+            if (directLabel) directLabel.textContent = meta.directLabel;
+
+            const btnTikTok = document.getElementById('btnFollowTikTok');
+            const verifyBox = document.getElementById('unlockVerifyingBox');
+            const bar = document.getElementById('unlockProgressBar');
+            const num = document.getElementById('unlockCountdownNum');
+
+            if (btnTikTok) btnTikTok.style.display = 'flex';
+            if (verifyBox) verifyBox.style.display = 'none';
+            if (bar) bar.style.width = '0%';
+            if (num) num.textContent = String(globalConfig.wait_seconds || 3);
+
             const modal = document.getElementById('unlockDownloadModal');
             if (modal) modal.classList.add('active');
-
-            // Reset visual elements
-            document.getElementById('btnFollowTikTok').style.display = 'flex';
-            document.getElementById('unlockVerifyingBox').style.display = 'none';
-            document.getElementById('btnFinalLink4m').style.display = 'none';
-            document.getElementById('unlockProgressBar').style.width = '0%';
-            document.getElementById('unlockCountdownNum').textContent = '8';
-
-            const banner = document.getElementById('unlockBannerText');
-            if (banner) {
-                banner.innerHTML = `
-                    <div style="font-weight: 700; color: #f8fafc; font-size: 13.5px; margin-bottom: 3px;">
-                        🎁 Bước mở khóa link tải tốc độ cao:
-                    </div>
-                    <div style="font-size: 12px; color: #cbd5e1; line-height: 1.45;">
-                        Nhấn nút bên dưới để <b>Follow kênh TikTok chính thức</b> của FlowOptimize để kích hoạt link tải Link4M!
-                    </div>
-                `;
-            }
-
-            // Clear any lingering timers
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);
-            if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
-
-            // Hidden background 8-second timer: "còn không thì phải đợi 8s - phần này ẩn đi"
-            unlockHiddenTimeout = setTimeout(() => {
-                completeUnlockProcess();
-            }, 8000);
         }
 
         function closeUnlockModal() {
             const modal = document.getElementById('unlockDownloadModal');
             if (modal) modal.classList.remove('active');
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);
-            if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
         }
 
         function closeUnlockOnBackdrop(e) {
@@ -2492,24 +2363,21 @@
         }
 
         function handleTikTokClick() {
-            // 1. Open TikTok channel URL in new tab / app
-            const tiktokUrl = getActiveTikTokUrl();
-            window.open(tiktokUrl, '_blank');
+            window.open(getActiveTikTokUrl(), '_blank', 'noopener,noreferrer');
 
-            // 2. Switch UI to Verifying state
-            document.getElementById('btnFollowTikTok').style.display = 'none';
-            document.getElementById('unlockVerifyingBox').style.display = 'block';
+            const btnTikTok = document.getElementById('btnFollowTikTok');
+            const verifyBox = document.getElementById('unlockVerifyingBox');
+            if (btnTikTok) btnTikTok.style.display = 'none';
+            if (verifyBox) verifyBox.style.display = 'block';
 
-            // 3. Start smooth 8-second countdown progress bar
-            let totalMs = 8000;
-            let startTime = Date.now();
+            const totalMs = Math.max(1000, (globalConfig.wait_seconds || 3) * 1000);
+            const startTime = Date.now();
 
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);
-
             unlockTimerInterval = setInterval(() => {
-                let elapsed = Date.now() - startTime;
-                let pct = Math.min(100, (elapsed / totalMs) * 100);
-                let remaining = Math.max(0, Math.ceil((totalMs - elapsed) / 1000));
+                const elapsed = Date.now() - startTime;
+                const pct = Math.min(100, (elapsed / totalMs) * 100);
+                const remaining = Math.max(0, Math.ceil((totalMs - elapsed) / 1000));
 
                 const bar = document.getElementById('unlockProgressBar');
                 if (bar) bar.style.width = pct + '%';
@@ -2519,256 +2387,16 @@
 
                 if (elapsed >= totalMs) {
                     clearInterval(unlockTimerInterval);
-                    completeUnlockProcess();
+                    if (verifyBox) verifyBox.style.display = 'none';
                 }
             }, 50);
         }
 
-        function completeUnlockProcess() {
-            if (hasUnlocked) return;
-            hasUnlocked = true;
-
-            if (unlockTimerInterval) clearInterval(unlockTimerInterval);
-            if (unlockHiddenTimeout) clearTimeout(unlockHiddenTimeout);
-
-            // Hide TikTok button & Verifying spinner
-            const btnTikTok = document.getElementById('btnFollowTikTok');
-            if (btnTikTok) btnTikTok.style.display = 'none';
-
-            const verifyBox = document.getElementById('unlockVerifyingBox');
-            if (verifyBox) verifyBox.style.display = 'none';
-
-            // Reveal Link4M Download Button
-            const finalBtn = document.getElementById('btnFinalLink4m');
-            if (finalBtn) {
-                finalBtn.href = preloadedFreshLink || generateDynamicLink4m();
-                finalBtn.target = '_blank';
-                finalBtn.style.display = 'flex';
-                if (!preloadedFreshLink) {
-                    fetchFreshLink4mApi().then(url => { if (url) finalBtn.href = url; });
-                }
-            }
-
-            const banner = document.getElementById('unlockBannerText');
-            if (banner) {
-                banner.innerHTML = `
-                    <div style="font-weight: 800; color: #34d399; font-size: 13.5px; margin-bottom: 3px;">
-                        🎉 ĐÃ XÁC MINH & MỞ KHÓA THÀNH CÔNG!
-                    </div>
-                    <div style="font-size: 12px; color: #cbd5e1; line-height: 1.45;">
-                        Bấm nút màu cam bên dưới để bắt đầu vượt link Link4M và tải FlowOptimize APK! Phiên tải có hiệu lực trong 5 phút.
-                    </div>
-                `;
-            }
-        }
-
-        let isLink4mRedirecting = false;
-        function executeLink4mRedirect(e) {
-            if (isLink4mRedirecting) {
-                if (e) e.preventDefault();
-                return false;
-            }
-            isLink4mRedirecting = true;
-            const freshUrl = generateDynamicLink4m();
-            const finalBtn = document.getElementById('btnFinalLink4m');
-            if (finalBtn) {
-                finalBtn.href = freshUrl;
-                finalBtn.style.pointerEvents = 'none';
-                finalBtn.style.opacity = '0.75';
-            }
-            setTimeout(() => {
-                isLink4mRedirecting = false;
-                if (finalBtn) {
-                    finalBtn.style.pointerEvents = 'auto';
-                    finalBtn.style.opacity = '1';
-                }
-                closeUnlockModal();
-            }, 1200);
-        }
-
-        // ==================== ADMIN PORTAL LOGIC ====================
-        function isAdminLoggedIn() {
-            return sessionStorage.getItem('flow_admin_auth') === 'true';
-        }
-
-        function updateAdminUI() {
-            const navAdmin = document.getElementById('navAdminItem');
-            if (navAdmin) {
-                navAdmin.style.display = isAdminLoggedIn() ? 'inline-block' : 'none';
-            }
-
-            const apiToken = globalConfig.api_token || '6ae77b1c1473a714b32b2a3a';
-            const label = document.getElementById('adminCurrentActiveLabel');
-            if (label) {
-                label.textContent = apiToken;
-            }
-
-            const inputApiToken = document.getElementById('adminApiTokenInput');
-            if (inputApiToken) {
-                inputApiToken.value = apiToken;
-            }
-
-            const inputDest = document.getElementById('adminDestinationInput');
-            if (inputDest) {
-                inputDest.value = globalConfig.destination_apk || 'https://gofile.io/d/hjP08Ofv';
-            }
-
-            const inputTikTok = document.getElementById('adminTikTokActiveInput');
-            if (inputTikTok) {
-                inputTikTok.value = getActiveTikTokUrl();
-            }
-
-            const serverUrlInput = document.getElementById('adminOriginServerUrl');
-            if (serverUrlInput) {
-                serverUrlInput.value = window.location.origin + '/FlowOptimize.apk';
-            }
-        }
-
-        function openAdminPortal() {
-            if (isAdminLoggedIn()) {
-                document.getElementById('adminLoginModal').classList.remove('active');
-                document.getElementById('adminDashboardModal').classList.add('active');
-                updateAdminUI();
-            } else {
-                document.getElementById('adminDashboardModal').classList.remove('active');
-                document.getElementById('adminLoginModal').classList.add('active');
-                const err = document.getElementById('adminLoginError');
-                if (err) err.style.display = 'none';
-                setTimeout(() => {
-                    const u = document.getElementById('adminUsername');
-                    if (u) u.focus();
-                }, 100);
-            }
-        }
-
-        function closeAdminModal(modalId) {
-            const m = document.getElementById(modalId);
-            if (m) m.classList.remove('active');
-        }
-
-        function closeAdminOnBackdrop(e, modalId) {
-            if (e.target.id === modalId) {
-                closeAdminModal(modalId);
-            }
-        }
-
-        function handleAdminLogin(e) {
-            e.preventDefault();
-            const u = document.getElementById('adminUsername').value.trim();
-            const p = document.getElementById('adminPassword').value;
-            const err = document.getElementById('adminLoginError');
-
-            if (u === ADMIN_USER && p === ADMIN_PASS) {
-                sessionStorage.setItem('flow_admin_auth', 'true');
-                if (err) err.style.display = 'none';
-                closeAdminModal('adminLoginModal');
-                document.getElementById('adminDashboardModal').classList.add('active');
-                updateAdminUI();
-            } else {
-                if (err) err.style.display = 'block';
-            }
-        }
-
-        function handleAdminLogout() {
-            sessionStorage.removeItem('flow_admin_auth');
-            closeAdminModal('adminDashboardModal');
-            updateAdminUI();
-            alert('Đã đăng xuất khỏi tài khoản Quản trị viên!');
-        }
-
-        function copyAdminInput(inputId, btn) {
-            const input = document.getElementById(inputId);
-            if (!input) return;
-            navigator.clipboard.writeText(input.value).then(() => {
-                const old = btn.textContent;
-                btn.textContent = '✓ Đã Copy!';
-                btn.style.background = '#10b981';
-                btn.style.color = '#000';
-                setTimeout(() => {
-                    btn.textContent = old;
-                    btn.style.background = '';
-                    btn.style.color = '';
-                }, 2000);
-            });
-        }
-
-        function saveAdminLink4mSettings() {
-            const inputApiToken = document.getElementById('adminApiTokenInput');
-            let valApiToken = inputApiToken ? inputApiToken.value.trim() : '';
-
-            const inputDest = document.getElementById('adminDestinationInput');
-            let valDest = inputDest ? inputDest.value.trim() : '';
-
-            const inputTikTok = document.getElementById('adminTikTokActiveInput');
-            let valTikTok = inputTikTok ? inputTikTok.value.trim() : '';
-
-            if (!valApiToken) {
-                alert('Vui lòng nhập API Token Link4M!');
-                return;
-            }
-            if (!valDest) {
-                valDest = 'https://gofile.io/d/hjP08Ofv';
-            }
-            if (valTikTok && !valTikTok.startsWith('http')) {
-                valTikTok = 'https://' + valTikTok;
-                if (inputTikTok) inputTikTok.value = valTikTok;
-            }
-
-            globalConfig.api_token = valApiToken;
-            globalConfig.destination_apk = valDest;
-            if (valTikTok) globalConfig.tiktok = valTikTok;
-
-            localStorage.setItem('flow_api_token', valApiToken);
-            localStorage.setItem('flow_destination_apk', valDest);
-            if (valTikTok) localStorage.setItem('flow_active_tiktok', valTikTok);
-
-            // Sync to server config.json via API (khi chạy trên web server cục bộ)
-            if (window.location.protocol.startsWith('http') && !window.location.hostname.includes('github.io')) {
-                fetch('/api/save-config', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        api_token: valApiToken,
-                        destination_apk: valDest,
-                        tiktok: valTikTok || globalConfig.tiktok,
-                        wait_seconds: 8
-                    })
-                }).then(r => r.json()).then(res => {
-                    console.log('Server synced:', res);
-                }).catch(e => {
-                    console.log('Saved to local storage');
-                });
-            }
-
-            updateAdminUI();
-
-            const alertBox = document.getElementById('adminSaveStatusAlert');
-            if (alertBox) {
-                alertBox.style.display = 'block';
-                setTimeout(() => { alertBox.style.display = 'none'; }, 4000);
-            }
-            alert('✓ Đã lưu và đồng bộ thành công!\nTừ giờ, người dùng trên MỌI THIẾT BỊ (PC, iPhone, Android) sau khi bấm theo dõi TikTok 8s sẽ được hệ thống sinh link Link4M tự động để vượt link.');
-        }
-
-        function testActiveLink4m() {
-            const url = generateDynamicLink4m();
-            window.open(url, '_blank');
-        }
-
-        // Close modal on Escape
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeUnlockModal();
-                closeAdminModal('adminLoginModal');
-                closeAdminModal('adminDashboardModal');
             }
-        });
-
-        // Initialize UI & Sync on DOM load
-        document.addEventListener('DOMContentLoaded', function() {
-            fetchServerConfig();
         });
     </script>
 </body>
 </html>
-

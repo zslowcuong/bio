@@ -3,459 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Key VIP 30 Giờ • FlowOptimize eSports</title>
+    <title>Miễn Phí Toàn Bộ Tính Năng • Flowly Engine</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #030712;
-            --card-bg: rgba(15, 23, 42, 0.9);
-            --card-border: rgba(16, 185, 129, 0.3);
-            --green: #10b981;
-            --green-glow: rgba(16, 185, 129, 0.35);
-            --accent: #38bdf8;
-            --gold: #f59e0b;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        :root { --bg: #030712; --card-bg: rgba(15, 23, 42, 0.9); }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
         body {
             background: var(--bg);
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.18), transparent 60%),
-                radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.1), transparent 50%);
+            background-image: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.18), transparent 60%);
             color: #f8fafc;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px 16px;
         }
-
         .container {
             width: 100%;
-            max-width: 440px;
+            max-width: 460px;
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
+            border: 1px solid rgba(16, 185, 129, 0.35);
             border-radius: 24px;
             padding: 28px 22px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px var(--green-glow);
             text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
             position: relative;
             overflow: hidden;
         }
-
         .container::before {
             content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3.5px;
+            position: absolute; top: 0; left: 0; right: 0; height: 3.5px;
             background: linear-gradient(90deg, #10b981, #38bdf8, #f59e0b);
         }
-
-        .badge-success {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(16, 185, 129, 0.15);
+        .badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.16);
             border: 1px solid #10b981;
             color: #34d399;
-            font-size: 11.5px;
-            font-weight: 800;
-            padding: 6px 14px;
-            border-radius: 99px;
+            font-size: 11px; font-weight: 800;
+            padding: 5px 14px; border-radius: 99px;
             margin-bottom: 14px;
         }
-
-        h1 {
-            font-size: 21px;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 6px;
-            letter-spacing: -0.5px;
-        }
-
-        .sub {
-            font-size: 12.5px;
-            color: #94a3b8;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        /* COUNTDOWN TIMER WIDGET */
-        .timer-card {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 18px;
-            padding: 16px;
-            margin-bottom: 20px;
-        }
-
-        .timer-label {
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: #38bdf8;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .countdown-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .time-box {
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 12px;
-            padding: 10px 4px;
-        }
-
-        .time-num {
-            font-family: monospace;
-            font-size: 24px;
-            font-weight: 900;
-            color: #38bdf8;
-            line-height: 1;
-        }
-
-        .time-txt {
-            font-size: 9.5px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #64748b;
-            margin-top: 4px;
-        }
-
-        /* KEY DISPLAY BOX */
-        .key-card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 2px solid #10b981;
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.25), inset 0 0 15px rgba(16, 185, 129, 0.1);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .key-title {
-            font-size: 11px;
-            font-weight: 800;
-            color: #a7f3d0;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
-        }
-
-        .key-text {
-            font-family: monospace;
-            font-size: 14px;
-            font-weight: 900;
-            color: #fff;
-            letter-spacing: 0.5px;
-            background: rgba(15, 23, 42, 0.95);
-            padding: 12px 10px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            word-break: break-all;
-            user-select: all;
-            margin-bottom: 12px;
-        }
-
-        .btn-copy {
+        h1 { font-size: 21px; font-weight: 900; margin-bottom: 8px; }
+        .sub { font-size: 13px; color: #cbd5e1; line-height: 1.55; margin-bottom: 20px; }
+        .btn-main {
             width: 100%;
             background: linear-gradient(135deg, #059669, #10b981);
-            color: #fff;
-            font-size: 13.5px;
-            font-weight: 900;
-            padding: 14px;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 6px 25px rgba(16, 185, 129, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.2s ease;
+            color: #fff; font-size: 14px; font-weight: 900;
+            padding: 15px; border-radius: 14px;
+            text-decoration: none;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            margin-bottom: 10px;
         }
-
-        .btn-copy:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.7);
-        }
-
-        .btn-copy:active {
-            transform: scale(0.98);
-        }
-
-        /* DETAILS LIST */
-        .info-list {
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 14px;
-            padding: 12px 16px;
-            margin-bottom: 20px;
-            text-align: left;
-            font-size: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .info-row:last-child {
-            border-bottom: none;
-        }
-
-        .info-label {
-            color: #64748b;
-        }
-
-        .info-val {
-            color: #e2e8f0;
-            font-weight: 700;
-        }
-
-        .btn-open-app {
+        .btn-alt {
             width: 100%;
             background: rgba(56, 189, 248, 0.12);
-            color: #38bdf8;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            font-size: 13px;
-            font-weight: 800;
-            padding: 13px;
-            border-radius: 12px;
-            cursor: pointer;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            color: #38bdf8; font-size: 13px; font-weight: 800;
+            padding: 13px; border-radius: 14px;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            margin-bottom: 16px;
-            transition: all 0.2s ease;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            margin-bottom: 10px;
         }
-
-        .btn-open-app:hover {
-            background: rgba(56, 189, 248, 0.2);
-        }
-
-        .pro-box {
-            padding-top: 16px;
+        .footer {
+            margin-top: 16px; padding-top: 14px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 11.5px;
-            color: #94a3b8;
-        }
-
-        .pro-box a {
-            color: #fbbf24;
-            font-weight: 800;
-            text-decoration: none;
-        }
-
-        /* TOAST */
-        #toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: #10b981;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 99px;
-            font-size: 13px;
-            font-weight: 800;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-            z-index: 9999;
-            pointer-events: none;
-        }
-
-        #toast.show {
-            transform: translateX(-50%) translateY(0);
+            font-size: 11.5px; color: #94a3b8;
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <div class="badge-success">
-            <span>✅</span> VƯỢT LINK THÀNH CÔNG
-        </div>
+        <div class="badge">🎉 FREE FOREVER • KHÔNG CẦN KEY</div>
+        <h1>Đã Gỡ Bỏ Hệ Thống Key!</h1>
+        <p class="sub">
+            Từ <b>FlowOptimize v1.6.0</b>, toàn bộ tính năng tối ưu eSports đều <b>miễn phí 100%</b> và mở sẵn ngay khi cài đặt. Nếu máy bạn vẫn đang chạy bản cũ bị hỏi Key, hãy tải bản mới nhất bên dưới để cập nhật đè lên.
+        </p>
 
-        <h1>XÁC THỰC HOÀN TẤT!</h1>
-        <p class="sub">Giai đoạn ra mắt: Bạn <b>KHÔNG CẦN</b> sao chép mã Key! Bấm nút bên dưới để mở App và tự động kích hoạt 24 Giờ Miễn Phí (Full PRO VIP).</p>
-
-        <!-- COUNTDOWN TIMER -->
-        <div class="timer-card">
-            <div class="timer-label">
-                <span>⏱️</span> Thời Gian Còn Lại
-            </div>
-            <div class="countdown-grid">
-                <div class="time-box">
-                    <div class="time-num" id="hoursBox">23</div>
-                    <div class="time-txt">Giờ</div>
-                </div>
-                <div class="time-box">
-                    <div class="time-num" id="minutesBox">59</div>
-                    <div class="time-txt">Phút</div>
-                </div>
-                <div class="time-box">
-                    <div class="time-num" id="secondsBox">59</div>
-                    <div class="time-txt">Giây</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- MỞ APP BUTTON (1 CHẠM TỰ ĐỘNG MỞ KHÓA) -->
-        <a href="flowoptimize://unlock" class="btn-open-app" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-size: 14.5px; font-weight: 900; padding: 16px; border-radius: 14px; box-shadow: 0 8px 30px rgba(16, 185, 129, 0.5); text-decoration: none; margin-bottom: 12px;">
-            <span>🚀 BẤM MỞ APP & VÀO GAME NGAY</span>
+        <a href="FlowOptimize.apk" download class="btn-main">
+            <span>⬇️</span>
+            <span>TẢI FLOWOPTIMIZE v1.6.0 APK (MIỄN PHÍ)</span>
+        </a>
+        <a href="https://gofile.io/d/Vr3bEORd" target="_blank" rel="noopener noreferrer" class="btn-alt">
+            <span>☁️</span>
+            <span>Link Tải Gofile • FlowOptimize v1.6.0</span>
+        </a>
+        <a href="index.html#download" class="btn-alt" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.16); color: #e2e8f0;">
+            <span>🏠</span>
+            <span>Mở Trang Tải Bộ 3 Ứng Dụng Flowly</span>
         </a>
 
-        <div>
-            <a href="intent://com.example.gameoptimizer#Intent;scheme=package;package=com.example.gameoptimizer;end" style="color: #38bdf8; font-size: 12px; font-weight: 700; text-decoration: underline; display: inline-block; margin-bottom: 18px;">
-                👉 Hoặc bấm mở App dự phòng tại đây
-            </a>
-        </div>
-
-        <!-- INFO LIST -->
-        <div class="info-list">
-            <div class="info-row">
-                <span class="info-label">Thiết bị áp dụng:</span>
-                <span class="info-val" id="infoHwid">...</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Trạng thái:</span>
-                <span class="info-val" style="color: #34d399;">👑 FULL CHỨC NĂNG VIP 30 GIỜ</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Thời hạn:</span>
-                <span class="info-val" id="infoExpires" style="color: #f87171;">...</span>
-            </div>
+        <div class="footer">
+            <b>© Bản quyền thuộc về Flowly Engine</b>
         </div>
     </div>
-
-    <div id="toast">✅ Đã sao chép mã Key VIP 30h!</div>
-
-    <script>
-        const KEY_SALT = "FLOWLY_SECRET_KEY_SALT_2026_ESPORTS";
-
-        // Lấy thông số từ URL
-        const urlParams = new URLSearchParams(window.location.search);
-        let hwid = urlParams.get('hwid');
-        if (!hwid || hwid.trim() === '') {
-            hwid = 'OPPO_UNKNOWN';
-        } else {
-            hwid = hwid.trim().toUpperCase();
-        }
-
-        document.getElementById('infoHwid').textContent = hwid;
-
-        // Tính toán mốc thời gian (30 giờ kể từ hiện tại)
-        const nowMs = Date.now();
-        const expiryMs = nowMs + 30 * 3600 * 1000;
-        const expirySec = Math.floor(expiryMs / 1000);
-        const expiryHex = expirySec.toString(16).toUpperCase();
-
-        // Định dạng ngày giờ hiển thị
-        function formatDate(d) {
-            const pad = n => n.toString().padStart(2, '0');
-            return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())} - ${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}`;
-        }
-
-        document.getElementById('infoCreated').textContent = formatDate(new Date(nowMs));
-        document.getElementById('infoExpires').textContent = formatDate(new Date(expiryMs));
-
-        let generatedKey = "";
-
-        // Hàm SHA-256 dùng Web Crypto API
-        async function generateSignedKey() {
-            try {
-                const sigInput = `${hwid}:${expirySec}:${KEY_SALT}`;
-                const enc = new TextEncoder();
-                const hashBuffer = await crypto.subtle.digest('SHA-256', enc.encode(sigInput));
-                const hashArray = Array.from(new Uint8Array(hashBuffer));
-                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
-                const sig8 = hashHex.substring(0, 8);
-
-                generatedKey = `FLOW30-${hwid}-${expiryHex}-${sig8}`;
-                document.getElementById('keyValDisplay').textContent = generatedKey;
-            } catch (e) {
-                // Fallback nếu môi trường chặn crypto.subtle
-                const simpleHash = Math.abs(hwid.split('').reduce((a,b)=>(((a<<5)-a)+b.charCodeAt(0))|0, 0)).toString(16).toUpperCase().padStart(8, '0').slice(0, 8);
-                generatedKey = `FLOW30-${hwid}-${expiryHex}-${simpleHash}`;
-                document.getElementById('keyValDisplay').textContent = generatedKey;
-            }
-        }
-
-        generateSignedKey();
-
-        // ĐỒNG HỒ ĐẾM NGƯỢC 24H REALTIME
-        function updateCountdown() {
-            const current = Date.now();
-            let diff = Math.max(0, Math.floor((expiryMs - current) / 1000));
-
-            const hours = Math.floor(diff / 3600);
-            diff %= 3600;
-            const minutes = Math.floor(diff / 60);
-            const seconds = diff % 60;
-
-            document.getElementById('hoursBox').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutesBox').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('secondsBox').textContent = seconds.toString().padStart(2, '0');
-
-            if (diff <= 0) {
-                document.getElementById('keyValDisplay').textContent = "MÃ KEY ĐÃ HẾT HẠN (VUI LÒNG VƯỢT LẠI)";
-            }
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // SAO CHÉP VÀO CLIPBOARD
-        function copyKeyToClipboard() {
-            if (!generatedKey) return;
-            navigator.clipboard.writeText(generatedKey).then(() => {
-                showToast("📋 Đã sao chép! Hãy mở app FlowOptimize và dán vào ô nhập Key.");
-            }).catch(() => {
-                const ta = document.createElement('textarea');
-                ta.value = generatedKey;
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-                showToast("📋 Đã sao chép! Hãy mở app FlowOptimize và dán vào ô nhập Key.");
-            });
-        }
-
-        function showToast(msg) {
-            const t = document.getElementById('toast');
-            t.textContent = msg;
-            t.classList.add('show');
-            setTimeout(() => {
-                t.classList.remove('show');
-            }, 3000);
-        }
-    </script>
 </body>
 </html>
-

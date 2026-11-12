@@ -1,333 +1,162 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cổng Lấy Key VIP 30 Giờ • FlowOptimize eSports</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <title>Miễn Phí 100% — Không Cần Key • Flowly Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #030712;
-            --card-bg: rgba(15, 23, 42, 0.85);
-            --card-border: rgba(56, 189, 248, 0.25);
+            --card-bg: rgba(15, 23, 42, 0.88);
+            --card-border: rgba(16, 185, 129, 0.35);
             --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.35);
             --green: #10b981;
-            --gold: #f59e0b;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
         body {
             background: var(--bg);
             background-image:
-                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15), transparent 60%),
-                radial-gradient(circle at 100% 100%, rgba(245, 158, 11, 0.08), transparent 50%);
+                radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.16), transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.1), transparent 50%);
             color: #f8fafc;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px 16px;
         }
-
         .container {
             width: 100%;
-            max-width: 440px;
+            max-width: 460px;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 24px;
             padding: 28px 22px;
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px var(--accent-glow);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(16, 185, 129, 0.25);
             text-align: center;
             position: relative;
             overflow: hidden;
         }
-
         .container::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #38bdf8, #818cf8, #f59e0b);
+            top: 0; left: 0; right: 0; height: 3.5px;
+            background: linear-gradient(90deg, #10b981, #38bdf8, #ec4899);
         }
-
         .logo-wrap {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 64px;
-            height: 64px;
+            width: 68px; height: 68px;
             border-radius: 18px;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            margin-bottom: 16px;
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            margin-bottom: 14px;
         }
-
-        .logo-wrap img {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            object-fit: cover;
+        .logo-wrap img { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; }
+        .badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.16);
+            border: 1px solid #10b981;
+            color: #34d399;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 99px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
         }
-
-        h1 {
-            font-size: 21px;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            color: #fff;
-            margin-bottom: 6px;
-        }
-
-        .sub {
-            font-size: 13px;
-            color: #94a3b8;
-            margin-bottom: 22px;
-            line-height: 1.5;
-        }
-
-        .hwid-card {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px dashed rgba(56, 189, 248, 0.4);
+        h1 { font-size: 21px; font-weight: 900; color: #fff; margin-bottom: 8px; line-height: 1.35; }
+        .sub { font-size: 13px; color: #cbd5e1; margin-bottom: 20px; line-height: 1.55; }
+        .notice-box {
+            background: rgba(30, 41, 59, 0.72);
+            border: 1px solid rgba(56, 189, 248, 0.28);
             border-radius: 16px;
-            padding: 14px 16px;
+            padding: 15px;
             margin-bottom: 20px;
             text-align: left;
-        }
-
-        .hwid-label {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #38bdf8;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .hwid-val {
-            font-family: monospace;
-            font-size: 16px;
-            font-weight: 800;
-            color: #f1f5f9;
-            word-break: break-all;
-            background: rgba(15, 23, 42, 0.8);
-            padding: 8px 12px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .steps-box {
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 24px;
-            text-align: left;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .step-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 12px;
             font-size: 12.5px;
-            color: #cbd5e1;
-            line-height: 1.5;
+            color: #e2e8f0;
+            line-height: 1.6;
         }
-
-        .step-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .step-num {
-            min-width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #0284c7, #38bdf8);
-            color: #fff;
-            font-size: 11px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 1px;
-        }
-
-        .btn-start {
+        .btn-primary {
             width: 100%;
-            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            background: linear-gradient(135deg, #059669, #10b981);
             color: #fff;
             font-size: 14px;
             font-weight: 900;
-            padding: 16px;
+            padding: 15px;
             border-radius: 14px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 8px 30px rgba(2, 132, 199, 0.4);
+            text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            text-decoration: none;
-            transition: all 0.25s ease;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+            margin-bottom: 10px;
         }
-
-        .btn-start:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(56, 189, 248, 0.6);
-        }
-
-        .btn-start:active {
-            transform: scale(0.98);
-        }
-
-        .pro-promo {
-            margin-top: 20px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 12px;
-            color: #94a3b8;
-        }
-
-        .pro-promo a {
-            color: #fbbf24;
+        .btn-secondary {
+            width: 100%;
+            background: rgba(56, 189, 248, 0.14);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+            font-size: 13px;
             font-weight: 800;
+            padding: 13px;
+            border-radius: 14px;
             text-decoration: none;
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 4px;
-            margin-top: 6px;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 10px;
         }
-
-        .pro-promo a:hover {
-            text-decoration: underline;
+        .footer {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 11.5px;
+            color: #94a3b8;
         }
     </style>
 </head>
-
 <body>
-
     <div class="container">
         <div class="logo-wrap">
-            <img src="app_logo.png" alt="Logo">
+            <img src="app_logo.png" alt="FlowOptimize Logo">
+        </div>
+        <div class="badge">✅ CHÍNH THỨC MIỄN PHÍ 100%</div>
+        <h1>FlowOptimize Đã Gỡ Bỏ Hoàn Toàn Yêu Cầu Lấy Key</h1>
+        <p class="sub">
+            Từ bản cập nhật <b>FlowOptimize v1.6.0</b> (cùng <b>FlowS v1.2.0</b> và <b>FlowUltra v1.1.0</b>), toàn bộ hệ sinh thái đã mở khóa <b>Miễn Phí Vĩnh Viễn</b>, không cần nhập Key hay qua bất kỳ trang trung gian nào.
+        </p>
+
+        <div class="notice-box">
+            <b>⚠️ Nếu ứng dụng trên máy bạn vẫn hiện màn hình đòi Key:</b><br>
+            Bạn đang dùng phiên bản cũ trước đây. Chỉ cần tải và cài đặt đè bản <b>FlowOptimize v1.6.0</b> bên dưới là sử dụng được ngay lập tức!
         </div>
 
-        <h1>XÁC THỰC MỞ KHÓA 30 GIỜ</h1>
-        <p class="sub">Vượt link nhanh để mở khóa toàn bộ tính năng FlowOptimize Full PRO VIP trong 30 giờ (Gói mua VIP
-            không cần vượt link)</p>
+        <a href="FlowOptimize.apk" download class="btn-primary">
+            <span>⬇️</span>
+            <span>TẢI NGAY FLOWOPTIMIZE v1.6.0 (TRỰC TIẾP)</span>
+        </a>
 
-        <!-- HWID BOX -->
-        <div class="hwid-card">
-            <div class="hwid-label">
-                <span>📱</span> Thiết bị được liên kết:
-            </div>
-            <div class="hwid-val">
-                <span id="hwidDisplay">Đang nhận diện...</span>
-                <span
-                    style="font-size: 11px; background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">CỐ
-                    ĐỊNH</span>
-            </div>
-            <div style="font-size: 11px; color: #64748b; margin-top: 6px;">
-                *Thiết bị của bạn được mở khóa 100% tính năng PRO VIP hoàn toàn miễn phí.
-            </div>
+        <a href="https://gofile.io/d/Vr3bEORd" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+            <span>☁️</span>
+            <span>Link Dự Phòng Gofile • FlowOptimize v1.6.0</span>
+        </a>
+
+        <a href="index.html#download" class="btn-secondary" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.16); color: #e2e8f0;">
+            <span>🏠</span>
+            <span>Về Trang Chủ Bio (Tải Bộ 3 App Miễn Phí)</span>
+        </a>
+
+        <div class="footer">
+            <b>© Bản quyền thuộc về Flowly Engine</b><br>
+            Hỗ trợ: <a href="https://t.me/+dtVBEzwuN2Q4NmI9" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: none; font-weight: 700;">Nhóm Telegram FlowOp</a>
         </div>
-
-        <!-- HƯỚNG DẪN 3 BƯỚC -->
-        <div class="steps-box">
-            <div class="step-item">
-                <div class="step-num">1</div>
-                <div>Bấm <b>Xác Minh TikTok</b> bên dưới để xác thực kênh chính thức (@xxd5974).</div>
-            </div>
-            <div class="step-item">
-                <div class="step-num">2</div>
-                <div>Hệ thống tự động kích hoạt link vượt Link4m (an toàn 100%).</div>
-            </div>
-            <div class="step-item">
-                <div class="step-num">3</div>
-                <div>Sau khi hoàn tất, nhận Key PRO VIP 30 giờ mở khóa toàn diện!</div>
-            </div>
-        </div>
-
-        <!-- NÚT BẮT ĐẦU VƯỢT LINK (XÁC THỰC TIKTOK 8S ẨN) -->
-        <button id="btnBypassLink" type="button" class="btn-start" onclick="handleTiktokKeyVerification()">
-            <span>🎵 THEO DÕI TIKTOK ĐỂ MỞ KHÓA LINK</span>
-        </button>
     </div>
-
-    <script>
-        // Lấy thông số từ URL
-        const urlParams = new URLSearchParams(window.location.search);
-        let hwid = urlParams.get('hwid');
-
-        if (!hwid || hwid.trim() === '') {
-            hwid = 'DEVICE_' + Math.random().toString(36).substring(2, 10).toUpperCase();
-        } else {
-            hwid = hwid.trim().toUpperCase();
-        }
-
-        document.getElementById('hwidDisplay').textContent = hwid;
-
-        // Chuyển hướng nếu đang ở trên Vercel để tránh tự tạo link4m làm bóp CPM
-        if (window.location.hostname && window.location.hostname.includes("vercel.app")) {
-            window.location.replace("https://zslowcuong.github.io/bio/getkey.html" + window.location.search);
-        }
-
-        // Cấu hình Link4m API token (Cố định theo HWID, không kèm timestamp ngẫu nhiên để tránh bóp CPM)
-        const link4mApi = "6ae77b1c1473a714b32b2a3a";
-        const baseBioUrl = "https://zslowcuong.github.io/bio/";
-        const destinationShowKey = `${baseBioUrl}showkey.html?hwid=${encodeURIComponent(hwid)}`;
-
-        // Tạo link rút gọn Link4m cố định theo thiết bị
-        const shortLink = `https://link4m.co/st?api=${link4mApi}&url=${encodeURIComponent(destinationShowKey)}`;
-
-        let isTiktokVerified = false;
-
-        function handleTiktokKeyVerification() {
-            const btn = document.getElementById('btnBypassLink');
-            if (isTiktokVerified) {
-                btn.innerHTML = `<span>⏳ ĐANG CHUYỂN HƯỚNG SANG LINK4M...</span>`;
-                window.location.href = shortLink;
-                return;
-            }
-
-            // Mở TikTok trong tab mới
-            window.open("https://www.tiktok.com/@xxd5974", '_blank');
-
-            btn.disabled = true;
-            btn.innerHTML = `<span>⏳ ĐANG XÁC THỰC KÊNH TIKTOK...</span>`;
-            btn.style.opacity = '0.75';
-            btn.style.pointerEvents = 'none';
-
-            // 8 giây xác thực chạy ngầm ẩn đi hoàn toàn (không hiện đếm ngược)
-            setTimeout(() => {
-                isTiktokVerified = true;
-                btn.disabled = false;
-                btn.style.opacity = '1';
-                btn.style.pointerEvents = 'auto';
-                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-                btn.innerHTML = `<span>🚀 BẮT ĐẦU VƯỢT LINK (LINK4M) ➔</span>`;
-            }, 8000);
-        }
-    </script>
 </body>
-
 </html>
