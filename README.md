@@ -3,7 +3,7 @@
 
 ![Flow Banner](app_logo.png)
 
-> **Flow Ecosystem** là bộ tứ công cụ tối ưu hóa phần cứng và gaming eSports chuyên sâu dành cho thiết bị Android, phát triển bởi **Flowly Engine**. Hỗ trợ **Dùng thử 3 Ngày Full PRO**, cổng vượt link **Key VIP 30 Giờ** khóa cứng theo thiết bị & ứng dụng, cùng **Shop Key PRO VietQR Techcombank tự động**.
+> **Flow Ecosystem** là bộ tứ công cụ tối ưu hóa phần cứng và gaming eSports chuyên sâu dành cho thiết bị Android, phát triển bởi **Flowly Engine**. Hỗ trợ **Dùng thử 3 Ngày Full PRO**, cổng vượt link **Key VIP 30 Giờ** khóa cứng theo thiết bị & ứng dụng, cùng **Shop Key PRO VietQR TPBank tự động**.
 
 ---
 

@@ -75,7 +75,7 @@ export default async function handler(req, res) {
         planName: plan.name,
         price: plan.price,
         phone,
-        method: 'VIETQR_TCB',
+        method: 'VIETQR_TPB',
         qrUrl,
         status: 'PENDING',
         key: null,
@@ -96,7 +96,7 @@ export default async function handler(req, res) {
         `📱 <b>App:</b> ${APPS[appId].name}\n` +
         `🆔 <b>HWID:</b> <code>${hwid}</code>\n` +
         `👤 <b>SĐT/Zalo:</b> <code>${phone}</code>\n\n` +
-        `🏦 <i>Chờ tiền thực về 0827353177 TECHCOMBANK trước khi cấp Key!</i>`
+        `🏦 <i>Chờ tiền thực về 10006503497 TPBANK trước khi cấp Key!</i>`
       );
 
       return res.status(200).json({
@@ -170,7 +170,7 @@ export default async function handler(req, res) {
             paid: false,
             order,
             sepayError: err.message,
-            message: 'Đang kiểm tra giao dịch Techcombank, vui lòng đợi thêm giây lát...',
+            message: 'Đang kiểm tra giao dịch TPBank, vui lòng đợi thêm giây lát...',
             ...backendStatus,
           });
         }
@@ -181,8 +181,8 @@ export default async function handler(req, res) {
         paid: false,
         order,
         message: sepayApiKey
-          ? `Chưa thấy giao dịch ${Number(order.price).toLocaleString('vi-VN')}đ kèm nội dung "${order.memo}" về Techcombank. Vui lòng chuyển khoản đúng QR rồi bấm kiểm tra lại.`
-          : 'Đơn đang chờ xác nhận biến động số dư Techcombank (Chưa gắn SEPAY_API_KEY trên Vercel — Admin sẽ duyệt tay ngay khi thấy tiền về).',
+          ? `Chưa thấy giao dịch ${Number(order.price).toLocaleString('vi-VN')}đ kèm nội dung "${order.memo}" về TPBank. Vui lòng chuyển khoản đúng QR rồi bấm kiểm tra lại.`
+          : 'Đơn đang chờ xác nhận biến động số dư TPBank (Chưa gắn SEPAY_API_KEY trên Vercel — Admin sẽ duyệt tay ngay khi thấy tiền về).',
         ...backendStatus,
       });
     }

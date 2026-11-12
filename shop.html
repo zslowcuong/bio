@@ -163,10 +163,10 @@
         </div>
 
         <div class="hero">
-            <span class="hero-badge">🏦 VIETQR TECHCOMBANK TỰ ĐỘNG • AN TOÀN TUYỆT ĐỐI</span>
+            <span class="hero-badge">🏦 VIETQR TPBANK TỰ ĐỘNG • AN TOÀN TUYỆT ĐỐI</span>
             <h1>Nâng Cấp Key PRO Chuyên Biệt Cho Game</h1>
             <p>
-                Mở khóa toàn bộ tính năng Game PRO (GameSpace, 120Hz/165Hz, Touch 180Hz+, Độ phân giải từng Game, Đồ Họa API Vulkan/ANGLE, Xung CPU/GPU MHz) không giới hạn vượt link. Chỉ hỗ trợ <b>Chuyển khoản VietQR Techcombank</b> để đảm bảo xác thực tiền về chính xác 100%.
+                Mở khóa toàn bộ tính năng Game PRO (GameSpace, 120Hz/165Hz, Touch 180Hz+, Độ phân giải từng Game, Đồ Họa API Vulkan/ANGLE, Xung CPU/GPU MHz) không giới hạn vượt link. Chỉ hỗ trợ <b>Chuyển khoản VietQR TPBank</b> để đảm bảo xác thực tiền về chính xác 100%.
             </p>
         </div>
 
@@ -211,7 +211,7 @@
                 </div>
             </div>
             <div class="bank-pill">
-                <span>🏦 TK Nhận Tiền Duy Nhất: <b>0827353177 • TECHCOMBANK • TRAN CHI CUONG</b></span>
+                <span>🏦 TK Nhận Tiền Duy Nhất: <b>10006503497 • TPBANK • TRAN CHI CUONG</b></span>
                 <span id="backendBadge" style="font-weight:800;color:#38bdf8;">Đang kiểm tra cổng Auto Bank...</span>
             </div>
         </div>
@@ -280,23 +280,23 @@
     <div id="payModal" class="modal-overlay">
         <div class="modal-box">
             <button type="button" class="modal-close" onclick="closePayModal()">✕</button>
-            <h2 style="font-size:18px;font-weight:900;margin-bottom:4px;">🏦 Quét QR Chuyển Khoản Techcombank</h2>
+            <h2 style="font-size:18px;font-weight:900;margin-bottom:4px;">🏦 Quét QR Chuyển Khoản TPBank</h2>
             <p style="font-size:12px;color:#94a3b8;" id="modalOrderSubtitle">Mã đơn: ...</p>
 
             <div class="qr-frame">
-                <img id="qrImg" src="" alt="VietQR Techcombank">
+                <img id="qrImg" src="" alt="VietQR TPBank">
             </div>
 
             <div class="bank-info">
-                <div class="bank-line"><span>Ngân hàng:</span><b>TECHCOMBANK (TCB)</b></div>
-                <div class="bank-line"><span>Số tài khoản:</span><span><b>0827353177</b> <button class="copy-mini" onclick="copyStr('0827353177')">Copy</button></span></div>
+                <div class="bank-line"><span>Ngân hàng:</span><b>TPBANK (TPB)</b></div>
+                <div class="bank-line"><span>Số tài khoản:</span><span><b>10006503497</b> <button class="copy-mini" onclick="copyStr('10006503497')">Copy</button></span></div>
                 <div class="bank-line"><span>Chủ tài khoản:</span><b>TRAN CHI CUONG</b></div>
                 <div class="bank-line"><span>Số tiền đúng:</span><b id="modalPrice" style="color:#38bdf8;">0đ</b></div>
                 <div class="bank-line"><span>Nội dung CK:</span><span><b id="modalMemo" style="color:#fbbf24;">FLOW000000</b> <button class="copy-mini" onclick="copyStr(currentOrder?.memo || '')">Copy</button></span></div>
             </div>
 
             <div id="modalStatusBox" class="status-box">
-                ⏳ Hệ thống đang chờ giao dịch thực từ Techcombank. Vui lòng giữ nguyên số tiền và nội dung chuyển khoản!
+                ⏳ Hệ thống đang chờ giao dịch thực từ TPBank. Vui lòng giữ nguyên số tiền và nội dung chuyển khoản!
             </div>
 
             <div id="modalKeySuccess" style="display:none;">
@@ -399,7 +399,7 @@
             document.getElementById('modalPendingBtns').style.display = 'grid';
             const box = document.getElementById('modalStatusBox');
             box.className = 'status-box';
-            box.textContent = '⏳ Đang chờ giao dịch chuyển khoản thực tế vào 0827353177 TECHCOMBANK. Hệ thống tự kiểm tra mỗi 5 giây...';
+            box.textContent = '⏳ Đang chờ giao dịch chuyển khoản thực tế vào 10006503497 TPBANK. Hệ thống tự kiểm tra mỗi 5 giây...';
             document.getElementById('payModal').classList.add('show');
 
             if (pollTimer) clearInterval(pollTimer);
@@ -421,7 +421,7 @@
                 if (data.paid && currentOrder.key) {
                     if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
                     box.className = 'status-box paid';
-                    box.textContent = '✅ Đã xác nhận tiền về Techcombank thành công! Key PRO của bạn đã được mở khóa ngay bên dưới.';
+                    box.textContent = '✅ Đã xác nhận tiền về TPBank thành công! Key PRO của bạn đã được mở khóa ngay bên dưới.';
                     document.getElementById('modalPendingBtns').style.display = 'none';
                     document.getElementById('modalKeySuccess').style.display = 'block';
                     document.getElementById('issuedKeyBox').textContent = currentOrder.key;
@@ -450,10 +450,10 @@
                         hwid: currentOrder.hwid,
                         plan: currentOrder.planName,
                         price: currentOrder.price,
-                        method: 'VIETQR_TCB'
+                        method: 'VIETQR_TPB'
                     })
                 });
-                alert('📢 Đã gửi thông báo kèm Mã Đơn đến Telegram Admin! Admin sẽ đối chiếu App Techcombank và duyệt Key ngay nếu tiền đã vào.');
+                alert('📢 Đã gửi thông báo kèm Mã Đơn đến Telegram Admin! Admin sẽ đối chiếu App TPBank và duyệt Key ngay nếu tiền đã vào.');
             } catch (e) {
                 alert('❌ Không gửi được nhắc nhở: ' + e.message);
             }

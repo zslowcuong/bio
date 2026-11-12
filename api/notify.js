@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     }
 
     const title = eventType === 'CONFIRM_PAID'
-      ? `🚨 <b>[FLOW SHOP] KHÁCH BÁO ĐÃ CHUYỂN TIỀN TECHCOMBANK!</b>`
+      ? `🚨 <b>[FLOW SHOP] KHÁCH BÁO ĐÃ CHUYỂN TIỀN TPBANK!</b>`
       : `🔔 <b>[FLOW SHOP] CÓ ĐƠN HÀNG VIETQR MỚI!</b>`;
 
     const priceText = typeof price === 'number' ? price.toLocaleString('vi-VN') + ' VNĐ' : price;
@@ -25,9 +25,9 @@ export default async function handler(req, res) {
       `💎 <b>Gói Đặt Mua:</b> ${plan || 'Chưa rõ'}\n` +
       `💰 <b>Số Tiền:</b> <b>${priceText}</b>\n` +
       `📱 <b>Mã Máy HWID:</b> <code>${hwid || 'CHƯA_CÓ'}</code>\n` +
-      `🏦 <b>Hình Thức:</b> ${method || 'VIETQR_TCB'}\n` +
+      `🏦 <b>Hình Thức:</b> ${method || 'VIETQR_TPB'}\n` +
       `⏰ <b>Thời Gian:</b> ${createdAt || new Date().toLocaleString('vi-VN')}\n\n` +
-      `👉 <i>Kiểm tra App Techcombank (0827353177) rồi bấm Duyệt trên Admin Dashboard nếu chưa bật SePay tự động!</i>`;
+      `👉 <i>Kiểm tra App TPBank (10006503497) rồi bấm Duyệt trên Admin Dashboard nếu chưa bật SePay tự động!</i>`;
 
     const tgData = await sendTelegram(message);
     return res.status(200).json({ success: true, telegram: tgData });

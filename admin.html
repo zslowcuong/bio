@@ -324,7 +324,7 @@
         }
 
         async function approveOrder(orderCode) {
-            if (!confirm(`Xác nhận đã nhận tiền Techcombank cho đơn ${orderCode} và cấp Key PRO ngay?`)) return;
+            if (!confirm(`Xác nhận đã nhận tiền TPBank cho đơn ${orderCode} và cấp Key PRO ngay?`)) return;
             const res = await fetch(`${API_BASE}/api/admin?action=approve_order`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPinHash },

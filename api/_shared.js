@@ -7,9 +7,9 @@ export const TRIAL_DURATION_MS = 72 * 3600 * 1000; // 3 days (72 hours)
 export const VIP_DURATION_MS = 30 * 3600 * 1000;   // 30 hours free VIP
 
 export const BANK_CONFIG = {
-  bankCode: 'TCB',
-  bankName: 'TECHCOMBANK',
-  accountNo: '0827353177',
+  bankCode: 'TPB',
+  bankName: 'TPBANK',
+  accountNo: '10006503497',
   accountName: 'TRAN CHI CUONG',
 };
 
