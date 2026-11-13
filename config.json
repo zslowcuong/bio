@@ -6,7 +6,7 @@
   "api_token": "6ae77b1c1473a714b32b2a3a",
   "tiktok": "https://www.tiktok.com/@xxd5974",
   "telegram": "https://t.me/+dtVBEzwuN2Q4NmI9",
-  "wait_seconds": 15,
+  "wait_seconds": 8,
   "revoked_keys": [],
   "event_keys": {
     "flowoptimize": {
@@ -43,10 +43,38 @@
     }
   },
   "global_resets": {
-    "flowoptimize": { "active": false, "resetId": "", "duration_hours": 72, "title": "", "notice": "", "triggered_at_utc": 0 },
-    "flows": { "active": false, "resetId": "", "duration_hours": 72, "title": "", "notice": "", "triggered_at_utc": 0 },
-    "flowultra": { "active": false, "resetId": "", "duration_hours": 72, "title": "", "notice": "", "triggered_at_utc": 0 },
-    "flowextra": { "active": false, "resetId": "", "duration_hours": 72, "title": "", "notice": "", "triggered_at_utc": 0 }
+    "flowoptimize": {
+      "active": false,
+      "resetId": "",
+      "duration_hours": 72,
+      "title": "",
+      "notice": "",
+      "triggered_at_utc": 0
+    },
+    "flows": {
+      "active": false,
+      "resetId": "",
+      "duration_hours": 72,
+      "title": "",
+      "notice": "",
+      "triggered_at_utc": 0
+    },
+    "flowultra": {
+      "active": false,
+      "resetId": "",
+      "duration_hours": 72,
+      "title": "",
+      "notice": "",
+      "triggered_at_utc": 0
+    },
+    "flowextra": {
+      "active": false,
+      "resetId": "",
+      "duration_hours": 72,
+      "title": "",
+      "notice": "",
+      "triggered_at_utc": 0
+    }
   },
   "flowoptimize": {
     "name": "FlowOptimize Anime Edition",

@@ -209,7 +209,7 @@
             </div>
             <div class="step-item">
                 <div class="step-num">2</div>
-                <div>Bấm nút xác nhận bên dưới để mở kênh <b>TikTok @xxd5974</b> (xác thực chạy ngầm 15 giây).</div>
+                <div>Bấm nút xác nhận bên dưới để mở kênh <b>TikTok @xxd5974</b> (xác thực chạy ngầm 8 giây).</div>
             </div>
             <div class="step-item">
                 <div class="step-num">3</div>
@@ -315,7 +315,7 @@
             btn.style.pointerEvents = 'none';
             const startedAt = Date.now();
             const updateWaitText = () => {
-                const leftSec = Math.max(0, Math.ceil((15000 - (Date.now() - startedAt)) / 1000));
+                const leftSec = Math.max(0, Math.ceil((8000 - (Date.now() - startedAt)) / 1000));
                 if (leftSec > 0) {
                     btn.innerHTML = `<span>⏳ ĐANG XÁC MINH TIKTOK... (${leftSec}s)</span>`;
                 } else {

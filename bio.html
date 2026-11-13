@@ -7630,7 +7630,7 @@ settings put secure multi_press_timeout 200</code></pre>
         const globalConfig = {
             api_token: "6ae77b1c1473a714b32b2a3a",
             tiktok: "https://www.tiktok.com/@xxd5974",
-            wait_seconds: 15,
+            wait_seconds: 8,
             flows: {
                 destination_apk: "https://zslowcuong.github.io/bio/FlowS.apk",
                 direct_apk: "FlowS.apk"
@@ -7916,7 +7916,7 @@ settings put secure multi_press_timeout 200</code></pre>
                 banner.innerHTML = '✨ <b>Đang xác nhận Follow TikTok (@xxd5974)...</b> Vui lòng đợi trong giây lát để mở khóa nút tải về!';
             }
 
-            const totalMs = Math.max(15000, (Number(globalConfig.wait_seconds) || 15) * 1000);
+            const totalMs = Math.max(8000, (Number(globalConfig.wait_seconds) || 8) * 1000);
             const startTime = Date.now();
 
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);

@@ -2247,7 +2247,7 @@
         let globalConfig = {
             api_token: "6ae77b1c1473a714b32b2a3a",
             tiktok: "https://www.tiktok.com/@xxd5974",
-            wait_seconds: 15,
+            wait_seconds: 8,
             flows: {
                 destination_apk: "https://zslowcuong.github.io/bio/FlowS.apk",
                 direct_apk: "FlowS.apk"
@@ -2428,7 +2428,7 @@
             if (btnTikTok) btnTikTok.style.display = 'none';
             if (verifyBox) verifyBox.style.display = 'block';
 
-            const totalMs = Math.max(15000, (Number(globalConfig.wait_seconds) || 15) * 1000);
+            const totalMs = Math.max(8000, (Number(globalConfig.wait_seconds) || 8) * 1000);
             const startTime = Date.now();
 
             if (unlockTimerInterval) clearInterval(unlockTimerInterval);
