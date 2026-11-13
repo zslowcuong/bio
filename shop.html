@@ -434,7 +434,7 @@
         async function notifyAdminPaid() {
             if (!currentOrder) return;
             try {
-                await fetch(`${API_BASE}/api/notify`, {
+                await fetch(`${API_BASE}/api/shop?action=notify_paid`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({

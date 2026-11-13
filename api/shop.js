@@ -187,6 +187,26 @@ export default async function handler(req, res) {
       });
     }
 
+    if (action === 'notify_paid') {
+      const orderCode = String(body.orderCode || '').trim().toUpperCase();
+      const appName = String(body.appName || 'Flowly').trim();
+      const phone = String(body.phone || '').trim();
+      const hwid = normalizeHwid(body.hwid);
+      const plan = String(body.plan || '').trim();
+      const price = Number(body.price || 0);
+
+      await sendTelegram(
+        `📢 <b>[KHÁCH BÁO ĐÃ CHUYỂN KHOẢN]</b>\n\n` +
+        `📱 <b>App:</b> ${appName}\n` +
+        `📦 <b>Mã đơn / CK:</b> <code>${orderCode}</code>\n` +
+        `💎 <b>Gói:</b> ${plan} (<b>${price.toLocaleString('vi-VN')}đ</b>)\n` +
+        `🆔 <b>HWID:</b> <code>${hwid}</code>\n` +
+        `📞 <b>SĐT/Zalo:</b> <code>${phone}</code>\n\n` +
+        `👉 <i>Admin kiểm tra TPBank và bấm Duyệt Đơn trên Dashboard!</i>`
+      );
+      return res.status(200).json({ success: true });
+    }
+
     if (action === 'lookup') {
       const q = String(req.query?.q || body.q || '').trim().toUpperCase();
       if (!q || q.length < 4) {
