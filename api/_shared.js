@@ -326,12 +326,10 @@ export async function sendTelegram(text) {
 }
 
 export function isAdminAuthorized(req, body = {}) {
-  const pinHeader = String(req.headers['x-admin-pin'] || body.pin || body.pinHash || req.query?.pin || req.query?.pinHash || '').trim();
-  if (!pinHeader) return false;
+  const rawPin = String(req.headers['x-admin-pin'] || body.pin || req.query?.pin || '').trim();
+  if (!rawPin || rawPin.length === 64) return false;
+  const candidateHash = sha256Hex(rawPin).toLowerCase();
   const targetHash = ADMIN_HASH.toLowerCase();
-  
-  // If client sent raw PIN, hash it; if client sent 64-char hash, compare directly using timingSafeEqual
-  const candidateHash = pinHeader.length === 64 ? pinHeader.toLowerCase() : sha256Hex(pinHeader).toLowerCase();
   if (candidateHash.length !== targetHash.length) return false;
   return crypto.timingSafeEqual(Buffer.from(candidateHash, 'utf8'), Buffer.from(targetHash, 'utf8'));
 }
