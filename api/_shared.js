@@ -308,8 +308,11 @@ export async function getRevokedKeysList() {
 }
 
 export async function sendTelegram(text) {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN || '9262220150:AAGdwwtYyFYlzrlOU7B9BzxnGgBVy5Isg8I';
-  const chatId = process.env.TELEGRAM_CHAT_ID || '8264644840';
+  const botToken = process.env.TELEGRAM_BOT_TOKEN || '';
+  const chatId = process.env.TELEGRAM_CHAT_ID || '';
+  if (!botToken || !chatId) {
+    return { ok: false, error: 'TELEGRAM_ENV_NOT_CONFIGURED' };
+  }
   try {
     const r = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
       method: 'POST',
@@ -323,13 +326,14 @@ export async function sendTelegram(text) {
 }
 
 export function isAdminAuthorized(req, body = {}) {
-  const headerPin = String(req.headers['x-admin-pin'] || '').trim();
-  const bodyHash = String(body.pinHash || req.query?.pinHash || '').trim().toLowerCase();
-  const bodyPin = String(body.pin || req.query?.pin || '').trim();
-  if (bodyHash && bodyHash === ADMIN_HASH.toLowerCase()) return true;
-  if (headerPin && (headerPin.toLowerCase() === ADMIN_HASH.toLowerCase() || sha256Hex(headerPin).toLowerCase() === ADMIN_HASH.toLowerCase())) return true;
-  if (bodyPin && sha256Hex(bodyPin).toLowerCase() === ADMIN_HASH.toLowerCase()) return true;
-  return false;
+  const pinHeader = String(req.headers['x-admin-pin'] || body.pin || body.pinHash || req.query?.pin || req.query?.pinHash || '').trim();
+  if (!pinHeader) return false;
+  const targetHash = ADMIN_HASH.toLowerCase();
+  
+  // If client sent raw PIN, hash it; if client sent 64-char hash, compare directly using timingSafeEqual
+  const candidateHash = pinHeader.length === 64 ? pinHeader.toLowerCase() : sha256Hex(pinHeader).toLowerCase();
+  if (candidateHash.length !== targetHash.length) return false;
+  return crypto.timingSafeEqual(Buffer.from(candidateHash, 'utf8'), Buffer.from(targetHash, 'utf8'));
 }
 
 export function makePaymentMemo(num6) {
