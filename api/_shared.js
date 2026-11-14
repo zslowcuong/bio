@@ -65,7 +65,6 @@ export const APPS = {
 export function normalizeAppId(raw) {
   const s = String(raw || 'flowoptimize').trim().toLowerCase();
   if (s === 'all' || s === 'combo' || s === 'all_apps' || s === 'combo_all') return 'all';
-  const s = String(raw || 'flowoptimize').trim().toLowerCase();
   if (s === 'flowop' || s === 'flowoptimize' || s === 'com.example.gameoptimizer') return 'flowoptimize';
   if (s === 'flows' || s === 'com.flows.gaming') return 'flows';
   if (s === 'flowultra' || s === 'com.flows.flowultra') return 'flowultra';
@@ -450,3 +449,46 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
   return completed;
 }
 
+
+export async function getLifetimePricingTier() {
+  const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+  const lifeCount = issuedKeys.filter(
+    (k) => k && (k.planCode === 'LIFE' || k.appId === 'all' || k.allApps === true)
+  ).length;
+
+  let currentPrice = 99000;
+  let tierNumber = 1;
+  let tierBadge = '';
+  let slotsLeft = 10;
+  let totalSlotsInTier = 10;
+
+  if (lifeCount < 10) {
+    tierNumber = 1;
+    currentPrice = 99000;
+    slotsLeft = Math.max(1, 10 - lifeCount);
+    totalSlotsInTier = 10;
+    tierBadge = `🔥 SỰ KIỆN RA MẮT • CÒN [${slotsLeft}/10] SUẤT 99K`;
+  } else if (lifeCount < 25) {
+    tierNumber = 2;
+    currentPrice = 169000;
+    slotsLeft = Math.max(1, 25 - lifeCount);
+    totalSlotsInTier = 15;
+    tierBadge = `⚡ ƯU ĐÃI ĐỢT 2 • CÒN [${slotsLeft}/15] SUẤT 169K (GIÁ CHUẨN 249K)`;
+  } else {
+    tierNumber = 3;
+    currentPrice = 249000;
+    slotsLeft = 0;
+    totalSlotsInTier = 0;
+    tierBadge = `👑 GIÁ CHUẨN ỔN ĐỊNH • TIẾT KIỆM 50%`;
+  }
+
+  return {
+    lifeCount,
+    tierNumber,
+    currentPrice,
+    tierBadge,
+    slotsLeft,
+    totalSlotsInTier,
+    originalPrice: 499000,
+  };
+}

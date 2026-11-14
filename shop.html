@@ -238,10 +238,10 @@
                         <div class="plan-name">⚡ Gói Tuần (7 Ngày)</div>
                         <div class="plan-price">15.000đ</div>
                         <ul class="plan-perks">
-                            <li>✅ Full 100% Tính Năng Game PRO</li>
+                            <li>✅ Phễu dùng thử nhanh (2.143đ/ngày)</li>
                             <li>✅ Không cần vượt link trong 7 ngày</li>
-                            <li>✅ Đếm ngược Ngày/Giờ/Phút/Giây</li>
-                            <li>✅ Khóa riêng cho <b class="appNameInline">FlowOptimize</b></li>
+                            <li>✅ Full 100% tính năng <b class="appNameInline">FlowOptimize</b></li>
+                            <li>✅ Đổi máy (HWID) bảo hành suốt 7 ngày</li>
                         </ul>
                     </div>
                     <button type="button" class="btn-buy" onclick="createShopOrder('7D')">🏦 Mua Gói 7 Ngày • 15K</button>
@@ -253,32 +253,35 @@
                         <div class="plan-name">👑 Gói Tháng (30 Ngày)</div>
                         <div class="plan-price" style="color:#fbbf24;">39.000đ</div>
                         <ul class="plan-perks">
-                            <li>✅ Full 100% Tính Năng Game PRO</li>
-                            <li>✅ Tiết kiệm 35% so với gói tuần</li>
-                            <li>✅ Tự nhận diện CK &amp; cấp Key ngay</li>
-                            <li>✅ Bảo hành đổi HWID qua Telegram</li>
+                            <li>✅ Tiết kiệm 35,0% so với 4 tuần lẻ (chỉ 1.300đ/ngày)</li>
+                            <li>✅ Mở khóa Full 100% Tính Năng Game PRO</li>
+                            <li>✅ Tự động nhận diện CK &amp; cấp Key ngay</li>
+                            <li>🛡️ <b>Bảo hành:</b> Đổi HWID qua Telegram suốt 30 ngày</li>
                         </ul>
                     </div>
                     <button type="button" class="btn-buy" onclick="createShopOrder('30D')">🏦 Mua Gói 30 Ngày • 39K</button>
                 </div>
 
-                <div class="plan-card" style="border: 1px solid #10b981; box-shadow: 0 0 24px rgba(16, 185, 129, 0.22); position: relative;">
-                    <span class="plan-tag" style="background: linear-gradient(135deg, #059669, #10b981); color: #fff;">👑 COMBO 4 APP • SIÊU TIẾT KIỆM</span>
+                <div class="plan-card" style="border: 1px solid #10b981; box-shadow: 0 0 24px rgba(16, 185, 129, 0.28); position: relative;">
+                    <span class="plan-tag" id="lifeTierBadge" style="background: linear-gradient(135deg, #059669, #10b981); color: #fff;">🔥 SỰ KIỆN RA MẮT • CÒN [10/10] SUẤT 99K</span>
                     <div>
                         <div class="plan-name" style="color: #6ee7b7;">💎 Gói Vĩnh Viễn (Full 4 App)</div>
-                        <div class="plan-price" style="color:#34d399;">99.000đ <span style="font-size: 13px; text-decoration: line-through; color: #64748b; font-weight: 500;">499.000đ</span></div>
+                        <div class="plan-price" style="color:#34d399;"><span id="lifePriceLabel">99.000đ</span> <span style="font-size: 13px; text-decoration: line-through; color: #64748b; font-weight: 500;">499.000đ</span></div>
                         <ul class="plan-perks">
                             <li style="color:#a7f3d0; font-weight: 700;">🔥 Xài FULL 4 Ứng Dụng trên cùng 1 máy:</li>
-                            <li style="padding-left: 8px;">• 🌸 <b>FlowOptimize</b> (Tối ưu phần cứng &amp; HUD)</li>
+                            <li style="padding-left: 8px;">• 🌸 <b>FlowOptimize</b> (Tối ưu phần cứng, 120Hz &amp; HUD)</li>
                             <li style="padding-left: 8px;">• 🎯 <b>FlowS Gamer</b> (Độ nhạy &amp; Zayon Sens)</li>
                             <li style="padding-left: 8px;">• 🚀 <b>FlowUltra</b> (Phantom limit, SkiaVK, Zero Blur)</li>
                             <li style="padding-left: 8px;">• 🎩 <b>FlowExtra</b> (GameSpace, Trim RAM &amp; Combat)</li>
                             <li>✅ 1 Mã Key duy nhất kích hoạt chung cho cả 4 app</li>
-                            <li>✅ Kích hoạt 1 app là 3 app còn lại tự động mở khóa theo</li>
-                            <li>✅ Dùng trọn đời máy • Miễn phí mọi bản cập nhật</li>
+                            <li>✅ Tự động đồng bộ chéo giữa các app khi cài lại</li>
+                            <li>✅ Dùng trọn đời máy • Miễn phí mọi bản cập nhật mới</li>
+                            <li style="color:#fde047; font-size: 11.5px; border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 6px; margin-top: 6px;">
+                                🔒 <b>Quy tắc HWID:</b> Khóa cố định 1 thiết bị • Miễn phí 1 lần đổi HWID đầu tiên qua Telegram (từ lần thứ 2 thu phí 20K–30K)
+                            </li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-buy" style="background:linear-gradient(135deg,#059669,#10b981);" onclick="createShopOrder('LIFE')">👑 Mua Vĩnh Viễn Full 4 App • 99K</button>
+                    <button type="button" class="btn-buy" id="lifeBuyBtn" style="background:linear-gradient(135deg,#059669,#10b981);" onclick="createShopOrder('LIFE')">👑 Mua Vĩnh Viễn Full 4 App • 99K</button>
                 </div>
             </div>
         </div>
@@ -352,7 +355,36 @@
         let currentOrder = null;
         let pollTimer = null;
 
-        function selectApp(appId) {
+        
+let currentLifePrice = 99000;
+
+async function syncDynamicPricing() {
+    try {
+        const res = await fetch(`${API_BASE}/api/shop?action=pricing`);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.pricing) {
+            const p = data.pricing;
+            currentLifePrice = p.currentPrice || 99000;
+            const badgeEl = document.getElementById('lifeTierBadge');
+            if (badgeEl && p.tierBadge) {
+                badgeEl.textContent = p.tierBadge;
+            }
+            const priceEl = document.getElementById('lifePriceLabel');
+            if (priceEl) {
+                priceEl.textContent = `${currentLifePrice.toLocaleString('vi-VN')}đ`;
+            }
+            const btnEl = document.getElementById('lifeBuyBtn');
+            if (btnEl) {
+                btnEl.textContent = `👑 Mua Vĩnh Viễn Full 4 App • ${Math.round(currentLifePrice/1000)}K`;
+            }
+        }
+    } catch (e) {
+        console.warn('Could not sync dynamic pricing:', e);
+    }
+}
+
+function selectApp(appId) {
             selectedAppId = APPS[appId] ? appId : 'flowoptimize';
             document.querySelectorAll('.app-btn').forEach(b => b.classList.toggle('active', b.dataset.app === selectedAppId));
             document.getElementById('selectedAppLabel').textContent = APPS[selectedAppId].name;
@@ -501,6 +533,7 @@
         }
 
         selectApp(selectedAppId);
+syncDynamicPricing();
     </script>
 </body>
 </html>

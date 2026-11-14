@@ -4,6 +4,7 @@ import {
   PLANS,
   buildVietQrUrl,
   completeOrderWithProKey,
+  getLifetimePricingTier,
   dbGetJson,
   dbSetJson,
   getBackendStatus,
@@ -32,6 +33,18 @@ export default async function handler(req, res) {
     const action = String(req.query?.action || body.action || 'status').trim().toLowerCase();
     const backendStatus = getBackendStatus();
 
+    if (action === 'pricing') {
+      const pricing = await getLifetimePricingTier();
+      return res.status(200).json({
+        success: true,
+        pricing,
+        plans: PLANS,
+        bank: BANK_CONFIG,
+        serverNowUtc,
+        ...backendStatus,
+      });
+    }
+
     if (action === 'status') {
       return res.status(200).json({
         success: true,
@@ -59,13 +72,19 @@ export default async function handler(req, res) {
       }
 
       const plan = PLANS[planCode];
+      const isLifeCombo = planCode === 'LIFE' || appId === 'all';
+      let finalPrice = plan.price;
+      let pricingTierInfo = null;
+      if (isLifeCombo) {
+        pricingTierInfo = await getLifetimePricingTier();
+        finalPrice = pricingTierInfo.currentPrice;
+      }
       const num6 = String(Math.floor(100000 + Math.random() * 900000));
       const orderCode = `ORD${num6}`;
       const memo = makePaymentMemo(num6);
-      const qrUrl = buildVietQrUrl(plan.price, memo);
+      const qrUrl = buildVietQrUrl(finalPrice, memo);
       const nowUtc = Date.now();
 
-      const isLifeCombo = planCode === 'LIFE' || appId === 'all';
       const finalAppId = isLifeCombo ? 'all' : appId;
       const order = {
         orderCode,
@@ -75,7 +94,7 @@ export default async function handler(req, res) {
         hwid,
         planCode,
         planName: isLifeCombo ? 'Gói Vĩnh Viễn Combo Full 4 App (99K)' : plan.name,
-        price: plan.price,
+        price: finalPrice,
         phone,
         allApps: isLifeCombo,
         method: 'VIETQR_TPB',
