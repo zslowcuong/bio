@@ -262,18 +262,23 @@
                     <button type="button" class="btn-buy" onclick="createShopOrder('30D')">🏦 Mua Gói 30 Ngày • 39K</button>
                 </div>
 
-                <div class="plan-card">
+                <div class="plan-card" style="border: 1px solid #10b981; box-shadow: 0 0 24px rgba(16, 185, 129, 0.22); position: relative;">
+                    <span class="plan-tag" style="background: linear-gradient(135deg, #059669, #10b981); color: #fff;">👑 COMBO 4 APP • SIÊU TIẾT KIỆM</span>
                     <div>
-                        <div class="plan-name">💎 Gói Vĩnh Viễn</div>
-                        <div class="plan-price" style="color:#34d399;">99.000đ</div>
+                        <div class="plan-name" style="color: #6ee7b7;">💎 Gói Vĩnh Viễn (Full 4 App)</div>
+                        <div class="plan-price" style="color:#34d399;">99.000đ <span style="font-size: 13px; text-decoration: line-through; color: #64748b; font-weight: 500;">499.000đ</span></div>
                         <ul class="plan-perks">
-                            <li>✅ Mở khóa PRO Trọn Đời Máy</li>
-                            <li>✅ Miễn phí mọi bản cập nhật mới</li>
-                            <li>✅ Tự động đồng bộ lại khi cài lại app</li>
-                            <li>✅ Hỗ trợ VIP ưu tiên trực tiếp</li>
+                            <li style="color:#a7f3d0; font-weight: 700;">🔥 Xài FULL 4 Ứng Dụng trên cùng 1 máy:</li>
+                            <li style="padding-left: 8px;">• 🌸 <b>FlowOptimize</b> (Tối ưu phần cứng &amp; HUD)</li>
+                            <li style="padding-left: 8px;">• 🎯 <b>FlowS Gamer</b> (Độ nhạy &amp; Zayon Sens)</li>
+                            <li style="padding-left: 8px;">• 🚀 <b>FlowUltra</b> (Phantom limit, SkiaVK, Zero Blur)</li>
+                            <li style="padding-left: 8px;">• 🎩 <b>FlowExtra</b> (GameSpace, Trim RAM &amp; Combat)</li>
+                            <li>✅ 1 Mã Key duy nhất kích hoạt chung cho cả 4 app</li>
+                            <li>✅ Kích hoạt 1 app là 3 app còn lại tự động mở khóa theo</li>
+                            <li>✅ Dùng trọn đời máy • Miễn phí mọi bản cập nhật</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-buy" style="background:linear-gradient(135deg,#059669,#10b981);" onclick="createShopOrder('LIFE')">💎 Mua Vĩnh Viễn • 99K</button>
+                    <button type="button" class="btn-buy" style="background:linear-gradient(135deg,#059669,#10b981);" onclick="createShopOrder('LIFE')">👑 Mua Vĩnh Viễn Full 4 App • 99K</button>
                 </div>
             </div>
         </div>
@@ -329,6 +334,7 @@
     <script>
         const API_BASE = 'https://bio-seven-nu.vercel.app';
         const APPS = {
+    all: { name: 'Combo Full 4 Ứng Dụng', prefix: 'FLOWALL', scheme: 'flowoptimize' },
             flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', scheme: 'flowoptimize' },
             flows:        { id: 'flows',        name: 'FlowS',        scheme: 'flows' },
             flowultra:    { id: 'flowultra',    name: 'FlowUltra',    scheme: 'flowultra' },
@@ -420,6 +426,10 @@
                     document.getElementById('modalPendingBtns').style.display = 'none';
                     document.getElementById('modalKeySuccess').style.display = 'block';
                     document.getElementById('issuedKeyBox').textContent = currentOrder.key;
+            if (currentOrder.planCode === 'LIFE' || currentOrder.appId === 'all') {
+                const noteEl = document.getElementById('issuedKeyNote');
+                if (noteEl) noteEl.innerHTML = '<span style="color:#34d399;font-weight:700;">👑 Key Vĩnh Viễn Combo: Dùng chung cho cả 4 app (FlowOptimize, FlowS, FlowUltra, FlowExtra)!</span>';
+            }
                     const scheme = APPS[currentOrder.appId]?.scheme || 'flowoptimize';
                     document.getElementById('openAppWithKeyBtn').href = `${scheme}://unlock?key=${encodeURIComponent(currentOrder.key)}`;
                 } else if (manualClick) {

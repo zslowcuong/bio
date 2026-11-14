@@ -93,17 +93,19 @@ export default async function handler(req, res) {
       const nowUtc = Date.now();
       const expiryUtcMs = planCode === 'LIFE' ? 4102444800000 : nowUtc + plan.hours * 3600 * 1000;
       const orderCode = `ADM${Math.floor(100000 + Math.random() * 900000)}`;
+      const isLifeCombo = appId === 'all' || planCode === 'LIFE';
 
       const order = {
         orderCode,
         memo: orderCode,
         appId,
-        appName: APPS[appId].name,
+        appName: isLifeCombo ? 'Combo 4 App (FlowOp, FlowS, FlowUltra, FlowExtra)' : APPS[appId].name,
         hwid,
         planCode,
-        planName: plan.name,
+        planName: isLifeCombo ? 'Gói Vĩnh Viễn Combo Full 4 App (99K)' : plan.name,
         price: plan.price,
         phone,
+        allApps: isLifeCombo,
         method: 'ADMIN_MANUAL',
         status: 'COMPLETED',
         key,
@@ -121,6 +123,7 @@ export default async function handler(req, res) {
       issuedKeys.unshift({
         key,
         appId,
+        allApps: isLifeCombo,
         hwid,
         planCode,
         planName: plan.name,

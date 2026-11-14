@@ -198,7 +198,7 @@ export default async function handler(req, res) {
       const matchingPro = issuedKeys.find(
         (k) =>
           k &&
-          k.appId === appId &&
+          (k.appId === appId || k.appId === 'all' || k.allApps === true || k.planCode === 'LIFE') &&
           k.hwid === hwid &&
           !k.revoked &&
           !revokedKeys.includes(String(k.key || '').toUpperCase()) &&
@@ -292,12 +292,14 @@ export default async function handler(req, res) {
         finalExpiryMs = Number(foundIssued.expiryUtcMs);
       } else if (verified.tier === 'PRO_SHOP') {
         // Persist first activation of offline-minted PRO key so duration can't be extended by re-entering
+        const isLifeComboSave = verified.isAllApps || verified.plan === 'LIFE';
         issuedKeys.unshift({
           key,
-          appId,
+          appId: isLifeComboSave ? 'all' : appId,
+          allApps: isLifeComboSave,
           hwid,
           planCode: verified.plan,
-          planName: verified.plan,
+          planName: isLifeComboSave ? 'Gói Vĩnh Viễn Combo Full 4 App (99K)' : verified.plan,
           source: 'KEY_ACTIVATED',
           createdAtUtc: serverNowUtc,
           expiryUtcMs: finalExpiryMs,
@@ -310,18 +312,22 @@ export default async function handler(req, res) {
         return res.status(400).json({ success: false, reason: 'Mã Key đã hết hạn!', serverNowUtc });
       }
 
+      const isLifeCombo = verified.isAllApps || verified.plan === 'LIFE';
       return res.status(200).json({
         success: true,
         tier: verified.tier,
-        appId,
+        appId: isLifeCombo ? 'all' : appId,
+        isAllApps: isLifeCombo,
         hwid,
         key,
         plan: verified.plan,
         expiryUtcMs: finalExpiryMs,
         serverNowUtc,
-        message: verified.tier === 'VIP_FREE'
-          ? 'Kích hoạt Key VIP 30 Giờ (khóa 1 thiết bị) thành công!'
-          : 'Kích hoạt Key PRO thành công!',
+        message: isLifeCombo
+          ? 'Kích hoạt thành công Gói Vĩnh Viễn 99K (Mở khóa toàn bộ 4 app: FlowS, FlowUltra, FlowOp, FlowExtra)!'
+          : (verified.tier === 'VIP_FREE'
+              ? 'Kích hoạt Key VIP 30 Giờ (khóa 1 thiết bị) thành công!'
+              : 'Kích hoạt Key PRO thành công!'),
       });
     }
 

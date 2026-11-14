@@ -65,16 +65,19 @@ export default async function handler(req, res) {
       const qrUrl = buildVietQrUrl(plan.price, memo);
       const nowUtc = Date.now();
 
+      const isLifeCombo = planCode === 'LIFE' || appId === 'all';
+      const finalAppId = isLifeCombo ? 'all' : appId;
       const order = {
         orderCode,
         memo,
-        appId,
-        appName: APPS[appId].name,
+        appId: finalAppId,
+        appName: isLifeCombo ? 'Combo 4 App (FlowOp, FlowS, FlowUltra, FlowExtra)' : APPS[appId].name,
         hwid,
         planCode,
-        planName: plan.name,
+        planName: isLifeCombo ? 'Gói Vĩnh Viễn Combo Full 4 App (99K)' : plan.name,
         price: plan.price,
         phone,
+        allApps: isLifeCombo,
         method: 'VIETQR_TPB',
         qrUrl,
         status: 'PENDING',
@@ -87,13 +90,30 @@ export default async function handler(req, res) {
       orders.unshift(order);
       await dbSetJson('flowly:orders', orders.slice(0, 500));
 
+      const tgTitle = isLifeCombo
+        ? '👑 [FLOW SHOP] ĐƠN HÀNG COMBO VĨNH VIỄN 99K (FULL 4 APP)'
+        : `🔔 [FLOW SHOP] ĐƠN HÀNG VIETQR MỚI (${APPS[appId].name})`;
+      const tgAppName = isLifeCombo
+        ? 'Full 4 App: FlowOptimize + FlowS + FlowUltra + FlowExtra'
+        : APPS[appId].name;
+      const tgPlanName = isLifeCombo
+        ? 'Gói Vĩnh Viễn Combo Full 4 App (99K)'
+        : plan.name;
+
       await sendTelegram(
-        `🔔 <b>[FLOW SHOP] ĐƠN HÀNG VIETQR MỚI (${APPS[appId].name})</b>\n\n` +
-        `📦 <b>Mã đơn:</b> <code>${orderCode}</code>\n` +
-        `💬 <b>Nội dung CK:</b> <code>${memo}</code>\n` +
-        `💰 <b>Số tiền:</b> <b>${plan.price.toLocaleString('vi-VN')}đ</b>\n` +
-        `💎 <b>Gói:</b> ${plan.name}\n` +
-        `📱 <b>App:</b> ${APPS[appId].name}\n` +
+        `<b>${tgTitle}</b>
+
+` +
+        `📦 <b>Mã đơn:</b> <code>${orderCode}</code>
+` +
+        `💬 <b>Nội dung CK:</b> <code>${memo}</code>
+` +
+        `💰 <b>Số tiền:</b> <b>${plan.price.toLocaleString('vi-VN')}đ</b>
+` +
+        `💎 <b>Gói:</b> ${tgPlanName}
+` +
+        `📱 <b>App:</b> ${tgAppName}
+` +
         `🆔 <b>HWID:</b> <code>${hwid}</code>\n` +
         `👤 <b>SĐT/Zalo:</b> <code>${phone}</code>\n\n` +
         `🏦 <i>Chờ tiền thực về 10006503497 TPBANK trước khi cấp Key!</i>`

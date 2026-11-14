@@ -20,6 +20,14 @@ export const PLANS = {
 };
 
 export const APPS = {
+  all: {
+    id: 'all',
+    name: 'Combo Toàn Bộ 4 Ứng Dụng (FlowOp, FlowS, FlowUltra, FlowExtra)',
+    prefix: 'FLOWALL',
+    salt: 'FLOWLY_2026_ALL_APPS_SALT_66F0',
+    package: 'all',
+    scheme: 'flowly',
+  },
   flowoptimize: {
     id: 'flowoptimize',
     name: 'FlowOptimize',
@@ -55,6 +63,8 @@ export const APPS = {
 };
 
 export function normalizeAppId(raw) {
+  const s = String(raw || 'flowoptimize').trim().toLowerCase();
+  if (s === 'all' || s === 'combo' || s === 'all_apps' || s === 'combo_all') return 'all';
   const s = String(raw || 'flowoptimize').trim().toLowerCase();
   if (s === 'flowop' || s === 'flowoptimize' || s === 'com.example.gameoptimizer') return 'flowoptimize';
   if (s === 'flows' || s === 'com.flows.gaming') return 'flows';
@@ -96,6 +106,38 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
   if (!app || !key) return { valid: false, reason: 'Thiếu thông tin ứng dụng hoặc mã key' };
 
   const cleanHwid = normalizeHwid(expectedHwid);
+
+  // 1) Universal ALL-APPS Combo Key (FLOWALL-PRO-<HWID>-<PLAN>-<NONCE4>-<SIG8>)
+  const allApp = APPS.all;
+  if (allApp && key.startsWith(`${allApp.prefix}-PRO-`)) {
+    const parts = key.slice(`${allApp.prefix}-PRO-`.length).split('-');
+    if (parts.length === 4) {
+      const [keyHwid, planCode, nonce4, sig8] = parts;
+      if (keyHwid !== cleanHwid) {
+        return { valid: false, reason: `Key Combo này gắn với thiết bị ${keyHwid}, không khớp máy ${cleanHwid}` };
+      }
+      const expectedSig = sha256Hex(`${allApp.prefix}:PRO:${keyHwid}:${planCode}:${nonce4}:${allApp.salt}`).slice(0, 8);
+      if (sig8 === expectedSig) {
+        return { valid: true, tier: 'PRO_SHOP', expiryUtcMs: 4102444800000, plan: 'LIFE', key, isLifetime: true, isAllApps: true };
+      }
+    }
+  }
+
+  // 2) Check if key is a LIFE key from ANY Flowly app (99K Lifetime unlocks ALL 4 apps!)
+  for (const [otherId, otherApp] of Object.entries(APPS)) {
+    if (key.startsWith(`${otherApp.prefix}-PRO-`)) {
+      const parts = key.slice(`${otherApp.prefix}-PRO-`.length).split('-');
+      if (parts.length === 4) {
+        const [keyHwid, planCode, nonce4, sig8] = parts;
+        if (keyHwid === cleanHwid && planCode === 'LIFE') {
+          const expectedSig = sha256Hex(`${otherApp.prefix}:PRO:${keyHwid}:${planCode}:${nonce4}:${otherApp.salt}`).slice(0, 8);
+          if (sig8 === expectedSig) {
+            return { valid: true, tier: 'PRO_SHOP', expiryUtcMs: 4102444800000, plan: 'LIFE', key, isLifetime: true, isAllApps: true };
+          }
+        }
+      }
+    }
+  }
 
   // Check VIP format: <PREFIX>-VIP-<HWID>-<EXPIRY_HEX>-<SIG8>
   const vipPrefix = `${app.prefix}-VIP-`;
@@ -357,7 +399,9 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
   }
 
   const nonce4 = crypto.randomBytes(2).toString('hex').toUpperCase();
-  const proKey = signProKey(existing.appId, existing.hwid, existing.planCode, nonce4);
+  const isLifeCombo = existing.planCode === 'LIFE' || existing.appId === 'all';
+  const issueAppId = isLifeCombo ? 'all' : existing.appId;
+  const proKey = signProKey(issueAppId, existing.hwid, existing.planCode, nonce4);
   const nowUtc = Date.now();
   const plan = PLANS[existing.planCode];
   const expiryUtcMs = existing.planCode === 'LIFE' ? 4102444800000 : nowUtc + (plan ? plan.hours * 3600 * 1000 : 7 * 86400000);
