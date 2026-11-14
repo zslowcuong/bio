@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cổng VIP PRO Suite • Tải Trực Tiếp 4 App & Quản Lý HWID</title>
+    <link rel="icon" type="image/png" href="app_logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #030712;
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --card-border: rgba(56, 189, 248, 0.28);
+            --accent-cyan: #38bdf8;
+            --accent-emerald: #10b981;
+            --accent-gold: #f59e0b;
+            --accent-rose: #f43f5e;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(160deg, #020617 0%, #0c1838 50%, #030712 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 18px 14px 80px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        /* Top Nav */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 99px;
+            padding: 8px 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+        }
+        .nav-logo img {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 12px;
+        }
+        .nav-links a {
+            color: var(--accent-cyan);
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: rgba(56, 189, 248, 0.1);
+            transition: all 0.2s;
+        }
+        .nav-links a:hover {
+            background: rgba(56, 189, 248, 0.25);
+            color: #fff;
+        }
+
+        /* Hero Header */
+        .hero {
+            text-align: center;
+            padding: 24px 16px 20px;
+            background: linear-gradient(180deg, rgba(16, 185, 129, 0.12) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1.5px solid rgba(16, 185, 129, 0.35);
+            border-radius: 24px;
+            margin-bottom: 22px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 0 30px rgba(16, 185, 129, 0.1);
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 4px 14px;
+            border-radius: 99px;
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: #fff;
+            margin-bottom: 12px;
+            box-shadow: 0 0 15px rgba(16,185,129,0.5);
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 14px rgba(0,0,0,0.8);
+        }
+        .hero-sub {
+            font-size: 12.5px;
+            color: var(--text-sub);
+            line-height: 1.5;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 20px 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .card-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Form Inputs */
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-label {
+            display: block;
+            font-size: 11.5px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 6px;
+        }
+        .form-input {
+            width: 100%;
+            background: rgba(3, 7, 18, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-family: 'Montserrat', monospace;
+            font-size: 13px;
+            color: #fff;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .form-input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        .btn-emerald {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: #fff;
+            box-shadow: 0 4px 18px rgba(16, 185, 129, 0.4);
+        }
+        .btn-emerald:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(16, 185, 129, 0.6);
+        }
+        .btn-cyan {
+            background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+            color: #fff;
+            box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4);
+        }
+        .btn-ghost {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #cbd5e1;
+        }
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+        }
+
+        /* VIP Badge Verified */
+        .vip-status-banner {
+            display: none;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.25));
+            border: 1.5px solid #10b981;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .vip-status-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            padding: 5px 0;
+            border-bottom: 1px dashed rgba(255,255,255,0.08);
+        }
+        .vip-status-row:last-child { border-bottom: none; }
+        .vip-label { color: var(--text-sub); }
+        .vip-val { font-weight: 700; color: #fff; }
+
+        /* App Download Cards Grid */
+        .app-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        @media (min-width: 580px) {
+            .app-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .app-card {
+            background: rgba(10, 17, 34, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 18px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+        }
+        .app-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 8px 26px rgba(56, 189, 248, 0.25);
+        }
+        .app-card-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .app-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.15);
+            object-fit: cover;
+        }
+        .app-card-name {
+            font-size: 14px;
+            font-weight: 800;
+            color: #fff;
+        }
+        .app-card-tag {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.12);
+            padding: 2px 7px;
+            border-radius: 99px;
+            margin-top: 2px;
+        }
+        .app-card-desc {
+            font-size: 11.5px;
+            color: var(--text-sub);
+            line-height: 1.4;
+            margin-bottom: 14px;
+            flex-grow: 1;
+        }
+        .app-card-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .app-card-actions .btn {
+            padding: 10px 12px;
+            font-size: 11.5px;
+        }
+
+        /* Tool chips */
+        .tool-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .tool-chip {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 11.5px;
+            color: #cbd5e1;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .tool-chip:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(56, 189, 248, 0.12);
+            color: #fff;
+        }
+
+        /* Modal VietQR */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .modal-box {
+            background: #0f172a;
+            border: 1.5px solid var(--accent-gold);
+            border-radius: 20px;
+            max-width: 420px;
+            width: 100%;
+            padding: 24px 20px;
+            box-shadow: 0 0 40px rgba(245, 158, 11, 0.35);
+            text-align: center;
+        }
+        .modal-qr {
+            width: 220px;
+            height: 220px;
+            border-radius: 14px;
+            margin: 14px auto;
+            border: 2px solid #fff;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Top Nav -->
+    <div class="top-nav">
+        <a href="index.html" class="nav-logo">
+            <img src="app_logo.png" alt="Logo">
+            <span>Flowly VIP</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Trang Chủ</a>
+            <a href="shop.html">Cửa Hàng</a>
+            <a href="getkey.html">Vượt Link</a>
+        </div>
+    </div>
+
+    <!-- Hero Header -->
+    <div class="hero">
+        <div class="hero-badge">👑 ĐẶC QUYỀN THÀNH VIÊN PRO</div>
+        <h1 class="hero-title">CỔNG TẢI TRỰC TIẾP 4 APP</h1>
+        <p class="hero-sub">
+            Khách hàng sở hữu gói <b>Key PRO (Tuần / Tháng / Vĩnh Viễn Combo 4 App)</b> được quyền tải bản cập nhật trực tiếp <b>100% không bao giờ phải xem quảng cáo hay vượt link rút gọn</b>.
+        </p>
+    </div>
+
+    <!-- VIP License Verification Card -->
+    <div class="glass-card">
+        <div class="card-header">
+            <div class="card-title">🔑 Xác Thực Bản Quyền PRO Của Bạn</div>
+            <span style="font-size: 11px; color: var(--accent-emerald); font-weight: 700;">● Tự Động Kết Nối</span>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">MÃ KEY PRO (HOẶC MÃ HWID TRÊN APP)</label>
+            <input type="text" id="vipKeyInput" class="form-input" placeholder="Dán mã FLOWALL-PRO-... hoặc FLOWOP-PRO-...">
+        </div>
+        <div class="form-group">
+            <label class="form-label">MÃ THIẾT BỊ HWID HIỆN TẠI</label>
+            <input type="text" id="vipHwidInput" class="form-input" placeholder="VD: OPPO_CPH2371">
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 8px;">
+            <button class="btn btn-emerald" onclick="verifyVipAccess()" id="btnCheckVip">⚡ Xác Thực Bản Quyền PRO</button>
+            <a href="shop.html" class="btn btn-ghost" style="flex: 0.6; text-align: center;">🛍️ Mua PRO</a>
+        </div>
+
+        <!-- Verified Status Banner -->
+        <div class="vip-status-banner" id="vipBanner">
+            <div style="font-size: 13px; font-weight: 800; color: #10b981; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                ✅ XÁC THỰC THÀNH VIÊN PRO THÀNH CÔNG!
+            </div>
+            <div class="vip-status-row">
+                <span class="vip-label">Mã Key PRO:</span>
+                <span class="vip-val mono" id="vKey">-</span>
+            </div>
+            <div class="vip-status-row">
+                <span class="vip-label">Gói Cước:</span>
+                <span class="vip-val" id="vPlan" style="color: #38bdf8;">-</span>
+            </div>
+            <div class="vip-status-row">
+                <span class="vip-label">Mã Thiết Bị Khóa:</span>
+                <span class="vip-val mono" id="vHwid">-</span>
+            </div>
+            <div class="vip-status-row">
+                <span class="vip-label">Lượt Đổi HWID:</span>
+                <span class="vip-val" id="vHwidChanges" style="color: #f59e0b;">-</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Direct Download 4 App Section -->
+    <div class="glass-card">
+        <div class="card-header">
+            <div class="card-title">🚀 Tải Trực Tiếp 4 Ứng Dụng (0 Giây Chờ • 0 Link Rút Gọn)</div>
+            <span style="font-size: 11px; background: rgba(16,185,129,0.15); color:#10b981; border:1px solid #10b981; padding:2px 8px; border-radius:99px; font-weight:700;">PRO VIP ONLY</span>
+        </div>
+
+        <div class="app-grid">
+            <!-- 1. FlowOptimize -->
+            <div class="app-card">
+                <div>
+                    <div class="app-card-top">
+                        <img src="app_logo.png" class="app-card-icon" alt="FlowOptimize">
+                        <div>
+                            <div class="app-card-name">FlowOptimize</div>
+                            <span class="app-card-tag">v1.8.0 • Anime Edition</span>
+                        </div>
+                    </div>
+                    <div class="app-card-desc">
+                        Tối ưu FPS cực hạn, 7 Theme Anime (Conan, One Piece, Dragon Ball...), Dynamic Island HUD & dọn RAM sâu an toàn 100%.
+                    </div>
+                </div>
+                <div class="app-card-actions">
+                    <a href="FlowOptimize.apk" download class="btn btn-emerald">⚡ Tải Trực Tiếp APK (0s)</a>
+                    <a href="https://gofile.io/d/Vr3bEORd" target="_blank" class="btn btn-ghost">🚀 Dự Phòng Gofile</a>
+                </div>
+            </div>
+
+            <!-- 2. FlowS -->
+            <div class="app-card">
+                <div>
+                    <div class="app-card-top">
+                        <img src="flows_logo.png" class="app-card-icon" alt="FlowS">
+                        <div>
+                            <div class="app-card-name">FlowS Tuner</div>
+                            <span class="app-card-tag">v1.4.0 • Gamer Edition</span>
+                        </div>
+                    </div>
+                    <div class="app-card-desc">
+                        Điều chỉnh độ nhạy cảm ứng 0ms, khóa tần số quét màn hình Max Hz phần cứng & bộ tinh chỉnh game thủ chuyên nghiệp.
+                    </div>
+                </div>
+                <div class="app-card-actions">
+                    <a href="FlowS.apk" download class="btn btn-emerald">⚡ Tải Trực Tiếp APK (0s)</a>
+                    <a href="https://gofile.io/d/kzDVlE2G" target="_blank" class="btn btn-ghost">🚀 Dự Phòng Gofile</a>
+                </div>
+            </div>
+
+            <!-- 3. FlowUltra -->
+            <div class="app-card">
+                <div>
+                    <div class="app-card-top">
+                        <img src="flowultra_logo.png" class="app-card-icon" alt="FlowUltra">
+                        <div>
+                            <div class="app-card-name">FlowUltra</div>
+                            <span class="app-card-tag">v1.3.0 • eSports Edition</span>
+                        </div>
+                    </div>
+                    <div class="app-card-desc">
+                        Ép xung vi xử lý phần cứng, tối ưu hóa Vulkan/OpenGL renderer & ổn định đường truyền mạng 0% giật lag cho thi đấu.
+                    </div>
+                </div>
+                <div class="app-card-actions">
+                    <a href="FlowUltra.apk" download class="btn btn-emerald">⚡ Tải Trực Tiếp APK (0s)</a>
+                    <a href="https://gofile.io/d/p8GZrZNY" target="_blank" class="btn btn-ghost">🚀 Dự Phòng Gofile</a>
+                </div>
+            </div>
+
+            <!-- 4. FlowExtra -->
+            <div class="app-card">
+                <div>
+                    <div class="app-card-top">
+                        <img src="flowextra_logo.png" class="app-card-icon" alt="FlowExtra">
+                        <div>
+                            <div class="app-card-name">FlowExtra</div>
+                            <span class="app-card-tag">v3.7 • Kaito Kid 1412</span>
+                        </div>
+                    </div>
+                    <div class="app-card-desc">
+                        Bảo vệ Camera & Ảnh, kích hoạt Touch Turbo 360Hz, chặn tiến trình chạy ngầm rác & giải phóng toàn bộ tài nguyên máy.
+                    </div>
+                </div>
+                <div class="app-card-actions">
+                    <a href="FlowExtra.apk" download class="btn btn-emerald">⚡ Tải Trực Tiếp APK (0s)</a>
+                    <a href="https://raw.githubusercontent.com/zslowcuong/bio/main/FlowExtra.apk" target="_blank" class="btn btn-ghost">🚀 Dự Phòng GitHub</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Auxiliary Tools -->
+        <div style="margin-top: 22px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
+            <div style="font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 8px;">🛠️ Công Cụ Bổ Trợ Kích Hoạt Nhanh:</div>
+            <div class="tool-chips">
+                <a href="Shizuku.apk" download class="tool-chip">🐱 Shizuku Official APK</a>
+                <a href="Shizuku-Next.apk" download class="tool-chip">⚡ Shizuku-Next Watchdog</a>
+                <a href="BrotX-v8.apk" download class="tool-chip">🔥 BrotX Optimizer v8</a>
+                <a href="TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat" download class="tool-chip">💻 Tool PC Kích Hoạt 1-Click (.BAT)</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HWID Self-Service Migration Section -->
+    <div class="glass-card">
+        <div class="card-header">
+            <div class="card-title">🔄 Chuyển Đổi Thiết Bị Cho Gói PRO (HWID Migration)</div>
+            <span style="font-size: 11px; color: var(--accent-gold); font-weight: 700;">★ Cam Kết Admin</span>
+        </div>
+
+        <p style="font-size: 12px; color: var(--text-sub); line-height: 1.5; margin-bottom: 14px;">
+            💬 <i>"Khách hàng PRO được <b>miễn phí 1 lần đổi máy đầu tiên</b> khi máy cũ bị hỏng hoặc đổi điện thoại mới. Từ lần thứ 2 trở đi, hệ thống thu phí bảo trì tượng trưng <b>5.000đ/lần</b> để duy trì máy chủ Redis."</i>
+        </p>
+
+        <div class="form-group">
+            <label class="form-label">MÃ KEY PRO CẦN CHUYỂN MÁY</label>
+            <input type="text" id="chgKeyInput" class="form-input" placeholder="FLOWALL-PRO-... hoặc FLOWOP-PRO-...">
+        </div>
+        <div class="form-group">
+            <label class="form-label">MÃ HWID MÁY MỚI CỦA BẠN (XEM TRÊN APP Ở MÁY MỚI)</label>
+            <input type="text" id="chgNewHwidInput" class="form-input" placeholder="VD: SAMSUNG_SM_S918B hoặc XIAOMI_23049PCD8G">
+        </div>
+
+        <button class="btn btn-cyan" onclick="requestHwidChange()" id="btnSubmitHwid">🔄 Xác Nhận Chuyển Sang Thiết Bị Mới</button>
+    </div>
+
+</div>
+
+<!-- Modal VietQR Pay 5.000d if 2nd change -->
+<div class="modal-overlay" id="qrModal">
+    <div class="modal-box">
+        <div style="font-size: 16px; font-weight: 800; color: var(--accent-gold); margin-bottom: 6px;">💳 PHÍ BẢO TRÌ ĐỔI HWID (5.000đ)</div>
+        <p style="font-size: 12px; color: #94a3b8; line-height: 1.4;">
+            Bạn đã sử dụng lượt đổi miễn phí lần đầu. Quét mã QR TPBank để thanh toán phí bảo trì <b>5.000đ</b>:
+        </p>
+        <img id="modalQrImg" class="modal-qr" src="" alt="VietQR 5K">
+        <div style="font-size: 12px; color: #fff; margin-bottom: 12px;">
+            Nội dung CK: <b id="modalMemo" style="color: #38bdf8;">FLOW...</b>
+        </div>
+        <div style="display: flex; gap: 8px;">
+            <button class="btn btn-emerald" onclick="checkHwidPayment()">Đã Chuyển Khoản</button>
+            <button class="btn btn-ghost" onclick="closeQrModal()">Đóng</button>
+        </div>
+        <a href="https://t.me/+dtVBEzwuN2Q4NmI9" target="_blank" style="display:block;margin-top:12px;font-size:11.5px;color:#38bdf8;text-decoration:none;">
+            💬 Hoặc nhắn Telegram Admin để được duyệt ngay
+        </a>
+    </div>
+</div>
+
+<script>
+    const API_BASE = 'https://bio-seven-nu.vercel.app';
+    let currentPendingOrder = null;
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const p = new URLSearchParams(window.location.search);
+        const qKey = p.get('key') || localStorage.getItem('flow_vip_key') || '';
+        const qHwid = p.get('hwid') || localStorage.getItem('flow_vip_hwid') || localStorage.getItem('flow_shop_hwid') || '';
+
+        if (qKey) document.getElementById('vipKeyInput').value = qKey;
+        if (qHwid) document.getElementById('vipHwidInput').value = qHwid;
+        if (qKey) document.getElementById('chgKeyInput').value = qKey;
+
+        if (qKey || qHwid) {
+            verifyVipAccess();
+        }
+    });
+
+    async function verifyVipAccess() {
+        const key = (document.getElementById('vipKeyInput').value || '').trim();
+        const hwid = (document.getElementById('vipHwidInput').value || '').trim();
+        const btn = document.getElementById('btnCheckVip');
+        btn.innerText = '⏳ Đang xác thực...';
+
+        try {
+            const res = await fetch(`${API_BASE}/api/license?action=verify_vip&key=${encodeURIComponent(key)}&hwid=${encodeURIComponent(hwid)}`);
+            const data = await res.json();
+            btn.innerText = '⚡ Xác Thực Bản Quyền PRO';
+
+            if (data.success && data.isVip) {
+                document.getElementById('vipBanner').style.display = 'block';
+                document.getElementById('vKey').innerText = data.key || key || 'PRO VIP';
+                document.getElementById('vPlan').innerText = data.planName || (data.isLifetime ? 'Vĩnh Viễn Full 4 App' : 'Gói PRO');
+                document.getElementById('vHwid').innerText = data.hwid || hwid || 'Đã liên kết';
+                document.getElementById('vHwidChanges').innerText = data.hwidChanges === 0 ? 'Còn 1 lượt ĐỔI MIỄN PHÍ' : `Đã đổi ${data.hwidChanges} lần (Lần sau 5.000đ)`;
+
+                if (key) localStorage.setItem('flow_vip_key', key);
+                if (data.hwid) localStorage.setItem('flow_vip_hwid', data.hwid);
+                if (key) document.getElementById('chgKeyInput').value = key;
+            } else {
+                alert(data.reason || 'Chưa tìm thấy bản quyền PRO cho thiết bị này. Bạn có thể mua tại Cửa Hàng!');
+            }
+        } catch (e) {
+            btn.innerText = '⚡ Xác Thực Bản Quyền PRO';
+            alert('Lỗi kết nối máy chủ xác thực: ' + e.message);
+        }
+    }
+
+    async function requestHwidChange() {
+        const key = (document.getElementById('chgKeyInput').value || '').trim();
+        const newHwid = (document.getElementById('chgNewHwidInput').value || '').trim();
+        const btn = document.getElementById('btnSubmitHwid');
+
+        if (!key) {
+            alert('Vui lòng nhập Mã Key PRO cần chuyển thiết bị!');
+            return;
+        }
+        if (!newHwid || newHwid.length < 4) {
+            alert('Vui lòng nhập Mã HWID máy mới (xem trong app ở máy mới)!');
+            return;
+        }
+
+        btn.innerText = '⏳ Đang xử lý đổi máy...';
+        try {
+            const res = await fetch(`${API_BASE}/api/license?action=change_hwid`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ key, newHwid })
+            });
+            const data = await res.json();
+            btn.innerText = '🔄 Xác Nhận Chuyển Sang Thiết Bị Mới';
+
+            if (data.success && data.free) {
+                alert(`🎉 CHÚC MỪNG BẠN!\n\nĐã chuyển đổi bản quyền PRO sang máy mới thành công MIỄN PHÍ 100%!\n\nMã HWID mới: ${data.newHwid}\nHãy mở app trên máy mới để sử dụng ngay!`);
+                localStorage.setItem('flow_vip_hwid', data.newHwid);
+                document.getElementById('vipHwidInput').value = data.newHwid;
+                verifyVipAccess();
+            } else if (data.requiresFee && data.order) {
+                currentPendingOrder = data.order;
+                document.getElementById('modalQrImg').src = data.order.qrUrl;
+                document.getElementById('modalMemo').innerText = data.order.memo;
+                document.getElementById('qrModal').style.display = 'flex';
+            } else {
+                alert(data.reason || data.message || 'Không thể đổi thiết bị!');
+            }
+        } catch (e) {
+            btn.innerText = '🔄 Xác Nhận Chuyển Sang Thiết Bị Mới';
+            alert('Lỗi kết nối: ' + e.message);
+        }
+    }
+
+    function closeQrModal() {
+        document.getElementById('qrModal').style.display = 'none';
+    }
+
+    function checkHwidPayment() {
+        alert('Cảm ơn bạn! Hệ thống SePay sẽ tự động kích hoạt ngay khi ngân hàng báo tiền về. Bạn cũng có thể liên hệ Telegram Admin để được chuyển ngay trong 1 phút!');
+        closeQrModal();
+    }
+</script>
+
+</body>
+</html>

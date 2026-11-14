@@ -164,6 +164,48 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, revokedKeys: revokedList, key: targetKey, revoked: shouldRevoke });
     }
 
+    if (action === 'change_hwid') {
+      const targetKey = String(body.key || '').trim().toUpperCase();
+      const newHwid = normalizeHwid(body.newHwid || '');
+      if (!targetKey || !newHwid || newHwid.length < 4) {
+        return res.status(400).json({ success: false, error: 'Thiếu mã Key hoặc HWID mới không hợp lệ' });
+      }
+
+      const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+      const targetIdx = issuedKeys.findIndex((k) => String(k.key || '').toUpperCase() === targetKey);
+      if (targetIdx < 0) {
+        return res.status(404).json({ success: false, error: 'Không tìm thấy mã key này trong danh sách đã cấp' });
+      }
+
+      const record = issuedKeys[targetIdx];
+      const oldHwid = record.hwid;
+      record.hwid = newHwid;
+      record.hwidChanges = (Number(record.hwidChanges || 0)) + 1;
+      record.hwidHistory = [
+        ...(Array.isArray(record.hwidHistory) ? record.hwidHistory : []),
+        { oldHwid, newHwid, changedAtUtc: Date.now(), by: 'ADMIN', reason: body.reason || 'ADMIN_OVERRIDE' },
+      ];
+      issuedKeys[targetIdx] = record;
+      await dbSetJson('flowly:issued_keys', issuedKeys);
+
+      const orders = (await dbGetJson('flowly:orders', [])) || [];
+      const orderIdx = orders.findIndex((o) => o.key === targetKey || o.hwid === oldHwid);
+      if (orderIdx >= 0) {
+        orders[orderIdx].hwid = newHwid;
+        await dbSetJson('flowly:orders', orders);
+      }
+
+      await sendTelegram(
+        `👑 <b>[ADMIN ĐỔI HWID THÀNH CÔNG]</b>\n\n` +
+        `🔑 <b>Key:</b> <code>${targetKey}</code>\n` +
+        `📟 <b>Cũ:</b> <code>${oldHwid}</code>\n` +
+        `🆕 <b>Mới:</b> <code>${newHwid}</code>\n` +
+        `📝 <b>Lý do:</b> ${body.reason || 'Admin duyệt'}`
+      );
+
+      return res.status(200).json({ success: true, oldHwid, newHwid, key: targetKey, message: `Đã đổi HWID thành công sang ${newHwid}` });
+    }
+
     if (action === 'save_event_key') {
       const targetIds = resolveTargetAppIds(body);
       if (targetIds.length === 0) {

@@ -420,9 +420,14 @@
                         <td class="mono" style="font-size:11.5px;">${k.key}</td>
                         <td><span class="pill ${isRev?'revoked':'ok'}">${isRev?'ĐÃ THU HỒI':'ĐANG HOẠT ĐỘNG'}</span></td>
                         <td>
-                            <button class="btn ${isRev?'green':'red'}" style="padding:6px 10px;font-size:11px;" onclick="toggleRevoke('${k.key}', ${!isRev})">
-                                ${isRev ? '🔓 Mở Lại Key' : '🚫 Thu Hồi Key'}
-                            </button>
+                            <div style="display:flex;gap:4px;">
+                                <button class="btn ${isRev?'green':'red'}" style="padding:6px 8px;font-size:11px;" onclick="toggleRevoke('${k.key}', ${!isRev})">
+                                    ${isRev ? '🔓 Mở Lại' : '🚫 Thu Hồi'}
+                                </button>
+                                <button class="btn" style="background:#0284c7;color:#fff;padding:6px 8px;font-size:11px;" onclick="promptChangeHwid('${k.key}', '${k.hwid}')">
+                                    🔄 Đổi HWID
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 `;
@@ -455,6 +460,29 @@
             const data = await res.json();
             if (data.success) await refreshDashboard();
             else alert('❌ Lỗi: ' + data.error);
+        }
+
+                async function promptChangeHwid(key, currentHwid) {
+            const newHwid = prompt(`Nhập HWID máy mới cho Key [${key}]:\n(HWID hiện tại: ${currentHwid})`, '');
+            if (!newHwid || newHwid.trim().length < 4) return;
+            const cleanNew = newHwid.trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+            const reason = prompt('Lý do đổi (ví dụ: Khách đổi máy hỏng / Admin hỗ trợ):', 'Admin hỗ trợ') || 'Admin đổi';
+            try {
+                const res = await fetch(`${API_BASE}/api/admin?action=change_hwid`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'x-admin-pin': getAdminPin() },
+                    body: JSON.stringify({ key, newHwid: cleanNew, reason })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert(`✅ Đã chuyển HWID thành công sang: ${cleanNew}`);
+                    refreshDashboard();
+                } else {
+                    alert(`❌ Lỗi: ${data.error || 'Không thể đổi HWID'}`);
+                }
+            } catch(e) {
+                alert(`❌ Lỗi mạng: ${e.message}`);
+            }
         }
 
         async function createManualKey() {

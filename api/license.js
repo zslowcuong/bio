@@ -1,6 +1,7 @@
 import {
   APPS,
   TRIAL_DURATION_MS,
+  buildVietQrUrl,
   dbGetJson,
   dbSetJson,
   getBackendStatus,
@@ -13,6 +14,7 @@ import {
   normalizeHwid,
   parseBody,
   sanitizeKeyInput,
+  sendTelegram,
   sha256Hex,
   verifySignedKeyFormat,
 } from './_shared.js';
@@ -328,6 +330,232 @@ export default async function handler(req, res) {
           : (verified.tier === 'VIP_FREE'
               ? 'Kích hoạt Key VIP 30 Giờ (khóa 1 thiết bị) thành công!'
               : 'Kích hoạt Key PRO thành công!'),
+      });
+    }
+
+        // 3) Action: verify_vip (Mở khóa tải trực tiếp 4 App không cần vượt link cho thành viên PRO)
+    if (action === 'verify_vip') {
+      const qKey = sanitizeKeyInput(body.key || req.query?.key || '');
+      const qHwid = normalizeHwid(body.hwid || req.query?.hwid || '');
+
+      const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+      let foundRecord = null;
+
+      if (qKey) {
+        foundRecord = issuedKeys.find((k) => String(k.key || '').toUpperCase() === qKey);
+      }
+      if (!foundRecord && qHwid) {
+        foundRecord = issuedKeys.find(
+          (k) =>
+            k &&
+            k.hwid === qHwid &&
+            !k.revoked &&
+            !revokedKeys.includes(String(k.key || '').toUpperCase()) &&
+            (!k.expiryUtcMs || Number(k.expiryUtcMs) > serverNowUtc)
+        );
+      }
+
+      // Check offline cryptographic signature if not in DB yet
+      let isCryptValid = false;
+      let cryptInfo = null;
+      if (!foundRecord && qKey && qHwid) {
+        for (const testApp of ['all', 'flowoptimize', 'flows', 'flowultra', 'flowextra']) {
+          const v = verifySignedKeyFormat(qKey, testApp, qHwid);
+          if (v.valid && (v.tier === 'PRO_SHOP' || v.plan === 'LIFE' || v.isLifetime)) {
+            isCryptValid = true;
+            cryptInfo = v;
+            break;
+          }
+        }
+      }
+
+      if (foundRecord && !foundRecord.revoked && (!foundRecord.expiryUtcMs || Number(foundRecord.expiryUtcMs) > serverNowUtc)) {
+        const isLife = foundRecord.planCode === 'LIFE' || foundRecord.allApps === true || foundRecord.appId === 'all';
+        return res.status(200).json({
+          success: true,
+          isVip: true,
+          key: foundRecord.key,
+          appId: foundRecord.appId || 'all',
+          plan: foundRecord.planCode || (isLife ? 'LIFE' : 'PRO'),
+          planName: foundRecord.planName || (isLife ? 'Gói Vĩnh Viễn Combo Full 4 App (99K)' : 'Gói PRO'),
+          hwid: foundRecord.hwid,
+          hwidChanges: Number(foundRecord.hwidChanges || 0),
+          isLifetime: isLife,
+          expiresAtUtc: Number(foundRecord.expiryUtcMs || 4102444800000),
+          serverNowUtc,
+          directDownloads: {
+            flowoptimize: {
+              name: 'FlowOptimize Anime Edition (v1.8.0 PRO Suite)',
+              directApk: 'https://zslowcuong.github.io/bio/FlowOptimize.apk',
+              gofile: 'https://gofile.io/d/Vr3bEORd',
+            },
+            flows: {
+              name: 'FlowS Gamer Tuner Edition (v1.4.0 PRO)',
+              directApk: 'https://zslowcuong.github.io/bio/FlowS.apk',
+              gofile: 'https://gofile.io/d/kzDVlE2G',
+            },
+            flowultra: {
+              name: 'FlowUltra eSports Suite (v1.3.0 PRO)',
+              directApk: 'https://zslowcuong.github.io/bio/FlowUltra.apk',
+              gofile: 'https://gofile.io/d/p8GZrZNY',
+            },
+            flowextra: {
+              name: 'FlowExtra Kaito Kid 1412 (v3.7 PRO Edition)',
+              directApk: 'https://zslowcuong.github.io/bio/FlowExtra.apk',
+              gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowExtra.apk',
+            },
+            tools: {
+              shizuku: 'https://gofile.io/d/DkhZ4xaM',
+              shizukunext: 'https://gofile.io/d/AdqIc0Gp',
+              brotx: 'https://gofile.io/d/RaSXG0aV',
+              toolpc: 'https://raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat',
+            }
+          },
+          message: '👑 Xác thực thành viên PRO thành công! Đã mở khóa link tải trực tiếp 4 app không cần vượt link.',
+        });
+      }
+
+      if (isCryptValid && cryptInfo) {
+        return res.status(200).json({
+          success: true,
+          isVip: true,
+          key: qKey,
+          appId: cryptInfo.isAllApps ? 'all' : (cryptInfo.appId || 'all'),
+          plan: cryptInfo.plan || 'LIFE',
+          planName: 'Gói PRO Đã Xác Thực Chữ Ký',
+          hwid: qHwid,
+          hwidChanges: 0,
+          isLifetime: cryptInfo.isLifetime || false,
+          expiresAtUtc: cryptInfo.expiryUtcMs || 4102444800000,
+          serverNowUtc,
+          directDownloads: {
+            flowoptimize: { name: 'FlowOptimize', directApk: 'https://zslowcuong.github.io/bio/FlowOptimize.apk', gofile: 'https://gofile.io/d/Vr3bEORd' },
+            flows: { name: 'FlowS', directApk: 'https://zslowcuong.github.io/bio/FlowS.apk', gofile: 'https://gofile.io/d/kzDVlE2G' },
+            flowultra: { name: 'FlowUltra', directApk: 'https://zslowcuong.github.io/bio/FlowUltra.apk', gofile: 'https://gofile.io/d/p8GZrZNY' },
+            flowextra: { name: 'FlowExtra', directApk: 'https://zslowcuong.github.io/bio/FlowExtra.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowExtra.apk' },
+          },
+          message: '👑 Xác thực thành viên PRO thành công!',
+        });
+      }
+
+      return res.status(200).json({
+        success: false,
+        isVip: false,
+        reason: 'Chưa tìm thấy bản quyền PRO cho Key hoặc Thiết bị này. Vui lòng nhập mã Key PRO hợp lệ hoặc mua gói tại Cửa Hàng!',
+        serverNowUtc,
+      });
+    }
+
+    // 4) Action: change_hwid (Hệ thống chuyển đổi HWID cho khách PRO: Miễn phí lần đầu, từ lần 2 thu 5.000đ bảo trì)
+    if (action === 'change_hwid') {
+      const qKey = sanitizeKeyInput(body.key || req.query?.key || '');
+      const newHwid = normalizeHwid(body.newHwid || req.query?.newHwid || '');
+      if (!qKey || !newHwid || newHwid.length < 4) {
+        return res.status(400).json({ success: false, reason: 'Vui lòng cung cấp Mã Key PRO và HWID máy mới (tối thiểu 4 ký tự)!' });
+      }
+
+      const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+      const targetIdx = issuedKeys.findIndex((k) => String(k.key || '').toUpperCase() === qKey);
+
+      if (targetIdx < 0) {
+        return res.status(404).json({ success: false, reason: 'Không tìm thấy thông tin Mã Key PRO này trên hệ thống máy chủ!' });
+      }
+
+      const record = issuedKeys[targetIdx];
+      if (record.revoked) {
+        return res.status(403).json({ success: false, reason: 'Mã Key này đã bị Admin thu hồi!' });
+      }
+
+      const oldHwid = record.hwid;
+      if (oldHwid === newHwid) {
+        return res.status(400).json({ success: false, reason: 'Mã HWID mới trùng với HWID hiện tại của máy!' });
+      }
+
+      const changesCount = Number(record.hwidChanges || 0);
+
+      // ĐỔI LẦN ĐẦU TIÊN (changesCount === 0): HOÀN TOÀN MIỄN PHÍ 100%!
+      if (changesCount === 0) {
+        record.hwid = newHwid;
+        record.hwidChanges = 1;
+        record.hwidHistory = [
+          ...(Array.isArray(record.hwidHistory) ? record.hwidHistory : []),
+          { oldHwid, newHwid, changedAtUtc: serverNowUtc, fee: 0, reason: 'FREE_FIRST_MIGRATION' },
+        ];
+        issuedKeys[targetIdx] = record;
+        await dbSetJson('flowly:issued_keys', issuedKeys);
+
+        // Đồng bộ đơn hàng tương ứng
+        const orders = (await dbGetJson('flowly:orders', [])) || [];
+        const orderIdx = orders.findIndex((o) => o.key === qKey || o.hwid === oldHwid);
+        if (orderIdx >= 0) {
+          orders[orderIdx].hwid = newHwid;
+          await dbSetJson('flowly:orders', orders);
+        }
+
+        await sendTelegram(
+          `🔄 <b>[KHÁCH PRO ĐỔI HWID MIỄN PHÍ LẦN ĐẦU]</b>\n\n` +
+          `🔑 <b>Key:</b> <code>${qKey}</code>\n` +
+          `📱 <b>App:</b> ${record.appId || 'All'}\n` +
+          `📟 <b>HWID cũ:</b> <code>${oldHwid}</code>\n` +
+          `🆕 <b>HWID mới:</b> <code>${newHwid}</code>\n` +
+          `✅ <i>Hệ thống đã tự động chuyển đổi bản quyền sang máy mới miễn phí 100%!</i>`
+        );
+
+        return res.status(200).json({
+          success: true,
+          free: true,
+          oldHwid,
+          newHwid,
+          hwidChanges: 1,
+          message: `🎉 Đổi thiết bị thành công miễn phí lần đầu! Bản quyền PRO đã được chuyển sang máy ${newHwid}.`,
+        });
+      }
+
+      // TỪ LẦN THỨ 2 TRỞ ĐI: THU PHÍ BẢO TRÌ 5.000đ (THEO CAM KẾT VỚI ADMIN)
+      const num6 = String(Math.floor(100000 + Math.random() * 900000));
+      const changeOrderCode = `CHG${num6}`;
+      const changeMemo = `FLOW${num6}`;
+      const qrUrl = buildVietQrUrl(5000, changeMemo);
+
+      const changeReqs = (await dbGetJson('flowly:hwid_change_requests', [])) || [];
+      const newReq = {
+        orderCode: changeOrderCode,
+        memo: changeMemo,
+        key: qKey,
+        oldHwid,
+        newHwid,
+        price: 5000,
+        status: 'PENDING',
+        createdAtUtc: serverNowUtc,
+        createdAt: new Date(serverNowUtc).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }),
+      };
+      changeReqs.unshift(newReq);
+      await dbSetJson('flowly:hwid_change_requests', changeReqs.slice(0, 300));
+
+      await sendTelegram(
+        `💳 <b>[YÊU CẦU ĐỔI HWID LẦN THỨ ${changesCount + 1}]</b>\n\n` +
+        `📦 <b>Mã đơn:</b> <code>${changeOrderCode}</code>\n` +
+        `💬 <b>Nội dung CK:</b> <code>${changeMemo}</code>\n` +
+        `💰 <b>Phí bảo trì:</b> <b>5.000đ</b>\n` +
+        `🔑 <b>Key:</b> <code>${qKey}</code>\n` +
+        `📟 <b>Cũ:</b> <code>${oldHwid}</code> ➔ 🆕 <b>Mới:</b> <code>${newHwid}</code>`
+      );
+
+      return res.status(200).json({
+        success: false,
+        requiresFee: true,
+        fee: 5000,
+        changesCount,
+        message: 'Bạn đã sử dụng lượt đổi thiết bị miễn phí lần đầu. Phí bảo trì chuyển đổi thiết bị từ lần thứ 2 là 5.000đ/lần.',
+        order: {
+          orderCode: changeOrderCode,
+          memo: changeMemo,
+          price: 5000,
+          qrUrl,
+          key: qKey,
+          oldHwid,
+          newHwid,
+        },
       });
     }
 
