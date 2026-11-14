@@ -540,6 +540,7 @@
                 </div>
                 <div class="app-card-actions">
                     <button type="button" class="btn btn-locked app-dl-btn" id="dl-flowoptimize" onclick="handleLockedClick('FlowOptimize')">🔒 Khóa Bản Quyền • Nhập Key PRO Để Tải</button>
+                    <button type="button" class="btn btn-locked app-act-btn" id="act-flowoptimize" onclick="handleLockedClick('FlowOptimize')">⚡ Mở & Tự Kích Hoạt 1-Chạm</button>
                     <button type="button" class="btn btn-locked app-gf-btn" id="gf-flowoptimize" onclick="handleLockedClick('FlowOptimize')">🔒 Link Dự Phòng Gofile</button>
                 </div>
             </div>
@@ -563,6 +564,7 @@
                 </div>
                 <div class="app-card-actions">
                     <button type="button" class="btn btn-locked app-dl-btn" id="dl-flows" onclick="handleLockedClick('FlowS')">🔒 Khóa Bản Quyền • Nhập Key PRO Để Tải</button>
+                    <button type="button" class="btn btn-locked app-act-btn" id="act-flows" onclick="handleLockedClick('FlowS')">⚡ Mở & Tự Kích Hoạt 1-Chạm</button>
                     <button type="button" class="btn btn-locked app-gf-btn" id="gf-flows" onclick="handleLockedClick('FlowS')">🔒 Link Dự Phòng Gofile</button>
                 </div>
             </div>
@@ -586,6 +588,7 @@
                 </div>
                 <div class="app-card-actions">
                     <button type="button" class="btn btn-locked app-dl-btn" id="dl-flowultra" onclick="handleLockedClick('FlowUltra')">🔒 Khóa Bản Quyền • Nhập Key PRO Để Tải</button>
+                    <button type="button" class="btn btn-locked app-act-btn" id="act-flowultra" onclick="handleLockedClick('FlowUltra')">⚡ Mở & Tự Kích Hoạt 1-Chạm</button>
                     <button type="button" class="btn btn-locked app-gf-btn" id="gf-flowultra" onclick="handleLockedClick('FlowUltra')">🔒 Link Dự Phòng Gofile</button>
                 </div>
             </div>
@@ -609,6 +612,7 @@
                 </div>
                 <div class="app-card-actions">
                     <button type="button" class="btn btn-locked app-dl-btn" id="dl-flowextra" onclick="handleLockedClick('FlowExtra')">🔒 Khóa Bản Quyền • Nhập Key PRO Để Tải</button>
+                    <button type="button" class="btn btn-locked app-act-btn" id="act-flowextra" onclick="handleLockedClick('FlowExtra')">⚡ Mở & Tự Kích Hoạt 1-Chạm</button>
                     <button type="button" class="btn btn-locked app-gf-btn" id="gf-flowextra" onclick="handleLockedClick('FlowExtra')">🔒 Link Dự Phòng GitHub</button>
                 </div>
             </div>
@@ -765,12 +769,20 @@
 
     function unlockAllAppCards(downloads) {
         const appKeys = ['flowoptimize', 'flows', 'flowultra', 'flowextra'];
+        const schemes = {
+            flowoptimize: 'flowoptimize',
+            flows: 'flows',
+            flowultra: 'flowultra',
+            flowextra: 'flowextra'
+        };
+        const activeKey = localStorage.getItem('flow_vip_key') || (document.getElementById('vipQueryInput').value || '').trim();
 
         appKeys.forEach(appId => {
             const card = document.getElementById(`card-${appId}`);
             const badge = document.getElementById(`badge-${appId}`);
             const dlBtn = document.getElementById(`dl-${appId}`);
             const gfBtn = document.getElementById(`gf-${appId}`);
+            const actBtn = document.getElementById(`act-${appId}`);
 
             if (card) card.classList.add('unlocked-card');
 
@@ -792,6 +804,18 @@
                 gfBtn.innerHTML = appId === 'flowextra' ? '🚀 Dự Phòng GitHub' : '🚀 Dự Phòng Gofile';
                 gfBtn.onclick = () => {
                     window.open(downloads[appId].gofile, '_blank');
+                };
+            }
+
+            if (actBtn) {
+                actBtn.className = 'btn btn-cyan app-act-btn';
+                actBtn.innerHTML = '⚡ Mở & Kích Hoạt PRO 1-Chạm';
+                actBtn.onclick = () => {
+                    if (activeKey) {
+                        window.location.href = `${schemes[appId]}://license?key=${encodeURIComponent(activeKey)}`;
+                    } else {
+                        alert('Vui lòng xác thực bản quyền PRO trước khi kích hoạt!');
+                    }
                 };
             }
         });
