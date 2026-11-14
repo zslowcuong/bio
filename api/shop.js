@@ -32,6 +32,7 @@ export default async function handler(req, res) {
     const body = req.method === 'POST' ? await parseBody(req) : {};
     const action = String(req.query?.action || body.action || 'status').trim().toLowerCase();
     const backendStatus = getBackendStatus();
+    const serverNowUtc = Date.now();
 
     if (action === 'pricing') {
       const pricing = await getLifetimePricingTier();
