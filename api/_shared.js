@@ -107,17 +107,27 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
   const cleanHwid = normalizeHwid(expectedHwid);
 
   // 1) Universal ALL-APPS Combo Key (FLOWALL-PRO-<HWID>-<PLAN>-<NONCE4>-<SIG8>)
+  // A Combo 4 App key unlocks ALL 4 apps on the user's device. On Android, each package has a distinct scoped HWID,
+  // so FLOWALL keys are cryptographically verified via master salt without requiring exact single-package HWID matching.
   const allApp = APPS.all;
   if (allApp && key.startsWith(`${allApp.prefix}-PRO-`)) {
     const parts = key.slice(`${allApp.prefix}-PRO-`.length).split('-');
     if (parts.length === 4) {
       const [keyHwid, planCode, nonce4, sig8] = parts;
-      if (keyHwid !== cleanHwid) {
-        return { valid: false, reason: `Key Combo này gắn với thiết bị ${keyHwid}, không khớp máy ${cleanHwid}` };
-      }
       const expectedSig = sha256Hex(`${allApp.prefix}:PRO:${keyHwid}:${planCode}:${nonce4}:${allApp.salt}`).slice(0, 8);
       if (sig8 === expectedSig) {
-        return { valid: true, tier: 'PRO_SHOP', expiryUtcMs: 4102444800000, plan: 'LIFE', key, isLifetime: true, isAllApps: true };
+        return {
+          valid: true,
+          tier: 'PRO_SHOP',
+          expiryUtcMs: 4102444800000,
+          plan: 'LIFE',
+          key,
+          isLifetime: true,
+          isAllApps: true,
+          keyOriginHwid: keyHwid
+        };
+      } else {
+        return { valid: false, reason: 'Chữ ký Key Combo Full 4 App không hợp lệ hoặc đã bị chỉnh sửa' };
       }
     }
   }
@@ -128,10 +138,19 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
       const parts = key.slice(`${otherApp.prefix}-PRO-`.length).split('-');
       if (parts.length === 4) {
         const [keyHwid, planCode, nonce4, sig8] = parts;
-        if (keyHwid === cleanHwid && planCode === 'LIFE') {
+        if (planCode === 'LIFE') {
           const expectedSig = sha256Hex(`${otherApp.prefix}:PRO:${keyHwid}:${planCode}:${nonce4}:${otherApp.salt}`).slice(0, 8);
           if (sig8 === expectedSig) {
-            return { valid: true, tier: 'PRO_SHOP', expiryUtcMs: 4102444800000, plan: 'LIFE', key, isLifetime: true, isAllApps: true };
+            return {
+              valid: true,
+              tier: 'PRO_SHOP',
+              expiryUtcMs: 4102444800000,
+              plan: 'LIFE',
+              key,
+              isLifetime: true,
+              isAllApps: true,
+              keyOriginHwid: keyHwid
+            };
           }
         }
       }

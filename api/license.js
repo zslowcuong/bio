@@ -201,7 +201,7 @@ export default async function handler(req, res) {
         (k) =>
           k &&
           (k.appId === appId || k.appId === 'all' || k.allApps === true || k.planCode === 'LIFE') &&
-          k.hwid === hwid &&
+          (k.hwid === hwid || (Array.isArray(k.hwids) && k.hwids.includes(hwid))) &&
           !k.revoked &&
           !revokedKeys.includes(String(k.key || '').toUpperCase()) &&
           (!k.expiryUtcMs || Number(k.expiryUtcMs) > serverNowUtc)
@@ -290,16 +290,25 @@ export default async function handler(req, res) {
       }
 
       let finalExpiryMs = verified.expiryUtcMs;
-      if (foundIssued && foundIssued.expiryUtcMs) {
-        finalExpiryMs = Number(foundIssued.expiryUtcMs);
+      const isLifeComboSave = verified.isAllApps || verified.plan === 'LIFE';
+      if (foundIssued) {
+        if (foundIssued.expiryUtcMs) {
+          finalExpiryMs = Number(foundIssued.expiryUtcMs);
+        }
+        if (isLifeComboSave) {
+          if (!Array.isArray(foundIssued.hwids)) foundIssued.hwids = [foundIssued.hwid].filter(Boolean);
+          if (!foundIssued.hwids.includes(hwid)) foundIssued.hwids.push(hwid);
+          foundIssued.lastActivatedAtUtc = serverNowUtc;
+          await dbSetJson('flowly:issued_keys', issuedKeys.slice(0, 800));
+        }
       } else if (verified.tier === 'PRO_SHOP') {
         // Persist first activation of offline-minted PRO key so duration can't be extended by re-entering
-        const isLifeComboSave = verified.isAllApps || verified.plan === 'LIFE';
         issuedKeys.unshift({
           key,
           appId: isLifeComboSave ? 'all' : appId,
           allApps: isLifeComboSave,
           hwid,
+          hwids: [hwid, verified.keyOriginHwid].filter(Boolean),
           planCode: verified.plan,
           planName: isLifeComboSave ? 'Gói Vĩnh Viễn Combo Full 4 App (99K)' : verified.plan,
           source: 'KEY_ACTIVATED',
@@ -368,7 +377,7 @@ export default async function handler(req, res) {
           const kPhone = String(k.phone || '').replace(/[^0-9]/g, '');
 
           if (tokenKey && kKey === tokenKey) return true;
-          if (tokenHwid && tokenHwid.length >= 4 && kHwid === tokenHwid) return true;
+          if (tokenHwid && tokenHwid.length >= 4 && (kHwid === tokenHwid || (Array.isArray(k.hwids) && k.hwids.includes(tokenHwid)))) return true;
           if (tokenPhone && tokenPhone.length >= 8 && (kPhone === tokenPhone || kPhone.includes(tokenPhone))) return true;
           return false;
         });
