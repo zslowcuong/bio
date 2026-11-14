@@ -230,22 +230,71 @@
         /* VIP Badge Verified */
         .vip-status-banner {
             display: none;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.25));
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(5, 150, 105, 0.28));
             border: 1.5px solid #10b981;
             border-radius: 16px;
             padding: 16px;
-            margin-bottom: 20px;
+            margin-top: 16px;
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .vip-status-row {
             display: flex;
             justify-content: space-between;
             font-size: 12px;
-            padding: 5px 0;
+            padding: 6px 0;
             border-bottom: 1px dashed rgba(255,255,255,0.08);
         }
         .vip-status-row:last-child { border-bottom: none; }
         .vip-label { color: var(--text-sub); }
         .vip-val { font-weight: 700; color: #fff; }
+
+        /* Lock / Unlock Badges & Buttons */
+        .lock-badge {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 99px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .lock-badge.locked {
+            background: rgba(239, 68, 68, 0.16);
+            border: 1px solid rgba(239, 68, 68, 0.45);
+            color: #f87171;
+        }
+        .lock-badge.unlocked {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid #10b981;
+            color: #34d399;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+            animation: pulse-glow 2s infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 8px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 0 18px rgba(16, 185, 129, 0.7); }
+        }
+
+        .btn-locked {
+            background: rgba(30, 41, 59, 0.85) !important;
+            border: 1px dashed rgba(239, 68, 68, 0.5) !important;
+            color: #94a3b8 !important;
+            cursor: pointer !important;
+            box-shadow: none !important;
+            transition: all 0.2s ease;
+        }
+        .btn-locked:hover {
+            background: rgba(45, 55, 72, 0.95) !important;
+            border-color: #ef4444 !important;
+            color: #fca5a5 !important;
+            transform: translateY(-1px);
+        }
 
         /* App Download Cards Grid */
         .app-grid {
@@ -266,6 +315,11 @@
             flex-direction: column;
             justify-content: space-between;
             transition: all 0.25s ease;
+            position: relative;
+        }
+        .app-card.unlocked-card {
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
         }
         .app-card:hover {
             transform: translateY(-3px);
@@ -275,8 +329,13 @@
         .app-card-top {
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: space-between;
             margin-bottom: 12px;
+        }
+        .app-card-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         .app-card-icon {
             width: 44px;
@@ -403,30 +462,29 @@
     </div>
 
     <!-- VIP License Verification Card -->
-    <div class="glass-card">
+    <div class="glass-card" id="vipAuthCard">
         <div class="card-header">
             <div class="card-title">🔑 Xác Thực Bản Quyền PRO Của Bạn</div>
             <span style="font-size: 11px; color: var(--accent-emerald); font-weight: 700;">● Tự Động Kết Nối</span>
         </div>
 
         <div class="form-group">
-            <label class="form-label">MÃ KEY PRO (HOẶC MÃ HWID TRÊN APP)</label>
-            <input type="text" id="vipKeyInput" class="form-input" placeholder="Dán mã FLOWALL-PRO-... hoặc FLOWOP-PRO-...">
-        </div>
-        <div class="form-group">
-            <label class="form-label">MÃ THIẾT BỊ HWID HIỆN TẠI</label>
-            <input type="text" id="vipHwidInput" class="form-input" placeholder="VD: OPPO_CPH2371">
+            <label class="form-label" style="font-size: 12px; font-weight: 800;">🔍 NHẬP SỐ ĐIỆN THOẠI, HWID HOẶC MÃ KEY PRO ĐÃ MUA</label>
+            <input type="text" id="vipQueryInput" class="form-input" placeholder="VD: 0966152284 hoặc REALM_29AF3D97 hoặc FLOWALL-PRO-...">
+            <div style="font-size: 11.5px; color: var(--text-sub); margin-top: 6px; line-height: 1.45;">
+                💡 <b>Tra cứu siêu tốc:</b> Nhập bất kỳ thông tin nào bạn đã dùng khi mua: <b>Số điện thoại</b>, <b>Mã HWID</b> (trên app), <b>Mã đơn hàng</b> (ORD...), hoặc <b>Mã Key PRO</b>. Hệ thống sẽ tự động đối soát đơn hàng và mở khóa link tải tức thì!
+            </div>
         </div>
 
-        <div style="display: flex; gap: 10px; margin-top: 8px;">
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
             <button class="btn btn-emerald" onclick="verifyVipAccess()" id="btnCheckVip">⚡ Xác Thực Bản Quyền PRO</button>
-            <a href="shop.html" class="btn btn-ghost" style="flex: 0.6; text-align: center;">🛍️ Mua PRO</a>
+            <a href="shop.html" class="btn btn-ghost" style="flex: 0.55; text-align: center;">🛍️ Mua PRO</a>
         </div>
 
         <!-- Verified Status Banner -->
         <div class="vip-status-banner" id="vipBanner">
             <div style="font-size: 13px; font-weight: 800; color: #10b981; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                ✅ XÁC THỰC THÀNH VIÊN PRO THÀNH CÔNG!
+                🎉 XÁC THỰC THÀNH VIÊN PRO THÀNH CÔNG! ĐÃ MỞ KHÓA TẢI TRỰC TIẾP 4 APP
             </div>
             <div class="vip-status-row">
                 <span class="vip-label">Mã Key PRO:</span>
@@ -437,8 +495,12 @@
                 <span class="vip-val" id="vPlan" style="color: #38bdf8;">-</span>
             </div>
             <div class="vip-status-row">
-                <span class="vip-label">Mã Thiết Bị Khóa:</span>
+                <span class="vip-label">Mã Thiết Bị Khóa (HWID):</span>
                 <span class="vip-val mono" id="vHwid">-</span>
+            </div>
+            <div class="vip-status-row" id="rowPhone" style="display: none;">
+                <span class="vip-label">Số Điện Thoại Mua Hàng:</span>
+                <span class="vip-val" id="vPhone" style="color: #34d399;">-</span>
             </div>
             <div class="vip-status-row">
                 <span class="vip-label">Lượt Đổi HWID:</span>
@@ -447,91 +509,107 @@
         </div>
     </div>
 
-    <!-- Direct Download 4 App Section -->
-    <div class="glass-card">
+    <!-- Direct Download 4 App Section (STRICTLY LOCKED UNTIL PRO VERIFIED) -->
+    <div class="glass-card" id="downloadSection">
         <div class="card-header">
             <div class="card-title">🚀 Tải Trực Tiếp 4 Ứng Dụng (0 Giây Chờ • 0 Link Rút Gọn)</div>
             <span style="font-size: 11px; background: rgba(16,185,129,0.15); color:#10b981; border:1px solid #10b981; padding:2px 8px; border-radius:99px; font-weight:700;">PRO VIP ONLY</span>
         </div>
 
+        <p style="font-size: 12px; color: var(--text-sub); margin-bottom: 14px; line-height: 1.45;">
+            🔒 <i>Khu vực link tải nội bộ tốc độ cao dành riêng cho khách hàng đã mua Key PRO. Vui lòng xác thực ở ô phía trên để mở khóa nút tải.</i>
+        </p>
+
         <div class="app-grid">
             <!-- 1. FlowOptimize -->
-            <div class="app-card">
+            <div class="app-card" id="card-flowoptimize">
                 <div>
                     <div class="app-card-top">
-                        <img src="app_logo.png" class="app-card-icon" alt="FlowOptimize">
-                        <div>
-                            <div class="app-card-name">FlowOptimize</div>
-                            <span class="app-card-tag">v1.8.0 • Anime Edition</span>
+                        <div class="app-card-info">
+                            <img src="app_logo.png" class="app-card-icon" alt="FlowOptimize">
+                            <div>
+                                <div class="app-card-name">FlowOptimize</div>
+                                <span class="app-card-tag">v1.8.0 • Anime Edition</span>
+                            </div>
                         </div>
+                        <span class="lock-badge locked" id="badge-flowoptimize">🔒 ĐANG KHÓA</span>
                     </div>
                     <div class="app-card-desc">
                         Tối ưu FPS cực hạn, 7 Theme Anime (Conan, One Piece, Dragon Ball...), Dynamic Island HUD & dọn RAM sâu an toàn 100%.
                     </div>
                 </div>
                 <div class="app-card-actions">
-                    <a href="FlowOptimize.apk" download class="btn btn-emerald">⚡ Tải Trực Tiếp APK (0s)</a>
-                    <a href="https://gofile.io/d/Vr3bEORd" target="_blank" class="btn btn-ghost">🚀 Dự Phòng Gofile</a>
+                    <button type="button" class="btn btn-locked app-dl-btn" id="dl-flowoptimize" onclick="handleLockedClick('FlowOptimize')">🔒 Khóa Bản Quyền • Nhập Key PRO Để Tải</button>
+                    <button type="button" class="btn btn-locked app-gf-btn" id="gf-flowoptimize" onclick="handleLockedClick('FlowOptimize')">🔒 Link Dự Phòng Gofile</button>
                 </div>
             </div>
 
             <!-- 2. FlowS -->
-            <div class="app-card">
+            <div class="app-card" id="card-flows">
                 <div>
                     <div class="app-card-top">
-                        <img src="flows_logo.png" class="app-card-icon" alt="FlowS">
-                        <div>
-                            <div class="app-card-name">FlowS Tuner</div>
-                            <span class="app-card-tag">v1.4.0 • Gamer Edition</span>
+                        <div class="app-card-info">
+                            <img src="flows_logo.png" class="app-card-icon" alt="FlowS">
+                            <div>
+                                <div class="app-card-name">FlowS Tuner</div>
+                                <span class="app-card-tag">v1.4.0 • Gamer Edition</span>
+                            </div>
                         </div>
+                        <span class="lock-badge locked" id="badge-flows">🔒 ĐANG KHÓA</span>
                     </div>
                     <div class="app-card-desc">
                         Điều chỉnh độ nhạy cảm ứng 0ms, khóa tần số quét màn hình Max Hz phần cứng & bộ tinh chỉnh game thủ chuyên nghiệp.
                     </div>
                 </div>
                 <div class="app-card-actions">
-                    <a href="FlowS.apk" download class="btn btn-emerald">⚡ Tải Trực Tiếp APK (0s)</a>
-                    <a href="https://gofile.io/d/kzDVlE2G" target="_blank" class="btn btn-ghost">🚀 Dự Phòng Gofile</a>
+                    <button type="button" class="btn btn-locked app-dl-btn" id="dl-flows" onclick="handleLockedClick('FlowS')">🔒 Khóa Bản Quyền • Nhập Key PRO Để Tải</button>
+                    <button type="button" class="btn btn-locked app-gf-btn" id="gf-flows" onclick="handleLockedClick('FlowS')">🔒 Link Dự Phòng Gofile</button>
                 </div>
             </div>
 
             <!-- 3. FlowUltra -->
-            <div class="app-card">
+            <div class="app-card" id="card-flowultra">
                 <div>
                     <div class="app-card-top">
-                        <img src="flowultra_logo.png" class="app-card-icon" alt="FlowUltra">
-                        <div>
-                            <div class="app-card-name">FlowUltra</div>
-                            <span class="app-card-tag">v1.3.0 • eSports Edition</span>
+                        <div class="app-card-info">
+                            <img src="flowultra_logo.png" class="app-card-icon" alt="FlowUltra">
+                            <div>
+                                <div class="app-card-name">FlowUltra</div>
+                                <span class="app-card-tag">v1.3.0 • eSports Edition</span>
+                            </div>
                         </div>
+                        <span class="lock-badge locked" id="badge-flowultra">🔒 ĐANG KHÓA</span>
                     </div>
                     <div class="app-card-desc">
                         Ép xung vi xử lý phần cứng, tối ưu hóa Vulkan/OpenGL renderer & ổn định đường truyền mạng 0% giật lag cho thi đấu.
                     </div>
                 </div>
                 <div class="app-card-actions">
-                    <a href="FlowUltra.apk" download class="btn btn-emerald">⚡ Tải Trực Tiếp APK (0s)</a>
-                    <a href="https://gofile.io/d/p8GZrZNY" target="_blank" class="btn btn-ghost">🚀 Dự Phòng Gofile</a>
+                    <button type="button" class="btn btn-locked app-dl-btn" id="dl-flowultra" onclick="handleLockedClick('FlowUltra')">🔒 Khóa Bản Quyền • Nhập Key PRO Để Tải</button>
+                    <button type="button" class="btn btn-locked app-gf-btn" id="gf-flowultra" onclick="handleLockedClick('FlowUltra')">🔒 Link Dự Phòng Gofile</button>
                 </div>
             </div>
 
             <!-- 4. FlowExtra -->
-            <div class="app-card">
+            <div class="app-card" id="card-flowextra">
                 <div>
                     <div class="app-card-top">
-                        <img src="flowextra_logo.png" class="app-card-icon" alt="FlowExtra">
-                        <div>
-                            <div class="app-card-name">FlowExtra</div>
-                            <span class="app-card-tag">v3.7 • Kaito Kid 1412</span>
+                        <div class="app-card-info">
+                            <img src="flowextra_logo.png" class="app-card-icon" alt="FlowExtra">
+                            <div>
+                                <div class="app-card-name">FlowExtra</div>
+                                <span class="app-card-tag">v3.7 • Kaito Kid 1412</span>
+                            </div>
                         </div>
+                        <span class="lock-badge locked" id="badge-flowextra">🔒 ĐANG KHÓA</span>
                     </div>
                     <div class="app-card-desc">
                         Bảo vệ Camera & Ảnh, kích hoạt Touch Turbo 360Hz, chặn tiến trình chạy ngầm rác & giải phóng toàn bộ tài nguyên máy.
                     </div>
                 </div>
                 <div class="app-card-actions">
-                    <a href="FlowExtra.apk" download class="btn btn-emerald">⚡ Tải Trực Tiếp APK (0s)</a>
-                    <a href="https://raw.githubusercontent.com/zslowcuong/bio/main/FlowExtra.apk" target="_blank" class="btn btn-ghost">🚀 Dự Phòng GitHub</a>
+                    <button type="button" class="btn btn-locked app-dl-btn" id="dl-flowextra" onclick="handleLockedClick('FlowExtra')">🔒 Khóa Bản Quyền • Nhập Key PRO Để Tải</button>
+                    <button type="button" class="btn btn-locked app-gf-btn" id="gf-flowextra" onclick="handleLockedClick('FlowExtra')">🔒 Link Dự Phòng GitHub</button>
                 </div>
             </div>
         </div>
@@ -560,8 +638,8 @@
         </p>
 
         <div class="form-group">
-            <label class="form-label">MÃ KEY PRO CẦN CHUYỂN MÁY</label>
-            <input type="text" id="chgKeyInput" class="form-input" placeholder="FLOWALL-PRO-... hoặc FLOWOP-PRO-...">
+            <label class="form-label">MÃ KEY PRO (HOẶC SĐT ĐÃ MUA) CẦN CHUYỂN MÁY</label>
+            <input type="text" id="chgKeyInput" class="form-input" placeholder="FLOWALL-PRO-... hoặc Số Điện Thoại...">
         </div>
         <div class="form-group">
             <label class="form-label">MÃ HWID MÁY MỚI CỦA BẠN (XEM TRÊN APP Ở MÁY MỚI)</label>
@@ -596,50 +674,127 @@
 
 <script>
     const API_BASE = 'https://bio-seven-nu.vercel.app';
+    let isVipAuthenticated = false;
+    let vipDownloadsData = null;
     let currentPendingOrder = null;
 
     window.addEventListener('DOMContentLoaded', () => {
         const p = new URLSearchParams(window.location.search);
-        const qKey = p.get('key') || localStorage.getItem('flow_vip_key') || '';
-        const qHwid = p.get('hwid') || localStorage.getItem('flow_vip_hwid') || localStorage.getItem('flow_shop_hwid') || '';
+        const qSmart = p.get('q') || p.get('phone') || p.get('key') || p.get('hwid') || localStorage.getItem('flow_vip_q') || localStorage.getItem('flow_vip_key') || '';
 
-        if (qKey) document.getElementById('vipKeyInput').value = qKey;
-        if (qHwid) document.getElementById('vipHwidInput').value = qHwid;
-        if (qKey) document.getElementById('chgKeyInput').value = qKey;
-
-        if (qKey || qHwid) {
+        if (qSmart) {
+            document.getElementById('vipQueryInput').value = qSmart;
+            document.getElementById('chgKeyInput').value = qSmart;
             verifyVipAccess();
         }
     });
 
+    function handleLockedClick(appName) {
+        if (isVipAuthenticated) return;
+
+        alert(`🔒 TÍNH NĂNG DÀNH RIÊNG CHO THÀNH VIÊN PRO!\n\n` +
+              `Link tải trực tiếp không cần vượt link (0s chờ) của ${appName} chỉ dành cho khách hàng đã sở hữu Key PRO.\n\n` +
+              `👉 Vui lòng nhập Số điện thoại mua hàng (VD: 0966152284), HWID máy hoặc Mã Key PRO vào ô xác thực phía trên để tự động mở khóa!`);
+
+        const card = document.getElementById('vipAuthCard');
+        const input = document.getElementById('vipQueryInput');
+        if (card && input) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            input.focus();
+            input.style.borderColor = '#ef4444';
+            input.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.6)';
+            setTimeout(() => {
+                input.style.borderColor = '';
+                input.style.boxShadow = '';
+            }, 2500);
+        }
+    }
+
     async function verifyVipAccess() {
-        const key = (document.getElementById('vipKeyInput').value || '').trim();
-        const hwid = (document.getElementById('vipHwidInput').value || '').trim();
+        const query = (document.getElementById('vipQueryInput').value || '').trim();
         const btn = document.getElementById('btnCheckVip');
-        btn.innerText = '⏳ Đang xác thực...';
+
+        if (!query) {
+            alert('Vui lòng nhập Số điện thoại mua hàng, Mã HWID hoặc Mã Key PRO để xác thực!');
+            document.getElementById('vipQueryInput').focus();
+            return;
+        }
+
+        btn.innerText = '⏳ Đang kiểm tra hệ thống...';
 
         try {
-            const res = await fetch(`${API_BASE}/api/license?action=verify_vip&key=${encodeURIComponent(key)}&hwid=${encodeURIComponent(hwid)}`);
+            const url = `${API_BASE}/api/license?action=verify_vip&q=${encodeURIComponent(query)}&key=${encodeURIComponent(query)}&hwid=${encodeURIComponent(query)}&phone=${encodeURIComponent(query)}`;
+            const res = await fetch(url);
             const data = await res.json();
             btn.innerText = '⚡ Xác Thực Bản Quyền PRO';
 
             if (data.success && data.isVip) {
+                isVipAuthenticated = true;
+                vipDownloadsData = data.directDownloads;
+
+                // Hiển thị thông tin VIP
                 document.getElementById('vipBanner').style.display = 'block';
-                document.getElementById('vKey').innerText = data.key || key || 'PRO VIP';
+                document.getElementById('vKey').innerText = data.key || 'PRO VIP';
                 document.getElementById('vPlan').innerText = data.planName || (data.isLifetime ? 'Vĩnh Viễn Full 4 App' : 'Gói PRO');
-                document.getElementById('vHwid').innerText = data.hwid || hwid || 'Đã liên kết';
+                document.getElementById('vHwid').innerText = data.hwid || 'Đã liên kết';
                 document.getElementById('vHwidChanges').innerText = data.hwidChanges === 0 ? 'Còn 1 lượt ĐỔI MIỄN PHÍ' : `Đã đổi ${data.hwidChanges} lần (Lần sau 5.000đ)`;
 
-                if (key) localStorage.setItem('flow_vip_key', key);
+                if (data.phone) {
+                    document.getElementById('rowPhone').style.display = 'flex';
+                    document.getElementById('vPhone').innerText = data.phone;
+                }
+
+                // Lưu vào bộ nhớ tạm
+                localStorage.setItem('flow_vip_q', query);
+                localStorage.setItem('flow_vip_key', data.key || query);
                 if (data.hwid) localStorage.setItem('flow_vip_hwid', data.hwid);
-                if (key) document.getElementById('chgKeyInput').value = key;
+                document.getElementById('chgKeyInput').value = data.key || query;
+
+                // MỞ KHÓA TOÀN BỘ 4 APP CARD
+                unlockAllAppCards(data.directDownloads);
+
             } else {
-                alert(data.reason || 'Chưa tìm thấy bản quyền PRO cho thiết bị này. Bạn có thể mua tại Cửa Hàng!');
+                isVipAuthenticated = false;
+                alert(data.reason || 'Chưa tìm thấy bản quyền PRO cho thông tin này. Bạn có thể bấm vào "Mua PRO" để đăng ký kích hoạt!');
             }
         } catch (e) {
             btn.innerText = '⚡ Xác Thực Bản Quyền PRO';
             alert('Lỗi kết nối máy chủ xác thực: ' + e.message);
         }
+    }
+
+    function unlockAllAppCards(downloads) {
+        const appKeys = ['flowoptimize', 'flows', 'flowultra', 'flowextra'];
+
+        appKeys.forEach(appId => {
+            const card = document.getElementById(`card-${appId}`);
+            const badge = document.getElementById(`badge-${appId}`);
+            const dlBtn = document.getElementById(`dl-${appId}`);
+            const gfBtn = document.getElementById(`gf-${appId}`);
+
+            if (card) card.classList.add('unlocked-card');
+
+            if (badge) {
+                badge.className = 'lock-badge unlocked';
+                badge.innerHTML = '🔓 ĐÃ MỞ KHÓA PRO';
+            }
+
+            if (dlBtn && downloads && downloads[appId]) {
+                dlBtn.className = 'btn btn-emerald app-dl-btn';
+                dlBtn.innerHTML = '⚡ Tải Trực Tiếp APK (0s Chờ)';
+                dlBtn.onclick = () => {
+                    window.location.href = downloads[appId].directApk;
+                };
+            }
+
+            if (gfBtn && downloads && downloads[appId]) {
+                gfBtn.className = 'btn btn-ghost app-gf-btn';
+                gfBtn.innerHTML = appId === 'flowextra' ? '🚀 Dự Phòng GitHub' : '🚀 Dự Phòng Gofile';
+                gfBtn.onclick = () => {
+                    window.open(downloads[appId].gofile, '_blank');
+                };
+            }
+        });
     }
 
     async function requestHwidChange() {
@@ -648,7 +803,7 @@
         const btn = document.getElementById('btnSubmitHwid');
 
         if (!key) {
-            alert('Vui lòng nhập Mã Key PRO cần chuyển thiết bị!');
+            alert('Vui lòng nhập Mã Key PRO (hoặc SĐT mua hàng) cần chuyển thiết bị!');
             return;
         }
         if (!newHwid || newHwid.length < 4) {
@@ -669,7 +824,7 @@
             if (data.success && data.free) {
                 alert(`🎉 CHÚC MỪNG BẠN!\n\nĐã chuyển đổi bản quyền PRO sang máy mới thành công MIỄN PHÍ 100%!\n\nMã HWID mới: ${data.newHwid}\nHãy mở app trên máy mới để sử dụng ngay!`);
                 localStorage.setItem('flow_vip_hwid', data.newHwid);
-                document.getElementById('vipHwidInput').value = data.newHwid;
+                document.getElementById('vipQueryInput').value = data.newHwid;
                 verifyVipAccess();
             } else if (data.requiresFee && data.order) {
                 currentPendingOrder = data.order;

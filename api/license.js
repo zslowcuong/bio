@@ -333,39 +333,117 @@ export default async function handler(req, res) {
       });
     }
 
-        // 3) Action: verify_vip (Mở khóa tải trực tiếp 4 App không cần vượt link cho thành viên PRO)
+    // 3) Action: verify_vip (Mở khóa tải trực tiếp 4 App không cần vượt link cho thành viên PRO)
     if (action === 'verify_vip') {
-      const qKey = sanitizeKeyInput(body.key || req.query?.key || '');
-      const qHwid = normalizeHwid(body.hwid || req.query?.hwid || '');
+      const rawQ = String(req.query?.q || body.q || '').trim();
+      const inKey = String(body.key || req.query?.key || '').trim();
+      const inHwid = String(body.hwid || req.query?.hwid || '').trim();
+      const inPhone = String(body.phone || req.query?.phone || '').trim();
+      const inOrder = String(body.order || req.query?.order || '').trim();
+
+      // Tập hợp tất cả các chuỗi tìm kiếm có thể người dùng nhập vào (chống trường hợp nhập nhầm ô)
+      const rawCandidates = [rawQ, inKey, inHwid, inPhone, inOrder].filter(Boolean);
+      const searchTokens = Array.from(new Set(rawCandidates));
 
       const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+      const orders = (await dbGetJson('flowly:orders', [])) || [];
+
       let foundRecord = null;
+      let matchedOrder = null;
 
-      if (qKey) {
-        foundRecord = issuedKeys.find((k) => String(k.key || '').toUpperCase() === qKey);
-      }
-      if (!foundRecord && qHwid) {
-        foundRecord = issuedKeys.find(
-          (k) =>
-            k &&
-            k.hwid === qHwid &&
-            !k.revoked &&
-            !revokedKeys.includes(String(k.key || '').toUpperCase()) &&
-            (!k.expiryUtcMs || Number(k.expiryUtcMs) > serverNowUtc)
-        );
+      // 1. Thử tìm trong issued_keys theo Key, HWID, hoặc Số điện thoại
+      for (const token of searchTokens) {
+        const tokenUpper = token.toUpperCase();
+        const tokenKey = sanitizeKeyInput(token);
+        const tokenHwid = normalizeHwid(token);
+        const tokenPhone = token.replace(/[^0-9]/g, '');
+
+        foundRecord = issuedKeys.find((k) => {
+          if (!k) return false;
+          if (k.revoked || revokedKeys.includes(String(k.key || '').toUpperCase())) return false;
+          if (k.expiryUtcMs && Number(k.expiryUtcMs) <= serverNowUtc) return false;
+
+          const kKey = String(k.key || '').toUpperCase();
+          const kHwid = String(k.hwid || '').toUpperCase();
+          const kPhone = String(k.phone || '').replace(/[^0-9]/g, '');
+
+          if (tokenKey && kKey === tokenKey) return true;
+          if (tokenHwid && tokenHwid.length >= 4 && kHwid === tokenHwid) return true;
+          if (tokenPhone && tokenPhone.length >= 8 && (kPhone === tokenPhone || kPhone.includes(tokenPhone))) return true;
+          return false;
+        });
+
+        if (foundRecord) break;
       }
 
-      // Check offline cryptographic signature if not in DB yet
+      // 2. Nếu chưa thấy trong issued_keys, tìm trong flowly:orders (đơn hàng đã hoàn thành COMPLETED)
+      if (!foundRecord) {
+        for (const token of searchTokens) {
+          const tokenUpper = token.toUpperCase();
+          const tokenKey = sanitizeKeyInput(token);
+          const tokenHwid = normalizeHwid(token);
+          const tokenPhone = token.replace(/[^0-9]/g, '');
+
+          matchedOrder = orders.find((o) => {
+            if (!o || o.status !== 'COMPLETED') return false;
+            if (o.key && revokedKeys.includes(String(o.key || '').toUpperCase())) return false;
+            if (o.expiryUtcMs && Number(o.expiryUtcMs) <= serverNowUtc) return false;
+
+            const oCode = String(o.orderCode || '').toUpperCase();
+            const oMemo = String(o.memo || '').toUpperCase();
+            const oKey = String(o.key || '').toUpperCase();
+            const oHwid = String(o.hwid || '').toUpperCase();
+            const oPhone = String(o.phone || '').replace(/[^0-9]/g, '');
+
+            if (oCode === tokenUpper) return true;
+            if (oMemo === tokenUpper) return true;
+            if (tokenKey && oKey === tokenKey) return true;
+            if (tokenHwid && tokenHwid.length >= 4 && oHwid === tokenHwid) return true;
+            if (tokenPhone && tokenPhone.length >= 8 && (oPhone === tokenPhone || oPhone.includes(tokenPhone))) return true;
+            return false;
+          });
+
+          if (matchedOrder) break;
+        }
+
+        if (matchedOrder) {
+          // Tìm record tương ứng trong issued_keys hoặc dựng từ matchedOrder
+          foundRecord = issuedKeys.find((k) => k && k.key === matchedOrder.key) || {
+            key: matchedOrder.key,
+            appId: matchedOrder.appId || 'all',
+            planCode: matchedOrder.planCode || (matchedOrder.allApps ? 'LIFE' : 'PRO'),
+            planName: matchedOrder.planName || 'Gói PRO Đã Kích Hoạt',
+            hwid: matchedOrder.hwid,
+            phone: matchedOrder.phone,
+            hwidChanges: 0,
+            allApps: matchedOrder.allApps ?? true,
+            expiryUtcMs: matchedOrder.expiryUtcMs || 4102444800000,
+          };
+        }
+      }
+
+      // 3. Fallback chữ ký mật mã offline nếu có cả Key và HWID
       let isCryptValid = false;
       let cryptInfo = null;
-      if (!foundRecord && qKey && qHwid) {
-        for (const testApp of ['all', 'flowoptimize', 'flows', 'flowultra', 'flowextra']) {
-          const v = verifySignedKeyFormat(qKey, testApp, qHwid);
-          if (v.valid && (v.tier === 'PRO_SHOP' || v.plan === 'LIFE' || v.isLifetime)) {
-            isCryptValid = true;
-            cryptInfo = v;
-            break;
+      if (!foundRecord) {
+        for (const tokenA of searchTokens) {
+          for (const tokenB of searchTokens) {
+            if (tokenA === tokenB) continue;
+            const tKey = sanitizeKeyInput(tokenA);
+            const tHwid = normalizeHwid(tokenB);
+            if (tKey && tHwid && tHwid.length >= 4) {
+              for (const testApp of ['all', 'flowoptimize', 'flows', 'flowultra', 'flowextra']) {
+                const v = verifySignedKeyFormat(tKey, testApp, tHwid);
+                if (v.valid && (v.tier === 'PRO_SHOP' || v.plan === 'LIFE' || v.isLifetime)) {
+                  isCryptValid = true;
+                  cryptInfo = { ...v, key: tKey, hwid: tHwid };
+                  break;
+                }
+              }
+              if (isCryptValid) break;
+            }
           }
+          if (isCryptValid) break;
         }
       }
 
@@ -379,6 +457,7 @@ export default async function handler(req, res) {
           plan: foundRecord.planCode || (isLife ? 'LIFE' : 'PRO'),
           planName: foundRecord.planName || (isLife ? 'Gói Vĩnh Viễn Combo Full 4 App (99K)' : 'Gói PRO'),
           hwid: foundRecord.hwid,
+          phone: foundRecord.phone || '',
           hwidChanges: Number(foundRecord.hwidChanges || 0),
           isLifetime: isLife,
           expiresAtUtc: Number(foundRecord.expiryUtcMs || 4102444800000),
@@ -419,29 +498,30 @@ export default async function handler(req, res) {
         return res.status(200).json({
           success: true,
           isVip: true,
-          key: qKey,
+          key: cryptInfo.key,
           appId: cryptInfo.isAllApps ? 'all' : (cryptInfo.appId || 'all'),
           plan: cryptInfo.plan || 'LIFE',
           planName: 'Gói PRO Đã Xác Thực Chữ Ký',
-          hwid: qHwid,
+          hwid: cryptInfo.hwid,
+          phone: '',
           hwidChanges: 0,
           isLifetime: cryptInfo.isLifetime || false,
           expiresAtUtc: cryptInfo.expiryUtcMs || 4102444800000,
           serverNowUtc,
           directDownloads: {
-            flowoptimize: { name: 'FlowOptimize', directApk: 'https://zslowcuong.github.io/bio/FlowOptimize.apk', gofile: 'https://gofile.io/d/Vr3bEORd' },
-            flows: { name: 'FlowS', directApk: 'https://zslowcuong.github.io/bio/FlowS.apk', gofile: 'https://gofile.io/d/kzDVlE2G' },
-            flowultra: { name: 'FlowUltra', directApk: 'https://zslowcuong.github.io/bio/FlowUltra.apk', gofile: 'https://gofile.io/d/p8GZrZNY' },
-            flowextra: { name: 'FlowExtra', directApk: 'https://zslowcuong.github.io/bio/FlowExtra.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowExtra.apk' },
+            flowoptimize: { name: 'FlowOptimize Anime Edition (v1.8.0 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowOptimize.apk', gofile: 'https://gofile.io/d/Vr3bEORd' },
+            flows: { name: 'FlowS Gamer Tuner Edition (v1.4.0 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowS.apk', gofile: 'https://gofile.io/d/kzDVlE2G' },
+            flowultra: { name: 'FlowUltra eSports Suite (v1.3.0 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowUltra.apk', gofile: 'https://gofile.io/d/p8GZrZNY' },
+            flowextra: { name: 'FlowExtra Kaito Kid 1412 (v3.7 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowExtra.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowExtra.apk' },
           },
-          message: '👑 Xác thực thành viên PRO thành công!',
+          message: '👑 Xác thực thành viên PRO thành công! Đã mở khóa link tải trực tiếp 4 app không cần vượt link.',
         });
       }
 
       return res.status(200).json({
         success: false,
         isVip: false,
-        reason: 'Chưa tìm thấy bản quyền PRO cho Key hoặc Thiết bị này. Vui lòng nhập mã Key PRO hợp lệ hoặc mua gói tại Cửa Hàng!',
+        reason: 'Chưa tìm thấy bản quyền PRO cho thông tin này (SĐT, HWID, Mã đơn hoặc Key). Vui lòng kiểm tra lại thông tin hoặc mua gói tại Cửa Hàng!',
         serverNowUtc,
       });
     }
@@ -455,7 +535,34 @@ export default async function handler(req, res) {
       }
 
       const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
-      const targetIdx = issuedKeys.findIndex((k) => String(k.key || '').toUpperCase() === qKey);
+      let targetIdx = issuedKeys.findIndex((k) => String(k.key || '').toUpperCase() === qKey);
+
+      if (targetIdx < 0) {
+        // Tìm thông minh nếu người dùng nhập HWID cũ hoặc SĐT
+        targetIdx = issuedKeys.findIndex((k) =>
+          k && (
+            String(k.hwid || '').toUpperCase() === qKey ||
+            (k.phone && k.phone.replace(/[^0-9]/g, '') === qKey.replace(/[^0-9]/g, ''))
+          )
+        );
+      }
+
+      if (targetIdx < 0) {
+        // Tìm trong đơn hàng flowly:orders
+        const orders = (await dbGetJson('flowly:orders', [])) || [];
+        const ord = orders.find((o) =>
+          o && o.status === 'COMPLETED' && (
+            String(o.orderCode || '').toUpperCase() === qKey ||
+            String(o.memo || '').toUpperCase() === qKey ||
+            String(o.key || '').toUpperCase() === qKey ||
+            String(o.hwid || '').toUpperCase() === qKey ||
+            (o.phone && o.phone.replace(/[^0-9]/g, '') === qKey.replace(/[^0-9]/g, ''))
+          )
+        );
+        if (ord && ord.key) {
+          targetIdx = issuedKeys.findIndex((k) => String(k.key || '').toUpperCase() === String(ord.key).toUpperCase());
+        }
+      }
 
       if (targetIdx < 0) {
         return res.status(404).json({ success: false, reason: 'Không tìm thấy thông tin Mã Key PRO này trên hệ thống máy chủ!' });
