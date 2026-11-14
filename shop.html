@@ -350,7 +350,22 @@
         if (!APPS[selectedAppId]) selectedAppId = 'flowoptimize';
 
         const hwidParam = (params.get('hwid') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
-        if (hwidParam) document.getElementById('hwidInput').value = hwidParam;
+        if (hwidParam) {
+            document.getElementById('hwidInput').value = hwidParam;
+            localStorage.setItem('flow_shop_hwid', hwidParam);
+        } else {
+            const savedHwid = localStorage.getItem('flow_shop_hwid');
+            if (savedHwid) document.getElementById('hwidInput').value = savedHwid;
+        }
+
+        const phoneParam = (params.get('phone') || '').trim();
+        if (phoneParam) {
+            document.getElementById('phoneInput').value = phoneParam;
+            localStorage.setItem('flow_shop_phone', phoneParam);
+        } else {
+            const savedPhone = localStorage.getItem('flow_shop_phone');
+            if (savedPhone) document.getElementById('phoneInput').value = savedPhone;
+        }
 
         let currentOrder = null;
         let pollTimer = null;
@@ -399,6 +414,8 @@ function selectApp(appId) {
                 document.getElementById('hwidInput').focus();
                 return;
             }
+            localStorage.setItem('flow_shop_hwid', hwid);
+            localStorage.setItem('flow_shop_phone', phone);
             if (!phone || phone.length < 8) {
                 alert('⚠️ Vui lòng nhập SĐT hoặc Zalo hợp lệ để bảo hành & tra cứu đơn hàng!');
                 document.getElementById('phoneInput').focus();
