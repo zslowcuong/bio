@@ -398,8 +398,15 @@
                     <td><span class="pill ${o.status==='COMPLETED'?'ok':'wait'}">${o.status}</span></td>
                     <td>
                         ${o.key
-                            ? `<div class="mono" style="font-size:11px;">${o.key}</div><button class="btn ghost" style="padding:4px 8px;font-size:11px;margin-top:4px;" onclick="copyText('${o.key}')">Copy</button>`
-                            : `<button class="btn green" style="padding:6px 10px;font-size:11.5px;" onclick="approveOrder('${o.orderCode}')">✅ Xác Nhận Tiền &amp; Cấp Key</button>`}
+                            ? `<div class="mono" style="font-size:11px;">${o.key}</div>
+                               <div style="display:flex;gap:4px;margin-top:4px;">
+                                 <button class="btn ghost" style="padding:4px 8px;font-size:11px;" onclick="copyText('${o.key}')">📋 Copy</button>
+                                 <button class="btn ghost" style="padding:4px 8px;font-size:11px;color:#f87171;" onclick="deleteOrder('${o.orderCode}')">🗑️ Xóa</button>
+                               </div>`
+                            : `<div style="display:flex;gap:4px;">
+                                 <button class="btn green" style="padding:6px 10px;font-size:11.5px;" onclick="approveOrder('${o.orderCode}')">✅ Xác Nhận Tiền &amp; Cấp Key</button>
+                                 <button class="btn ghost" style="padding:6px 8px;font-size:11px;color:#f87171;" onclick="deleteOrder('${o.orderCode}')">🗑️</button>
+                               </div>`}
                     </td>
                 </tr>
             `).join('') : '<tr><td colspan="7" style="color:#64748b;text-align:center;">Chưa có đơn hàng nào</td></tr>';
@@ -426,6 +433,9 @@
                                 </button>
                                 <button class="btn" style="background:#0284c7;color:#fff;padding:6px 8px;font-size:11px;" onclick="promptChangeHwid('${k.key}', '${k.hwid}')">
                                     🔄 Đổi HWID
+                                </button>
+                                <button class="btn ghost" style="padding:6px 8px;font-size:11px;color:#f87171;" onclick="deleteIssuedKey('${k.key}')">
+                                    🗑️ Xóa
                                 </button>
                             </div>
                         </td>
@@ -460,6 +470,44 @@
             const data = await res.json();
             if (data.success) await refreshDashboard();
             else alert('❌ Lỗi: ' + data.error);
+        }
+
+        async function deleteOrder(orderCode) {
+            if (!confirm(`Bạn có chắc chắn muốn XÓA đơn hàng [${orderCode}] không?`)) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/admin?action=delete_order`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPin },
+                    body: JSON.stringify({ orderCode })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    await refreshDashboard();
+                } else {
+                    alert('❌ Lỗi: ' + data.error);
+                }
+            } catch (e) {
+                alert('❌ Lỗi: ' + e.message);
+            }
+        }
+
+        async function deleteIssuedKey(key) {
+            if (!confirm(`Bạn có chắc chắn muốn XÓA hoàn toàn Key [${key}] khỏi hệ thống không?`)) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/admin?action=delete_issued_key`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPin },
+                    body: JSON.stringify({ key })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    await refreshDashboard();
+                } else {
+                    alert('❌ Lỗi: ' + data.error);
+                }
+            } catch (e) {
+                alert('❌ Lỗi: ' + e.message);
+            }
         }
 
                 async function promptChangeHwid(key, currentHwid) {
