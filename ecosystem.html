@@ -3839,6 +3839,27 @@
             }
         }
     
+    
+        /* Ultra High Performance Mobile 60FPS Optimization */
+        @media (max-width: 900px) {
+            * {
+                -webkit-tap-highlight-color: transparent;
+            }
+            html {
+                scroll-behavior: auto !important; /* Prevents touch momentum stutter */
+            }
+            .site-nav, .app-card, .tool-card, .hero-card, .review-card, .faq-item, .modal-card {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background-color: #0b132b !important;
+                box-shadow: 0 4px 14px rgba(0,0,0,0.4) !important;
+            }
+            .section, .container > div, .reviews-grid, .faq-accordion {
+                content-visibility: auto;
+                contain-intrinsic-size: 1px 350px;
+            }
+        }
+    
     </style>
 
 </head>
@@ -3859,7 +3880,7 @@
 
         <a href="#about" class="nav-brand">
 
-            <img src="app_logo.png" alt="Flowly" class="nav-logo">
+            <img src="app_logo.png" alt="Flowly" class="nav-logo" loading="lazy" decoding="async">
 
             <span class="nav-brand-title">Flowly <span>Gaming Engine</span></span>
 
@@ -3911,7 +3932,7 @@
 
             <div class="avatar-wrap">
 
-                <img src="app_logo.png" alt="Flowly Avatar" class="avatar-img">
+                <img src="app_logo.png" alt="Flowly Avatar" class="avatar-img" loading="lazy" decoding="async">
 
                 <span class="badge-verified" title="Official Verified">✓</span>
 
@@ -3993,7 +4014,7 @@
 
                         <div class="app-header">
 
-                            <img src="flows_logo.png" alt="FlowS" class="app-icon-img" style="border-color: #00ff66;">
+                            <img src="flows_logo.png" alt="FlowS" class="app-icon-img" style="border-color: #00ff66;" loading="lazy" decoding="async">
 
                             <div>
 
@@ -4041,7 +4062,7 @@
 
                         <div class="app-header">
 
-                            <img src="app_logo.png" alt="FlowOptimize" class="app-icon-img" style="border-color: #ec4899;">
+                            <img src="app_logo.png" alt="FlowOptimize" class="app-icon-img" style="border-color: #ec4899;" loading="lazy" decoding="async">
 
                             <div>
 
@@ -4089,7 +4110,7 @@
 
                         <div class="app-header">
 
-                            <img src="flowultra_logo.png" alt="FlowUltra" class="app-icon-img" style="border-color: #f59e0b;">
+                            <img src="flowultra_logo.png" alt="FlowUltra" class="app-icon-img" style="border-color: #f59e0b;" loading="lazy" decoding="async">
 
                             <div>
 
@@ -4135,7 +4156,7 @@
 
                         <div class="app-header">
 
-                            <img src="flowextra_logo.png" alt="FlowExtra" class="app-icon-img" style="border-color: #7dd3fc;">
+                            <img src="flowextra_logo.png" alt="FlowExtra" class="app-icon-img" style="border-color: #7dd3fc;" loading="lazy" decoding="async">
 
                             <div>
 
@@ -4177,7 +4198,7 @@
                 <div class="app-download-card" style="border-color: rgba(239, 68, 68, 0.4); background: rgba(15, 23, 42, 0.88);">
                     <div>
                         <div class="app-header">
-                            <img src="icon_brotx.png" alt="BrotX V8" class="app-icon-img" style="border-color: #ef4444;">
+                            <img src="icon_brotx.png" alt="BrotX V8" class="app-icon-img" style="border-color: #ef4444;" loading="lazy" decoding="async">
                             <div>
                                 <div class="app-title">BrotX V8</div>
                                 <span class="app-sub-badge" style="background: rgba(239, 68, 68, 0.2); color: #f87171;">HOT GAMING APP (v8.0)</span>
@@ -4201,7 +4222,7 @@
                 <div class="app-download-card" style="border-color: rgba(56, 189, 248, 0.4); background: rgba(15, 23, 42, 0.88);">
                     <div>
                         <div class="app-header">
-                            <img src="icon_shizukunext.png" alt="Shizuku-Next" class="app-icon-img" style="border-color: #38bdf8;">
+                            <img src="icon_shizukunext.png" alt="Shizuku-Next" class="app-icon-img" style="border-color: #38bdf8;" loading="lazy" decoding="async">
                             <div>
                                 <div class="app-title">Shizuku & Next</div>
                                 <span class="app-sub-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">NỀN TẢNG CẤP QUYỀN (HOT)</span>
@@ -4249,7 +4270,7 @@
 
                 <div class="linkbio-pill" data-app-id="shizukunext" onclick="handlePillClick(event, 'shizukunext')">
 
-                    <img src="icon_shizukunext.png" alt="Shizuku-Next" class="linkbio-pill-img">
+                    <img src="icon_shizukunext.png" alt="Shizuku-Next" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4269,7 +4290,7 @@
 
                 <div class="linkbio-pill" data-app-id="canta" onclick="handlePillClick(event, 'canta')">
 
-                    <img src="icon_canta.png" alt="Canta" class="linkbio-pill-img">
+                    <img src="icon_canta.png" alt="Canta" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4289,7 +4310,7 @@
 
                 <div class="linkbio-pill" data-app-id="appmanager" onclick="handlePillClick(event, 'appmanager')">
 
-                    <img src="icon_appmanager.png" alt="App Manager" class="linkbio-pill-img">
+                    <img src="icon_appmanager.png" alt="App Manager" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4309,7 +4330,7 @@
 
                 <div class="linkbio-pill" data-app-id="hail" onclick="handlePillClick(event, 'hail')">
 
-                    <img src="icon_hail.png" alt="Hail" class="linkbio-pill-img">
+                    <img src="icon_hail.png" alt="Hail" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4329,7 +4350,7 @@
 
                 <div class="linkbio-pill" data-app-id="optidroid" onclick="handlePillClick(event, 'optidroid')">
 
-                    <img src="icon_optidroid.png" alt="OptiDroid" class="linkbio-pill-img">
+                    <img src="icon_optidroid.png" alt="OptiDroid" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4349,7 +4370,7 @@
 
                 <div class="linkbio-pill" data-app-id="gama" onclick="handlePillClick(event, 'gama')">
 
-                    <img src="icon_gama.png" alt="Gama Booster" class="linkbio-pill-img">
+                    <img src="icon_gama.png" alt="Gama Booster" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4369,7 +4390,7 @@
 
                 <div class="linkbio-pill" data-app-id="sdmaidse" onclick="handlePillClick(event, 'sdmaidse')">
 
-                    <img src="icon_sdmaidse.png" alt="SD Maid 2/SE (FOSS)" class="linkbio-pill-img">
+                    <img src="icon_sdmaidse.png" alt="SD Maid 2/SE (FOSS)" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4389,7 +4410,7 @@
 
                 <div class="linkbio-pill" data-app-id="obtainium" onclick="handlePillClick(event, 'obtainium')">
 
-                    <img src="icon_obtainium.png" alt="Obtainium" class="linkbio-pill-img">
+                    <img src="icon_obtainium.png" alt="Obtainium" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4425,7 +4446,7 @@
 
                 <div class="linkbio-pill" data-app-id="gamelauncherpro" onclick="handlePillClick(event, 'gamelauncherpro')">
 
-                    <img src="icon_gamelauncherpro.png" alt="Game Launcher PRO" class="linkbio-pill-img">
+                    <img src="icon_gamelauncherpro.png" alt="Game Launcher PRO" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4445,7 +4466,7 @@
 
                 <div class="linkbio-pill" data-app-id="keymapper" onclick="handlePillClick(event, 'keymapper')">
 
-                    <img src="icon_keymapper.png" alt="Key Mapper (v4.6+)" class="linkbio-pill-img">
+                    <img src="icon_keymapper.png" alt="Key Mapper (v4.6+)" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4465,7 +4486,7 @@
 
                 <div class="linkbio-pill" data-app-id="gamemappermind" onclick="handlePillClick(event, 'gamemappermind')">
 
-                    <img src="icon_gamemappermind.png" alt="GameMapperMind" class="linkbio-pill-img">
+                    <img src="icon_gamemappermind.png" alt="GameMapperMind" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4485,7 +4506,7 @@
 
                 <div class="linkbio-pill" data-app-id="openmapper" onclick="handlePillClick(event, 'openmapper')">
 
-                    <img src="icon_openmapper.png" alt="OpenMapper (Shizuku)" class="linkbio-pill-img">
+                    <img src="icon_openmapper.png" alt="OpenMapper (Shizuku)" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4505,7 +4526,7 @@
 
                 <div class="linkbio-pill" data-app-id="k2er" onclick="handlePillClick(event, 'k2er')">
 
-                    <img src="icon_k2er.png" alt="K2er Touch KeyMapper" class="linkbio-pill-img">
+                    <img src="icon_k2er.png" alt="K2er Touch KeyMapper" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4525,7 +4546,7 @@
 
                 <div class="linkbio-pill" data-app-id="colorosgamespace" onclick="handlePillClick(event, 'colorosgamespace')">
 
-                    <img src="icon_colorosgamespace.png" alt="ColorOS Game Space" class="linkbio-pill-img">
+                    <img src="icon_colorosgamespace.png" alt="ColorOS Game Space" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4561,7 +4582,7 @@
 
                 <div class="linkbio-pill" data-app-id="shizukuplus" onclick="handlePillClick(event, 'shizukuplus')">
 
-                    <img src="icon_shizukuplus.png" alt="Shizuku+" class="linkbio-pill-img">
+                    <img src="icon_shizukuplus.png" alt="Shizuku+" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4581,7 +4602,7 @@
 
                 <div class="linkbio-pill" data-app-id="shizuwall" onclick="handlePillClick(event, 'shizuwall')">
 
-                    <img src="icon_shizuwall.png" alt="ShizuWall" class="linkbio-pill-img">
+                    <img src="icon_shizuwall.png" alt="ShizuWall" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4601,7 +4622,7 @@
 
                 <div class="linkbio-pill" data-app-id="nomorebackground" onclick="handlePillClick(event, 'nomorebackground')">
 
-                    <img src="icon_nomorebackground.png" alt="NoMoreBackground" class="linkbio-pill-img">
+                    <img src="icon_nomorebackground.png" alt="NoMoreBackground" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4621,7 +4642,7 @@
 
                 <div class="linkbio-pill" data-app-id="corepolicy" onclick="handlePillClick(event, 'corepolicy')">
 
-                    <img src="icon_corepolicy.png" alt="CorePolicy" class="linkbio-pill-img">
+                    <img src="icon_corepolicy.png" alt="CorePolicy" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4641,7 +4662,7 @@
 
                 <div class="linkbio-pill" data-app-id="thanox" onclick="handlePillClick(event, 'thanox')">
 
-                    <img src="icon_thanox.png" alt="Thanox (FOSS)" class="linkbio-pill-img">
+                    <img src="icon_thanox.png" alt="Thanox (FOSS)" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4661,7 +4682,7 @@
 
                 <div class="linkbio-pill" data-app-id="adaptivetheme" onclick="handlePillClick(event, 'adaptivetheme')">
 
-                    <img src="icon_adaptivetheme.png" alt="Adaptive Theme" class="linkbio-pill-img">
+                    <img src="icon_adaptivetheme.png" alt="Adaptive Theme" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4681,7 +4702,7 @@
 
                 <div class="linkbio-pill" data-app-id="shizucallrecorder" onclick="handlePillClick(event, 'shizucallrecorder')">
 
-                    <img src="icon_shizucallrecorder.png" alt="ShizuCallRecorder" class="linkbio-pill-img">
+                    <img src="icon_shizucallrecorder.png" alt="ShizuCallRecorder" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4717,7 +4738,7 @@
 
                 <div class="linkbio-pill" data-app-id="geto" onclick="handlePillClick(event, 'geto')">
 
-                    <img src="icon_geto.png" alt="Geto (Vượt Chặn Bank)" class="linkbio-pill-img">
+                    <img src="icon_geto.png" alt="Geto (Vượt Chặn Bank)" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4737,7 +4758,7 @@
 
                 <div class="linkbio-pill" data-app-id="imd" onclick="handlePillClick(event, 'imd')">
 
-                    <img src="icon_imd.png" alt="IMD (It's My Device)" class="linkbio-pill-img">
+                    <img src="icon_imd.png" alt="IMD (It's My Device)" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4757,7 +4778,7 @@
 
                 <div class="linkbio-pill" data-app-id="pensum" onclick="handlePillClick(event, 'pensum')">
 
-                    <img src="icon_pensum.png" alt="Pensum Task Manager" class="linkbio-pill-img">
+                    <img src="icon_pensum.png" alt="Pensum Task Manager" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4777,7 +4798,7 @@
 
                 <div class="linkbio-pill" data-app-id="enforcedoze" onclick="handlePillClick(event, 'enforcedoze')">
 
-                    <img src="icon_enforcedoze.png" alt="EnforceDoze" class="linkbio-pill-img">
+                    <img src="icon_enforcedoze.png" alt="EnforceDoze" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4797,7 +4818,7 @@
 
                 <div class="linkbio-pill" data-app-id="finevolume" onclick="handlePillClick(event, 'finevolume')">
 
-                    <img src="icon_finevolume.png" alt="FineVolume" class="linkbio-pill-img">
+                    <img src="icon_finevolume.png" alt="FineVolume" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4817,7 +4838,7 @@
 
                 <div class="linkbio-pill" data-app-id="mpmanager" onclick="handlePillClick(event, 'mpmanager')">
 
-                    <img src="icon_mpmanager.png" alt="MP-Manager" class="linkbio-pill-img">
+                    <img src="icon_mpmanager.png" alt="MP-Manager" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4853,7 +4874,7 @@
 
                 <div class="linkbio-pill" data-app-id="pixels" onclick="handlePillClick(event, 'pixels')">
 
-                    <img src="icon_pixels.png" alt="Pixels" class="linkbio-pill-img">
+                    <img src="icon_pixels.png" alt="Pixels" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4873,7 +4894,7 @@
 
                 <div class="linkbio-pill" data-app-id="galaxymaxhz" onclick="handlePillClick(event, 'galaxymaxhz')">
 
-                    <img src="icon_galaxymaxhz.png" alt="Galaxy Max Hz" class="linkbio-pill-img">
+                    <img src="icon_galaxymaxhz.png" alt="Galaxy Max Hz" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4893,7 +4914,7 @@
 
                 <div class="linkbio-pill" data-app-id="netmonster" onclick="handlePillClick(event, 'netmonster')">
 
-                    <img src="icon_netmonster.png" alt="NetMonster" class="linkbio-pill-img">
+                    <img src="icon_netmonster.png" alt="NetMonster" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4913,7 +4934,7 @@
 
                 <div class="linkbio-pill" data-app-id="wgtunnel" onclick="handlePillClick(event, 'wgtunnel')">
 
-                    <img src="icon_wgtunnel.png" alt="WGTunnel" class="linkbio-pill-img">
+                    <img src="icon_wgtunnel.png" alt="WGTunnel" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4933,7 +4954,7 @@
 
                 <div class="linkbio-pill" data-app-id="smartdock" onclick="handlePillClick(event, 'smartdock')">
 
-                    <img src="icon_smartdock.png" alt="SmartDock" class="linkbio-pill-img">
+                    <img src="icon_smartdock.png" alt="SmartDock" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4953,7 +4974,7 @@
 
                 <div class="linkbio-pill" data-app-id="localsend" onclick="handlePillClick(event, 'localsend')">
 
-                    <img src="icon_localsend.png" alt="LocalSend" class="linkbio-pill-img">
+                    <img src="icon_localsend.png" alt="LocalSend" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -4989,7 +5010,7 @@
 
                 <div class="linkbio-pill" data-app-id="shizuku" onclick="handlePillClick(event, 'shizuku')">
 
-                    <img src="icon_shizuku.png" alt="Shizuku" class="linkbio-pill-img">
+                    <img src="icon_shizuku.png" alt="Shizuku" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5009,7 +5030,7 @@
 
                 <div class="linkbio-pill" data-app-id="ashell" onclick="handlePillClick(event, 'ashell')">
 
-                    <img src="icon_ashell.png" alt="aShell You" class="linkbio-pill-img">
+                    <img src="icon_ashell.png" alt="aShell You" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5029,7 +5050,7 @@
 
                 <div class="linkbio-pill" data-app-id="rytunex" onclick="handlePillClick(event, 'rytunex')">
 
-                    <img src="icon_rytunex.png" alt="RyTuneX" class="linkbio-pill-img">
+                    <img src="icon_rytunex.png" alt="RyTuneX" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5065,7 +5086,7 @@
 
                 <div class="linkbio-pill" data-app-id="framex" onclick="handlePillClick(event, 'framex')">
 
-                    <img src="icon_framex.png" alt="FrameX" class="linkbio-pill-img">
+                    <img src="icon_framex.png" alt="FrameX" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5085,7 +5106,7 @@
 
                 <div class="linkbio-pill" data-app-id="shappky" onclick="handlePillClick(event, 'shappky')">
 
-                    <img src="icon_shappky.png" alt="Shappky" class="linkbio-pill-img">
+                    <img src="icon_shappky.png" alt="Shappky" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5105,7 +5126,7 @@
 
                 <div class="linkbio-pill" data-app-id="savertuner" onclick="handlePillClick(event, 'savertuner')">
 
-                    <img src="icon_savertuner.png" alt="SaverTuner" class="linkbio-pill-img">
+                    <img src="icon_savertuner.png" alt="SaverTuner" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5125,7 +5146,7 @@
 
                 <div class="linkbio-pill" data-app-id="installerx" onclick="handlePillClick(event, 'installerx')">
 
-                    <img src="icon_installerx.png" alt="InstallerX Revived" class="linkbio-pill-img">
+                    <img src="icon_installerx.png" alt="InstallerX Revived" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5145,7 +5166,7 @@
 
                 <div class="linkbio-pill" data-app-id="colorblendr" onclick="handlePillClick(event, 'colorblendr')">
 
-                    <img src="icon_colorblendr.png" alt="ColorBlendr" class="linkbio-pill-img">
+                    <img src="icon_colorblendr.png" alt="ColorBlendr" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5165,7 +5186,7 @@
 
                 <div class="linkbio-pill" data-app-id="sharemove" onclick="handlePillClick(event, 'sharemove')">
 
-                    <img src="icon_sharemove.png" alt="ShaRemove" class="linkbio-pill-img">
+                    <img src="icon_sharemove.png" alt="ShaRemove" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5201,7 +5222,7 @@
 
                 <div class="linkbio-pill" data-app-id="shizutools" onclick="handlePillClick(event, 'shizutools')">
 
-                    <img src="icon_shizutools.png" alt="ShizuTools" class="linkbio-pill-img">
+                    <img src="icon_shizutools.png" alt="ShizuTools" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5221,7 +5242,7 @@
 
                 <div class="linkbio-pill" data-app-id="extinguish" onclick="handlePillClick(event, 'extinguish')">
 
-                    <img src="icon_extinguish.png" alt="Extinguish" class="linkbio-pill-img">
+                    <img src="icon_extinguish.png" alt="Extinguish" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5241,7 +5262,7 @@
 
                 <div class="linkbio-pill" data-app-id="redirectguard" onclick="handlePillClick(event, 'redirectguard')">
 
-                    <img src="icon_redirectguard.png" alt="Redirect Guard" class="linkbio-pill-img">
+                    <img src="icon_redirectguard.png" alt="Redirect Guard" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5261,7 +5282,7 @@
 
                 <div class="linkbio-pill" data-app-id="extendroid" onclick="handlePillClick(event, 'extendroid')">
 
-                    <img src="icon_extendroid.png" alt="Extendroid" class="linkbio-pill-img">
+                    <img src="icon_extendroid.png" alt="Extendroid" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5281,7 +5302,7 @@
 
                 <div class="linkbio-pill" data-app-id="essentials" onclick="handlePillClick(event, 'essentials')">
 
-                    <img src="icon_essentials.png" alt="Essentials" class="linkbio-pill-img">
+                    <img src="icon_essentials.png" alt="Essentials" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5301,7 +5322,7 @@
 
                 <div class="linkbio-pill" data-app-id="shizustore" onclick="handlePillClick(event, 'shizustore')">
 
-                    <img src="icon_shizustore.png" alt="ShizuStore" class="linkbio-pill-img">
+                    <img src="icon_shizustore.png" alt="ShizuStore" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5321,7 +5342,7 @@
 
                 <div class="linkbio-pill" data-app-id="shizucorefetch" onclick="handlePillClick(event, 'shizucorefetch')">
 
-                    <img src="icon_shizucorefetch.png" alt="ShizuCoreFetch" class="linkbio-pill-img">
+                    <img src="icon_shizucorefetch.png" alt="ShizuCoreFetch" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5357,7 +5378,7 @@
 
                 <div class="linkbio-pill" data-app-id="gmsflags" onclick="handlePillClick(event, 'gmsflags')">
 
-                    <img src="icon_gmsflags.png" alt="GMS Flags" class="linkbio-pill-img">
+                    <img src="icon_gmsflags.png" alt="GMS Flags" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5377,7 +5398,7 @@
 
                 <div class="linkbio-pill" data-app-id="pixelims" onclick="handlePillClick(event, 'pixelims')">
 
-                    <img src="icon_pixelims.png" alt="Pixel IMS" class="linkbio-pill-img">
+                    <img src="icon_pixelims.png" alt="Pixel IMS" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5397,7 +5418,7 @@
 
                 <div class="linkbio-pill" data-app-id="scrcpyandroid" onclick="handlePillClick(event, 'scrcpyandroid')">
 
-                    <img src="icon_scrcpy.png" alt="Scrcpy-Android" class="linkbio-pill-img">
+                    <img src="icon_scrcpy.png" alt="Scrcpy-Android" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5417,7 +5438,7 @@
 
                 <div class="linkbio-pill" data-app-id="openpods" onclick="handlePillClick(event, 'openpods')">
 
-                    <img src="icon_openpods.png" alt="AirBattery / OpenPods" class="linkbio-pill-img">
+                    <img src="icon_openpods.png" alt="AirBattery / OpenPods" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5437,7 +5458,7 @@
 
                 <div class="linkbio-pill" data-app-id="fdeai" onclick="handlePillClick(event, 'fdeai')">
 
-                    <img src="icon_fdeai.png" alt="Athena / FDE-AI" class="linkbio-pill-img">
+                    <img src="icon_fdeai.png" alt="Athena / FDE-AI" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5457,7 +5478,7 @@
 
                 <div class="linkbio-pill" data-app-id="brevent" onclick="handlePillClick(event, 'brevent')">
 
-                    <img src="icon_brevent.png" alt="Brevent" class="linkbio-pill-img">
+                    <img src="icon_brevent.png" alt="Brevent" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5477,7 +5498,7 @@
 
                 <div class="linkbio-pill" data-app-id="sensorsoff" onclick="handlePillClick(event, 'sensorsoff')">
 
-                    <img src="icon_sensorsoff.png" alt="Sensors Off Tile" class="linkbio-pill-img">
+                    <img src="icon_sensorsoff.png" alt="Sensors Off Tile" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5497,7 +5518,7 @@
 
                 <div class="linkbio-pill" data-app-id="clipious" onclick="handlePillClick(event, 'clipious')">
 
-                    <img src="icon_clipious.png" alt="Clipious / ShizuClip" class="linkbio-pill-img">
+                    <img src="icon_clipious.png" alt="Clipious / ShizuClip" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5531,7 +5552,7 @@
 
                 <div class="linkbio-pill" data-app-id="idletweaks" onclick="handlePillClick(event, 'idletweaks')">
 
-                    <img src="icon_idletweaks.png" alt="Zero / IdleTweaks" class="linkbio-pill-img">
+                    <img src="icon_idletweaks.png" alt="Zero / IdleTweaks" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5551,7 +5572,7 @@
 
                 <div class="linkbio-pill" data-app-id="betterbatterystats" onclick="handlePillClick(event, 'betterbatterystats')">
 
-                    <img src="icon_betterbatterystats.png" alt="BetterBatteryStats" class="linkbio-pill-img">
+                    <img src="icon_betterbatterystats.png" alt="BetterBatteryStats" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5571,7 +5592,7 @@
 
                 <div class="linkbio-pill" data-app-id="simplehook" onclick="handlePillClick(event, 'simplehook')">
 
-                    <img src="icon_simplehook.png" alt="SimpleHook" class="linkbio-pill-img">
+                    <img src="icon_simplehook.png" alt="SimpleHook" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5591,7 +5612,7 @@
 
                 <div class="linkbio-pill" data-app-id="batterychargelimit" onclick="handlePillClick(event, 'batterychargelimit')">
 
-                    <img src="icon_batterychargelimit.png" alt="Battery Charge Limiter" class="linkbio-pill-img">
+                    <img src="icon_batterychargelimit.png" alt="Battery Charge Limiter" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5611,7 +5632,7 @@
 
                 <div class="linkbio-pill" data-app-id="bluetoothcodec" onclick="handlePillClick(event, 'bluetoothcodec')">
 
-                    <img src="icon_bluetoothcodec.png" alt="Bluetooth Codec Changer" class="linkbio-pill-img">
+                    <img src="icon_bluetoothcodec.png" alt="Bluetooth Codec Changer" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5631,7 +5652,7 @@
 
                 <div class="linkbio-pill" data-app-id="diskinfo" onclick="handlePillClick(event, 'diskinfo')">
 
-                    <img src="icon_diskinfo.png" alt="DiskInfo" class="linkbio-pill-img">
+                    <img src="icon_diskinfo.png" alt="DiskInfo" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5651,7 +5672,7 @@
 
                 <div class="linkbio-pill" data-app-id="easer" onclick="handlePillClick(event, 'easer')">
 
-                    <img src="icon_easer.png" alt="Easer" class="linkbio-pill-img">
+                    <img src="icon_easer.png" alt="Easer" class="linkbio-pill-img" loading="lazy" decoding="async">
 
                     <div class="linkbio-pill-content">
 
@@ -5945,7 +5966,7 @@ settings put secure multi_press_timeout 200</code></pre>
 
                             <div class="guide-deep-header">
 
-                                <img src="icon_pixels.png" alt="Pixels" class="guide-mini-icon">
+                                <img src="icon_pixels.png" alt="Pixels" class="guide-mini-icon" loading="lazy" decoding="async">
 
                                 <div>
 
@@ -5973,7 +5994,7 @@ settings put secure multi_press_timeout 200</code></pre>
 
                             <div class="guide-deep-header">
 
-                                <img src="icon_netmonster.png" alt="NetMonster" class="guide-mini-icon">
+                                <img src="icon_netmonster.png" alt="NetMonster" class="guide-mini-icon" loading="lazy" decoding="async">
 
                                 <div>
 
@@ -6001,7 +6022,7 @@ settings put secure multi_press_timeout 200</code></pre>
 
                             <div class="guide-deep-header">
 
-                                <img src="icon_galaxymaxhz.png" alt="Galaxy Max Hz" class="guide-mini-icon">
+                                <img src="icon_galaxymaxhz.png" alt="Galaxy Max Hz" class="guide-mini-icon" loading="lazy" decoding="async">
 
                                 <div>
 
@@ -6029,7 +6050,7 @@ settings put secure multi_press_timeout 200</code></pre>
 
                             <div class="guide-deep-header">
 
-                                <img src="icon_wgtunnel.png" alt="WG Tunnel" class="guide-mini-icon">
+                                <img src="icon_wgtunnel.png" alt="WG Tunnel" class="guide-mini-icon" loading="lazy" decoding="async">
 
                                 <div>
 
@@ -6057,7 +6078,7 @@ settings put secure multi_press_timeout 200</code></pre>
 
                             <div class="guide-deep-header">
 
-                                <img src="icon_ashell.png" alt="aShell You" class="guide-mini-icon">
+                                <img src="icon_ashell.png" alt="aShell You" class="guide-mini-icon" loading="lazy" decoding="async">
 
                                 <div>
 
@@ -6085,7 +6106,7 @@ settings put secure multi_press_timeout 200</code></pre>
 
                             <div class="guide-deep-header">
 
-                                <img src="icon_smartdock.png" alt="Smart Dock" class="guide-mini-icon">
+                                <img src="icon_smartdock.png" alt="Smart Dock" class="guide-mini-icon" loading="lazy" decoding="async">
 
                                 <div>
 
@@ -7468,7 +7489,7 @@ settings put secure multi_press_timeout 200</code></pre>
             </div>
 
             <div class="modal-app-box">
-                <img id="modalAppIcon" src="app_logo.png" alt="App" class="modal-app-img">
+                <img id="modalAppIcon" src="app_logo.png" alt="App" class="modal-app-img" loading="lazy" decoding="async">
                 <div>
                     <div id="modalAppTitle" style="font-size: 15px; font-weight: 800; color: #fff;">FlowOptimize v1.7.0</div>
                     <div id="modalAppSub" style="font-size: 11px; color: var(--text-muted);">Miễn Phí 100% • Không Cần GetKey</div>
@@ -9516,7 +9537,7 @@ settings put secure multi_press_timeout 200</code></pre>
 
             <div class="app-modal-header">
 
-                <img src="" alt="" id="appPopIcon" class="app-modal-icon">
+                <img src="" alt="" id="appPopIcon" class="app-modal-icon" loading="lazy" decoding="async">
 
                 <div class="app-modal-meta">
 
