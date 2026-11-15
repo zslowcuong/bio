@@ -86,6 +86,46 @@ export default async function handler(req, res) {
       changelog: appCfg.changelog || '',
     };
 
+    // ==============================================================
+    // 🛡️ ANTI-CRACK & MANDATORY FORCE UPDATE KILLSWITCH
+    // Khóa triệt để toàn bộ bản crack ("Sikibidi Mod") & bản cũ < minVersionCode
+    // ==============================================================
+    const crackPattern = /sikibidi|modzzz|vip_mod|crack|hacked|modded|free_pro/i;
+    const isKnownCrack = (
+      crackPattern.test(activeKey) ||
+      crackPattern.test(deviceModel) ||
+      crackPattern.test(hwid) ||
+      activeKey.toUpperCase() === 'SIKIBIDI_MOD'
+    );
+
+    const minAllowedVer = Number(appCfg.min_version_code || 1);
+    const isOutdated = Boolean(
+      (appCfg.force_update && appVersionCode < minAllowedVer) ||
+      (minAllowedVer > 1 && (!appVersionCode || appVersionCode < minAllowedVer))
+    );
+
+    if (action !== 'time' && (isKnownCrack || isOutdated)) {
+      return res.status(200).json({
+        success: false,
+        blocked: true,
+        forceUpdate: true,
+        canUseSystem: false,
+        error: isKnownCrack ? 'CRACK_MOD_BLOCKED' : 'OUTDATED_VERSION_BLOCKED',
+        reason: isKnownCrack
+          ? '⚠️ PHÁT HIỆN BẢN CRACK TRÁI PHÉP ("SIKIBIDI MOD") ĐÃ BỊ VÔ HIỆU HÓA HOÀN TOÀN!\nToàn bộ quyền truy cập và tính năng tối ưu Shizuku đã bị khóa vĩnh viễn.\nVui lòng gỡ bỏ bản crack và tải bản chính thức miễn phí tại: https://zslowcuong.github.io/bio/'
+          : `⚠️ BẢN CŨ ĐÃ HẾT HẠN - BẮT BUỘC CẬP NHẬT!\nPhiên bản bạn đang sử dụng (${appVersionCode ? 'v' + appVersionCode : 'bản cũ'}) đã bị đóng để bảo vệ an toàn hệ thống.\nVui lòng cập nhật lên ${appCfg.name || 'bản mới'} (${appCfg.version || 'mới nhất'}) để tiếp tục sử dụng miễn phí!`,
+        updateInfo: {
+          ...updateInfo,
+          forceUpdate: true,
+          mustUpdateImmediately: true,
+        },
+        trialRemainingMs: 0,
+        tier: 'BLOCKED_OUTDATED',
+        serverNowUtc,
+        ...status,
+      });
+    }
+
     if (action === 'checkin') {
       if (!hwid || hwid.length < 4) {
         return res.status(400).json({ success: false, error: 'MISSING_HWID', serverNowUtc });
