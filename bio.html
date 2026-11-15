@@ -7460,6 +7460,10 @@ settings put secure multi_press_timeout 200</code></pre>
                 </div>
             </div>
 
+                        <!-- Warning for TikTok In-App Browser -->
+            <div id="tiktokBrowserWarning" style="display: none; background: rgba(239, 68, 68, 0.15); border: 1.5px solid rgba(239, 68, 68, 0.45); border-radius: 12px; padding: 10px 12px; margin-bottom: 12px; font-size: 11.5px; color: #fecaca; text-align: left; line-height: 1.45;">
+                ⚠️ <b>MẸO TẢI TRÊN TIKTOK:</b> Bấm dấu <b>[ ⋮ ]</b> góc trên bên phải màn hình ➔ Chọn <b>"Mở bằng trình duyệt ngoài"</b> (Chrome/Safari) để tránh bị TikTok chặn tải file APK!
+            </div>
             <div id="unlockBannerText" style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 12px; margin-bottom: 14px; text-align: left; font-size: 12px; color: #cbd5e1; line-height: 1.45;">
                 Nhấn nút bên dưới để <b>Follow kênh TikTok chính thức (@xxd5974)</b>, hệ thống sẽ tự động mở khóa liên kết tải file cài đặt APK tốc độ cao!
             </div>
@@ -7488,6 +7492,11 @@ settings put secure multi_press_timeout 200</code></pre>
                 <span style="font-size: 16px;">⚡</span>
                 <span id="txtFinalDownloadLabel">TẢI VỀ FILE CÀI ĐẶT APK →</span>
             </button>
+            <!-- Direct Download Fallback Button -->
+            <a id="btnDirectDownload" href="#" target="_blank" class="btn-modal-action" style="display: none; background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(255, 255, 255, 0.22); color: #cbd5e1; font-size: 11.5px; font-weight: 700; text-decoration: none; justify-content: center; align-items: center; gap: 6px; padding: 10px; border-radius: 12px; margin-bottom: 10px;">
+                <span>📥</span>
+                <span>TẢI TRỰC TIẾP DỰ PHÒNG (NẾU LINK VƯỢT BỊ KẸT)</span>
+            </a>
 
             <div style="font-size: 11px; color: var(--text-muted); margin-top: 14px; text-align: center;">
                 ✓ Miễn phí 100% • <b>© Bản quyền thuộc về Flowly Engine</b>
@@ -7857,6 +7866,12 @@ settings put secure multi_press_timeout 200</code></pre>
                 banner.innerHTML = `Nhấn nút bên dưới để <b>Follow kênh TikTok chính thức (@xxd5974)</b>, hệ thống sẽ tự động mở khóa liên kết tải <b>${escHtml(meta.title)}</b>!`;
             }
 
+            const directBtnEl = document.getElementById('btnDirectDownload');
+            if (directBtnEl) directBtnEl.style.display = 'none';
+            const isTikTok = /musical_ly|ByteLocale|TikTok/i.test(navigator.userAgent);
+            const tiktokWarn = document.getElementById('tiktokBrowserWarning');
+            if (tiktokWarn) tiktokWarn.style.display = isTikTok ? 'block' : 'none';
+
             if (modal) {
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
@@ -7881,6 +7896,11 @@ settings put secure multi_press_timeout 200</code></pre>
             const meta = getAnyAppDownloadMeta(currentTargetApp);
             hasUnlockedCurrentApp = true;
             unlockedDownloadUrl = buildGatewayDownloadUrl(meta.dest, meta.prebuiltGateway);
+            const directBtn = document.getElementById('btnDirectDownload');
+            if (directBtn) {
+                directBtn.href = meta.dest;
+                directBtn.style.display = 'flex';
+            }
 
             const verifyingBox = document.getElementById('unlockVerifyingBox');
             const btnTikTok = document.getElementById('btnFollowTikTok');
@@ -7968,7 +7988,7 @@ settings put secure multi_press_timeout 200</code></pre>
         const APP_TRIPLE_LINKS = {
     "shizuku": {
         "name": "Shizuku",
-        "dest": "https://gofile.io/d/DkhZ4xaM",
+        "dest": "https://zslowcuong.github.io/bio/Shizuku.apk",
         "gofile": "https://gofile.io/d/DkhZ4xaM",
         "direct_apk": "Shizuku.apk"
     },
@@ -8002,7 +8022,7 @@ settings put secure multi_press_timeout 200</code></pre>
     },
     "shizukunext": {
         "name": "Shizuku-Next",
-        "dest": "https://gofile.io/d/AdqIc0Gp",
+        "dest": "https://zslowcuong.github.io/bio/Shizuku-Next.apk",
         "gofile": "https://gofile.io/d/AdqIc0Gp",
         "direct_apk": "Shizuku-Next.apk"
     },
@@ -8228,7 +8248,7 @@ settings put secure multi_press_timeout 200</code></pre>
     },
     "brotx": {
         "name": "BrotX Optimizer v8",
-        "dest": "https://gofile.io/d/RaSXG0aV",
+        "dest": "https://zslowcuong.github.io/bio/BrotX-v8.apk",
         "gofile": "https://gofile.io/d/RaSXG0aV",
         "direct_apk": "BrotX-v8.apk"
     },
