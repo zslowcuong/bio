@@ -3824,6 +3824,21 @@
 
 
 
+    
+        /* Mobile Scroll Performance Enhancements */
+        @media (max-width: 768px) {
+            .site-nav {
+                backdrop-filter: blur(8px) !important;
+                -webkit-backdrop-filter: blur(8px) !important;
+                transform: translateZ(0);
+            }
+            .app-card, .tool-card {
+                transform: translateZ(0);
+                content-visibility: auto;
+                contain-intrinsic-size: 1px 300px;
+            }
+        }
+    
     </style>
 
 </head>
@@ -7492,11 +7507,7 @@ settings put secure multi_press_timeout 200</code></pre>
                 <span style="font-size: 16px;">⚡</span>
                 <span id="txtFinalDownloadLabel">TẢI VỀ FILE CÀI ĐẶT APK →</span>
             </button>
-            <!-- Direct Download Fallback Button -->
-            <a id="btnDirectDownload" href="#" target="_blank" class="btn-modal-action" style="display: none; background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(255, 255, 255, 0.22); color: #cbd5e1; font-size: 11.5px; font-weight: 700; text-decoration: none; justify-content: center; align-items: center; gap: 6px; padding: 10px; border-radius: 12px; margin-bottom: 10px;">
-                <span>📥</span>
-                <span>TẢI TRỰC TIẾP DỰ PHÒNG (NẾU LINK VƯỢT BỊ KẸT)</span>
-            </a>
+            
 
             <div style="font-size: 11px; color: var(--text-muted); margin-top: 14px; text-align: center;">
                 ✓ Miễn phí 100% • <b>© Bản quyền thuộc về Flowly Engine</b>
@@ -7506,19 +7517,26 @@ settings put secure multi_press_timeout 200</code></pre>
 
     <!-- ==================== JAVASCRIPT ==================== -->
     <script>
-        // 1. Scroll Progress & Back-to-Top
+        // 1. Scroll Progress & Back-to-Top (Throttled via requestAnimationFrame & passive: true for 60 FPS)
+        let isScrollTicking = false;
         window.addEventListener('scroll', () => {
-            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-            const pBar = document.getElementById('scrollProgressBar');
-            if (pBar) pBar.style.width = scrolled + '%';
+            if (!isScrollTicking) {
+                window.requestAnimationFrame(() => {
+                    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+                    const pBar = document.getElementById('scrollProgressBar');
+                    if (pBar) pBar.style.width = scrolled + '%';
 
-            const btnTop = document.getElementById('btnBackToTop');
-            if (btnTop) {
-                btnTop.style.display = winScroll > 400 ? 'flex' : 'none';
+                    const btnTop = document.getElementById('btnBackToTop');
+                    if (btnTop) {
+                        btnTop.style.display = winScroll > 400 ? 'flex' : 'none';
+                    }
+                    isScrollTicking = false;
+                });
+                isScrollTicking = true;
             }
-        });
+        }, { passive: true });
 
         // 2. Robust Scroll Reveal
         function initScrollReveal() {
@@ -7866,8 +7884,7 @@ settings put secure multi_press_timeout 200</code></pre>
                 banner.innerHTML = `Nhấn nút bên dưới để <b>Follow kênh TikTok chính thức (@xxd5974)</b>, hệ thống sẽ tự động mở khóa liên kết tải <b>${escHtml(meta.title)}</b>!`;
             }
 
-            const directBtnEl = document.getElementById('btnDirectDownload');
-            if (directBtnEl) directBtnEl.style.display = 'none';
+            // btnDirectDownload removed per request
             const isTikTok = /musical_ly|ByteLocale|TikTok/i.test(navigator.userAgent);
             const tiktokWarn = document.getElementById('tiktokBrowserWarning');
             if (tiktokWarn) tiktokWarn.style.display = isTikTok ? 'block' : 'none';
@@ -7896,11 +7913,7 @@ settings put secure multi_press_timeout 200</code></pre>
             const meta = getAnyAppDownloadMeta(currentTargetApp);
             hasUnlockedCurrentApp = true;
             unlockedDownloadUrl = buildGatewayDownloadUrl(meta.dest, meta.prebuiltGateway);
-            const directBtn = document.getElementById('btnDirectDownload');
-            if (directBtn) {
-                directBtn.href = meta.dest;
-                directBtn.style.display = 'flex';
-            }
+            // btnDirectDownload removed per request
 
             const verifyingBox = document.getElementById('unlockVerifyingBox');
             const btnTikTok = document.getElementById('btnFollowTikTok');
