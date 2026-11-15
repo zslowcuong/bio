@@ -732,7 +732,7 @@
             let data = await res.json();
 
             // Safeguard chống cache proxy cũ
-            if (data && data.error === 'OUTDATED_VERSION_BLOCKED') {
+            if (data && (data.error === 'OUTDATED_VERSION_BLOCKED' || (data.reason && data.reason.includes('BẢN CŨ ĐÃ HẾT HẠN')))) {
                 try {
                     const postRes = await fetch(`${API_BASE}/api/license`, {
                         method: 'POST',
@@ -781,7 +781,11 @@
 
             } else {
                 isVipAuthenticated = false;
-                alert(data.reason || 'Chưa tìm thấy bản quyền PRO cho thông tin này. Bạn có thể bấm vào "Mua PRO" để đăng ký kích hoạt!');
+                let failReason = data.reason || 'Chưa tìm thấy bản quyền PRO cho thông tin này. Bạn có thể bấm vào "Mua PRO" để đăng ký kích hoạt!';
+                if (failReason.includes('BẢN CŨ ĐÃ HẾT HẠN') || data.error === 'OUTDATED_VERSION_BLOCKED') {
+                    failReason = 'Chưa tìm thấy bản quyền PRO tương ứng với thông tin này. Vui lòng kiểm tra lại số điện thoại / HWID / Mã đơn hàng!';
+                }
+                alert(failReason);
             }
         } catch (e) {
             btn.innerText = '⚡ Xác Thực Bản Quyền PRO';
