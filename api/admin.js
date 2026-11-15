@@ -81,25 +81,14 @@ export default async function handler(req, res) {
     if (action === 'delete_order') {
       const orderCode = String(body.orderCode || '').trim().toUpperCase();
       let orders = (await dbGetJson('flowly:orders', [])) || [];
+      const target = orders.find((o) => o.orderCode === orderCode);
+      if (target && target.status === 'COMPLETED' && !body.force) {
+        return res.status(400).json({ success: false, error: 'Không thể xóa đơn hàng đã mua và cấp key!' });
+      }
       const beforeLen = orders.length;
       orders = orders.filter((o) => o.orderCode !== orderCode);
       await dbSetJson('flowly:orders', orders);
       return res.status(200).json({ success: true, deleted: beforeLen !== orders.length, orderCode });
-    }
-
-    if (action === 'delete_issued_key') {
-      const targetKey = String(body.key || '').trim().toUpperCase();
-      let issued = (await dbGetJson('flowly:issued_keys', [])) || [];
-      const beforeLen = issued.length;
-      issued = issued.filter((k) => String(k.key || '').trim().toUpperCase() !== targetKey);
-      await dbSetJson('flowly:issued_keys', issued);
-
-      // Also clean from revoked keys if present
-      let revokedList = (await dbGetJson('flowly:revoked_keys', [])) || [];
-      revokedList = revokedList.filter((k) => String(k).trim().toUpperCase() !== targetKey);
-      await dbSetJson('flowly:revoked_keys', revokedList);
-
-      return res.status(200).json({ success: true, deleted: beforeLen !== issued.length, key: targetKey });
     }
 
     if (action === 'create_manual_key') {
