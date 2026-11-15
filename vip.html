@@ -727,9 +727,25 @@
         btn.innerText = '⏳ Đang kiểm tra hệ thống...';
 
         try {
-            const url = `${API_BASE}/api/license?action=verify_vip&q=${encodeURIComponent(query)}&key=${encodeURIComponent(query)}&hwid=${encodeURIComponent(query)}&phone=${encodeURIComponent(query)}`;
-            const res = await fetch(url);
-            const data = await res.json();
+            const url = `${API_BASE}/api/license?action=verify_vip&q=${encodeURIComponent(query)}&key=${encodeURIComponent(query)}&hwid=${encodeURIComponent(query)}&phone=${encodeURIComponent(query)}&_t=${Date.now()}`;
+            const res = await fetch(url, { cache: 'no-store' });
+            let data = await res.json();
+
+            // Safeguard chống cache proxy cũ
+            if (data && data.error === 'OUTDATED_VERSION_BLOCKED') {
+                try {
+                    const postRes = await fetch(`${API_BASE}/api/license`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'verify_vip', q: query, phone: query, key: query, hwid: query })
+                    });
+                    const postData = await postRes.json();
+                    if (postData && (postData.success || postData.isVip)) {
+                        data = postData;
+                    }
+                } catch (_) {}
+            }
+
             btn.innerText = '⚡ Xác Thực Bản Quyền PRO';
 
             if (data.success && data.isVip) {
@@ -756,6 +772,12 @@
 
                 // MỞ KHÓA TOÀN BỘ 4 APP CARD
                 unlockAllAppCards(data.directDownloads);
+
+                // Tự động cuộn mượt xuống khu vực tải trực tiếp
+                setTimeout(() => {
+                    const dlSec = document.getElementById('downloadSection');
+                    if (dlSec) dlSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
 
             } else {
                 isVipAuthenticated = false;
@@ -794,23 +816,31 @@
             if (dlBtn && downloads && downloads[appId]) {
                 dlBtn.className = 'btn btn-emerald app-dl-btn';
                 dlBtn.innerHTML = '⚡ Tải Trực Tiếp APK (0s Chờ)';
-                dlBtn.onclick = () => {
+                dlBtn.removeAttribute('onclick');
+                dlBtn.onclick = (e) => {
+                    if (e) e.preventDefault();
                     window.location.href = downloads[appId].directApk;
                 };
+                dlBtn.setAttribute('onclick', `window.location.href='${downloads[appId].directApk}'`);
             }
 
             if (gfBtn && downloads && downloads[appId]) {
                 gfBtn.className = 'btn btn-ghost app-gf-btn';
                 gfBtn.innerHTML = appId === 'flowextra' ? '🚀 Dự Phòng GitHub' : '🚀 Dự Phòng Gofile';
-                gfBtn.onclick = () => {
+                gfBtn.removeAttribute('onclick');
+                gfBtn.onclick = (e) => {
+                    if (e) e.preventDefault();
                     window.open(downloads[appId].gofile, '_blank');
                 };
+                gfBtn.setAttribute('onclick', `window.open('${downloads[appId].gofile}', '_blank')`);
             }
 
             if (actBtn) {
                 actBtn.className = 'btn btn-cyan app-act-btn';
                 actBtn.innerHTML = '⚡ Mở & Kích Hoạt PRO 1-Chạm';
-                actBtn.onclick = () => {
+                actBtn.removeAttribute('onclick');
+                actBtn.onclick = (e) => {
+                    if (e) e.preventDefault();
                     if (activeKey) {
                         window.location.href = `${schemes[appId]}://license?key=${encodeURIComponent(activeKey)}`;
                     } else {

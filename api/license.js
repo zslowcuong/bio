@@ -21,6 +21,9 @@ import {
 
 export default async function handler(req, res) {
   if (handlePreflight(req, res)) return;
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
 
   try {
     const body = req.method === 'POST' ? await parseBody(req) : {};
