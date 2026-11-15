@@ -182,6 +182,20 @@
             </p>
         </div>
 
+        <!-- VIP OWNED KEY BANNER -->
+        <div id="ownedKeyBanner" style="display:none;background:linear-gradient(135deg,rgba(16,185,129,0.18),rgba(6,95,70,0.35));border:1.5px solid #10b981;border-radius:16px;padding:14px 16px;margin-bottom:16px;box-shadow:0 0 20px rgba(16,185,129,0.25);">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+                <div>
+                    <div style="font-size:13px;font-weight:900;color:#6ee7b7;">👑 BẠN ĐÃ MUA BẢN QUYỀN PRO THÀNH CÔNG!</div>
+                    <div style="font-size:11.5px;color:#cbd5e1;margin-top:2px;">Mã Key của bạn: <b id="ownedKeyText" style="font-family:monospace;color:#fff;"></b></div>
+                </div>
+                <div style="display:flex;gap:6px;">
+                    <button type="button" class="copy-mini" onclick="copyStr(document.getElementById('ownedKeyText').textContent)" style="padding:6px 12px;font-size:12px;">📋 Sao Chép Key</button>
+                    <a href="vip.html" style="background:#0284c7;color:#fff;text-decoration:none;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;">⚡ Cổng VIP (0s Chờ)</a>
+                </div>
+            </div>
+        </div>
+
         <!-- 1. CHỌN ỨNG DỤNG -->
         <div class="section-card">
             <div class="section-title">1. Chọn Ứng Dụng Cần Kích Hoạt PRO</div>
@@ -407,7 +421,10 @@ function selectApp(appId) {
             document.querySelectorAll('.appNameInline').forEach(el => el.textContent = APPS[selectedAppId].name);
         }
 
+        let isCreatingOrder = false;
+
         async function createShopOrder(planCode) {
+            if (isCreatingOrder) return;
             const hwid = (document.getElementById('hwidInput').value || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
             const phone = (document.getElementById('phoneInput').value || '').trim();
             if (!hwid || hwid.length < 4) {
@@ -423,6 +440,10 @@ function selectApp(appId) {
                 return;
             }
 
+            isCreatingOrder = true;
+            const buyBtns = document.querySelectorAll('.btn-buy');
+            buyBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.6'; });
+
             try {
                 const res = await fetch(`${API_BASE}/api/shop?action=create_order`, {
                     method: 'POST',
@@ -437,6 +458,9 @@ function selectApp(appId) {
                 openPayModal(data.order);
             } catch (e) {
                 alert('❌ Lỗi kết nối máy chủ Shop: ' + e.message);
+            } finally {
+                isCreatingOrder = false;
+                buyBtns.forEach(b => { b.disabled = false; b.style.opacity = '1'; });
             }
         }
 
@@ -471,6 +495,11 @@ function selectApp(appId) {
                 const box = document.getElementById('modalStatusBox');
                 if (data.paid && currentOrder.key) {
                     if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+                    try {
+                        localStorage.setItem('flow_my_pro_key', currentOrder.key);
+                        localStorage.setItem('flow_my_pro_hwid', currentOrder.hwid);
+                        if (currentOrder.phone) localStorage.setItem('flow_shop_phone', currentOrder.phone);
+                    } catch (_) {}
                     box.className = 'status-box paid';
                     box.textContent = '✅ Đã xác nhận tiền về TPBank thành công! Key PRO của bạn đã được mở khóa ngay bên dưới.';
                     document.getElementById('modalPendingBtns').style.display = 'none';
@@ -551,7 +580,18 @@ function selectApp(appId) {
         }
 
         selectApp(selectedAppId);
-syncDynamicPricing();
+        syncDynamicPricing();
+
+        try {
+            const savedProKey = localStorage.getItem('flow_my_pro_key');
+            if (savedProKey) {
+                const banner = document.getElementById('ownedKeyBanner');
+                if (banner) {
+                    banner.style.display = 'block';
+                    document.getElementById('ownedKeyText').textContent = savedProKey;
+                }
+            }
+        } catch (_) {}
     </script>
 </body>
 </html>
