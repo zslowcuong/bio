@@ -98,13 +98,16 @@ export default async function handler(req, res) {
       activeKey.toUpperCase() === 'SIKIBIDI_MOD'
     );
 
+    const isAppClient = (action === 'checkin' || action === 'activate_key');
     const minAllowedVer = Number(appCfg.min_version_code || 1);
     const isOutdated = Boolean(
-      (appCfg.force_update && appVersionCode < minAllowedVer) ||
-      (minAllowedVer > 1 && (!appVersionCode || appVersionCode < minAllowedVer))
+      isAppClient && (
+        (appCfg.force_update && (Number(appVersionCode || 0) < minAllowedVer)) ||
+        (minAllowedVer > 1 && (!appVersionCode || Number(appVersionCode) < minAllowedVer))
+      )
     );
 
-    if (action !== 'time' && (isKnownCrack || isOutdated)) {
+    if (isAppClient && (isKnownCrack || isOutdated)) {
       return res.status(200).json({
         success: false,
         blocked: true,
