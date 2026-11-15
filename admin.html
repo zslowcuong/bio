@@ -430,6 +430,7 @@
                                 <button class="btn" style="background:#0284c7;color:#fff;padding:6px 8px;font-size:11px;" onclick="promptChangeHwid('${k.key}', '${k.hwid}')">
                                     🔄 Đổi HWID
                                 </button>
+                                ${isRev ? `<button class="btn ghost" style="padding:6px 8px;font-size:11px;color:#f87171;" onclick="deleteIssuedKey('${k.key}')" title="Xóa vĩnh viễn lịch sử Key đã thu hồi">🗑️ Xóa</button>` : ''}
                             </div>
                         </td>
                     </tr>
@@ -481,6 +482,25 @@
                 }
             } catch (e) {
                 alert('❌ Lỗi: ' + e.message);
+            }
+        }
+
+        async function deleteIssuedKey(key) {
+            if (!confirm(`Bạn có chắc chắn muốn XÓA VĨNH VIỄN bản ghi Key đã thu hồi [${key}] khỏi danh sách không?`)) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/admin?action=delete_issued_key`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPin },
+                    body: JSON.stringify({ key })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    await refreshDashboard();
+                } else {
+                    alert('❌ Lỗi: ' + data.error);
+                }
+            } catch (e) {
+                alert('❌ Lỗi kết nối: ' + e.message);
             }
         }
 

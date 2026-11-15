@@ -177,6 +177,18 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, revokedKeys: revokedList, key: targetKey, revoked: shouldRevoke });
     }
 
+    if (action === 'delete_issued_key') {
+      const targetKey = String(body.key || '').trim().toUpperCase();
+      if (!targetKey) {
+        return res.status(400).json({ success: false, error: 'Thiếu mã key' });
+      }
+      let issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+      const beforeLen = issuedKeys.length;
+      issuedKeys = issuedKeys.filter((item) => String(item.key || '').toUpperCase() !== targetKey);
+      await dbSetJson('flowly:issued_keys', issuedKeys);
+      return res.status(200).json({ success: true, deleted: beforeLen !== issuedKeys.length, key: targetKey });
+    }
+
     if (action === 'change_hwid') {
       const targetKey = String(body.key || '').trim().toUpperCase();
       const newHwid = normalizeHwid(body.newHwid || '');
