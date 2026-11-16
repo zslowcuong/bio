@@ -150,7 +150,8 @@
             flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP', salt: 'FLOWLY_2026_FLOWOP_SALT_91A4', scheme: 'flowoptimize', pkg: 'com.example.gameoptimizer', logo: 'app_logo.png' },
             flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS',  salt: 'FLOWLY_2026_FLOWS_SALT_73C8',  scheme: 'flows',        pkg: 'com.flows.gaming',         logo: 'flows_logo.png' },
             flowultra:    { id: 'flowultra',    name: 'FlowUltra',    prefix: 'FLOWULTRA', salt: 'FLOWLY_2026_FLOWULTRA_SALT_52E9', scheme: 'flowultra', pkg: 'com.flows.flowultra',    logo: 'flowultra_logo.png' },
-            flowextra:    { id: 'flowextra',    name: 'FlowExtra',    prefix: 'FLOWEXTRA', salt: 'FLOWLY_2026_FLOWEXTRA_1412_SALT_84F1', scheme: 'flowextra', pkg: 'com.flowextra.optimizer', logo: 'flowextra_logo.png' }
+            flowextra:    { id: 'flowextra',    name: 'FlowExtra',    prefix: 'FLOWEXTRA', salt: 'FLOWLY_2026_FLOWEXTRA_1412_SALT_84F1', scheme: 'flowextra', pkg: 'com.flowextra.optimizer', logo: 'flowextra_logo.png' },
+            flowz:        { id: 'flowz',        name: 'FlowZ VIP',    prefix: 'FLOWZ',  salt: 'FLOWLY_2026_FLOWZ_VIP_SALT_98B2',  scheme: 'flowz',        pkg: 'com.nebula.hnx',         logo: 'flowz_logo.png' }
         };
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -159,6 +160,7 @@
         if (appId === 'com.flows.gaming') appId = 'flows';
         if (appId === 'com.flows.flowultra') appId = 'flowultra';
         if (appId === 'com.flowextra.optimizer') appId = 'flowextra';
+        if (appId === 'flowz' || appId === 'com.flows.flowz' || appId === 'com.nebula.hnx') appId = 'flowz';
         if (!APPS[appId]) appId = 'flowoptimize';
         const app = APPS[appId];
 

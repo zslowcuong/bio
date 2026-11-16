@@ -176,6 +176,7 @@
             <button type="button" class="app-tab" data-app="flows" onclick="selectApp('flows')">⚡ FlowS</button>
             <button type="button" class="app-tab" data-app="flowultra" onclick="selectApp('flowultra')">🚀 FlowUltra</button>
             <button type="button" class="app-tab" data-app="flowextra" onclick="selectApp('flowextra')">🎩 FlowExtra</button>
+            <button type="button" class="app-tab" data-app="flowz" onclick="selectApp('flowz')">🎯 FlowZ VIP</button>
         </div>
 
         <div class="logo-wrap">
@@ -241,7 +242,8 @@
             flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP-VIP', logo: 'app_logo.png' },
             flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS-VIP',  logo: 'flows_logo.png' },
             flowultra:    { id: 'flowultra',    name: 'FlowUltra',    prefix: 'FLOWULTRA-VIP', logo: 'flowultra_logo.png' },
-            flowextra:    { id: 'flowextra',    name: 'FlowExtra',    prefix: 'FLOWEXTRA-VIP', logo: 'flowextra_logo.png' }
+            flowextra:    { id: 'flowextra',    name: 'FlowExtra',    prefix: 'FLOWEXTRA-VIP', logo: 'flowextra_logo.png' },
+            flowz:        { id: 'flowz',        name: 'FlowZ VIP',    prefix: 'FLOWZ-VIP',     logo: 'flowz_logo.png' }
         };
 
         const params = new URLSearchParams(window.location.search);
@@ -250,6 +252,7 @@
         if (currentAppId === 'com.flows.gaming') currentAppId = 'flows';
         if (currentAppId === 'com.flows.flowultra') currentAppId = 'flowultra';
         if (currentAppId === 'com.flowextra.optimizer') currentAppId = 'flowextra';
+        if (currentAppId === 'flowz' || currentAppId === 'com.flows.flowz' || currentAppId === 'com.nebula.hnx') currentAppId = 'flowz';
         if (!APPS[currentAppId]) currentAppId = 'flowoptimize';
 
         const rawHwidParam = (params.get('hwid') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');

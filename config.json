@@ -40,6 +40,14 @@
       "expires_at_utc": 0,
       "title": "Sự Kiện PRO FlowExtra",
       "notice": "Nhận mã Key Event FlowExtra tại Admin Dashboard hoặc Nhóm Telegram"
+    },
+    "flowz": {
+      "active": false,
+      "key_sha256": "",
+      "duration_hours": 24,
+      "expires_at_utc": 0,
+      "title": "Sự Kiện PRO FlowZ VIP",
+      "notice": "Nhận mã Key Event FlowZ tại Admin Dashboard hoặc Nhóm Telegram"
     }
   },
   "global_resets": {
@@ -68,6 +76,14 @@
       "triggered_at_utc": 0
     },
     "flowextra": {
+      "active": false,
+      "resetId": "",
+      "duration_hours": 72,
+      "title": "",
+      "notice": "",
+      "triggered_at_utc": 0
+    },
+    "flowz": {
       "active": false,
       "resetId": "",
       "duration_hours": 72,
@@ -131,6 +147,20 @@
     "destination_apk": "https://zslowcuong.github.io/bio/FlowExtra.apk",
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowExtra.apk",
     "direct_apk": "FlowExtra.apk"
+  },
+  "flowz": {
+    "name": "FlowZ VIP Headshot & Sensitivity Pro",
+    "version": "v1.0.0",
+    "version_code": 1,
+    "min_version_code": 1,
+    "force_update": true,
+    "update_url": "https://zslowcuong.github.io/bio/?dl=flowz#download",
+    "download_url": "https://zslowcuong.github.io/bio/?dl=flowz#download",
+    "package": "com.nebula.hnx",
+    "changelog": "Bản phát hành chính thức FlowZ VIP Pro Suite: Tối ưu hóa kéo tâm Free Fire & Liên Quân, gia tốc cảm ứng 360Hz, bong bóng nổi HUD in-game thời gian thực & đồng bộ hệ sinh thái FlowEngine.",
+    "destination_apk": "https://zslowcuong.github.io/bio/FlowZ.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowZ.apk",
+    "direct_apk": "FlowZ.apk"
   },
   "tools_store": {
     "brotx": {

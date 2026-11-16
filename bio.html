@@ -3909,6 +3909,7 @@
             <li><a href="https://t.me/+dtVBEzwuN2Q4NmI9" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; font-weight: 700;">✈️ Nhóm Telegram</a></li>
 
             <li><a href="shop.html" style="color: #fbbf24; font-weight: 800;">🛒 Shop Key PRO</a></li>
+            <li><a href="vip.html" style="color: #10b981; font-weight: 800;">👑 Cổng VIP Tải 4 App</a></li>
             <li><a href="getkey.html" style="color: #34d399; font-weight: 800;">🔑 Lấy Key VIP 30h</a></li>
             <li><a href="#faq">FAQ</a></li>
 
@@ -3966,6 +3967,11 @@
                     <span>🛒</span>
                     <span>SHOP KEY PRO (VIETQR)</span>
                     <span style="color: #fbbf24;">➔</span>
+                </a>
+                <a href="vip.html" class="btn-telegram-pill" style="border-color: rgba(16, 185, 129, 0.55); background: rgba(16, 185, 129, 0.14); color: #a7f3d0;">
+                    <span>👑</span>
+                    <span>CỔNG TẢI PRO (VIP)</span>
+                    <span style="color: #34d399;">➔</span>
                 </a>
                 <a href="getkey.html" class="btn-telegram-pill" style="border-color: rgba(16, 185, 129, 0.55); background: rgba(16, 185, 129, 0.14); color: #a7f3d0;">
                     <span>🔑</span>
@@ -4194,7 +4200,31 @@
 
                 </div>
 
-                <!-- 5. BrotX V8 (Hot App Gamer) -->
+                <!-- 5. FlowZ VIP (Kéo Tâm & Cảm Ứng 360Hz Pro) -->
+                <div class="app-download-card flowz" style="border-color: rgba(168, 85, 247, 0.45); background: linear-gradient(160deg, rgba(22, 11, 46, 0.9) 0%, rgba(10, 17, 34, 0.95) 100%);">
+                    <div>
+                        <div class="app-header">
+                            <img src="flowz_logo.png" alt="FlowZ" class="app-icon-img" style="border-color: #c084fc;" loading="lazy" decoding="async">
+                            <div>
+                                <div class="app-title" style="color: #c084fc;">FlowZ VIP</div>
+                                <span class="app-sub-badge" style="background: rgba(168, 85, 247, 0.2); color: #e9d5ff; border: 1px solid rgba(168, 85, 247, 0.4);">HỖ TRỢ KÉO TÂM (v1.0.0 • TRIAL 3D PRO)</span>
+                            </div>
+                        </div>
+                        <div class="app-bullets">
+                            • 🎯 <b>Khóa Tâm Kéo Headshot:</b> Cân bằng độ nhạy trục X/Y tỉ lệ 1:1, lướt tâm êm ái chống rít màn hình.<br>
+                            • ⚡ <b>Turbo 360Hz Touch Engine:</b> Giảm độ trễ cảm ứng 0ms cực nhạy cho game thủ eSports Free Fire, Liên Quân.<br>
+                            • 🌌 <b>Bong Bóng Nổi Cyber HUD:</b> Tinh chỉnh độ nhạy &amp; macro trực tiếp real-time ngay trong trận chiến.<br>
+                            • 🌸 <b>Theme Anime Độc Quyền:</b> Goku Ultra Instinct, Gojo Satoru, Kaito Kid, Sasuke Chidori, Akaza.<br>
+                            • 🛡️ <b>Đồng Bộ FlowEngine:</b> Hưởng trọn đặc quyền dùng thử 3 ngày &amp; key bản quyền chung hệ thống.
+                        </div>
+                    </div>
+                    <button type="button" onclick="openUnlockModal('flowz')" class="btn-download-action" style="background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%); color: #fff; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4); margin-top: 14px;">
+                        <span>🎯</span>
+                        <span>TẢI XUỐNG FLOWZ (MIỄN PHÍ)</span>
+                    </button>
+                </div>
+
+                <!-- 6. BrotX V8 (Hot App Gamer) -->
                 <div class="app-download-card" style="border-color: rgba(239, 68, 68, 0.4); background: rgba(15, 23, 42, 0.88);">
                     <div>
                         <div class="app-header">
@@ -7695,6 +7725,10 @@ settings put secure multi_press_timeout 200</code></pre>
                 destination_apk: "https://zslowcuong.github.io/bio/FlowExtra.apk",
                 direct_apk: "FlowExtra.apk"
             },
+            flowz: {
+                destination_apk: "https://zslowcuong.github.io/bio/FlowZ.apk",
+                direct_apk: "FlowZ.apk"
+            },
             brotx: {
                 destination_apk: "https://gofile.io/d/RaSXG0aV",
                 direct_apk: "BrotX-v8.apk"
@@ -7721,6 +7755,7 @@ settings put secure multi_press_timeout 200</code></pre>
                     if (data.flowoptimize) globalConfig.flowoptimize = Object.assign(globalConfig.flowoptimize, data.flowoptimize);
                     if (data.flowultra) globalConfig.flowultra = Object.assign(globalConfig.flowultra, data.flowultra);
                     if (data.flowextra) globalConfig.flowextra = Object.assign(globalConfig.flowextra, data.flowextra);
+                    if (data.flowz) globalConfig.flowz = Object.assign(globalConfig.flowz, data.flowz);
                     if (data.tools_store) {
                         if (data.tools_store.brotx) Object.assign(globalConfig.brotx, data.tools_store.brotx, { destination_apk: data.tools_store.brotx.gofile || data.tools_store.brotx.destination_apk || globalConfig.brotx.destination_apk });
                         if (data.tools_store.shizuku) Object.assign(globalConfig.shizuku, data.tools_store.shizuku, { destination_apk: data.tools_store.shizuku.gofile || data.tools_store.shizuku.destination_apk || globalConfig.shizuku.destination_apk });
@@ -7790,6 +7825,19 @@ settings put secure multi_press_timeout 200</code></pre>
                     btnLabel: '🎩 TẢI VỀ FLOWEXTRA APK →',
                     bg: 'linear-gradient(135deg, #0284c7 0%, #7dd3fc 100%)',
                     color: '#04152b'
+                };
+            }
+            if (key === 'flowz') {
+                return {
+                    key,
+                    icon: 'flowz_logo.png',
+                    title: 'FlowZ VIP Headshot & Sensitivity Pro',
+                    sub: 'Khóa Tâm Kéo Headshot • Cảm Ứng 360Hz • Cyber HUD',
+                    dest: (globalConfig.flowz && globalConfig.flowz.destination_apk) || 'https://zslowcuong.github.io/bio/FlowZ.apk',
+                    prebuiltGateway: '',
+                    btnLabel: '🎯 TẢI VỀ FLOWZ VIP APK →',
+                    bg: 'linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)',
+                    color: '#fff'
                 };
             }
             if (key === 'brotx') {
