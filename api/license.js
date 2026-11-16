@@ -145,10 +145,15 @@ export default async function handler(req, res) {
         wdvRecord = await dbGetJson(wdvStoreKey, null);
       }
 
+      // Master device slot to synchronize 3-day trial across all 5 apps (FlowS, FlowUltra, FlowExtra, FlowOp, FlowZ)
+      const masterSlot = widevineHash && widevineHash.length >= 8 ? widevineHash : hwid;
+      const masterTrialKey = `flowly:master_trial:${masterSlot}`;
+      const masterRecord = await dbGetJson(masterTrialKey, null);
+
       if (!record) {
-        let inheritedStart = wdvRecord?.trialStartUtc ? Number(wdvRecord.trialStartUtc) : serverNowUtc;
-        let inheritedEnd = wdvRecord?.trialEndUtc ? Number(wdvRecord.trialEndUtc) : (inheritedStart + TRIAL_DURATION_MS);
-        if (!wdvRecord && validClientStart > 0) {
+        let inheritedStart = masterRecord?.trialStartUtc ? Number(masterRecord.trialStartUtc) : (wdvRecord?.trialStartUtc ? Number(wdvRecord.trialStartUtc) : serverNowUtc);
+        let inheritedEnd = masterRecord?.trialEndUtc ? Number(masterRecord.trialEndUtc) : (wdvRecord?.trialEndUtc ? Number(wdvRecord.trialEndUtc) : (inheritedStart + TRIAL_DURATION_MS));
+        if (!masterRecord && !wdvRecord && validClientStart > 0) {
           inheritedStart = Math.min(inheritedStart, validClientStart);
           inheritedEnd = inheritedStart + TRIAL_DURATION_MS;
         }
@@ -161,9 +166,9 @@ export default async function handler(req, res) {
           lastVersionCode: appVersionCode || 1,
           trialStartUtc: inheritedStart,
           trialEndUtc: inheritedEnd,
-          lastResetId: wdvRecord?.lastResetId || '',
-          lastResetAtUtc: Number(wdvRecord?.lastResetAtUtc || 0),
-          appliedResetIds: Array.isArray(wdvRecord?.appliedResetIds) ? [...wdvRecord.appliedResetIds] : [],
+          lastResetId: masterRecord?.lastResetId || wdvRecord?.lastResetId || '',
+          lastResetAtUtc: Number(masterRecord?.lastResetAtUtc || wdvRecord?.lastResetAtUtc || 0),
+          appliedResetIds: Array.isArray(masterRecord?.appliedResetIds) ? [...masterRecord.appliedResetIds] : (Array.isArray(wdvRecord?.appliedResetIds) ? [...wdvRecord.appliedResetIds] : []),
           firstSeenUtc: serverNowUtc,
           lastSeenUtc: serverNowUtc,
           installCount: (wdvRecord?.installCount || 0) + 1,
@@ -226,6 +231,15 @@ export default async function handler(req, res) {
       }
 
       await dbSetJson(trialKey, record);
+      await dbSetJson(masterTrialKey, {
+        trialStartUtc: record.trialStartUtc,
+        trialEndUtc: record.trialEndUtc,
+        lastResetId: record.lastResetId || '',
+        lastResetAtUtc: Number(record.lastResetAtUtc || 0),
+        appliedResetIds: record.appliedResetIds || [],
+        lastHwid: hwid,
+        lastSeenUtc: serverNowUtc,
+      });
       if (wdvStoreKey) {
         await dbSetJson(wdvStoreKey, {
           trialStartUtc: record.trialStartUtc,
@@ -510,7 +524,7 @@ export default async function handler(req, res) {
           key: foundRecord.key,
           appId: foundRecord.appId || 'all',
           plan: foundRecord.planCode || (isLife ? 'LIFE' : 'PRO'),
-          planName: foundRecord.planName || (isLife ? 'Gói Vĩnh Viễn Combo Full 4 App (99K)' : 'Gói PRO'),
+          planName: foundRecord.planName || (isLife ? 'Gói Vĩnh Viễn Combo Full 5 App (99K)' : 'Gói PRO'),
           hwid: foundRecord.hwid,
           phone: foundRecord.phone || '',
           hwidChanges: Number(foundRecord.hwidChanges || 0),
@@ -538,6 +552,12 @@ export default async function handler(req, res) {
               directApk: 'https://zslowcuong.github.io/bio/FlowExtra.apk',
               gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowExtra.apk',
             },
+            flowz: {
+              name: 'FlowZ VIP Headshot & Sensitivity Pro (Quà tặng kèm PRO)',
+              directApk: 'https://zslowcuong.github.io/bio/FlowZ.apk',
+              gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowZ.apk',
+              giftNotice: '🎁 Tặng kèm miễn phí dành riêng cho khách hàng mua KEY PRO!'
+            },
             tools: {
               shizuku: 'https://gofile.io/d/DkhZ4xaM',
               shizukunext: 'https://gofile.io/d/AdqIc0Gp',
@@ -545,7 +565,7 @@ export default async function handler(req, res) {
               toolpc: 'https://raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat',
             }
           },
-          message: '👑 Xác thực thành viên PRO thành công! Đã mở khóa link tải trực tiếp 4 app không cần vượt link.',
+          message: '👑 Xác thực thành viên PRO thành công! Đã mở khóa link tải trực tiếp trọn bộ 5 app không cần vượt link (tặng kèm FlowZ VIP).',
         });
       }
 
@@ -568,8 +588,9 @@ export default async function handler(req, res) {
             flows: { name: 'FlowS Gamer Tuner Edition (v1.4.0 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowS.apk', gofile: 'https://gofile.io/d/kzDVlE2G' },
             flowultra: { name: 'FlowUltra eSports Suite (v1.3.0 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowUltra.apk', gofile: 'https://gofile.io/d/p8GZrZNY' },
             flowextra: { name: 'FlowExtra Kaito Kid 1412 (v3.7 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowExtra.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowExtra.apk' },
+            flowz: { name: 'FlowZ VIP Headshot & Sensitivity Pro (Quà tặng kèm PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowZ.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowZ.apk', giftNotice: '🎁 Tặng kèm miễn phí dành riêng cho khách hàng mua KEY PRO!' },
           },
-          message: '👑 Xác thực thành viên PRO thành công! Đã mở khóa link tải trực tiếp 4 app không cần vượt link.',
+          message: '👑 Xác thực thành viên PRO thành công! Đã mở khóa link tải trực tiếp trọn bộ 5 app không cần vượt link (tặng kèm FlowZ VIP).',
         });
       }
 

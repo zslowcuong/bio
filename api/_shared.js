@@ -14,15 +14,15 @@ export const BANK_CONFIG = {
 };
 
 export const PLANS = {
-  '7D': { code: '7D', name: 'Gói Tuần (7 Ngày)', days: 7, hours: 168, price: 15000 },
-  '30D': { code: '30D', name: 'Gói Tháng (30 Ngày)', days: 30, hours: 720, price: 39000 },
-  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn (Trọn Đời)', days: 36500, hours: 876000, price: 99000 },
+  '7D': { code: '7D', name: 'Gói Tuần Combo 5 App (7 Ngày)', days: 7, hours: 168, price: 25000 },
+  '30D': { code: '30D', name: 'Gói Tháng Combo 5 App (30 Ngày)', days: 30, hours: 720, price: 49000 },
+  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn Combo 5 App (Mua 4 Tặng 1 FlowZ VIP)', days: 36500, hours: 876000, price: 99000 },
 };
 
 export const APPS = {
   all: {
     id: 'all',
-    name: 'Combo Toàn Bộ 4 Ứng Dụng (FlowOp, FlowS, FlowUltra, FlowExtra)',
+    name: 'Combo Toàn Bộ 5 Ứng Dụng (FlowOp, FlowS, FlowUltra, FlowExtra + Tặng FlowZ VIP)',
     prefix: 'FLOWALL',
     salt: 'FLOWLY_2026_ALL_APPS_SALT_66F0',
     package: 'all',
@@ -60,6 +60,14 @@ export const APPS = {
     package: 'com.flowextra.optimizer',
     scheme: 'flowextra',
   },
+  flowz: {
+    id: 'flowz',
+    name: 'FlowZ VIP Headshot & Sensitivity Pro',
+    prefix: 'FLOWZ',
+    salt: 'FLOWLY_2026_FLOWZ_VIP_SALT_98B2',
+    package: 'com.nebula.hnx',
+    scheme: 'flowz',
+  },
 };
 
 export function normalizeAppId(raw) {
@@ -69,6 +77,7 @@ export function normalizeAppId(raw) {
   if (s === 'flows' || s === 'com.flows.gaming') return 'flows';
   if (s === 'flowultra' || s === 'com.flows.flowultra') return 'flowultra';
   if (s === 'flowextra' || s === 'com.flowextra.optimizer') return 'flowextra';
+  if (s === 'flowz' || s === 'com.flows.flowz' || s === 'com.nebula.hnx') return 'flowz';
   return null;
 }
 
@@ -486,7 +495,7 @@ export async function getLifetimePricingTier() {
     currentPrice = 99000;
     slotsLeft = Math.max(1, 10 - lifeCount);
     totalSlotsInTier = 10;
-    tierBadge = `🔥 SỰ KIỆN RA MẮT • CÒN [${slotsLeft}/10] SUẤT 99K`;
+    tierBadge = `🔥 ƯU ĐÃI ĐẶC BIỆT • FULL 5 APP (TẶNG FLOWZ) • CÒN [${slotsLeft}/10] SUẤT 99K`;
   } else if (lifeCount < 25) {
     tierNumber = 2;
     currentPrice = 169000;

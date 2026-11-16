@@ -91,10 +91,10 @@ export default async function handler(req, res) {
         orderCode,
         memo,
         appId: finalAppId,
-        appName: isLifeCombo ? 'Combo 4 App (FlowOp, FlowS, FlowUltra, FlowExtra)' : APPS[appId].name,
+        appName: isLifeCombo ? 'Combo 5 App (FlowOp, FlowS, FlowUltra, FlowExtra + Tặng FlowZ VIP)' : APPS[appId].name,
         hwid,
         planCode,
-        planName: isLifeCombo ? 'Gói Vĩnh Viễn Combo Full 4 App (99K)' : plan.name,
+        planName: isLifeCombo ? `Gói Vĩnh Viễn Combo Full 5 App (${finalPrice / 1000}K)` : plan.name,
         price: finalPrice,
         phone,
         allApps: isLifeCombo,
@@ -111,13 +111,13 @@ export default async function handler(req, res) {
       await dbSetJson('flowly:orders', orders.slice(0, 500));
 
       const tgTitle = isLifeCombo
-        ? '👑 [FLOW SHOP] ĐƠN HÀNG COMBO VĨNH VIỄN 99K (FULL 4 APP)'
+        ? `👑 [FLOW SHOP] ĐƠN HÀNG COMBO VĨNH VIỄN ${finalPrice / 1000}K (FULL 5 APP)`
         : `🔔 [FLOW SHOP] ĐƠN HÀNG VIETQR MỚI (${APPS[appId].name})`;
       const tgAppName = isLifeCombo
-        ? 'Full 4 App: FlowOptimize + FlowS + FlowUltra + FlowExtra'
+        ? 'Full 5 App: FlowOptimize + FlowS + FlowUltra + FlowExtra + FlowZ VIP (Tặng kèm)'
         : APPS[appId].name;
       const tgPlanName = isLifeCombo
-        ? 'Gói Vĩnh Viễn Combo Full 4 App (99K)'
+        ? `Gói Vĩnh Viễn Combo Full 5 App (${finalPrice / 1000}K)`
         : plan.name;
 
       await sendTelegram(
@@ -128,7 +128,7 @@ export default async function handler(req, res) {
 ` +
         `💬 <b>Nội dung CK:</b> <code>${memo}</code>
 ` +
-        `💰 <b>Số tiền:</b> <b>${plan.price.toLocaleString('vi-VN')}đ</b>
+        `💰 <b>Số tiền:</b> <b>${finalPrice.toLocaleString('vi-VN')}đ</b>
 ` +
         `💎 <b>Gói:</b> ${tgPlanName}
 ` +
