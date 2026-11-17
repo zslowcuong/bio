@@ -368,5 +368,12 @@
     "gofile": "https://raw.githubusercontent.com/zslowcuong/bio/main/FlowZ.apk",
     "direct_apk": "FlowZ.apk",
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowZ.apk"
+  },
+  "voidadb": {
+    "name": "VOID ADB VIE (Mod By FlowEngine)",
+    "dest": "https://zslowcuong.github.io/bio/VOID_ADB_VIE.apk",
+    "gofile": "https://zslowcuong.github.io/bio/VOID_ADB_VIE.apk",
+    "direct_apk": "VOID_ADB_VIE.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FVOID_ADB_VIE.apk"
   }
 }

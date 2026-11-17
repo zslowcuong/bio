@@ -4248,6 +4248,31 @@
                     </button>
                 </div>
 
+                
+                <!-- 7. VOID ADB VIE (Hot App • Mod By FlowEngine) -->
+                <div class="app-download-card" style="border-color: rgba(168, 85, 247, 0.45); background: rgba(15, 23, 42, 0.88);">
+                    <div>
+                        <div class="app-header">
+                            <img src="icon_voidadb.png" alt="VOID ADB VIE" class="app-icon-img" style="border-color: #a855f7;" loading="lazy" decoding="async">
+                            <div>
+                                <div class="app-title">VOID ADB VIE</div>
+                                <span class="app-sub-badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">HOT APP • MOD BY FLOWENGINE</span>
+                            </div>
+                        </div>
+                        <div class="app-bullets">
+                            • 🌌 <b>Bản Việt Hóa 100%:</b> Toàn bộ giao diện &amp; tính năng được dịch chuẩn Tiếng Việt.<br>
+                            • ⚡ <b>Ép Xung GPU &amp; CPU:</b> Tối ưu hóa Vulkan UI, bung hiệu năng đỉnh chóp.<br>
+                            • 🎮 <b>Hỗ Trợ Shizuku:</b> Kích hoạt 1 chạm qua Shizuku không cần root máy, an toàn tuyệt đối.<br>
+                            • 🛡️ <b>Đã Bypass Anti-Tamper:</b> Triệt tiêu hoàn toàn cảnh báo bản sửa đổi, chạy mượt trên mọi máy.<br>
+                            • 💎 <b>Độc Quyền FlowEngine:</b> Tinh chỉnh tối ưu hóa gaming đỉnh cao.
+                        </div>
+                    </div>
+                    <button type="button" onclick="openUnlockModal('voidadb')" class="btn-download-action" style="background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%); color: #fff; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4); margin-top: 14px;">
+                        <span>🚀</span>
+                        <span>TẢI XUỐNG VOID ADB VIE (MIỄN PHÍ)</span>
+                    </button>
+                </div>
+
                 <!-- 5. Shizuku & Shizuku-Next (Nền Tảng Cấp Quyền) -->
                 <div class="app-download-card" style="border-color: rgba(56, 189, 248, 0.4); background: rgba(15, 23, 42, 0.88);">
                     <div>
@@ -7729,6 +7754,10 @@ settings put secure multi_press_timeout 200</code></pre>
                 destination_apk: "https://zslowcuong.github.io/bio/FlowZ.apk",
                 direct_apk: "FlowZ.apk"
             },
+            voidadb: {
+                destination_apk: "https://zslowcuong.github.io/bio/VOID_ADB_VIE.apk",
+                direct_apk: "VOID_ADB_VIE.apk"
+            },
             brotx: {
                 destination_apk: "https://gofile.io/d/RaSXG0aV",
                 direct_apk: "BrotX-v8.apk"
@@ -7836,6 +7865,19 @@ settings put secure multi_press_timeout 200</code></pre>
                     dest: (globalConfig.flowz && globalConfig.flowz.destination_apk) || 'https://zslowcuong.github.io/bio/FlowZ.apk',
                     prebuiltGateway: '',
                     btnLabel: '🎯 TẢI VỀ FLOWZ VIP APK →',
+                    bg: 'linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)',
+                    color: '#fff'
+                };
+            }
+            if (key === 'voidadb') {
+                return {
+                    key,
+                    icon: 'icon_voidadb.png',
+                    title: 'VOID ADB VIE (Mod By FlowEngine)',
+                    sub: 'Bản Việt Hóa 100% • Ép Xung GPU Shizuku • Miễn Phí',
+                    dest: (globalConfig.voidadb && globalConfig.voidadb.destination_apk) || 'https://zslowcuong.github.io/bio/VOID_ADB_VIE.apk',
+                    prebuiltGateway: '',
+                    btnLabel: '🚀 TẢI VỀ VOID ADB VIE APK →',
                     bg: 'linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)',
                     color: '#fff'
                 };
@@ -8328,6 +8370,28 @@ settings put secure multi_press_timeout 200</code></pre>
         "name": "Chronos / Easer (Event-Driven)",
         "dest": "https://github.com/renyuneyun/Easer/releases/download/v0.8.2.3/Easer-v0.8.2.3.apk"
     },
+    "voidadb": {
+        "name": "VOID ADB VIE (Mod By FlowEngine)",
+        "icon": "icon_voidadb.png",
+        "tag": "🔥 HOT APP • MOD BY FLOWENGINE",
+        "tagClass": "pill-tag-hot",
+        "required": "🔌 App yêu cầu: Shizuku (UID 2000)",
+        "source": "VOID ADB VIE • FlowEngine Re-engineering",
+        "features": [
+            "Bản Việt Hóa 100% chuẩn ngữ cảnh gaming và hệ thống Android",
+            "Ép xung GPU Vulkan UI & CPU Boost tối ưu khung hình combat mượt mà",
+            "Đã gỡ bỏ và bypass triệt để cơ chế chống sửa đổi (Anti-Tamper)",
+            "Tích hợp Shizuku một chạm, an toàn tuyệt đối không cần Root máy"
+        ],
+        "guide": [
+            "<b>Bước 1:</b> Tải và cài đặt file <code>VOID_ADB_VIE.apk</code>.",
+            "<b>Bước 2:</b> Khởi chạy Shizuku trên máy của bạn.",
+            "<b>Bước 3:</b> Mở <b>VOID ADB VIE</b> và bấm Kết nối Shizuku để cấp quyền.",
+            "<b>Bước 4:</b> Bật các tính năng tối ưu GPU & Game mong muốn."
+        ],
+        "command": "pm grant com.voidadb.gpu moe.shizuku.manager.permission.API_V23"
+    },
+
     "brotx": {
         "name": "BrotX Optimizer v8",
         "dest": "https://zslowcuong.github.io/bio/BrotX-v8.apk",
@@ -8364,6 +8428,28 @@ settings put secure multi_press_timeout 200</code></pre>
 };
 
         const APP_DETAILS_DATA = {
+    "voidadb": {
+        "name": "VOID ADB VIE (Mod By FlowEngine)",
+        "icon": "icon_voidadb.png",
+        "tag": "🔥 HOT APP • MOD BY FLOWENGINE",
+        "tagClass": "pill-tag-hot",
+        "required": "🔌 App yêu cầu: Shizuku (UID 2000)",
+        "source": "VOID ADB VIE • FlowEngine Re-engineering",
+        "features": [
+            "Bản Việt Hóa 100% chuẩn ngữ cảnh gaming và hệ thống Android",
+            "Ép xung GPU Vulkan UI & CPU Boost tối ưu khung hình combat mượt mà",
+            "Đã gỡ bỏ và bypass triệt để cơ chế chống sửa đổi (Anti-Tamper)",
+            "Tích hợp Shizuku một chạm, an toàn tuyệt đối không cần Root máy"
+        ],
+        "guide": [
+            "<b>Bước 1:</b> Tải và cài đặt file <code>VOID_ADB_VIE.apk</code>.",
+            "<b>Bước 2:</b> Khởi chạy Shizuku trên máy của bạn.",
+            "<b>Bước 3:</b> Mở <b>VOID ADB VIE</b> và bấm Kết nối Shizuku để cấp quyền.",
+            "<b>Bước 4:</b> Bật các tính năng tối ưu GPU & Game mong muốn."
+        ],
+        "command": "pm grant com.voidadb.gpu moe.shizuku.manager.permission.API_V23"
+    },
+
     "brotx": {
         "name": "BrotX Optimizer v8",
         "icon": "icon_brotx.png",
@@ -9567,7 +9653,7 @@ settings put secure multi_press_timeout 200</code></pre>
             await fetchConfig();
             const params = new URLSearchParams(window.location.search);
             const dl = (params.get('dl') || params.get('app') || '').trim().toLowerCase();
-            if (dl && (['flows', 'flowoptimize', 'flowultra', 'flowextra', 'brotx', 'shizukunext', 'shizuku'].includes(dl) || (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS[dl]))) {
+            if (dl && (['flows', 'flowoptimize', 'flowultra', 'flowextra', 'brotx', 'voidadb', 'shizukunext', 'shizuku'].includes(dl) || (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS[dl]))) {
                 openUnlockModal(dl);
             }
         });
