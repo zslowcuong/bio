@@ -94,14 +94,14 @@
   },
   "flowoptimize": {
     "name": "FlowOptimize Anime Edition",
-    "version": "v1.8.0",
-    "version_code": 9,
+    "version": "v1.8.1",
+    "version_code": 10,
     "min_version_code": 9,
-    "force_update": true,
+    "force_update": false,
     "update_url": "https://zslowcuong.github.io/bio/?dl=flowoptimize#download",
     "download_url": "https://zslowcuong.github.io/bio/?dl=flowoptimize#download",
     "package": "com.example.gameoptimizer",
-    "changelog": "Bản cập nhật v1.8.0 PRO Suite: Sửa triệt để lỗi thực thi Shizuku batch (0 thành công / EPIPE), hiển thị banner thông báo Key Event PRO & Auto Reset Day kèm đếm ngược, hỗ trợ Key Event đa thiết bị & hoàn thiện GetKey VIP 30h.",
+    "changelog": "Bản cập nhật v1.8.1: Bổ sung công cụ 1-chạm cứu hộ Pin Trắng chuyên biệt cho Xiaomi, Redmi 12 & HyperOS (khôi phục chế độ cân bằng gốc của máy, reset driver pin kernel), tối ưu hoàn trả cài đặt gốc.",
     "destination_apk": "https://zslowcuong.github.io/bio/FlowOptimize.apk",
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowOptimize.apk",
     "direct_apk": "FlowOptimize.apk"
