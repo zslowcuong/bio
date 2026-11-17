@@ -8,6 +8,7 @@ import {
   getBackendStatus,
   getEventKeysMap,
   getGlobalResetsMap,
+  getTrialEnabled,
   getRevokedKeysList,
   handlePreflight,
   isAdminAuthorized,
@@ -56,6 +57,7 @@ export default async function handler(req, res) {
       const revokedKeys = await getRevokedKeysList();
       const eventKeys = await getEventKeysMap();
       const globalResets = await getGlobalResetsMap();
+      const trialEnabled = await getTrialEnabled();
       return res.status(200).json({
         success: true,
         orders,
@@ -63,6 +65,7 @@ export default async function handler(req, res) {
         revokedKeys,
         eventKeys,
         globalResets,
+        trialEnabled,
         ...backendStatus,
       });
     }
@@ -367,11 +370,71 @@ export default async function handler(req, res) {
         currentResets[id] = {
           ...(currentResets[id] || {}),
           active: false,
+          resetId: '',
           notice: '',
         };
       }
       await dbSetJson('flowly:global_resets', currentResets);
       return res.status(200).json({ success: true, targetApps: targetIds, globalResets: currentResets });
+    }
+
+    if (action === 'toggle_trial_system') {
+      const enabled = Boolean(body.enabled);
+      await dbSetJson('flowly:trial_enabled', enabled);
+      let currentResets = await getGlobalResetsMap();
+      let currentEvents = await getEventKeysMap();
+      if (!enabled) {
+        for (const id of Object.keys(APPS)) {
+          currentResets[id] = {
+            ...(currentResets[id] || {}),
+            active: false,
+            resetId: '',
+            notice: '',
+          };
+          currentEvents[id] = {
+            ...(currentEvents[id] || {}),
+            active: false,
+            notice: '',
+          };
+        }
+        await dbSetJson('flowly:global_resets', currentResets);
+        await dbSetJson('flowly:event_keys', currentEvents);
+      }
+      return res.status(200).json({
+        success: true,
+        trialEnabled: enabled,
+        globalResets: currentResets,
+        eventKeys: currentEvents,
+        message: enabled ? 'Đã bật Sự kiện Dùng Thử (Trial 72h)!' : 'Đã TẮT TOÀN BỘ Sự kiện Dùng Thử (Trial = 0h) và Reset Day!'
+      });
+    }
+
+    if (action === 'disable_all_events') {
+      await dbSetJson('flowly:trial_enabled', false);
+      let currentResets = await getGlobalResetsMap();
+      let currentEvents = await getEventKeysMap();
+      for (const id of Object.keys(APPS)) {
+        currentResets[id] = {
+          ...(currentResets[id] || {}),
+          active: false,
+          resetId: '',
+          notice: '',
+        };
+        currentEvents[id] = {
+          ...(currentEvents[id] || {}),
+          active: false,
+          notice: '',
+        };
+      }
+      await dbSetJson('flowly:global_resets', currentResets);
+      await dbSetJson('flowly:event_keys', currentEvents);
+      return res.status(200).json({
+        success: true,
+        trialEnabled: false,
+        globalResets: currentResets,
+        eventKeys: currentEvents,
+        message: 'Đã tắt toàn bộ Key Event, Dùng Thử & Reset Day trên tất cả ứng dụng!'
+      });
     }
 
     return res.status(400).json({ success: false, error: 'UNKNOWN_ACTION' });

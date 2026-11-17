@@ -3,7 +3,18 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 export const ADMIN_HASH = process.env.ADMIN_PIN_HASH || '246942076e3359c83467555088158cca0cff87e60f95b6cd85a6aacabf0b5ac0';
-export const TRIAL_DURATION_MS = 72 * 3600 * 1000; // 3 days (72 hours)
+export const TRIAL_DURATION_MS = 0; // Trial event ended -> Default 0h (VIP maintained via getkey 30h)
+export const DEFAULT_TRIAL_HOURS = 0;
+
+export async function getTrialEnabled() {
+  const staticCfg = loadStaticConfig();
+  const staticEnabled = Boolean(staticCfg.trial_enabled ?? false);
+  const kvTrial = await dbGetJson('flowly:trial_enabled', null);
+  if (kvTrial !== null && typeof kvTrial !== 'undefined') {
+    return Boolean(kvTrial);
+  }
+  return staticEnabled;
+}
 export const VIP_DURATION_MS = 30 * 3600 * 1000;   // 30 hours free VIP
 
 export const BANK_CONFIG = {

@@ -1,6 +1,7 @@
 import {
   APPS,
   TRIAL_DURATION_MS,
+  getTrialEnabled,
   buildVietQrUrl,
   dbGetJson,
   dbSetJson,
@@ -150,12 +151,19 @@ export default async function handler(req, res) {
       const masterTrialKey = `flowly:master_trial:${masterSlot}`;
       const masterRecord = await dbGetJson(masterTrialKey, null);
 
+      const trialEnabled = await getTrialEnabled();
+      const trialDurationMs = trialEnabled ? (TRIAL_DURATION_MS || (72 * 3600 * 1000)) : 0;
+
       if (!record) {
-        let inheritedStart = masterRecord?.trialStartUtc ? Number(masterRecord.trialStartUtc) : (wdvRecord?.trialStartUtc ? Number(wdvRecord.trialStartUtc) : serverNowUtc);
-        let inheritedEnd = masterRecord?.trialEndUtc ? Number(masterRecord.trialEndUtc) : (wdvRecord?.trialEndUtc ? Number(wdvRecord.trialEndUtc) : (inheritedStart + TRIAL_DURATION_MS));
-        if (!masterRecord && !wdvRecord && validClientStart > 0) {
+        let inheritedStart = trialEnabled
+          ? (masterRecord?.trialStartUtc ? Number(masterRecord.trialStartUtc) : (wdvRecord?.trialStartUtc ? Number(wdvRecord.trialStartUtc) : serverNowUtc))
+          : 0;
+        let inheritedEnd = trialEnabled
+          ? (masterRecord?.trialEndUtc ? Number(masterRecord.trialEndUtc) : (wdvRecord?.trialEndUtc ? Number(wdvRecord.trialEndUtc) : (inheritedStart + trialDurationMs)))
+          : 0;
+        if (trialEnabled && !masterRecord && !wdvRecord && validClientStart > 0) {
           inheritedStart = Math.min(inheritedStart, validClientStart);
-          inheritedEnd = inheritedStart + TRIAL_DURATION_MS;
+          inheritedEnd = inheritedStart + trialDurationMs;
         }
         record = {
           appId,
@@ -267,14 +275,17 @@ export default async function handler(req, res) {
           (!k.expiryUtcMs || Number(k.expiryUtcMs) > serverNowUtc)
       );
 
+      const effectiveTrialRemainingMs = trialEnabled ? Math.max(0, (record.trialEndUtc || 0) - serverNowUtc) : 0;
+
       return res.status(200).json({
         success: true,
         appId,
         hwid,
         serverNowUtc,
-        trialStartUtc: record.trialStartUtc,
-        trialEndUtc: record.trialEndUtc,
-        trialRemainingMs: Math.max(0, record.trialEndUtc - serverNowUtc),
+        trialEnabled: Boolean(trialEnabled),
+        trialStartUtc: trialEnabled ? record.trialStartUtc : 0,
+        trialEndUtc: trialEnabled ? record.trialEndUtc : 0,
+        trialRemainingMs: effectiveTrialRemainingMs,
         lastResetId: record.lastResetId || '',
         resetAppliedNow,
         activeKeyRevoked,
