@@ -395,10 +395,10 @@ export default async function handler(req, res) {
         expiryUtcMs: finalExpiryMs,
         serverNowUtc,
         message: isLifeCombo
-          ? 'Kích hoạt thành công Gói Vĩnh Viễn 99K (Mở khóa toàn bộ 4 app: FlowS, FlowUltra, FlowOp, FlowExtra)!'
+          ? 'Kích hoạt thành công Gói Vĩnh Viễn 99K (Mở khóa toàn bộ 5 app: FlowS, FlowUltra, FlowOp, FlowExtra, FlowZ)!'
           : (verified.tier === 'VIP_FREE'
-              ? 'Kích hoạt Key VIP 30 Giờ (khóa 1 thiết bị) thành công!'
-              : 'Kích hoạt Key PRO thành công!'),
+            ? 'Kích hoạt Key VIP 30 Giờ (khóa 1 thiết bị) thành công!'
+            : 'Kích hoạt Key PRO thành công!'),
       });
     }
 
@@ -501,7 +501,7 @@ export default async function handler(req, res) {
             const tKey = sanitizeKeyInput(tokenA);
             const tHwid = normalizeHwid(tokenB);
             if (tKey && tHwid && tHwid.length >= 4) {
-              for (const testApp of ['all', 'flowoptimize', 'flows', 'flowultra', 'flowextra']) {
+              for (const testApp of ['all', 'flowoptimize', 'flows', 'flowultra', 'flowextra', 'flowz']) {
                 const v = verifySignedKeyFormat(tKey, testApp, tHwid);
                 if (v.valid && (v.tier === 'PRO_SHOP' || v.plan === 'LIFE' || v.isLifetime)) {
                   isCryptValid = true;

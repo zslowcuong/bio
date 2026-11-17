@@ -368,8 +368,8 @@
 
         const params = new URLSearchParams(window.location.search);
         let selectedAppId = (params.get('app') || params.get('appId') || 'flowoptimize').trim().toLowerCase();
-        if (selectedAppId === 'flowop') selectedAppId = 'flowoptimize';
-        if (selectedAppId === 'com.nebula.hnx') selectedAppId = 'flowz';
+        if (selectedAppId === 'flowop' || selectedAppId === 'com.example.gameoptimizer') selectedAppId = 'flowoptimize';
+        if (selectedAppId === 'flowz' || selectedAppId === 'com.flows.flowz' || selectedAppId === 'com.nebula.hnx') selectedAppId = 'flowz';
         if (!APPS[selectedAppId]) selectedAppId = 'flowoptimize';
 
         const hwidParam = (params.get('hwid') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
