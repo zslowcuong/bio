@@ -5,6 +5,7 @@ import {
   handlePreflight,
   normalizeTextForMatch,
   parseBody,
+  BANK_CONFIG,
 } from './_shared.js';
 
 export default async function handler(req, res) {
@@ -14,29 +15,30 @@ export default async function handler(req, res) {
   }
 
   try {
-    const webhookSecret = process.env.SEPAY_WEBHOOK_SECRET || '';
+    const webhookSecret = process.env.SEPAY_WEBHOOK_SECRET || process.env.SEPAY_API_KEY || '';
     if (webhookSecret) {
-      const auth = String(req.headers.authorization || '').trim();
-      const expected = `Apikey ${webhookSecret}`;
-      if (auth !== expected) {
+      const auth = String(req.headers.authorization || req.headers['x-api-key'] || req.query?.token || '').trim();
+      const cleanAuth = auth.replace(/^(Apikey|Bearer)\s+/i, '').trim();
+      if (cleanAuth !== webhookSecret && auth !== `Apikey ${webhookSecret}` && auth !== `Bearer ${webhookSecret}`) {
         return res.status(401).json({ success: false, error: 'Unauthorized Webhook' });
       }
-    } else {
-      // Strictly reject unauthenticated webhook hits until SEPAY_WEBHOOK_SECRET is configured on Vercel
-      return res.status(503).json({
-        success: false,
-        error: 'SEPAY_WEBHOOK_SECRET is not configured on Vercel yet',
-      });
     }
 
     const tx = await parseBody(req);
-    const txId = String(tx.id || tx.referenceCode || '');
-    const transferType = String(tx.transferType || '').toLowerCase();
-    const amountIn = Number(tx.transferAmount || tx.amount_in || 0);
-    const content = String(tx.content || tx.description || '');
+    const txId = String(tx.id || tx.referenceCode || tx.transaction_id || '');
+    const transferType = String(tx.transferType || tx.type || 'in').toLowerCase();
+    const amountIn = Number(tx.transferAmount || tx.amount_in || tx.amount || 0);
+    const content = String(tx.content || tx.description || tx.transaction_content || '');
+    const accNo = String(tx.accountNumber || tx.account_number || '').trim();
 
-    if (!txId || transferType !== 'in' || amountIn <= 0) {
+    // Verify incoming transfer
+    if (!txId || (transferType && transferType !== 'in') || amountIn <= 0) {
       return res.status(200).json({ success: true, ignored: true, reason: 'Not an incoming transfer' });
+    }
+
+    // Check account number if present in webhook payload
+    if (accNo && accNo !== BANK_CONFIG.accountNo) {
+      return res.status(200).json({ success: true, ignored: true, reason: 'Account number mismatch' });
     }
 
     const claimedTx = (await dbGetJson('flowly:claimed_tx', {})) || {};
@@ -53,16 +55,23 @@ export default async function handler(req, res) {
     });
 
     if (!target) {
-      return res.status(200).json({ success: true, matched: false });
+      return res.status(200).json({ success: true, matched: false, reason: 'No matching pending order found' });
     }
 
     claimedTx[txId] = { orderCode: target.orderCode, claimedAtUtc: Date.now() };
     await dbSetJson('flowly:claimed_tx', claimedTx);
 
+    // AUTO APPROVE & ISSUE KEY IMMEDIATELY
     const completed = await completeOrderWithProKey(target, txId, 'SEPAY_WEBHOOK_VERIFIED');
-    return res.status(200).json({ success: true, matched: true, orderCode: completed.orderCode, key: completed.key });
+    return res.status(200).json({
+      success: true,
+      matched: true,
+      autoApproved: true,
+      orderCode: completed.orderCode,
+      key: completed.key,
+      hwid: completed.hwid,
+    });
   } catch (e) {
     return res.status(500).json({ success: false, error: e.message });
   }
 }
-

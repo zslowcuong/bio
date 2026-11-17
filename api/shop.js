@@ -167,7 +167,7 @@ export default async function handler(req, res) {
       }
 
       // Real bank verification via SePay API ONLY if SEPAY_API_KEY is configured
-      const sepayApiKey = process.env.SEPAY_API_KEY || '';
+      const sepayApiKey = process.env.SEPAY_API_KEY || process.env.SEPAY_WEBHOOK_SECRET || '';
       if (sepayApiKey) {
         try {
           const sepayUrl = `https://my.sepay.vn/userapi/transactions/list?account_number=${encodeURIComponent(BANK_CONFIG.accountNo)}&limit=30`;
