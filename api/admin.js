@@ -106,6 +106,7 @@ export default async function handler(req, res) {
       if (body.oldKey) ord.oldKey = String(body.oldKey).trim().toUpperCase();
       if (body.oldHwid) ord.oldHwid = normalizeHwid(body.oldHwid);
       if (body.phone) ord.phone = String(body.phone).trim();
+      if (body.changeHwidCount !== undefined) ord.changeHwidCount = Number(body.changeHwidCount);
       orders[ordIdx] = ord;
       await dbSetJson('flowly:orders', orders);
 
