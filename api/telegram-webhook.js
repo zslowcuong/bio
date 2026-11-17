@@ -1,4 +1,4 @@
-import { handlePreflight, parseBody } from './_shared.js';
+import { handlePreflight, parseBody, dbGetJson, dbSetJson } from './_shared.js';
 
 const BIO_URL = 'https://zslowcuong.github.io/bio/';
 const SHOP_URL = 'https://zslowcuong.github.io/bio/shop.html';
@@ -8,8 +8,18 @@ const FLOWOP_APK = 'https://zslowcuong.github.io/bio/FlowOptimize.apk';
 const VOIDADB_APK = 'https://zslowcuong.github.io/bio/VOID_ADB_VIE.apk';
 const ADMIN_TG = 'https://t.me/+dtVBEzwuN2Q4NmI9';
 
-async function callTelegram(method, payload) {
-  const token = process.env.TELEGRAM_BOT_TOKEN || '';
+async function getBotToken(customToken = null) {
+  if (customToken) return customToken;
+  if (process.env.TELEGRAM_BOT_TOKEN) return process.env.TELEGRAM_BOT_TOKEN;
+  try {
+    const dbToken = await dbGetJson('flowly:telegram_bot_token', '');
+    if (dbToken) return String(dbToken).trim();
+  } catch (e) {}
+  return '';
+}
+
+async function callTelegram(method, payload, explicitToken = null) {
+  const token = await getBotToken(explicitToken);
   if (!token) return { ok: false, error: 'TELEGRAM_BOT_TOKEN_NOT_CONFIGURED' };
   try {
     const res = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
@@ -260,28 +270,41 @@ function matchSmartAnswer(userMsg = '') {
 export default async function handler(req, res) {
   if (handlePreflight(req, res)) return;
 
-  const token = process.env.TELEGRAM_BOT_TOKEN || '';
+  const url = new URL(req.url, `https://${req.headers.host || 'bio-seven-nu.vercel.app'}`);
+  const passedToken = String(url.searchParams.get('token') || '').trim();
+  if (passedToken) {
+    try {
+      await dbSetJson('flowly:telegram_bot_token', passedToken);
+    } catch (e) {}
+  }
+
+  const token = await getBotToken(passedToken);
 
   // GET request: Diagnostics & Set Webhook helper
   if (req.method === 'GET') {
-    const url = new URL(req.url, `https://${req.headers.host || 'bio-seven-nu.vercel.app'}`);
     const host = req.headers.host || 'bio-seven-nu.vercel.app';
     const webhookUrl = `https://${host}/api/telegram-webhook`;
 
     if (url.searchParams.get('set_webhook') === '1') {
       if (!token) {
-        return res.status(400).json({ error: 'TELEGRAM_BOT_TOKEN is not configured in Vercel' });
+        return res.status(400).json({ error: 'TELEGRAM_BOT_TOKEN is not configured. Pass ?token=YOUR_BOT_TOKEN to configure it.' });
       }
-      const setRes = await callTelegram('setWebhook', { url: webhookUrl });
-      return res.status(200).json({ success: true, webhookUrl, telegram: setRes });
+      const setRes = await callTelegram('setWebhook', { url: webhookUrl }, token);
+      const meRes = await callTelegram('getMe', {}, token);
+      return res.status(200).json({
+        success: setRes.ok === true,
+        webhookUrl,
+        telegramResult: setRes,
+        botInfo: meRes
+      });
     }
 
     if (url.searchParams.get('info') === '1') {
       if (!token) {
         return res.status(400).json({ error: 'TELEGRAM_BOT_TOKEN is not configured' });
       }
-      const infoRes = await callTelegram('getWebhookInfo', {});
-      const meRes = await callTelegram('getMe', {});
+      const infoRes = await callTelegram('getWebhookInfo', {}, token);
+      const meRes = await callTelegram('getMe', {}, token);
       return res.status(200).json({ webhookInfo: infoRes, bot: meRes });
     }
 
@@ -290,7 +313,7 @@ export default async function handler(req, res) {
       message: 'Flow Telegram CSKH Webhook is active 24/7',
       tokenConfigured: Boolean(token),
       webhookEndpoint: webhookUrl,
-      instructions: 'Open /api/telegram-webhook?set_webhook=1 to register webhook with Telegram.'
+      instructions: 'Open /api/telegram-webhook?set_webhook=1 (hoặc thêm &token=YOUR_TOKEN) để kích hoạt webhook.'
     });
   }
 
