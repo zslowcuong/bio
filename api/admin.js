@@ -91,6 +91,32 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, deleted: beforeLen !== orders.length, orderCode });
     }
 
+    if (action === 'sync_order_record') {
+      const orderCode = String(body.orderCode || '').trim().toUpperCase();
+      const orders = (await dbGetJson('flowly:orders', [])) || [];
+      const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+      const ordIdx = orders.findIndex(o => o.orderCode === orderCode);
+      if (ordIdx < 0) return res.status(404).json({ success: false, error: 'Không tìm thấy đơn hàng' });
+      
+      const ord = orders[ordIdx];
+      if (body.hwid) ord.hwid = normalizeHwid(body.hwid);
+      if (body.key) ord.key = String(body.key).trim().toUpperCase();
+      if (Array.isArray(body.hwids)) ord.hwids = body.hwids;
+      if (Array.isArray(body.oldKeys)) ord.oldKeys = body.oldKeys;
+      if (body.oldKey) ord.oldKey = String(body.oldKey).trim().toUpperCase();
+      if (body.oldHwid) ord.oldHwid = normalizeHwid(body.oldHwid);
+      if (body.phone) ord.phone = String(body.phone).trim();
+      orders[ordIdx] = ord;
+      await dbSetJson('flowly:orders', orders);
+
+      const keyIdx = issuedKeys.findIndex(k => k.orderCode === orderCode || k.key === ord.key || k.key === ord.oldKey);
+      if (keyIdx >= 0) {
+        issuedKeys[keyIdx] = { ...issuedKeys[keyIdx], ...ord };
+        await dbSetJson('flowly:issued_keys', issuedKeys);
+      }
+      return res.status(200).json({ success: true, order: ord });
+    }
+
     if (action === 'create_manual_key') {
       const appId = normalizeAppId(body.appId || 'flowoptimize');
       const hwid = normalizeHwid(body.hwid);
@@ -204,11 +230,23 @@ export default async function handler(req, res) {
 
       const record = issuedKeys[targetIdx];
       const oldHwid = record.hwid;
+      const appId = record.appId || 'all';
+      const planCode = record.planCode || 'LIFE';
+      const nonce4 = crypto.randomBytes(2).toString('hex').toUpperCase();
+      const newKey = signProKey(appId, newHwid, planCode, nonce4);
+
+      record.oldKey = targetKey;
+      record.key = newKey;
       record.hwid = newHwid;
+      if (!Array.isArray(record.oldKeys)) record.oldKeys = [];
+      if (!record.oldKeys.includes(targetKey)) record.oldKeys.push(targetKey);
+      if (!Array.isArray(record.hwids)) record.hwids = [oldHwid].filter(Boolean);
+      if (!record.hwids.includes(newHwid)) record.hwids.push(newHwid);
+
       record.hwidChanges = (Number(record.hwidChanges || 0)) + 1;
       record.hwidHistory = [
         ...(Array.isArray(record.hwidHistory) ? record.hwidHistory : []),
-        { oldHwid, newHwid, changedAtUtc: Date.now(), by: 'ADMIN', reason: body.reason || 'ADMIN_OVERRIDE' },
+        { oldHwid, newHwid, oldKey: targetKey, newKey, changedAtUtc: Date.now(), by: 'ADMIN', reason: body.reason || 'ADMIN_OVERRIDE' },
       ];
       issuedKeys[targetIdx] = record;
       await dbSetJson('flowly:issued_keys', issuedKeys);
@@ -216,7 +254,14 @@ export default async function handler(req, res) {
       const orders = (await dbGetJson('flowly:orders', [])) || [];
       const orderIdx = orders.findIndex((o) => o.key === targetKey || o.hwid === oldHwid);
       if (orderIdx >= 0) {
+        orders[orderIdx].oldKey = targetKey;
+        orders[orderIdx].key = newKey;
+        orders[orderIdx].oldHwid = oldHwid;
         orders[orderIdx].hwid = newHwid;
+        if (!Array.isArray(orders[orderIdx].hwids)) orders[orderIdx].hwids = [oldHwid].filter(Boolean);
+        if (!orders[orderIdx].hwids.includes(newHwid)) orders[orderIdx].hwids.push(newHwid);
+        if (!Array.isArray(orders[orderIdx].oldKeys)) orders[orderIdx].oldKeys = [];
+        if (!orders[orderIdx].oldKeys.includes(targetKey)) orders[orderIdx].oldKeys.push(targetKey);
         await dbSetJson('flowly:orders', orders);
       }
 

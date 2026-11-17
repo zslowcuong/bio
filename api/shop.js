@@ -292,6 +292,12 @@ export default async function handler(req, res) {
       const newKey = signProKey(appId, newHwidInput, planCode, nonce4);
 
       if (targetOrder) {
+        targetOrder.oldHwid = currentHwid;
+        targetOrder.oldKey = keyInput;
+        if (!Array.isArray(targetOrder.hwids)) targetOrder.hwids = [currentHwid].filter(Boolean);
+        if (!targetOrder.hwids.includes(newHwidInput)) targetOrder.hwids.push(newHwidInput);
+        if (!Array.isArray(targetOrder.oldKeys)) targetOrder.oldKeys = [];
+        if (!targetOrder.oldKeys.includes(keyInput)) targetOrder.oldKeys.push(keyInput);
         targetOrder.hwid = newHwidInput;
         targetOrder.key = newKey;
         targetOrder.changeHwidCount = changeCount;
@@ -299,6 +305,12 @@ export default async function handler(req, res) {
         await dbSetJson('flowly:orders', orders);
       }
       if (targetKeyRec) {
+        targetKeyRec.oldHwid = currentHwid;
+        targetKeyRec.oldKey = keyInput;
+        if (!Array.isArray(targetKeyRec.hwids)) targetKeyRec.hwids = [currentHwid].filter(Boolean);
+        if (!targetKeyRec.hwids.includes(newHwidInput)) targetKeyRec.hwids.push(newHwidInput);
+        if (!Array.isArray(targetKeyRec.oldKeys)) targetKeyRec.oldKeys = [];
+        if (!targetKeyRec.oldKeys.includes(keyInput)) targetKeyRec.oldKeys.push(keyInput);
         targetKeyRec.hwid = newHwidInput;
         targetKeyRec.key = newKey;
         targetKeyRec.changeHwidCount = changeCount;
@@ -355,7 +367,12 @@ export default async function handler(req, res) {
         .filter((o) =>
           String(o.orderCode || '').toUpperCase() === q ||
           String(o.memo || '').toUpperCase() === q ||
+          String(o.key || '').toUpperCase().includes(q) ||
+          String(o.oldKey || '').toUpperCase().includes(q) ||
+          (Array.isArray(o.oldKeys) && o.oldKeys.some((ok) => String(ok).toUpperCase().includes(q))) ||
           String(o.hwid || '').toUpperCase().includes(q) ||
+          String(o.oldHwid || '').toUpperCase().includes(q) ||
+          (Array.isArray(o.hwids) && o.hwids.some((h) => String(h).toUpperCase().includes(q))) ||
           String(o.phone || '').toUpperCase().includes(q)
         )
         .slice(0, 15);

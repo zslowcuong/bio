@@ -436,8 +436,8 @@ export default async function handler(req, res) {
           const kHwid = String(k.hwid || '').toUpperCase();
           const kPhone = String(k.phone || '').replace(/[^0-9]/g, '');
 
-          if (tokenKey && kKey === tokenKey) return true;
-          if (tokenHwid && tokenHwid.length >= 4 && (kHwid === tokenHwid || (Array.isArray(k.hwids) && k.hwids.includes(tokenHwid)))) return true;
+          if (tokenKey && (kKey === tokenKey || String(k.oldKey || '').toUpperCase() === tokenKey || (Array.isArray(k.oldKeys) && k.oldKeys.some(ok => String(ok).toUpperCase() === tokenKey)))) return true;
+          if (tokenHwid && tokenHwid.length >= 4 && (kHwid === tokenHwid || String(k.oldHwid || '').toUpperCase() === tokenHwid || (Array.isArray(k.hwids) && k.hwids.includes(tokenHwid)))) return true;
           if (tokenPhone && tokenPhone.length >= 8 && (kPhone === tokenPhone || kPhone.includes(tokenPhone))) return true;
           return false;
         });
@@ -466,8 +466,8 @@ export default async function handler(req, res) {
 
             if (oCode === tokenUpper) return true;
             if (oMemo === tokenUpper) return true;
-            if (tokenKey && oKey === tokenKey) return true;
-            if (tokenHwid && tokenHwid.length >= 4 && oHwid === tokenHwid) return true;
+            if (tokenKey && (oKey === tokenKey || String(o.oldKey || '').toUpperCase() === tokenKey || (Array.isArray(o.oldKeys) && o.oldKeys.some(ok => String(ok).toUpperCase() === tokenKey)))) return true;
+            if (tokenHwid && tokenHwid.length >= 4 && (oHwid === tokenHwid || String(o.oldHwid || '').toUpperCase() === tokenHwid || (Array.isArray(o.hwids) && o.hwids.includes(tokenHwid)))) return true;
             if (tokenPhone && tokenPhone.length >= 8 && (oPhone === tokenPhone || oPhone.includes(tokenPhone))) return true;
             return false;
           });
