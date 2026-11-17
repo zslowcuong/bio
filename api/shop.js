@@ -76,10 +76,9 @@ export default async function handler(req, res) {
       }
 
       const plan = PLANS[planCode];
-      const isLifeCombo = planCode === 'LIFE' || appId === 'all';
       let finalPrice = plan.price;
       let pricingTierInfo = null;
-      if (isLifeCombo) {
+      if (planCode === 'LIFE') {
         pricingTierInfo = await getLifetimePricingTier();
         finalPrice = pricingTierInfo.currentPrice;
       }
@@ -89,18 +88,23 @@ export default async function handler(req, res) {
       const qrUrl = buildVietQrUrl(finalPrice, memo);
       const nowUtc = Date.now();
 
-      const finalAppId = isLifeCombo ? 'all' : appId;
+      // Tat ca cac goi deu mo khoa tron bo 5 App
+      const finalAppId = 'all';
+      const planTitle = planCode === 'LIFE'
+        ? `Gói Vĩnh Viễn Combo Full 5 App (${finalPrice / 1000}K)`
+        : plan.name;
+
       const order = {
         orderCode,
         memo,
         appId: finalAppId,
-        appName: isLifeCombo ? 'Combo 5 App (FlowOp, FlowS, FlowUltra, FlowExtra + Tặng FlowZ VIP)' : APPS[appId].name,
+        appName: 'Combo Full 5 App (FlowOptimize, FlowS, FlowUltra, FlowExtra, FlowZ VIP)',
         hwid,
         planCode,
-        planName: isLifeCombo ? `Gói Vĩnh Viễn Combo Full 5 App (${finalPrice / 1000}K)` : plan.name,
+        planName: planTitle,
         price: finalPrice,
         phone,
-        allApps: isLifeCombo,
+        allApps: true,
         method: 'VIETQR_TPB',
         qrUrl,
         status: 'PENDING',
@@ -113,15 +117,9 @@ export default async function handler(req, res) {
       orders.unshift(order);
       await dbSetJson('flowly:orders', orders.slice(0, 500));
 
-      const tgTitle = isLifeCombo
-        ? `👑 [FLOW SHOP] ĐƠN HÀNG COMBO VĨNH VIỄN ${finalPrice / 1000}K (FULL 5 APP)`
-        : `🔔 [FLOW SHOP] ĐƠN HÀNG VIETQR MỚI (${APPS[appId].name})`;
-      const tgAppName = isLifeCombo
-        ? 'Full 5 App: FlowOptimize + FlowS + FlowUltra + FlowExtra + FlowZ VIP (Tặng kèm)'
-        : APPS[appId].name;
-      const tgPlanName = isLifeCombo
-        ? `Gói Vĩnh Viễn Combo Full 5 App (${finalPrice / 1000}K)`
-        : plan.name;
+      const tgTitle = `🔔 [FLOW SHOP] ĐƠN HÀNG MỚI (${planTitle})`;
+      const tgAppName = 'Full 5 App: FlowOptimize + FlowS + FlowUltra + FlowExtra + FlowZ VIP';
+      const tgPlanName = planTitle;
 
       await sendTelegram(
         `<b>${tgTitle}</b>

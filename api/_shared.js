@@ -16,13 +16,13 @@ export const BANK_CONFIG = {
 export const PLANS = {
   '7D': { code: '7D', name: 'Gói Tuần Combo 5 App (7 Ngày)', days: 7, hours: 168, price: 25000 },
   '30D': { code: '30D', name: 'Gói Tháng Combo 5 App (30 Ngày)', days: 30, hours: 720, price: 49000 },
-  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn Combo 5 App (Mua 4 Tặng 1 FlowZ VIP)', days: 36500, hours: 876000, price: 99000 },
+  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn Combo 5 App (Trọn Đời Máy)', days: 36500, hours: 876000, price: 99000 },
 };
 
 export const APPS = {
   all: {
     id: 'all',
-    name: 'Combo Toàn Bộ 5 Ứng Dụng (FlowOp, FlowS, FlowUltra, FlowExtra + Tặng FlowZ VIP)',
+    name: 'Combo Toàn Bộ 5 Ứng Dụng (FlowOptimize, FlowS, FlowUltra, FlowExtra, FlowZ VIP)',
     prefix: 'FLOWALL',
     salt: 'FLOWLY_2026_ALL_APPS_SALT_66F0',
     package: 'all',
@@ -134,16 +134,7 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
         };
       }
 
-      // Check FlowZ policy:
-      // Gói Tuần (7D) và Gói Tháng (30D) KHÔNG bao gồm FlowZ (chỉ gồm 4 app: FlowOp, FlowS, FlowUltra, FlowExtra).
-      // FlowZ chỉ có trong Gói Vĩnh Viễn (LIFE) (Full 5 App).
-      if (expectedAppId === 'flowz' && planCode !== 'LIFE') {
-        return {
-          valid: false,
-          reason: 'Gói Tuần và Gói Tháng chỉ hỗ trợ 4 ứng dụng (FlowOptimize, FlowS, FlowUltra, FlowExtra), không bao gồm FlowZ VIP. Với FlowZ VIP, quý khách vui lòng Vượt Key VIP (30 Giờ) hoặc nâng cấp lên Gói Vĩnh Viễn (Full 5 App)!'
-        };
-      }
-
+      // Tất cả các gói (7D, 30D, LIFE) của mã Combo FLOWALL đều mở khóa trọn bộ 5 app (bao gồm FlowZ VIP)
       const plan = PLANS[planCode] || { hours: 168 };
       const isLifetime = planCode === 'LIFE';
       const expiryUtcMs = isLifetime ? 4102444800000 : Date.now() + plan.hours * 3600 * 1000;
@@ -155,7 +146,7 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
         plan: planCode,
         key,
         isLifetime,
-        isAllApps: isLifetime,
+        isAllApps: true, // Trọn bộ 5 app!
         keyOriginHwid: keyHwid
       };
     }
@@ -453,8 +444,8 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
   }
 
   const nonce4 = crypto.randomBytes(2).toString('hex').toUpperCase();
-  const isLifeCombo = existing.planCode === 'LIFE' || existing.appId === 'all';
-  const issueAppId = isLifeCombo ? 'all' : existing.appId;
+  // Toàn bộ các gói (7D, 30D, LIFE) đều cấp Key Combo ALL mở khóa full 5 app
+  const issueAppId = 'all';
   const proKey = signProKey(issueAppId, existing.hwid, existing.planCode, nonce4);
   const nowUtc = Date.now();
   const plan = PLANS[existing.planCode];
@@ -462,6 +453,8 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
 
   const completed = {
     ...existing,
+    appId: issueAppId,
+    allApps: true,
     status: 'COMPLETED',
     key: proKey,
     txId: txId || existing.txId || null,

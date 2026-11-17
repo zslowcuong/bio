@@ -226,22 +226,22 @@
                     <div class="sub">Prefix: FLOWZ</div>
                 </button>
             </div>
-            <div class="app-warn">
-                ⚠️ <b>Cảnh báo quan trọng:</b> Phải chọn <b>ĐÚNG ứng dụng</b> bạn đang sử dụng để hệ thống cấp đúng mã Key cho app đó (<b class="appNameInline">FlowOptimize</b>). Key của các app được tách riêng hoàn toàn — <b>nếu chọn nhầm app sẽ không kích hoạt được ứng dụng!</b>
+            <div class="app-warn" style="background:rgba(16,185,129,0.12);border-color:#10b981;color:#a7f3d0;">
+                ✨ <b>Đặc quyền Hệ Sinh Thái FlowEngine:</b> Khi mua bất kỳ gói nào (<b>Tuần / Tháng / Vĩnh Viễn</b>), bạn đều nhận được <b>Mã Key Combo Kích Hoạt Trọn Bộ 5 App</b>! 1 Mã Key duy nhất mở khóa full tính năng cho cả 5 ứng dụng: <b>FlowOptimize</b>, <b>FlowS Gamer</b>, <b>FlowUltra</b>, <b>FlowExtra</b> và <b>FlowZ VIP</b>.
             </div>
         </div>
 
         <!-- 2. THÔNG TIN THIẾT BỊ -->
         <div class="section-card">
-            <div class="section-title">2. Thông Tin Thiết Bị Nhận Key (Khóa 1-1 Chống Chia Sẻ)</div>
+            <div class="section-title">2. Thông Tin Thiết Bị Nhận Key (Khóa 1 Thiết Bị Chống Chia Sẻ)</div>
             <div class="form-grid">
                 <div class="field">
                     <label>📱 Mã Thiết Bị (HWID trong App)</label>
-                    <input id="hwidInput" placeholder="VD: OPPO_A1B2C3D4 hoặc BENCO_8A2F1C90" />
+                    <input id="hwidInput" placeholder="VD: HWID máy (Lấy trực tiếp trong App)..." />
                 </div>
                 <div class="field">
                     <label>📞 SĐT / Zalo Bảo Hành &amp; Tra Cứu</label>
-                    <input id="phoneInput" placeholder="VD: 0912345678" />
+                    <input id="phoneInput" placeholder="VD: 09xxxxxxxx" />
                 </div>
             </div>
             <div class="bank-pill">
@@ -251,23 +251,23 @@
 
         <!-- 3. CHỌN GÓI -->
         <div class="section-card">
-            <div class="section-title">3. Chọn Gói Key PRO Cho <span id="selectedAppLabel" style="color:#fff;">FlowOptimize</span></div>
+            <div class="section-title">3. Chọn Gói Key PRO (Tất Cả Các Gói Đều Kích Hoạt Full 5 App)</div>
             <div class="plans-grid">
                 <div class="plan-card">
                     <div>
                         <div class="plan-name">⚡ Gói Tuần Combo (7 Ngày)</div>
                         <div class="plan-price">25.000đ</div>
                         <ul class="plan-perks">
-                            <li>✅ Sử dụng trọn bộ <b>4 Ứng Dụng</b> trong 7 ngày (FlowOp, FlowS, FlowUltra, FlowExtra)</li>
-                            <li>⚠️ <i>Không bao gồm FlowZ (FlowZ dùng key VIP 30h miễn phí)</i></li>
-                            <li>✅ Không cần vượt link trong suốt 7 ngày</li>
-                            <li>✅ Full 100% tính năng cả 4 App (120Hz, SkiaVK, Chống tụt FPS...)</li>
+                            <li>✅ Sử dụng trọn bộ <b>5 Ứng Dụng</b> trong 7 ngày (FlowOp, FlowS, FlowUltra, FlowExtra, FlowZ VIP)</li>
+                            <li>✅ 1 Mã Key duy nhất nhập và kích hoạt Full cả 5 App</li>
+                            <li>✅ Không cần vượt link, không quảng cáo trong suốt 7 ngày</li>
+                            <li>✅ Full 100% tính năng cả 5 App (120Hz, SkiaVK, Chống tụt FPS, Khóa tâm 360Hz...)</li>
                             <li style="color:#38bdf8;font-size:12px;border-top:1px dashed rgba(255,255,255,0.12);padding-top:6px;margin-top:6px;">
                                 📱 Tặng <b>2 lần đổi thiết bị miễn phí</b> (lần 3 trở đi 5k/lượt)
                             </li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-buy" onclick="createShopOrder('7D')">🏦 Mua Gói 4 App 7 Ngày • 25K</button>
+                    <button type="button" class="btn-buy" onclick="createShopOrder('7D')">🏦 Mua Gói 5 App 7 Ngày • 25K</button>
                 </div>
 
                 <div class="plan-card popular">
@@ -276,20 +276,20 @@
                         <div class="plan-name">👑 Gói Tháng Combo (30 Ngày)</div>
                         <div class="plan-price" style="color:#fbbf24;">49.000đ</div>
                         <ul class="plan-perks">
-                            <li>✅ Tiết kiệm vượt trội (chỉ ~1.600đ/ngày cho 4 app)</li>
-                            <li>✅ Mở khóa Full 100% Tính Năng Game PRO cả 4 App</li>
-                            <li>⚠️ <i>Không bao gồm FlowZ (FlowZ dùng key VIP 30h miễn phí)</i></li>
-                            <li>✅ Tự động nhận diện CK &amp; cấp Key ngay</li>
+                            <li>✅ Tiết kiệm vượt trội (chỉ ~1.600đ/ngày cho full 5 app)</li>
+                            <li>✅ Mở khóa trọn bộ <b>5 Ứng Dụng</b> trong 30 ngày (FlowOp, FlowS, FlowUltra, FlowExtra, FlowZ VIP)</li>
+                            <li>✅ 1 Mã Key duy nhất nhập và kích hoạt Full cả 5 App</li>
+                            <li>✅ Tự động nhận diện CK &amp; cấp Key ngay qua SePay</li>
                             <li style="color:#38bdf8;font-size:12px;border-top:1px dashed rgba(255,255,255,0.12);padding-top:6px;margin-top:6px;">
                                 📱 Tặng <b>2 lần đổi thiết bị miễn phí</b> (lần 3 trở đi 5k/lượt)
                             </li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-buy" onclick="createShopOrder('30D')">🏦 Mua Gói 4 App 30 Ngày • 49K</button>
+                    <button type="button" class="btn-buy" onclick="createShopOrder('30D')">🏦 Mua Gói 5 App 30 Ngày • 49K</button>
                 </div>
 
                 <div class="plan-card" style="border: 1px solid #10b981; box-shadow: 0 0 24px rgba(16, 185, 129, 0.28); position: relative;">
-                    <span class="plan-tag" id="lifeTierBadge" style="background: linear-gradient(135deg, #059669, #10b981); color: #fff;">💎 GÓI TRỌN ĐỜI • TẶNG KÈM FLOWZ VIP (FULL 5 APP)</span>
+                    <span class="plan-tag" id="lifeTierBadge" style="background: linear-gradient(135deg, #059669, #10b981); color: #fff;">💎 GÓI TRỌN ĐỜI • FULL 5 APP</span>
                     <div>
                         <div class="plan-name" style="color: #6ee7b7;">💎 Gói Vĩnh Viễn (Full 5 App)</div>
                         <div class="plan-price" style="color:#34d399;"><span id="lifePriceLabel">99.000đ</span> <span style="font-size: 13px; text-decoration: line-through; color: #64748b; font-weight: 500;">499.000đ</span></div>
@@ -299,7 +299,7 @@
                             <li style="padding-left: 8px;">• 🎯 <b>FlowS Gamer</b> (Độ nhạy &amp; Zayon Sens)</li>
                             <li style="padding-left: 8px;">• 🚀 <b>FlowUltra</b> (Phantom limit, SkiaVK, Zero Blur)</li>
                             <li style="padding-left: 8px;">• 🎩 <b>FlowExtra</b> (GameSpace, Trim RAM &amp; Combat)</li>
-                            <li style="padding-left: 8px;">• ⚡ <b>FlowZ VIP</b> (Tặng kèm: Kéo tâm Headshot Free Fire, Liên Quân, Chỉnh DPI, Cảm ứng 360Hz)</li>
+                            <li style="padding-left: 8px;">• ⚡ <b>FlowZ VIP</b> (Kéo tâm Headshot Free Fire, Liên Quân, Chỉnh DPI, Cảm ứng 360Hz)</li>
                             <li>✅ 1 Mã Key duy nhất kích hoạt chung cho cả 5 app</li>
                             <li>✅ Tự động đồng bộ chéo giữa các app khi cài lại</li>
                             <li>✅ Dùng trọn đời máy • Miễn phí mọi bản cập nhật mới</li>
