@@ -395,7 +395,7 @@ export async function getRevokedKeysList() {
 }
 
 export async function sendTelegram(text) {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN || '';
+  const botToken = process.env.TELEGRAM_BOT_TOKEN || '9232886591:AAFBj0Xr9Yu1DSBgkyPMrC1DJFcUztIhqyk';
   const chatId = process.env.TELEGRAM_CHAT_ID || '';
   if (!botToken || !chatId) {
     return { ok: false, error: 'TELEGRAM_ENV_NOT_CONFIGURED' };

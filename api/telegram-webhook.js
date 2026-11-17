@@ -8,6 +8,8 @@ const FLOWOP_APK = 'https://zslowcuong.github.io/bio/FlowOptimize.apk';
 const VOIDADB_APK = 'https://zslowcuong.github.io/bio/VOID_ADB_VIE.apk';
 const ADMIN_TG = 'https://t.me/+dtVBEzwuN2Q4NmI9';
 
+const HARDCODED_BOT_TOKEN = '9232886591:AAFBj0Xr9Yu1DSBgkyPMrC1DJFcUztIhqyk';
+
 async function getBotToken(customToken = null) {
   if (customToken) return customToken;
   if (process.env.TELEGRAM_BOT_TOKEN) return process.env.TELEGRAM_BOT_TOKEN;
@@ -15,7 +17,7 @@ async function getBotToken(customToken = null) {
     const dbToken = await dbGetJson('flowly:telegram_bot_token', '');
     if (dbToken) return String(dbToken).trim();
   } catch (e) {}
-  return '';
+  return HARDCODED_BOT_TOKEN;
 }
 
 async function callTelegram(method, payload, explicitToken = null) {
