@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import {
   APPS,
   BANK_CONFIG,
@@ -15,6 +16,8 @@ import {
   normalizeTextForMatch,
   parseBody,
   sendTelegram,
+  signProKey,
+  sanitizeKeyInput,
 } from './_shared.js';
 
 function memoMatchesTransaction(contentRaw, orderMemo) {
@@ -224,6 +227,103 @@ export default async function handler(req, res) {
           ? `Chưa thấy giao dịch ${Number(order.price).toLocaleString('vi-VN')}đ kèm nội dung "${order.memo}" về TPBank. Vui lòng chuyển khoản đúng QR rồi bấm kiểm tra lại.`
           : 'Đơn đang chờ xác nhận biến động số dư TPBank (Chưa gắn SEPAY_API_KEY trên Vercel — Admin sẽ duyệt tay ngay khi thấy tiền về).',
         ...backendStatus,
+      });
+    }
+
+    if (action === 'support_message') {
+      const orderCode = String(body.orderCode || '').trim().toUpperCase();
+      const hwid = normalizeHwid(body.hwid);
+      const phone = String(body.phone || '').trim();
+      const message = String(body.message || '').trim().slice(0, 500);
+      if (!message) {
+        return res.status(400).json({ success: false, error: 'Vui lòng nhập nội dung cần hỗ trợ' });
+      }
+
+      await sendTelegram(
+        `💬 <b>[HỖ TRỢ THANH TOÁN & KEY PRO]</b>\n\n` +
+        `📦 <b>Mã đơn:</b> <code>${orderCode || 'CHƯA_CÓ'}</code>\n` +
+        `🆔 <b>HWID:</b> <code>${hwid || 'N/A'}</code>\n` +
+        `📞 <b>SĐT/Zalo:</b> <code>${phone || 'N/A'}</code>\n` +
+        `📩 <b>Tin nhắn khách gửi:</b>\n"<i>${message}</i>"\n\n` +
+        `👉 <i>Bấm để trò chuyện hỗ trợ khách ngay:</i> <a href="https://t.me/zslowcuong">@zslowcuong</a>`
+      );
+      return res.status(200).json({
+        success: true,
+        message: 'Đã gửi tin nhắn đến Admin! Admin sẽ phản hồi hỗ trợ bạn ngay qua Telegram / Zalo.'
+      });
+    }
+
+    if (action === 'change_hwid') {
+      const keyInput = sanitizeKeyInput(body.key || '');
+      const newHwidInput = normalizeHwid(body.newHwid);
+      if (!keyInput || !newHwidInput) {
+        return res.status(400).json({ success: false, error: 'Vui lòng nhập Mã Key và HWID mới' });
+      }
+      const orders = (await dbGetJson('flowly:orders', [])) || [];
+      const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+
+      let targetOrder = orders.find((o) => o.key === keyInput);
+      let targetKeyRec = issuedKeys.find((k) => k.key === keyInput);
+
+      if (!targetOrder && !targetKeyRec) {
+        return res.status(404).json({ success: false, error: 'Không tìm thấy thông tin Key này trên hệ thống!' });
+      }
+
+      const currentHwid = targetOrder?.hwid || targetKeyRec?.hwid || '';
+      const planCode = targetOrder?.planCode || targetKeyRec?.planCode || 'LIFE';
+      const appId = targetOrder?.appId || targetKeyRec?.appId || 'all';
+      let changeCount = Number(targetOrder?.changeHwidCount || targetKeyRec?.changeHwidCount || 0);
+
+      if (currentHwid === newHwidInput) {
+        return res.status(400).json({ success: false, error: 'HWID mới trùng khớp với HWID hiện tại của máy!' });
+      }
+
+      if (changeCount >= 2) {
+        return res.status(400).json({
+          success: false,
+          needFee: true,
+          changeCount,
+          fee: 5000,
+          message: `Bạn đã sử dụng hết 2 lần đổi thiết bị miễn phí (${changeCount}/2). Phí đổi máy từ lần thứ 3 trở đi là 5.000đ/lượt. Vui lòng chuyển khoản 5.000đ hoặc nhắn tin Admin Telegram @zslowcuong để hoàn tất đổi máy!`
+        });
+      }
+
+      // Free transfer (1st or 2nd time)
+      changeCount += 1;
+      const nonce4 = crypto.randomBytes(2).toString('hex').toUpperCase();
+      const newKey = signProKey(appId, newHwidInput, planCode, nonce4);
+
+      if (targetOrder) {
+        targetOrder.hwid = newHwidInput;
+        targetOrder.key = newKey;
+        targetOrder.changeHwidCount = changeCount;
+        targetOrder.lastChangedAtUtc = Date.now();
+        await dbSetJson('flowly:orders', orders);
+      }
+      if (targetKeyRec) {
+        targetKeyRec.hwid = newHwidInput;
+        targetKeyRec.key = newKey;
+        targetKeyRec.changeHwidCount = changeCount;
+        targetKeyRec.lastChangedAtUtc = Date.now();
+        await dbSetJson('flowly:issued_keys', issuedKeys);
+      }
+
+      await sendTelegram(
+        `🔄 <b>[ĐỔI THIẾT BỊ MIỄN PHÍ (${changeCount}/2)]</b>\n\n` +
+        `📦 <b>Gói:</b> ${planCode}\n` +
+        `📱 <b>HWID cũ:</b> <code>${currentHwid}</code>\n` +
+        `📲 <b>HWID mới:</b> <code>${newHwidInput}</code>\n` +
+        `🔑 <b>Key mới:</b> <code>${newKey}</code>\n` +
+        `🎁 <b>Số lần đổi miễn phí còn lại:</b> ${2 - changeCount} lần`
+      );
+
+      return res.status(200).json({
+        success: true,
+        newKey,
+        oldKey: keyInput,
+        newHwid: newHwidInput,
+        remainingFree: 2 - changeCount,
+        message: `Đổi thiết bị thành công! Key mới của bạn: ${newKey}. Bạn còn ${2 - changeCount} lần đổi máy miễn phí.`
       });
     }
 

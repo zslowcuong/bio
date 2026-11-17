@@ -116,32 +116,52 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
   const cleanHwid = normalizeHwid(expectedHwid);
 
   // 1) Universal ALL-APPS Combo Key (FLOWALL-PRO-<HWID>-<PLAN>-<NONCE4>-<SIG8>)
-  // A Combo 4 App key unlocks ALL 4 apps on the user's device. On Android, each package has a distinct scoped HWID,
-  // so FLOWALL keys are cryptographically verified via master salt without requiring exact single-package HWID matching.
   const allApp = APPS.all;
   if (allApp && key.startsWith(`${allApp.prefix}-PRO-`)) {
     const parts = key.slice(`${allApp.prefix}-PRO-`.length).split('-');
     if (parts.length === 4) {
       const [keyHwid, planCode, nonce4, sig8] = parts;
       const expectedSig = sha256Hex(`${allApp.prefix}:PRO:${keyHwid}:${planCode}:${nonce4}:${allApp.salt}`).slice(0, 8);
-      if (sig8 === expectedSig) {
-        return {
-          valid: true,
-          tier: 'PRO_SHOP',
-          expiryUtcMs: 4102444800000,
-          plan: 'LIFE',
-          key,
-          isLifetime: true,
-          isAllApps: true,
-          keyOriginHwid: keyHwid
-        };
-      } else {
-        return { valid: false, reason: 'Chữ ký Key Combo Full 4 App không hợp lệ hoặc đã bị chỉnh sửa' };
+      if (sig8 !== expectedSig) {
+        return { valid: false, reason: 'Chữ ký Key Combo không hợp lệ hoặc đã bị chỉnh sửa' };
       }
+
+      // Check 1 device restriction
+      if (cleanHwid && keyHwid && cleanHwid !== keyHwid) {
+        return {
+          valid: false,
+          reason: `Key này chỉ được kích hoạt trên 1 thiết bị (${keyHwid}), không khớp với máy hiện tại (${cleanHwid})!`
+        };
+      }
+
+      // Check FlowZ policy:
+      // Gói Tuần (7D) và Gói Tháng (30D) KHÔNG bao gồm FlowZ (chỉ gồm 4 app: FlowOp, FlowS, FlowUltra, FlowExtra).
+      // FlowZ chỉ có trong Gói Vĩnh Viễn (LIFE) (Full 5 App).
+      if (expectedAppId === 'flowz' && planCode !== 'LIFE') {
+        return {
+          valid: false,
+          reason: 'Gói Tuần và Gói Tháng chỉ hỗ trợ 4 ứng dụng (FlowOptimize, FlowS, FlowUltra, FlowExtra), không bao gồm FlowZ VIP. Với FlowZ VIP, quý khách vui lòng Vượt Key VIP (30 Giờ) hoặc nâng cấp lên Gói Vĩnh Viễn (Full 5 App)!'
+        };
+      }
+
+      const plan = PLANS[planCode] || { hours: 168 };
+      const isLifetime = planCode === 'LIFE';
+      const expiryUtcMs = isLifetime ? 4102444800000 : Date.now() + plan.hours * 3600 * 1000;
+
+      return {
+        valid: true,
+        tier: 'PRO_SHOP',
+        expiryUtcMs,
+        plan: planCode,
+        key,
+        isLifetime,
+        isAllApps: isLifetime,
+        keyOriginHwid: keyHwid
+      };
     }
   }
 
-  // 2) Check if key is a LIFE key from ANY Flowly app (99K Lifetime unlocks ALL 4 apps!)
+  // 2) Check if key is a LIFE key from ANY Flowly app (Lifetime unlocks ALL 5 apps on 1 device)
   for (const [otherId, otherApp] of Object.entries(APPS)) {
     if (key.startsWith(`${otherApp.prefix}-PRO-`)) {
       const parts = key.slice(`${otherApp.prefix}-PRO-`.length).split('-');
@@ -150,6 +170,13 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
         if (planCode === 'LIFE') {
           const expectedSig = sha256Hex(`${otherApp.prefix}:PRO:${keyHwid}:${planCode}:${nonce4}:${otherApp.salt}`).slice(0, 8);
           if (sig8 === expectedSig) {
+            // Check 1 device restriction
+            if (cleanHwid && keyHwid && cleanHwid !== keyHwid) {
+              return {
+                valid: false,
+                reason: `Key Vĩnh Viễn này chỉ được kích hoạt trên 1 thiết bị (${keyHwid}), không khớp với máy hiện tại (${cleanHwid})!`
+              };
+            }
             return {
               valid: true,
               tier: 'PRO_SHOP',
@@ -484,39 +511,17 @@ export async function getLifetimePricingTier() {
     (k) => k && (k.planCode === 'LIFE' || k.appId === 'all' || k.allApps === true)
   ).length;
 
-  let currentPrice = 99000;
-  let tierNumber = 1;
-  let tierBadge = '';
-  let slotsLeft = 10;
-  let totalSlotsInTier = 10;
-
-  if (lifeCount < 10) {
-    tierNumber = 1;
-    currentPrice = 99000;
-    slotsLeft = Math.max(1, 10 - lifeCount);
-    totalSlotsInTier = 10;
-    tierBadge = `🔥 ƯU ĐÃI ĐẶC BIỆT • FULL 5 APP (TẶNG FLOWZ) • CÒN [${slotsLeft}/10] SUẤT 99K`;
-  } else if (lifeCount < 25) {
-    tierNumber = 2;
-    currentPrice = 169000;
-    slotsLeft = Math.max(1, 25 - lifeCount);
-    totalSlotsInTier = 15;
-    tierBadge = `⚡ ƯU ĐÃI ĐỢT 2 • CÒN [${slotsLeft}/15] SUẤT 169K (GIÁ CHUẨN 249K)`;
-  } else {
-    tierNumber = 3;
-    currentPrice = 249000;
-    slotsLeft = 0;
-    totalSlotsInTier = 0;
-    tierBadge = `👑 GIÁ CHUẨN ỔN ĐỊNH • TIẾT KIỆM 50%`;
-  }
+  const currentPrice = 99000;
+  const tierNumber = 1;
+  const tierBadge = '💎 GÓI TRỌN ĐỜI • TẶNG KÈM FLOWZ VIP (FULL 5 APP)';
 
   return {
     lifeCount,
     tierNumber,
     currentPrice,
     tierBadge,
-    slotsLeft,
-    totalSlotsInTier,
+    slotsLeft: 10,
+    totalSlotsInTier: 10,
     originalPrice: 499000,
   };
 }
