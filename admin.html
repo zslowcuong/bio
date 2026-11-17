@@ -116,11 +116,12 @@
             <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">
                 <input id="searchBox" placeholder="🔍 Lọc theo App, HWID, SĐT, Mã Đơn hoặc Key..." oninput="renderTables()" style="flex:1;min-width:240px;padding:10px 12px;border-radius:10px;background:#020617;border:1px solid rgba(255,255,255,0.14);color:#fff;font-size:13px;" />
                 <select id="filterApp" onchange="renderTables()" style="padding:10px 12px;border-radius:10px;background:#020617;border:1px solid rgba(255,255,255,0.14);color:#fff;font-size:13px;">
-                    <option value="">Tất cả 4 App</option>
+                    <option value="">Tất cả 5 App</option>
                     <option value="flowoptimize">FlowOptimize</option>
                     <option value="flows">FlowS</option>
                     <option value="flowultra">FlowUltra</option>
                     <option value="flowextra">FlowExtra</option>
+                    <option value="flowz">FlowZ VIP</option>
                 </select>
             </div>
 
@@ -157,6 +158,7 @@
                         <option value="flows">FlowS (FLOWS-PRO-...)</option>
                         <option value="flowultra">FlowUltra (FLOWULTRA-PRO-...)</option>
                         <option value="flowextra">FlowExtra (FLOWEXTRA-PRO-...)</option>
+                        <option value="flowz">FlowZ VIP (FLOWZ-PRO-...)</option>
                     </select>
                 </div>
                 <div class="field">
@@ -231,11 +233,12 @@
                     <div class="field">
                         <label>App áp dụng</label>
                         <select id="bulkEvTarget">
-                            <option value="all">🌟 Cả 5 App (FlowOptimize • FlowS • FlowUltra • FlowExtra)</option>
+                            <option value="all">🌟 Cả 5 App (FlowOptimize • FlowS • FlowUltra • FlowExtra • FlowZ VIP)</option>
                             <option value="flowoptimize">🌸 Chỉ FlowOptimize</option>
                             <option value="flows">⚡ Chỉ FlowS</option>
                             <option value="flowultra">🚀 Chỉ FlowUltra</option>
                             <option value="flowextra">🎩 Chỉ FlowExtra</option>
+                            <option value="flowz">🎯 Chỉ FlowZ VIP</option>
                         </select>
                     </div>
                     <div class="field">
@@ -274,11 +277,12 @@
                     <div class="field">
                         <label>App được Reset Day</label>
                         <select id="rstTarget">
-                            <option value="all">🌟 Cả 5 App (FlowOptimize • FlowS • FlowUltra • FlowExtra)</option>
+                            <option value="all">🌟 Cả 5 App (FlowOptimize • FlowS • FlowUltra • FlowExtra • FlowZ VIP)</option>
                             <option value="flowoptimize">🌸 Chỉ FlowOptimize</option>
                             <option value="flows">⚡ Chỉ FlowS</option>
                             <option value="flowultra">🚀 Chỉ FlowUltra</option>
                             <option value="flowextra">🎩 Chỉ FlowExtra</option>
+                            <option value="flowz">🎯 Chỉ FlowZ VIP</option>
                         </select>
                     </div>
                     <div class="field">
@@ -323,11 +327,12 @@
     <script>
         const API_BASE = 'https://bio-seven-nu.vercel.app';
                 const APPS_META = [
-            { id: 'all', name: 'Combo 4 App', prefix: 'FLOWALL' },
-    { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP' },
+            { id: 'all', name: 'Combo Full 5 App', prefix: 'FLOWALL' },
+            { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP' },
             { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS' },
             { id: 'flowultra',    name: 'FlowUltra',    prefix: 'FLOWULTRA' },
-            { id: 'flowextra',    name: 'FlowExtra',    prefix: 'FLOWEXTRA' }
+            { id: 'flowextra',    name: 'FlowExtra',    prefix: 'FLOWEXTRA' },
+            { id: 'flowz',        name: 'FlowZ VIP',    prefix: 'FLOWZ' }
         ];
 
         let adminPin = sessionStorage.getItem('flow_admin_pin') || '';
