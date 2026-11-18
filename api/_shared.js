@@ -27,7 +27,7 @@ export const BANK_CONFIG = {
 export const PLANS = {
   '7D': { code: '7D', name: 'Gói Tuần Combo 5 App (7 Ngày)', days: 7, hours: 168, price: 25000 },
   '30D': { code: '30D', name: 'Gói Tháng Combo 5 App (30 Ngày)', days: 30, hours: 720, price: 49000 },
-  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn Combo 5 App (Trọn Đời Máy)', days: 36500, hours: 876000, price: 99000 },
+  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn Combo 5 App (Trọn Đời Máy)', days: 36500, hours: 876000, price: 169000 },
 };
 
 export const APPS = {
@@ -515,17 +515,32 @@ export async function getLifetimePricingTier() {
     (k) => k && (k.planCode === 'LIFE' || k.appId === 'all' || k.allApps === true)
   ).length;
 
-  const currentPrice = 99000;
-  const tierNumber = 1;
-  const tierBadge = '💎 GÓI TRỌN ĐỜI • TẶNG KÈM FLOWZ VIP (FULL 5 APP)';
+  let currentPrice = 169000;
+  let tierNumber = 2;
+  let totalSlotsInTier = 15;
+  let tier2Sold = Math.max(0, lifeCount - 10);
+  let slotsLeft = Math.max(1, 15 - tier2Sold);
+
+  if (lifeCount >= 25) {
+    currentPrice = 249000;
+    tierNumber = 3;
+    totalSlotsInTier = 15;
+    let tier3Sold = Math.max(0, lifeCount - 25);
+    slotsLeft = Math.max(0, 15 - tier3Sold);
+  }
+
+  const tierBadge = tierNumber === 2
+    ? `🔥 ĐÃ BÁN HẾT 10/10 SUẤT 99K • MỞ BÁN NẤC 2: CÒN ${slotsLeft}/15 SUẤT GIÁ 169K (GIÁ CHUẨN 249K)`
+    : `💎 NẤC 3 GIÁ CHUẨN: 249.000đ • CÒN ${slotsLeft}/15 SUẤT (GIÁ GỐC 499K)`;
 
   return {
     lifeCount,
     tierNumber,
     currentPrice,
     tierBadge,
-    slotsLeft: 10,
-    totalSlotsInTier: 10,
+    slotsLeft,
+    totalSlotsInTier,
     originalPrice: 499000,
+    nextTierPrice: 249000,
   };
 }
