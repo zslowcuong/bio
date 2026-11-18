@@ -142,10 +142,14 @@ export default async function handler(req, res) {
         orderCode,
         memo: orderCode,
         appId,
-        appName: isLifeCombo ? 'Combo 4 App (FlowOp, FlowS, FlowUltra, FlowExtra)' : APPS[appId].name,
+        appName: isLifeCombo ? 'Combo Full 5 App (FlowOp, FlowS, FlowUltra, FlowExtra, FlowZ VIP)' : APPS[appId].name,
         hwid,
         planCode,
-        planName: isLifeCombo ? 'Gói Vĩnh Viễn Combo Full 4 App (99K)' : plan.name,
+        planName: planCode === 'LIFE'
+          ? 'Gói Vĩnh Viễn Full Bảo Hành Trọn Đời Hệ Thống App FlowEngine'
+          : (planCode === '1Y' || planCode === '365D'
+              ? 'Gói 1 Năm Combo 5 App (365 Ngày)'
+              : plan.name),
         price: plan.price,
         phone,
         allApps: isLifeCombo,

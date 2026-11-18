@@ -27,7 +27,9 @@ export const BANK_CONFIG = {
 export const PLANS = {
   '7D': { code: '7D', name: 'Gói Tuần Combo 5 App (7 Ngày)', days: 7, hours: 168, price: 25000 },
   '30D': { code: '30D', name: 'Gói Tháng Combo 5 App (30 Ngày)', days: 30, hours: 720, price: 49000 },
-  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn Combo 5 App (Trọn Đời Máy)', days: 36500, hours: 876000, price: 169000 },
+  '1Y': { code: '1Y', name: 'Gói 1 Năm Combo 5 App (365 Ngày)', days: 365, hours: 8760, price: 169000 },
+  '365D': { code: '365D', name: 'Gói 1 Năm Combo 5 App (365 Ngày)', days: 365, hours: 8760, price: 169000 },
+  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn Full Bảo Hành Trọn Đời Hệ Thống App FlowEngine', days: 36500, hours: 876000, price: 899000 },
 };
 
 export const APPS = {
@@ -500,6 +502,7 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
     `📦 <b>Mã đơn:</b> <code>${completed.orderCode}</code>\n` +
     `💳 <b>Nội dung CK:</b> <code>${completed.memo}</code>\n` +
     `💰 <b>Số tiền:</b> <b>${Number(completed.price).toLocaleString('vi-VN')}đ</b>\n` +
+    `💎 <b>Gói:</b> ${completed.planName || completed.planCode}\n` +
     `🆔 <b>HWID:</b> <code>${completed.hwid}</code>\n` +
     `🔑 <b>Key PRO:</b> <code>${proKey}</code>\n` +
     `⚡ <b>Nguồn xác thực:</b> ${source}`
@@ -511,22 +514,22 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
 
 export async function getLifetimePricingTier() {
   const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
-  const lifeCount = issuedKeys.filter(
-    (k) => k && (k.planCode === 'LIFE' || k.appId === 'all' || k.allApps === true)
+  const yearlyCount = issuedKeys.filter(
+    (k) => k && (k.planCode === '1Y' || k.planCode === '365D' || (k.appId === 'all' && k.planCode !== 'LIFE' && k.planCode !== '7D' && k.planCode !== '30D'))
   ).length;
 
   let currentPrice = 169000;
   let tierNumber = 2;
   let totalSlotsInTier = 15;
   // Khởi điểm đã bán 2 suất ưu đãi đợt 2 -> chỉ còn 13/15 suất tạo hiệu ứng thôi thúc
-  let tier2Sold = Math.max(2, lifeCount - 10 + 2);
+  let tier2Sold = Math.max(2, yearlyCount + 2);
   let slotsLeft = Math.max(1, 15 - tier2Sold);
 
-  if (tier2Sold >= 15 || lifeCount >= 23) {
+  if (tier2Sold >= 15 || yearlyCount >= 13) {
     currentPrice = 249000;
     tierNumber = 3;
     totalSlotsInTier = 15;
-    let tier3Sold = Math.max(0, lifeCount - 23);
+    let tier3Sold = Math.max(0, yearlyCount - 13);
     slotsLeft = Math.max(0, 15 - tier3Sold);
   }
 
@@ -535,7 +538,7 @@ export async function getLifetimePricingTier() {
     : `💎 GIÁ CHUẨN: 249.000đ • CÒN ${slotsLeft}/15 SUẤT (GIÁ GỐC 499K)`;
 
   return {
-    lifeCount,
+    yearlyCount,
     tierNumber,
     currentPrice,
     tierBadge,
@@ -543,5 +546,8 @@ export async function getLifetimePricingTier() {
     totalSlotsInTier,
     originalPrice: 499000,
     nextTierPrice: 249000,
+    lifePrice: 899000,
   };
 }
+
+export const getYearlyPricingTier = getLifetimePricingTier;

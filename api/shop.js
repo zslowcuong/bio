@@ -78,9 +78,11 @@ export default async function handler(req, res) {
       const plan = PLANS[planCode];
       let finalPrice = plan.price;
       let pricingTierInfo = null;
-      if (planCode === 'LIFE') {
+      if (planCode === '1Y' || planCode === '365D') {
         pricingTierInfo = await getLifetimePricingTier();
         finalPrice = pricingTierInfo.currentPrice;
+      } else if (planCode === 'LIFE') {
+        finalPrice = 899000;
       }
       const num6 = String(Math.floor(100000 + Math.random() * 900000));
       const orderCode = `ORD${num6}`;
@@ -91,8 +93,10 @@ export default async function handler(req, res) {
       // Tat ca cac goi deu mo khoa tron bo 5 App
       const finalAppId = 'all';
       const planTitle = planCode === 'LIFE'
-        ? `Gói Vĩnh Viễn Combo Full 5 App (${finalPrice / 1000}K)`
-        : plan.name;
+        ? 'Gói Vĩnh Viễn Full Bảo Hành Trọn Đời Hệ Thống App FlowEngine (899K)'
+        : (planCode === '1Y' || planCode === '365D'
+            ? `Gói 1 Năm Combo Full 5 App (${finalPrice / 1000}K)`
+            : plan.name);
 
       const order = {
         orderCode,

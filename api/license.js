@@ -381,7 +381,11 @@ export default async function handler(req, res) {
           hwid,
           hwids: [hwid, verified.keyOriginHwid].filter(Boolean),
           planCode: verified.plan,
-          planName: isLifeComboSave ? 'Gói Vĩnh Viễn Combo Full 4 App (99K)' : verified.plan,
+          planName: verified.plan === 'LIFE'
+            ? 'Gói Vĩnh Viễn Full Bảo Hành Trọn Đời Hệ Thống App FlowEngine'
+            : (verified.plan === '1Y' || verified.plan === '365D'
+                ? 'Gói 1 Năm Combo 5 App (365 Ngày)'
+                : (verified.plan === '30D' ? 'Gói Tháng Combo 5 App (30 Ngày)' : 'Gói Tuần Combo 5 App (7 Ngày)')),
           source: 'KEY_ACTIVATED',
           createdAtUtc: serverNowUtc,
           expiryUtcMs: finalExpiryMs,
@@ -395,6 +399,23 @@ export default async function handler(req, res) {
       }
 
       const isLifeCombo = verified.isAllApps || verified.plan === 'LIFE';
+      let activatedMsg = 'Kích hoạt Key PRO thành công!';
+      if (isLifeCombo) {
+        if (verified.plan === 'LIFE') {
+          activatedMsg = 'Kích hoạt thành công Gói Vĩnh Viễn Full Bảo Hành Trọn Đời (Full 5 App: FlowS, FlowUltra, FlowOp, FlowExtra, FlowZ VIP)!';
+        } else if (verified.plan === '1Y' || verified.plan === '365D') {
+          activatedMsg = 'Kích hoạt thành công Gói 1 Năm (Mở khóa toàn bộ 5 App: FlowS, FlowUltra, FlowOp, FlowExtra, FlowZ VIP)!';
+        } else if (verified.plan === '30D') {
+          activatedMsg = 'Kích hoạt thành công Gói Tháng 30 Ngày (Mở khóa toàn bộ 5 App: FlowS, FlowUltra, FlowOp, FlowExtra, FlowZ VIP)!';
+        } else if (verified.plan === '7D') {
+          activatedMsg = 'Kích hoạt thành công Gói Tuần 7 Ngày (Mở khóa toàn bộ 5 App: FlowS, FlowUltra, FlowOp, FlowExtra, FlowZ VIP)!';
+        } else {
+          activatedMsg = 'Kích hoạt thành công Key Combo Full 5 App FlowEngine!';
+        }
+      } else if (verified.tier === 'VIP_FREE') {
+        activatedMsg = 'Kích hoạt Key VIP 30 Giờ (khóa 1 thiết bị) thành công!';
+      }
+
       return res.status(200).json({
         success: true,
         tier: verified.tier,
@@ -405,11 +426,7 @@ export default async function handler(req, res) {
         plan: verified.plan,
         expiryUtcMs: finalExpiryMs,
         serverNowUtc,
-        message: isLifeCombo
-          ? 'Kích hoạt thành công Gói Vĩnh Viễn 99K (Mở khóa toàn bộ 5 app: FlowS, FlowUltra, FlowOp, FlowExtra, FlowZ)!'
-          : (verified.tier === 'VIP_FREE'
-            ? 'Kích hoạt Key VIP 30 Giờ (khóa 1 thiết bị) thành công!'
-            : 'Kích hoạt Key PRO thành công!'),
+        message: activatedMsg,
       });
     }
 
@@ -535,7 +552,7 @@ export default async function handler(req, res) {
           key: foundRecord.key,
           appId: foundRecord.appId || 'all',
           plan: foundRecord.planCode || (isLife ? 'LIFE' : 'PRO'),
-          planName: foundRecord.planName || (isLife ? 'Gói Vĩnh Viễn Combo Full 5 App (99K)' : 'Gói PRO'),
+          planName: foundRecord.planName || (isLife ? 'Gói Vĩnh Viễn Full Bảo Hành Trọn Đời Hệ Thống App FlowEngine' : 'Gói PRO'),
           hwid: foundRecord.hwid,
           phone: foundRecord.phone || '',
           hwidChanges: Number(foundRecord.hwidChanges || 0),
