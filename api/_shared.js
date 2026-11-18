@@ -518,20 +518,21 @@ export async function getLifetimePricingTier() {
   let currentPrice = 169000;
   let tierNumber = 2;
   let totalSlotsInTier = 15;
-  let tier2Sold = Math.max(0, lifeCount - 10);
+  // Khởi điểm đã bán 2 suất ưu đãi đợt 2 -> chỉ còn 13/15 suất tạo hiệu ứng thôi thúc
+  let tier2Sold = Math.max(2, lifeCount - 10 + 2);
   let slotsLeft = Math.max(1, 15 - tier2Sold);
 
-  if (lifeCount >= 25) {
+  if (tier2Sold >= 15 || lifeCount >= 23) {
     currentPrice = 249000;
     tierNumber = 3;
     totalSlotsInTier = 15;
-    let tier3Sold = Math.max(0, lifeCount - 25);
+    let tier3Sold = Math.max(0, lifeCount - 23);
     slotsLeft = Math.max(0, 15 - tier3Sold);
   }
 
   const tierBadge = tierNumber === 2
-    ? `🔥 ĐÃ BÁN HẾT 10/10 SUẤT 99K • MỞ BÁN NẤC 2: CÒN ${slotsLeft}/15 SUẤT GIÁ 169K (GIÁ CHUẨN 249K)`
-    : `💎 NẤC 3 GIÁ CHUẨN: 249.000đ • CÒN ${slotsLeft}/15 SUẤT (GIÁ GỐC 499K)`;
+    ? `🔥 ĐÃ BÁN HẾT 10/10 SUẤT 99K • CHỈ CÒN ${slotsLeft}/15 SUẤT GIÁ 169K (GIÁ CHUẨN 249K)`
+    : `💎 GIÁ CHUẨN: 249.000đ • CÒN ${slotsLeft}/15 SUẤT (GIÁ GỐC 499K)`;
 
   return {
     lifeCount,
