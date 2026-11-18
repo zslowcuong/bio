@@ -25,10 +25,10 @@ export const BANK_CONFIG = {
 };
 
 export const PLANS = {
-  '7D': { code: '7D', name: 'Gói Tuần Combo 5 App (7 Ngày)', days: 7, hours: 168, price: 25000 },
-  '30D': { code: '30D', name: 'Gói Tháng Combo 5 App (30 Ngày)', days: 30, hours: 720, price: 49000 },
-  '1Y': { code: '1Y', name: 'Gói 1 Năm Combo 5 App (365 Ngày)', days: 365, hours: 8760, price: 169000 },
-  '365D': { code: '365D', name: 'Gói 1 Năm Combo 5 App (365 Ngày)', days: 365, hours: 8760, price: 169000 },
+  '7D': { code: '7D', name: 'Gói Tuần Combo 5 App (7 Ngày)', days: 7, hours: 168, price: 15000 },
+  '30D': { code: '30D', name: 'Gói Tháng Combo 5 App (30 Ngày)', days: 30, hours: 720, price: 35000 },
+  '1Y': { code: '1Y', name: 'Gói 1 Năm Combo 5 App (365 Ngày)', days: 365, hours: 8760, price: 99000 },
+  '365D': { code: '365D', name: 'Gói 1 Năm Combo 5 App (365 Ngày)', days: 365, hours: 8760, price: 99000 },
   'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn Full Bảo Hành Trọn Đời Hệ Thống App FlowEngine', days: 36500, hours: 876000, price: 899000 },
 };
 
@@ -513,40 +513,19 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
 
 
 export async function getLifetimePricingTier() {
-  const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
-  const yearlyCount = issuedKeys.filter(
-    (k) => k && (k.planCode === '1Y' || k.planCode === '365D' || (k.appId === 'all' && k.planCode !== 'LIFE' && k.planCode !== '7D' && k.planCode !== '30D'))
-  ).length;
-
-  let currentPrice = 169000;
-  let tierNumber = 2;
-  let totalSlotsInTier = 15;
-  // Khởi điểm đã bán 2 suất ưu đãi đợt 2 -> chỉ còn 13/15 suất tạo hiệu ứng thôi thúc
-  let tier2Sold = Math.max(2, yearlyCount + 2);
-  let slotsLeft = Math.max(1, 15 - tier2Sold);
-
-  if (tier2Sold >= 15 || yearlyCount >= 13) {
-    currentPrice = 249000;
-    tierNumber = 3;
-    totalSlotsInTier = 15;
-    let tier3Sold = Math.max(0, yearlyCount - 13);
-    slotsLeft = Math.max(0, 15 - tier3Sold);
-  }
-
-  const tierBadge = tierNumber === 2
-    ? `🔥 ĐÃ BÁN HẾT 10/10 SUẤT 99K • CHỈ CÒN ${slotsLeft}/15 SUẤT GIÁ 169K (GIÁ CHUẨN 249K)`
-    : `💎 GIÁ CHUẨN: 249.000đ • CÒN ${slotsLeft}/15 SUẤT (GIÁ GỐC 499K)`;
+  const currentPrice = 99000;
+  const tierBadge = '🔥 TIẾT KIỆM NHẤT • CHỈ ~8.250đ/THÁNG';
 
   return {
-    yearlyCount,
-    tierNumber,
+    yearlyCount: 0,
+    tierNumber: 1,
     currentPrice,
     tierBadge,
-    slotsLeft,
-    totalSlotsInTier,
-    originalPrice: 499000,
-    nextTierPrice: 249000,
-    lifePrice: 899000,
+    slotsLeft: 999,
+    totalSlotsInTier: 999,
+    originalPrice: 199000,
+    nextTierPrice: 99000,
+    lifePrice: 0,
   };
 }
 

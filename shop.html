@@ -80,14 +80,11 @@
         /* NEW LUXURY PRICING DESIGN MATCHING INFOGRAPHIC */
         .plans-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
             margin-top: 8px;
         }
-        @media (max-width: 1024px) {
-            .plans-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 640px) {
+        @media (max-width: 960px) {
             .plans-grid { grid-template-columns: 1fr; }
         }
 
@@ -722,11 +719,11 @@
             </div>
         </div>
 
-                <!-- 3. CHỌN GÓI -->
+        <!-- 3. CHỌN GÓI -->
         <div class="section-card" style="padding: 24px;">
             <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
                 <div style="font-size: 16px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
-                    <span style="color:#00f0ff; font-size: 18px;">💎</span> BẢNG GIÁ DỊCH VỤ NIÊM YẾT MỚI (ÁP DỤNG TRỌN BỘ 5 ỨNG DỤNG)
+                    <span style="color:#00f0ff; font-size: 18px;">💎</span> BẢNG GIÁ DỊCH VỤ NIÊM YẾT MỚI (MỞ KHÓA TRỌN BỘ 5 ỨNG DỤNG)
                 </div>
                 <div style="font-size: 12px; color: #fbbf24; font-weight: 800; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); padding: 5px 14px; border-radius: 20px; display: flex; align-items: center; gap: 6px;">
                     🔥 1 Key VIP sử dụng đồng thời trên cả 5 App
@@ -738,69 +735,56 @@
                 <div class="pricing-card-box">
                     <div>
                         <div class="plan-card-title">GÓI TUẦN COMBO</div>
-                        <div class="plan-card-price">25.000đ</div>
-                        <div class="plan-card-desc">Trải nghiệm ngắn hạn full tính năng cao cấp trên cả 5 ứng dụng.</div>
+                        <div class="plan-card-price">15.000đ</div>
+                        <div class="plan-card-desc">Phễu dùng thử siêu rẻ cho học sinh, sinh viên trải nghiệm mượt mà.</div>
                         <ul class="plan-card-perks">
-                            <li>Mở khóa full 5 app Flow</li>
+                            <li>Mở khóa full 5 app FlowEngine</li>
                             <li>Hạn dùng: 7 ngày liên tục</li>
-                            <li>Cập nhật tính năng mới</li>
-                            <li>Tặng 2 lần đổi máy miễn phí</li>
+                            <li>Đơn giá: • 2.143đ/ngày • 3.000đ/app</li>
+                            <li>Khóa cố định 1 thiết bị (hỗ trợ đổi 1 lần nếu cài lại ROM)</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-week" onclick="createShopOrder('7D')">⚡ Mua Gói Tuần • 25K</button>
+                    <button type="button" class="btn-plan-action btn-week" onclick="createShopOrder('7D')">⚡ Mua Gói Tuần • 15K</button>
                 </div>
 
                 <!-- GÓI 2: THÁNG -->
                 <div class="pricing-card-box">
                     <div>
                         <div class="plan-card-title">GÓI THÁNG COMBO</div>
-                        <div class="plan-card-price">49.000đ</div>
-                        <div class="plan-card-desc">Giải pháp tiết kiệm nhất (~1.600đ/ngày) cho game thủ thường xuyên.</div>
+                        <div class="plan-card-price">35.000đ</div>
+                        <div class="plan-card-desc">Giải pháp tiết kiệm nhất (~1.167đ/ngày) cho game thủ thường xuyên.</div>
                         <ul class="plan-card-perks">
-                            <li>Mở khóa full 5 app Flow</li>
+                            <li>Mở khóa full 5 app FlowEngine</li>
                             <li>Hạn dùng: 30 ngày liên tục</li>
+                            <li>Đơn giá: • 1.167đ/ngày • 7.000đ/app</li>
+                            <li>Tiết kiệm 25.000đ (41,7%) so với mua 4 tuần lẻ</li>
+                            <li>Tặng 1 lần đổi thiết bị miễn phí (lần 2 trở đi 10.000đ/lượt)</li>
                             <li>Hỗ trợ kỹ thuật ưu tiên</li>
-                            <li>Tặng 2 lần đổi máy miễn phí</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-month" onclick="createShopOrder('30D')">🚀 Mua Gói Tháng • 49K</button>
+                    <button type="button" class="btn-plan-action btn-month" onclick="createShopOrder('30D')">🚀 Mua Gói Tháng • 35K</button>
                 </div>
 
                 <!-- GÓI 3: 1 NĂM (365 NGÀY) -->
                 <div class="pricing-card-box featured">
-                    <span class="plan-ribbon orange" id="yearlyTierBadge">🔥 ƯU ĐÃI ĐỢT 2: CÒN 13/15 SUẤT</span>
+                    <span class="plan-ribbon orange" id="yearlyTierBadge">🔥 TIẾT KIỆM NHẤT • CHỈ ~8.250đ/THÁNG</span>
                     <div>
                         <div class="plan-card-title">GÓI 1 NĂM (12 THÁNG)</div>
                         <div class="plan-card-price">
-                            <span id="yearlyPriceLabel">169.000đ</span>
-                            <span class="plan-old-strikethrough">249.000đ</span>
+                            <span id="yearlyPriceLabel">99.000đ</span>
+                            <span class="plan-old-strikethrough">199.000đ</span>
                         </div>
-                        <div class="plan-card-desc">Gói được ưa chuộng nhất: Tiết kiệm ngay 80.000đ so với giá chuẩn!</div>
+                        <div class="plan-card-desc">Gói được ưa chuộng nhất: Giảm 50,3% so với giá gốc 199.000đ!</div>
                         <ul class="plan-card-perks">
                             <li>Mở khóa full 5 app trong 365 ngày</li>
-                            <li>Chỉ ~14.000đ/tháng siêu rẻ</li>
-                            <li>Nhận mọi bản cập nhật lớn nhỏ</li>
-                            <li>Hỗ trợ đổi máy 1-1 không mất key</li>
+                            <li>Đơn giá: • 8.250đ/tháng • 271đ/ngày • 19.800đ/app</li>
+                            <li>Tiết kiệm 321.000đ (76,4%) so với mua lẻ 12 tháng (420.000đ)</li>
+                            <li>Hòa vốn sau 2,83 tháng; tặng 2 lần đổi thiết bị miễn phí</li>
+                            <li>Nhận mọi bản cập nhật tính năng mới lớn nhỏ</li>
+                            <li>Hỗ trợ kỹ thuật VIP ưu tiên 1-1</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-yearly" id="yearlyBuyBtn" onclick="createShopOrder('1Y')">👑 Mua Gói 1 Năm • 169K</button>
-                </div>
-
-                <!-- GÓI 4: VĨNH VIỄN VIP 899K -->
-                <div class="pricing-card-box vip">
-                    <span class="plan-ribbon gold">👑 BẢO HÀNH TRỌN ĐỜI</span>
-                    <div>
-                        <div class="plan-card-title">GÓI VĨNH VIỄN VIP</div>
-                        <div class="plan-card-price">899.000đ</div>
-                        <div class="plan-card-desc">Quyền lợi tối thượng: Sở hữu trọn đời toàn bộ hệ sinh thái Flowly Engine.</div>
-                        <ul class="plan-card-perks">
-                            <li>Full bản quyền 5 app vĩnh viễn</li>
-                            <li>Full bảo hành trọn đời hệ thống</li>
-                            <li>Đặc quyền mọi app mới ra mắt</li>
-                            <li>Hỗ trợ kỹ thuật VIP 24/7 trực tiếp</li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn-plan-action btn-vip" onclick="createShopOrder('LIFE')">💎 Mua Vĩnh Viễn • 899K</button>
+                    <button type="button" class="btn-plan-action btn-yearly" id="yearlyBuyBtn" onclick="createShopOrder('1Y')">👑 Mua Gói 1 Năm • 99K</button>
                 </div>
             </div>
         </div>
@@ -916,7 +900,7 @@
         let currentOrder = null;
         let pollTimer = null;
 
-        let currentYearlyPrice = 169000;
+        let currentYearlyPrice = 99000;
 
         async function syncDynamicPricing() {
             try {
@@ -925,7 +909,7 @@
                 const data = await res.json();
                 if (data.pricing) {
                     const p = data.pricing;
-                    currentYearlyPrice = p.currentPrice || 169000;
+                    currentYearlyPrice = p.currentPrice || 99000;
                     const badgeEl = document.getElementById('yearlyTierBadge');
                     if (badgeEl && p.tierBadge) {
                         badgeEl.textContent = p.tierBadge;
@@ -936,7 +920,7 @@
                     }
                     const btnEl = document.getElementById('yearlyBuyBtn');
                     if (btnEl) {
-                        btnEl.textContent = `👑 Mua Gói 1 Năm Full 5 App • ${Math.round(currentYearlyPrice/1000)}K`;
+                        btnEl.textContent = `👑 Mua Gói 1 Năm • ${Math.round(currentYearlyPrice/1000)}K`;
                     }
                 }
             } catch (e) {
