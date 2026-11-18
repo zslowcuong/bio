@@ -60,7 +60,7 @@ export default async function handler(req, res) {
     }
 
     if (action === 'create_order') {
-      const appId = normalizeAppId(body.appId || body.app || 'flowoptimize');
+      const appId = normalizeAppId(body.appId || body.app || 'all') || 'all';
       const hwid = normalizeHwid(body.hwid);
       const planCode = String(body.planCode || body.plan || '7D').trim().toUpperCase();
       const phone = String(body.phone || '').trim().slice(0, 32);

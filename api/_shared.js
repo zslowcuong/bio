@@ -84,14 +84,14 @@ export const APPS = {
 };
 
 export function normalizeAppId(raw) {
-  const s = String(raw || 'flowoptimize').trim().toLowerCase();
-  if (s === 'all' || s === 'combo' || s === 'all_apps' || s === 'combo_all') return 'all';
+  const s = String(raw || 'all').trim().toLowerCase();
+  if (s === 'all' || s === 'flowall' || s === 'combo' || s === 'all_apps' || s === 'combo_all' || s === 'combo5' || s === 'ecosystem') return 'all';
   if (s === 'flowop' || s === 'flowoptimize' || s === 'com.example.gameoptimizer') return 'flowoptimize';
   if (s === 'flows' || s === 'com.flows.gaming') return 'flows';
   if (s === 'flowultra' || s === 'com.flows.flowultra') return 'flowultra';
   if (s === 'flowextra' || s === 'com.flowextra.optimizer') return 'flowextra';
   if (s === 'flowz' || s === 'com.flows.flowz' || s === 'com.nebula.hnx') return 'flowz';
-  return null;
+  return 'all';
 }
 
 export function sanitizeKeyInput(raw) {

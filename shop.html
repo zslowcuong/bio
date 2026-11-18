@@ -893,10 +893,7 @@
         };
 
         const params = new URLSearchParams(window.location.search);
-        let selectedAppId = (params.get('app') || params.get('appId') || 'flowoptimize').trim().toLowerCase();
-        if (selectedAppId === 'flowop' || selectedAppId === 'com.example.gameoptimizer') selectedAppId = 'flowoptimize';
-        if (selectedAppId === 'flowz' || selectedAppId === 'com.flows.flowz' || selectedAppId === 'com.nebula.hnx') selectedAppId = 'flowz';
-        if (!APPS[selectedAppId]) selectedAppId = 'flowoptimize';
+        let selectedAppId = 'all';
 
         const hwidParam = (params.get('hwid') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
         if (hwidParam) {
@@ -948,7 +945,7 @@
         }
 
 function selectApp(appId) {
-            selectedAppId = 'flowall';
+            selectedAppId = 'all';
             const label = document.getElementById('selectedAppLabel');
             if (label) label.textContent = "Combo 5 App FlowEngine";
             document.querySelectorAll('.appNameInline').forEach(el => el.textContent = "Combo 5 App");
@@ -981,7 +978,7 @@ function selectApp(appId) {
                 const res = await fetch(`${API_BASE}/api/shop?action=create_order`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ appId: selectedAppId, hwid, phone, planCode })
+                    body: JSON.stringify({ appId: 'all', app: 'all', hwid, phone, planCode })
                 });
                 const data = await res.json();
                 if (!data.success || !data.order) {
