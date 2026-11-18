@@ -80,11 +80,14 @@
         /* NEW LUXURY PRICING DESIGN MATCHING INFOGRAPHIC */
         .plans-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
             margin-top: 8px;
         }
-        @media (max-width: 960px) {
+        @media (max-width: 1100px) {
+            .plans-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 680px) {
             .plans-grid { grid-template-columns: 1fr; }
         }
 
@@ -736,12 +739,12 @@
                     <div>
                         <div class="plan-card-title">GÓI TUẦN COMBO</div>
                         <div class="plan-card-price">15.000đ</div>
-                        <div class="plan-card-desc">Phễu dùng thử siêu rẻ cho học sinh, sinh viên trải nghiệm mượt mà.</div>
+                        <div class="plan-card-desc">Phễu dùng thử siêu rẻ cho máy yếu test FPS, độ nhạy cực mượt.</div>
                         <ul class="plan-card-perks">
                             <li>Mở khóa full 5 app FlowEngine</li>
                             <li>Hạn dùng: 7 ngày liên tục</li>
-                            <li>Đơn giá: • 2.143đ/ngày • 3.000đ/app</li>
-                            <li>Khóa cố định 1 thiết bị (hỗ trợ đổi 1 lần nếu cài lại ROM)</li>
+                            <li>Đơn giá: • 2.143đ/ngày (3.000đ/app)</li>
+                            <li>Khóa 1 thiết bị (đổi 1 lần nếu up ROM)</li>
                         </ul>
                     </div>
                     <button type="button" class="btn-plan-action btn-week" onclick="createShopOrder('7D')">⚡ Mua Gói Tuần • 15K</button>
@@ -756,9 +759,9 @@
                         <ul class="plan-card-perks">
                             <li>Mở khóa full 5 app FlowEngine</li>
                             <li>Hạn dùng: 30 ngày liên tục</li>
-                            <li>Đơn giá: • 1.167đ/ngày • 7.000đ/app</li>
-                            <li>Tiết kiệm 25.000đ (41,7%) so với mua 4 tuần lẻ</li>
-                            <li>Tặng 1 lần đổi thiết bị miễn phí (lần 2 trở đi 10.000đ/lượt)</li>
+                            <li>Đơn giá: • 1.167đ/ngày (7.000đ/app)</li>
+                            <li>Tiết kiệm 41,7% so với mua 4 tuần lẻ (60.000đ)</li>
+                            <li>Tặng 1 lần đổi máy miễn phí (lần 2 trở đi 10k)</li>
                             <li>Hỗ trợ kỹ thuật ưu tiên</li>
                         </ul>
                     </div>
@@ -767,24 +770,46 @@
 
                 <!-- GÓI 3: 1 NĂM (365 NGÀY) -->
                 <div class="pricing-card-box featured">
-                    <span class="plan-ribbon orange" id="yearlyTierBadge">🔥 TIẾT KIỆM NHẤT • CHỈ ~8.250đ/THÁNG</span>
+                    <span class="plan-ribbon orange" id="yearlyTierBadge">🔥 PHỔ BIẾN NHẤT • CHỈ 8.250đ/THÁNG</span>
                     <div>
                         <div class="plan-card-title">GÓI 1 NĂM (12 THÁNG)</div>
                         <div class="plan-card-price">
                             <span id="yearlyPriceLabel">99.000đ</span>
                             <span class="plan-old-strikethrough">199.000đ</span>
                         </div>
-                        <div class="plan-card-desc">Gói được ưa chuộng nhất: Giảm 50,3% so với giá gốc 199.000đ!</div>
+                        <div class="plan-card-desc">Gói được ưa chuộng nhất: Tiết kiệm 76,4% so với mua lẻ 12 tháng!</div>
                         <ul class="plan-card-perks">
                             <li>Mở khóa full 5 app trong 365 ngày</li>
-                            <li>Đơn giá: • 8.250đ/tháng • 271đ/ngày • 19.800đ/app</li>
-                            <li>Tiết kiệm 321.000đ (76,4%) so với mua lẻ 12 tháng (420.000đ)</li>
-                            <li>Hòa vốn sau 2,83 tháng; tặng 2 lần đổi thiết bị miễn phí</li>
+                            <li>Đơn giá: • 8.250đ/tháng (271đ/ngày) (19.800đ/app)</li>
+                            <li>Tiết kiệm 321.000đ; hòa vốn sau 2,83 tháng</li>
+                            <li>Tặng 2 lần đổi máy miễn phí (lần 3 trở đi 10k)</li>
                             <li>Nhận mọi bản cập nhật tính năng mới lớn nhỏ</li>
                             <li>Hỗ trợ kỹ thuật VIP ưu tiên 1-1</li>
                         </ul>
                     </div>
                     <button type="button" class="btn-plan-action btn-yearly" id="yearlyBuyBtn" onclick="createShopOrder('1Y')">👑 Mua Gói 1 Năm • 99K</button>
+                </div>
+
+                <!-- GÓI 4: VĨNH VIỄN VIP 199K -->
+                <div class="pricing-card-box vip">
+                    <span class="plan-ribbon gold">👑 SỞ HỮU TRỌN ĐỜI</span>
+                    <div>
+                        <div class="plan-card-title">GÓI VĨNH VIỄN VIP</div>
+                        <div class="plan-card-price">
+                            <span>199.000đ</span>
+                            <span class="plan-old-strikethrough">499.000đ</span>
+                        </div>
+                        <div class="plan-card-desc" style="color:#fbbf24;font-weight:700;">Chỉ thêm 100.000đ so với Gói 1 Năm để sở hữu trọn đời — không bao giờ phải gia hạn lại!</div>
+                        <ul class="plan-card-perks">
+                            <li>Full bản quyền 5 app trọn đời vĩnh viễn</li>
+                            <li>Đơn giá: 39.800đ/app (gấp 2,01 lần gói Năm)</li>
+                            <li>Hòa vốn sau 5,69 tháng; giảm 60,1% giá gốc</li>
+                            <li>Tặng 3 lần đổi máy miễn phí</li>
+                            <li>Đặc quyền mọi app mới phát hành trong tương lai</li>
+                            <li>Hỗ trợ kỹ thuật VIP 24/7 trực tiếp</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-plan-action btn-vip" onclick="createShopOrder('LIFE')">💎 Mua Vĩnh Viễn • 199K</button>
                 </div>
             </div>
         </div>
@@ -799,7 +824,7 @@
             <div id="lookupResults" class="lookup-res"></div>
 
             <div style="margin-top:16px;border-top:1px dashed rgba(255,255,255,0.12);padding-top:14px;">
-                <div style="font-size:13px;font-weight:800;color:#38bdf8;margin-bottom:8px;">🔄 Chuyển Key Sang Thiết Bị Mới (2 Lần Đổi Miễn Phí)</div>
+                <div style="font-size:13px;font-weight:800;color:#38bdf8;margin-bottom:8px;">🔄 Chuyển Key Sang Thiết Bị Mới (1 Lần Gói Tuần/Tháng • 2 Lần Gói Năm • 3 Lần Gói Vĩnh Viễn)</div>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;">
                     <input id="changeKeyInput" placeholder="Mã Key PRO hiện tại (VD: FLOWALL-PRO...)" style="background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:10px;padding:9px 12px;font-size:12px;" />
                     <input id="changeNewHwidInput" placeholder="Mã HWID máy mới (Lấy trong App)" style="background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:10px;padding:9px 12px;font-size:12px;" />

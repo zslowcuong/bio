@@ -29,7 +29,7 @@ export const PLANS = {
   '30D': { code: '30D', name: 'Gói Tháng Combo 5 App (30 Ngày)', days: 30, hours: 720, price: 35000 },
   '1Y': { code: '1Y', name: 'Gói 1 Năm Combo 5 App (365 Ngày)', days: 365, hours: 8760, price: 99000 },
   '365D': { code: '365D', name: 'Gói 1 Năm Combo 5 App (365 Ngày)', days: 365, hours: 8760, price: 99000 },
-  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn Full Bảo Hành Trọn Đời Hệ Thống App FlowEngine', days: 36500, hours: 876000, price: 899000 },
+  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn VIP Full 5 App Trọn Đời (199K)', days: 36500, hours: 876000, price: 199000 },
 };
 
 export const APPS = {
@@ -514,7 +514,7 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
 
 export async function getLifetimePricingTier() {
   const currentPrice = 99000;
-  const tierBadge = '🔥 TIẾT KIỆM NHẤT • CHỈ ~8.250đ/THÁNG';
+  const tierBadge = '🔥 PHỔ BIẾN NHẤT • CHỈ 8.250đ/THÁNG';
 
   return {
     yearlyCount: 0,
@@ -525,7 +525,7 @@ export async function getLifetimePricingTier() {
     totalSlotsInTier: 999,
     originalPrice: 199000,
     nextTierPrice: 99000,
-    lifePrice: 0,
+    lifePrice: 199000,
   };
 }
 

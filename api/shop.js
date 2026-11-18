@@ -84,7 +84,7 @@ export default async function handler(req, res) {
       } else if (planCode === '7D') {
         finalPrice = 15000;
       } else if (planCode === 'LIFE') {
-        finalPrice = 899000;
+        finalPrice = 199000;
       }
       const num6 = String(Math.floor(100000 + Math.random() * 900000));
       const orderCode = `ORD${num6}`;
@@ -99,7 +99,7 @@ export default async function handler(req, res) {
         : (planCode === '30D'
             ? 'Gói Tháng Combo Full 5 App (35K)'
             : (planCode === 'LIFE'
-                ? 'Gói Vĩnh Viễn Full Bảo Hành Trọn Đời Hệ Thống App FlowEngine (899K)'
+                ? 'Gói Vĩnh Viễn VIP Full 5 App Trọn Đời (199K)'
                 : 'Gói Tuần Combo Full 5 App (15K)'));
 
       const order = {
@@ -284,13 +284,23 @@ export default async function handler(req, res) {
         return res.status(400).json({ success: false, error: 'HWID mới trùng khớp với HWID hiện tại của máy!' });
       }
 
-      if (changeCount >= 2) {
+      let maxFreeChanges = 1;
+      if (planCode === 'LIFE') {
+        maxFreeChanges = 3;
+      } else if (planCode === '1Y' || planCode === '365D') {
+        maxFreeChanges = 2;
+      } else {
+        maxFreeChanges = 1;
+      }
+
+      if (changeCount >= maxFreeChanges) {
         return res.status(400).json({
           success: false,
           needFee: true,
           changeCount,
-          fee: 5000,
-          message: `Bạn đã sử dụng hết 2 lần đổi thiết bị miễn phí (${changeCount}/2). Phí đổi máy từ lần thứ 3 trở đi là 5.000đ/lượt. Vui lòng chuyển khoản 5.000đ hoặc nhắn tin Admin Telegram @zslowcuong để hoàn tất đổi máy!`
+          maxFreeChanges,
+          fee: 10000,
+          message: `Bạn đã sử dụng hết ${maxFreeChanges} lần đổi thiết bị miễn phí (${changeCount}/${maxFreeChanges}). Phí đổi máy từ lượt tiếp theo là 10.000đ/lượt. Vui lòng liên hệ Admin Telegram @zslowcuong để được hỗ trợ chuyển máy nhanh chóng!`
         });
       }
 
@@ -327,12 +337,12 @@ export default async function handler(req, res) {
       }
 
       await sendTelegram(
-        `🔄 <b>[ĐỔI THIẾT BỊ MIỄN PHÍ (${changeCount}/2)]</b>\n\n` +
+        `🔄 <b>[ĐỔI THIẾT BỊ MIỄN PHÍ (${changeCount}/${maxFreeChanges})]</b>\n\n` +
         `📦 <b>Gói:</b> ${planCode}\n` +
         `📱 <b>HWID cũ:</b> <code>${currentHwid}</code>\n` +
         `📲 <b>HWID mới:</b> <code>${newHwidInput}</code>\n` +
         `🔑 <b>Key mới:</b> <code>${newKey}</code>\n` +
-        `🎁 <b>Số lần đổi miễn phí còn lại:</b> ${2 - changeCount} lần`
+        `🎁 <b>Số lần đổi miễn phí còn lại:</b> ${Math.max(0, maxFreeChanges - changeCount)} lần`
       );
 
       return res.status(200).json({
@@ -340,8 +350,10 @@ export default async function handler(req, res) {
         newKey,
         oldKey: keyInput,
         newHwid: newHwidInput,
-        remainingFree: 2 - changeCount,
-        message: `Đổi thiết bị thành công! Key mới của bạn: ${newKey}. Bạn còn ${2 - changeCount} lần đổi máy miễn phí.`
+        changeCount,
+        maxFreeChanges,
+        remainingFree: Math.max(0, maxFreeChanges - changeCount),
+        message: `Đổi thiết bị thành công! Key mới của bạn: ${newKey}. Bạn còn ${Math.max(0, maxFreeChanges - changeCount)} lần đổi máy miễn phí.`
       });
     }
 
