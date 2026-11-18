@@ -25,7 +25,7 @@
             min-height: 100vh;
             padding: 18px 14px 48px;
         }
-        .wrap { max-width: 900px; margin: 0 auto; }
+        .wrap { max-width: 1180px; margin: 0 auto; }
         .topbar {
             display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
             margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -76,27 +76,186 @@
         }
         .field input:focus { border-color: #38bdf8; }
 
-        .plans-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-        @media (max-width: 992px) { .plans-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .plans-grid { grid-template-columns: 1fr; } }
-        .plan-card {
-            background: rgba(15, 23, 42, 0.92); border: 1.5px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px; padding: 20px 18px; display: flex; flex-direction: column; justify-content: space-between;
+        
+        /* NEW LUXURY PRICING DESIGN MATCHING INFOGRAPHIC */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 8px;
+        }
+        @media (max-width: 1024px) {
+            .plans-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .plans-grid { grid-template-columns: 1fr; }
+        }
+
+        .pricing-card-box {
+            background: rgba(13, 21, 39, 0.92);
+            border: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 24px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             position: relative;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
         }
-        .plan-card.popular { border-color: #f59e0b; box-shadow: 0 0 28px rgba(245, 158, 11, 0.2); }
-        .plan-tag {
-            position: absolute; top: -10px; right: 16px; background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #fff; font-size: 10px; font-weight: 900; padding: 4px 10px; border-radius: 99px;
+        .pricing-card-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
         }
-        .plan-name { font-size: 16px; font-weight: 900; margin-bottom: 6px; }
-        .plan-price { font-size: 28px; font-weight: 900; color: #38bdf8; margin-bottom: 12px; }
-        .plan-perks { list-style: none; font-size: 12.5px; color: #cbd5e1; margin-bottom: 18px; line-height: 1.75; }
-        .btn-buy {
-            width: 100%; padding: 13px; border-radius: 13px; border: none; cursor: pointer;
-            background: linear-gradient(135deg, #0284c7, #38bdf8); color: #fff; font-size: 13.5px; font-weight: 900;
+
+        .pricing-card-box.featured {
+            border: 1.5px solid #00f0ff;
+            background: linear-gradient(165deg, rgba(13, 21, 39, 0.98), rgba(0, 240, 255, 0.08));
+            box-shadow: 0 0 28px rgba(0, 240, 255, 0.22);
         }
-        .plan-card.popular .btn-buy { background: linear-gradient(135deg, #f59e0b, #ea580c); }
+        .pricing-card-box.featured:hover {
+            box-shadow: 0 0 38px rgba(0, 240, 255, 0.38);
+        }
+
+        .pricing-card-box.vip {
+            border: 1.5px solid #f59e0b;
+            background: linear-gradient(165deg, rgba(13, 21, 39, 0.98), rgba(245, 158, 11, 0.08));
+            box-shadow: 0 0 28px rgba(245, 158, 11, 0.22);
+        }
+        .pricing-card-box.vip:hover {
+            box-shadow: 0 0 38px rgba(245, 158, 11, 0.38);
+        }
+
+        .plan-ribbon {
+            position: absolute;
+            top: -11px;
+            right: 14px;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 900;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .plan-ribbon.orange {
+            background: linear-gradient(90deg, #ef4444, #f59e0b);
+            box-shadow: 0 2px 10px rgba(239, 68, 68, 0.45);
+        }
+        .plan-ribbon.gold {
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.45);
+        }
+
+        .plan-card-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .pricing-card-box.featured .plan-card-title {
+            color: #00f0ff;
+        }
+        .pricing-card-box.vip .plan-card-title {
+            color: #fbbf24;
+        }
+
+        .plan-card-price {
+            font-size: 28px;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            letter-spacing: -0.5px;
+        }
+        .plan-old-strikethrough {
+            font-size: 13px;
+            color: #ef4444;
+            text-decoration: line-through;
+            font-weight: 600;
+        }
+
+        .plan-card-desc {
+            font-size: 12.5px;
+            color: #94a3b8;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            min-height: 38px;
+        }
+
+        .plan-card-perks {
+            list-style: none;
+            font-size: 12px;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 14px;
+        }
+        .plan-card-perks li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .plan-card-perks li::before {
+            content: '✓';
+            color: #10b981;
+            font-weight: 900;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .btn-plan-action {
+            width: 100%;
+            padding: 13px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 900;
+            color: #fff;
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.2s ease;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn-plan-action:hover {
+            filter: brightness(1.15);
+            transform: scale(1.02);
+        }
+        .btn-plan-action.btn-week {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-plan-action.btn-month {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            border: none;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+        }
+        .btn-plan-action.btn-yearly {
+            background: linear-gradient(135deg, #00b4d8, #00f0ff);
+            color: #060913;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0, 240, 255, 0.4);
+        }
+        .btn-plan-action.btn-vip {
+            background: linear-gradient(135deg, #d97706, #fbbf24);
+            color: #060913;
+            border: none;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+
 
         .bank-pill {
             display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;
@@ -250,93 +409,85 @@
             </div>
         </div>
 
-        <!-- 3. CHỌN GÓI -->
-        <div class="section-card">
-            <div class="section-title">3. Chọn Gói Key PRO (Tất Cả Các Gói Đều Kích Hoạt Full 5 App)</div>
+                <!-- 3. CHỌN GÓI -->
+        <div class="section-card" style="padding: 24px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                <div style="font-size: 16px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
+                    <span style="color:#00f0ff; font-size: 18px;">💎</span> BẢNG GIÁ DỊCH VỤ NIÊM YẾT MỚI (ÁP DỤNG TRỌN BỘ 5 ỨNG DỤNG)
+                </div>
+                <div style="font-size: 12px; color: #fbbf24; font-weight: 800; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); padding: 5px 14px; border-radius: 20px; display: flex; align-items: center; gap: 6px;">
+                    🔥 1 Key VIP sử dụng đồng thời trên cả 5 App
+                </div>
+            </div>
+
             <div class="plans-grid">
                 <!-- GÓI 1: TUẦN -->
-                <div class="plan-card">
+                <div class="pricing-card-box">
                     <div>
-                        <div class="plan-name">⚡ Gói Tuần Combo (7 Ngày)</div>
-                        <div class="plan-price">25.000đ</div>
-                        <ul class="plan-perks">
-                            <li>✅ Sử dụng trọn bộ <b>5 Ứng Dụng</b> trong 7 ngày (FlowOp, FlowS, FlowUltra, FlowExtra, FlowZ VIP)</li>
-                            <li>✅ 1 Mã Key duy nhất nhập và kích hoạt Full cả 5 App</li>
-                            <li>✅ Không cần vượt link, không quảng cáo trong suốt 7 ngày</li>
-                            <li>✅ Full 100% tính năng cả 5 App (120Hz, SkiaVK, Chống tụt FPS, Khóa tâm 360Hz...)</li>
-                            <li style="color:#38bdf8;font-size:12px;border-top:1px dashed rgba(255,255,255,0.12);padding-top:6px;margin-top:6px;">
-                                📱 Tặng <b>2 lần đổi thiết bị miễn phí</b> (lần 3 trở đi 5k/lượt)
-                            </li>
+                        <div class="plan-card-title">GÓI TUẦN COMBO</div>
+                        <div class="plan-card-price">25.000đ</div>
+                        <div class="plan-card-desc">Trải nghiệm ngắn hạn full tính năng cao cấp trên cả 5 ứng dụng.</div>
+                        <ul class="plan-card-perks">
+                            <li>Mở khóa full 5 app Flow</li>
+                            <li>Hạn dùng: 7 ngày liên tục</li>
+                            <li>Cập nhật tính năng mới</li>
+                            <li>Tặng 2 lần đổi máy miễn phí</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-buy" onclick="createShopOrder('7D')">🏦 Mua Gói 7 Ngày • 25K</button>
+                    <button type="button" class="btn-plan-action btn-week" onclick="createShopOrder('7D')">⚡ Mua Gói Tuần • 25K</button>
                 </div>
 
                 <!-- GÓI 2: THÁNG -->
-                <div class="plan-card popular">
-                    <span class="plan-tag" style="background: linear-gradient(135deg, #d97706, #f59e0b); color: #000; font-weight: 800;">⭐ TIẾT KIỆM • CHỈ ~1.600đ/NGÀY</span>
+                <div class="pricing-card-box">
                     <div>
-                        <div class="plan-name">👑 Gói Tháng Combo (30 Ngày)</div>
-                        <div class="plan-price" style="color:#fbbf24;">49.000đ</div>
-                        <ul class="plan-perks">
-                            <li>✅ Tiết kiệm vượt trội (chỉ ~1.600đ/ngày cho full 5 app)</li>
-                            <li>✅ Mở khóa trọn bộ <b>5 Ứng Dụng</b> trong 30 ngày (FlowOp, FlowS, FlowUltra, FlowExtra, FlowZ VIP)</li>
-                            <li>✅ 1 Mã Key duy nhất nhập và kích hoạt Full cả 5 App</li>
-                            <li>✅ Tự động nhận diện CK &amp; cấp Key ngay qua SePay</li>
-                            <li style="color:#38bdf8;font-size:12px;border-top:1px dashed rgba(255,255,255,0.12);padding-top:6px;margin-top:6px;">
-                                📱 Tặng <b>2 lần đổi thiết bị miễn phí</b> (lần 3 trở đi 5k/lượt)
-                            </li>
+                        <div class="plan-card-title">GÓI THÁNG COMBO</div>
+                        <div class="plan-card-price">49.000đ</div>
+                        <div class="plan-card-desc">Giải pháp tiết kiệm nhất (~1.600đ/ngày) cho game thủ thường xuyên.</div>
+                        <ul class="plan-card-perks">
+                            <li>Mở khóa full 5 app Flow</li>
+                            <li>Hạn dùng: 30 ngày liên tục</li>
+                            <li>Hỗ trợ kỹ thuật ưu tiên</li>
+                            <li>Tặng 2 lần đổi máy miễn phí</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-buy" onclick="createShopOrder('30D')">🏦 Mua Gói 30 Ngày • 49K</button>
+                    <button type="button" class="btn-plan-action btn-month" onclick="createShopOrder('30D')">🚀 Mua Gói Tháng • 49K</button>
                 </div>
 
                 <!-- GÓI 3: 1 NĂM (365 NGÀY) -->
-                <div class="plan-card" style="border: 1.5px solid #0284c7; box-shadow: 0 0 24px rgba(2, 132, 199, 0.25); position: relative;">
-                    <span class="plan-tag" id="yearlyTierBadge" style="background: linear-gradient(135deg, #dc2626, #ea580c); color: #fff; font-weight: 800; font-size: 11px; padding: 4px 10px; border-radius: 999px; box-shadow: 0 0 15px rgba(234, 88, 12, 0.4);">🔥 ĐÃ BÁN HẾT 10/10 SUẤT 99K • CHỈ CÒN 13/15 SUẤT GIÁ 169K (GIÁ CHUẨN 249K)</span>
+                <div class="pricing-card-box featured">
+                    <span class="plan-ribbon orange" id="yearlyTierBadge">🔥 ƯU ĐÃI ĐỢT 2: CÒN 13/15 SUẤT</span>
                     <div>
-                        <div class="plan-name" style="color: #38bdf8;">👑 Gói 1 Năm Combo (365 Ngày)</div>
-                        <div class="plan-price" style="color:#38bdf8;"><span id="yearlyPriceLabel">169.000đ</span> <span style="font-size: 13px; text-decoration: line-through; color: #64748b; font-weight: 500;">499.000đ</span></div>
-                        <div style="font-size: 11.5px; color: #7dd3fc; margin-top: 4px; font-weight: 600;">⚡ Tiết kiệm 80.000đ so với giá chuẩn 249.000đ khi hết 15 suất ưu đãi</div>
-                        <ul class="plan-perks" style="margin-top: 10px;">
-                            <li>✅ Tiết kiệm 71% (chỉ ~460đ/ngày) cho <b>Full 5 App</b></li>
-                            <li>✅ Mở khóa trọn bộ <b>5 Ứng Dụng</b> trong <b>365 ngày (1 Năm)</b>:</li>
-                            <li style="padding-left: 8px;">• 🌸 FlowOptimize (120Hz &amp; HUD)</li>
-                            <li style="padding-left: 8px;">• 🎯 FlowS Gamer (Độ nhạy &amp; Sens)</li>
-                            <li style="padding-left: 8px;">• 🚀 FlowUltra (Phantom limit &amp; SkiaVK)</li>
-                            <li style="padding-left: 8px;">• 🎩 FlowExtra (GameSpace &amp; RAM)</li>
-                            <li style="padding-left: 8px;">• ⚡ FlowZ VIP (Kéo tâm &amp; Cảm ứng 360Hz)</li>
-                            <li>✅ 1 Mã Key duy nhất kích hoạt Full cả 5 App</li>
-                            <li>✅ Miễn phí mọi bản cập nhật tính năng mới trong 1 năm</li>
-                            <li style="color:#38bdf8;font-size:12px;border-top:1px dashed rgba(255,255,255,0.12);padding-top:6px;margin-top:6px;">
-                                📱 Tặng <b>2 lần đổi thiết bị miễn phí</b> (lần 3 trở đi 5k/lượt)
-                            </li>
+                        <div class="plan-card-title">GÓI 1 NĂM (12 THÁNG)</div>
+                        <div class="plan-card-price">
+                            <span id="yearlyPriceLabel">169.000đ</span>
+                            <span class="plan-old-strikethrough">249.000đ</span>
+                        </div>
+                        <div class="plan-card-desc">Gói được ưa chuộng nhất: Tiết kiệm ngay 80.000đ so với giá chuẩn!</div>
+                        <ul class="plan-card-perks">
+                            <li>Mở khóa full 5 app trong 365 ngày</li>
+                            <li>Chỉ ~14.000đ/tháng siêu rẻ</li>
+                            <li>Nhận mọi bản cập nhật lớn nhỏ</li>
+                            <li>Hỗ trợ đổi máy 1-1 không mất key</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-buy" id="yearlyBuyBtn" style="background:linear-gradient(135deg,#0284c7,#38bdf8);" onclick="createShopOrder('1Y')">👑 Mua Gói 1 Năm Full 5 App • 169K</button>
+                    <button type="button" class="btn-plan-action btn-yearly" id="yearlyBuyBtn" onclick="createShopOrder('1Y')">👑 Mua Gói 1 Năm • 169K</button>
                 </div>
 
-                <!-- GÓI 4: VĨNH VIỄN FULL BẢO HÀNH TRỌN ĐỜI 899K -->
-                <div class="plan-card" style="border: 2px solid #10b981; background: linear-gradient(180deg, rgba(16,185,129,0.08) 0%, rgba(15,23,42,0.95) 100%); box-shadow: 0 0 30px rgba(16, 185, 129, 0.35); position: relative;">
-                    <span class="plan-tag" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-weight: 900; font-size: 11px; padding: 4px 10px; border-radius: 999px; box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);">💎 ĐỈNH CAO VIP • FULL BẢO HÀNH TRỌN ĐỜI</span>
+                <!-- GÓI 4: VĨNH VIỄN VIP 899K -->
+                <div class="pricing-card-box vip">
+                    <span class="plan-ribbon gold">👑 BẢO HÀNH TRỌN ĐỜI</span>
                     <div>
-                        <div class="plan-name" style="color: #6ee7b7; font-size: 15.5px; line-height: 1.35;">💎 Gói Vĩnh Viễn Full Bảo Hành Trọn Đời Hệ Thống App FlowEngine</div>
-                        <div class="plan-price" style="color:#34d399; margin-top: 6px;">899.000đ <span style="font-size: 13px; text-decoration: line-through; color: #64748b; font-weight: 500;">1.999.000đ</span></div>
-                        <div style="font-size: 11.5px; color: #a7f3d0; margin-top: 4px; font-weight: 700;">🛡️ Đặc quyền tối thượng: Bảo hành trọn đời hệ thống 5 app FlowEngine</div>
-                        <ul class="plan-perks" style="margin-top: 10px;">
-                            <li style="color:#6ee7b7; font-weight: 800;">👑 ĐẶC QUYỀN VĨNH VIỄN TRỌN ĐỜI MÁY:</li>
-                            <li style="padding-left: 8px;">• Mở khóa <b>VĨNH VIỄN</b> toàn bộ 5 App FlowEngine</li>
-                            <li style="padding-left: 8px;">• FlowOptimize, FlowS, FlowUltra, FlowExtra, FlowZ VIP</li>
-                            <li>🛡️ <b>Full Bảo Hành Trọn Đời Hệ Thống 1-1:</b> Trực tiếp Admin hỗ trợ kỹ thuật, tối ưu riêng theo dòng máy</li>
-                            <li>✅ 1 Mã Key duy nhất mở khóa trọn đời không giới hạn thời gian</li>
-                            <li>✅ Miễn phí trọn đời mọi bản cập nhật phiên bản mới &amp; tính năng AI</li>
-                            <li>⚡ Hỗ trợ chuyển đổi thiết bị linh hoạt trọn đời khi nâng cấp máy</li>
-                            <li style="color:#fbbf24; font-size: 12px; border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 6px; margin-top: 6px;">
-                                🎁 Ưu tiên slot hỗ trợ đặc biệt 24/7 từ Admin qua Telegram
-                            </li>
+                        <div class="plan-card-title">GÓI VĨNH VIỄN VIP</div>
+                        <div class="plan-card-price">899.000đ</div>
+                        <div class="plan-card-desc">Quyền lợi tối thượng: Sở hữu trọn đời toàn bộ hệ sinh thái Flowly Engine.</div>
+                        <ul class="plan-card-perks">
+                            <li>Full bản quyền 5 app vĩnh viễn</li>
+                            <li>Full bảo hành trọn đời hệ thống</li>
+                            <li>Đặc quyền mọi app mới ra mắt</li>
+                            <li>Hỗ trợ kỹ thuật VIP 24/7 trực tiếp</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-buy" style="background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 0 20px rgba(16,185,129,0.4);" onclick="createShopOrder('LIFE')">👑 Mua Vĩnh Viễn Full Bảo Hành • 899K</button>
+                    <button type="button" class="btn-plan-action btn-vip" onclick="createShopOrder('LIFE')">💎 Mua Vĩnh Viễn • 899K</button>
                 </div>
             </div>
         </div>
