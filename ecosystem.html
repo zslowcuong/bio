@@ -242,39 +242,41 @@
 
 
 
-        .nav-links {
-
+                .nav-links {
             display: flex;
-
             align-items: center;
-
-            gap: 14px;
-
+            gap: 10px;
             list-style: none;
-
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            margin: 0;
+            padding: 0;
         }
 
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
 
+        .nav-links li {
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
 
         .nav-links a {
-
             color: var(--text-sub);
-
             text-decoration: none;
-
-            font-size: 13px;
-
+            font-size: 12.5px;
             font-weight: 600;
-
             transition: all 0.25s ease;
-
-            padding: 6px 10px;
-
+            padding: 6px 8px;
             border-radius: 8px;
-
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
         }
-
-
 
         .nav-links a:hover {
 
@@ -3890,7 +3892,7 @@
 
             <li><a href="#about">Trang Chủ</a></li>
 
-            <li><a href="#download">Tải 4 App</a></li>
+            <li><a href="#download">Tải 5 App</a></li>
 
             <li><a href="#preview">Xem Preview</a></li>
 
@@ -3909,7 +3911,7 @@
             <li><a href="https://t.me/+dtVBEzwuN2Q4NmI9" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; font-weight: 700;">✈️ Nhóm Telegram</a></li>
 
             <li><a href="shop.html" style="color: #fbbf24; font-weight: 800;">🛒 Shop Key PRO</a></li>
-            <li><a href="vip.html" style="color: #10b981; font-weight: 800;">👑 Cổng VIP Tải 4 App</a></li>
+            <li><a href="vip.html" style="color: #10b981; font-weight: 800;">👑 Cổng VIP Tải 5 App</a></li>
             <li><a href="getkey.html" style="color: #34d399; font-weight: 800;">🔑 Lấy Key VIP 30h</a></li>
             <li><a href="#faq">FAQ</a></li>
 

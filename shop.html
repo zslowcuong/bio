@@ -317,6 +317,287 @@
             font-family: monospace; font-size: 13.5px; font-weight: 900; color: #fff; background: #020617;
             padding: 12px; border-radius: 10px; border: 1px solid #10b981; word-break: break-all; margin: 10px 0;
         }
+    
+        /* ECOSYSTEM ORBIT ANIMATION SYSTEM */
+        .ecosystem-stage-card {
+            background: linear-gradient(135deg, rgba(13, 21, 39, 0.95), rgba(15, 23, 42, 0.98));
+            border: 1.5px solid rgba(56, 189, 248, 0.3);
+            border-radius: 24px;
+            padding: 24px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ecosystem-stage-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .ecosystem-main-title {
+            font-size: 16px;
+            font-weight: 900;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        .ecosystem-sub-badge {
+            font-size: 11.5px;
+            color: #34d399;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.45);
+            padding: 5px 14px;
+            border-radius: 99px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .orbit-arena {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 380px;
+            margin: 10px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orbit-core-glow {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(56, 189, 248, 0.15) 45%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(25px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .orbit-center-master {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 116px;
+            height: 116px;
+            background: linear-gradient(145deg, rgba(13, 21, 39, 0.98), rgba(6, 78, 59, 0.7));
+            border: 2px solid #10b981;
+            border-radius: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 0 35px rgba(16, 185, 129, 0.55), inset 0 0 20px rgba(16, 185, 129, 0.35);
+            animation: centerPulse 3.5s ease-in-out infinite;
+            cursor: default;
+        }
+
+        @keyframes centerPulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 30px rgba(16, 185, 129, 0.5), inset 0 0 15px rgba(16, 185, 129, 0.3);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.05);
+                box-shadow: 0 0 45px rgba(56, 189, 248, 0.75), inset 0 0 25px rgba(16, 185, 129, 0.6);
+            }
+        }
+
+        .center-logo-img {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 4px;
+        }
+
+        .center-app-title {
+            font-size: 13px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -0.2px;
+            line-height: 1.2;
+        }
+
+        .center-crown-badge {
+            font-size: 9.5px;
+            font-weight: 800;
+            color: #6ee7b7;
+            background: rgba(16, 185, 129, 0.25);
+            padding: 2px 8px;
+            border-radius: 99px;
+            margin-top: 2px;
+            letter-spacing: 0.3px;
+        }
+
+        .orbit-track-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 280px;
+            height: 280px;
+            margin-top: -140px;
+            margin-left: -140px;
+            border: 1.5px dashed rgba(56, 189, 248, 0.35);
+            border-radius: 50%;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.08), inset 0 0 25px rgba(139, 92, 246, 0.06);
+            animation: orbitRevolution 22s linear infinite;
+            z-index: 4;
+        }
+
+        @keyframes orbitRevolution {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .orbit-arena:hover .orbit-track-ring,
+        .orbit-arena:hover .sat-node-card {
+            animation-play-state: paused;
+        }
+
+        .orbit-slot {
+            position: absolute;
+            width: 78px;
+            height: 78px;
+        }
+
+        .slot-top {
+            top: -39px;
+            left: 50%;
+            margin-left: -39px;
+        }
+
+        .slot-right {
+            right: -39px;
+            top: 50%;
+            margin-top: -39px;
+        }
+
+        .slot-bottom {
+            bottom: -39px;
+            left: 50%;
+            margin-left: -39px;
+        }
+
+        .slot-left {
+            left: -39px;
+            top: 50%;
+            margin-top: -39px;
+        }
+
+        .sat-node-card {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            background: rgba(15, 23, 42, 0.96);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 5px;
+            animation: counterRevolution 22s linear infinite;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+        }
+
+        @keyframes counterRevolution {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
+        .sat-node-card:hover {
+            transform: scale(1.18) !important;
+            z-index: 20;
+        }
+
+        .sat-node-card img {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 3px;
+        }
+
+        .sat-name-text {
+            font-size: 11px;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .sat-tag-text {
+            font-size: 8.5px;
+            font-weight: 700;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .card-flows {
+            border: 1.5px solid #f59e0b;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+        }
+        .card-flows:hover {
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.6);
+        }
+        .card-flows .sat-tag-text { color: #fbbf24; }
+
+        .card-ultra {
+            border: 1.5px solid #ec4899;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.35);
+        }
+        .card-ultra:hover {
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.6);
+        }
+        .card-ultra .sat-tag-text { color: #f472b6; }
+
+        .card-extra {
+            border: 1.5px solid #8b5cf6;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.35);
+        }
+        .card-extra:hover {
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+        }
+        .card-extra .sat-tag-text { color: #a78bfa; }
+
+        .card-flowz {
+            border: 1.5px solid #00f0ff;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+        }
+        .card-flowz:hover {
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+        }
+        .card-flowz .sat-tag-text { color: #38bdf8; }
+
+        .ecosystem-summary-pill {
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-size: 12.5px;
+            color: #d1fae5;
+            line-height: 1.55;
+            margin-top: 10px;
+        }
+        .ecosystem-summary-pill b {
+            color: #34d399;
+        }
+
     </style>
 </head>
 <body>
@@ -356,38 +637,70 @@
             </div>
         </div>
 
-        <!-- 1. CHỌN ỨNG DỤNG -->
-        <div class="section-card">
-            <div class="section-title">1. Chọn Ứng Dụng Cần Kích Hoạt PRO</div>
-            <div class="app-grid">
-                <button type="button" class="app-btn" data-app="flowoptimize" onclick="selectApp('flowoptimize')">
-                    <img src="app_logo.png" alt="FlowOptimize">
-                    <div class="name">FlowOptimize</div>
-                    <div class="sub">Prefix: FLOWOP</div>
-                </button>
-                <button type="button" class="app-btn" data-app="flows" onclick="selectApp('flows')">
-                    <img src="flows_logo.png" alt="FlowS">
-                    <div class="name">FlowS</div>
-                    <div class="sub">Prefix: FLOWS</div>
-                </button>
-                <button type="button" class="app-btn" data-app="flowultra" onclick="selectApp('flowultra')">
-                    <img src="flowultra_logo.png" alt="FlowUltra">
-                    <div class="name">FlowUltra</div>
-                    <div class="sub">Prefix: FLOWULTRA</div>
-                </button>
-                <button type="button" class="app-btn" data-app="flowextra" onclick="selectApp('flowextra')">
-                    <img src="flowextra_logo.png" alt="FlowExtra">
-                    <div class="name">FlowExtra</div>
-                    <div class="sub">Prefix: FLOWEXTRA</div>
-                </button>
-                <button type="button" class="app-btn" data-app="flowz" onclick="selectApp('flowz')">
-                    <img src="flowz_logo.png" onerror="this.src='app_logo.png'" alt="FlowZ">
-                    <div class="name">FlowZ VIP</div>
-                    <div class="sub">Prefix: FLOWZ</div>
-                </button>
+                <!-- 1. HỆ SINH THÁI 5 ỨNG DỤNG ĐỒNG BỘ TOÀN DIỆN -->
+        <div class="ecosystem-stage-card">
+            <div class="ecosystem-stage-header">
+                <div class="ecosystem-main-title">
+                    <span style="color:#00f0ff;">🌌</span> HỆ SINH THÁI 5 ỨNG DỤNG ĐỒNG BỘ TOÀN DIỆN
+                </div>
+                <div class="ecosystem-sub-badge">
+                    ✨ 1 Key VIP Mở Khóa Trọn Bộ 5 App
+                </div>
             </div>
-            <div class="app-warn" style="background:rgba(16,185,129,0.12);border-color:#10b981;color:#a7f3d0;">
-                ✨ <b>Đặc quyền Hệ Sinh Thái FlowEngine:</b> Khi mua bất kỳ gói nào (<b>Tuần / Tháng / 1 Năm / Vĩnh Viễn</b>), bạn đều nhận được <b>Mã Key Combo Kích Hoạt Trọn Bộ 5 App</b>! 1 Mã Key duy nhất mở khóa full tính năng cho cả 5 ứng dụng: <b>FlowOptimize</b>, <b>FlowS Gamer</b>, <b>FlowUltra</b>, <b>FlowExtra</b> và <b>FlowZ VIP</b>.
+
+            <!-- ORBITAL ANIMATION ARENA -->
+            <div class="orbit-arena">
+                <div class="orbit-core-glow"></div>
+
+                <!-- Center Node: FlowOp Master Engine -->
+                <div class="orbit-center-master" title="FlowOptimize - Trung Tâm Điều Khiển Master">
+                    <img src="app_logo.png" alt="FlowOptimize" class="center-logo-img">
+                    <div class="center-app-title">FlowOp</div>
+                    <div class="center-crown-badge">👑 Master Hub</div>
+                </div>
+
+                <!-- Orbit Track with 4 Satellites revolving -->
+                <div class="orbit-track-ring">
+                    <!-- Sat 1: FlowS (Top) -->
+                    <div class="orbit-slot slot-top">
+                        <div class="sat-node-card card-flows" title="FlowS - Tối Ưu FPS &amp; Xung Nhịp">
+                            <img src="flows_logo.png" alt="FlowS">
+                            <div class="sat-name-text">FlowS</div>
+                            <div class="sat-tag-text">120Hz &amp; FPS</div>
+                        </div>
+                    </div>
+
+                    <!-- Sat 2: FlowUltra (Right) -->
+                    <div class="orbit-slot slot-right">
+                        <div class="sat-node-card card-ultra" title="FlowUltra - SkiaVK &amp; Hail Freeze">
+                            <img src="flowultra_logo.png" alt="FlowUltra">
+                            <div class="sat-name-text">FlowUltra</div>
+                            <div class="sat-tag-text">SkiaVK &amp; Hail</div>
+                        </div>
+                    </div>
+
+                    <!-- Sat 3: FlowExtra (Bottom) -->
+                    <div class="orbit-slot slot-bottom">
+                        <div class="sat-node-card card-extra" title="FlowExtra - Cảm Ứng &amp; Ping">
+                            <img src="flowextra_logo.png" alt="FlowExtra">
+                            <div class="sat-name-text">FlowExtra</div>
+                            <div class="sat-tag-text">Touch &amp; Ping</div>
+                        </div>
+                    </div>
+
+                    <!-- Sat 4: FlowZ (Left) -->
+                    <div class="orbit-slot slot-left">
+                        <div class="sat-node-card card-flowz" title="FlowZ VIP - DPI &amp; HUD Nổi">
+                            <img src="flowz_logo.png" onerror="this.src='app_logo.png'" alt="FlowZ">
+                            <div class="sat-name-text">FlowZ VIP</div>
+                            <div class="sat-tag-text">DPI &amp; HUD</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ecosystem-summary-pill">
+                ✨ <b>Đặc quyền Hệ Sinh Thái FlowEngine:</b> Tất cả các gói (<b>Tuần / Tháng / 1 Năm / Vĩnh Viễn</b>) đều cấp <b>1 Mã Key Combo Duy Nhất</b> kích hoạt full tính năng cho cả 5 App cùng lúc: <b>FlowOptimize</b>, <b>FlowS Gamer</b>, <b>FlowUltra</b>, <b>FlowExtra</b> và <b>FlowZ VIP</b>. Bạn không cần phải chọn riêng từng ứng dụng!
             </div>
         </div>
 
@@ -635,10 +948,10 @@
         }
 
 function selectApp(appId) {
-            selectedAppId = APPS[appId] ? appId : 'flowoptimize';
-            document.querySelectorAll('.app-btn').forEach(b => b.classList.toggle('active', b.dataset.app === selectedAppId));
-            document.getElementById('selectedAppLabel').textContent = APPS[selectedAppId].name;
-            document.querySelectorAll('.appNameInline').forEach(el => el.textContent = APPS[selectedAppId].name);
+            selectedAppId = 'flowall';
+            const label = document.getElementById('selectedAppLabel');
+            if (label) label.textContent = "Combo 5 App FlowEngine";
+            document.querySelectorAll('.appNameInline').forEach(el => el.textContent = "Combo 5 App");
         }
 
         let isCreatingOrder = false;
