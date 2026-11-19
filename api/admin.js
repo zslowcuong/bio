@@ -5,6 +5,9 @@ import {
   completeOrderWithProKey,
   dbGetJson,
   dbSetJson,
+  dbHgetAllJson,
+  dbHgetJson,
+  dbHsetJson,
   getBackendStatus,
   getEventKeysMap,
   getGlobalResetsMap,
@@ -19,6 +22,39 @@ import {
   sha256Hex,
   signProKey,
 } from './_shared.js';
+
+
+async function getMergedOrders() {
+  const mapOrders = (await dbHgetAllJson('flowly:orders_map')) || {};
+  const listOrders = (await dbGetJson('flowly:orders', [])) || [];
+  const mergedMap = new Map();
+  for (const o of listOrders) {
+    if (o && o.orderCode) mergedMap.set(o.orderCode, o);
+  }
+  for (const code of Object.keys(mapOrders)) {
+    const o = mapOrders[code];
+    if (o && (o.orderCode || code)) {
+      mergedMap.set(o.orderCode || code, o);
+    }
+  }
+  return Array.from(mergedMap.values());
+}
+
+async function getMergedKeys() {
+  const mapKeys = (await dbHgetAllJson('flowly:keys_map')) || {};
+  const listKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+  const mergedMap = new Map();
+  for (const k of listKeys) {
+    if (k && k.key) mergedMap.set(String(k.key).toUpperCase(), k);
+  }
+  for (const kStr of Object.keys(mapKeys)) {
+    const k = mapKeys[kStr];
+    if (k && (k.key || kStr)) {
+      mergedMap.set(String(k.key || kStr).toUpperCase(), k);
+    }
+  }
+  return Array.from(mergedMap.values());
+}
 
 function formatDurationLabel(hours) {
   const h = Number(hours || 24);
@@ -52,8 +88,8 @@ export default async function handler(req, res) {
     const backendStatus = getBackendStatus();
 
     if (action === 'dashboard') {
-      const orders = (await dbGetJson('flowly:orders', [])) || [];
-      const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+      const orders = await getMergedOrders();
+      const issuedKeys = await getMergedKeys();
       const revokedKeys = await getRevokedKeysList();
       const eventKeys = await getEventKeysMap();
       const globalResets = await getGlobalResetsMap();
@@ -72,12 +108,26 @@ export default async function handler(req, res) {
 
     if (action === 'approve_order') {
       const orderCode = String(body.orderCode || '').trim().toUpperCase();
-      const orders = (await dbGetJson('flowly:orders', [])) || [];
-      const target = orders.find((o) => o.orderCode === orderCode);
+      let target = await dbHgetJson('flowly:orders_map', orderCode);
+      if (!target) {
+        const orders = (await dbGetJson('flowly:orders', [])) || [];
+        target = orders.find((o) => o.orderCode === orderCode);
+      }
       if (!target) {
         return res.status(404).json({ success: false, error: 'Không tìm thấy đơn hàng' });
       }
       const completed = await completeOrderWithProKey(target, body.txId || `ADMIN_${Date.now()}`, 'ADMIN_VERIFIED_TCB');
+      
+      // Update legacy orders array for backward compatibility
+      const orders = (await dbGetJson('flowly:orders', [])) || [];
+      const idx = orders.findIndex(o => o.orderCode === orderCode);
+      if (idx >= 0) {
+        orders[idx] = completed;
+      } else {
+        orders.unshift(completed);
+      }
+      await dbSetJson('flowly:orders', orders.slice(0, 500));
+
       return res.status(200).json({ success: true, order: completed });
     }
 
@@ -166,8 +216,7 @@ export default async function handler(req, res) {
       orders.unshift(order);
       await dbSetJson('flowly:orders', orders.slice(0, 500));
 
-      const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
-      issuedKeys.unshift({
+      const issuedRecord = {
         key,
         appId,
         allApps: isLifeCombo,
@@ -181,8 +230,15 @@ export default async function handler(req, res) {
         createdAtUtc: nowUtc,
         expiryUtcMs,
         revoked: false,
-      });
+      };
+
+      const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+      issuedKeys.unshift(issuedRecord);
       await dbSetJson('flowly:issued_keys', issuedKeys.slice(0, 800));
+
+      // Atomic Redis Hashes
+      await dbHsetJson('flowly:orders_map', orderCode, order);
+      await dbHsetJson('flowly:keys_map', key, issuedRecord);
 
       return res.status(200).json({ success: true, key, order });
     }
@@ -207,6 +263,13 @@ export default async function handler(req, res) {
         String(item.key || '').toUpperCase() === targetKey ? { ...item, revoked: shouldRevoke } : item
       );
       await dbSetJson('flowly:issued_keys', updatedIssued);
+
+      // Atomic Hash update
+      const keyObj = await dbHgetJson('flowly:keys_map', targetKey);
+      if (keyObj) {
+        keyObj.revoked = shouldRevoke;
+        await dbHsetJson('flowly:keys_map', targetKey, keyObj);
+      }
 
       return res.status(200).json({ success: true, revokedKeys: revokedList, key: targetKey, revoked: shouldRevoke });
     }

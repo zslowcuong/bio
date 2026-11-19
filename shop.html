@@ -429,6 +429,16 @@
             box-shadow: 0 0 35px rgba(245, 158, 11, 0.45), 0 0 75px rgba(245, 158, 11, 0.22), inset 0 0 25px rgba(245, 158, 11, 0.08);
             animation: goldAuraPulse 3s infinite ease-in-out;
         }
+        .pricing-card-box.aura-1y {
+            border: 1.8px solid rgba(239, 68, 68, 0.7);
+            background: linear-gradient(165deg, rgba(13, 21, 39, 0.96), rgba(239, 68, 68, 0.12));
+            box-shadow: 0 0 32px rgba(239, 68, 68, 0.35), 0 0 70px rgba(239, 68, 68, 0.18), inset 0 0 20px rgba(239, 68, 68, 0.08);
+        }
+        .pricing-card-box.aura-1y:hover {
+            box-shadow: 0 0 45px rgba(239, 68, 68, 0.6), 0 0 90px rgba(239, 68, 68, 0.35), inset 0 0 28px rgba(239, 68, 68, 0.12);
+            border-color: #f87171;
+        }
+
         @keyframes goldAuraPulse {
             0%, 100% {
                 box-shadow: 0 0 30px rgba(245, 158, 11, 0.4), 0 0 65px rgba(245, 158, 11, 0.18), inset 0 0 20px rgba(245, 158, 11, 0.06);
@@ -513,6 +523,7 @@
         .btn-plan-action.btn-3d { background: linear-gradient(135deg, #059669, #10b981); color: #fff; }
         .btn-plan-action.btn-7d { background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; }
         .btn-plan-action.btn-30d { background: linear-gradient(135deg, #9333ea, #a855f7); color: #fff; }
+        .btn-1y { background: linear-gradient(135deg, #dc2626, #ef4444); color: #fff; }
 
     </style>
 </head>
@@ -665,7 +676,30 @@
                     <button type="button" class="btn-plan-action btn-30d" onclick="createShopOrder('30D')">👑 Mua Gói Tháng • 49K</button>
                 </div>
 
-                <!-- GÓI 4: VĨNH VIỄN VIP -->
+                <!-- GÓI 4: 1 NĂM (12 THÁNG) -->
+                <div class="pricing-card-box aura-1y featured">
+                    <span class="plan-ribbon orange">🔥 PHỔ BIẾN NHẤT • ~14K/THÁNG</span>
+                    <div>
+                        <div class="plan-card-title">GÓI 1 NĂM (12 THÁNG)</div>
+                        <div class="plan-card-price">
+                            <span id="price1Y">169.000đ</span>
+                            <span class="plan-old-strikethrough">399.000đ</span>
+                        </div>
+                        <div class="plan-flash-tag">⚡ Giá Ưu Đãi 1 Năm (Tiết kiệm 58%)</div>
+                        <div class="plan-card-desc">Gói được game thủ ưa chuộng nhất: Tối ưu 365 ngày liên tục, chỉ ~463đ/ngày.</div>
+                        <ul class="plan-card-perks">
+                            <li>Mở khóa full 5 app FlowEngine trong 365 ngày</li>
+                            <li>Đơn giá siêu hời: ~14.000đ/tháng (~463đ/ngày)</li>
+                            <li>Tiết kiệm 71% so với gia hạn 12 tháng lẻ</li>
+                            <li>Tặng 2 lần đổi thiết bị miễn phí linh hoạt</li>
+                            <li>Nhận toàn bộ bản cập nhật tính năng mới lớn nhỏ</li>
+                            <li>Hỗ trợ kỹ thuật VIP ưu tiên 1-1 qua Zalo/Telegram</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-plan-action btn-1y" onclick="createShopOrder('1Y')">🔥 Mua Gói 1 Năm • 169K</button>
+                </div>
+
+                <!-- GÓI 5: VĨNH VIỄN VIP -->
                 <div class="pricing-card-box aura-life vip">
                     <span class="plan-ribbon gold" id="vipTierBadge">👑 SỞ HỮU TRỌN ĐỜI • 899K</span>
                     <div>
