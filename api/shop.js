@@ -77,14 +77,17 @@ export default async function handler(req, res) {
 
       const plan = PLANS[planCode];
       let finalPrice = plan.price;
-      if (planCode === '1Y' || planCode === '365D') {
-        finalPrice = 99000;
-      } else if (planCode === '30D') {
-        finalPrice = 35000;
+      if (planCode === '3D') {
+        finalPrice = 10000;
       } else if (planCode === '7D') {
-        finalPrice = 15000;
+        finalPrice = 25000;
+      } else if (planCode === '30D') {
+        finalPrice = 49000;
+      } else if (planCode === '1Y' || planCode === '365D') {
+        finalPrice = 99000;
       } else if (planCode === 'LIFE') {
-        finalPrice = 199000;
+        const tier = await getLifetimePricingTier();
+        finalPrice = tier.currentPrice || 99000;
       }
       const num6 = String(Math.floor(100000 + Math.random() * 900000));
       const orderCode = `ORD${num6}`;
@@ -94,13 +97,15 @@ export default async function handler(req, res) {
 
       // Tat ca cac goi deu mo khoa tron bo 5 App
       const finalAppId = 'all';
-      const planTitle = (planCode === '1Y' || planCode === '365D')
-        ? 'Gói 1 Năm Combo Full 5 App (99K)'
-        : (planCode === '30D'
-            ? 'Gói Tháng Combo Full 5 App (35K)'
-            : (planCode === 'LIFE'
-                ? 'Gói Vĩnh Viễn VIP Full 5 App Trọn Đời (199K)'
-                : 'Gói Tuần Combo Full 5 App (15K)'));
+      const planTitle = (planCode === '3D')
+        ? 'Gói 3 Ngày Trải Nghiệm Combo Full 5 App (10K)'
+        : (planCode === '7D'
+            ? 'Gói 7 Ngày Combo Full 5 App (25K)'
+            : (planCode === '30D'
+                ? 'Gói Tháng Combo Full 5 App (49K)'
+                : (planCode === 'LIFE'
+                    ? `Gói Vĩnh Viễn VIP Full 5 App Trọn Đời (${Math.round(finalPrice / 1000)}K)`
+                    : 'Gói Combo Full 5 App')));
 
       const order = {
         orderCode,

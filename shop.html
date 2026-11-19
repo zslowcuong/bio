@@ -318,285 +318,201 @@
             padding: 12px; border-radius: 10px; border: 1px solid #10b981; word-break: break-all; margin: 10px 0;
         }
     
-        /* ECOSYSTEM ORBIT ANIMATION SYSTEM */
-        .ecosystem-stage-card {
-            background: linear-gradient(135deg, rgba(13, 21, 39, 0.95), rgba(15, 23, 42, 0.98));
-            border: 1.5px solid rgba(56, 189, 248, 0.3);
-            border-radius: 24px;
-            padding: 24px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ecosystem-stage-header {
+        /* --- FLASH SALE COUNTDOWN BANNER --- */
+        .flash-sale-banner {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.18), rgba(245, 158, 11, 0.15));
+            border: 1.5px solid rgba(239, 68, 68, 0.5);
+            border-radius: 16px;
+            padding: 14px 20px;
+            margin-bottom: 22px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 14px;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.25);
+            animation: flashPulse 2.5s infinite ease-in-out;
         }
-
-        .ecosystem-main-title {
-            font-size: 16px;
-            font-weight: 900;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            letter-spacing: 0.3px;
+        @keyframes flashPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.25); border-color: rgba(239, 68, 68, 0.5); }
+            50% { box-shadow: 0 0 35px rgba(245, 158, 11, 0.45); border-color: rgba(245, 158, 11, 0.8); }
         }
-
-        .ecosystem-sub-badge {
+        .flash-badge {
+            background: linear-gradient(135deg, #ef4444, #f59e0b);
+            color: #fff;
             font-size: 11.5px;
-            color: #34d399;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.45);
-            padding: 5px 14px;
-            border-radius: 99px;
-            font-weight: 800;
+            font-weight: 900;
+            padding: 5px 12px;
+            border-radius: 20px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
+            letter-spacing: 0.5px;
         }
-
-        .orbit-arena {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            height: 380px;
-            margin: 10px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .orbit-core-glow {
-            position: absolute;
-            width: 220px;
-            height: 220px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(56, 189, 248, 0.15) 45%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(25px);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .orbit-center-master {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 116px;
-            height: 116px;
-            background: linear-gradient(145deg, rgba(13, 21, 39, 0.98), rgba(6, 78, 59, 0.7));
-            border: 2px solid #10b981;
-            border-radius: 28px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            box-shadow: 0 0 35px rgba(16, 185, 129, 0.55), inset 0 0 20px rgba(16, 185, 129, 0.35);
-            animation: centerPulse 3.5s ease-in-out infinite;
-            cursor: default;
-        }
-
-        @keyframes centerPulse {
-            0%, 100% {
-                transform: translate(-50%, -50%) scale(1);
-                box-shadow: 0 0 30px rgba(16, 185, 129, 0.5), inset 0 0 15px rgba(16, 185, 129, 0.3);
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.05);
-                box-shadow: 0 0 45px rgba(56, 189, 248, 0.75), inset 0 0 25px rgba(16, 185, 129, 0.6);
-            }
-        }
-
-        .center-logo-img {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
-            object-fit: cover;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            margin-bottom: 4px;
-        }
-
-        .center-app-title {
+        .flash-note {
+            color: #f1f5f9;
             font-size: 13px;
-            font-weight: 900;
-            color: #ffffff;
-            letter-spacing: -0.2px;
-            line-height: 1.2;
+            font-weight: 600;
+            display: block;
+            margin-top: 5px;
         }
-
-        .center-crown-badge {
-            font-size: 9.5px;
-            font-weight: 800;
-            color: #6ee7b7;
-            background: rgba(16, 185, 129, 0.25);
-            padding: 2px 8px;
-            border-radius: 99px;
-            margin-top: 2px;
-            letter-spacing: 0.3px;
-        }
-
-        .orbit-track-ring {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 280px;
-            height: 280px;
-            margin-top: -140px;
-            margin-left: -140px;
-            border: 1.5px dashed rgba(56, 189, 248, 0.35);
-            border-radius: 50%;
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.08), inset 0 0 25px rgba(139, 92, 246, 0.06);
-            animation: orbitRevolution 22s linear infinite;
-            z-index: 4;
-        }
-
-        @keyframes orbitRevolution {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .orbit-arena:hover .orbit-track-ring,
-        .orbit-arena:hover .sat-node-card {
-            animation-play-state: paused;
-        }
-
-        .orbit-slot {
-            position: absolute;
-            width: 78px;
-            height: 78px;
-        }
-
-        .slot-top {
-            top: -39px;
-            left: 50%;
-            margin-left: -39px;
-        }
-
-        .slot-right {
-            right: -39px;
-            top: 50%;
-            margin-top: -39px;
-        }
-
-        .slot-bottom {
-            bottom: -39px;
-            left: 50%;
-            margin-left: -39px;
-        }
-
-        .slot-left {
-            left: -39px;
-            top: 50%;
-            margin-top: -39px;
-        }
-
-        .sat-node-card {
-            width: 100%;
-            height: 100%;
-            border-radius: 20px;
-            background: rgba(15, 23, 42, 0.96);
+        .flash-countdown-wrap {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 5px;
-            animation: counterRevolution 22s linear infinite;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-            cursor: pointer;
+            gap: 10px;
         }
-
-        @keyframes counterRevolution {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(-360deg); }
-        }
-
-        .sat-node-card:hover {
-            transform: scale(1.18) !important;
-            z-index: 20;
-        }
-
-        .sat-node-card img {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            object-fit: cover;
-            margin-bottom: 3px;
-        }
-
-        .sat-name-text {
+        .countdown-title {
             font-size: 11px;
             font-weight: 800;
-            color: #ffffff;
-            line-height: 1.2;
-            white-space: nowrap;
+            color: #fbbf24;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+        .countdown-digits {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .time-box {
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(251, 191, 36, 0.6);
+            color: #fbbf24;
+            font-size: 16px;
+            font-weight: 900;
+            font-family: monospace;
+            padding: 5px 9px;
+            border-radius: 8px;
+            min-width: 32px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+        }
+        .time-sep {
+            color: #ef4444;
+            font-weight: 900;
+            font-size: 16px;
         }
 
-        .sat-tag-text {
-            font-size: 8.5px;
-            font-weight: 700;
-            line-height: 1.2;
-            white-space: nowrap;
+        /* --- BLUR AURA CHO 4 GÓI --- */
+        .pricing-card-box.aura-3d {
+            border: 1.5px solid rgba(16, 185, 129, 0.45);
+            background: linear-gradient(165deg, rgba(13, 21, 39, 0.95), rgba(16, 185, 129, 0.08));
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.22), 0 0 55px rgba(16, 185, 129, 0.1), inset 0 0 20px rgba(16, 185, 129, 0.04);
+        }
+        .pricing-card-box.aura-3d:hover {
+            box-shadow: 0 0 35px rgba(16, 185, 129, 0.45), 0 0 75px rgba(16, 185, 129, 0.22), inset 0 0 25px rgba(16, 185, 129, 0.08);
+            border-color: #10b981;
         }
 
-        .card-flows {
-            border: 1.5px solid #f59e0b;
-            box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+        .pricing-card-box.aura-7d {
+            border: 1.5px solid rgba(14, 165, 233, 0.5);
+            background: linear-gradient(165deg, rgba(13, 21, 39, 0.95), rgba(14, 165, 233, 0.09));
+            box-shadow: 0 0 25px rgba(14, 165, 233, 0.25), 0 0 60px rgba(14, 165, 233, 0.12), inset 0 0 20px rgba(14, 165, 233, 0.05);
         }
-        .card-flows:hover {
-            box-shadow: 0 0 30px rgba(245, 158, 11, 0.6);
+        .pricing-card-box.aura-7d:hover {
+            box-shadow: 0 0 38px rgba(14, 165, 233, 0.5), 0 0 80px rgba(14, 165, 233, 0.25), inset 0 0 25px rgba(14, 165, 233, 0.09);
+            border-color: #0ea5e9;
         }
-        .card-flows .sat-tag-text { color: #fbbf24; }
 
-        .card-ultra {
-            border: 1.5px solid #ec4899;
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.35);
+        .pricing-card-box.aura-30d {
+            border: 1.5px solid rgba(168, 85, 247, 0.6);
+            background: linear-gradient(165deg, rgba(13, 21, 39, 0.95), rgba(168, 85, 247, 0.1));
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.32), 0 0 65px rgba(168, 85, 247, 0.16), inset 0 0 20px rgba(168, 85, 247, 0.06);
         }
-        .card-ultra:hover {
-            box-shadow: 0 0 30px rgba(236, 72, 153, 0.6);
+        .pricing-card-box.aura-30d:hover {
+            box-shadow: 0 0 42px rgba(168, 85, 247, 0.55), 0 0 85px rgba(168, 85, 247, 0.3), inset 0 0 25px rgba(168, 85, 247, 0.1);
+            border-color: #c084fc;
         }
-        .card-ultra .sat-tag-text { color: #f472b6; }
 
-        .card-extra {
-            border: 1.5px solid #8b5cf6;
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.35);
+        .pricing-card-box.aura-life {
+            border: 1.8px solid rgba(245, 158, 11, 0.75);
+            background: linear-gradient(165deg, rgba(13, 21, 39, 0.98), rgba(245, 158, 11, 0.12));
+            box-shadow: 0 0 35px rgba(245, 158, 11, 0.45), 0 0 75px rgba(245, 158, 11, 0.22), inset 0 0 25px rgba(245, 158, 11, 0.08);
+            animation: goldAuraPulse 3s infinite ease-in-out;
         }
-        .card-extra:hover {
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+        @keyframes goldAuraPulse {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(245, 158, 11, 0.4), 0 0 65px rgba(245, 158, 11, 0.18), inset 0 0 20px rgba(245, 158, 11, 0.06);
+                border-color: rgba(245, 158, 11, 0.65);
+            }
+            50% {
+                box-shadow: 0 0 48px rgba(245, 158, 11, 0.65), 0 0 95px rgba(245, 158, 11, 0.32), inset 0 0 30px rgba(245, 158, 11, 0.12);
+                border-color: #fbbf24;
+            }
         }
-        .card-extra .sat-tag-text { color: #a78bfa; }
+        .pricing-card-box.aura-life:hover {
+            box-shadow: 0 0 55px rgba(245, 158, 11, 0.75), 0 0 110px rgba(245, 158, 11, 0.38), inset 0 0 35px rgba(245, 158, 11, 0.15);
+            border-color: #f59e0b;
+        }
 
-        .card-flowz {
-            border: 1.5px solid #00f0ff;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+        /* --- VIP SLOT COUNTER WIDGET --- */
+        .vip-slot-box {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin: 12px 0;
         }
-        .card-flowz:hover {
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+        .vip-slot-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11.5px;
+            font-weight: 800;
+            margin-bottom: 6px;
         }
-        .card-flowz .sat-tag-text { color: #38bdf8; }
+        .vip-slot-badge {
+            color: #fbbf24;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .vip-slot-count {
+            color: #ef4444;
+            font-weight: 900;
+            background: rgba(239, 68, 68, 0.15);
+            padding: 2px 7px;
+            border-radius: 10px;
+        }
+        .vip-slot-track {
+            height: 7px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .vip-slot-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f59e0b, #ef4444);
+            border-radius: 10px;
+            transition: width 0.6s ease;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+        }
+        .vip-slot-hint {
+            font-size: 10.5px;
+            color: #94a3b8;
+            margin-top: 5px;
+            line-height: 1.35;
+        }
 
-        .ecosystem-summary-pill {
-            background: rgba(16, 185, 129, 0.12);
-            border: 1px solid rgba(16, 185, 129, 0.35);
-            border-radius: 14px;
-            padding: 12px 16px;
-            font-size: 12.5px;
-            color: #d1fae5;
-            line-height: 1.55;
-            margin-top: 10px;
+        .plan-flash-tag {
+            font-size: 11px;
+            font-weight: 800;
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            padding: 4px 8px;
+            display: inline-block;
+            margin-bottom: 8px;
         }
-        .ecosystem-summary-pill b {
-            color: #34d399;
-        }
+
+        .plan-ribbon.green { background: linear-gradient(135deg, #059669, #10b981); }
+        .plan-ribbon.blue { background: linear-gradient(135deg, #0284c7, #0ea5e9); }
+        .plan-ribbon.purple { background: linear-gradient(135deg, #9333ea, #a855f7); }
+
+        .btn-plan-action.btn-3d { background: linear-gradient(135deg, #059669, #10b981); color: #fff; }
+        .btn-plan-action.btn-7d { background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; }
+        .btn-plan-action.btn-30d { background: linear-gradient(135deg, #9333ea, #a855f7); color: #fff; }
 
     </style>
 </head>
@@ -637,76 +553,9 @@
             </div>
         </div>
 
-                <!-- 1. HỆ SINH THÁI 5 ỨNG DỤNG ĐỒNG BỘ TOÀN DIỆN -->
-        <div class="ecosystem-stage-card">
-            <div class="ecosystem-stage-header">
-                <div class="ecosystem-main-title">
-                    <span style="color:#00f0ff;">🌌</span> HỆ SINH THÁI 5 ỨNG DỤNG ĐỒNG BỘ TOÀN DIỆN
-                </div>
-                <div class="ecosystem-sub-badge">
-                    ✨ 1 Key VIP Mở Khóa Trọn Bộ 5 App
-                </div>
-            </div>
-
-            <!-- ORBITAL ANIMATION ARENA -->
-            <div class="orbit-arena">
-                <div class="orbit-core-glow"></div>
-
-                <!-- Center Node: FlowOp Master Engine -->
-                <div class="orbit-center-master" title="FlowOptimize - Trung Tâm Điều Khiển Master">
-                    <img src="app_logo.png" alt="FlowOptimize" class="center-logo-img">
-                    <div class="center-app-title">FlowOp</div>
-                    <div class="center-crown-badge">👑 Master Hub</div>
-                </div>
-
-                <!-- Orbit Track with 4 Satellites revolving -->
-                <div class="orbit-track-ring">
-                    <!-- Sat 1: FlowS (Top) -->
-                    <div class="orbit-slot slot-top">
-                        <div class="sat-node-card card-flows" title="FlowS - Tối Ưu FPS &amp; Xung Nhịp">
-                            <img src="flows_logo.png" alt="FlowS">
-                            <div class="sat-name-text">FlowS</div>
-                            <div class="sat-tag-text">120Hz &amp; FPS</div>
-                        </div>
-                    </div>
-
-                    <!-- Sat 2: FlowUltra (Right) -->
-                    <div class="orbit-slot slot-right">
-                        <div class="sat-node-card card-ultra" title="FlowUltra - SkiaVK &amp; Hail Freeze">
-                            <img src="flowultra_logo.png" alt="FlowUltra">
-                            <div class="sat-name-text">FlowUltra</div>
-                            <div class="sat-tag-text">SkiaVK &amp; Hail</div>
-                        </div>
-                    </div>
-
-                    <!-- Sat 3: FlowExtra (Bottom) -->
-                    <div class="orbit-slot slot-bottom">
-                        <div class="sat-node-card card-extra" title="FlowExtra - Cảm Ứng &amp; Ping">
-                            <img src="flowextra_logo.png" alt="FlowExtra">
-                            <div class="sat-name-text">FlowExtra</div>
-                            <div class="sat-tag-text">Touch &amp; Ping</div>
-                        </div>
-                    </div>
-
-                    <!-- Sat 4: FlowZ (Left) -->
-                    <div class="orbit-slot slot-left">
-                        <div class="sat-node-card card-flowz" title="FlowZ VIP - DPI &amp; HUD Nổi">
-                            <img src="flowz_logo.png" onerror="this.src='app_logo.png'" alt="FlowZ">
-                            <div class="sat-name-text">FlowZ VIP</div>
-                            <div class="sat-tag-text">DPI &amp; HUD</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ecosystem-summary-pill">
-                ✨ <b>Đặc quyền Hệ Sinh Thái FlowEngine:</b> Tất cả các gói (<b>Tuần / Tháng / 1 Năm / Vĩnh Viễn</b>) đều cấp <b>1 Mã Key Combo Duy Nhất</b> kích hoạt full tính năng cho cả 5 App cùng lúc: <b>FlowOptimize</b>, <b>FlowS Gamer</b>, <b>FlowUltra</b>, <b>FlowExtra</b> và <b>FlowZ VIP</b>. Bạn không cần phải chọn riêng từng ứng dụng!
-            </div>
-        </div>
-
-        <!-- 2. THÔNG TIN THIẾT BỊ -->
+                <!-- 1. THÔNG TIN THIẾT BỊ -->
         <div class="section-card">
-            <div class="section-title">2. Thông Tin Thiết Bị Nhận Key (Khóa 1 Thiết Bị Chống Chia Sẻ)</div>
+            <div class="section-title">1. Thông Tin Thiết Bị Nhận Key (Bảo Hành HWID)</div>
             <div class="form-grid">
                 <div class="field">
                     <label>📱 Mã Thiết Bị (HWID trong App)</label>
@@ -722,101 +571,140 @@
             </div>
         </div>
 
-        <!-- 3. CHỌN GÓI -->
+                <!-- 2. CHỌN GÓI KEY PRO -->
         <div class="section-card" style="padding: 24px;">
             <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
                 <div style="font-size: 16px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
                     <span style="color:#00f0ff; font-size: 18px;">💎</span> BẢNG GIÁ DỊCH VỤ NIÊM YẾT MỚI (MỞ KHÓA TRỌN BỘ 5 ỨNG DỤNG)
                 </div>
-                <div style="font-size: 12px; color: #fbbf24; font-weight: 800; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); padding: 5px 14px; border-radius: 20px; display: flex; align-items: center; gap: 6px;">
+                <div style="font-size: 12px; color: #fbbf24; font-weight: 800; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.35); padding: 5px 14px; border-radius: 20px;">
                     🔥 1 Key VIP sử dụng đồng thời trên cả 5 App
                 </div>
             </div>
 
+            <!-- FLASH SALE COUNTDOWN BANNER -->
+            <div class="flash-sale-banner">
+                <div class="flash-sale-left">
+                    <span class="flash-badge">⚡ FLASH SALE GIỚI HẠN GIỜ</span>
+                    <span class="flash-note">Sau khi hết giờ Flash Sale sẽ tăng giá: <b>Gói 3 Ngày (15K)</b> • <b>Gói 7 Ngày (29K)</b> • <b>Gói Tháng (54K)</b></span>
+                </div>
+                <div class="flash-countdown-wrap">
+                    <span class="countdown-title">KẾT THÚC SAU:</span>
+                    <div class="countdown-digits">
+                        <span class="time-box" id="flashHours">05</span><span class="time-sep">:</span>
+                        <span class="time-box" id="flashMins">42</span><span class="time-sep">:</span>
+                        <span class="time-box" id="flashSecs">18</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="plans-grid">
-                <!-- GÓI 1: TUẦN -->
-                <div class="pricing-card-box">
+                <!-- GÓI 1: 3 NGÀY -->
+                <div class="pricing-card-box aura-3d">
+                    <span class="plan-ribbon green">⚡ TEST MƯỢT 72H</span>
                     <div>
-                        <div class="plan-card-title">GÓI TUẦN COMBO</div>
-                        <div class="plan-card-price">15.000đ</div>
-                        <div class="plan-card-desc">Phễu dùng thử siêu rẻ cho máy yếu test FPS, độ nhạy cực mượt.</div>
-                        <ul class="plan-card-perks">
-                            <li>Mở khóa full 5 app FlowEngine</li>
-                            <li>Hạn dùng: 7 ngày liên tục</li>
-                            <li>Đơn giá: • 2.143đ/ngày (3.000đ/app)</li>
-                            <li>Khóa 1 thiết bị (đổi 1 lần nếu up ROM)</li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn-plan-action btn-week" onclick="createShopOrder('7D')">⚡ Mua Gói Tuần • 15K</button>
-                </div>
-
-                <!-- GÓI 2: THÁNG -->
-                <div class="pricing-card-box">
-                    <div>
-                        <div class="plan-card-title">GÓI THÁNG COMBO</div>
-                        <div class="plan-card-price">35.000đ</div>
-                        <div class="plan-card-desc">Giải pháp tiết kiệm nhất (~1.167đ/ngày) cho game thủ thường xuyên.</div>
-                        <ul class="plan-card-perks">
-                            <li>Mở khóa full 5 app FlowEngine</li>
-                            <li>Hạn dùng: 30 ngày liên tục</li>
-                            <li>Đơn giá: • 1.167đ/ngày (7.000đ/app)</li>
-                            <li>Tiết kiệm 41,7% so với mua 4 tuần lẻ (60.000đ)</li>
-                            <li>Tặng 1 lần đổi máy miễn phí (lần 2 trở đi 10k)</li>
-                            <li>Hỗ trợ kỹ thuật ưu tiên</li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn-plan-action btn-month" onclick="createShopOrder('30D')">🚀 Mua Gói Tháng • 35K</button>
-                </div>
-
-                <!-- GÓI 3: 1 NĂM (365 NGÀY) -->
-                <div class="pricing-card-box featured">
-                    <span class="plan-ribbon orange" id="yearlyTierBadge">🔥 PHỔ BIẾN NHẤT • CHỈ 8.250đ/THÁNG</span>
-                    <div>
-                        <div class="plan-card-title">GÓI 1 NĂM (12 THÁNG)</div>
+                        <div class="plan-card-title">GÓI 3 NGÀY COMBO</div>
                         <div class="plan-card-price">
-                            <span id="yearlyPriceLabel">99.000đ</span>
-                            <span class="plan-old-strikethrough">199.000đ</span>
+                            <span id="price3D">10.000đ</span>
+                            <span class="plan-old-strikethrough">15.000đ</span>
                         </div>
-                        <div class="plan-card-desc">Gói được ưa chuộng nhất: Tiết kiệm 76,4% so với mua lẻ 12 tháng!</div>
+                        <div class="plan-flash-tag">⚡ Giá Flash Sale (Sau đó tăng 15K)</div>
+                        <div class="plan-card-desc">Trải nghiệm tối ưu hiệu năng mượt mà, test FPS &amp; độ nhạy cực bén trên mọi thiết bị.</div>
                         <ul class="plan-card-perks">
-                            <li>Mở khóa full 5 app trong 365 ngày</li>
-                            <li>Đơn giá: • 8.250đ/tháng (271đ/ngày) (19.800đ/app)</li>
-                            <li>Tiết kiệm 321.000đ; hòa vốn sau 2,83 tháng</li>
-                            <li>Tặng 2 lần đổi máy miễn phí (lần 3 trở đi 10k)</li>
-                            <li>Nhận mọi bản cập nhật tính năng mới lớn nhỏ</li>
-                            <li>Hỗ trợ kỹ thuật VIP ưu tiên 1-1</li>
+                            <li>Mở khóa trọn bộ 5 app FlowEngine</li>
+                            <li>Hạn dùng: 3 ngày (72 giờ liên tục)</li>
+                            <li>Chi phí siêu rẻ: chỉ ~3.333đ/ngày</li>
+                            <li>Hỗ trợ đổi thiết bị 1 lần miễn phí khi up ROM/đổi máy</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-yearly" id="yearlyBuyBtn" onclick="createShopOrder('1Y')">👑 Mua Gói 1 Năm • 99K</button>
+                    <button type="button" class="btn-plan-action btn-3d" onclick="createShopOrder('3D')">⚡ Mua Gói 3 Ngày • 10K</button>
                 </div>
 
-                <!-- GÓI 4: VĨNH VIỄN VIP 199K -->
-                <div class="pricing-card-box vip">
-                    <span class="plan-ribbon gold">👑 SỞ HỮU TRỌN ĐỜI</span>
+                <!-- GÓI 2: 7 NGÀY (1 TUẦN) -->
+                <div class="pricing-card-box aura-7d">
+                    <span class="plan-ribbon blue">🚀 LEO RANK TUẦN</span>
+                    <div>
+                        <div class="plan-card-title">GÓI 7 NGÀY (1 TUẦN)</div>
+                        <div class="plan-card-price">
+                            <span id="price7D">25.000đ</span>
+                            <span class="plan-old-strikethrough">29.000đ</span>
+                        </div>
+                        <div class="plan-flash-tag">⚡ Giá Flash Sale (Sau đó tăng 29K)</div>
+                        <div class="plan-card-desc">Giải pháp leo rank tuần hoàn hảo (~3.570đ/ngày) cho game thủ cày sự kiện.</div>
+                        <ul class="plan-card-perks">
+                            <li>Mở khóa trọn bộ 5 app FlowEngine</li>
+                            <li>Hạn dùng: 7 ngày liên tục</li>
+                            <li>Chi phí tối ưu: chỉ ~3.570đ/ngày</li>
+                            <li>Tiết kiệm hơn nhiều so với mua lẻ từng ngày</li>
+                            <li>Tặng 1 lần đổi thiết bị miễn phí linh hoạt</li>
+                            <li>Hỗ trợ kỹ thuật chuyên nghiệp 24/7</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-plan-action btn-7d" onclick="createShopOrder('7D')">🚀 Mua Gói Tuần • 25K</button>
+                </div>
+
+                <!-- GÓI 3: THÁNG (30 NGÀY) -->
+                <div class="pricing-card-box aura-30d">
+                    <span class="plan-ribbon purple">👑 CHIẾN GAME CẢ THÁNG</span>
+                    <div>
+                        <div class="plan-card-title">GÓI THÁNG (30 NGÀY)</div>
+                        <div class="plan-card-price">
+                            <span id="price30D">49.000đ</span>
+                            <span class="plan-old-strikethrough">54.000đ</span>
+                        </div>
+                        <div class="plan-flash-tag">⚡ Giá Flash Sale (Sau đó tăng 54K)</div>
+                        <div class="plan-card-desc">Gói chiến game bền bỉ cả tháng, tối ưu vượt trội chỉ ~1.633đ/ngày.</div>
+                        <ul class="plan-card-perks">
+                            <li>Mở khóa full 5 app FlowEngine trong 30 ngày</li>
+                            <li>Đơn giá siêu rẻ: ~1.633đ/ngày</li>
+                            <li>Tặng 1 lần đổi máy miễn phí linh hoạt</li>
+                            <li>Nhận mọi bản cập nhật tính năng mới lớn nhỏ</li>
+                            <li>Hỗ trợ kỹ thuật ưu tiên 24/7</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-plan-action btn-30d" onclick="createShopOrder('30D')">👑 Mua Gói Tháng • 49K</button>
+                </div>
+
+                <!-- GÓI 4: VĨNH VIỄN VIP -->
+                <div class="pricing-card-box aura-life vip">
+                    <span class="plan-ribbon gold" id="vipTierBadge">🔥 ĐỢT 1: CHỈ CÒN 15/15 SUẤT 99K</span>
                     <div>
                         <div class="plan-card-title">GÓI VĨNH VIỄN VIP</div>
                         <div class="plan-card-price">
-                            <span>199.000đ</span>
-                            <span class="plan-old-strikethrough">499.000đ</span>
+                            <span id="vipPriceLabel">99.000đ</span>
+                            <span class="plan-old-strikethrough">249.000đ</span>
                         </div>
-                        <div class="plan-card-desc" style="color:#fbbf24;font-weight:700;">Chỉ thêm 100.000đ so với Gói 1 Năm để sở hữu trọn đời — không bao giờ phải gia hạn lại!</div>
+
+                        <!-- SLOTS COUNTER WIDGET -->
+                        <div class="vip-slot-box">
+                            <div class="vip-slot-header">
+                                <span class="vip-slot-badge">🔥 Suất Ưu Đãi Đợt 1</span>
+                                <span class="vip-slot-count" id="vipSlotCount">Còn 15/15 suất</span>
+                            </div>
+                            <div class="vip-slot-track">
+                                <div class="vip-slot-fill" id="vipSlotFill" style="width: 25%;"></div>
+                            </div>
+                            <div class="vip-slot-hint">Hết 15 suất đầu tiên sẽ tăng lên 149.000đ ➔ tiến dần về giá gốc 249K</div>
+                        </div>
+
+                        <div class="plan-card-desc" style="color:#fbbf24;font-weight:700;">Sở hữu trọn đời một lần duy nhất — trải nghiệm không giới hạn, không bao giờ phải gia hạn!</div>
                         <ul class="plan-card-perks">
-                            <li>Full bản quyền 5 app trọn đời vĩnh viễn</li>
-                            <li>Đơn giá: 39.800đ/app (gấp 2,01 lần gói Năm)</li>
-                            <li>Hòa vốn sau 5,69 tháng; giảm 60,1% giá gốc</li>
-                            <li>Tặng 3 lần đổi máy miễn phí</li>
-                            <li>Đặc quyền mọi app mới phát hành trong tương lai</li>
-                            <li>Hỗ trợ kỹ thuật VIP 24/7 trực tiếp</li>
+                            <li>Full bản quyền trọn đời vĩnh viễn trên cả 5 ứng dụng</li>
+                            <li>Đơn giá trọn đời: chỉ 99.000đ dùng mãi mãi</li>
+                            <li>Ưu đãi độc quyền: Giảm hơn 60% so với giá niêm yết</li>
+                            <li>Tặng 3 lần đổi thiết bị miễn phí trọn đời</li>
+                            <li>Đặc quyền dùng miễn phí mọi app mới phát hành trong tương lai</li>
+                            <li>Hỗ trợ kỹ thuật VIP 24/7 chuyên sâu, ưu tiên cao nhất</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-vip" onclick="createShopOrder('LIFE')">💎 Mua Vĩnh Viễn • 199K</button>
+                    <button type="button" class="btn-plan-action btn-vip" id="vipBuyBtn" onclick="createShopOrder('LIFE')">💎 Mua Vĩnh Viễn • 99K</button>
                 </div>
             </div>
         </div>
 
-        <!-- 4. TRA CỨU ĐƠN HÀNG & ĐỔI THIẾT BỊ -->
+        <!-- 3. TRA CỨU ĐƠN HÀNG & ĐỔI THIẾT BỊ -->
         <div class="section-card">
-            <div class="section-title">4. Tra Cứu Đơn Hàng &amp; Đổi Thiết Bị (HWID)</div>
+            <div class="section-title">3. Tra Cứu Đơn Hàng &amp; Đổi Thiết Bị (HWID)</div>
             <div class="lookup-row">
                 <input id="lookupInput" placeholder="Nhập Mã Đơn (ORD...), Nội dung CK (FLOW...), HWID hoặc SĐT..." />
                 <button type="button" onclick="lookupOrders()">🔍 Tra Cứu</button>
@@ -925,7 +813,41 @@
         let currentOrder = null;
         let pollTimer = null;
 
-        let currentYearlyPrice = 99000;
+        
+        let currentVipPrice = 99000;
+
+        function startFlashSaleTimer() {
+            let endTime = localStorage.getItem('flow_flash_end');
+            const now = Date.now();
+            if (!endTime || Number(endTime) <= now) {
+                // Đặt đợt Flash Sale 8 tiếng từ lúc truy cập
+                endTime = now + (8 * 3600 * 1000);
+                localStorage.setItem('flow_flash_end', endTime);
+            } else {
+                endTime = Number(endTime);
+            }
+
+            function updateClock() {
+                const diff = Math.max(0, endTime - Date.now());
+                const hours = Math.floor(diff / (3600 * 1000));
+                const mins = Math.floor((diff % (3600 * 1000)) / (60 * 1000));
+                const secs = Math.floor((diff % (60 * 1000)) / 1000);
+
+                const hEl = document.getElementById('flashHours');
+                const mEl = document.getElementById('flashMins');
+                const sEl = document.getElementById('flashSecs');
+                if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+                if (mEl) mEl.textContent = String(mins).padStart(2, '0');
+                if (sEl) sEl.textContent = String(secs).padStart(2, '0');
+
+                if (diff <= 0) {
+                    // Reset thêm chu kỳ mới
+                    localStorage.setItem('flow_flash_end', Date.now() + (6 * 3600 * 1000));
+                }
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+        }
 
         async function syncDynamicPricing() {
             try {
@@ -934,18 +856,27 @@
                 const data = await res.json();
                 if (data.pricing) {
                     const p = data.pricing;
-                    currentYearlyPrice = p.currentPrice || 99000;
-                    const badgeEl = document.getElementById('yearlyTierBadge');
+                    currentVipPrice = p.currentPrice || 99000;
+                    const badgeEl = document.getElementById('vipTierBadge');
                     if (badgeEl && p.tierBadge) {
                         badgeEl.textContent = p.tierBadge;
                     }
-                    const priceEl = document.getElementById('yearlyPriceLabel');
+                    const priceEl = document.getElementById('vipPriceLabel');
                     if (priceEl) {
-                        priceEl.textContent = `${currentYearlyPrice.toLocaleString('vi-VN')}đ`;
+                        priceEl.textContent = `${currentVipPrice.toLocaleString('vi-VN')}đ`;
                     }
-                    const btnEl = document.getElementById('yearlyBuyBtn');
+                    const btnEl = document.getElementById('vipBuyBtn');
                     if (btnEl) {
-                        btnEl.textContent = `👑 Mua Gói 1 Năm • ${Math.round(currentYearlyPrice/1000)}K`;
+                        btnEl.textContent = `💎 Mua Vĩnh Viễn • ${Math.round(currentVipPrice/1000)}K`;
+                    }
+                    const countEl = document.getElementById('vipSlotCount');
+                    if (countEl && p.slotsLeft !== undefined) {
+                        countEl.textContent = `Còn ${p.slotsLeft}/15 suất`;
+                    }
+                    const fillEl = document.getElementById('vipSlotFill');
+                    if (fillEl && p.soldInTier !== undefined) {
+                        const pct = Math.min(100, Math.max(10, Math.round((p.soldInTier / 15) * 100)));
+                        fillEl.style.width = `${pct}%`;
                     }
                 }
             } catch (e) {
@@ -953,7 +884,8 @@
             }
         }
 
-function selectApp(appId) {
+
+        function selectApp(appId) {
             selectedAppId = 'all';
             const label = document.getElementById('selectedAppLabel');
             if (label) label.textContent = "Combo 5 App FlowEngine";
@@ -1195,6 +1127,7 @@ function selectApp(appId) {
 
         selectApp(selectedAppId);
         syncDynamicPricing();
+        startFlashSaleTimer();
 
         try {
             const savedProKey = localStorage.getItem('flow_my_pro_key');
