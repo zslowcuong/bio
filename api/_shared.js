@@ -28,9 +28,9 @@ export const PLANS = {
   '3D': { code: '3D', name: 'Gói 3 Ngày Trải Nghiệm (72 Giờ)', days: 3, hours: 72, price: 10000 },
   '7D': { code: '7D', name: 'Gói 7 Ngày Combo (1 Tuần)', days: 7, hours: 168, price: 25000 },
   '30D': { code: '30D', name: 'Gói Tháng Combo (30 Ngày)', days: 30, hours: 720, price: 49000 },
-  '1Y': { code: '1Y', name: 'Gói 1 Năm Combo (365 Ngày)', days: 365, hours: 8760, price: 99000 },
-  '365D': { code: '365D', name: 'Gói 1 Năm Combo (365 Ngày)', days: 365, hours: 8760, price: 99000 },
-  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn VIP Trọn Đời (99K)', days: 36500, hours: 876000, price: 99000 },
+  '1Y': { code: '1Y', name: 'Gói 1 Năm Combo (365 Ngày)', days: 365, hours: 8760, price: 169000 },
+  '365D': { code: '365D', name: 'Gói 1 Năm Combo (365 Ngày)', days: 365, hours: 8760, price: 169000 },
+  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn VIP Trọn Đời (899K)', days: 36500, hours: 876000, price: 899000 },
 };
 
 export const APPS = {
@@ -634,64 +634,18 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
 
 
 export async function getLifetimePricingTier() {
-  const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
-  const lifeCount = Array.isArray(issuedKeys)
-    ? issuedKeys.filter(k => k.planCode === 'LIFE' || k.plan === 'LIFE' || (k.key && k.key.includes('-LIFE-'))).length
-    : 0;
-
-  const TIER_SIZE = 15;
-  let tierNumber = 1;
-  let currentPrice = 99000;
-  let nextTierPrice = 149000;
-  let slotsLeft = 15;
-  let soldInTier = 0;
-
-  if (lifeCount < 15) {
-    tierNumber = 1;
-    currentPrice = 99000;
-    nextTierPrice = 149000;
-    slotsLeft = 15 - lifeCount;
-    soldInTier = lifeCount;
-  } else if (lifeCount < 30) {
-    tierNumber = 2;
-    currentPrice = 149000;
-    nextTierPrice = 199000;
-    slotsLeft = 30 - lifeCount;
-    soldInTier = lifeCount - 15;
-  } else if (lifeCount < 45) {
-    tierNumber = 3;
-    currentPrice = 199000;
-    nextTierPrice = 249000;
-    slotsLeft = 45 - lifeCount;
-    soldInTier = lifeCount - 30;
-  } else {
-    tierNumber = 4;
-    currentPrice = 249000;
-    nextTierPrice = 249000;
-    slotsLeft = 0;
-    soldInTier = 15;
-  }
-
-  // Nếu chưa có đơn hàng nào, để mặc định 4/15 suất còn lại để tạo hiệu ứng FOMO trực quan
-  if (lifeCount === 0) {
-    soldInTier = 11;
-    slotsLeft = 4;
-  }
-
-  const tierBadge = tierNumber === 1
-    ? `🔥 ĐỢT 1: CÒN ${slotsLeft}/15 SUẤT 99K`
-    : `🔥 ĐỢT ${tierNumber}: CÒN ${slotsLeft}/15 SUẤT (${Math.round(currentPrice/1000)}K)`;
-
+  const currentPrice = 899000;
+  const originalPrice = 1299000;
   return {
-    lifeCount,
-    tierNumber,
+    lifeCount: 0,
+    tierNumber: 1,
     currentPrice,
-    nextTierPrice,
-    slotsLeft,
-    totalSlotsInTier: TIER_SIZE,
-    soldInTier,
-    originalPrice: 249000,
-    tierBadge,
+    nextTierPrice: 899000,
+    slotsLeft: 5,
+    totalSlotsInTier: 15,
+    soldInTier: 10,
+    originalPrice,
+    tierBadge: '👑 GÓI VĨNH VIỄN VIP TRỌN ĐỜI 899K',
   };
 }
 

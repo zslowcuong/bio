@@ -667,37 +667,37 @@
 
                 <!-- GÓI 4: VĨNH VIỄN VIP -->
                 <div class="pricing-card-box aura-life vip">
-                    <span class="plan-ribbon gold" id="vipTierBadge">🔥 ĐỢT 1: CHỈ CÒN 15/15 SUẤT 99K</span>
+                    <span class="plan-ribbon gold" id="vipTierBadge">👑 SỞ HỮU TRỌN ĐỜI • 899K</span>
                     <div>
                         <div class="plan-card-title">GÓI VĨNH VIỄN VIP</div>
                         <div class="plan-card-price">
-                            <span id="vipPriceLabel">99.000đ</span>
-                            <span class="plan-old-strikethrough">249.000đ</span>
+                            <span id="vipPriceLabel">899.000đ</span>
+                            <span class="plan-old-strikethrough">1.299.000đ</span>
                         </div>
 
                         <!-- SLOTS COUNTER WIDGET -->
                         <div class="vip-slot-box">
                             <div class="vip-slot-header">
-                                <span class="vip-slot-badge">🔥 Suất Ưu Đãi Đợt 1</span>
-                                <span class="vip-slot-count" id="vipSlotCount">Còn 15/15 suất</span>
+                                <span class="vip-slot-badge">🔥 Suất Ưu Đãi VIP</span>
+                                <span class="vip-slot-count" id="vipSlotCount">Còn 5/15 suất</span>
                             </div>
                             <div class="vip-slot-track">
-                                <div class="vip-slot-fill" id="vipSlotFill" style="width: 25%;"></div>
+                                <div class="vip-slot-fill" id="vipSlotFill" style="width: 66%;"></div>
                             </div>
-                            <div class="vip-slot-hint">Hết 15 suất đầu tiên sẽ tăng lên 149.000đ ➔ tiến dần về giá gốc 249K</div>
+                            <div class="vip-slot-hint">Hết lượt ưu đãi sẽ quay lại giá niêm yết 1.299.000đ</div>
                         </div>
 
                         <div class="plan-card-desc" style="color:#fbbf24;font-weight:700;">Sở hữu trọn đời một lần duy nhất — trải nghiệm không giới hạn, không bao giờ phải gia hạn!</div>
                         <ul class="plan-card-perks">
                             <li>Full bản quyền trọn đời vĩnh viễn trên cả 5 ứng dụng</li>
-                            <li>Đơn giá trọn đời: chỉ 99.000đ dùng mãi mãi</li>
-                            <li>Ưu đãi độc quyền: Giảm hơn 60% so với giá niêm yết</li>
+                            <li>Đơn giá trọn đời: chỉ 899.000đ dùng mãi mãi</li>
+                            <li>Ưu đãi độc quyền: Tiết kiệm tối đa chi phí dài hạn</li>
                             <li>Tặng 3 lần đổi thiết bị miễn phí trọn đời</li>
                             <li>Đặc quyền dùng miễn phí mọi app mới phát hành trong tương lai</li>
                             <li>Hỗ trợ kỹ thuật VIP 24/7 chuyên sâu, ưu tiên cao nhất</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-vip" id="vipBuyBtn" onclick="createShopOrder('LIFE')">💎 Mua Vĩnh Viễn • 99K</button>
+                    <button type="button" class="btn-plan-action btn-vip" id="vipBuyBtn" onclick="createShopOrder('LIFE')">💎 Mua Vĩnh Viễn • 899K</button>
                 </div>
             </div>
         </div>
@@ -966,6 +966,21 @@
         function closePayModal() {
             document.getElementById('payModal').classList.remove('show');
             if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+        }
+
+        function openBankApp(bank) {
+            if (!currentOrder) return;
+            const memo = currentOrder.memo || '';
+            const price = currentOrder.price || 0;
+            const accNo = '10006503497';
+            const bankCode = 'TPB';
+
+            // Auto copy memo to clipboard
+            copyStr(memo);
+
+            // VietQR Universal 1-Tap Deeplink
+            const deepLinkUrl = `https://dl.vietqr.io/pay?app=${encodeURIComponent(bank)}&ba=${accNo}@${bankCode}&am=${price}&tn=${encodeURIComponent(memo)}`;
+            window.open(deepLinkUrl, '_blank');
         }
 
         async function checkCurrentOrder(manualClick) {

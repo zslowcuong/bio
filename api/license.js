@@ -5,6 +5,7 @@ import {
   buildVietQrUrl,
   dbGetJson,
   dbSetJson,
+  dbSetNx,
   getBackendStatus,
   getEventKeysMap,
   getGlobalResetsMap,
@@ -37,6 +38,18 @@ export default async function handler(req, res) {
       const targetHwid = normalizeHwid(req.query?.hwid || body.hwid);
       if (!targetHwid || targetHwid.length < 4) {
         return res.status(400).json({ success: false, error: 'MISSING_HWID', serverNowUtc });
+      }
+
+      // Atomic Rate Limit: 60s per HWID
+      const rateLimitKey = `flowly:mint_vip_rate:${targetHwid}`;
+      const canMint = await dbSetNx(rateLimitKey, '1', 60);
+      if (!canMint) {
+        return res.status(429).json({
+          success: false,
+          error: 'RATE_LIMIT_EXCEEDED',
+          message: 'Thao tác quá nhanh! Vui lòng đợi 60 giây trước khi nhận key tiếp theo.',
+          serverNowUtc
+        });
       }
       const targetApp = APPS[targetAppId] || APPS['flowoptimize'];
       const expiryMs = serverNowUtc + 30 * 3600 * 1000;

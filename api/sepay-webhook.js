@@ -2,6 +2,8 @@ import {
   completeOrderWithProKey,
   dbGetJson,
   dbSetJson,
+  dbHgetAllJson,
+  dbSetNx,
   handlePreflight,
   normalizeTextForMatch,
   parseBody,
@@ -41,25 +43,35 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, ignored: true, reason: 'Account number mismatch' });
     }
 
-    const claimedTx = (await dbGetJson('flowly:claimed_tx', {})) || {};
-    if (claimedTx[txId]) {
-      return res.status(200).json({ success: true, duplicate: true, orderCode: claimedTx[txId].orderCode });
+    // 1. Atomic Deduplication via SETNX
+    const claimKey = `flowly:claim_tx:${txId}`;
+    const acquired = await dbSetNx(claimKey, JSON.stringify({ txId, amountIn, time: Date.now() }), 86400 * 30);
+    if (!acquired) {
+      return res.status(200).json({ success: true, duplicate: true, reason: 'Transaction already claimed' });
     }
 
     const compactContent = normalizeTextForMatch(content).replace(/\s+/g, '');
-    const orders = (await dbGetJson('flowly:orders', [])) || [];
-    const target = orders.find((o) => {
+
+    // 2. Query Atomic Orders Map First
+    const ordersMap = (await dbHgetAllJson('flowly:orders_map')) || {};
+    let target = Object.values(ordersMap).find((o) => {
       if (o.status === 'COMPLETED') return false;
       const memoUpper = String(o.memo || '').toUpperCase();
       return memoUpper && compactContent.includes(memoUpper) && amountIn >= Number(o.price);
     });
 
     if (!target) {
-      return res.status(200).json({ success: true, matched: false, reason: 'No matching pending order found' });
+      const orders = (await dbGetJson('flowly:orders', [])) || [];
+      target = orders.find((o) => {
+        if (o.status === 'COMPLETED') return false;
+        const memoUpper = String(o.memo || '').toUpperCase();
+        return memoUpper && compactContent.includes(memoUpper) && amountIn >= Number(o.price);
+      });
     }
 
-    claimedTx[txId] = { orderCode: target.orderCode, claimedAtUtc: Date.now() };
-    await dbSetJson('flowly:claimed_tx', claimedTx);
+    if (!target) {
+      return res.status(200).json({ success: true, matched: false, reason: 'No matching pending order found' });
+    }
 
     // AUTO APPROVE & ISSUE KEY IMMEDIATELY
     const completed = await completeOrderWithProKey(target, txId, 'SEPAY_WEBHOOK_VERIFIED');

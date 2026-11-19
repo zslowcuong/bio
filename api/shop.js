@@ -8,6 +8,10 @@ import {
   getLifetimePricingTier,
   dbGetJson,
   dbSetJson,
+  dbHgetJson,
+  dbHsetJson,
+  dbHgetAllJson,
+  dbSetNx,
   getBackendStatus,
   handlePreflight,
   makePaymentMemo,
@@ -84,10 +88,9 @@ export default async function handler(req, res) {
       } else if (planCode === '30D') {
         finalPrice = 49000;
       } else if (planCode === '1Y' || planCode === '365D') {
-        finalPrice = 99000;
+        finalPrice = 169000;
       } else if (planCode === 'LIFE') {
-        const tier = await getLifetimePricingTier();
-        finalPrice = tier.currentPrice || 99000;
+        finalPrice = 899000;
       }
       const num6 = String(Math.floor(100000 + Math.random() * 900000));
       const orderCode = `ORD${num6}`;
@@ -103,9 +106,11 @@ export default async function handler(req, res) {
             ? 'Gói 7 Ngày Combo Full 5 App (25K)'
             : (planCode === '30D'
                 ? 'Gói Tháng Combo Full 5 App (49K)'
-                : (planCode === 'LIFE'
-                    ? `Gói Vĩnh Viễn VIP Full 5 App Trọn Đời (${Math.round(finalPrice / 1000)}K)`
-                    : 'Gói Combo Full 5 App')));
+                : (planCode === '1Y' || planCode === '365D'
+                    ? 'Gói 1 Năm Combo Full 5 App (169K)'
+                    : (planCode === 'LIFE'
+                        ? 'Gói Vĩnh Viễn VIP Full 5 App Trọn Đời (899K)'
+                        : 'Gói Combo Full 5 App'))));
 
       const order = {
         orderCode,
@@ -126,6 +131,8 @@ export default async function handler(req, res) {
         createdAt: new Date(nowUtc).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }),
       };
 
+      // 1. Atomic write to orders map
+      await dbHsetJson('flowly:orders_map', order.orderCode, order);
       const orders = (await dbGetJson('flowly:orders', [])) || [];
       orders.unshift(order);
       await dbSetJson('flowly:orders', orders.slice(0, 500));
@@ -167,8 +174,12 @@ export default async function handler(req, res) {
         return res.status(400).json({ success: false, error: 'Thiếu orderCode' });
       }
 
-      const orders = (await dbGetJson('flowly:orders', [])) || [];
-      let order = orders.find((o) => o.orderCode === orderCode);
+      // Check atomic hash map first
+      let order = await dbHgetJson('flowly:orders_map', orderCode);
+      if (!order) {
+        const orders = (await dbGetJson('flowly:orders', [])) || [];
+        order = orders.find((o) => o.orderCode === orderCode);
+      }
       if (!order) {
         return res.status(404).json({ success: false, error: 'Không tìm thấy đơn hàng' });
       }
@@ -191,7 +202,6 @@ export default async function handler(req, res) {
           if (spRes.ok) {
             const spData = await spRes.json();
             const txs = Array.isArray(spData?.transactions) ? spData.transactions : [];
-            const claimedTx = (await dbGetJson('flowly:claimed_tx', {})) || {};
 
             const matched = txs.find((tx) => {
               const txId = String(tx.id || '');
@@ -199,7 +209,6 @@ export default async function handler(req, res) {
               const content = tx.transaction_content || '';
               return (
                 txId &&
-                !claimedTx[txId] &&
                 amountIn >= Number(order.price) &&
                 memoMatchesTransaction(content, order.memo)
               );
@@ -207,15 +216,17 @@ export default async function handler(req, res) {
 
             if (matched) {
               const txId = String(matched.id);
-              claimedTx[txId] = { orderCode: order.orderCode, claimedAtUtc: Date.now() };
-              await dbSetJson('flowly:claimed_tx', claimedTx);
-              order = await completeOrderWithProKey(order, txId, 'SEPAY_POLL_VERIFIED');
-              return res.status(200).json({
-                success: true,
-                paid: true,
-                order,
-                ...backendStatus,
-              });
+              // Atomic claim via SETNX
+              const acquired = await dbSetNx(`flowly:claim_tx:${txId}`, JSON.stringify({ orderCode: order.orderCode, claimedAtUtc: Date.now() }), 86400 * 30);
+              if (acquired) {
+                order = await completeOrderWithProKey(order, txId, 'SEPAY_POLL_VERIFIED');
+                return res.status(200).json({
+                  success: true,
+                  paid: true,
+                  order,
+                  ...backendStatus,
+                });
+              }
             }
           }
         } catch (err) {
