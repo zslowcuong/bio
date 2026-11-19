@@ -30,7 +30,7 @@ export const PLANS = {
   '30D': { code: '30D', name: 'Gói Tháng Combo (30 Ngày)', days: 30, hours: 720, price: 49000 },
   '1Y': { code: '1Y', name: 'Gói 1 Năm Combo (365 Ngày)', days: 365, hours: 8760, price: 169000 },
   '365D': { code: '365D', name: 'Gói 1 Năm Combo (365 Ngày)', days: 365, hours: 8760, price: 169000 },
-  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn VIP Trọn Đời (899K)', days: 36500, hours: 876000, price: 899000 },
+  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn VIP Trọn Đời (99K)', days: 36500, hours: 876000, price: 99000 },
 };
 
 export const APPS = {
@@ -634,18 +634,64 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
 
 
 export async function getLifetimePricingTier() {
-  const currentPrice = 899000;
-  const originalPrice = 1299000;
+  const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+  const lifeCount = Array.isArray(issuedKeys)
+    ? issuedKeys.filter(k => k.planCode === 'LIFE' || k.plan === 'LIFE' || (k.key && k.key.includes('-LIFE-'))).length
+    : 0;
+
+  const TIER_SIZE = 15;
+  let tierNumber = 1;
+  let currentPrice = 99000;
+  let nextTierPrice = 149000;
+  let slotsLeft = 15;
+  let soldInTier = 0;
+
+  if (lifeCount < 15) {
+    tierNumber = 1;
+    currentPrice = 99000;
+    nextTierPrice = 149000;
+    slotsLeft = 15 - lifeCount;
+    soldInTier = lifeCount;
+  } else if (lifeCount < 30) {
+    tierNumber = 2;
+    currentPrice = 149000;
+    nextTierPrice = 199000;
+    slotsLeft = 30 - lifeCount;
+    soldInTier = lifeCount - 15;
+  } else if (lifeCount < 45) {
+    tierNumber = 3;
+    currentPrice = 199000;
+    nextTierPrice = 249000;
+    slotsLeft = 45 - lifeCount;
+    soldInTier = lifeCount - 30;
+  } else {
+    tierNumber = 4;
+    currentPrice = 249000;
+    nextTierPrice = 249000;
+    slotsLeft = 0;
+    soldInTier = 15;
+  }
+
+  // Nếu chưa có lượt mua nào, giữ nguyên 15/15 suất theo yêu cầu
+  if (lifeCount === 0) {
+    soldInTier = 0;
+    slotsLeft = 15;
+  }
+
+  const tierBadge = tierNumber === 1
+    ? `👑 SỞ HỮU TRỌN ĐỜI • 99K`
+    : `👑 SỞ HỮU TRỌN ĐỜI • ${Math.round(currentPrice/1000)}K`;
+
   return {
-    lifeCount: 0,
-    tierNumber: 1,
+    lifeCount,
+    tierNumber,
     currentPrice,
-    nextTierPrice: 899000,
-    slotsLeft: 5,
-    totalSlotsInTier: 15,
-    soldInTier: 10,
-    originalPrice,
-    tierBadge: '👑 GÓI VĨNH VIỄN VIP TRỌN ĐỜI 899K',
+    nextTierPrice,
+    slotsLeft,
+    totalSlotsInTier: TIER_SIZE,
+    soldInTier,
+    originalPrice: 249000,
+    tierBadge,
   };
 }
 

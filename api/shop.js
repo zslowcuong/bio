@@ -90,7 +90,8 @@ export default async function handler(req, res) {
       } else if (planCode === '1Y' || planCode === '365D') {
         finalPrice = 169000;
       } else if (planCode === 'LIFE') {
-        finalPrice = 899000;
+        const lifeTier = await getLifetimePricingTier();
+        finalPrice = lifeTier.currentPrice || 99000;
       }
       const num6 = String(Math.floor(100000 + Math.random() * 900000));
       const orderCode = `ORD${num6}`;
@@ -109,7 +110,7 @@ export default async function handler(req, res) {
                 : (planCode === '1Y' || planCode === '365D'
                     ? 'Gói 1 Năm Combo Full 5 App (169K)'
                     : (planCode === 'LIFE'
-                        ? 'Gói Vĩnh Viễn VIP Full 5 App Trọn Đời (899K)'
+                        ? `Gói Vĩnh Viễn VIP Full 5 App Trọn Đời (${Math.round(finalPrice / 1000)}K)`
                         : 'Gói Combo Full 5 App'))));
 
       const order = {
