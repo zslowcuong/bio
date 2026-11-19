@@ -147,11 +147,11 @@
 
     <script>
         const APPS = {
-            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP', salt: 'FLOWLY_2026_FLOWOP_SALT_91A4', scheme: 'flowoptimize', pkg: 'com.example.gameoptimizer', logo: 'app_logo.png' },
-            flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS',  salt: 'FLOWLY_2026_FLOWS_SALT_73C8',  scheme: 'flows',        pkg: 'com.flows.gaming',         logo: 'flows_logo.png' },
-            flowultra:    { id: 'flowultra',    name: 'FlowUltra',    prefix: 'FLOWULTRA', salt: 'FLOWLY_2026_FLOWULTRA_SALT_52E9', scheme: 'flowultra', pkg: 'com.flows.flowultra',    logo: 'flowultra_logo.png' },
-            flowextra:    { id: 'flowextra',    name: 'FlowExtra',    prefix: 'FLOWEXTRA', salt: 'FLOWLY_2026_FLOWEXTRA_1412_SALT_84F1', scheme: 'flowextra', pkg: 'com.flowextra.optimizer', logo: 'flowextra_logo.png' },
-            flowz:        { id: 'flowz',        name: 'FlowZ VIP',    prefix: 'FLOWZ',  salt: 'FLOWLY_2026_FLOWZ_VIP_SALT_98B2',  scheme: 'flowz',        pkg: 'com.nebula.hnx',         logo: 'flowz_logo.png' }
+            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP', scheme: 'flowoptimize', pkg: 'com.example.gameoptimizer', logo: 'app_logo.png' },
+            flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS',  scheme: 'flows',        pkg: 'com.flows.gaming',         logo: 'flows_logo.png' },
+            flowultra:    { id: 'flowultra',    name: 'FlowUltra',    prefix: 'FLOWULTRA', scheme: 'flowultra', pkg: 'com.flows.flowultra',    logo: 'flowultra_logo.png' },
+            flowextra:    { id: 'flowextra',    name: 'FlowExtra',    prefix: 'FLOWEXTRA', scheme: 'flowextra', pkg: 'com.flowextra.optimizer', logo: 'flowextra_logo.png' },
+            flowz:        { id: 'flowz',        name: 'FlowZ VIP',    prefix: 'FLOWZ',  scheme: 'flowz',        pkg: 'com.nebula.hnx',         logo: 'flowz_logo.png' }
         };
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -185,39 +185,38 @@
             return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())} • ${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
         }
 
-        async function sha256Upper(text) {
-            const enc = new TextEncoder();
-            const buf = await crypto.subtle.digest('SHA-256', enc.encode(text));
-            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
-        }
+        
 
         async function initVipKey() {
             if (!hwid || hwid.length < 4) return;
-            let nowMs = Date.now();
+            document.getElementById('keyValDisplay').textContent = '⏳ Đang tạo mã Key VIP từ máy chủ bảo mật...';
             try {
-                const res = await fetch('https://bio-seven-nu.vercel.app/api/license?action=time', { cache: 'no-store' });
-                if (res.ok) {
+                const query = `action=mint_vip&app=${encodeURIComponent(app.id)}&hwid=${encodeURIComponent(hwid)}`;
+                let res = null;
+                try {
+                    res = await fetch(`/api/license?${query}`, { cache: 'no-store' });
+                } catch (_) {}
+                if (!res || !res.ok) {
+                    res = await fetch(`https://bio-seven-nu.vercel.app/api/license?${query}`, { cache: 'no-store' });
+                }
+                if (res && res.ok) {
                     const data = await res.json();
-                    if (data.serverNowUtc) {
-                        clockOffsetMs = Number(data.serverNowUtc) - Date.now();
-                        nowMs = Number(data.serverNowUtc);
+                    if (data.success && data.key) {
+                        generatedKey = data.key;
+                        expiryMs = Number(data.expiresAtUtc || (Date.now() + 30 * 3600 * 1000));
+                        clockOffsetMs = Number(data.serverNowUtc || Date.now()) - Date.now();
+                        document.getElementById('keyValDisplay').textContent = generatedKey;
+                        document.getElementById('infoCreated').textContent = formatDate(new Date(Number(data.serverNowUtc || Date.now())));
+                        document.getElementById('infoExpires').textContent = formatDate(new Date(expiryMs));
+                        document.getElementById('deepLinkBtn').href = `${app.scheme}://unlock?key=${encodeURIComponent(generatedKey)}`;
+                        updateCountdown();
+                        return;
                     }
                 }
-            } catch (_) {}
-
-            expiryMs = nowMs + 30 * 3600 * 1000;
-            const expirySec = Math.floor(expiryMs / 1000);
-            const expiryHex = expirySec.toString(16).toUpperCase();
-            const sigInput = `${app.prefix}:VIP:${hwid}:${expirySec}:${app.salt}`;
-            const hashHex = await sha256Upper(sigInput);
-            const sig8 = hashHex.slice(0, 8);
-
-            generatedKey = `${app.prefix}-VIP-${hwid}-${expiryHex}-${sig8}`;
-            document.getElementById('keyValDisplay').textContent = generatedKey;
-            document.getElementById('infoCreated').textContent = formatDate(new Date(nowMs));
-            document.getElementById('infoExpires').textContent = formatDate(new Date(expiryMs));
-            document.getElementById('deepLinkBtn').href = `${app.scheme}://unlock?key=${encodeURIComponent(generatedKey)}`;
-            updateCountdown();
+            } catch (err) {
+                console.error('Lỗi cấp Key VIP từ server:', err);
+            }
+            document.getElementById('keyValDisplay').textContent = '⚠️ KHÔNG THỂ CẤP KEY VIP. VUI LÒNG KIỂM TRA MẠNG HOẶC THỬ LẠI SAU.';
         }
 
         function updateCountdown() {

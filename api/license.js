@@ -32,6 +32,34 @@ export default async function handler(req, res) {
     const serverNowUtc = Date.now();
     const status = getBackendStatus();
 
+    if (action === 'mint_vip') {
+      const targetAppId = normalizeAppId(req.query?.appId || req.query?.app || body.appId || body.app);
+      const targetHwid = normalizeHwid(req.query?.hwid || body.hwid);
+      if (!targetHwid || targetHwid.length < 4) {
+        return res.status(400).json({ success: false, error: 'MISSING_HWID', serverNowUtc });
+      }
+      const targetApp = APPS[targetAppId] || APPS['flowoptimize'];
+      const expiryMs = serverNowUtc + 30 * 3600 * 1000;
+      const expirySec = Math.floor(expiryMs / 1000);
+      const expiryHex = expirySec.toString(16).toUpperCase();
+      const sigInput = `${targetApp.prefix}:VIP:${targetHwid}:${expirySec}:${targetApp.salt}`;
+      const hashHex = sha256Hex(sigInput).toUpperCase();
+      const sig8 = hashHex.slice(0, 8);
+      const vipKey = `${targetApp.prefix}-VIP-${targetHwid}-${expiryHex}-${sig8}`;
+
+      return res.status(200).json({
+        success: true,
+        key: vipKey,
+        appId: targetApp.id,
+        appName: targetApp.name,
+        hwid: targetHwid,
+        durationHours: 30,
+        expiresAtUtc: expiryMs,
+        serverNowUtc,
+        ...status,
+      });
+    }
+
     if (action === 'time') {
       return res.status(200).json({
         success: true,

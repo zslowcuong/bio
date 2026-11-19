@@ -741,6 +741,17 @@
                 <div class="bank-line"><span>Nội dung CK:</span><span><b id="modalMemo" style="color:#fbbf24;">FLOW000000</b> <button class="copy-mini" onclick="copyStr(currentOrder?.memo || '')">Copy</button></span></div>
             </div>
 
+            
+            <div id="bankDeeplinkRow" style="margin:12px 0 6px;text-align:left;">
+                <div style="font-size:11px;font-weight:700;color:#94a3b8;margin-bottom:6px;">🚀 MỞ APP NGÂN HÀNG 1-CHẠM (TỰ SAO CHÉP STK &amp; NỘI DUNG):</div>
+                <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;">
+                    <button type="button" onclick="openBankApp('tpb')" style="background:#581c87;color:#c084fc;border:1px solid #7e22ce;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">TPBank</button>
+                    <button type="button" onclick="openBankApp('mb')" style="background:#1e3a8a;color:#60a5fa;border:1px solid #2563eb;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">MBBank</button>
+                    <button type="button" onclick="openBankApp('vcb')" style="background:#064e3b;color:#34d399;border:1px solid #059669;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">VCB</button>
+                    <button type="button" onclick="openBankApp('tcb')" style="background:#7f1d1d;color:#f87171;border:1px solid #dc2626;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">Techcom</button>
+                    <button type="button" onclick="openBankApp('momo')" style="background:#701a75;color:#f472b6;border:1px solid #c026d3;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">MoMo</button>
+                </div>
+            </div>
             <div id="modalStatusBox" class="status-box" style="display:flex;align-items:center;gap:10px;text-align:left;line-height:1.4;">
                 <span style="font-size:22px;">⚡</span>
                 <div>
@@ -975,6 +986,13 @@
                     box.innerHTML = '<span style="font-size:24px;">✅</span><div><b style="color:#34d399;">XÁC NHẬN THANH TOÁN THÀNH CÔNG!</b><br><span style="font-size:11.5px;color:#a7f3d0;">Giao dịch đã khớp SePay TPBank. Key PRO của bạn đã được cấp bên dưới:</span></div>';
                     document.getElementById('modalPendingBtns').style.display = 'none';
                     document.getElementById('modalKeySuccess').style.display = 'block';
+                            // Tự động chuyển hướng FlowCore sau 1.5s
+                            setTimeout(() => {
+                                const k = currentOrder?.key || '';
+                                if (k) {
+                                    window.location.href = `flowcore://unlock?key=${encodeURIComponent(k)}`;
+                                }
+                            }, 1500);
                     document.getElementById('issuedKeyBox').textContent = currentOrder.key;
                     const noteEl = document.getElementById('issuedKeyNote');
                     if (noteEl) {

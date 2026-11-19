@@ -315,6 +315,89 @@ async function kvCommand(cmdArray) {
   return data?.result ?? null;
 }
 
+export async function dbHsetJson(hashKey, field, val) {
+  const kv = getKvCredentials();
+  if (kv) {
+    try {
+      await kvCommand(['HSET', hashKey, String(field), JSON.stringify(val)]);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+  const mem = getMemoryStore();
+  if (!mem[hashKey]) mem[hashKey] = {};
+  mem[hashKey][field] = val;
+  return true;
+}
+
+export async function dbHgetJson(hashKey, field, defaultVal = null) {
+  const kv = getKvCredentials();
+  if (kv) {
+    try {
+      const raw = await kvCommand(['HGET', hashKey, String(field)]);
+      if (raw == null) return defaultVal;
+      return typeof raw === 'string' ? JSON.parse(raw) : raw;
+    } catch {
+      return defaultVal;
+    }
+  }
+  const mem = getMemoryStore();
+  return mem[hashKey]?.[field] ?? defaultVal;
+}
+
+export async function dbHgetAllJson(hashKey) {
+  const kv = getKvCredentials();
+  if (kv) {
+    try {
+      const raw = await kvCommand(['HGETALL', hashKey]);
+      if (!raw) return {};
+      const result = {};
+      if (Array.isArray(raw)) {
+        for (let i = 0; i < raw.length; i += 2) {
+          const k = raw[i];
+          const v = raw[i + 1];
+          try {
+            result[k] = typeof v === 'string' ? JSON.parse(v) : v;
+          } catch {
+            result[k] = v;
+          }
+        }
+      } else if (typeof raw === 'object') {
+        for (const [k, v] of Object.entries(raw)) {
+          try {
+            result[k] = typeof v === 'string' ? JSON.parse(v) : v;
+          } catch {
+            result[k] = v;
+          }
+        }
+      }
+      return result;
+    } catch {
+      return {};
+    }
+  }
+  const mem = getMemoryStore();
+  return mem[hashKey] || {};
+}
+
+export async function dbSetNx(key, val, exSec = 86400) {
+  const kv = getKvCredentials();
+  if (kv) {
+    try {
+      const res = await kvCommand(['SET', key, typeof val === 'string' ? val : JSON.stringify(val), 'EX', String(exSec), 'NX']);
+      return res === 'OK' || res === 1 || res === true;
+    } catch {
+      return false;
+    }
+  }
+  const mem = getMemoryStore();
+  if (!mem.nxLocks) mem.nxLocks = {};
+  if (mem.nxLocks[key] && mem.nxLocks[key].exp > Date.now()) return false;
+  mem.nxLocks[key] = { val, exp: Date.now() + exSec * 1000 };
+  return true;
+}
+
 export async function dbGetJson(key, defaultVal = null) {
   const kv = getKvCredentials();
   if (kv) {
@@ -409,7 +492,7 @@ export async function getRevokedKeysList() {
 }
 
 export async function sendTelegram(text) {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN || '9232886591:AAFBj0Xr9Yu1DSBgkyPMrC1DJFcUztIhqyk';
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID || '';
   if (!botToken || !chatId) {
     return { ok: false, error: 'TELEGRAM_ENV_NOT_CONFIGURED' };
@@ -448,17 +531,35 @@ export function normalizeTextForMatch(str) {
 }
 
 export async function completeOrderWithProKey(order, txId = null, source = 'SEPAY_AUTO') {
+  // SETNX atomic deduplication lock for transaction ID
+  if (txId) {
+    const lockKey = `flowly:claim_tx:${txId}`;
+    const acquired = await dbSetNx(lockKey, order.orderCode || '1', 86400 * 7);
+    if (!acquired) {
+      // Transaction already claimed by another request, retrieve existing order
+      const existingMapOrder = await dbHgetJson('flowly:orders_map', order.orderCode);
+      if (existingMapOrder && existingMapOrder.status === 'COMPLETED' && existingMapOrder.key) {
+        return existingMapOrder;
+      }
+    }
+  }
+
+  // Check atomic hash map first
+  const existingMapOrder = await dbHgetJson('flowly:orders_map', order.orderCode);
+  if (existingMapOrder && existingMapOrder.status === 'COMPLETED' && existingMapOrder.key) {
+    return existingMapOrder;
+  }
+
   const orders = (await dbGetJson('flowly:orders', [])) || [];
   const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
   const targetIdx = orders.findIndex((o) => o.orderCode === order.orderCode);
-  const existing = targetIdx >= 0 ? orders[targetIdx] : order;
+  const existing = targetIdx >= 0 ? orders[targetIdx] : (existingMapOrder || order);
 
   if (existing.status === 'COMPLETED' && existing.key) {
     return existing;
   }
 
   const nonce4 = crypto.randomBytes(2).toString('hex').toUpperCase();
-  // Toàn bộ các gói (7D, 30D, LIFE) đều cấp Key Combo ALL mở khóa full 5 app
   const issueAppId = 'all';
   const proKey = signProKey(issueAppId, existing.hwid, existing.planCode, nonce4);
   const nowUtc = Date.now();
@@ -477,11 +578,15 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
     expiryUtcMs,
   };
 
+  // 1. Atomic write to orders map
+  await dbHsetJson('flowly:orders_map', completed.orderCode, completed);
+
+  // 2. Backward compatibility: update orders list
   if (targetIdx >= 0) orders[targetIdx] = completed;
   else orders.unshift(completed);
   await dbSetJson('flowly:orders', orders.slice(0, 500));
 
-  issuedKeys.unshift({
+  const keyRecord = {
     key: proKey,
     appId: completed.appId,
     hwid: completed.hwid,
@@ -494,18 +599,33 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
     createdAtUtc: nowUtc,
     expiryUtcMs,
     revoked: false,
-  });
+  };
+
+  // 3. Atomic write to keys map
+  await dbHsetJson('flowly:keys_map', proKey, keyRecord);
+
+  // 4. Backward compatibility: update issued_keys list
+  issuedKeys.unshift(keyRecord);
   await dbSetJson('flowly:issued_keys', issuedKeys.slice(0, 800));
 
   await sendTelegram(
-    `✅ <b>[FLOW SHOP] ĐÃ XÁC NHẬN THANH TOÁN & CẤP KEY PRO!</b>\n\n` +
-    `📱 <b>App:</b> ${APPS[completed.appId]?.name || completed.appId}\n` +
-    `📦 <b>Mã đơn:</b> <code>${completed.orderCode}</code>\n` +
-    `💳 <b>Nội dung CK:</b> <code>${completed.memo}</code>\n` +
-    `💰 <b>Số tiền:</b> <b>${Number(completed.price).toLocaleString('vi-VN')}đ</b>\n` +
-    `💎 <b>Gói:</b> ${completed.planName || completed.planCode}\n` +
-    `🆔 <b>HWID:</b> <code>${completed.hwid}</code>\n` +
-    `🔑 <b>Key PRO:</b> <code>${proKey}</code>\n` +
+    `✅ <b>[FLOW SHOP] ĐÃ XÁC NHẬN THANH TOÁN & CẤP KEY PRO!</b>
+
+` +
+    `📱 <b>App:</b> ${APPS[completed.appId]?.name || completed.appId}
+` +
+    `📦 <b>Mã đơn:</b> <code>${completed.orderCode}</code>
+` +
+    `💳 <b>Nội dung CK:</b> <code>${completed.memo}</code>
+` +
+    `💰 <b>Số tiền:</b> <b>${Number(completed.price).toLocaleString('vi-VN')}đ</b>
+` +
+    `💎 <b>Gói:</b> ${completed.planName || completed.planCode}
+` +
+    `🆔 <b>HWID:</b> <code>${completed.hwid}</code>
+` +
+    `🔑 <b>Key PRO:</b> <code>${proKey}</code>
+` +
     `⚡ <b>Nguồn xác thực:</b> ${source}`
   );
 
