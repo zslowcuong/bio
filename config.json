@@ -227,5 +227,84 @@
     "version_code": 18,
     "destination_apk": "https://zslowcuong.github.io/bio/SetEdit++.apk",
     "direct_apk": "SetEdit++.apk"
+  },
+  "flowmax": {
+    "name": "FlowMax Ultra Hardware Suite",
+    "version": "v3.0.1",
+    "version_code": 12,
+    "min_version_code": 11,
+    "force_update": false,
+    "update_url": "https://zslowcuong.github.io/bio/?dl=flowmax#download",
+    "download_url": "https://zslowcuong.github.io/bio/?dl=flowmax#download",
+    "package": "com.flowextra.optimizer",
+    "changelog": "Bản cập nhật V3.0.1: Hợp nhất hoàn hảo FlowUltra + FlowExtra thành FlowMax, logo & icon thương hiệu mới, tích hợp GPU Turbo 360Hz & hệ thống bảo trì vá lỗi thông minh.",
+    "destination_apk": "https://zslowcuong.github.io/bio/FlowMax.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowMax.apk",
+    "direct_apk": "FlowMax.apk"
+  },
+  "global_maintenance": {
+    "active": false,
+    "title": "🛑 HỆ THỐNG FLOWENGINE ĐANG BẢO TRÌ & NÂNG CẤP V3.0.1",
+    "notice": "Hệ sinh thái FlowEngine đang tạm dừng để bảo trì máy chủ và nâng cấp tính năng mới. Người dùng vui lòng cập nhật phiên bản mới nhất bên dưới:",
+    "vip_download_url": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2F",
+    "pro_download_url": "https://zslowcuong.github.io/bio/",
+    "allow_dismiss": false,
+    "updated_at_utc": 0
+  },
+  "maintenance": {
+    "all": {
+      "active": false,
+      "title": "🛑 HỆ THỐNG FLOWENGINE ĐANG BẢO TRÌ & NÂNG CẤP V3.0.1",
+      "notice": "Hệ sinh thái FlowEngine đang tạm dừng để bảo trì máy chủ và nâng cấp tính năng mới. Người dùng vui lòng cập nhật phiên bản mới nhất bên dưới:",
+      "vip_download_url": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2F",
+      "pro_download_url": "https://zslowcuong.github.io/bio/",
+      "allow_dismiss": false,
+      "updated_at_utc": 0
+    },
+    "flowmax": {
+      "active": false,
+      "title": "🛑 THÔNG BÁO BẢO TRÌ & NÂNG CẤP FLOWMAX V3.0.1",
+      "notice": "Ứng dụng FlowMax đang tạm ngưng hoạt động để vá lỗi và nâng cấp GPU Turbo 360Hz. Vui lòng tải phiên bản mới nhất bên dưới:",
+      "vip_download_url": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowMax.apk",
+      "pro_download_url": "https://zslowcuong.github.io/bio/FlowMax.apk",
+      "allow_dismiss": false,
+      "updated_at_utc": 0
+    },
+    "flowoptimize": {
+      "active": false,
+      "title": "🛑 THÔNG BÁO BẢO TRÌ & NÂNG CẤP FLOWOPTIMIZE V2.5.0",
+      "notice": "FlowOptimize đang tạm ngưng để nâng cấp thuật toán tự dọn RAM ngầm không hiện thông báo và bảo vệ nhiệt độ máy. Vui lòng cập nhật ngay:",
+      "vip_download_url": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowOptimize.apk",
+      "pro_download_url": "https://zslowcuong.github.io/bio/FlowOptimize.apk",
+      "allow_dismiss": false,
+      "updated_at_utc": 0
+    },
+    "flows": {
+      "active": false,
+      "title": "🛑 THÔNG BÁO BẢO TRÌ & NÂNG CẤP FLOWS V2.5.0",
+      "notice": "FlowS đang bảo trì nâng cấp chế độ Crazy Mode cực đại và tối ưu mượt mà không nóng máy. Vui lòng tải bản vá lỗi mới:",
+      "vip_download_url": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowS.apk",
+      "pro_download_url": "https://zslowcuong.github.io/bio/FlowS.apk",
+      "allow_dismiss": false,
+      "updated_at_utc": 0
+    },
+    "flowz": {
+      "active": false,
+      "title": "🛑 THÔNG BÁO BẢO TRÌ & NÂNG CẤP FLOWZ VIP V3.0.1",
+      "notice": "FlowZ VIP đang bảo trì nâng cấp nút chỉnh sơ đồ kéo thả độ nhạy và menu đóng mở linh hoạt. Vui lòng tải bản cập nhật mới nhất:",
+      "vip_download_url": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowZ.apk",
+      "pro_download_url": "https://zslowcuong.github.io/bio/FlowZ.apk",
+      "allow_dismiss": false,
+      "updated_at_utc": 0
+    },
+    "flowcore": {
+      "active": false,
+      "title": "🛑 THÔNG BÁO BẢO TRÌ & NÂNG CẤP FLOWCORE BRAIN",
+      "notice": "FlowCore Brain AI đang nâng cấp hệ thống điều phối 5 app chống xung đột và tối ưu pin ColorOS/HyperOS. Vui lòng cập nhật ngay:",
+      "vip_download_url": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowCore.apk",
+      "pro_download_url": "https://zslowcuong.github.io/bio/FlowCore.apk",
+      "allow_dismiss": false,
+      "updated_at_utc": 0
+    }
   }
 }

@@ -109,6 +109,7 @@
             <button class="tab-btn" onclick="switchTab('manual', this)">🔑 Cấp Key PRO Thủ Công</button>
             <button class="tab-btn" onclick="switchTab('events', this)">🎉 Key Event PRO &amp; Reset Day</button>
             <button class="tab-btn" onclick="switchTab('config', this)">🚀 Export Config.json &amp; Force Update</button>
+<button class="tab-btn" onclick="switchTab('maintenance', this)">🛑 Tạm Dừng &amp; Bảo Trì App</button>
         </div>
 
         <!-- TAB 1: ORDERS & ISSUED KEYS -->
@@ -312,7 +313,70 @@
             <div class="grid-2" id="eventCardsGrid"></div>
         </div>
 
-        <!-- TAB 4: CONFIG.JSON EXPORT / GITHUB PUSH -->
+        
+<!-- TAB 5: MAINTENANCE & FORCE STOP APPS -->
+<div id="tab-maintenance" class="panel">
+  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+    <div>
+      <h3 style="font-size:16px; font-weight:900; color:#f87171;">🛑 Quản Lý Tạm Dừng &amp; Thông Báo Cập Nhật 5 App</h3>
+      <p style="font-size:12px; color:#94a3b8;">Cho phép ngưng hoạt động 1 app hoặc cả hệ sinh thái để bảo trì, sửa lỗi và cung cấp 2 link tải phân quyền rõ ràng: VIP (Vượt link) &amp; PRO (Tải trực tiếp).</p>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button type="button" class="btn green" onclick="saveAllMaintenance()">💾 Lưu Toàn Bộ Cấu Hình</button>
+      <button type="button" class="btn gold" onclick="switchTab('config', document.querySelectorAll('.tab-btn')[4]); downloadMergedConfig();">⬇️ Tải config.json</button>
+    </div>
+  </div>
+
+  <!-- GLOBAL MAINTENANCE CARD -->
+  <div class="event-card" style="border: 2px solid #ef4444; background: rgba(127, 29, 29, 0.22); margin-bottom:20px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <div>
+        <span class="pill" id="globalMaintBadge" style="background:#22c55e; color:#fff; font-weight:800;">🟢 HỆ THỐNG ĐANG HOẠT ĐỘNG BÌNH THƯỜNG</span>
+        <h4 style="font-size:15px; font-weight:900; color:#fff; margin-top:6px;">⚠️ Ngưng Hoạt Động Toàn Bộ 5 App (Khẩn Cấp Toàn Hệ Thống)</h4>
+      </div>
+      <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:800; font-size:13px; color:#fca5a5;">
+        <input type="checkbox" id="maint_all_active" onchange="updateMaintBadge('all')" style="width:18px; height:18px;">
+        BẬT NGƯNG HOẠT ĐỘNG TOÀN BỘ
+      </label>
+    </div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:14px;">
+      <div>
+        <label>Tiêu đề thông báo bảo trì toàn hệ thống</label>
+        <input id="maint_all_title" value="🛑 HỆ THỐNG FLOWENGINE ĐANG BẢO TRÌ & NÂNG CẤP V3.0.1" />
+      </div>
+      <div>
+        <label>Chế độ đóng dialog</label>
+        <select id="maint_all_allow_dismiss">
+          <option value="false">🔒 Khóa cứng app (Bắt buộc cập nhật, không thể thoát dialog)</option>
+          <option value="true">🔓 Cho phép đóng dialog (Người dùng có thể bỏ qua)</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top:10px;">
+      <label>Nội dung chi tiết thông báo lỗi / bảo trì toàn hệ thống</label>
+      <textarea id="maint_all_notice" rows="2" style="width:100%; padding:10px; border-radius:10px; background:#0f172a; border:1px solid rgba(255,255,255,0.15); color:#fff; font-size:12.5px;">Hệ sinh thái FlowEngine đang tạm dừng để bảo trì máy chủ và nâng cấp tính năng mới. Vui lòng tải bản cập nhật mới nhất để tiếp tục sử dụng.</textarea>
+    </div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:10px;">
+      <div>
+        <label style="color:#d946ef; font-weight:800;">🔑 Link Tải VIP (Vượt Link Link4M)</label>
+        <input id="maint_all_vip_url" value="https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2F" />
+      </div>
+      <div>
+        <label style="color:#34d399; font-weight:800;">💎 Link Tải PRO (Tải Trực Tiếp Direct APK)</label>
+        <input id="maint_all_pro_url" value="https://zslowcuong.github.io/bio/" />
+      </div>
+    </div>
+    <div style="margin-top:12px; text-align:right;">
+      <button type="button" class="btn red" onclick="saveMaintApp('all')">💾 Áp Dụng Cho Toàn Hệ Thống</button>
+    </div>
+  </div>
+
+  <!-- INDIVIDUAL 5 APPS GRID -->
+  <h4 style="font-size:14px; font-weight:800; color:#38bdf8; margin-bottom:12px;">🎛️ Cấu Hình Tạm Dừng &amp; Thông Báo Riêng Từng App (5 App Hệ Sinh Thái)</h4>
+  <div class="grid-2" id="maintAppsGrid"></div>
+</div>
+
+<!-- TAB 4: CONFIG.JSON EXPORT / GITHUB PUSH -->
         <div id="tab-config" class="panel">
             <h3 style="font-size:15px;margin-bottom:10px;">🚀 Đồng Bộ &amp; Xuất File config.json (Event + Revoked Keys + Update)</h3>
             <p style="font-size:12.5px;color:#94a3b8;margin-bottom:12px;">
@@ -800,7 +864,269 @@
             }
         }
 
-        function buildMergedConfigObject() {
+        
+// -------------------------------------------------------------
+// MAINTENANCE & FORCE STOP APPS MANAGEMENT SYSTEM
+// -------------------------------------------------------------
+const MAINT_APP_DEFS = {
+  flowmax: {
+    name: 'FlowMax Ultra Hardware Suite',
+    icon: '⚡',
+    package: 'com.flowextra.optimizer',
+    defaultTitle: '🛑 THÔNG BÁO BẢO TRÌ & NÂNG CẤP FLOWMAX V3.0.1',
+    defaultNotice: 'Ứng dụng FlowMax (hợp nhất FlowUltra + FlowExtra) đang tạm ngưng hoạt động để vá lỗi và nâng cấp GPU Turbo 360Hz. Vui lòng tải phiên bản mới nhất bên dưới:',
+    defaultVip: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowMax.apk',
+    defaultPro: 'https://zslowcuong.github.io/bio/FlowMax.apk'
+  },
+  flowoptimize: {
+    name: 'FlowOptimize Anime Edition',
+    icon: '🚀',
+    package: 'com.example.gameoptimizer',
+    defaultTitle: '🛑 THÔNG BÁO BẢO TRÌ & NÂNG CẤP FLOWOPTIMIZE V2.5.0',
+    defaultNotice: 'FlowOptimize đang tạm ngưng để nâng cấp thuật toán tự dọn RAM ngầm không hiện thông báo và bảo vệ nhiệt độ máy. Vui lòng cập nhật ngay:',
+    defaultVip: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowOptimize.apk',
+    defaultPro: 'https://zslowcuong.github.io/bio/FlowOptimize.apk'
+  },
+  flows: {
+    name: 'FlowS Gamer Tuner Edition',
+    icon: '🎮',
+    package: 'com.flows.gaming',
+    defaultTitle: '🛑 THÔNG BÁO BẢO TRÌ & NÂNG CẤP FLOWS V2.5.0',
+    defaultNotice: 'FlowS đang bảo trì nâng cấp chế độ Crazy Mode cực đại và tối ưu mượt mà không nóng máy. Vui lòng tải bản vá lỗi mới:',
+    defaultVip: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowS.apk',
+    defaultPro: 'https://zslowcuong.github.io/bio/FlowS.apk'
+  },
+  flowz: {
+    name: 'FlowZ VIP Sensitivity Pro',
+    icon: '🎯',
+    package: 'com.nebula.hnx',
+    defaultTitle: '🛑 THÔNG BÁO BẢO TRÌ & NÂNG CẤP FLOWZ VIP V3.0.1',
+    defaultNotice: 'FlowZ VIP đang bảo trì nâng cấp nút chỉnh sơ đồ kéo thả độ nhạy và menu đóng mở linh hoạt. Vui lòng tải bản cập nhật mới nhất:',
+    defaultVip: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowZ.apk',
+    defaultPro: 'https://zslowcuong.github.io/bio/FlowZ.apk'
+  },
+  flowcore: {
+    name: 'FlowCore Brain AI System',
+    icon: '🧠',
+    package: 'com.flowengine.core',
+    defaultTitle: '🛑 THÔNG BÁO BẢO TRÌ & NÂNG CẤP FLOWCORE BRAIN',
+    defaultNotice: 'FlowCore Brain AI đang nâng cấp hệ thống điều phối 5 app chống xung đột và tối ưu pin ColorOS/HyperOS. Vui lòng cập nhật ngay:',
+    defaultVip: 'https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowCore.apk',
+    defaultPro: 'https://zslowcuong.github.io/bio/FlowCore.apk'
+  }
+};
+
+function renderMaintenancePanel() {
+  const maint = (dashData && dashData.maintenance) || {};
+  
+  // Render Global (all)
+  const allM = maint.all || {};
+  const isAllActive = Boolean(allM.active);
+  const chkAll = document.getElementById('maint_all_active');
+  if (chkAll) chkAll.checked = isAllActive;
+  if (document.getElementById('maint_all_title') && allM.title) document.getElementById('maint_all_title').value = allM.title;
+  if (document.getElementById('maint_all_notice') && allM.notice) document.getElementById('maint_all_notice').value = allM.notice;
+  if (document.getElementById('maint_all_vip_url') && allM.vip_download_url) document.getElementById('maint_all_vip_url').value = allM.vip_download_url;
+  if (document.getElementById('maint_all_pro_url') && allM.pro_download_url) document.getElementById('maint_all_pro_url').value = allM.pro_download_url;
+  if (document.getElementById('maint_all_allow_dismiss')) document.getElementById('maint_all_allow_dismiss').value = String(Boolean(allM.allow_dismiss));
+  updateMaintBadge('all');
+
+  // Render individual apps
+  const grid = document.getElementById('maintAppsGrid');
+  if (!grid) return;
+  let html = '';
+  for (const [key, def] of Object.entries(MAINT_APP_DEFS)) {
+    const cur = maint[key] || {};
+    const act = Boolean(cur.active);
+    const tit = cur.title || def.defaultTitle;
+    const not = cur.notice || def.defaultNotice;
+    const vip = cur.vip_download_url || def.defaultVip;
+    const pro = cur.pro_download_url || def.defaultPro;
+    const dis = Boolean(cur.allow_dismiss);
+
+    html += `
+      <div class="event-card" style="border: 1px solid ${act ? '#ef4444' : 'rgba(255,255,255,0.12)'}; background: ${act ? 'rgba(127, 29, 29, 0.16)' : 'rgba(2,6,23,0.65)'};">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div>
+            <h4 style="font-size:14.5px; font-weight:900; color:#fff;">${def.icon} ${def.name}</h4>
+            <span style="font-size:11px; color:#64748b; font-family:monospace;">${def.package}</span>
+          </div>
+          <span class="pill" id="badge_${key}" style="background:${act ? '#ef4444' : '#22c55e'}; color:#fff; font-weight:800;">
+            ${act ? '🔴 ĐANG TẠM NGƯNG' : '🟢 HOẠT ĐỘNG TỐT'}
+          </span>
+        </div>
+
+        <div style="margin: 10px 0;">
+          <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:800; font-size:12.5px; color:${act ? '#fca5a5' : '#e2e8f0'};">
+            <input type="checkbox" id="maint_${key}_active" ${act ? 'checked' : ''} onchange="updateMaintBadge('${key}')" style="width:16px; height:16px;">
+            BẬT TẠM DỪNG / THÔNG BÁO CẬP NHẬT
+          </label>
+        </div>
+
+        <div style="margin-top:8px;">
+          <label>Tiêu đề thông báo</label>
+          <input id="maint_${key}_title" value="${tit.replace(/"/g, '&quot;')}" />
+        </div>
+
+        <div style="margin-top:8px;">
+          <label>Nội dung thông báo vá lỗi / bảo trì</label>
+          <textarea id="maint_${key}_notice" rows="2" style="width:100%; padding:8px 10px; border-radius:8px; background:#0f172a; border:1px solid rgba(255,255,255,0.12); color:#fff; font-size:12px;">${not.replace(/</g, '&lt;')}</textarea>
+        </div>
+
+        <div style="margin-top:8px;">
+          <label style="color:#d946ef; font-weight:800;">🔑 Link Tải VIP (Vượt Link Link4M)</label>
+          <input id="maint_${key}_vip_url" value="${vip.replace(/"/g, '&quot;')}" />
+        </div>
+
+        <div style="margin-top:8px;">
+          <label style="color:#34d399; font-weight:800;">💎 Link Tải PRO (Tải Trực Tiếp Direct APK)</label>
+          <input id="maint_${key}_pro_url" value="${pro.replace(/"/g, '&quot;')}" />
+        </div>
+
+        <div style="margin-top:8px;">
+          <label>Chế độ đóng dialog</label>
+          <select id="maint_${key}_allow_dismiss">
+            <option value="false" ${!dis ? 'selected' : ''}>🔒 Khóa cứng app (Bắt buộc cập nhật)</option>
+            <option value="true" ${dis ? 'selected' : ''}>🔓 Cho phép đóng dialog</option>
+          </select>
+        </div>
+
+        <div style="margin-top:12px; display:flex; justify-content:space-between; align-items:center;">
+          <button type="button" class="btn ghost" style="padding:6px 12px; font-size:11.5px;" onclick="resetMaintDefault('${key}')">🔄 Mặc Định</button>
+          <button type="button" class="btn green" style="padding:7px 14px; font-size:12px;" onclick="saveMaintApp('${key}')">💾 Lưu App Này</button>
+        </div>
+      </div>
+    `;
+  }
+  grid.innerHTML = html;
+}
+
+function updateMaintBadge(appKey) {
+  const isAll = appKey === 'all';
+  const chk = document.getElementById(isAll ? 'maint_all_active' : `maint_${appKey}_active`);
+  const badge = document.getElementById(isAll ? 'globalMaintBadge' : `badge_${appKey}`);
+  if (!chk || !badge) return;
+  if (isAll) {
+    if (chk.checked) {
+      badge.style.background = '#ef4444';
+      badge.textContent = '🔴 ĐANG KHÓA BẢO TRÌ TOÀN HỆ THỐNG';
+    } else {
+      badge.style.background = '#22c55e';
+      badge.textContent = '🟢 HỆ THỐNG ĐANG HOẠT ĐỘNG BÌNH THƯỜNG';
+    }
+  } else {
+    if (chk.checked) {
+      badge.style.background = '#ef4444';
+      badge.textContent = '🔴 ĐANG TẠM NGƯNG';
+    } else {
+      badge.style.background = '#22c55e';
+      badge.textContent = '🟢 HOẠT ĐỘNG TỐT';
+    }
+  }
+}
+
+function resetMaintDefault(key) {
+  const def = MAINT_APP_DEFS[key];
+  if (!def) return;
+  document.getElementById(`maint_${key}_title`).value = def.defaultTitle;
+  document.getElementById(`maint_${key}_notice`).value = def.defaultNotice;
+  document.getElementById(`maint_${key}_vip_url`).value = def.defaultVip;
+  document.getElementById(`maint_${key}_pro_url`).value = def.defaultPro;
+}
+
+async function saveMaintApp(appKey) {
+  const isAll = appKey === 'all';
+  const act = document.getElementById(isAll ? 'maint_all_active' : `maint_${appKey}_active`).checked;
+  const tit = document.getElementById(isAll ? 'maint_all_title' : `maint_${appKey}_title`).value.trim();
+  const not = document.getElementById(isAll ? 'maint_all_notice' : `maint_${appKey}_notice`).value.trim();
+  const vip = document.getElementById(isAll ? 'maint_all_vip_url' : `maint_${appKey}_vip_url`).value.trim();
+  const pro = document.getElementById(isAll ? 'maint_all_pro_url' : `maint_${appKey}_pro_url`).value.trim();
+  const dis = (document.getElementById(isAll ? 'maint_all_allow_dismiss' : `maint_${appKey}_allow_dismiss`).value === 'true');
+
+  if (!dashData.maintenance) dashData.maintenance = {};
+  dashData.maintenance[appKey] = {
+    active: act,
+    title: tit,
+    notice: not,
+    vip_download_url: vip,
+    pro_download_url: pro,
+    allow_dismiss: dis,
+    updated_at_utc: Date.now()
+  };
+
+  try {
+    const res = await fetch(`${API_BASE}/api/admin?action=save_maintenance`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${adminPin}` },
+      body: JSON.stringify({
+        appKey,
+        active: act,
+        title: tit,
+        notice: not,
+        vip_download_url: vip,
+        pro_download_url: pro,
+        allow_dismiss: dis
+      })
+    });
+    const d = await res.json();
+    if (d.success) {
+      alert(`✅ Đã lưu cấu hình bảo trì cho [${appKey.toUpperCase()}] thành công!`);
+    } else {
+      alert('⚠️ Máy chủ phản hồi: ' + (d.message || 'Lỗi lưu, nhưng cấu hình đã lưu vào bộ nhớ tạm. Vui lòng bấm Tải config.json để đẩy lên GitHub Pages.'));
+    }
+  } catch (e) {
+    alert('ℹ️ Máy chủ API Vercel offline/timeout. Cấu hình đã được lưu vào bộ nhớ tạm. Hãy vào tab "Export Config.json" để tải file hoặc copy cập nhật GitHub Pages.');
+  }
+  renderMaintenancePanel();
+}
+
+async function saveAllMaintenance() {
+  if (!dashData.maintenance) dashData.maintenance = {};
+  
+  // Collect all
+  const isAll = document.getElementById('maint_all_active').checked;
+  dashData.maintenance.all = {
+    active: isAll,
+    title: document.getElementById('maint_all_title').value.trim(),
+    notice: document.getElementById('maint_all_notice').value.trim(),
+    vip_download_url: document.getElementById('maint_all_vip_url').value.trim(),
+    pro_download_url: document.getElementById('maint_all_pro_url').value.trim(),
+    allow_dismiss: document.getElementById('maint_all_allow_dismiss').value === 'true',
+    updated_at_utc: Date.now()
+  };
+
+  for (const key of Object.keys(MAINT_APP_DEFS)) {
+    const act = document.getElementById(`maint_${key}_active`).checked;
+    dashData.maintenance[key] = {
+      active: act,
+      title: document.getElementById(`maint_${key}_title`).value.trim(),
+      notice: document.getElementById(`maint_${key}_notice`).value.trim(),
+      vip_download_url: document.getElementById(`maint_${key}_vip_url`).value.trim(),
+      pro_download_url: document.getElementById(`maint_${key}_pro_url`).value.trim(),
+      allow_dismiss: document.getElementById(`maint_${key}_allow_dismiss`).value === 'true',
+      updated_at_utc: Date.now()
+    };
+  }
+
+  try {
+    const res = await fetch(`${API_BASE}/api/admin?action=save_maintenance`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${adminPin}` },
+      body: JSON.stringify({ maintenance: dashData.maintenance })
+    });
+    const d = await res.json();
+    if (d.success) {
+      alert('✅ ĐÃ LƯU TOÀN BỘ CẤU HÌNH BẢO TRÌ LÊN SERVER (UPSTASH KV REDIS) THÀNH CÔNG!');
+    } else {
+      alert('⚠️ Lưu vào bộ nhớ client thành công. Vui lòng tải config.json để đồng bộ lên GitHub Pages.');
+    }
+  } catch (e) {
+    alert('ℹ️ Máy chủ API offline. Cấu hình bảo trì đã lưu trên web. Vui lòng tải config.json để cập nhật lên GitHub Pages.');
+  }
+  renderMaintenancePanel();
+}
+
+function buildMergedConfigObject() {
             const cfg = JSON.parse(JSON.stringify(baseConfig || {}));
             const sanitizedEvents = {};
             for (const a of APPS_META) {
