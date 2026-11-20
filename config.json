@@ -208,8 +208,24 @@
       "gofile": "https://zslowcuong.github.io/bio/VOID_ADB_VIE.apk",
       "destination_apk": "https://zslowcuong.github.io/bio/VOID_ADB_VIE.apk",
       "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FVOID_ADB_VIE.apk"
+    },
+    "setedit": {
+      "name": "SetEdit++ 🔥",
+      "tag": "DATABASE EDITOR",
+      "desc": "Công cụ chỉnh sửa thông số bảng System, Secure & Global Database mạnh mẽ",
+      "file": "SetEdit++.apk",
+      "gofile": "https://zslowcuong.github.io/bio/SetEdit++.apk",
+      "destination_apk": "https://zslowcuong.github.io/bio/SetEdit++.apk",
+      "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FSetEdit%2B%2B.apk"
     }
   },
   "trial_enabled": false,
-  "trial_duration_hours": 0
+  "trial_duration_hours": 0,
+  "setedit": {
+    "name": "SetEdit++ (Settings Database Editor)",
+    "version": "v1.0.0",
+    "version_code": 18,
+    "destination_apk": "https://zslowcuong.github.io/bio/SetEdit++.apk",
+    "direct_apk": "SetEdit++.apk"
+  }
 }

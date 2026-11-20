@@ -4275,6 +4275,29 @@
                     </button>
                 </div>
 
+                                <!-- 8. SetEdit++ (Settings Database Editor) -->
+                <div class="app-download-card" style="border-color: rgba(16, 185, 129, 0.45); background: rgba(15, 23, 42, 0.88);">
+                    <div>
+                        <div class="app-header">
+                            <img src="icon_setedit.png" alt="SetEdit++" class="app-icon-img" style="border-color: #10b981;" loading="lazy" decoding="async">
+                            <div>
+                                <div class="app-title">SetEdit++</div>
+                                <span class="app-sub-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">DATABASE EDITOR • MIỄN PHÍ</span>
+                            </div>
+                        </div>
+                        <div class="app-bullets">
+                            • ⚡ <b>Bản Mod SetEdit++:</b> Chỉnh sửa trực tiếp System Table, Secure Table và Global Table.<br>
+                            • 🎯 <b>Tối Ưu Cảm Ứng &amp; Độ Nhạy:</b> Tinh chỉnh pointer_speed, touch_slop, touch.pressure mượt mà.<br>
+                            • 🛡️ <b>Mở Khóa Toàn Diện:</b> Hỗ trợ can thiệp sâu các bảng cấu hình Android không bị chặn.<br>
+                            • 💎 <b>Giao Diện Trực Quan:</b> Đã chỉnh sửa nhãn app chuẩn SetEdit++, tương thích Android 8 đến 15.
+                        </div>
+                    </div>
+                    <button type="button" onclick="openUnlockModal('setedit')" class="btn-download-action" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); margin-top: 14px;">
+                        <span>🚀</span>
+                        <span>TẢI XUỐNG SETEDIT++ (MIỄN PHÍ)</span>
+                    </button>
+                </div>
+
                 <!-- 5. Shizuku & Shizuku-Next (Nền Tảng Cấp Quyền) -->
                 <div class="app-download-card" style="border-color: rgba(56, 189, 248, 0.4); background: rgba(15, 23, 42, 0.88);">
                     <div>
@@ -7760,6 +7783,11 @@ settings put secure multi_press_timeout 200</code></pre>
                 destination_apk: "https://zslowcuong.github.io/bio/VOID_ADB_VIE.apk",
                 direct_apk: "VOID_ADB_VIE.apk"
             },
+            setedit: {
+                destination_apk: "https://zslowcuong.github.io/bio/SetEdit++.apk",
+                direct_apk: "SetEdit++.apk"
+            },
+
             brotx: {
                 destination_apk: "https://gofile.io/d/RaSXG0aV",
                 direct_apk: "BrotX-v8.apk"
@@ -7868,6 +7896,19 @@ settings put secure multi_press_timeout 200</code></pre>
                     prebuiltGateway: '',
                     btnLabel: '🎯 TẢI VỀ FLOWZ VIP APK →',
                     bg: 'linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)',
+                    color: '#fff'
+                };
+            }
+            if (key === 'setedit') {
+                return {
+                    key,
+                    icon: 'icon_setedit.png',
+                    title: 'SetEdit++ (Settings Database Editor)',
+                    sub: 'Chỉnh sửa System, Secure, Global Settings Database • Miễn Phí',
+                    dest: (globalConfig.setedit && globalConfig.setedit.destination_apk) || 'https://zslowcuong.github.io/bio/SetEdit++.apk',
+                    prebuiltGateway: '',
+                    btnLabel: '🚀 TẢI VỀ SETEDIT++ APK →',
+                    bg: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
                     color: '#fff'
                 };
             }
@@ -8371,6 +8412,27 @@ settings put secure multi_press_timeout 200</code></pre>
     "easer": {
         "name": "Chronos / Easer (Event-Driven)",
         "dest": "https://github.com/renyuneyun/Easer/releases/download/v0.8.2.3/Easer-v0.8.2.3.apk"
+    },
+    "setedit": {
+        "name": "SetEdit++",
+        "icon": "icon_setedit.png",
+        "tag": "⚡ DATABASE EDITOR",
+        "tagClass": "pill-tag-pro",
+        "required": "🔌 App yêu cầu: Quyền WRITE_SECURE_SETTINGS qua ADB / Shizuku",
+        "source": "SetEdit++ • Settings Database Editor",
+        "features": [
+            "Chỉnh sửa trực tiếp bảng System, Secure và Global Settings trên Android",
+            "Mở khóa các tính năng ẩn và tinh chỉnh độ nhạy cảm ứng pointer_speed",
+            "Giao diện trực quan, nhẹ và ổn định trên mọi phiên bản Android",
+            "Đã cập nhật tên và cấu hình chuẩn SetEdit++"
+        ],
+        "guide": [
+            "<b>Bước 1:</b> Tải và cài đặt file <code>SetEdit++.apk</code>.",
+            "<b>Bước 2:</b> Mở app và cấp quyền WRITE_SECURE_SETTINGS nếu cần qua ADB.",
+            "<b>Bước 3:</b> Chọn bảng cài đặt (System / Secure / Global) cần chỉnh sửa.",
+            "<b>Bước 4:</b> Nhấn Lưu và khởi động lại thiết bị nếu cần."
+        ],
+        "command": "pm grant by4a.setedit22 android.permission.WRITE_SECURE_SETTINGS"
     },
     "voidadb": {
         "name": "VOID ADB VIE (Mod By FlowEngine)",
