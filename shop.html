@@ -515,6 +515,141 @@
         .btn-plan-action.btn-30d { background: linear-gradient(135deg, #9333ea, #a855f7); color: #fff; }
         .btn-1y { background: linear-gradient(135deg, #dc2626, #ef4444); color: #fff; }
 
+    
+        /* 5-COLUMN RESPONSIVE PLANS GRID */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-top: 14px;
+            align-items: stretch;
+        }
+
+        /* Màn hình nhỏ hơn (Tablet / Laptop 13 inch): 3 cột trên + 2 cột dưới căn giữa */
+        @media (max-width: 1279px) and (min-width: 768px) {
+            .plans-grid {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 16px;
+            }
+            .pricing-card-box:nth-child(1) { grid-column: span 2; }
+            .pricing-card-box:nth-child(2) { grid-column: span 2; }
+            .pricing-card-box:nth-child(3) { grid-column: span 2; }
+            .pricing-card-box:nth-child(4) { grid-column: 2 / span 2; }
+            .pricing-card-box:nth-child(5) { grid-column: 4 / span 2; }
+        }
+
+        /* Mobile < 768px: 1 cột xếp dọc */
+        @media (max-width: 767px) {
+            .plans-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .pricing-card-box.featured {
+                transform: none;
+            }
+        }
+
+        .pricing-card-box {
+            background: rgba(13, 21, 39, 0.94);
+            border-radius: 20px;
+            padding: 24px 18px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* 1. Gói Trải Nghiệm (2 Ngày / 48H) - Emerald */
+        .aura-2d {
+            border: 1.5px solid rgba(16, 185, 129, 0.55);
+            background: linear-gradient(165deg, rgba(13, 21, 39, 0.96), rgba(16, 185, 129, 0.08));
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+        }
+        .aura-2d:hover {
+            box-shadow: 0 0 50px rgba(16, 185, 129, 0.65), 0 0 95px rgba(16, 185, 129, 0.25);
+            border-color: #10b981;
+            transform: translateY(-4px);
+        }
+
+        /* 2. Gói 7 Ngày (1 Tuần) - Sky/Blue */
+        .aura-7d {
+            border: 1.5px solid rgba(14, 165, 233, 0.55);
+            background: linear-gradient(165deg, rgba(13, 21, 39, 0.96), rgba(14, 165, 233, 0.08));
+            box-shadow: 0 0 25px rgba(14, 165, 233, 0.25);
+        }
+        .aura-7d:hover {
+            box-shadow: 0 0 50px rgba(14, 165, 233, 0.65), 0 0 95px rgba(14, 165, 233, 0.25);
+            border-color: #0ea5e9;
+            transform: translateY(-4px);
+        }
+
+        /* 3. Gói Tháng (30 Ngày) - Neon Purple (Chủ lực, nổi bật nhất) */
+        .aura-30d {
+            border: 2px solid rgba(168, 85, 247, 0.85);
+            background: linear-gradient(165deg, rgba(13, 21, 39, 0.98), rgba(168, 85, 247, 0.16));
+            box-shadow: 0 0 35px rgba(168, 85, 247, 0.45), 0 0 75px rgba(168, 85, 247, 0.2);
+            transform: scale(1.02);
+            z-index: 2;
+        }
+        .aura-30d:hover {
+            box-shadow: 0 0 65px rgba(168, 85, 247, 0.8), 0 0 120px rgba(168, 85, 247, 0.4);
+            border-color: #c084fc;
+            transform: scale(1.04) translateY(-4px);
+        }
+
+        /* 4. Gói 3 Tháng (90 Ngày) - Rose / Pink */
+        .aura-90d {
+            border: 1.5px solid rgba(244, 63, 94, 0.55);
+            background: linear-gradient(165deg, rgba(13, 21, 39, 0.96), rgba(244, 63, 94, 0.08));
+            box-shadow: 0 0 25px rgba(244, 63, 94, 0.25);
+        }
+        .aura-90d:hover {
+            box-shadow: 0 0 50px rgba(244, 63, 94, 0.65), 0 0 95px rgba(244, 63, 94, 0.25);
+            border-color: #f43f5e;
+            transform: translateY(-4px);
+        }
+
+        /* 5. Gói 1 Năm VIP (365 Ngày) - Amber / Gold */
+        .aura-365d {
+            border: 2px solid rgba(245, 158, 11, 0.85);
+            background: linear-gradient(165deg, rgba(13, 21, 39, 0.98), rgba(245, 158, 11, 0.14));
+            box-shadow: 0 0 32px rgba(245, 158, 11, 0.4), 0 0 70px rgba(245, 158, 11, 0.2);
+        }
+        .aura-365d:hover {
+            box-shadow: 0 0 60px rgba(245, 158, 11, 0.75), 0 0 120px rgba(245, 158, 11, 0.35);
+            border-color: #fbbf24;
+            transform: translateY(-4px);
+        }
+
+        /* Ribbon badges */
+        .plan-ribbon.emerald { background: linear-gradient(135deg, #059669, #10b981); }
+        .plan-ribbon.sky { background: linear-gradient(135deg, #0284c7, #0ea5e9); }
+        .plan-ribbon.purple-neon { background: linear-gradient(135deg, #9333ea, #c084fc); box-shadow: 0 0 15px rgba(168, 85, 247, 0.6); }
+        .plan-ribbon.rose { background: linear-gradient(135deg, #e11d48, #f43f5e); }
+        .plan-ribbon.gold { background: linear-gradient(135deg, #d97706, #f59e0b); color: #04152b; font-weight: 900; }
+
+        /* Notification boxes */
+        .plan-flash-tag.tag-emerald { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; }
+        .plan-flash-tag.tag-blue { background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.4); color: #38bdf8; }
+        .plan-flash-tag.tag-purple { background: rgba(168, 85, 247, 0.18); border: 1px solid rgba(168, 85, 247, 0.5); color: #d8b4fe; }
+        .plan-flash-tag.tag-rose { background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.4); color: #fda4af; }
+        .plan-flash-tag.tag-gold { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); color: #fcd34d; }
+
+        /* Action buttons */
+        .btn-plan-action.btn-2d { background: linear-gradient(135deg, #059669, #10b981); color: #fff; }
+        .btn-plan-action.btn-2d:hover { box-shadow: 0 0 20px rgba(16, 185, 129, 0.6); }
+        .btn-plan-action.btn-7d { background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; }
+        .btn-plan-action.btn-7d:hover { box-shadow: 0 0 20px rgba(14, 165, 233, 0.6); }
+        .btn-plan-action.btn-30d { background: linear-gradient(135deg, #9333ea, #c084fc); color: #fff; box-shadow: 0 0 25px rgba(168, 85, 247, 0.6); font-size: 13.5px; }
+        .btn-plan-action.btn-30d:hover { box-shadow: 0 0 35px rgba(168, 85, 247, 0.85); transform: translateY(-2px); }
+        .btn-plan-action.btn-90d { background: linear-gradient(135deg, #e11d48, #f43f5e); color: #fff; }
+        .btn-plan-action.btn-90d:hover { box-shadow: 0 0 20px rgba(244, 63, 94, 0.6); }
+        .btn-plan-action.btn-365d { background: linear-gradient(135deg, #d97706, #f59e0b); color: #04152b; font-weight: 900; }
+        .btn-plan-action.btn-365d:hover { box-shadow: 0 0 25px rgba(245, 158, 11, 0.7); }
+
     </style>
 </head>
 <body>
@@ -600,43 +735,40 @@
             </div>
 
                         <div class="plans-grid">
-                <!-- GÓI 1: 3 NGÀY -->
-                <div class="pricing-card-box aura-3d">
-                    <span class="plan-ribbon green">⚡ TEST MƯỢT 72H</span>
+                <!-- CỘT 1: GÓI TRẢI NGHIỆM (2 NGÀY) -->
+                <div class="pricing-card-box aura-2d">
+                    <span class="plan-ribbon emerald">⚡ TEST MƯỢT 48H</span>
                     <div>
-                        <div class="plan-card-title">GÓI 3 NGÀY COMBO</div>
+                        <div class="plan-card-title">GÓI TRẢI NGHIỆM (2 NGÀY)</div>
                         <div class="plan-card-price">
-                            <span id="price3D">10.000đ</span>
+                            <span id="price2D">10.000đ</span>
                             <span class="plan-old-strikethrough">15.000đ</span>
                         </div>
-                        <div class="plan-flash-tag">⚡ Giá Flash Sale (Sau đó tăng lên 15.000đ)</div>
-                        <div class="plan-card-desc">Trải nghiệm tối ưu hiệu năng mượt mà, test FPS &amp; độ nhạy cực bén trên mọi thiết bị.</div>
+                        <div class="plan-flash-tag tag-emerald">⚡ Giá Flash Sale (-33,3%) — Tiết kiệm 5.000đ</div>
                         <ul class="plan-card-perks">
                             <li>Mở khóa trọn bộ 5 app FlowEngine</li>
-                            <li>Hạn dùng: 3 ngày (72 giờ liên tục)</li>
-                            <li>Chi phí siêu rẻ: chỉ ~3.333đ/ngày</li>
+                            <li>Hạn dùng: 2 ngày (48 giờ liên tục), không cần vượt link4m 30h</li>
+                            <li>Chi phí dùng thử: 5.000đ/ngày</li>
                             <li>Tặng 1 lần đổi thiết bị miễn phí linh hoạt</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-3d" onclick="createShopOrder('3D')">⚡ Mua Gói 3 Ngày • 10K</button>
+                    <button type="button" class="btn-plan-action btn-2d" onclick="createShopOrder('2D')">⚡ Trải Nghiệm 48H • 10K</button>
                 </div>
 
-                <!-- GÓI 2: 7 NGÀY (1 TUẦN) -->
+                <!-- CỘT 2: GÓI 7 NGÀY (1 TUẦN) -->
                 <div class="pricing-card-box aura-7d">
-                    <span class="plan-ribbon blue">🚀 LEO RANK TUẦN</span>
+                    <span class="plan-ribbon sky">🚀 LEO RANK TUẦN</span>
                     <div>
                         <div class="plan-card-title">GÓI 7 NGÀY (1 TUẦN)</div>
                         <div class="plan-card-price">
                             <span id="price7D">25.000đ</span>
                             <span class="plan-old-strikethrough">29.000đ</span>
                         </div>
-                        <div class="plan-flash-tag">⚡ Giá Flash Sale (Sau đó tăng lên 29.000đ)</div>
-                        <div class="plan-card-desc">Giải pháp leo rank tuần hoàn hảo (~3.570đ/ngày) cho game thủ cày sự kiện.</div>
+                        <div class="plan-flash-tag tag-blue">⚡ Giá Flash Sale (-13,8%) — Rẻ hơn 28,6%/ngày so với gói 2 ngày</div>
                         <ul class="plan-card-perks">
                             <li>Mở khóa trọn bộ 5 app FlowEngine</li>
-                            <li>Hạn dùng: 7 ngày liên tục</li>
-                            <li>Chi phí tối ưu: chỉ ~3.570đ/ngày</li>
-                            <li>Tiết kiệm hơn so với mua lẻ từng ngày</li>
+                            <li>Hạn dùng: 7 ngày liên tục, bỏ qua vượt link4m 30h</li>
+                            <li>Chi phí tối ưu: chỉ ~3.571đ/ngày</li>
                             <li>Tặng 1 lần đổi thiết bị miễn phí linh hoạt</li>
                             <li>Hỗ trợ kỹ thuật 24/7 trực tiếp</li>
                         </ul>
@@ -644,61 +776,68 @@
                     <button type="button" class="btn-plan-action btn-7d" onclick="createShopOrder('7D')">🚀 Mua Gói Tuần • 25K</button>
                 </div>
 
-                <!-- GÓI 3: THÁNG (30 NGÀY) -->
-                <div class="pricing-card-box aura-30d">
-                    <span class="plan-ribbon purple">👑 CHIẾN GAME CẢ THÁNG</span>
+                <!-- CỘT 3: GÓI THÁNG (30 NGÀY) - CHỦ LỰC NỔI BẬT NHẤT -->
+                <div class="pricing-card-box aura-30d featured">
+                    <span class="plan-ribbon purple-neon">🔥 PHỔ BIẾN NHẤT • BÁN CHẠY</span>
                     <div>
-                        <div class="plan-card-title">GÓI THÁNG (30 NGÀY)</div>
+                        <div class="plan-card-title" style="color:#d8b4fe; font-size:16.5px;">GÓI THÁNG (30 NGÀY)</div>
                         <div class="plan-card-price">
-                            <span id="price30D">49.000đ</span>
+                            <span id="price30D" style="color:#f3e8ff;">49.000đ</span>
                             <span class="plan-old-strikethrough">54.000đ</span>
                         </div>
-                        <div class="plan-flash-tag">⚡ Giá Flash Sale (Sau đó tăng lên 54.000đ)</div>
-                        <div class="plan-card-desc">Gói chiến game bền bỉ cả tháng, tối ưu vượt trội chỉ ~1.633đ/ngày.</div>
+                        <div class="plan-flash-tag tag-purple">⚡ Rẻ hơn 54,3%/ngày so với gói Tuần — Thêm 24K dùng gấp hơn 4 lần</div>
                         <ul class="plan-card-perks">
                             <li>Mở khóa full 5 app FlowEngine trong 30 ngày</li>
-                            <li>Đơn giá siêu rẻ: ~1.633đ/ngày</li>
-                            <li>Tặng 1 lần đổi máy miễn phí linh hoạt</li>
+                            <li>Đơn giá siêu rẻ: chỉ ~1.633đ/ngày</li>
+                            <li>Tặng 1 lần đổi thiết bị miễn phí linh hoạt</li>
                             <li>Nhận mọi bản cập nhật tính năng mới lớn nhỏ</li>
                             <li>Hỗ trợ kỹ thuật ưu tiên 24/7</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-30d" onclick="createShopOrder('30D')">👑 Mua Gói Tháng • 49K</button>
+                    <button type="button" class="btn-plan-action btn-30d" onclick="createShopOrder('30D')">🔥 Mua Gói Tháng • 49K</button>
                 </div>
 
-                <!-- GÓI 4: VĨNH VIỄN VIP (99K) -->
-                <div class="pricing-card-box aura-life vip">
-                    <span class="plan-ribbon gold" id="vipTierBadge">👑 SỞ HỮU TRỌN ĐỜI • 99K</span>
+                <!-- CỘT 4: GÓI 3 THÁNG (90 NGÀY) -->
+                <div class="pricing-card-box aura-90d">
+                    <span class="plan-ribbon rose">⭐ CÀY MÙA RANK • TIẾT KIỆM</span>
                     <div>
-                        <div class="plan-card-title">GÓI VĨNH VIỄN VIP</div>
+                        <div class="plan-card-title">GÓI 3 THÁNG (90 NGÀY)</div>
                         <div class="plan-card-price">
-                            <span id="vipPriceLabel">99.000đ</span>
-                            <span class="plan-old-strikethrough">249.000đ</span>
+                            <span id="price90D">119.000đ</span>
+                            <span class="plan-old-strikethrough">147.000đ</span>
                         </div>
-
-                        <!-- SLOTS COUNTER WIDGET -->
-                        <div class="vip-slot-box">
-                            <div class="vip-slot-header">
-                                <span class="vip-slot-badge">🔥 Suất Ưu Đãi Đợt 1</span>
-                                <span class="vip-slot-count" id="vipSlotCount">Còn 15/15 suất</span>
-                            </div>
-                            <div class="vip-slot-track">
-                                <div class="vip-slot-fill" id="vipSlotFill" style="width: 100%;"></div>
-                            </div>
-                            <div class="vip-slot-hint">⚡ Hết 15 lượt mua đầu tiên giá 99.000đ sẽ tăng lên 149.000đ cho đến khi về giá gốc 249.000đ!</div>
-                        </div>
-
-                        <div class="plan-card-desc" style="color:#fbbf24;font-weight:700;">Sở hữu trọn đời một lần duy nhất — trải nghiệm không giới hạn, không bao giờ phải gia hạn!</div>
+                        <div class="plan-flash-tag tag-rose">🔥 Tiết kiệm ngay 28.000đ (-19,0%) so với gia hạn từng tháng</div>
                         <ul class="plan-card-perks">
-                            <li>Full bản quyền trọn đời vĩnh viễn trên cả 5 ứng dụng</li>
-                            <li>Đơn giá trọn đời: chỉ 99.000đ dùng mãi mãi</li>
-                            <li>Ưu đãi độc quyền: Tiết kiệm tối đa chi phí dài hạn</li>
-                            <li>Tặng 3 lần đổi thiết bị miễn phí trọn đời</li>
-                            <li>Đặc quyền dùng miễn phí mọi app mới phát hành trong tương lai</li>
+                            <li>Mở khóa full 5 app FlowEngine trong 90 ngày</li>
+                            <li>Đơn giá tiết kiệm: chỉ ~1.322đ/ngày (-19,0% so với gói tháng)</li>
+                            <li>Tặng 2 lần đổi thiết bị miễn phí trong 3 tháng</li>
+                            <li>Nhận đầy đủ bản cập nhật tối ưu game &amp; Android mới</li>
+                            <li>Hỗ trợ kỹ thuật ưu tiên 24/7</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-plan-action btn-90d" onclick="createShopOrder('90D')">⭐ Mua Gói 3 Tháng • 119K</button>
+                </div>
+
+                <!-- CỘT 5: GÓI 1 NĂM VIP (365 NGÀY) -->
+                <div class="pricing-card-box aura-365d">
+                    <span class="plan-ribbon gold">👑 VIP 1 NĂM • GIẢM 49,1%</span>
+                    <div>
+                        <div class="plan-card-title" style="color:#fcd34d;">GÓI 1 NĂM VIP (365 NGÀY)</div>
+                        <div class="plan-card-price">
+                            <span id="price365D" style="color:#fef08a;">299.000đ</span>
+                            <span class="plan-old-strikethrough">588.000đ</span>
+                        </div>
+                        <div class="plan-flash-tag tag-gold">💎 Tiết kiệm ngay 289.000đ so với gia hạn lẻ 12 tháng (588.000đ)</div>
+                        <ul class="plan-card-perks">
+                            <li>Full bản quyền 365 ngày trên trọn bộ 5 app FlowEngine hiện tại</li>
+                            <li>Đơn giá rẻ nhất hệ thống: chỉ ~819đ/ngày (-38,0% so với gói 3 tháng)</li>
+                            <li>Tiết kiệm 289.000đ (-49,1%) so với mua lẻ 12 tháng</li>
+                            <li>Tặng 3 lần đổi thiết bị miễn phí trong năm</li>
+                            <li>Cập nhật miễn phí cho mọi phiên bản Android mới trong năm</li>
                             <li>Hỗ trợ kỹ thuật VIP 24/7 chuyên sâu, ưu tiên cao nhất</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-vip" id="vipBuyBtn" onclick="createShopOrder('LIFE')">💎 Mua Vĩnh Viễn • 99K</button>
+                    <button type="button" class="btn-plan-action btn-365d" onclick="createShopOrder('365D')">💎 Mua Gói 1 Năm • 299K</button>
                 </div>
             </div>
         </div>
@@ -713,7 +852,7 @@
             <div id="lookupResults" class="lookup-res"></div>
 
             <div style="margin-top:16px;border-top:1px dashed rgba(255,255,255,0.12);padding-top:14px;">
-                <div style="font-size:13px;font-weight:800;color:#38bdf8;margin-bottom:8px;">🔄 Chuyển Key Sang Thiết Bị Mới (1 Lần Gói Tuần/Tháng • 2 Lần Gói Năm • 3 Lần Gói Vĩnh Viễn)</div>
+                <div style="font-size:13px;font-weight:800;color:#38bdf8;margin-bottom:8px;">🔄 Chuyển Key Sang Thiết Bị Mới (1 Lần Gói Trải Nghiệm/Tuần/Tháng • 2 Lần Gói 3 Tháng • 3 Lần Gói 1 Năm)</div>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;">
                     <input id="changeKeyInput" placeholder="Mã Key PRO hiện tại (VD: FLOWALL-PRO...)" style="background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:10px;padding:9px 12px;font-size:12px;" />
                     <input id="changeNewHwidInput" placeholder="Mã HWID máy mới (Lấy trong App)" style="background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:10px;padding:9px 12px;font-size:12px;" />

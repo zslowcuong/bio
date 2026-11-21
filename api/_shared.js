@@ -25,12 +25,14 @@ export const BANK_CONFIG = {
 };
 
 export const PLANS = {
-  '3D': { code: '3D', name: 'Gói 3 Ngày Trải Nghiệm (72 Giờ)', days: 3, hours: 72, price: 10000 },
-  '7D': { code: '7D', name: 'Gói 7 Ngày Combo (1 Tuần)', days: 7, hours: 168, price: 25000 },
-  '30D': { code: '30D', name: 'Gói Tháng Combo (30 Ngày)', days: 30, hours: 720, price: 49000 },
-  '1Y': { code: '1Y', name: 'Gói 1 Năm Combo (365 Ngày)', days: 365, hours: 8760, price: 169000 },
-  '365D': { code: '365D', name: 'Gói 1 Năm Combo (365 Ngày)', days: 365, hours: 8760, price: 169000 },
-  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn VIP Trọn Đời (99K)', days: 36500, hours: 876000, price: 99000 },
+  '2D': { code: '2D', name: 'Gói Trải Nghiệm (2 Ngày / 48H)', days: 2, hours: 48, price: 10000, origPrice: 15000 },
+  '3D': { code: '3D', name: 'Gói Trải Nghiệm (2 Ngày / 48H)', days: 2, hours: 48, price: 10000, origPrice: 15000 },
+  '7D': { code: '7D', name: 'Gói 7 Ngày (1 Tuần)', days: 7, hours: 168, price: 25000, origPrice: 29000 },
+  '30D': { code: '30D', name: 'Gói Tháng (30 Ngày)', days: 30, hours: 720, price: 49000, origPrice: 54000 },
+  '90D': { code: '90D', name: 'Gói 3 Tháng (90 Ngày)', days: 90, hours: 2160, price: 119000, origPrice: 147000 },
+  '365D': { code: '365D', name: 'Gói 1 Năm VIP (365 Ngày)', days: 365, hours: 8760, price: 299000, origPrice: 588000 },
+  '1Y': { code: '1Y', name: 'Gói 1 Năm VIP (365 Ngày)', days: 365, hours: 8760, price: 299000, origPrice: 588000 },
+  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn VIP Trọn Đời', days: 36500, hours: 876000, price: 299000, origPrice: 588000 },
 };
 
 export const APPS = {
