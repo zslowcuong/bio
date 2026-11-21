@@ -60,21 +60,29 @@ export const APPS = {
     package: 'com.flows.gaming',
     scheme: 'flows',
   },
-  flowultra: {
-    id: 'flowultra',
-    name: 'FlowUltra',
-    prefix: 'FLOWULTRA',
-    salt: 'FLOWLY_2026_FLOWULTRA_SALT_52E9',
-    package: 'com.flows.flowultra',
-    scheme: 'flowultra',
+  flowmax: {
+    id: 'flowmax',
+    name: 'FlowMax (Unified Hardware Suite)',
+    prefix: 'FLOWMAX',
+    salt: 'FLOWLY_2026_FLOWEXTRA_1412_SALT_84F1',
+    package: 'com.flowextra.optimizer',
+    scheme: 'flowmax',
   },
   flowextra: {
     id: 'flowextra',
-    name: 'FlowExtra',
+    name: 'FlowMax',
     prefix: 'FLOWEXTRA',
     salt: 'FLOWLY_2026_FLOWEXTRA_1412_SALT_84F1',
     package: 'com.flowextra.optimizer',
     scheme: 'flowextra',
+  },
+  flowultra: {
+    id: 'flowultra',
+    name: 'FlowMax',
+    prefix: 'FLOWULTRA',
+    salt: 'FLOWLY_2026_FLOWULTRA_SALT_52E9',
+    package: 'com.flowextra.optimizer',
+    scheme: 'flowultra',
   },
   flowz: {
     id: 'flowz',
@@ -91,8 +99,7 @@ export function normalizeAppId(raw) {
   if (s === 'all' || s === 'flowall' || s === 'combo' || s === 'all_apps' || s === 'combo_all' || s === 'combo5' || s === 'ecosystem') return 'all';
   if (s === 'flowop' || s === 'flowoptimize' || s === 'com.example.gameoptimizer') return 'flowoptimize';
   if (s === 'flows' || s === 'com.flows.gaming') return 'flows';
-  if (s === 'flowultra' || s === 'com.flows.flowultra') return 'flowultra';
-  if (s === 'flowextra' || s === 'com.flowextra.optimizer') return 'flowextra';
+  if (s === 'flowmax' || s === 'flowextra' || s === 'flowultra' || s === 'com.flowextra.optimizer' || s === 'com.flows.flowultra') return 'flowmax';
   if (s === 'flowz' || s === 'com.flows.flowz' || s === 'com.nebula.hnx') return 'flowz';
   return 'all';
 }

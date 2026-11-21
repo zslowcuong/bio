@@ -80,7 +80,7 @@
         .pricing-card-box {
             background: rgba(13, 21, 39, 0.94);
             border-radius: 20px;
-            padding: 24px 16px 20px;
+            padding: 24px 14px 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -90,6 +90,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             height: 100%;
             box-sizing: border-box;
+            min-width: 0;
         }
         .pricing-card-box > div {
             display: flex;
@@ -533,16 +534,19 @@
         .plans-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 16px;
+            grid-auto-rows: 1fr;
+            gap: 12px;
             margin-top: 14px;
             align-items: stretch;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         /* Màn hình nhỏ hơn (Tablet / Laptop 13 inch): 3 cột trên + 2 cột dưới căn giữa */
         @media (max-width: 1279px) and (min-width: 768px) {
             .plans-grid {
                 grid-template-columns: repeat(6, 1fr);
-                gap: 16px;
+                gap: 12px;
             }
             .pricing-card-box:nth-child(1) { grid-column: span 2; }
             .pricing-card-box:nth-child(2) { grid-column: span 2; }
@@ -566,10 +570,10 @@
         .aura-2d {
             border: 1.5px solid rgba(16, 185, 129, 0.55);
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.96), rgba(16, 185, 129, 0.08));
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
         }
         .aura-2d:hover {
-            box-shadow: 0 0 50px rgba(16, 185, 129, 0.65), 0 0 95px rgba(16, 185, 129, 0.25);
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.45);
             border-color: #10b981;
             transform: translateY(-4px);
         }
@@ -578,10 +582,10 @@
         .aura-7d {
             border: 1.5px solid rgba(14, 165, 233, 0.55);
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.96), rgba(14, 165, 233, 0.08));
-            box-shadow: 0 0 25px rgba(14, 165, 233, 0.25);
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.2);
         }
         .aura-7d:hover {
-            box-shadow: 0 0 50px rgba(14, 165, 233, 0.65), 0 0 95px rgba(14, 165, 233, 0.25);
+            box-shadow: 0 0 25px rgba(14, 165, 233, 0.45);
             border-color: #0ea5e9;
             transform: translateY(-4px);
         }
@@ -590,12 +594,12 @@
         .aura-30d {
             border: 2px solid rgba(168, 85, 247, 0.85);
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.98), rgba(168, 85, 247, 0.16));
-            box-shadow: 0 0 35px rgba(168, 85, 247, 0.45), 0 0 75px rgba(168, 85, 247, 0.2);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.35), inset 0 0 10px rgba(168, 85, 247, 0.08);
             transform: scale(1.02);
             z-index: 2;
         }
         .aura-30d:hover {
-            box-shadow: 0 0 65px rgba(168, 85, 247, 0.8), 0 0 120px rgba(168, 85, 247, 0.4);
+            box-shadow: 0 0 28px rgba(168, 85, 247, 0.6), inset 0 0 14px rgba(168, 85, 247, 0.15);
             border-color: #c084fc;
             transform: scale(1.04) translateY(-4px);
         }
@@ -604,10 +608,10 @@
         .aura-90d {
             border: 1.5px solid rgba(244, 63, 94, 0.55);
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.96), rgba(244, 63, 94, 0.08));
-            box-shadow: 0 0 25px rgba(244, 63, 94, 0.25);
+            box-shadow: 0 0 15px rgba(244, 63, 94, 0.2);
         }
         .aura-90d:hover {
-            box-shadow: 0 0 50px rgba(244, 63, 94, 0.65), 0 0 95px rgba(244, 63, 94, 0.25);
+            box-shadow: 0 0 25px rgba(244, 63, 94, 0.45);
             border-color: #f43f5e;
             transform: translateY(-4px);
         }
@@ -616,10 +620,10 @@
         .aura-365d {
             border: 2px solid rgba(245, 158, 11, 0.85);
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.98), rgba(245, 158, 11, 0.14));
-            box-shadow: 0 0 32px rgba(245, 158, 11, 0.4), 0 0 70px rgba(245, 158, 11, 0.2);
+            box-shadow: 0 0 16px rgba(245, 158, 11, 0.35), inset 0 0 10px rgba(245, 158, 11, 0.08);
         }
         .aura-365d:hover {
-            box-shadow: 0 0 60px rgba(245, 158, 11, 0.75), 0 0 120px rgba(245, 158, 11, 0.35);
+            box-shadow: 0 0 22px rgba(245, 158, 11, 0.5), inset 0 0 14px rgba(245, 158, 11, 0.15);
             border-color: #fbbf24;
             transform: translateY(-4px);
         }
@@ -708,7 +712,7 @@
         </div>
 
                 <!-- 2. CHỌN GÓI KEY PRO -->
-        <div class="section-card" style="padding: 24px;">
+        <div class="section-card" style="padding: 24px; overflow: hidden; position: relative;">
             <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
                 <div style="font-size: 16px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
                     <span style="color:#00f0ff; font-size: 18px;">💎</span> BẢNG GIÁ DỊCH VỤ NIÊM YẾT MỚI (MỞ KHÓA TRỌN BỘ 5 ỨNG DỤNG)
@@ -829,11 +833,11 @@
                         </div>
                         <div class="plan-flash-tag tag-gold">💎 Tiết kiệm ngay 289.000đ so với gia hạn lẻ 12 tháng (588.000đ)</div>
                         <ul class="plan-card-perks">
-                            <li>Full bản quyền 365 ngày trên trọn bộ 5 app FlowEngine hiện tại</li>
-                            <li>Đơn giá rẻ nhất hệ thống: chỉ ~819đ/ngày (-38,0% so với gói 3 tháng)</li>
-                            <li>Tiết kiệm 289.000đ (-49,1%) so với mua lẻ 12 tháng</li>
+                            <li>Full bản quyền 365 ngày trọn bộ 5 app FlowEngine</li>
+                            <li>Đơn giá rẻ nhất: chỉ ~819đ/ngày (-38,0% so với gói 3T)</li>
+                            <li>Tiết kiệm 289.000đ (-49,1%) so với mua lẻ 12T</li>
                             <li>Tặng 3 lần đổi thiết bị miễn phí trong năm</li>
-                            <li>Cập nhật miễn phí cho mọi phiên bản Android mới trong năm</li>
+                            <li>Cập nhật miễn phí mọi bản Android mới trong năm</li>
                             <li>Hỗ trợ kỹ thuật VIP 24/7 chuyên sâu, ưu tiên cao nhất</li>
                         </ul>
                     </div>
