@@ -121,34 +121,6 @@
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowS.apk",
     "direct_apk": "FlowS.apk"
   },
-  "flowultra": {
-    "name": "FlowUltra eSports Hardware Suite",
-    "version": "v2.5.0",
-    "version_code": 6,
-    "min_version_code": 5,
-    "force_update": false,
-    "update_url": "https://zslowcuong.github.io/bio/?dl=flowultra#download",
-    "download_url": "https://zslowcuong.github.io/bio/?dl=flowultra#download",
-    "package": "com.flows.flowultra",
-    "changelog": "Bản cập nhật v2.5.0: Đồng bộ chuẩn HWID duy nhất trên toàn bộ hệ sinh thái FlowEngine, tối ưu hóa Vulkan Hardware Turbo & bảo vệ quyền lợi trọn đời cho người mua Key PRO.",
-    "destination_apk": "https://zslowcuong.github.io/bio/FlowUltra.apk",
-    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowUltra.apk",
-    "direct_apk": "FlowUltra.apk"
-  },
-  "flowextra": {
-    "name": "FlowExtra Kaito Kid 1412 Edition",
-    "version": "v2.5.0",
-    "version_code": 11,
-    "min_version_code": 10,
-    "force_update": false,
-    "update_url": "https://zslowcuong.github.io/bio/?dl=flowextra#download",
-    "download_url": "https://zslowcuong.github.io/bio/?dl=flowextra#download",
-    "package": "com.flowextra.optimizer",
-    "changelog": "Bản cập nhật v2.5.0: Đồng bộ chuẩn HWID duy nhất 5 app, nâng cấp bộ giải mã Key Combo đa năng (Tuần / Tháng / 1 Năm / Vĩnh Viễn), tối ưu hóa Touch Turbo 360Hz.",
-    "destination_apk": "https://zslowcuong.github.io/bio/FlowExtra.apk",
-    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowExtra.apk",
-    "direct_apk": "FlowExtra.apk"
-  },
   "flowz": {
     "name": "FlowZ VIP Headshot & Sensitivity Pro",
     "version": "v2.5.0",

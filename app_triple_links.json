@@ -349,19 +349,6 @@
     "direct_apk": "FlowS.apk",
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2FkzDVlE2G"
   },
-  "flowultra": {
-    "name": "FlowUltra v1.1.0 (Miễn Phí)",
-    "dest": "https://gofile.io/d/p8GZrZNY",
-    "gofile": "https://gofile.io/d/p8GZrZNY",
-    "direct_apk": "FlowUltra.apk",
-    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fgofile.io%2Fd%2Fp8GZrZNY"
-  },
-  "flowextra": {
-    "name": "FlowExtra v3.5 Kaito Kid 1412 (Miễn Phí)",
-    "dest": "https://zslowcuong.github.io/bio/FlowExtra.apk",
-    "direct_apk": "FlowExtra.apk",
-    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowExtra.apk"
-  },
   "flowz": {
     "name": "FlowZ VIP Headshot & Sensitivity Pro (Miễn Phí)",
     "dest": "https://zslowcuong.github.io/bio/FlowZ.apk",
@@ -382,5 +369,11 @@
     "gofile": "https://zslowcuong.github.io/bio/SetEdit++.apk",
     "direct_apk": "SetEdit++.apk",
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FSetEdit%2B%2B.apk"
+  },
+  "flowmax": {
+    "name": "FlowMax v3.0.1 Unified Hardware Suite (Miễn Phí)",
+    "dest": "https://zslowcuong.github.io/bio/FlowMax.apk",
+    "direct_apk": "FlowMax.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowMax.apk"
   }
 }

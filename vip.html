@@ -580,51 +580,27 @@
                 </div>
             </div>
 
-            <!-- 3. FlowUltra -->
-            <div class="app-card" id="card-flowultra">
+            <!-- 3. FlowMax (Unified Hardware Suite - Gộp FlowUltra & FlowExtra) -->
+            <div class="app-card" id="card-flowmax" style="border-color: rgba(56, 189, 248, 0.45); background: linear-gradient(160deg, rgba(14, 28, 54, 0.9) 0%, rgba(10, 17, 34, 0.95) 100%);">
                 <div>
                     <div class="app-card-top">
                         <div class="app-card-info">
-                            <img src="flowultra_logo.png" class="app-card-icon" alt="FlowUltra">
+                            <img src="flowmax_logo.png" class="app-card-icon" alt="FlowMax">
                             <div>
-                                <div class="app-card-name">FlowUltra</div>
-                                <span class="app-card-tag">v1.3.0 • eSports Edition</span>
+                                <div class="app-card-name" style="color: #38bdf8;">FlowMax</div>
+                                <span class="app-card-tag" style="background: rgba(56, 189, 248, 0.16); color: #7dd3fc;">v3.0.1 • Unified Hardware Suite</span>
                             </div>
                         </div>
-                        <span class="lock-badge locked" id="badge-flowultra">🔒 ĐANG KHÓA</span>
+                        <span class="lock-badge locked" id="badge-flowmax">🔒 ĐANG KHÓA</span>
                     </div>
                     <div class="app-card-desc">
-                        Ép xung vi xử lý phần cứng, tối ưu hóa Vulkan/OpenGL renderer & ổn định đường truyền mạng 0% giật lag cho thi đấu.
+                        Hợp nhất toàn diện FlowUltra &amp; FlowExtra: Shappky Deep Doze tiết kiệm pin đêm, Đồ họa API Vulkan/ANGLE Unlocker, Quét xung CPU từng cụm &amp; 1412 Phantom GameSpace.
                     </div>
                 </div>
                 <div class="app-card-actions">
-                    <button type="button" class="btn btn-locked app-dl-btn" id="dl-flowultra" onclick="handleLockedClick('FlowUltra')">🔒 Khóa Bản Quyền • Nhập Key PRO Để Tải</button>
-                    <button type="button" class="btn btn-locked app-act-btn" id="act-flowultra" onclick="handleLockedClick('FlowUltra')">⚡ Mở & Tự Kích Hoạt 1-Chạm</button>
-                    <button type="button" class="btn btn-locked app-gf-btn" id="gf-flowultra" onclick="handleLockedClick('FlowUltra')">🔒 Link Dự Phòng Gofile</button>
-                </div>
-            </div>
-
-            <!-- 4. FlowExtra -->
-            <div class="app-card" id="card-flowextra">
-                <div>
-                    <div class="app-card-top">
-                        <div class="app-card-info">
-                            <img src="flowextra_logo.png" class="app-card-icon" alt="FlowExtra">
-                            <div>
-                                <div class="app-card-name">FlowExtra</div>
-                                <span class="app-card-tag">v3.7 • Kaito Kid 1412</span>
-                            </div>
-                        </div>
-                        <span class="lock-badge locked" id="badge-flowextra">🔒 ĐANG KHÓA</span>
-                    </div>
-                    <div class="app-card-desc">
-                        Bảo vệ Camera & Ảnh, kích hoạt Touch Turbo 360Hz, chặn tiến trình chạy ngầm rác & giải phóng toàn bộ tài nguyên máy.
-                    </div>
-                </div>
-                <div class="app-card-actions">
-                    <button type="button" class="btn btn-locked app-dl-btn" id="dl-flowextra" onclick="handleLockedClick('FlowExtra')">🔒 Khóa Bản Quyền • Nhập Key PRO Để Tải</button>
-                    <button type="button" class="btn btn-locked app-act-btn" id="act-flowextra" onclick="handleLockedClick('FlowExtra')">⚡ Mở & Tự Kích Hoạt 1-Chạm</button>
-                    <button type="button" class="btn btn-locked app-gf-btn" id="gf-flowextra" onclick="handleLockedClick('FlowExtra')">🔒 Link Dự Phòng GitHub</button>
+                    <button type="button" class="btn btn-locked app-dl-btn" id="dl-flowmax" onclick="handleLockedClick('FlowMax')">🔒 Khóa Bản Quyền • Nhập Key PRO Để Tải</button>
+                    <button type="button" class="btn btn-locked app-act-btn" id="act-flowmax" onclick="handleLockedClick('FlowMax')">⚡ Mở &amp; Tự Kích Hoạt 1-Chạm</button>
+                    <button type="button" class="btn btn-locked app-gf-btn" id="gf-flowmax" onclick="handleLockedClick('FlowMax')">🔒 Link Tải GitHub</button>
                 </div>
             </div>
 
@@ -832,12 +808,13 @@
         const giftBanner = document.getElementById('giftNoticeBanner');
         if (giftBanner) giftBanner.style.display = 'block';
 
-        const appKeys = ['flowoptimize', 'flows', 'flowultra', 'flowextra', 'flowz'];
+        const appKeys = ['flowoptimize', 'flows', 'flowmax', 'flowz'];
         const schemes = {
             flowoptimize: 'flowoptimize',
             flows: 'flows',
-            flowultra: 'flowultra',
-            flowextra: 'flowextra',
+            flowmax: 'flowmax',
+            flowextra: 'flowmax',
+            flowultra: 'flowmax',
             flowz: 'flowz'
         };
         const activeKey = localStorage.getItem('flow_vip_key') || (document.getElementById('vipQueryInput').value || '').trim();
@@ -856,26 +833,40 @@
                 badge.innerHTML = '🔓 ĐÃ MỞ KHÓA PRO';
             }
 
-            if (dlBtn && downloads && downloads[appId]) {
+            const defaultLinks = {
+                flowoptimize: { directApk: 'https://zslowcuong.github.io/bio/FlowOptimize.apk', gofile: 'https://zslowcuong.github.io/bio/FlowOptimize.apk' },
+                flows: { directApk: 'https://zslowcuong.github.io/bio/FlowS.apk', gofile: 'https://zslowcuong.github.io/bio/FlowS.apk' },
+                flowmax: { directApk: 'https://zslowcuong.github.io/bio/FlowMax.apk', gofile: 'https://zslowcuong.github.io/bio/FlowMax.apk' },
+                flowz: { directApk: 'https://zslowcuong.github.io/bio/FlowZ.apk', gofile: 'https://zslowcuong.github.io/bio/FlowZ.apk' }
+            };
+            let appDl = (downloads && (downloads[appId] || (appId === 'flowmax' ? (downloads['flowmax'] || downloads['flowextra']) : null))) || defaultLinks[appId];
+            if (appId === 'flowmax' && appDl) {
+                appDl = {
+                    directApk: (appDl.directApk || '').replace(/FlowExtra\.apk/gi, 'FlowMax.apk') || defaultLinks.flowmax.directApk,
+                    gofile: (appDl.gofile || '').replace(/FlowExtra\.apk/gi, 'FlowMax.apk') || defaultLinks.flowmax.gofile
+                };
+            }
+
+            if (dlBtn && appDl) {
                 dlBtn.className = 'btn btn-emerald app-dl-btn';
                 dlBtn.innerHTML = '⚡ Tải Trực Tiếp APK (0s Chờ)';
                 dlBtn.removeAttribute('onclick');
                 dlBtn.onclick = (e) => {
                     if (e) e.preventDefault();
-                    window.location.href = downloads[appId].directApk;
+                    window.location.href = appDl.directApk;
                 };
-                dlBtn.setAttribute('onclick', `window.location.href='${downloads[appId].directApk}'`);
+                dlBtn.setAttribute('onclick', `window.location.href='${appDl.directApk}'`);
             }
 
-            if (gfBtn && downloads && downloads[appId]) {
+            if (gfBtn && appDl) {
                 gfBtn.className = 'btn btn-ghost app-gf-btn';
-                gfBtn.innerHTML = (appId === 'flowextra' || appId === 'flowz') ? '🚀 Dự Phòng GitHub' : '🚀 Dự Phòng Gofile';
+                gfBtn.innerHTML = (appId === 'flowmax' || appId === 'flowz') ? '🚀 Dự Phòng GitHub' : '🚀 Dự Phòng Gofile';
                 gfBtn.removeAttribute('onclick');
                 gfBtn.onclick = (e) => {
                     if (e) e.preventDefault();
-                    window.open(downloads[appId].gofile, '_blank');
+                    window.open(appDl.gofile, '_blank');
                 };
-                gfBtn.setAttribute('onclick', `window.open('${downloads[appId].gofile}', '_blank')`);
+                gfBtn.setAttribute('onclick', `window.open('${appDl.gofile}', '_blank')`);
             }
 
             if (actBtn) {

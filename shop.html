@@ -25,7 +25,7 @@
             min-height: 100vh;
             padding: 18px 14px 48px;
         }
-        .wrap { max-width: 1180px; margin: 0 auto; }
+        .wrap { max-width: 1260px; margin: 0 auto; }
         .topbar {
             display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
             margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -79,18 +79,19 @@
         
         .pricing-card-box {
             background: rgba(13, 21, 39, 0.94);
-            border-radius: 20px;
-            padding: 24px 14px 20px;
+            border-radius: 18px;
+            padding: 22px 10px 18px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(14px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
             height: 100%;
             box-sizing: border-box;
             min-width: 0;
+            overflow: hidden;
         }
         .pricing-card-box > div {
             display: flex;
@@ -99,25 +100,25 @@
         }
         .pricing-card-box:hover {
             transform: translateY(-4px);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
         }
 
         .pricing-card-box.featured {
             border: 1.5px solid #00f0ff;
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.98), rgba(0, 240, 255, 0.08));
-            box-shadow: 0 0 28px rgba(0, 240, 255, 0.22);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
         }
         .pricing-card-box.featured:hover {
-            box-shadow: 0 0 38px rgba(0, 240, 255, 0.38);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.35);
         }
 
         .pricing-card-box.vip {
             border: 1.5px solid #f59e0b;
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.98), rgba(245, 158, 11, 0.08));
-            box-shadow: 0 0 28px rgba(245, 158, 11, 0.22);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
         }
         .pricing-card-box.vip:hover {
-            box-shadow: 0 0 38px rgba(245, 158, 11, 0.38);
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.35);
         }
 
         .plan-ribbon {
@@ -127,10 +128,10 @@
             color: #fff;
             font-size: 10px;
             font-weight: 900;
-            padding: 4px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.4px;
             white-space: nowrap;
         }
         .plan-ribbon.orange {
@@ -143,15 +144,16 @@
         }
 
         .plan-card-title {
-            font-size: 15px;
+            font-size: 13.5px;
             font-weight: 800;
             color: #cbd5e1;
             margin-bottom: 8px;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             text-transform: uppercase;
-            min-height: 42px;
+            min-height: 38px;
             display: flex;
             align-items: center;
+            line-height: 1.3;
         }
         .pricing-card-box.featured .plan-card-title {
             color: #00f0ff;
@@ -161,75 +163,78 @@
         }
 
         .plan-card-price {
-            font-size: 28px;
+            font-size: 23px;
             font-weight: 900;
             color: #ffffff;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: baseline;
-            gap: 8px;
+            gap: 6px;
             letter-spacing: -0.5px;
+            flex-wrap: wrap;
         }
         .plan-old-strikethrough {
-            font-size: 13px;
+            font-size: 12.5px;
             color: #ef4444;
             text-decoration: line-through;
             font-weight: 600;
         }
 
         .plan-card-desc {
-            font-size: 12.5px;
+            font-size: 12px;
             color: #94a3b8;
-            line-height: 1.5;
-            margin-bottom: 16px;
-            min-height: 38px;
+            line-height: 1.45;
+            margin-bottom: 14px;
+            min-height: 36px;
         }
 
         .plan-flash-tag {
-            font-size: 11.5px;
+            font-size: 10.5px;
             font-weight: 700;
-            padding: 7px 10px;
+            padding: 6px 8px;
             border-radius: 8px;
             margin-bottom: 12px;
-            line-height: 1.45;
-            min-height: 48px;
+            line-height: 1.4;
+            min-height: 44px;
             display: flex;
             align-items: center;
             box-sizing: border-box;
+            word-break: break-word;
         }
 
         .plan-card-perks {
             list-style: none;
-            font-size: 11.5px;
+            font-size: 11px;
             color: #cbd5e1;
-            margin-bottom: 16px;
-            line-height: 1.5;
+            margin-bottom: 14px;
+            line-height: 1.45;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 12px;
+            padding-top: 10px;
             flex: 1 1 auto;
         }
         .plan-card-perks li {
             display: flex;
             align-items: flex-start;
-            gap: 7px;
+            gap: 6px;
             margin-bottom: 5px;
+            word-break: break-word;
         }
         .plan-card-perks li::before {
             content: '✓';
             color: #10b981;
             font-weight: 900;
-            font-size: 12px;
+            font-size: 11px;
             flex-shrink: 0;
         }
 
         .btn-plan-action {
             width: 100%;
-            height: 44px;
-            padding: 0 12px;
+            height: 42px;
+            padding: 0 6px;
             border-radius: 12px;
             border: none;
             cursor: pointer;
-            font-size: 12.5px;
+            font-size: 12px;
             font-weight: 900;
             color: #fff;
             background: rgba(30, 41, 59, 0.95);
@@ -437,26 +442,7 @@
             border-color: #c084fc;
         }
 
-        .pricing-card-box.aura-life {
-            border: 2px solid rgba(245, 158, 11, 0.85);
-            background: linear-gradient(165deg, rgba(17, 24, 39, 0.98), rgba(245, 158, 11, 0.15));
-            box-shadow: 0 0 40px rgba(245, 158, 11, 0.55), 0 0 85px rgba(245, 158, 11, 0.28), inset 0 0 25px rgba(245, 158, 11, 0.1);
-            animation: goldAuraPulse 3s infinite ease-in-out;
-        }
-        @keyframes goldAuraPulse {
-            0%, 100% {
-                box-shadow: 0 0 35px rgba(245, 158, 11, 0.48), 0 0 80px rgba(245, 158, 11, 0.22), inset 0 0 22px rgba(245, 158, 11, 0.08);
-                border-color: rgba(245, 158, 11, 0.75);
-            }
-            50% {
-                box-shadow: 0 0 65px rgba(245, 158, 11, 0.8), 0 0 130px rgba(245, 158, 11, 0.45), inset 0 0 35px rgba(245, 158, 11, 0.16);
-                border-color: #fbbf24;
-            }
-        }
-        .pricing-card-box.aura-life:hover {
-            box-shadow: 0 0 80px rgba(245, 158, 11, 0.9), 0 0 150px rgba(245, 158, 11, 0.5), inset 0 0 40px rgba(245, 158, 11, 0.22);
-            border-color: #f59e0b;
-        }
+
 
         /* --- VIP SLOT COUNTER WIDGET --- */
         .vip-slot-box {
@@ -535,15 +521,15 @@
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             grid-auto-rows: 1fr;
-            gap: 12px;
+            gap: 10px;
             margin-top: 14px;
             align-items: stretch;
             width: 100%;
             box-sizing: border-box;
         }
 
-        /* Màn hình nhỏ hơn (Tablet / Laptop 13 inch): 3 cột trên + 2 cột dưới căn giữa */
-        @media (max-width: 1279px) and (min-width: 768px) {
+        /* Màn hình nhỏ hơn (Tablet / Laptop <= 1240px): 3 cột trên + 2 cột dưới căn giữa */
+        @media (max-width: 1240px) and (min-width: 768px) {
             .plans-grid {
                 grid-template-columns: repeat(6, 1fr);
                 gap: 12px;
@@ -559,7 +545,7 @@
         @media (max-width: 767px) {
             .plans-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 18px;
             }
             .pricing-card-box.featured {
                 transform: none;
@@ -620,10 +606,10 @@
         .aura-365d {
             border: 2px solid rgba(245, 158, 11, 0.85);
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.98), rgba(245, 158, 11, 0.14));
-            box-shadow: 0 0 16px rgba(245, 158, 11, 0.35), inset 0 0 10px rgba(245, 158, 11, 0.08);
+            box-shadow: 0 0 14px rgba(245, 158, 11, 0.3), inset 0 0 8px rgba(245, 158, 11, 0.08);
         }
         .aura-365d:hover {
-            box-shadow: 0 0 22px rgba(245, 158, 11, 0.5), inset 0 0 14px rgba(245, 158, 11, 0.15);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.45), inset 0 0 12px rgba(245, 158, 11, 0.12);
             border-color: #fbbf24;
             transform: translateY(-4px);
         }
@@ -712,7 +698,7 @@
         </div>
 
                 <!-- 2. CHỌN GÓI KEY PRO -->
-        <div class="section-card" style="padding: 24px; overflow: hidden; position: relative;">
+        <div class="section-card" style="padding: 22px 18px; position: relative;">
             <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
                 <div style="font-size: 16px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
                     <span style="color:#00f0ff; font-size: 18px;">💎</span> BẢNG GIÁ DỊCH VỤ NIÊM YẾT MỚI (MỞ KHÓA TRỌN BỘ 5 ỨNG DỤNG)
