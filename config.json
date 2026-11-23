@@ -204,7 +204,7 @@
     "name": "FlowMax Ultra Hardware Suite",
     "version": "v3.0.1",
     "version_code": 12,
-    "min_version_code": 11,
+    "min_version_code": 10,
     "force_update": false,
     "update_url": "https://zslowcuong.github.io/bio/?dl=flowmax#download",
     "download_url": "https://zslowcuong.github.io/bio/?dl=flowmax#download",
@@ -278,5 +278,19 @@
       "allow_dismiss": false,
       "updated_at_utc": 0
     }
+  },
+  "flowextra": {
+    "name": "FlowMax Ultra Hardware Suite",
+    "version": "v3.0.1",
+    "version_code": 12,
+    "min_version_code": 10,
+    "force_update": false,
+    "update_url": "https://zslowcuong.github.io/bio/?dl=flowmax#download",
+    "download_url": "https://zslowcuong.github.io/bio/?dl=flowmax#download",
+    "package": "com.flowextra.optimizer",
+    "changelog": "Bản cập nhật V3.0.1: Hợp nhất hoàn hảo FlowUltra + FlowExtra thành FlowMax, logo & icon thương hiệu mới, tích hợp GPU Turbo 360Hz & hệ thống bảo trì vá lỗi thông minh.",
+    "destination_apk": "https://zslowcuong.github.io/bio/FlowMax.apk",
+    "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowMax.apk",
+    "direct_apk": "FlowMax.apk"
   }
 }
