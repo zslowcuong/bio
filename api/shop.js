@@ -84,16 +84,16 @@ export default async function handler(req, res) {
       if (planCode === '2D' || planCode === '3D') {
         finalPrice = 10000;
       } else if (planCode === '7D') {
-        finalPrice = 25000;
+        finalPrice = 15000;
       } else if (planCode === '30D') {
-        finalPrice = 49000;
+        finalPrice = 39000;
       } else if (planCode === '90D' || planCode === '3M') {
-        finalPrice = 119000;
+        finalPrice = 79000;
       } else if (planCode === '1Y' || planCode === '365D') {
-        finalPrice = 299000;
+        finalPrice = 199000;
       } else if (planCode === 'LIFE') {
         const lifeTier = await getLifetimePricingTier();
-        finalPrice = lifeTier.currentPrice || 299000;
+        finalPrice = lifeTier.currentPrice || 99000;
       }
       const num6 = String(Math.floor(100000 + Math.random() * 900000));
       const orderCode = `ORD${num6}`;
@@ -106,13 +106,13 @@ export default async function handler(req, res) {
       const planTitle = (planCode === '2D' || planCode === '3D')
         ? 'Gói Trải Nghiệm 48H Combo Full 5 App (10K)'
         : (planCode === '7D'
-            ? 'Gói 7 Ngày (1 Tuần) Combo Full 5 App (25K)'
+            ? 'Gói 7 Ngày (1 Tuần) Combo Full 5 App (15K)'
             : (planCode === '30D'
-                ? 'Gói Tháng (30 Ngày) Combo Full 5 App (49K)'
+                ? 'Gói Tháng (30 Ngày) Combo Full 5 App (39K)'
                 : (planCode === '90D' || planCode === '3M'
-                    ? 'Gói 3 Tháng (90 Ngày) Combo Full 5 App (119K)'
+                    ? 'Gói 3 Tháng (90 Ngày) Combo Full 5 App (79K)'
                     : (planCode === '1Y' || planCode === '365D'
-                        ? 'Gói 1 Năm VIP (365 Ngày) Combo Full 5 App (299K)'
+                        ? 'Gói 1 Năm VIP (365 Ngày) Combo Full 5 App (199K)'
                         : (planCode === 'LIFE'
                             ? `Gói Vĩnh Viễn VIP Full 5 App Trọn Đời (${Math.round(finalPrice / 1000)}K)`
                             : 'Gói Combo Full 5 App')))));

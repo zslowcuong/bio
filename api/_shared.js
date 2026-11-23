@@ -27,12 +27,12 @@ export const BANK_CONFIG = {
 export const PLANS = {
   '2D': { code: '2D', name: 'Gói Trải Nghiệm (2 Ngày / 48H)', days: 2, hours: 48, price: 10000, origPrice: 15000 },
   '3D': { code: '3D', name: 'Gói Trải Nghiệm (2 Ngày / 48H)', days: 2, hours: 48, price: 10000, origPrice: 15000 },
-  '7D': { code: '7D', name: 'Gói 7 Ngày (1 Tuần)', days: 7, hours: 168, price: 25000, origPrice: 29000 },
-  '30D': { code: '30D', name: 'Gói Tháng (30 Ngày)', days: 30, hours: 720, price: 49000, origPrice: 54000 },
-  '90D': { code: '90D', name: 'Gói 3 Tháng (90 Ngày)', days: 90, hours: 2160, price: 119000, origPrice: 147000 },
-  '365D': { code: '365D', name: 'Gói 1 Năm VIP (365 Ngày)', days: 365, hours: 8760, price: 299000, origPrice: 588000 },
-  '1Y': { code: '1Y', name: 'Gói 1 Năm VIP (365 Ngày)', days: 365, hours: 8760, price: 299000, origPrice: 588000 },
-  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn VIP Trọn Đời', days: 36500, hours: 876000, price: 299000, origPrice: 588000 },
+  '7D': { code: '7D', name: 'Gói 7 Ngày (1 Tuần)', days: 7, hours: 168, price: 15000, origPrice: 29000 },
+  '30D': { code: '30D', name: 'Gói Tháng (30 Ngày)', days: 30, hours: 720, price: 39000, origPrice: 54000 },
+  '90D': { code: '90D', name: 'Gói 3 Tháng (90 Ngày)', days: 90, hours: 2160, price: 79000, origPrice: 119000 },
+  '365D': { code: '365D', name: 'Gói 1 Năm VIP (365 Ngày)', days: 365, hours: 8760, price: 199000, origPrice: 488000 },
+  '1Y': { code: '1Y', name: 'Gói 1 Năm VIP (365 Ngày)', days: 365, hours: 8760, price: 199000, origPrice: 488000 },
+  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn VIP Trọn Đời', days: 36500, hours: 876000, price: 99000, origPrice: 249000 },
 };
 
 export const APPS = {
@@ -648,43 +648,41 @@ export async function getLifetimePricingTier() {
     ? issuedKeys.filter(k => k.planCode === 'LIFE' || k.plan === 'LIFE' || (k.key && k.key.includes('-LIFE-'))).length
     : 0;
 
+  // Khởi điểm đã bán 2 lượt, còn chính xác 13/15 suất cho đợt 1 giá 99.000đ
+  const BASE_SOLD = 2;
+  const effectiveCount = Math.max(BASE_SOLD, lifeCount + BASE_SOLD);
+
   const TIER_SIZE = 15;
   let tierNumber = 1;
   let currentPrice = 99000;
   let nextTierPrice = 149000;
-  let slotsLeft = 15;
-  let soldInTier = 0;
+  let slotsLeft = 13;
+  let soldInTier = 2;
 
-  if (lifeCount < 15) {
+  if (effectiveCount < 15) {
     tierNumber = 1;
     currentPrice = 99000;
     nextTierPrice = 149000;
-    slotsLeft = 15 - lifeCount;
-    soldInTier = lifeCount;
-  } else if (lifeCount < 30) {
+    slotsLeft = 15 - effectiveCount;
+    soldInTier = effectiveCount;
+  } else if (effectiveCount < 30) {
     tierNumber = 2;
     currentPrice = 149000;
     nextTierPrice = 199000;
-    slotsLeft = 30 - lifeCount;
-    soldInTier = lifeCount - 15;
-  } else if (lifeCount < 45) {
+    slotsLeft = 30 - effectiveCount;
+    soldInTier = effectiveCount - 15;
+  } else if (effectiveCount < 45) {
     tierNumber = 3;
     currentPrice = 199000;
     nextTierPrice = 249000;
-    slotsLeft = 45 - lifeCount;
-    soldInTier = lifeCount - 30;
+    slotsLeft = 45 - effectiveCount;
+    soldInTier = effectiveCount - 30;
   } else {
     tierNumber = 4;
     currentPrice = 249000;
     nextTierPrice = 249000;
     slotsLeft = 0;
     soldInTier = 15;
-  }
-
-  // Nếu chưa có lượt mua nào, giữ nguyên 15/15 suất theo yêu cầu
-  if (lifeCount === 0) {
-    soldInTier = 0;
-    slotsLeft = 15;
   }
 
   const tierBadge = tierNumber === 1

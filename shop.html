@@ -708,23 +708,18 @@
                 </div>
             </div>
 
-                        <!-- FLASH SALE COUNTDOWN BANNER -->
-            <div class="flash-sale-banner">
-                <div class="flash-sale-left">
-                    <span class="flash-badge">⚡ FLASH SALE ĐANG DIỄN RA • GIỚI HẠN GIỜ</span>
-                    <span class="flash-note">Sau khi hết giờ Flash Sale sẽ tăng giá: <b>Gói 3 Ngày (lên 15.000đ)</b> • <b>Gói 7 Ngày (lên 29.000đ)</b> • <b>Gói 30 Ngày (lên 54.000đ)</b>!</span>
+            <!-- ƯU ĐÃI GÓI VĨNH VIỄN BANNER -->
+            <div class="vip-promo-banner" style="background: linear-gradient(90deg, rgba(245, 158, 11, 0.16), rgba(239, 68, 68, 0.16)); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: 14px; padding: 14px 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                    <span style="background: linear-gradient(135deg, #f59e0b, #ef4444); color: #fff; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.5px;">🔥 ƯU ĐÃI ĐỘC QUYỀN</span>
+                    <span style="font-size: 13.5px; color: #f8fafc; font-weight: 700;">Gói Vĩnh Viễn Trọn Đời chỉ <b>99.000đ</b> cho <span style="color:#ef4444; font-weight:900;" id="vipBannerSlot">13/15 suất còn lại</span> — Sau khi hết lượt giá sẽ tăng dần cho đến giá gốc <b>249.000đ</b>!</span>
                 </div>
-                <div class="flash-countdown-wrap">
-                    <span class="countdown-title">KẾT THÚC SAU:</span>
-                    <div class="countdown-digits">
-                        <span class="time-box" id="flashHours">05</span><span class="time-sep">:</span>
-                        <span class="time-box" id="flashMins">42</span><span class="time-sep">:</span>
-                        <span class="time-box" id="flashSecs">18</span>
-                    </div>
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; color: #fbbf24; background: rgba(15, 23, 42, 0.85); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(245, 158, 11, 0.35);">
+                    <span>⚡ 1 Key Mở Khóa Cả 5 App</span>
                 </div>
             </div>
 
-                        <div class="plans-grid">
+            <div class="plans-grid">
                 <!-- CỘT 1: GÓI TRẢI NGHIỆM (2 NGÀY) -->
                 <div class="pricing-card-box aura-2d">
                     <span class="plan-ribbon emerald">⚡ TEST MƯỢT 48H</span>
@@ -734,7 +729,7 @@
                             <span id="price2D">10.000đ</span>
                             <span class="plan-old-strikethrough">15.000đ</span>
                         </div>
-                        <div class="plan-flash-tag tag-emerald">⚡ Giá Flash Sale (-33,3%) — Tiết kiệm 5.000đ</div>
+                        <div class="plan-flash-tag tag-emerald">⚡ Dùng Thử 48H — Tiết kiệm 5.000đ</div>
                         <ul class="plan-card-perks">
                             <li>Mở khóa trọn bộ 5 app FlowEngine</li>
                             <li>Hạn dùng: 2 ngày (48 giờ liên tục), không cần vượt link4m 30h</li>
@@ -751,19 +746,19 @@
                     <div>
                         <div class="plan-card-title">GÓI 7 NGÀY (1 TUẦN)</div>
                         <div class="plan-card-price">
-                            <span id="price7D">25.000đ</span>
+                            <span id="price7D">15.000đ</span>
                             <span class="plan-old-strikethrough">29.000đ</span>
                         </div>
-                        <div class="plan-flash-tag tag-blue">⚡ Giá Flash Sale (-13,8%) — Rẻ hơn 28,6%/ngày so với gói 2 ngày</div>
+                        <div class="plan-flash-tag tag-blue">🚀 Giá Tối Ưu — Chỉ ~2.140đ/ngày (Tiết kiệm 14.000đ)</div>
                         <ul class="plan-card-perks">
                             <li>Mở khóa trọn bộ 5 app FlowEngine</li>
                             <li>Hạn dùng: 7 ngày liên tục, bỏ qua vượt link4m 30h</li>
-                            <li>Chi phí tối ưu: chỉ ~3.571đ/ngày</li>
+                            <li>Chi phí tối ưu: chỉ ~2.140đ/ngày</li>
                             <li>Tặng 1 lần đổi thiết bị miễn phí linh hoạt</li>
                             <li>Hỗ trợ kỹ thuật 24/7 trực tiếp</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-7d" onclick="createShopOrder('7D')">🚀 Mua Gói Tuần • 25K</button>
+                    <button type="button" class="btn-plan-action btn-7d" onclick="createShopOrder('7D')">🚀 Mua Gói Tuần • 15K</button>
                 </div>
 
                 <!-- CỘT 3: GÓI THÁNG (30 NGÀY) - CHỦ LỰC NỔI BẬT NHẤT -->
@@ -772,19 +767,19 @@
                     <div>
                         <div class="plan-card-title" style="color:#d8b4fe; font-size:16.5px;">GÓI THÁNG (30 NGÀY)</div>
                         <div class="plan-card-price">
-                            <span id="price30D" style="color:#f3e8ff;">49.000đ</span>
+                            <span id="price30D" style="color:#f3e8ff;">39.000đ</span>
                             <span class="plan-old-strikethrough">54.000đ</span>
                         </div>
-                        <div class="plan-flash-tag tag-purple">⚡ Rẻ hơn 54,3%/ngày so với gói Tuần — Thêm 24K dùng gấp hơn 4 lần</div>
+                        <div class="plan-flash-tag tag-purple">🔥 Cực Rẻ — Chỉ ~1.300đ/ngày (Rẻ hơn 39% so với gói Tuần)</div>
                         <ul class="plan-card-perks">
                             <li>Mở khóa full 5 app FlowEngine trong 30 ngày</li>
-                            <li>Đơn giá siêu rẻ: chỉ ~1.633đ/ngày</li>
+                            <li>Đơn giá siêu rẻ: chỉ ~1.300đ/ngày</li>
                             <li>Tặng 1 lần đổi thiết bị miễn phí linh hoạt</li>
                             <li>Nhận mọi bản cập nhật tính năng mới lớn nhỏ</li>
                             <li>Hỗ trợ kỹ thuật ưu tiên 24/7</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-30d" onclick="createShopOrder('30D')">🔥 Mua Gói Tháng • 49K</button>
+                    <button type="button" class="btn-plan-action btn-30d" onclick="createShopOrder('30D')">🔥 Mua Gói Tháng • 39K</button>
                 </div>
 
                 <!-- CỘT 4: GÓI 3 THÁNG (90 NGÀY) -->
@@ -793,41 +788,54 @@
                     <div>
                         <div class="plan-card-title">GÓI 3 THÁNG (90 NGÀY)</div>
                         <div class="plan-card-price">
-                            <span id="price90D">119.000đ</span>
-                            <span class="plan-old-strikethrough">147.000đ</span>
+                            <span id="price90D">79.000đ</span>
+                            <span class="plan-old-strikethrough">119.000đ</span>
                         </div>
-                        <div class="plan-flash-tag tag-rose">🔥 Tiết kiệm ngay 28.000đ (-19,0%) so với gia hạn từng tháng</div>
+                        <div class="plan-flash-tag tag-rose">⭐ Tiết kiệm ngay 38.000đ so với gia hạn từng tháng</div>
                         <ul class="plan-card-perks">
                             <li>Mở khóa full 5 app FlowEngine trong 90 ngày</li>
-                            <li>Đơn giá tiết kiệm: chỉ ~1.322đ/ngày (-19,0% so với gói tháng)</li>
+                            <li>Đơn giá tiết kiệm: chỉ ~877đ/ngày</li>
                             <li>Tặng 2 lần đổi thiết bị miễn phí trong 3 tháng</li>
                             <li>Nhận đầy đủ bản cập nhật tối ưu game &amp; Android mới</li>
                             <li>Hỗ trợ kỹ thuật ưu tiên 24/7</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-90d" onclick="createShopOrder('90D')">⭐ Mua Gói 3 Tháng • 119K</button>
+                    <button type="button" class="btn-plan-action btn-90d" onclick="createShopOrder('90D')">⭐ Mua Gói 3 Tháng • 79K</button>
                 </div>
 
-                <!-- CỘT 5: GÓI 1 NĂM VIP (365 NGÀY) -->
+                <!-- CỘT 5: GÓI VĨNH VIỄN (TRỌN ĐỜI) -->
                 <div class="pricing-card-box aura-365d">
-                    <span class="plan-ribbon gold">👑 VIP 1 NĂM • GIẢM 49,1%</span>
+                    <span class="plan-ribbon gold" id="vipTierBadge">👑 VĨNH VIỄN • ĐỢT 1</span>
                     <div>
-                        <div class="plan-card-title" style="color:#fcd34d;">GÓI 1 NĂM VIP (365 NGÀY)</div>
+                        <div class="plan-card-title" style="color:#fcd34d;">GÓI VĨNH VIỄN (TRỌN ĐỜI)</div>
                         <div class="plan-card-price">
-                            <span id="price365D" style="color:#fef08a;">299.000đ</span>
-                            <span class="plan-old-strikethrough">588.000đ</span>
+                            <span id="vipPriceLabel" style="color:#fef08a;">99.000đ</span>
+                            <span class="plan-old-strikethrough">249.000đ</span>
                         </div>
-                        <div class="plan-flash-tag tag-gold">💎 Tiết kiệm ngay 289.000đ so với gia hạn lẻ 12 tháng (588.000đ)</div>
+
+                        <!-- SLOTS COUNTER WIDGET -->
+                        <div class="vip-slot-box" style="margin: 10px 0 12px;">
+                            <div class="vip-slot-header">
+                                <span class="vip-slot-badge">🔥 Suất Ưu Đãi Đợt 1</span>
+                                <span class="vip-slot-count" id="vipSlotCount">Còn 13/15 suất</span>
+                            </div>
+                            <div class="vip-slot-track">
+                                <div class="vip-slot-fill" id="vipSlotFill" style="width: 86%;"></div>
+                            </div>
+                            <div class="vip-slot-hint" id="vipSlotHint">⚡ Hết 13 lượt mua ưu đãi 99.000đ sẽ tăng dần lên cho đến khi về giá gốc 249.000đ!</div>
+                        </div>
+
+                        <div class="plan-flash-tag tag-gold">💎 Tiết kiệm ngay 150.000đ (-60,2%) so với giá gốc 249.000đ</div>
                         <ul class="plan-card-perks">
-                            <li>Full bản quyền 365 ngày trọn bộ 5 app FlowEngine</li>
-                            <li>Đơn giá rẻ nhất: chỉ ~819đ/ngày (-38,0% so với gói 3T)</li>
-                            <li>Tiết kiệm 289.000đ (-49,1%) so với mua lẻ 12T</li>
-                            <li>Tặng 3 lần đổi thiết bị miễn phí trong năm</li>
-                            <li>Cập nhật miễn phí mọi bản Android mới trong năm</li>
+                            <li>Full bản quyền trọn đời vĩnh viễn trên cả 5 app FlowEngine</li>
+                            <li>Đơn giá trọn đời: chỉ 99.000đ dùng mãi mãi, không bao giờ phải gia hạn</li>
+                            <li>Ưu đãi độc quyền: 13/15 lượt còn lại, hết lượt tăng lên 249.000đ</li>
+                            <li>Tặng 3 lần đổi thiết bị miễn phí trọn đời</li>
+                            <li>Cập nhật miễn phí mọi tính năng mới &amp; phiên bản Android</li>
                             <li>Hỗ trợ kỹ thuật VIP 24/7 chuyên sâu, ưu tiên cao nhất</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-365d" onclick="createShopOrder('365D')">💎 Mua Gói 1 Năm • 299K</button>
+                    <button type="button" class="btn-plan-action btn-vip" id="vipBuyBtn" onclick="createShopOrder('LIFE')">💎 Mua Vĩnh Viễn • 99K</button>
                 </div>
             </div>
         </div>
@@ -1019,6 +1027,14 @@
                         const left = p.slotsLeft;
                         const pct = Math.min(100, Math.max(10, Math.round((left / 15) * 100)));
                         fillEl.style.width = `${pct}%`;
+                    }
+                    const bannerSlotEl = document.getElementById('vipBannerSlot');
+                    if (bannerSlotEl && p.slotsLeft !== undefined) {
+                        bannerSlotEl.textContent = `${p.slotsLeft}/15 suất còn lại`;
+                    }
+                    const hintEl = document.getElementById('vipSlotHint');
+                    if (hintEl && p.tierHint) {
+                        hintEl.textContent = p.tierHint;
                     }
                 }
             } catch (e) {
@@ -1291,7 +1307,7 @@
 
         selectApp(selectedAppId);
         syncDynamicPricing();
-        startFlashSaleTimer();
+        // Flash Sale countdown removed per user request
 
         try {
             const savedProKey = localStorage.getItem('flow_my_pro_key');
