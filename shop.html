@@ -516,36 +516,34 @@
         .btn-1y { background: linear-gradient(135deg, #dc2626, #ef4444); color: #fff; }
 
     
-        /* 5-COLUMN RESPONSIVE PLANS GRID */
+        /* 3-COLUMN RESPONSIVE PLANS GRID (TUẦN, THÁNG, VĨNH VIỄN) */
         .plans-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             grid-auto-rows: 1fr;
-            gap: 10px;
+            gap: 16px;
             margin-top: 14px;
             align-items: stretch;
             width: 100%;
+            max-width: 1120px;
+            margin-left: auto;
+            margin-right: auto;
             box-sizing: border-box;
         }
 
-        /* Màn hình nhỏ hơn (Tablet / Laptop <= 1240px): 3 cột trên + 2 cột dưới căn giữa */
-        @media (max-width: 1240px) and (min-width: 768px) {
+        /* Tablet <= 992px: 3 cột hoặc căn chỉnh */
+        @media (max-width: 992px) and (min-width: 768px) {
             .plans-grid {
-                grid-template-columns: repeat(6, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 12px;
             }
-            .pricing-card-box:nth-child(1) { grid-column: span 2; }
-            .pricing-card-box:nth-child(2) { grid-column: span 2; }
-            .pricing-card-box:nth-child(3) { grid-column: span 2; }
-            .pricing-card-box:nth-child(4) { grid-column: 2 / span 2; }
-            .pricing-card-box:nth-child(5) { grid-column: 4 / span 2; }
         }
 
         /* Mobile < 768px: 1 cột xếp dọc */
         @media (max-width: 767px) {
             .plans-grid {
                 grid-template-columns: 1fr;
-                gap: 18px;
+                gap: 20px;
             }
             .pricing-card-box.featured {
                 transform: none;
@@ -720,27 +718,7 @@
             </div>
 
             <div class="plans-grid">
-                <!-- CỘT 1: GÓI TRẢI NGHIỆM (2 NGÀY) -->
-                <div class="pricing-card-box aura-2d">
-                    <span class="plan-ribbon emerald">⚡ TEST MƯỢT 48H</span>
-                    <div>
-                        <div class="plan-card-title">GÓI TRẢI NGHIỆM (2 NGÀY)</div>
-                        <div class="plan-card-price">
-                            <span id="price2D">10.000đ</span>
-                            <span class="plan-old-strikethrough">15.000đ</span>
-                        </div>
-                        <div class="plan-flash-tag tag-emerald">⚡ Dùng Thử 48H — Tiết kiệm 5.000đ</div>
-                        <ul class="plan-card-perks">
-                            <li>Mở khóa trọn bộ 5 app FlowEngine</li>
-                            <li>Hạn dùng: 2 ngày (48 giờ liên tục), không cần vượt link4m 30h</li>
-                            <li>Chi phí dùng thử: 5.000đ/ngày</li>
-                            <li>Tặng 1 lần đổi thiết bị miễn phí linh hoạt</li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn-plan-action btn-2d" onclick="createShopOrder('2D')">⚡ Trải Nghiệm 48H • 10K</button>
-                </div>
-
-                <!-- CỘT 2: GÓI 7 NGÀY (1 TUẦN) -->
+                <!-- CỘT 1: GÓI 7 NGÀY (1 TUẦN) -->
                 <div class="pricing-card-box aura-7d">
                     <span class="plan-ribbon sky">🚀 LEO RANK TUẦN</span>
                     <div>
@@ -761,7 +739,7 @@
                     <button type="button" class="btn-plan-action btn-7d" onclick="createShopOrder('7D')">🚀 Mua Gói Tuần • 15K</button>
                 </div>
 
-                <!-- CỘT 3: GÓI THÁNG (30 NGÀY) - CHỦ LỰC NỔI BẬT NHẤT -->
+                <!-- CỘT 2: GÓI THÁNG (30 NGÀY) - CHỦ LỰC NỔI BẬT NHẤT -->
                 <div class="pricing-card-box aura-30d featured">
                     <span class="plan-ribbon purple-neon">🔥 PHỔ BIẾN NHẤT • BÁN CHẠY</span>
                     <div>
@@ -782,28 +760,7 @@
                     <button type="button" class="btn-plan-action btn-30d" onclick="createShopOrder('30D')">🔥 Mua Gói Tháng • 39K</button>
                 </div>
 
-                <!-- CỘT 4: GÓI 3 THÁNG (90 NGÀY) -->
-                <div class="pricing-card-box aura-90d">
-                    <span class="plan-ribbon rose">⭐ CÀY MÙA RANK • TIẾT KIỆM</span>
-                    <div>
-                        <div class="plan-card-title">GÓI 3 THÁNG (90 NGÀY)</div>
-                        <div class="plan-card-price">
-                            <span id="price90D">79.000đ</span>
-                            <span class="plan-old-strikethrough">119.000đ</span>
-                        </div>
-                        <div class="plan-flash-tag tag-rose">⭐ Tiết kiệm ngay 38.000đ so với gia hạn từng tháng</div>
-                        <ul class="plan-card-perks">
-                            <li>Mở khóa full 5 app FlowEngine trong 90 ngày</li>
-                            <li>Đơn giá tiết kiệm: chỉ ~877đ/ngày</li>
-                            <li>Tặng 2 lần đổi thiết bị miễn phí trong 3 tháng</li>
-                            <li>Nhận đầy đủ bản cập nhật tối ưu game &amp; Android mới</li>
-                            <li>Hỗ trợ kỹ thuật ưu tiên 24/7</li>
-                        </ul>
-                    </div>
-                    <button type="button" class="btn-plan-action btn-90d" onclick="createShopOrder('90D')">⭐ Mua Gói 3 Tháng • 79K</button>
-                </div>
-
-                <!-- CỘT 5: GÓI VĨNH VIỄN (TRỌN ĐỜI) -->
+                <!-- CỘT 3: GÓI VĨNH VIỄN (TRỌN ĐỜI) -->
                 <div class="pricing-card-box aura-365d">
                     <span class="plan-ribbon gold" id="vipTierBadge">👑 VĨNH VIỄN • ĐỢT 1</span>
                     <div>
@@ -850,7 +807,7 @@
             <div id="lookupResults" class="lookup-res"></div>
 
             <div style="margin-top:16px;border-top:1px dashed rgba(255,255,255,0.12);padding-top:14px;">
-                <div style="font-size:13px;font-weight:800;color:#38bdf8;margin-bottom:8px;">🔄 Chuyển Key Sang Thiết Bị Mới (1 Lần Gói Trải Nghiệm/Tuần/Tháng • 2 Lần Gói 3 Tháng • 3 Lần Gói 1 Năm)</div>
+                <div style="font-size:13px;font-weight:800;color:#38bdf8;margin-bottom:8px;">🔄 Chuyển Key Sang Thiết Bị Mới (1 Lần Gói Tuần / Tháng • 3 Lần Gói Vĩnh Viễn Trọn Đời)</div>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;">
                     <input id="changeKeyInput" placeholder="Mã Key PRO hiện tại (VD: FLOWALL-PRO...)" style="background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:10px;padding:9px 12px;font-size:12px;" />
                     <input id="changeNewHwidInput" placeholder="Mã HWID máy mới (Lấy trong App)" style="background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:10px;padding:9px 12px;font-size:12px;" />
