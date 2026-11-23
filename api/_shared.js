@@ -644,13 +644,16 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
 
 export async function getLifetimePricingTier() {
   const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
-  const lifeCount = Array.isArray(issuedKeys)
-    ? issuedKeys.filter(k => k.planCode === 'LIFE' || k.plan === 'LIFE' || (k.key && k.key.includes('-LIFE-'))).length
+  
+  // Tính số lượng key LIFE mới bán ra từ mốc khuyến mãi mới
+  const PROMO_START_UTC = 1795418000000; // Mốc chiến dịch 23/11/2026
+  const newLifeCount = Array.isArray(issuedKeys)
+    ? issuedKeys.filter(k => (Number(k.createdAtUtc || 0) >= PROMO_START_UTC) && (k.planCode === 'LIFE' || k.plan === 'LIFE' || (k.key && k.key.includes('-LIFE-')))).length
     : 0;
 
-  // Khởi điểm đã bán 2 lượt, còn chính xác 13/15 suất cho đợt 1 giá 99.000đ
-  const BASE_SOLD = 2;
-  const effectiveCount = Math.max(BASE_SOLD, lifeCount + BASE_SOLD);
+  // Khởi điểm đã có 2 lượt, còn chính xác 13/15 suất cho đợt 1 giá 99.000đ
+  const INITIAL_SOLD = 2;
+  const effectiveCount = INITIAL_SOLD + newLifeCount;
 
   const TIER_SIZE = 15;
   let tierNumber = 1;
@@ -686,11 +689,15 @@ export async function getLifetimePricingTier() {
   }
 
   const tierBadge = tierNumber === 1
-    ? `👑 SỞ HỮU TRỌN ĐỜI • 99K`
-    : `👑 SỞ HỮU TRỌN ĐỜI • ${Math.round(currentPrice/1000)}K`;
+    ? `👑 VĨNH VIỄN • ĐỢT 1 (99K)`
+    : (tierNumber === 2 ? `👑 VĨNH VIỄN • ĐỢT 2 (149K)` : (tierNumber === 3 ? `👑 VĨNH VIỄN • ĐỢT 3 (199K)` : `👑 VĨNH VIỄN • GIÁ GỐC (249K)`));
+
+  const tierHint = tierNumber < 4
+    ? `Còn ${slotsLeft}/15 suất ưu đãi ${currentPrice.toLocaleString('vi-VN')}đ, hết lượt sẽ tăng lên ${nextTierPrice.toLocaleString('vi-VN')}đ cho đến giá gốc 249.000đ!`
+    : 'Đã về giá niêm yết gốc 249.000đ trọn đời!';
 
   return {
-    lifeCount,
+    lifeCount: effectiveCount,
     tierNumber,
     currentPrice,
     nextTierPrice,
@@ -699,6 +706,7 @@ export async function getLifetimePricingTier() {
     soldInTier,
     originalPrice: 249000,
     tierBadge,
+    tierHint,
   };
 }
 
