@@ -7490,7 +7490,7 @@ settings put secure multi_press_timeout 200</code></pre>
 
                 <div class="faq-a">
 
-                    Rất đơn giản: Bấm <b>TẢI XUỐNG (MIỄN PHÍ)</b> -> Xác thực <b>Follow TikTok (@xxd5974)</b> -> Bấm nút <b>Tải về File APK</b> để nhận bộ cài đặt chính thức (100% miễn phí, không cần GetKey)!
+                    Rất đơn giản: Bấm <b>TẢI XUỐNG (MIỄN PHÍ)</b> -> Xác thực <b>Follow TikTok (@xxd5974) &amp; Tham gia nhóm Telegram</b> -> Bấm nút <b>Tải về File APK</b> để nhận bộ cài đặt chính thức (100% miễn phí, không cần GetKey)!
 
                 </div>
 
@@ -7535,17 +7535,17 @@ settings put secure multi_press_timeout 200</code></pre>
                 ⚠️ <b>MẸO TẢI TRÊN TIKTOK:</b> Bấm dấu <b>[ ⋮ ]</b> góc trên bên phải màn hình ➔ Chọn <b>"Mở bằng trình duyệt ngoài"</b> (Chrome/Safari) để tránh bị TikTok chặn tải file APK!
             </div>
             <div id="unlockBannerText" style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 12px; margin-bottom: 14px; text-align: left; font-size: 12px; color: #cbd5e1; line-height: 1.45;">
-                Nhấn nút bên dưới để <b>Follow kênh TikTok chính thức (@xxd5974)</b>, hệ thống sẽ tự động mở khóa liên kết tải file cài đặt APK tốc độ cao!
+                Hoàn thành 2 bước bên dưới: <b>Follow kênh TikTok chính thức (@xxd5974)</b> và <b>Tham gia nhóm Telegram</b> để tự động mở khóa liên kết tải file cài đặt APK tốc độ cao!
             </div>
 
-            <!-- Required TikTok Follow Button -->
+            <!-- Step 1: Required TikTok Follow Button -->
             <button id="btnFollowTikTok" type="button" class="btn-modal-action" style="background: #000; color: #fff; border: 1.5px solid rgba(255,255,255,0.25); box-shadow: -2px -2px 10px rgba(0, 242, 254, 0.28), 2px 2px 10px rgba(254, 44, 85, 0.38); margin-bottom: 10px;" onclick="handleTikTokClick()">
                 <span style="font-size: 16px;">🎵</span>
                 <span>THEO DÕI TIKTOK ĐỂ MỞ KHÓA (@XXD5974)</span>
             </button>
 
-            <!-- Verifying Progress Box (seconds intentionally hidden) -->
-            <div id="unlockVerifyingBox" style="display: none; background: #0b132b; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 14px; margin-bottom: 12px; text-align: left;">
+            <!-- TikTok Verifying Progress Box (seconds intentionally hidden) -->
+            <div id="unlockVerifyingBoxTikTok" style="display: none; background: #0b132b; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 14px; margin-bottom: 10px; text-align: left;">
                 <div style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 3px;">
                     ⏳ Đang xác minh theo dõi TikTok...
                 </div>
@@ -7553,11 +7553,40 @@ settings put secure multi_press_timeout 200</code></pre>
                     Hệ thống đang kiểm tra tự động, vui lòng đợi trong giây lát...
                 </div>
                 <div class="progress-track">
-                    <div id="unlockProgressBar" class="progress-fill"></div>
+                    <div id="unlockProgressBarTikTok" class="progress-fill"></div>
                 </div>
             </div>
 
-            <!-- Unlocked Download Button (Revealed after TikTok follow; opens gateway on click without spoiling URL beforehand) -->
+            <!-- TikTok Verified Badge -->
+            <div id="badgeTikTokDone" style="display: none; align-items: center; justify-content: center; gap: 8px; background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.45); border-radius: 12px; padding: 10px 14px; margin-bottom: 10px; font-size: 12.5px; font-weight: 700; color: #34d399;">
+                ✅ Đã xác minh Follow TikTok (@xxd5974)
+            </div>
+
+            <!-- Step 2: Required Telegram Group Join Button -->
+            <button id="btnFollowTelegram" type="button" class="btn-modal-action" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: #fff; border: 1.5px solid rgba(56, 189, 248, 0.55); box-shadow: 0 4px 15px rgba(2, 132, 199, 0.38); margin-bottom: 10px;" onclick="handleTelegramClick()">
+                <span style="font-size: 16px;">✈️</span>
+                <span>THAM GIA NHÓM TELEGRAM ĐỂ MỞ KHÓA</span>
+            </button>
+
+            <!-- Telegram Verifying Progress Box (seconds intentionally hidden) -->
+            <div id="unlockVerifyingBoxTelegram" style="display: none; background: #0b132b; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 14px; padding: 14px; margin-bottom: 10px; text-align: left;">
+                <div style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 3px;">
+                    ⏳ Đang xác minh tham gia nhóm Telegram...
+                </div>
+                <div style="font-size: 11.5px; color: var(--text-muted);">
+                    Hệ thống đang kiểm tra tự động, vui lòng đợi trong giây lát...
+                </div>
+                <div class="progress-track">
+                    <div id="unlockProgressBarTelegram" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Telegram Verified Badge -->
+            <div id="badgeTelegramDone" style="display: none; align-items: center; justify-content: center; gap: 8px; background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.45); border-radius: 12px; padding: 10px 14px; margin-bottom: 10px; font-size: 12.5px; font-weight: 700; color: #34d399;">
+                ✅ Đã xác minh tham gia nhóm Telegram
+            </div>
+
+            <!-- Unlocked Download Button (Revealed after BOTH TikTok & Telegram complete) -->
             <button id="btnFinalDownload" type="button" onclick="handleFinalDownloadClick(event)" class="btn-modal-action" style="display: none; background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%); color: #fff; margin-bottom: 10px;">
                 <span style="font-size: 16px;">⚡</span>
                 <span id="txtFinalDownloadLabel">TẢI VỀ FILE CÀI ĐẶT APK →</span>
@@ -7702,9 +7731,15 @@ settings put secure multi_press_timeout 200</code></pre>
             }
         }
 
-        // 5. UNIFIED TIKTOK FOLLOW + GATEWAY MODAL LOGIC (APPLIES TO CORE & SUB-APPS)
+        // 5. UNIFIED TIKTOK + TELEGRAM FOLLOW + GATEWAY MODAL LOGIC (APPLIES TO CORE & SUB-APPS)
         let currentTargetApp = 'flowoptimize';
         let unlockTimerInterval = null;
+        let tiktokTimerInterval = null;
+        let telegramTimerInterval = null;
+        let tiktokVerified = false;
+        let telegramVerified = false;
+        let tiktokVerifying = false;
+        let telegramVerifying = false;
         let isDownloadRedirecting = false;
         let hasUnlockedCurrentApp = false;
         let unlockedDownloadUrl = '';
@@ -7712,6 +7747,7 @@ settings put secure multi_press_timeout 200</code></pre>
         const globalConfig = {
             api_token: "6ae77b1c1473a714b32b2a3a",
             tiktok: "https://www.tiktok.com/@xxd5974",
+            telegram: "https://t.me/+dtVBEzwuN2Q4NmI9",
             wait_seconds: 8,
             flows: {
                 destination_apk: "https://zslowcuong.github.io/bio/FlowS.apk",
@@ -7763,6 +7799,7 @@ settings put secure multi_press_timeout 200</code></pre>
                     const data = await res.json();
                     if (data.api_token) globalConfig.api_token = data.api_token;
                     if (data.tiktok) globalConfig.tiktok = data.tiktok;
+                    if (data.telegram) globalConfig.telegram = data.telegram;
                     if (typeof data.wait_seconds === 'number') globalConfig.wait_seconds = data.wait_seconds;
                     if (data.flows) globalConfig.flows = Object.assign(globalConfig.flows, data.flows);
                     if (data.flowoptimize) globalConfig.flowoptimize = Object.assign(globalConfig.flowoptimize, data.flowoptimize);
@@ -7942,12 +7979,23 @@ settings put secure multi_press_timeout 200</code></pre>
             };
         }
 
+        function clearAllUnlockTimers() {
+            if (unlockTimerInterval) { clearInterval(unlockTimerInterval); unlockTimerInterval = null; }
+            if (tiktokTimerInterval) { clearInterval(tiktokTimerInterval); tiktokTimerInterval = null; }
+            if (telegramTimerInterval) { clearInterval(telegramTimerInterval); telegramTimerInterval = null; }
+        }
+
         function openUnlockModal(appKey) {
             const meta = getAnyAppDownloadMeta(appKey);
             currentTargetApp = meta.key;
             hasUnlockedCurrentApp = false;
             unlockedDownloadUrl = '';
             isDownloadRedirecting = false;
+            clearAllUnlockTimers();
+            tiktokVerified = false;
+            telegramVerified = false;
+            tiktokVerifying = false;
+            telegramVerifying = false;
 
             const modal = document.getElementById('unlockDownloadModal');
             const icon = document.getElementById('modalAppIcon');
@@ -7957,8 +8005,13 @@ settings put secure multi_press_timeout 200</code></pre>
             const finalLabel = document.getElementById('txtFinalDownloadLabel');
             const banner = document.getElementById('unlockBannerText');
             const btnTikTok = document.getElementById('btnFollowTikTok');
-            const verifyingBox = document.getElementById('unlockVerifyingBox');
-            const barEl = document.getElementById('unlockProgressBar');
+            const btnTelegram = document.getElementById('btnFollowTelegram');
+            const verifyingBoxTikTok = document.getElementById('unlockVerifyingBoxTikTok');
+            const verifyingBoxTelegram = document.getElementById('unlockVerifyingBoxTelegram');
+            const badgeTikTok = document.getElementById('badgeTikTokDone');
+            const badgeTelegram = document.getElementById('badgeTelegramDone');
+            const barTikTok = document.getElementById('unlockProgressBarTikTok');
+            const barTelegram = document.getElementById('unlockProgressBarTelegram');
 
             if (icon) icon.src = meta.icon;
             if (title) title.textContent = meta.title;
@@ -7973,10 +8026,15 @@ settings put secure multi_press_timeout 200</code></pre>
             if (finalLabel) finalLabel.textContent = meta.btnLabel;
 
             if (btnTikTok) btnTikTok.style.display = 'flex';
-            if (verifyingBox) verifyingBox.style.display = 'none';
-            if (barEl) barEl.style.width = '0%';
+            if (btnTelegram) btnTelegram.style.display = 'flex';
+            if (verifyingBoxTikTok) verifyingBoxTikTok.style.display = 'none';
+            if (verifyingBoxTelegram) verifyingBoxTelegram.style.display = 'none';
+            if (badgeTikTok) badgeTikTok.style.display = 'none';
+            if (badgeTelegram) badgeTelegram.style.display = 'none';
+            if (barTikTok) barTikTok.style.width = '0%';
+            if (barTelegram) barTelegram.style.width = '0%';
             if (banner) {
-                banner.innerHTML = `Nhấn nút bên dưới để <b>Follow kênh TikTok chính thức (@xxd5974)</b>, hệ thống sẽ tự động mở khóa liên kết tải <b>${escHtml(meta.title)}</b>!`;
+                banner.innerHTML = `Hoàn thành 2 bước bên dưới: <b>Follow TikTok (@xxd5974)</b> và <b>Tham gia nhóm Telegram</b> để tự động mở khóa liên kết tải <b>${escHtml(meta.title)}</b>!`;
             }
 
             // btnDirectDownload removed per request
@@ -7988,7 +8046,6 @@ settings put secure multi_press_timeout 200</code></pre>
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
-            if (unlockTimerInterval) clearInterval(unlockTimerInterval);
         }
 
         function closeUnlockModal() {
@@ -7997,11 +8054,25 @@ settings put secure multi_press_timeout 200</code></pre>
                 modal.classList.remove('active');
                 document.body.style.overflow = '';
             }
-            if (unlockTimerInterval) clearInterval(unlockTimerInterval);
+            clearAllUnlockTimers();
         }
 
         function closeUnlockOnBackdrop(e) {
             if (e.target.id === 'unlockDownloadModal') closeUnlockModal();
+        }
+
+        function updateUnlockProgressBanner() {
+            if (tiktokVerified && telegramVerified) {
+                completeUnlock();
+                return;
+            }
+            const banner = document.getElementById('unlockBannerText');
+            if (!banner) return;
+            if (tiktokVerified && !telegramVerified && !telegramVerifying) {
+                banner.innerHTML = '✅ <b>Bước 1/2 hoàn tất!</b> Nhấn nút bên dưới để <b>Tham gia nhóm Telegram</b> và mở khóa nút tải về!';
+            } else if (telegramVerified && !tiktokVerified && !tiktokVerifying) {
+                banner.innerHTML = '✅ <b>Bước 1/2 hoàn tất!</b> Nhấn nút bên dưới để <b>Follow TikTok (@xxd5974)</b> và mở khóa nút tải về!';
+            }
         }
 
         function completeUnlock() {
@@ -8010,14 +8081,22 @@ settings put secure multi_press_timeout 200</code></pre>
             unlockedDownloadUrl = buildGatewayDownloadUrl(meta.dest, meta.prebuiltGateway);
             // btnDirectDownload removed per request
 
-            const verifyingBox = document.getElementById('unlockVerifyingBox');
+            const verifyingBoxTikTok = document.getElementById('unlockVerifyingBoxTikTok');
+            const verifyingBoxTelegram = document.getElementById('unlockVerifyingBoxTelegram');
             const btnTikTok = document.getElementById('btnFollowTikTok');
+            const btnTelegram = document.getElementById('btnFollowTelegram');
+            const badgeTikTok = document.getElementById('badgeTikTokDone');
+            const badgeTelegram = document.getElementById('badgeTelegramDone');
             const finalBtn = document.getElementById('btnFinalDownload');
             const finalLabel = document.getElementById('txtFinalDownloadLabel');
             const banner = document.getElementById('unlockBannerText');
 
-            if (verifyingBox) verifyingBox.style.display = 'none';
+            if (verifyingBoxTikTok) verifyingBoxTikTok.style.display = 'none';
+            if (verifyingBoxTelegram) verifyingBoxTelegram.style.display = 'none';
             if (btnTikTok) btnTikTok.style.display = 'none';
+            if (btnTelegram) btnTelegram.style.display = 'none';
+            if (badgeTikTok) badgeTikTok.style.display = 'flex';
+            if (badgeTelegram) badgeTelegram.style.display = 'flex';
             if (finalLabel) finalLabel.textContent = meta.btnLabel;
             if (finalBtn) {
                 finalBtn.style.display = 'flex';
@@ -8027,39 +8106,79 @@ settings put secure multi_press_timeout 200</code></pre>
                 finalBtn.style.opacity = '1';
             }
             if (banner) {
-                banner.innerHTML = '🎉 <b>Xác thực Follow TikTok thành công!</b> Bấm nút bên dưới để chuyển sang trang tải file cài đặt chính thức.';
+                banner.innerHTML = '🎉 <b>Xác thực Follow TikTok &amp; Nhóm Telegram thành công!</b> Bấm nút bên dưới để chuyển sang trang tải file cài đặt chính thức.';
             }
         }
 
-        function handleTikTokClick() {
-            const tiktokUrl = globalConfig.tiktok || 'https://www.tiktok.com/@xxd5974';
-            window.open(tiktokUrl, '_blank', 'noopener,noreferrer');
+        function startSocialVerifyStep(cfg) {
+            window.open(cfg.url, '_blank', 'noopener,noreferrer');
 
-            const btnTikTok = document.getElementById('btnFollowTikTok');
-            const verifyingBox = document.getElementById('unlockVerifyingBox');
+            const btn = document.getElementById(cfg.btnId);
+            const verifyingBox = document.getElementById(cfg.boxId);
+            const badge = document.getElementById(cfg.badgeId);
+            const barEl = document.getElementById(cfg.barId);
             const banner = document.getElementById('unlockBannerText');
-            if (btnTikTok) btnTikTok.style.display = 'none';
+            if (btn) btn.style.display = 'none';
             if (verifyingBox) verifyingBox.style.display = 'block';
-            if (banner) {
-                banner.innerHTML = '✨ <b>Đang xác nhận Follow TikTok (@xxd5974)...</b> Vui lòng đợi trong giây lát để mở khóa nút tải về!';
+            if (barEl) barEl.style.width = '0%';
+            if (banner && !tiktokVerified && !telegramVerified) {
+                banner.innerHTML = cfg.bannerHtml;
             }
 
             const totalMs = Math.max(8000, (Number(globalConfig.wait_seconds) || 8) * 1000);
             const startTime = Date.now();
-
-            if (unlockTimerInterval) clearInterval(unlockTimerInterval);
-            unlockTimerInterval = setInterval(() => {
+            const timerId = setInterval(() => {
                 const elapsed = Date.now() - startTime;
                 const pct = Math.min(100, (elapsed / totalMs) * 100);
-
-                const barEl = document.getElementById('unlockProgressBar');
                 if (barEl) barEl.style.width = pct + '%';
 
                 if (elapsed >= totalMs) {
-                    clearInterval(unlockTimerInterval);
-                    completeUnlock();
+                    clearInterval(timerId);
+                    if (verifyingBox) verifyingBox.style.display = 'none';
+                    if (badge) badge.style.display = 'flex';
+                    cfg.onDone();
+                    updateUnlockProgressBanner();
                 }
             }, 50);
+            return timerId;
+        }
+
+        function handleTikTokClick() {
+            if (tiktokVerified || tiktokVerifying) return;
+            tiktokVerifying = true;
+            if (tiktokTimerInterval) clearInterval(tiktokTimerInterval);
+            tiktokTimerInterval = startSocialVerifyStep({
+                url: globalConfig.tiktok || 'https://www.tiktok.com/@xxd5974',
+                btnId: 'btnFollowTikTok',
+                boxId: 'unlockVerifyingBoxTikTok',
+                barId: 'unlockProgressBarTikTok',
+                badgeId: 'badgeTikTokDone',
+                bannerHtml: '✨ <b>Đang xác nhận Follow TikTok (@xxd5974)...</b> Đừng quên <b>Tham gia nhóm Telegram</b> bên dưới để hoàn tất mở khóa!',
+                onDone: () => {
+                    tiktokTimerInterval = null;
+                    tiktokVerifying = false;
+                    tiktokVerified = true;
+                }
+            });
+        }
+
+        function handleTelegramClick() {
+            if (telegramVerified || telegramVerifying) return;
+            telegramVerifying = true;
+            if (telegramTimerInterval) clearInterval(telegramTimerInterval);
+            telegramTimerInterval = startSocialVerifyStep({
+                url: globalConfig.telegram || 'https://t.me/+dtVBEzwuN2Q4NmI9',
+                btnId: 'btnFollowTelegram',
+                boxId: 'unlockVerifyingBoxTelegram',
+                barId: 'unlockProgressBarTelegram',
+                badgeId: 'badgeTelegramDone',
+                bannerHtml: '✈️ <b>Đang xác nhận tham gia nhóm Telegram...</b> Đừng quên <b>Follow TikTok (@xxd5974)</b> để hoàn tất mở khóa!',
+                onDone: () => {
+                    telegramTimerInterval = null;
+                    telegramVerifying = false;
+                    telegramVerified = true;
+                }
+            });
         }
 
         function handleFinalDownloadClick(e) {
