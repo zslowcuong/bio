@@ -158,14 +158,14 @@
   },
   "flowz": {
     "name": "FlowZ",
-    "version": "v3.2.0",
-    "version_code": 4,
+    "version": "v3.2.2",
+    "version_code": 5,
     "min_version_code": 1,
     "force_update": false,
     "update_url": "https://zslowcuong.github.io/bio/?dl=flowz#download",
     "download_url": "https://zslowcuong.github.io/bio/?dl=flowz#download",
     "package": "com.nebula.hnx",
-    "changelog": "Bản cập nhật v3.2.0: Giao diện chính ZKMNext GameSpace (Dark Void + Energy Cube Telemetry), giữ nguyên HyperBoost V2, fix triệt để lỗi kẹt cảm ứng Sơ đồ phím (bảo vệ trong game + nút thoát khẩn cấp + phím Âm lượng), bổ sung Tâm Ảo Crosshair, Focus Chặn TB, Hạ Nhiệt Tự Động sau khi chơi & nút Đặt Lại Toàn Hệ Thống.",
+    "changelog": "Bản cập nhật v3.2.2: Giữ nguyên giao diện Anime độc quyền & HyperBoost V2, fix triệt để lỗi treo/nhân đôi nút nổi nhanh phụ, fix kẹt cảm ứng Sơ đồ phím, bổ sung Tâm Ảo Crosshair, Focus Chặn TB, Hạ Nhiệt Tự Động & nút Đặt Lại Toàn Hệ Thống.",
     "destination_apk": "https://zslowcuong.github.io/bio/FlowZ.apk",
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowZ.apk",
     "direct_apk": "FlowZ.apk"

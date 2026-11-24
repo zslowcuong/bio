@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Cửa Hàng Key PRO Tự Động (VietQR) • Flowly Engine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg: #030712;
@@ -15,7 +17,15 @@
             --gold: #f59e0b;
             --pink: #ec4899;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
             background: var(--bg);
             background-image:
@@ -25,58 +35,197 @@
             min-height: 100vh;
             padding: 18px 14px 48px;
         }
-        .wrap { max-width: 1260px; margin: 0 auto; }
+
+        .wrap {
+            max-width: 1260px;
+            margin: 0 auto;
+        }
+
         .topbar {
-            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
-            margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 900; font-size: 16px; }
-        .brand img { width: 36px; height: 36px; border-radius: 10px; border: 1px solid rgba(56, 189, 248, 0.4); object-fit: cover; }
-        .nav-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 900;
+            font-size: 16px;
+        }
+
+        .brand img {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            object-fit: cover;
+        }
+
+        .nav-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
         .nav-pill {
-            padding: 7px 13px; border-radius: 99px; font-size: 12px; font-weight: 800; text-decoration: none;
-            background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.12); color: #e2e8f0;
+            padding: 7px 13px;
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 800;
+            text-decoration: none;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #e2e8f0;
         }
+
         .hero {
-            text-align: center; background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: 22px; padding: 24px 18px; margin-bottom: 18px;
+            text-align: center;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 24px 18px;
+            margin-bottom: 18px;
         }
+
         .hero-badge {
-            display: inline-block; background: rgba(16, 185, 129, 0.16); border: 1px solid #10b981;
-            color: #34d399; font-size: 11px; font-weight: 800; padding: 5px 12px; border-radius: 99px; margin-bottom: 10px;
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.16);
+            border: 1px solid #10b981;
+            color: #34d399;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 99px;
+            margin-bottom: 10px;
         }
-        .hero h1 { font-size: 22px; font-weight: 900; margin-bottom: 8px; }
-        .hero p { font-size: 13px; color: #cbd5e1; line-height: 1.55; max-width: 680px; margin: 0 auto; }
+
+        .hero h1 {
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            font-size: 13px;
+            color: #cbd5e1;
+            line-height: 1.55;
+            max-width: 680px;
+            margin: 0 auto;
+        }
 
         .section-card {
-            background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 18px; margin-bottom: 18px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 18px;
         }
-        .section-title { font-size: 14px; font-weight: 900; color: #38bdf8; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.4px; }
 
-        .app-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-        @media (max-width: 640px) { .app-grid { grid-template-columns: repeat(2, 1fr); } }
-        .app-btn {
-            background: rgba(30, 41, 59, 0.72); border: 1.5px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px; padding: 12px 10px; cursor: pointer; text-align: center; color: #cbd5e1; transition: all 0.2s ease;
+        .section-title {
+            font-size: 14px;
+            font-weight: 900;
+            color: #38bdf8;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
         }
-        .app-btn img { width: 38px; height: 38px; border-radius: 10px; object-fit: cover; margin-bottom: 6px; }
-        .app-btn .name { font-size: 13px; font-weight: 900; color: #fff; }
-        .app-btn .sub { font-size: 10.5px; color: #94a3b8; margin-top: 2px; }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        @media (max-width: 640px) {
+            .app-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .app-btn {
+            background: rgba(30, 41, 59, 0.72);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 12px 10px;
+            cursor: pointer;
+            text-align: center;
+            color: #cbd5e1;
+            transition: all 0.2s ease;
+        }
+
+        .app-btn img {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 6px;
+        }
+
+        .app-btn .name {
+            font-size: 13px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .app-btn .sub {
+            font-size: 10.5px;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
         .app-btn.active {
-            border-color: #38bdf8; background: rgba(56, 189, 248, 0.16);
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.16);
             box-shadow: 0 0 22px rgba(56, 189, 248, 0.28);
         }
 
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
-        .field label { display: block; font-size: 11.5px; font-weight: 800; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; }
-        .field input {
-            width: 100%; padding: 12px 14px; border-radius: 12px; font-size: 13.5px; font-weight: 700;
-            background: rgba(2, 6, 23, 0.85); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; outline: none;
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
         }
-        .field input:focus { border-color: #38bdf8; }
 
-        
+        @media (max-width: 640px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .field label {
+            display: block;
+            font-size: 11.5px;
+            font-weight: 800;
+            color: #94a3b8;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: 13.5px;
+            font-weight: 700;
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            outline: none;
+        }
+
+        .field input:focus {
+            border-color: #38bdf8;
+        }
+
+
         .pricing-card-box {
             background: rgba(13, 21, 39, 0.94);
             border-radius: 20px;
@@ -91,11 +240,13 @@
             box-sizing: border-box;
             min-height: 480px;
         }
-        .pricing-card-box > div {
+
+        .pricing-card-box>div {
             display: flex;
             flex-direction: column;
             flex: 1 1 auto;
         }
+
         .pricing-card-box:hover {
             transform: translateY(-4px);
             box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
@@ -106,6 +257,7 @@
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.98), rgba(0, 240, 255, 0.08));
             box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
         }
+
         .pricing-card-box.featured:hover {
             box-shadow: 0 0 30px rgba(0, 240, 255, 0.35);
         }
@@ -115,6 +267,7 @@
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.98), rgba(245, 158, 11, 0.08));
             box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
         }
+
         .pricing-card-box.vip:hover {
             box-shadow: 0 0 30px rgba(245, 158, 11, 0.35);
         }
@@ -132,10 +285,12 @@
             letter-spacing: 0.4px;
             white-space: nowrap;
         }
+
         .plan-ribbon.orange {
             background: linear-gradient(90deg, #ef4444, #f59e0b);
             box-shadow: 0 2px 10px rgba(239, 68, 68, 0.45);
         }
+
         .plan-ribbon.gold {
             background: linear-gradient(90deg, #f59e0b, #d97706);
             box-shadow: 0 2px 10px rgba(245, 158, 11, 0.45);
@@ -153,9 +308,11 @@
             align-items: center;
             line-height: 1.3;
         }
+
         .pricing-card-box.featured .plan-card-title {
             color: #00f0ff;
         }
+
         .pricing-card-box.vip .plan-card-title {
             color: #fbbf24;
         }
@@ -171,6 +328,7 @@
             letter-spacing: -0.5px;
             flex-wrap: wrap;
         }
+
         .plan-old-strikethrough {
             font-size: 12.5px;
             color: #ef4444;
@@ -210,6 +368,7 @@
             padding-top: 10px;
             flex: 1 1 auto;
         }
+
         .plan-card-perks li {
             display: flex;
             align-items: flex-start;
@@ -217,6 +376,7 @@
             margin-bottom: 5px;
             word-break: break-word;
         }
+
         .plan-card-perks li::before {
             content: '✓';
             color: #10b981;
@@ -247,25 +407,30 @@
             box-sizing: border-box;
             flex-shrink: 0;
         }
+
         .btn-plan-action:hover {
             filter: brightness(1.15);
             transform: scale(1.02);
         }
+
         .btn-plan-action.btn-week {
             background: linear-gradient(135deg, #1e293b, #334155);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
         .btn-plan-action.btn-month {
             background: linear-gradient(135deg, #0284c7, #38bdf8);
             border: none;
             box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
         }
+
         .btn-plan-action.btn-yearly {
             background: linear-gradient(135deg, #00b4d8, #00f0ff);
             color: #060913;
             border: none;
             box-shadow: 0 4px 20px rgba(0, 240, 255, 0.4);
         }
+
         .btn-plan-action.btn-vip {
             background: linear-gradient(135deg, #d97706, #fbbf24);
             color: #060913;
@@ -275,10 +440,20 @@
 
 
         .bank-pill {
-            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;
-            background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.35);
-            border-radius: 14px; padding: 12px 14px; font-size: 12.5px; color: #d1fae5; margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            border-radius: 14px;
+            padding: 12px 14px;
+            font-size: 12.5px;
+            color: #d1fae5;
+            margin-top: 12px;
         }
+
         .app-warn {
             margin-top: 12px;
             padding: 11px 14px;
@@ -289,52 +464,164 @@
             font-size: 12.5px;
             line-height: 1.55;
         }
-        .app-warn b { color: #fbbf24; }
 
-        .lookup-row { display: flex; gap: 8px; }
-        .lookup-row input { flex: 1; padding: 11px 14px; border-radius: 12px; background: rgba(2,6,23,0.85); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-size: 13px; font-weight: 700; }
-        .lookup-row button { padding: 11px 18px; border-radius: 12px; border: none; background: #38bdf8; color: #031525; font-weight: 900; cursor: pointer; }
-        .lookup-res { margin-top: 12px; font-size: 12.5px; }
+        .app-warn b {
+            color: #fbbf24;
+        }
+
+        .lookup-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .lookup-row input {
+            flex: 1;
+            padding: 11px 14px;
+            border-radius: 12px;
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .lookup-row button {
+            padding: 11px 18px;
+            border-radius: 12px;
+            border: none;
+            background: #38bdf8;
+            color: #031525;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .lookup-res {
+            margin-top: 12px;
+            font-size: 12.5px;
+        }
 
         /* MODAL */
         .modal-overlay {
-            display: none; position: fixed; inset: 0; background: rgba(2, 6, 23, 0.88); backdrop-filter: blur(8px);
-            z-index: 9999; align-items: center; justify-content: center; padding: 14px; overflow-y: auto;
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.88);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 14px;
+            overflow-y: auto;
         }
-        .modal-overlay.show { display: flex; }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
         .modal-box {
-            width: 100%; max-width: 470px; background: #0f172a; border: 1px solid rgba(56, 189, 248, 0.45);
-            border-radius: 24px; padding: 22px 18px; position: relative; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
-            max-height: 94vh; overflow-y: auto;
+            width: 100%;
+            max-width: 470px;
+            background: #0f172a;
+            border: 1px solid rgba(56, 189, 248, 0.45);
+            border-radius: 24px;
+            padding: 22px 18px;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+            max-height: 94vh;
+            overflow-y: auto;
         }
+
         .modal-close {
-            position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.08); border: none;
-            color: #fff; width: 32px; height: 32px; border-radius: 99px; font-weight: 900; cursor: pointer;
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 99px;
+            font-weight: 900;
+            cursor: pointer;
         }
+
         .qr-frame {
-            background: #fff; padding: 10px; border-radius: 16px; width: 220px; margin: 12px auto;
+            background: #fff;
+            padding: 10px;
+            border-radius: 16px;
+            width: 220px;
+            margin: 12px auto;
             box-shadow: 0 10px 30px rgba(56, 189, 248, 0.25);
         }
-        .qr-frame img { width: 100%; display: block; border-radius: 8px; }
+
+        .qr-frame img {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
         .bank-info {
-            background: rgba(30, 41, 59, 0.75); border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 14px; padding: 12px 14px; font-size: 12.5px; margin-bottom: 12px;
+            background: rgba(30, 41, 59, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 12px 14px;
+            font-size: 12.5px;
+            margin-bottom: 12px;
         }
-        .bank-line { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .bank-line:last-child { border-bottom: none; }
-        .copy-mini { background: rgba(56, 189, 248, 0.2); border: 1px solid rgba(56, 189, 248, 0.4); color: #7dd3fc; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 7px; cursor: pointer; }
+
+        .bank-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .bank-line:last-child {
+            border-bottom: none;
+        }
+
+        .copy-mini {
+            background: rgba(56, 189, 248, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #7dd3fc;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
         .status-box {
-            border-radius: 14px; padding: 12px; font-size: 12.5px; line-height: 1.5; margin-bottom: 12px;
-            background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.35); color: #fde68a;
+            border-radius: 14px;
+            padding: 12px;
+            font-size: 12.5px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            color: #fde68a;
         }
+
         .status-box.paid {
-            background: rgba(16, 185, 129, 0.16); border-color: #10b981; color: #a7f3d0;
+            background: rgba(16, 185, 129, 0.16);
+            border-color: #10b981;
+            color: #a7f3d0;
         }
+
         .key-display {
-            font-family: monospace; font-size: 13.5px; font-weight: 900; color: #fff; background: #020617;
-            padding: 12px; border-radius: 10px; border: 1px solid #10b981; word-break: break-all; margin: 10px 0;
+            font-family: monospace;
+            font-size: 13.5px;
+            font-weight: 900;
+            color: #fff;
+            background: #020617;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #10b981;
+            word-break: break-all;
+            margin: 10px 0;
         }
-    
+
         /* --- FLASH SALE COUNTDOWN BANNER --- */
         .flash-sale-banner {
             background: linear-gradient(135deg, rgba(239, 68, 68, 0.18), rgba(245, 158, 11, 0.15));
@@ -350,10 +637,21 @@
             box-shadow: 0 0 25px rgba(239, 68, 68, 0.25);
             animation: flashPulse 2.5s infinite ease-in-out;
         }
+
         @keyframes flashPulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.25); border-color: rgba(239, 68, 68, 0.5); }
-            50% { box-shadow: 0 0 35px rgba(245, 158, 11, 0.45); border-color: rgba(245, 158, 11, 0.8); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(239, 68, 68, 0.25);
+                border-color: rgba(239, 68, 68, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 35px rgba(245, 158, 11, 0.45);
+                border-color: rgba(245, 158, 11, 0.8);
+            }
         }
+
         .flash-badge {
             background: linear-gradient(135deg, #ef4444, #f59e0b);
             color: #fff;
@@ -366,6 +664,7 @@
             gap: 5px;
             letter-spacing: 0.5px;
         }
+
         .flash-note {
             color: #f1f5f9;
             font-size: 13px;
@@ -373,11 +672,13 @@
             display: block;
             margin-top: 5px;
         }
+
         .flash-countdown-wrap {
             display: flex;
             align-items: center;
             gap: 10px;
         }
+
         .countdown-title {
             font-size: 11px;
             font-weight: 800;
@@ -385,11 +686,13 @@
             letter-spacing: 0.8px;
             text-transform: uppercase;
         }
+
         .countdown-digits {
             display: flex;
             align-items: center;
             gap: 4px;
         }
+
         .time-box {
             background: rgba(15, 23, 42, 0.95);
             border: 1px solid rgba(251, 191, 36, 0.6);
@@ -403,18 +706,20 @@
             text-align: center;
             box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
         }
+
         .time-sep {
             color: #ef4444;
             font-weight: 900;
             font-size: 16px;
         }
 
-                /* --- BLUR AURA HIỆU ỨNG TỎA SÁNG XUNG QUANH CÁC GÓI --- */
+        /* --- BLUR AURA HIỆU ỨNG TỎA SÁNG XUNG QUANH CÁC GÓI --- */
         .pricing-card-box.aura-3d {
             border: 1.5px solid rgba(16, 185, 129, 0.55);
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.95), rgba(16, 185, 129, 0.12));
             box-shadow: 0 0 28px rgba(16, 185, 129, 0.32), 0 0 65px rgba(16, 185, 129, 0.15), inset 0 0 20px rgba(16, 185, 129, 0.05);
         }
+
         .pricing-card-box.aura-3d:hover {
             box-shadow: 0 0 45px rgba(16, 185, 129, 0.6), 0 0 90px rgba(16, 185, 129, 0.3), inset 0 0 25px rgba(16, 185, 129, 0.1);
             border-color: #10b981;
@@ -425,6 +730,7 @@
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.95), rgba(14, 165, 233, 0.12));
             box-shadow: 0 0 30px rgba(14, 165, 233, 0.35), 0 0 70px rgba(14, 165, 233, 0.16), inset 0 0 20px rgba(14, 165, 233, 0.06);
         }
+
         .pricing-card-box.aura-7d:hover {
             box-shadow: 0 0 50px rgba(14, 165, 233, 0.65), 0 0 95px rgba(14, 165, 233, 0.32), inset 0 0 25px rgba(14, 165, 233, 0.12);
             border-color: #38bdf8;
@@ -435,6 +741,7 @@
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.95), rgba(168, 85, 247, 0.14));
             box-shadow: 0 0 35px rgba(168, 85, 247, 0.4), 0 0 75px rgba(168, 85, 247, 0.2), inset 0 0 20px rgba(168, 85, 247, 0.07);
         }
+
         .pricing-card-box.aura-30d:hover {
             box-shadow: 0 0 55px rgba(168, 85, 247, 0.7), 0 0 105px rgba(168, 85, 247, 0.38), inset 0 0 25px rgba(168, 85, 247, 0.14);
             border-color: #c084fc;
@@ -450,6 +757,7 @@
             padding: 10px 12px;
             margin: 12px 0;
         }
+
         .vip-slot-header {
             display: flex;
             align-items: center;
@@ -458,12 +766,14 @@
             font-weight: 800;
             margin-bottom: 6px;
         }
+
         .vip-slot-badge {
             color: #fbbf24;
             display: flex;
             align-items: center;
             gap: 4px;
         }
+
         .vip-slot-count {
             color: #ef4444;
             font-weight: 900;
@@ -471,6 +781,7 @@
             padding: 2px 7px;
             border-radius: 10px;
         }
+
         .vip-slot-track {
             height: 7px;
             background: rgba(255, 255, 255, 0.1);
@@ -478,6 +789,7 @@
             overflow: hidden;
             position: relative;
         }
+
         .vip-slot-fill {
             height: 100%;
             background: linear-gradient(90deg, #f59e0b, #ef4444);
@@ -485,6 +797,7 @@
             transition: width 0.6s ease;
             box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
         }
+
         .vip-slot-hint {
             font-size: 10.5px;
             color: #94a3b8;
@@ -504,25 +817,48 @@
             margin-bottom: 8px;
         }
 
-        .plan-ribbon.green { background: linear-gradient(135deg, #059669, #10b981); }
-        .plan-ribbon.blue { background: linear-gradient(135deg, #0284c7, #0ea5e9); }
-        .plan-ribbon.purple { background: linear-gradient(135deg, #9333ea, #a855f7); }
+        .plan-ribbon.green {
+            background: linear-gradient(135deg, #059669, #10b981);
+        }
 
-        .btn-plan-action.btn-3d { background: linear-gradient(135deg, #059669, #10b981); color: #fff; }
-        .btn-plan-action.btn-7d { background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; }
-        .btn-plan-action.btn-30d { background: linear-gradient(135deg, #9333ea, #a855f7); color: #fff; }
-        .btn-1y { background: linear-gradient(135deg, #dc2626, #ef4444); color: #fff; }
+        .plan-ribbon.blue {
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+        }
 
-    
-        /* 4-COLUMN RESPONSIVE PLANS GRID (7 NGÀY, 1 THÁNG, 3 THÁNG, 12 THÁNG) */
+        .plan-ribbon.purple {
+            background: linear-gradient(135deg, #9333ea, #a855f7);
+        }
+
+        .btn-plan-action.btn-3d {
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: #fff;
+        }
+
+        .btn-plan-action.btn-7d {
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            color: #fff;
+        }
+
+        .btn-plan-action.btn-30d {
+            background: linear-gradient(135deg, #9333ea, #a855f7);
+            color: #fff;
+        }
+
+        .btn-1y {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            color: #fff;
+        }
+
+
+        /* 5-COLUMN RESPONSIVE PLANS GRID (1 NGÀY, 1 TUẦN, 1 THÁNG, 3 THÁNG, 1 NĂM) */
         .plans-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+            gap: 14px;
             margin-top: 14px;
             align-items: stretch;
             width: 100%;
-            max-width: 1220px;
+            max-width: 1260px;
             margin-left: auto;
             margin-right: auto;
             box-sizing: border-box;
@@ -534,6 +870,7 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 14px;
             }
+
             .pricing-card-box.featured {
                 transform: none;
             }
@@ -545,6 +882,7 @@
                 grid-template-columns: 1fr;
                 gap: 18px;
             }
+
             .pricing-card-box.featured {
                 transform: none;
             }
@@ -556,6 +894,7 @@
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.96), rgba(16, 185, 129, 0.08));
             box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
         }
+
         .aura-2d:hover {
             box-shadow: 0 0 25px rgba(16, 185, 129, 0.45);
             border-color: #10b981;
@@ -568,6 +907,7 @@
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.96), rgba(14, 165, 233, 0.08));
             box-shadow: 0 0 15px rgba(14, 165, 233, 0.2);
         }
+
         .aura-7d:hover {
             box-shadow: 0 0 25px rgba(14, 165, 233, 0.45);
             border-color: #0ea5e9;
@@ -582,6 +922,7 @@
             transform: scale(1.02);
             z-index: 2;
         }
+
         .aura-30d:hover {
             box-shadow: 0 0 28px rgba(168, 85, 247, 0.6), inset 0 0 14px rgba(168, 85, 247, 0.15);
             border-color: #c084fc;
@@ -594,6 +935,7 @@
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.96), rgba(244, 63, 94, 0.08));
             box-shadow: 0 0 15px rgba(244, 63, 94, 0.2);
         }
+
         .aura-90d:hover {
             box-shadow: 0 0 25px rgba(244, 63, 94, 0.45);
             border-color: #f43f5e;
@@ -606,6 +948,7 @@
             background: linear-gradient(165deg, rgba(13, 21, 39, 0.98), rgba(245, 158, 11, 0.14));
             box-shadow: 0 0 14px rgba(245, 158, 11, 0.3), inset 0 0 8px rgba(245, 158, 11, 0.08);
         }
+
         .aura-365d:hover {
             box-shadow: 0 0 20px rgba(245, 158, 11, 0.45), inset 0 0 12px rgba(245, 158, 11, 0.12);
             border-color: #fbbf24;
@@ -613,30 +956,109 @@
         }
 
         /* Ribbon badges */
-        .plan-ribbon.emerald { background: linear-gradient(135deg, #059669, #10b981); }
-        .plan-ribbon.sky { background: linear-gradient(135deg, #0284c7, #0ea5e9); }
-        .plan-ribbon.purple-neon { background: linear-gradient(135deg, #9333ea, #c084fc); box-shadow: 0 0 15px rgba(168, 85, 247, 0.6); }
-        .plan-ribbon.rose { background: linear-gradient(135deg, #e11d48, #f43f5e); }
-        .plan-ribbon.gold { background: linear-gradient(135deg, #d97706, #f59e0b); color: #04152b; font-weight: 900; }
+        .plan-ribbon.emerald {
+            background: linear-gradient(135deg, #059669, #10b981);
+        }
+
+        .plan-ribbon.sky {
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+        }
+
+        .plan-ribbon.purple-neon {
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
+        }
+
+        .plan-ribbon.rose {
+            background: linear-gradient(135deg, #e11d48, #f43f5e);
+        }
+
+        .plan-ribbon.gold {
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            color: #04152b;
+            font-weight: 900;
+        }
 
         /* Notification boxes */
-        .plan-flash-tag.tag-emerald { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; }
-        .plan-flash-tag.tag-blue { background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.4); color: #38bdf8; }
-        .plan-flash-tag.tag-purple { background: rgba(168, 85, 247, 0.18); border: 1px solid rgba(168, 85, 247, 0.5); color: #d8b4fe; }
-        .plan-flash-tag.tag-rose { background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.4); color: #fda4af; }
-        .plan-flash-tag.tag-gold { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); color: #fcd34d; }
+        .plan-flash-tag.tag-emerald {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #34d399;
+        }
+
+        .plan-flash-tag.tag-blue {
+            background: rgba(14, 165, 233, 0.15);
+            border: 1px solid rgba(14, 165, 233, 0.4);
+            color: #38bdf8;
+        }
+
+        .plan-flash-tag.tag-purple {
+            background: rgba(168, 85, 247, 0.18);
+            border: 1px solid rgba(168, 85, 247, 0.5);
+            color: #d8b4fe;
+        }
+
+        .plan-flash-tag.tag-rose {
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: #fda4af;
+        }
+
+        .plan-flash-tag.tag-gold {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: #fcd34d;
+        }
 
         /* Action buttons */
-        .btn-plan-action.btn-2d { background: linear-gradient(135deg, #059669, #10b981); color: #fff; }
-        .btn-plan-action.btn-2d:hover { box-shadow: 0 0 20px rgba(16, 185, 129, 0.6); }
-        .btn-plan-action.btn-7d { background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; }
-        .btn-plan-action.btn-7d:hover { box-shadow: 0 0 20px rgba(14, 165, 233, 0.6); }
-        .btn-plan-action.btn-30d { background: linear-gradient(135deg, #9333ea, #c084fc); color: #fff; box-shadow: 0 0 25px rgba(168, 85, 247, 0.6); font-size: 13.5px; }
-        .btn-plan-action.btn-30d:hover { box-shadow: 0 0 35px rgba(168, 85, 247, 0.85); transform: translateY(-2px); }
-        .btn-plan-action.btn-90d { background: linear-gradient(135deg, #e11d48, #f43f5e); color: #fff; }
-        .btn-plan-action.btn-90d:hover { box-shadow: 0 0 20px rgba(244, 63, 94, 0.6); }
-        .btn-plan-action.btn-365d { background: linear-gradient(135deg, #d97706, #f59e0b); color: #04152b; font-weight: 900; }
-        .btn-plan-action.btn-365d:hover { box-shadow: 0 0 25px rgba(245, 158, 11, 0.7); }
+        .btn-plan-action.btn-2d {
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: #fff;
+        }
+
+        .btn-plan-action.btn-2d:hover {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+        }
+
+        .btn-plan-action.btn-7d {
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            color: #fff;
+        }
+
+        .btn-plan-action.btn-7d:hover {
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.6);
+        }
+
+        .btn-plan-action.btn-30d {
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            color: #fff;
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.6);
+            font-size: 13.5px;
+        }
+
+        .btn-plan-action.btn-30d:hover {
+            box-shadow: 0 0 35px rgba(168, 85, 247, 0.85);
+            transform: translateY(-2px);
+        }
+
+        .btn-plan-action.btn-90d {
+            background: linear-gradient(135deg, #e11d48, #f43f5e);
+            color: #fff;
+        }
+
+        .btn-plan-action.btn-90d:hover {
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.6);
+        }
+
+        .btn-plan-action.btn-365d {
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            color: #04152b;
+            font-weight: 900;
+        }
+
+        .btn-plan-action.btn-365d:hover {
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.7);
+        }
 
         .section-jump-tabs {
             display: flex;
@@ -644,6 +1066,7 @@
             gap: 10px;
             margin-bottom: 18px;
         }
+
         .section-jump-btn {
             flex: 1 1 220px;
             display: inline-flex;
@@ -660,28 +1083,33 @@
             border: 1.5px solid rgba(56, 189, 248, 0.35);
             transition: all 0.2s ease;
         }
+
         .section-jump-btn:hover {
             transform: translateY(-2px);
             border-color: #38bdf8;
             color: #fff;
             box-shadow: 0 6px 20px rgba(56, 189, 248, 0.22);
         }
+
         .section-jump-btn.combo {
             border-color: rgba(245, 158, 11, 0.55);
             background: linear-gradient(135deg, rgba(245, 158, 11, 0.14), rgba(168, 85, 247, 0.14));
             color: #fde68a;
         }
+
         .single-app-picker {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 8px;
             margin-bottom: 14px;
         }
+
         @media (max-width: 767px) {
             .single-app-picker {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
         .single-app-chip {
             background: rgba(15, 23, 42, 0.85);
             border: 1.5px solid rgba(148, 163, 184, 0.25);
@@ -697,26 +1125,30 @@
             gap: 6px;
             transition: all 0.2s ease;
         }
+
         .single-app-chip:hover {
             border-color: rgba(56, 189, 248, 0.65);
             color: #fff;
         }
+
         .single-app-chip.active {
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.28), rgba(56, 189, 248, 0.22));
             border-color: #c084fc;
             color: #fff;
             box-shadow: 0 0 18px rgba(168, 85, 247, 0.35);
         }
+
         .btn-plan-action.btn-vip-single {
             background: linear-gradient(135deg, #f59e0b, #ea580c);
             color: #fff;
         }
+
         .btn-plan-action.btn-vip-single:hover {
             box-shadow: 0 0 22px rgba(245, 158, 11, 0.65);
         }
-
     </style>
 </head>
+
 <body>
     <div class="wrap">
         <div class="topbar">
@@ -736,25 +1168,34 @@
             <span class="hero-badge">🏦 VIETQR TPBANK TỰ ĐỘNG • AN TOÀN TUYỆT ĐỐI</span>
             <h1>Nâng Cấp Key PRO Chuyên Biệt Cho Game</h1>
             <p>
-                Mở khóa toàn bộ tính năng Game PRO (GameSpace, 120Hz/165Hz, Touch 180Hz+, Độ phân giải từng Game, Đồ Họa API Vulkan/ANGLE, Xung CPU/GPU MHz) không giới hạn vượt link. Chỉ hỗ trợ <b>Chuyển khoản VietQR TPBank</b> để đảm bảo xác thực tiền về chính xác 100%.
+                Mở khóa toàn bộ tính năng Game PRO (GameSpace, 120Hz/165Hz, Touch 180Hz+, Độ phân giải từng Game, Đồ Họa
+                API Vulkan/ANGLE, Xung CPU/GPU MHz) không giới hạn vượt link. Chỉ hỗ trợ <b>Chuyển khoản VietQR
+                    TPBank</b> để đảm bảo xác thực tiền về chính xác 100%.
             </p>
         </div>
 
         <!-- VIP OWNED KEY BANNER -->
-        <div id="ownedKeyBanner" style="display:none;background:linear-gradient(135deg,rgba(16,185,129,0.18),rgba(6,95,70,0.35));border:1.5px solid #10b981;border-radius:16px;padding:14px 16px;margin-bottom:16px;box-shadow:0 0 20px rgba(16,185,129,0.25);">
+        <div id="ownedKeyBanner"
+            style="display:none;background:linear-gradient(135deg,rgba(16,185,129,0.18),rgba(6,95,70,0.35));border:1.5px solid #10b981;border-radius:16px;padding:14px 16px;margin-bottom:16px;box-shadow:0 0 20px rgba(16,185,129,0.25);">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
                 <div>
-                    <div style="font-size:13px;font-weight:900;color:#6ee7b7;">👑 BẠN ĐÃ MUA BẢN QUYỀN PRO THÀNH CÔNG!</div>
-                    <div style="font-size:11.5px;color:#cbd5e1;margin-top:2px;">Mã Key của bạn: <b id="ownedKeyText" style="font-family:monospace;color:#fff;"></b></div>
+                    <div style="font-size:13px;font-weight:900;color:#6ee7b7;">👑 BẠN ĐÃ MUA BẢN QUYỀN PRO THÀNH CÔNG!
+                    </div>
+                    <div style="font-size:11.5px;color:#cbd5e1;margin-top:2px;">Mã Key của bạn: <b id="ownedKeyText"
+                            style="font-family:monospace;color:#fff;"></b></div>
                 </div>
                 <div style="display:flex;gap:6px;">
-                    <button type="button" class="copy-mini" onclick="copyStr(document.getElementById('ownedKeyText').textContent)" style="padding:6px 12px;font-size:12px;">📋 Sao Chép Key</button>
-                    <a href="vip.html" style="background:#0284c7;color:#fff;text-decoration:none;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;">⚡ Cổng VIP (0s Chờ)</a>
+                    <button type="button" class="copy-mini"
+                        onclick="copyStr(document.getElementById('ownedKeyText').textContent)"
+                        style="padding:6px 12px;font-size:12px;">📋 Sao Chép Key</button>
+                    <a href="vip.html"
+                        style="background:#0284c7;color:#fff;text-decoration:none;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;">⚡
+                        Cổng VIP (0s Chờ)</a>
                 </div>
             </div>
         </div>
 
-                <!-- 1. THÔNG TIN THIẾT BỊ -->
+        <!-- 1. THÔNG TIN THIẾT BỊ -->
         <div class="section-card">
             <div class="section-title">1. Thông Tin Thiết Bị Nhận Key (Bảo Hành HWID)</div>
             <div class="form-grid">
@@ -773,23 +1214,33 @@
         </div>
 
         <!-- 2. BẢNG GIÁ KEY PRO THỐNG NHẤT FULL 5 APP -->
-        <div class="section-card" id="combo-5app-plans" style="padding: 22px 18px; position: relative; border-color: rgba(245, 158, 11, 0.45);">
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
-                <div style="font-size: 16px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
-                    <span style="color:#00f0ff; font-size: 18px;">👑</span> 2. BẢNG GIÁ KEY PRO FULL 5 APP (GỘP 5 APP CHUNG 1 KEY)
+        <div class="section-card" id="combo-5app-plans"
+            style="padding: 22px 18px; position: relative; border-color: rgba(245, 158, 11, 0.45);">
+            <div
+                style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
+                <div
+                    style="font-size: 16px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
+                    <span style="color:#00f0ff; font-size: 18px;">👑</span> 2. BẢNG GIÁ KEY PRO FULL 5 APP (GỘP 5 APP
+                    CHUNG 1 KEY)
                 </div>
-                <div style="font-size: 12px; color: #fbbf24; font-weight: 800; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.35); padding: 5px 14px; border-radius: 20px;">
+                <div
+                    style="font-size: 12px; color: #fbbf24; font-weight: 800; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.35); padding: 5px 14px; border-radius: 20px;">
                     🔥 1 Key Mở Khóa Trọn Bộ: FlowZ • FlowOptimize • FlowS • FlowMax • FlowCore
                 </div>
             </div>
 
             <!-- BANNER ĐỒNG BỘ 1 KEY FULL 5 APP -->
-            <div class="vip-promo-banner" style="background: linear-gradient(90deg, rgba(16, 185, 129, 0.14), rgba(56, 189, 248, 0.14), rgba(245, 158, 11, 0.16)); border: 1.5px solid rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 14px 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+            <div class="vip-promo-banner"
+                style="background: linear-gradient(90deg, rgba(16, 185, 129, 0.14), rgba(56, 189, 248, 0.14), rgba(245, 158, 11, 0.16)); border: 1.5px solid rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 14px 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
                 <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                    <span style="background: linear-gradient(135deg, #059669, #38bdf8); color: #fff; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.5px;">⚡ 1 KEY = 5 APP</span>
-                    <span style="font-size: 13.5px; color: #f8fafc; font-weight: 700;">Gộp cả 5 ứng dụng chung 1 mã Key duy nhất: <b>1 Ngày 10K • 7 Ngày 35K • 30 Ngày 99K • 90 Ngày 229K</b>!</span>
+                    <span
+                        style="background: linear-gradient(135deg, #059669, #38bdf8); color: #fff; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.5px;">⚡
+                        1 KEY = 5 APP</span>
+                    <span style="font-size: 13.5px; color: #f8fafc; font-weight: 700;">Gộp cả 5 ứng dụng chung 1 mã Key
+                        duy nhất: <b>1 Ngày 6K • 1 Tuần 15K • 1 Tháng 150K • 3 Tháng 300K • 1 Năm 899K</b>!</span>
                 </div>
-                <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; color: #34d399; background: rgba(15, 23, 42, 0.85); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(16, 185, 129, 0.4);">
+                <div
+                    style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; color: #34d399; background: rgba(15, 23, 42, 0.85); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(16, 185, 129, 0.4);">
                     <span>👑 Mở Khóa Tức Thì Qua VietQR</span>
                 </div>
             </div>
@@ -801,10 +1252,10 @@
                     <div>
                         <div class="plan-card-title" style="color:#34d399;">KEY 1 NGÀY (24 GIỜ)</div>
                         <div class="plan-card-price">
-                            <span id="price1D">10.000đ</span>
-                            <span class="plan-old-strikethrough">15.000đ</span>
+                            <span id="price1D">6.000đ</span>
+                            <span class="plan-old-strikethrough">10.000đ</span>
                         </div>
-                        <div class="plan-flash-tag tag-emerald">⚡ Chỉ 10.000đ mở khóa trọn bộ 5 App trong 24 giờ</div>
+                        <div class="plan-flash-tag tag-emerald">⚡ Chỉ 6.000đ mở khóa trọn bộ 5 App trong 24 giờ</div>
                         <ul class="plan-card-perks">
                             <li>1 Key dùng chung cho cả 5 app FlowEngine</li>
                             <li>Hạn dùng 24 giờ đầy đủ mọi tính năng PRO</li>
@@ -812,19 +1263,20 @@
                             <li>Tặng 1 lần đổi thiết bị miễn phí</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-2d" onclick="createShopOrder('1D', 'all')">⚡ Mua Key 1 Ngày • 10K</button>
+                    <button type="button" class="btn-plan-action btn-2d" onclick="createShopOrder('1D', 'all')">⚡ Mua
+                        Key 1 Ngày • 6K</button>
                 </div>
 
-                <!-- GÓI 2: KEY 7 NGÀY (1 TUẦN) -->
+                <!-- GÓI 2: KEY 1 TUẦN (7 NGÀY) -->
                 <div class="pricing-card-box aura-7d">
-                    <span class="plan-ribbon sky">🚀 7 NGÀY FULL 5 APP</span>
+                    <span class="plan-ribbon sky">🚀 1 TUẦN FULL 5 APP</span>
                     <div>
-                        <div class="plan-card-title">KEY 7 NGÀY (1 TUẦN)</div>
+                        <div class="plan-card-title">KEY 1 TUẦN (7 NGÀY)</div>
                         <div class="plan-card-price">
-                            <span id="price7D">35.000đ</span>
-                            <span class="plan-old-strikethrough">59.000đ</span>
+                            <span id="price7D">15.000đ</span>
+                            <span class="plan-old-strikethrough">29.000đ</span>
                         </div>
-                        <div class="plan-flash-tag tag-blue">🚀 Tiết kiệm 50% so với mua lẻ ngày — Chỉ 5.000đ/ngày</div>
+                        <div class="plan-flash-tag tag-blue">🚀 Siêu hời so với mua lẻ ngày — Chỉ ~2.140đ/ngày</div>
                         <ul class="plan-card-perks">
                             <li>1 Key dùng chung trọn bộ 5 app (FlowZ, FlowOp, FlowS, FlowMax, FlowCore)</li>
                             <li>Dùng liên tục 7 ngày không cần gia hạn</li>
@@ -832,19 +1284,21 @@
                             <li>Tặng 1 lần đổi thiết bị miễn phí linh hoạt</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-7d" onclick="createShopOrder('7D', 'all')">🚀 Mua Key 7 Ngày • 35K</button>
+                    <button type="button" class="btn-plan-action btn-7d" onclick="createShopOrder('7D', 'all')">🚀 Mua
+                        Key 1 Tuần • 15K</button>
                 </div>
 
-                <!-- GÓI 3: KEY 30 NGÀY (1 THÁNG) -->
+                <!-- GÓI 3: KEY 1 THÁNG (30 NGÀY) -->
                 <div class="pricing-card-box aura-30d featured">
                     <span class="plan-ribbon purple-neon">🔥 PHỔ BIẾN NHẤT</span>
                     <div>
-                        <div class="plan-card-title" style="color:#d8b4fe;">KEY 30 NGÀY (1 THÁNG)</div>
+                        <div class="plan-card-title" style="color:#d8b4fe;">KEY 1 THÁNG (30 NGÀY)</div>
                         <div class="plan-card-price">
-                            <span id="price30D" style="color:#f3e8ff;">99.000đ</span>
-                            <span class="plan-old-strikethrough">149.000đ</span>
+                            <span id="price30D" style="color:#f3e8ff;">150.000đ</span>
+                            <span class="plan-old-strikethrough">220.000đ</span>
                         </div>
-                        <div class="plan-flash-tag tag-purple">🔥 Chỉ 3.300đ/ngày cho trọn bộ 5 App (~660đ/App/ngày)</div>
+                        <div class="plan-flash-tag tag-purple">🔥 Chỉ 5.000đ/ngày cho trọn bộ 5 App (1.000đ/App/ngày)
+                        </div>
                         <ul class="plan-card-perks">
                             <li>Mở khóa Full 5 app FlowEngine suốt 30 ngày</li>
                             <li>Bản quyền đồng bộ theo HWID, chống mất key khi cập nhật</li>
@@ -852,27 +1306,52 @@
                             <li>Hỗ trợ kỹ thuật ưu tiên 24/7</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-30d" onclick="createShopOrder('30D', 'all')">🔥 Mua Key 30 Ngày • 99K</button>
+                    <button type="button" class="btn-plan-action btn-30d" onclick="createShopOrder('30D', 'all')">🔥 Mua
+                        Key 1 Tháng • 150K</button>
                 </div>
 
-                <!-- GÓI 4: KEY 90 NGÀY (3 THÁNG) -->
+                <!-- GÓI 4: KEY 3 THÁNG (90 NGÀY) -->
                 <div class="pricing-card-box aura-365d">
-                    <span class="plan-ribbon gold">👑 90 NGÀY • SIÊU TIẾT KIỆM</span>
+                    <span class="plan-ribbon gold">👑 3 THÁNG • TIẾT KIỆM 150K</span>
                     <div>
-                        <div class="plan-card-title" style="color:#fcd34d;">KEY 90 NGÀY (3 THÁNG)</div>
+                        <div class="plan-card-title" style="color:#fcd34d;">KEY 3 THÁNG (90 NGÀY)</div>
                         <div class="plan-card-price">
-                            <span id="price90D" style="color:#fef08a;">229.000đ</span>
-                            <span class="plan-old-strikethrough">349.000đ</span>
+                            <span id="price90D" style="color:#fef08a;">300.000đ</span>
+                            <span class="plan-old-strikethrough">450.000đ</span>
                         </div>
-                        <div class="plan-flash-tag tag-gold">👑 Chỉ ~2.544đ/ngày — Tiết kiệm 68K so với mua từng tháng</div>
+                        <div class="plan-flash-tag tag-gold">👑 Chỉ ~3.333đ/ngày — Mua 2 tháng tặng thêm 1 tháng
+                        </div>
                         <ul class="plan-card-perks">
                             <li>Full bản quyền 90 ngày liên tục cho cả 5 app FlowEngine</li>
-                            <li>Chi phí tối ưu nhất trọn mùa rank (~508đ/App/ngày)</li>
+                            <li>Tiết kiệm ngay 150.000đ so với gia hạn từng tháng</li>
                             <li>Tặng 2 lần đổi thiết bị miễn phí linh hoạt</li>
-                            <li>Hỗ trợ kỹ thuật VIP 24/7 chuyên sâu, ưu tiên cao nhất</li>
+                            <li>Hỗ trợ kỹ thuật VIP 24/7 chuyên sâu</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-365d" onclick="createShopOrder('90D', 'all')">👑 Mua Key 90 Ngày • 229K</button>
+                    <button type="button" class="btn-plan-action btn-365d" onclick="createShopOrder('90D', 'all')">👑
+                        Mua Key 3 Tháng • 300K</button>
+                </div>
+
+                <!-- GÓI 5: KEY 1 NĂM (365 NGÀY) -->
+                <div class="pricing-card-box aura-365d" style="border-color: rgba(239, 68, 68, 0.55); background: linear-gradient(165deg, rgba(24, 12, 22, 0.96), rgba(220, 38, 38, 0.1));">
+                    <span class="plan-ribbon" style="background: linear-gradient(90deg, #ef4444, #f59e0b); color: #fff;">💎 1 NĂM VIP • DÀI HẠN</span>
+                    <div>
+                        <div class="plan-card-title" style="color:#fca5a5;">KEY 1 NĂM (365 NGÀY)</div>
+                        <div class="plan-card-price">
+                            <span id="price365D" style="color:#fecaca;">899.000đ</span>
+                            <span class="plan-old-strikethrough">1.499.000đ</span>
+                        </div>
+                        <div class="plan-flash-tag" style="background: rgba(239, 68, 68, 0.14); border: 1px solid rgba(239, 68, 68, 0.35); color: #fecaca;">💎 Chỉ ~2.463đ/ngày — Tiết kiệm 901K cả năm
+                        </div>
+                        <ul class="plan-card-perks">
+                            <li>Trọn bộ 5 app FlowEngine suốt 365 ngày liên tục</li>
+                            <li>Chưa tới 495đ/App/ngày kèm full update dài hạn</li>
+                            <li>Tặng 3 lần đổi thiết bị miễn phí linh hoạt</li>
+                            <li>Ưu tiên hỗ trợ &amp; bảo hành VIP 24/7 cao nhất</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-plan-action btn-1y" onclick="createShopOrder('365D', 'all')">💎
+                        Mua Key 1 Năm • 899K</button>
                 </div>
             </div>
         </div>
@@ -887,376 +1366,411 @@
             <div id="lookupResults" class="lookup-res"></div>
 
             <div style="margin-top:16px;border-top:1px dashed rgba(255,255,255,0.12);padding-top:14px;">
-                <div style="font-size:13px;font-weight:800;color:#38bdf8;margin-bottom:8px;">🔄 Chuyển Key Sang Thiết Bị Mới (1 Lần Gói 1/7/30 Ngày • 2 Lần Gói 90 Ngày)</div>
+                <div style="font-size:13px;font-weight:800;color:#38bdf8;margin-bottom:8px;">🔄 Chuyển Key Sang Thiết Bị
+                    Mới (1 Lần Gói 1/7/30 Ngày • 2 Lần Gói 3 Tháng • 3 Lần Gói 1 Năm)</div>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;">
-                    <input id="changeKeyInput" placeholder="Mã Key PRO hiện tại (VD: FLOWALL-PRO...)" style="background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:10px;padding:9px 12px;font-size:12px;" />
-                    <input id="changeNewHwidInput" placeholder="Mã HWID máy mới (Lấy trong App)" style="background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:10px;padding:9px 12px;font-size:12px;" />
+                    <input id="changeKeyInput" placeholder="Mã Key PRO hiện tại (VD: FLOWALL-PRO...)"
+                        style="background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:10px;padding:9px 12px;font-size:12px;" />
+                    <input id="changeNewHwidInput" placeholder="Mã HWID máy mới (Lấy trong App)"
+                        style="background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:10px;padding:9px 12px;font-size:12px;" />
                 </div>
-                <button type="button" onclick="requestChangeHwid()" style="margin-top:8px;width:100%;background:linear-gradient(135deg,#0284c7,#38bdf8);color:#fff;border:none;border-radius:10px;padding:10px;font-weight:800;font-size:12.5px;cursor:pointer;">📲 Xác Nhận Đổi Sang Thiết Bị Mới</button>
+                <button type="button" onclick="requestChangeHwid()"
+                    style="margin-top:8px;width:100%;background:linear-gradient(135deg,#0284c7,#38bdf8);color:#fff;border:none;border-radius:10px;padding:10px;font-weight:800;font-size:12.5px;cursor:pointer;">📲
+                    Xác Nhận Đổi Sang Thiết Bị Mới</button>
                 <div id="changeHwidResult" style="margin-top:8px;font-size:12px;"></div>
             </div>
         </div>
 
         <!-- MODAL THANH TOÁN VIETQR -->
-    <div id="payModal" class="modal-overlay">
-        <div class="modal-box">
-            <button type="button" class="modal-close" onclick="closePayModal()">✕</button>
-            <h2 style="font-size:18px;font-weight:900;margin-bottom:4px;">🏦 Quét QR Chuyển Khoản TPBank</h2>
-            <p style="font-size:12px;color:#94a3b8;" id="modalOrderSubtitle">Mã đơn: ...</p>
+        <div id="payModal" class="modal-overlay">
+            <div class="modal-box">
+                <button type="button" class="modal-close" onclick="closePayModal()">✕</button>
+                <h2 style="font-size:18px;font-weight:900;margin-bottom:4px;">🏦 Quét QR Chuyển Khoản TPBank</h2>
+                <p style="font-size:12px;color:#94a3b8;" id="modalOrderSubtitle">Mã đơn: ...</p>
 
-            <div class="qr-frame">
-                <img id="qrImg" src="" alt="VietQR TPBank">
-            </div>
-
-            <div class="bank-info">
-                <div class="bank-line"><span>Ngân hàng:</span><b>TPBANK (TPB)</b></div>
-                <div class="bank-line"><span>Số tài khoản:</span><span><b>10006503497</b> <button class="copy-mini" onclick="copyStr('10006503497')">Copy</button></span></div>
-                <div class="bank-line"><span>Chủ tài khoản:</span><b>TRAN CHI CUONG</b></div>
-                <div class="bank-line"><span>Số tiền đúng:</span><b id="modalPrice" style="color:#38bdf8;">0đ</b></div>
-                <div class="bank-line"><span>Nội dung CK:</span><span><b id="modalMemo" style="color:#fbbf24;">FLOW000000</b> <button class="copy-mini" onclick="copyStr(currentOrder?.memo || '')">Copy</button></span></div>
-            </div>
-
-            
-            <div id="bankDeeplinkRow" style="margin:12px 0 6px;text-align:left;">
-                <div style="font-size:11px;font-weight:700;color:#94a3b8;margin-bottom:6px;">🚀 MỞ APP NGÂN HÀNG 1-CHẠM (TỰ SAO CHÉP STK &amp; NỘI DUNG):</div>
-                <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;">
-                    <button type="button" onclick="openBankApp('tpb')" style="background:#581c87;color:#c084fc;border:1px solid #7e22ce;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">TPBank</button>
-                    <button type="button" onclick="openBankApp('mb')" style="background:#1e3a8a;color:#60a5fa;border:1px solid #2563eb;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">MBBank</button>
-                    <button type="button" onclick="openBankApp('vcb')" style="background:#064e3b;color:#34d399;border:1px solid #059669;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">VCB</button>
-                    <button type="button" onclick="openBankApp('tcb')" style="background:#7f1d1d;color:#f87171;border:1px solid #dc2626;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">Techcom</button>
-                    <button type="button" onclick="openBankApp('momo')" style="background:#701a75;color:#f472b6;border:1px solid #c026d3;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">MoMo</button>
+                <div class="qr-frame">
+                    <img id="qrImg" src="" alt="VietQR TPBank">
                 </div>
-            </div>
-            <div id="modalStatusBox" class="status-box" style="display:flex;align-items:center;gap:10px;text-align:left;line-height:1.4;">
-                <span style="font-size:22px;">⚡</span>
-                <div>
-                    <b>Quét mã thanh toán để nhận Key tự động:</b><br>
-                    <span style="font-size:11.5px;color:#cbd5e1;">Hệ thống sẽ tự động duyệt và hiện tích xanh thành công ngay sau khi nhận tiền.</span>
-                </div>
-            </div>
 
-            <div id="modalKeySuccess" style="display:none;">
-                <div style="text-align:center;padding:12px 0 6px;">
-                    <div style="display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:rgba(16,185,129,0.2);border:2px solid #10b981;color:#10b981;font-size:28px;margin-bottom:8px;">✓</div>
-                    <div style="font-size:16px;font-weight:900;color:#34d399;letter-spacing:0.5px;">THANH TOÁN THÀNH CÔNG!</div>
-                    <div style="font-size:12px;color:#94a3b8;margin-top:2px;">Mã Key PRO của bạn đã sẵn sàng kích hoạt:</div>
-                </div>
-                <div id="issuedKeyBox" class="key-display"></div>
-                <div id="issuedKeyNote" style="font-size:11.5px;margin-bottom:8px;"></div>
-                <button type="button" class="btn-buy" style="background:linear-gradient(135deg,#059669,#10b981);margin-bottom:8px;" onclick="copyStr(currentOrder?.key || '')">📋 SAO CHÉP KEY PRO</button>
-                <a id="openAppWithKeyBtn" href="#" style="display:block;text-align:center;padding:12px;border-radius:12px;background:rgba(56,189,248,0.18);border:1px solid #38bdf8;color:#38bdf8;font-weight:800;text-decoration:none;font-size:13px;">🚀 Bấm Mở App &amp; Tự Kích Hoạt Ngay</a>
-            </div>
-
-            <div id="modalPendingBtns" style="display:grid;gap:8px;">
-                <button type="button" class="btn-buy" onclick="checkCurrentOrder(true)">🔄 Tôi Đã Chuyển Khoản — Kiểm Tra Ngay</button>
-                <button type="button" class="btn-buy" style="background:rgba(14,165,233,0.18);border:1px solid #0284c7;color:#38bdf8;" onclick="window.open('https://t.me/zslowcuong','_blank')">💬 Nhắn Cho Admin Telegram Để Được Hỗ Trợ</button>
-
-                <!-- KHUNG HỖ TRỢ TRỰC TUYẾN LÚC CHUYỂN KHOẢN -->
-                <div style="margin-top:4px;background:rgba(255,255,255,0.04);border:1px dashed rgba(255,255,255,0.15);border-radius:12px;padding:10px;text-align:left;">
-                    <div style="font-size:11.5px;font-weight:800;color:#38bdf8;margin-bottom:6px;">💬 Gặp sự cố lúc chuyển khoản? Nhắn Admin hỗ trợ ngay:</div>
-                    <div style="display:flex;gap:6px;">
-                        <input id="supportMsgInput" placeholder="Nhập câu hỏi hoặc vấn đề của bạn..." style="flex:1;background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:8px;padding:7px 10px;font-size:12px;" />
-                        <button type="button" onclick="sendSupportMessage()" style="background:#0284c7;color:#fff;border:none;border-radius:8px;padding:7px 12px;font-weight:800;font-size:11.5px;cursor:pointer;">🚀 Gửi</button>
+                <div class="bank-info">
+                    <div class="bank-line"><span>Ngân hàng:</span><b>TPBANK (TPB)</b></div>
+                    <div class="bank-line"><span>Số tài khoản:</span><span><b>10006503497</b> <button class="copy-mini"
+                                onclick="copyStr('10006503497')">Copy</button></span></div>
+                    <div class="bank-line"><span>Chủ tài khoản:</span><b>TRAN CHI CUONG</b></div>
+                    <div class="bank-line"><span>Số tiền đúng:</span><b id="modalPrice" style="color:#38bdf8;">0đ</b>
                     </div>
-                    <div id="supportMsgFeedback" style="font-size:11px;color:#94a3b8;margin-top:4px;">Admin sẽ theo dõi và phản hồi qua Telegram / Zalo nếu key không hoạt động.</div>
+                    <div class="bank-line"><span>Nội dung CK:</span><span><b id="modalMemo"
+                                style="color:#fbbf24;">FLOW000000</b> <button class="copy-mini"
+                                onclick="copyStr(currentOrder?.memo || '')">Copy</button></span></div>
+                </div>
+
+
+                <div id="bankDeeplinkRow" style="margin:12px 0 6px;text-align:left;">
+                    <div style="font-size:11px;font-weight:700;color:#94a3b8;margin-bottom:6px;">🚀 MỞ APP NGÂN HÀNG
+                        1-CHẠM (TỰ SAO CHÉP STK &amp; NỘI DUNG):</div>
+                    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;">
+                        <button type="button" onclick="openBankApp('tpb')"
+                            style="background:#581c87;color:#c084fc;border:1px solid #7e22ce;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">TPBank</button>
+                        <button type="button" onclick="openBankApp('mb')"
+                            style="background:#1e3a8a;color:#60a5fa;border:1px solid #2563eb;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">MBBank</button>
+                        <button type="button" onclick="openBankApp('vcb')"
+                            style="background:#064e3b;color:#34d399;border:1px solid #059669;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">VCB</button>
+                        <button type="button" onclick="openBankApp('tcb')"
+                            style="background:#7f1d1d;color:#f87171;border:1px solid #dc2626;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">Techcom</button>
+                        <button type="button" onclick="openBankApp('momo')"
+                            style="background:#701a75;color:#f472b6;border:1px solid #c026d3;border-radius:8px;padding:8px 2px;font-size:11px;font-weight:800;cursor:pointer;">MoMo</button>
+                    </div>
+                </div>
+                <div id="modalStatusBox" class="status-box"
+                    style="display:flex;align-items:center;gap:10px;text-align:left;line-height:1.4;">
+                    <span style="font-size:22px;">⚡</span>
+                    <div>
+                        <b>Quét mã thanh toán để nhận Key tự động:</b><br>
+                        <span style="font-size:11.5px;color:#cbd5e1;">Hệ thống sẽ tự động duyệt và hiện tích xanh thành
+                            công ngay sau khi nhận tiền.</span>
+                    </div>
+                </div>
+
+                <div id="modalKeySuccess" style="display:none;">
+                    <div style="text-align:center;padding:12px 0 6px;">
+                        <div
+                            style="display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:rgba(16,185,129,0.2);border:2px solid #10b981;color:#10b981;font-size:28px;margin-bottom:8px;">
+                            ✓</div>
+                        <div style="font-size:16px;font-weight:900;color:#34d399;letter-spacing:0.5px;">THANH TOÁN THÀNH
+                            CÔNG!</div>
+                        <div style="font-size:12px;color:#94a3b8;margin-top:2px;">Mã Key PRO của bạn đã sẵn sàng kích
+                            hoạt:</div>
+                    </div>
+                    <div id="issuedKeyBox" class="key-display"></div>
+                    <div id="issuedKeyNote" style="font-size:11.5px;margin-bottom:8px;"></div>
+                    <button type="button" class="btn-buy"
+                        style="background:linear-gradient(135deg,#059669,#10b981);margin-bottom:8px;"
+                        onclick="copyStr(currentOrder?.key || '')">📋 SAO CHÉP KEY PRO</button>
+                    <a id="openAppWithKeyBtn" href="#"
+                        style="display:block;text-align:center;padding:12px;border-radius:12px;background:rgba(56,189,248,0.18);border:1px solid #38bdf8;color:#38bdf8;font-weight:800;text-decoration:none;font-size:13px;">🚀
+                        Bấm Mở App &amp; Tự Kích Hoạt Ngay</a>
+                </div>
+
+                <div id="modalPendingBtns" style="display:grid;gap:8px;">
+                    <button type="button" class="btn-buy" onclick="checkCurrentOrder(true)">🔄 Tôi Đã Chuyển Khoản —
+                        Kiểm Tra Ngay</button>
+                    <button type="button" class="btn-buy"
+                        style="background:rgba(14,165,233,0.18);border:1px solid #0284c7;color:#38bdf8;"
+                        onclick="window.open('https://t.me/zslowcuong','_blank')">💬 Nhắn Cho Admin Telegram Để Được Hỗ
+                        Trợ</button>
+
+                    <!-- KHUNG HỖ TRỢ TRỰC TUYẾN LÚC CHUYỂN KHOẢN -->
+                    <div
+                        style="margin-top:4px;background:rgba(255,255,255,0.04);border:1px dashed rgba(255,255,255,0.15);border-radius:12px;padding:10px;text-align:left;">
+                        <div style="font-size:11.5px;font-weight:800;color:#38bdf8;margin-bottom:6px;">💬 Gặp sự cố lúc
+                            chuyển khoản? Nhắn Admin hỗ trợ ngay:</div>
+                        <div style="display:flex;gap:6px;">
+                            <input id="supportMsgInput" placeholder="Nhập câu hỏi hoặc vấn đề của bạn..."
+                                style="flex:1;background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:8px;padding:7px 10px;font-size:12px;" />
+                            <button type="button" onclick="sendSupportMessage()"
+                                style="background:#0284c7;color:#fff;border:none;border-radius:8px;padding:7px 12px;font-weight:800;font-size:11.5px;cursor:pointer;">🚀
+                                Gửi</button>
+                        </div>
+                        <div id="supportMsgFeedback" style="font-size:11px;color:#94a3b8;margin-top:4px;">Admin sẽ theo
+                            dõi và phản hồi qua Telegram / Zalo nếu key không hoạt động.</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        const API_BASE = 'https://bio-seven-nu.vercel.app';
-        const APPS = {
-            all:          { id: 'all',          name: 'Combo Full 5 Ứng Dụng', prefix: 'FLOWALL',  scheme: 'flowoptimize' },
-            flowz:        { id: 'flowz',        name: 'FlowZ',                  prefix: 'FLOWZ',    scheme: 'flowz' },
-            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize',           prefix: 'FLOWOP',   scheme: 'flowoptimize' },
-            flows:        { id: 'flows',        name: 'FlowS',                  prefix: 'FLOWS',    scheme: 'flows' },
-            flowmax:      { id: 'flowmax',      name: 'FlowMax',                prefix: 'FLOWMAX',  scheme: 'flowmax' },
-            flowextra:    { id: 'flowextra',    name: 'FlowMax',                prefix: 'FLOWEXTRA',scheme: 'flowmax' },
-            flowultra:    { id: 'flowultra',    name: 'FlowMax',                prefix: 'FLOWULTRA',scheme: 'flowmax' },
-            flowcore:     { id: 'flowcore',     name: 'FlowCore',               prefix: 'FLOWCORE', scheme: 'flowcore' }
-        };
+        <script>
+            const API_BASE = 'https://bio-seven-nu.vercel.app';
+            const APPS = {
+                all: { id: 'all', name: 'Combo Full 5 Ứng Dụng', prefix: 'FLOWALL', scheme: 'flowoptimize' },
+                flowz: { id: 'flowz', name: 'FlowZ', prefix: 'FLOWZ', scheme: 'flowz' },
+                flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP', scheme: 'flowoptimize' },
+                flows: { id: 'flows', name: 'FlowS', prefix: 'FLOWS', scheme: 'flows' },
+                flowmax: { id: 'flowmax', name: 'FlowMax', prefix: 'FLOWMAX', scheme: 'flowmax' },
+                flowextra: { id: 'flowextra', name: 'FlowMax', prefix: 'FLOWEXTRA', scheme: 'flowmax' },
+                flowultra: { id: 'flowultra', name: 'FlowMax', prefix: 'FLOWULTRA', scheme: 'flowmax' },
+                flowcore: { id: 'flowcore', name: 'FlowCore', prefix: 'FLOWCORE', scheme: 'flowcore' }
+            };
 
-        const params = new URLSearchParams(window.location.search);
-        let rawAppParam = (params.get('app') || params.get('appId') || 'flowz').trim().toLowerCase();
-        if (rawAppParam === 'flowop' || rawAppParam === 'com.example.gameoptimizer') rawAppParam = 'flowoptimize';
-        if (rawAppParam === 'com.flows.gaming') rawAppParam = 'flows';
-        if (rawAppParam === 'flowextra' || rawAppParam === 'flowultra' || rawAppParam === 'com.flowextra.optimizer' || rawAppParam === 'com.flows.flowultra') rawAppParam = 'flowmax';
-        if (rawAppParam === 'com.nebula.hnx' || rawAppParam === 'com.flows.flowz') rawAppParam = 'flowz';
-        if (rawAppParam === 'com.flowcore.brain' || rawAppParam === 'com.flowengine.core') rawAppParam = 'flowcore';
-        const SINGLE_IDS = ['flowz', 'flowoptimize', 'flows', 'flowmax', 'flowcore'];
-        let selectedSingleApp = SINGLE_IDS.includes(rawAppParam) ? rawAppParam : 'flowz';
-        let selectedAppId = rawAppParam === 'all' ? 'all' : selectedSingleApp;
+            const params = new URLSearchParams(window.location.search);
+            let rawAppParam = (params.get('app') || params.get('appId') || 'flowz').trim().toLowerCase();
+            if (rawAppParam === 'flowop' || rawAppParam === 'com.example.gameoptimizer') rawAppParam = 'flowoptimize';
+            if (rawAppParam === 'com.flows.gaming') rawAppParam = 'flows';
+            if (rawAppParam === 'flowextra' || rawAppParam === 'flowultra' || rawAppParam === 'com.flowextra.optimizer' || rawAppParam === 'com.flows.flowultra') rawAppParam = 'flowmax';
+            if (rawAppParam === 'com.nebula.hnx' || rawAppParam === 'com.flows.flowz') rawAppParam = 'flowz';
+            if (rawAppParam === 'com.flowcore.brain' || rawAppParam === 'com.flowengine.core') rawAppParam = 'flowcore';
+            const SINGLE_IDS = ['flowz', 'flowoptimize', 'flows', 'flowmax', 'flowcore'];
+            let selectedSingleApp = SINGLE_IDS.includes(rawAppParam) ? rawAppParam : 'flowz';
+            let selectedAppId = rawAppParam === 'all' ? 'all' : selectedSingleApp;
 
-        const hwidParam = (params.get('hwid') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
-        if (hwidParam) {
-            document.getElementById('hwidInput').value = hwidParam;
-            localStorage.setItem('flow_shop_hwid', hwidParam);
-        } else {
-            const savedHwid = localStorage.getItem('flow_shop_hwid');
-            if (savedHwid) document.getElementById('hwidInput').value = savedHwid;
-        }
-
-        const phoneParam = (params.get('phone') || '').trim();
-        if (phoneParam) {
-            document.getElementById('phoneInput').value = phoneParam;
-            localStorage.setItem('flow_shop_phone', phoneParam);
-        } else {
-            const savedPhone = localStorage.getItem('flow_shop_phone');
-            if (savedPhone) document.getElementById('phoneInput').value = savedPhone;
-        }
-
-        let currentOrder = null;
-        let pollTimer = null;
-
-        
-        let currentVipPrice = 99000;
-
-        function startFlashSaleTimer() {
-            let endTime = localStorage.getItem('flow_flash_end');
-            const now = Date.now();
-            if (!endTime || Number(endTime) <= now) {
-                // Đặt đợt Flash Sale 8 tiếng từ lúc truy cập
-                endTime = now + (8 * 3600 * 1000);
-                localStorage.setItem('flow_flash_end', endTime);
+            const hwidParam = (params.get('hwid') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+            if (hwidParam) {
+                document.getElementById('hwidInput').value = hwidParam;
+                localStorage.setItem('flow_shop_hwid', hwidParam);
             } else {
-                endTime = Number(endTime);
+                const savedHwid = localStorage.getItem('flow_shop_hwid');
+                if (savedHwid) document.getElementById('hwidInput').value = savedHwid;
             }
 
-            function updateClock() {
-                const diff = Math.max(0, endTime - Date.now());
-                const hours = Math.floor(diff / (3600 * 1000));
-                const mins = Math.floor((diff % (3600 * 1000)) / (60 * 1000));
-                const secs = Math.floor((diff % (60 * 1000)) / 1000);
+            const phoneParam = (params.get('phone') || '').trim();
+            if (phoneParam) {
+                document.getElementById('phoneInput').value = phoneParam;
+                localStorage.setItem('flow_shop_phone', phoneParam);
+            } else {
+                const savedPhone = localStorage.getItem('flow_shop_phone');
+                if (savedPhone) document.getElementById('phoneInput').value = savedPhone;
+            }
 
-                const hEl = document.getElementById('flashHours');
-                const mEl = document.getElementById('flashMins');
-                const sEl = document.getElementById('flashSecs');
-                if (hEl) hEl.textContent = String(hours).padStart(2, '0');
-                if (mEl) mEl.textContent = String(mins).padStart(2, '0');
-                if (sEl) sEl.textContent = String(secs).padStart(2, '0');
+            let currentOrder = null;
+            let pollTimer = null;
 
-                if (diff <= 0) {
-                    // Reset thêm chu kỳ mới
-                    localStorage.setItem('flow_flash_end', Date.now() + (6 * 3600 * 1000));
+
+            let currentVipPrice = 99000;
+
+            function startFlashSaleTimer() {
+                let endTime = localStorage.getItem('flow_flash_end');
+                const now = Date.now();
+                if (!endTime || Number(endTime) <= now) {
+                    // Đặt đợt Flash Sale 8 tiếng từ lúc truy cập
+                    endTime = now + (8 * 3600 * 1000);
+                    localStorage.setItem('flow_flash_end', endTime);
+                } else {
+                    endTime = Number(endTime);
+                }
+
+                function updateClock() {
+                    const diff = Math.max(0, endTime - Date.now());
+                    const hours = Math.floor(diff / (3600 * 1000));
+                    const mins = Math.floor((diff % (3600 * 1000)) / (60 * 1000));
+                    const secs = Math.floor((diff % (60 * 1000)) / 1000);
+
+                    const hEl = document.getElementById('flashHours');
+                    const mEl = document.getElementById('flashMins');
+                    const sEl = document.getElementById('flashSecs');
+                    if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+                    if (mEl) mEl.textContent = String(mins).padStart(2, '0');
+                    if (sEl) sEl.textContent = String(secs).padStart(2, '0');
+
+                    if (diff <= 0) {
+                        // Reset thêm chu kỳ mới
+                        localStorage.setItem('flow_flash_end', Date.now() + (6 * 3600 * 1000));
+                    }
+                }
+                updateClock();
+                setInterval(updateClock, 1000);
+            }
+
+            async function syncDynamicPricing() {
+                // Kept for backward pricing endpoint warmup without overwriting fixed 3M/12M plan cards
+            }
+
+            function selectSingleApp(appId) {
+                if (!SINGLE_IDS.includes(appId)) appId = 'flowz';
+                selectedSingleApp = appId;
+                const appName = APPS[appId]?.name || 'FlowZ';
+                document.querySelectorAll('#singleAppPicker .single-app-chip').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.app === appId);
+                });
+                const nameEl = document.getElementById('selectedSingleAppName');
+                if (nameEl) nameEl.textContent = appName;
+                document.querySelectorAll('.singleAppInline').forEach(el => {
+                    el.textContent = appName;
+                });
+                const btn7 = document.getElementById('btnSingle7D');
+                const btn30 = document.getElementById('btnSingle30D');
+                const btn90 = document.getElementById('btnSingle90D');
+                const btn365 = document.getElementById('btnSingle365D');
+                if (btn7) btn7.textContent = `🎯 7 Ngày ${appName} • 10K`;
+                if (btn30) btn30.textContent = `🔥 1 Tháng ${appName} • 25K`;
+                if (btn90) btn90.textContent = `🚀 3 Tháng ${appName} • 59K`;
+                if (btn365) btn365.textContent = `👑 12 Tháng ${appName} • 149K`;
+            }
+
+            function selectApp(appId) {
+                if (SINGLE_IDS.includes(appId)) {
+                    selectSingleApp(appId);
+                } else {
+                    selectSingleApp(selectedSingleApp);
                 }
             }
-            updateClock();
-            setInterval(updateClock, 1000);
-        }
 
-        async function syncDynamicPricing() {
-            // Kept for backward pricing endpoint warmup without overwriting fixed 3M/12M plan cards
-        }
+            let isCreatingOrder = false;
 
-        function selectSingleApp(appId) {
-            if (!SINGLE_IDS.includes(appId)) appId = 'flowz';
-            selectedSingleApp = appId;
-            const appName = APPS[appId]?.name || 'FlowZ';
-            document.querySelectorAll('#singleAppPicker .single-app-chip').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.app === appId);
-            });
-            const nameEl = document.getElementById('selectedSingleAppName');
-            if (nameEl) nameEl.textContent = appName;
-            document.querySelectorAll('.singleAppInline').forEach(el => {
-                el.textContent = appName;
-            });
-            const btn7 = document.getElementById('btnSingle7D');
-            const btn30 = document.getElementById('btnSingle30D');
-            const btn90 = document.getElementById('btnSingle90D');
-            const btn365 = document.getElementById('btnSingle365D');
-            if (btn7) btn7.textContent = `🎯 7 Ngày ${appName} • 10K`;
-            if (btn30) btn30.textContent = `🔥 1 Tháng ${appName} • 25K`;
-            if (btn90) btn90.textContent = `🚀 3 Tháng ${appName} • 59K`;
-            if (btn365) btn365.textContent = `👑 12 Tháng ${appName} • 149K`;
-        }
-
-        function selectApp(appId) {
-            if (SINGLE_IDS.includes(appId)) {
-                selectSingleApp(appId);
-            } else {
-                selectSingleApp(selectedSingleApp);
-            }
-        }
-
-        let isCreatingOrder = false;
-
-        async function createShopOrder(planCode, targetAppId = 'all') {
-            if (isCreatingOrder) return;
-            const orderAppId = targetAppId || 'all';
-            const hwid = (document.getElementById('hwidInput').value || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
-            const phone = (document.getElementById('phoneInput').value || '').trim();
-            if (!hwid || hwid.length < 4) {
-                alert('⚠️ Vui lòng mở app cần mua Key ➔ bấm Sao chép Mã HWID và dán vào ô HWID!');
-                document.getElementById('hwidInput').focus();
-                return;
-            }
-            localStorage.setItem('flow_shop_hwid', hwid);
-            localStorage.setItem('flow_shop_phone', phone);
-            if (!phone || phone.length < 8) {
-                alert('⚠️ Vui lòng nhập SĐT hoặc Zalo hợp lệ để bảo hành & tra cứu đơn hàng!');
-                document.getElementById('phoneInput').focus();
-                return;
-            }
-
-            isCreatingOrder = true;
-            const buyBtns = document.querySelectorAll('.btn-plan-action, .btn-buy');
-            buyBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.6'; });
-
-            try {
-                const res = await fetch(`${API_BASE}/api/shop?action=create_order`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ appId: orderAppId, app: orderAppId, hwid, phone, planCode })
-                });
-                const data = await res.json();
-                if (!data.success || !data.order) {
-                    alert('❌ Lỗi tạo đơn: ' + (data.error || 'Không rõ'));
+            async function createShopOrder(planCode, targetAppId = 'all') {
+                if (isCreatingOrder) return;
+                const orderAppId = targetAppId || 'all';
+                const hwid = (document.getElementById('hwidInput').value || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+                const phone = (document.getElementById('phoneInput').value || '').trim();
+                if (!hwid || hwid.length < 4) {
+                    alert('⚠️ Vui lòng mở app cần mua Key ➔ bấm Sao chép Mã HWID và dán vào ô HWID!');
+                    document.getElementById('hwidInput').focus();
                     return;
                 }
-                openPayModal(data.order);
-            } catch (e) {
-                alert('❌ Lỗi kết nối máy chủ Shop: ' + e.message);
-            } finally {
-                isCreatingOrder = false;
-                buyBtns.forEach(b => { b.disabled = false; b.style.opacity = '1'; });
-            }
-        }
+                localStorage.setItem('flow_shop_hwid', hwid);
+                localStorage.setItem('flow_shop_phone', phone);
+                if (!phone || phone.length < 8) {
+                    alert('⚠️ Vui lòng nhập SĐT hoặc Zalo hợp lệ để bảo hành & tra cứu đơn hàng!');
+                    document.getElementById('phoneInput').focus();
+                    return;
+                }
 
-        function openPayModal(order) {
-            currentOrder = order;
-            document.getElementById('modalOrderSubtitle').textContent = `${order.appName} • ${order.planName} • HWID: ${order.hwid} • Đơn: ${order.orderCode}`;
-            document.getElementById('qrImg').src = order.qrUrl;
-            document.getElementById('modalPrice').textContent = Number(order.price).toLocaleString('vi-VN') + 'đ';
-            document.getElementById('modalMemo').textContent = order.memo;
-            document.getElementById('modalKeySuccess').style.display = 'none';
-            document.getElementById('modalPendingBtns').style.display = 'grid';
-            const box = document.getElementById('modalStatusBox');
-            box.className = 'status-box';
-            box.innerHTML = '<span style="font-size:22px;">⚡</span><div><b>Quét mã thanh toán để nhận Key tự động:</b><br><span style="font-size:11.5px;color:#cbd5e1;">Hệ thống sẽ tự động duyệt và hiện tích xanh thành công ngay sau khi nhận tiền.</span></div>';
-            document.getElementById('payModal').classList.add('show');
+                isCreatingOrder = true;
+                const buyBtns = document.querySelectorAll('.btn-plan-action, .btn-buy');
+                buyBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.6'; });
 
-            if (pollTimer) clearInterval(pollTimer);
-            pollTimer = setInterval(() => checkCurrentOrder(false), 5000);
-        }
-
-        function closePayModal() {
-            document.getElementById('payModal').classList.remove('show');
-            if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
-        }
-
-        function openBankApp(bank) {
-            if (!currentOrder) return;
-            const memo = currentOrder.memo || '';
-            const price = currentOrder.price || 0;
-            const accNo = '10006503497';
-            const bankCode = 'TPB';
-
-            // Auto copy memo to clipboard
-            copyStr(memo);
-
-            // VietQR Universal 1-Tap Deeplink
-            const deepLinkUrl = `https://dl.vietqr.io/pay?app=${encodeURIComponent(bank)}&ba=${accNo}@${bankCode}&am=${price}&tn=${encodeURIComponent(memo)}`;
-            window.open(deepLinkUrl, '_blank');
-        }
-
-        async function checkCurrentOrder(manualClick) {
-            if (!currentOrder) return;
-            try {
-                const res = await fetch(`${API_BASE}/api/shop?action=check_order&orderCode=${encodeURIComponent(currentOrder.orderCode)}`, { cache: 'no-store' });
-                const data = await res.json();
-                if (data.order) currentOrder = data.order;
-                const box = document.getElementById('modalStatusBox');
-                if (data.paid && currentOrder.key) {
-                    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
-                    try {
-                        localStorage.setItem('flow_my_pro_key', currentOrder.key);
-                        localStorage.setItem('flow_my_pro_hwid', currentOrder.hwid);
-                        if (currentOrder.phone) localStorage.setItem('flow_shop_phone', currentOrder.phone);
-                    } catch (_) {}
-                    box.className = 'status-box paid';
-                    box.innerHTML = '<span style="font-size:24px;">✅</span><div><b style="color:#34d399;">XÁC NHẬN THANH TOÁN THÀNH CÔNG!</b><br><span style="font-size:11.5px;color:#a7f3d0;">Giao dịch đã khớp SePay TPBank. Key PRO của bạn đã được cấp bên dưới:</span></div>';
-                    document.getElementById('modalPendingBtns').style.display = 'none';
-                    document.getElementById('modalKeySuccess').style.display = 'block';
-                    const isComboAllPaid = currentOrder.allApps === true || currentOrder.appId === 'all' || String(currentOrder.key || '').startsWith('FLOWALL-');
-                    const scheme = isComboAllPaid ? 'flowoptimize' : (APPS[currentOrder.appId]?.scheme || 'flowz');
-                    setTimeout(() => {
-                        const k = currentOrder?.key || '';
-                        if (k) {
-                            window.location.href = `${scheme}://unlock?key=${encodeURIComponent(k)}`;
-                        }
-                    }, 1500);
-                    document.getElementById('issuedKeyBox').textContent = currentOrder.key;
-                    const noteEl = document.getElementById('issuedKeyNote');
-                    if (noteEl) {
-                        if (isComboAllPaid) {
-                            noteEl.innerHTML = '<span style="color:#34d399;font-weight:700;">👑 Key Combo Full 5 App: Kích hoạt chung trên 1 máy cho cả 5 App (FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!</span>';
-                        } else {
-                            const sName = APPS[currentOrder.appId]?.name || currentOrder.appName || currentOrder.appId;
-                            noteEl.innerHTML = `<span style="color:#c084fc;font-weight:700;">🎯 Key Đơn App (${sName}): Chỉ kích hoạt riêng cho duy nhất app ${sName} trên thiết bị này!</span>`;
-                        }
+                try {
+                    const res = await fetch(`${API_BASE}/api/shop?action=create_order`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ appId: orderAppId, app: orderAppId, hwid, phone, planCode })
+                    });
+                    const data = await res.json();
+                    if (!data.success || !data.order) {
+                        alert('❌ Lỗi tạo đơn: ' + (data.error || 'Không rõ'));
+                        return;
                     }
-                    document.getElementById('openAppWithKeyBtn').href = `${scheme}://unlock?key=${encodeURIComponent(currentOrder.key)}`;
-                } else if (manualClick) {
-                    box.className = 'status-box';
-                    box.innerHTML = `<span style="font-size:20px;">🔍</span><div><b>Chưa phát hiện giao dịch khớp:</b><br><span style="font-size:11.5px;color:#cbd5e1;">${data.message || 'Vui lòng hoàn tất chuyển khoản đúng số tiền và nội dung CK.'}</span></div>`;
+                    openPayModal(data.order);
+                } catch (e) {
+                    alert('❌ Lỗi kết nối máy chủ Shop: ' + e.message);
+                } finally {
+                    isCreatingOrder = false;
+                    buyBtns.forEach(b => { b.disabled = false; b.style.opacity = '1'; });
                 }
-            } catch (e) {
-                if (manualClick) alert('❌ Lỗi kiểm tra đơn: ' + e.message);
             }
-        }
 
-        async function sendSupportMessage() {
-            const input = document.getElementById('supportMsgInput');
-            const msg = (input?.value || '').trim();
-            const feedback = document.getElementById('supportMsgFeedback');
-            if (!msg) {
-                alert('Vui lòng nhập nội dung cần hỗ trợ!');
-                input?.focus();
-                return;
+            function openPayModal(order) {
+                currentOrder = order;
+                document.getElementById('modalOrderSubtitle').textContent = `${order.appName} • ${order.planName} • HWID: ${order.hwid} • Đơn: ${order.orderCode}`;
+                document.getElementById('qrImg').src = order.qrUrl;
+                document.getElementById('modalPrice').textContent = Number(order.price).toLocaleString('vi-VN') + 'đ';
+                document.getElementById('modalMemo').textContent = order.memo;
+                document.getElementById('modalKeySuccess').style.display = 'none';
+                document.getElementById('modalPendingBtns').style.display = 'grid';
+                const box = document.getElementById('modalStatusBox');
+                box.className = 'status-box';
+                box.innerHTML = '<span style="font-size:22px;">⚡</span><div><b>Quét mã thanh toán để nhận Key tự động:</b><br><span style="font-size:11.5px;color:#cbd5e1;">Hệ thống sẽ tự động duyệt và hiện tích xanh thành công ngay sau khi nhận tiền.</span></div>';
+                document.getElementById('payModal').classList.add('show');
+
+                if (pollTimer) clearInterval(pollTimer);
+                pollTimer = setInterval(() => checkCurrentOrder(false), 5000);
             }
-            if (feedback) feedback.textContent = '⏳ Đang gửi tin nhắn đến Admin...';
-            try {
-                const res = await fetch(`${API_BASE}/api/shop?action=support_message`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        orderCode: currentOrder?.memo || currentOrder?.orderCode || '',
-                        hwid: currentOrder?.hwid || (document.getElementById('hwidInput')?.value || ''),
-                        phone: currentOrder?.phone || (document.getElementById('phoneInput')?.value || ''),
-                        message: msg
-                    })
-                });
-                const data = await res.json();
-                if (data.success) {
-                    if (feedback) feedback.innerHTML = '<span style="color:#34d399;font-weight:700;">✅ ' + data.message + '</span>';
-                    if (input) input.value = '';
-                } else {
-                    if (feedback) feedback.innerHTML = '<span style="color:#f87171;">❌ ' + (data.error || 'Lỗi gửi tin nhắn') + '</span>';
+
+            function closePayModal() {
+                document.getElementById('payModal').classList.remove('show');
+                if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+            }
+
+            function openBankApp(bank) {
+                if (!currentOrder) return;
+                const memo = currentOrder.memo || '';
+                const price = currentOrder.price || 0;
+                const accNo = '10006503497';
+                const bankCode = 'TPB';
+
+                // Auto copy memo to clipboard
+                copyStr(memo);
+
+                // VietQR Universal 1-Tap Deeplink
+                const deepLinkUrl = `https://dl.vietqr.io/pay?app=${encodeURIComponent(bank)}&ba=${accNo}@${bankCode}&am=${price}&tn=${encodeURIComponent(memo)}`;
+                window.open(deepLinkUrl, '_blank');
+            }
+
+            async function checkCurrentOrder(manualClick) {
+                if (!currentOrder) return;
+                try {
+                    const res = await fetch(`${API_BASE}/api/shop?action=check_order&orderCode=${encodeURIComponent(currentOrder.orderCode)}`, { cache: 'no-store' });
+                    const data = await res.json();
+                    if (data.order) currentOrder = data.order;
+                    const box = document.getElementById('modalStatusBox');
+                    if (data.paid && currentOrder.key) {
+                        if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+                        try {
+                            localStorage.setItem('flow_my_pro_key', currentOrder.key);
+                            localStorage.setItem('flow_my_pro_hwid', currentOrder.hwid);
+                            if (currentOrder.phone) localStorage.setItem('flow_shop_phone', currentOrder.phone);
+                        } catch (_) { }
+                        box.className = 'status-box paid';
+                        box.innerHTML = '<span style="font-size:24px;">✅</span><div><b style="color:#34d399;">XÁC NHẬN THANH TOÁN THÀNH CÔNG!</b><br><span style="font-size:11.5px;color:#a7f3d0;">Giao dịch đã khớp SePay TPBank. Key PRO của bạn đã được cấp bên dưới:</span></div>';
+                        document.getElementById('modalPendingBtns').style.display = 'none';
+                        document.getElementById('modalKeySuccess').style.display = 'block';
+                        const isComboAllPaid = currentOrder.allApps === true || currentOrder.appId === 'all' || String(currentOrder.key || '').startsWith('FLOWALL-');
+                        const scheme = isComboAllPaid ? 'flowoptimize' : (APPS[currentOrder.appId]?.scheme || 'flowz');
+                        setTimeout(() => {
+                            const k = currentOrder?.key || '';
+                            if (k) {
+                                window.location.href = `${scheme}://unlock?key=${encodeURIComponent(k)}`;
+                            }
+                        }, 1500);
+                        document.getElementById('issuedKeyBox').textContent = currentOrder.key;
+                        const noteEl = document.getElementById('issuedKeyNote');
+                        if (noteEl) {
+                            if (isComboAllPaid) {
+                                noteEl.innerHTML = '<span style="color:#34d399;font-weight:700;">👑 Key Combo Full 5 App: Kích hoạt chung trên 1 máy cho cả 5 App (FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!</span>';
+                            } else {
+                                const sName = APPS[currentOrder.appId]?.name || currentOrder.appName || currentOrder.appId;
+                                noteEl.innerHTML = `<span style="color:#c084fc;font-weight:700;">🎯 Key Đơn App (${sName}): Chỉ kích hoạt riêng cho duy nhất app ${sName} trên thiết bị này!</span>`;
+                            }
+                        }
+                        document.getElementById('openAppWithKeyBtn').href = `${scheme}://unlock?key=${encodeURIComponent(currentOrder.key)}`;
+                    } else if (manualClick) {
+                        box.className = 'status-box';
+                        box.innerHTML = `<span style="font-size:20px;">🔍</span><div><b>Chưa phát hiện giao dịch khớp:</b><br><span style="font-size:11.5px;color:#cbd5e1;">${data.message || 'Vui lòng hoàn tất chuyển khoản đúng số tiền và nội dung CK.'}</span></div>`;
+                    }
+                } catch (e) {
+                    if (manualClick) alert('❌ Lỗi kiểm tra đơn: ' + e.message);
                 }
-            } catch (err) {
-                if (feedback) feedback.innerHTML = '<span style="color:#f87171;">❌ Lỗi kết nối: ' + err.message + '</span>';
             }
-        }
 
-        async function requestChangeHwid() {
-            const key = (document.getElementById('changeKeyInput')?.value || '').trim();
-            const newHwid = (document.getElementById('changeNewHwidInput')?.value || '').trim().toUpperCase();
-            const out = document.getElementById('changeHwidResult');
-            if (!key || !newHwid) {
-                alert('Vui lòng nhập đầy đủ Mã Key PRO và Mã HWID của thiết bị mới!');
-                return;
+            async function sendSupportMessage() {
+                const input = document.getElementById('supportMsgInput');
+                const msg = (input?.value || '').trim();
+                const feedback = document.getElementById('supportMsgFeedback');
+                if (!msg) {
+                    alert('Vui lòng nhập nội dung cần hỗ trợ!');
+                    input?.focus();
+                    return;
+                }
+                if (feedback) feedback.textContent = '⏳ Đang gửi tin nhắn đến Admin...';
+                try {
+                    const res = await fetch(`${API_BASE}/api/shop?action=support_message`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            orderCode: currentOrder?.memo || currentOrder?.orderCode || '',
+                            hwid: currentOrder?.hwid || (document.getElementById('hwidInput')?.value || ''),
+                            phone: currentOrder?.phone || (document.getElementById('phoneInput')?.value || ''),
+                            message: msg
+                        })
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        if (feedback) feedback.innerHTML = '<span style="color:#34d399;font-weight:700;">✅ ' + data.message + '</span>';
+                        if (input) input.value = '';
+                    } else {
+                        if (feedback) feedback.innerHTML = '<span style="color:#f87171;">❌ ' + (data.error || 'Lỗi gửi tin nhắn') + '</span>';
+                    }
+                } catch (err) {
+                    if (feedback) feedback.innerHTML = '<span style="color:#f87171;">❌ Lỗi kết nối: ' + err.message + '</span>';
+                }
             }
-            if (out) out.innerHTML = '⏳ Đang gửi yêu cầu đổi thiết bị...';
-            try {
-                const res = await fetch(`${API_BASE}/api/shop?action=change_hwid`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ key, newHwid })
-                });
-                const data = await res.json();
-                if (data.success) {
-                    if (out) out.innerHTML = `
+
+            async function requestChangeHwid() {
+                const key = (document.getElementById('changeKeyInput')?.value || '').trim();
+                const newHwid = (document.getElementById('changeNewHwidInput')?.value || '').trim().toUpperCase();
+                const out = document.getElementById('changeHwidResult');
+                if (!key || !newHwid) {
+                    alert('Vui lòng nhập đầy đủ Mã Key PRO và Mã HWID của thiết bị mới!');
+                    return;
+                }
+                if (out) out.innerHTML = '⏳ Đang gửi yêu cầu đổi thiết bị...';
+                try {
+                    const res = await fetch(`${API_BASE}/api/shop?action=change_hwid`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ key, newHwid })
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        if (out) out.innerHTML = `
                         <div style="background:rgba(16,185,129,0.15);border:1px solid #10b981;padding:10px;border-radius:10px;color:#a7f3d0;">
                             <b>🎉 ĐỔI THIẾT BỊ THÀNH CÔNG!</b><br>
                             Mã Key mới cho máy mới:<br>
@@ -1265,91 +1779,92 @@
                             <div style="font-size:11px;color:#cbd5e1;margin-top:6px;">🎁 Bạn còn ${data.remainingFree} lần đổi máy miễn phí.</div>
                         </div>
                     `;
-                } else {
-                    if (out) out.innerHTML = `
+                    } else {
+                        if (out) out.innerHTML = `
                         <div style="background:rgba(239,68,68,0.15);border:1px solid #ef4444;padding:10px;border-radius:10px;color:#fca5a5;">
                             <b>⚠️ THÔNG BÁO:</b><br>${data.message || data.error}
                         </div>
                     `;
+                    }
+                } catch (e) {
+                    if (out) out.innerHTML = `<span style="color:#f87171;">❌ Lỗi kết nối: ${e.message}</span>`;
                 }
-            } catch (e) {
-                if (out) out.innerHTML = `<span style="color:#f87171;">❌ Lỗi kết nối: ${e.message}</span>`;
             }
-        }
 
-        async function notifyAdminPaid() {
-            if (!currentOrder) return;
-            try {
-                await fetch(`${API_BASE}/api/shop?action=notify_paid`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        eventType: 'CONFIRM_PAID',
-                        orderCode: currentOrder.memo || currentOrder.orderCode,
-                        appName: currentOrder.appName,
-                        phone: currentOrder.phone,
-                        hwid: currentOrder.hwid,
-                        plan: currentOrder.planName,
-                        price: currentOrder.price,
-                        method: 'VIETQR_TPB'
-                    })
-                });
-                alert('📢 Đã gửi thông báo kèm Mã Đơn đến Telegram Admin! Admin sẽ đối chiếu App TPBank và duyệt Key ngay nếu tiền đã vào.');
-            } catch (e) {
-                alert('❌ Không gửi được nhắc nhở: ' + e.message);
+            async function notifyAdminPaid() {
+                if (!currentOrder) return;
+                try {
+                    await fetch(`${API_BASE}/api/shop?action=notify_paid`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            eventType: 'CONFIRM_PAID',
+                            orderCode: currentOrder.memo || currentOrder.orderCode,
+                            appName: currentOrder.appName,
+                            phone: currentOrder.phone,
+                            hwid: currentOrder.hwid,
+                            plan: currentOrder.planName,
+                            price: currentOrder.price,
+                            method: 'VIETQR_TPB'
+                        })
+                    });
+                    alert('📢 Đã gửi thông báo kèm Mã Đơn đến Telegram Admin! Admin sẽ đối chiếu App TPBank và duyệt Key ngay nếu tiền đã vào.');
+                } catch (e) {
+                    alert('❌ Không gửi được nhắc nhở: ' + e.message);
+                }
             }
-        }
 
-        async function lookupOrders() {
-            const q = (document.getElementById('lookupInput').value || '').trim();
-            const out = document.getElementById('lookupResults');
-            if (!q || q.length < 4) {
-                out.innerHTML = '<span style="color:#f87171;">Vui lòng nhập ít nhất 4 ký tự (Mã Đơn, Nội dung CK, HWID hoặc SĐT).</span>';
-                return;
-            }
-            out.innerHTML = '⏳ Đang tra cứu...';
-            try {
-                const res = await fetch(`${API_BASE}/api/shop?action=lookup&q=${encodeURIComponent(q)}`, { cache: 'no-store' });
-                const data = await res.json();
-                const list = data.orders || [];
-                if (!list.length) {
-                    out.innerHTML = '<span style="color:#94a3b8;">Không tìm thấy đơn hàng nào khớp từ khóa này.</span>';
+            async function lookupOrders() {
+                const q = (document.getElementById('lookupInput').value || '').trim();
+                const out = document.getElementById('lookupResults');
+                if (!q || q.length < 4) {
+                    out.innerHTML = '<span style="color:#f87171;">Vui lòng nhập ít nhất 4 ký tự (Mã Đơn, Nội dung CK, HWID hoặc SĐT).</span>';
                     return;
                 }
-                out.innerHTML = list.map(o => `
+                out.innerHTML = '⏳ Đang tra cứu...';
+                try {
+                    const res = await fetch(`${API_BASE}/api/shop?action=lookup&q=${encodeURIComponent(q)}`, { cache: 'no-store' });
+                    const data = await res.json();
+                    const list = data.orders || [];
+                    if (!list.length) {
+                        out.innerHTML = '<span style="color:#94a3b8;">Không tìm thấy đơn hàng nào khớp từ khóa này.</span>';
+                        return;
+                    }
+                    out.innerHTML = list.map(o => `
                     <div style="background:rgba(30,41,59,0.75);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px;margin-bottom:8px;">
                         <div style="display:flex;justify-content:space-between;font-weight:800;">
                             <span>${o.appName} • ${o.planName}</span>
-                            <span style="color:${o.status==='COMPLETED'?'#34d399':'#fbbf24'}">${o.status==='COMPLETED'?'ĐÃ CẤP KEY':'CHỜ THANH TOÁN'}</span>
+                            <span style="color:${o.status === 'COMPLETED' ? '#34d399' : '#fbbf24'}">${o.status === 'COMPLETED' ? 'ĐÃ CẤP KEY' : 'CHỜ THANH TOÁN'}</span>
                         </div>
                         <div style="color:#94a3b8;font-size:11.5px;margin-top:4px;">Đơn: ${o.orderCode} • CK: ${o.memo} • HWID: ${o.hwid}</div>
                         ${o.key ? `<div class="key-display" style="margin:8px 0 6px;">${o.key}</div><button class="copy-mini" onclick="copyStr('${o.key}')">📋 Copy Key</button>` : `<button class="copy-mini" style="margin-top:8px;" onclick='openPayModal(${JSON.stringify(o)})'>🏦 Mở Lại QR Thanh Toán</button>`}
                     </div>
                 `).join('');
-            } catch (e) {
-                out.innerHTML = `<span style="color:#f87171;">Lỗi tra cứu: ${e.message}</span>`;
-            }
-        }
-
-        function copyStr(txt) {
-            if (!txt) return;
-            navigator.clipboard?.writeText(txt).then(() => alert('📋 Đã sao chép: ' + txt)).catch(() => alert(txt));
-        }
-
-        selectApp(selectedAppId);
-        syncDynamicPricing();
-        // Flash Sale countdown removed per user request
-
-        try {
-            const savedProKey = localStorage.getItem('flow_my_pro_key');
-            if (savedProKey) {
-                const banner = document.getElementById('ownedKeyBanner');
-                if (banner) {
-                    banner.style.display = 'block';
-                    document.getElementById('ownedKeyText').textContent = savedProKey;
+                } catch (e) {
+                    out.innerHTML = `<span style="color:#f87171;">Lỗi tra cứu: ${e.message}</span>`;
                 }
             }
-        } catch (_) {}
-    </script>
+
+            function copyStr(txt) {
+                if (!txt) return;
+                navigator.clipboard?.writeText(txt).then(() => alert('📋 Đã sao chép: ' + txt)).catch(() => alert(txt));
+            }
+
+            selectApp(selectedAppId);
+            syncDynamicPricing();
+            // Flash Sale countdown removed per user request
+
+            try {
+                const savedProKey = localStorage.getItem('flow_my_pro_key');
+                if (savedProKey) {
+                    const banner = document.getElementById('ownedKeyBanner');
+                    if (banner) {
+                        banner.style.display = 'block';
+                        document.getElementById('ownedKeyText').textContent = savedProKey;
+                    }
+                }
+            } catch (_) { }
+        </script>
 </body>
+
 </html>
