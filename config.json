@@ -123,14 +123,14 @@
   },
   "flowz": {
     "name": "FlowZ VIP Headshot & Sensitivity Pro",
-    "version": "v2.5.0",
-    "version_code": 2,
+    "version": "v3.1.0",
+    "version_code": 3,
     "min_version_code": 1,
     "force_update": false,
     "update_url": "https://zslowcuong.github.io/bio/?dl=flowz#download",
     "download_url": "https://zslowcuong.github.io/bio/?dl=flowz#download",
     "package": "com.nebula.hnx",
-    "changelog": "Bản cập nhật v2.5.0: Đồng bộ chuẩn HWID duy nhất theo hệ thống FlowEngine, hỗ trợ kích hoạt trực tiếp mã Key Combo (FLOWALL) & FlowZ PRO, tối ưu kéo tâm Free Fire / Liên Quân 0ms delay.",
+    "changelog": "Bản cập nhật V3.1.0: Nâng cấp HyperBoost Toolkit (Khóa FPS 60–185Hz & dọn RAM Eco theo mốc), Macro Flo an toàn chống loạn cảm ứng + tự dừng/ẩn HUD & nút phụ khi thoát game, bảo vệ chữ ký chống crack, đồng bộ Event PRO & Reset Day FlowEngine cho mọi máy Android.",
     "destination_apk": "https://zslowcuong.github.io/bio/FlowZ.apk",
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowZ.apk",
     "direct_apk": "FlowZ.apk"
