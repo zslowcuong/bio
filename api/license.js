@@ -425,8 +425,10 @@ export default async function handler(req, res) {
         const durText = verified.plan === 'LIFE'
           ? 'Vĩnh Viễn Trọn Đời'
           : (verified.plan === '1Y' || verified.plan === '365D'
-              ? '1 Năm (365 Ngày)'
-              : (verified.plan === '30D' ? '1 Tháng (30 Ngày)' : '7 Ngày'));
+              ? '12 Tháng (365 Ngày)'
+              : (verified.plan === '90D'
+                  ? '3 Tháng (90 Ngày)'
+                  : (verified.plan === '30D' ? '1 Tháng (30 Ngày)' : '7 Ngày')));
         issuedKeys.unshift({
           key,
           appId: isLifeComboSave ? 'all' : appId,
@@ -455,7 +457,9 @@ export default async function handler(req, res) {
         if (verified.plan === 'LIFE') {
           activatedMsg = 'Kích hoạt thành công Gói Vĩnh Viễn Full Bảo Hành Trọn Đời (Full 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
         } else if (verified.plan === '1Y' || verified.plan === '365D') {
-          activatedMsg = 'Kích hoạt thành công Gói 1 Năm (Mở khóa toàn bộ 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
+          activatedMsg = 'Kích hoạt thành công Gói 12 Tháng 365 Ngày (Mở khóa toàn bộ 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
+        } else if (verified.plan === '90D') {
+          activatedMsg = 'Kích hoạt thành công Gói 3 Tháng 90 Ngày (Mở khóa toàn bộ 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
         } else if (verified.plan === '30D') {
           activatedMsg = 'Kích hoạt thành công Gói 1 Tháng 30 Ngày (Mở khóa toàn bộ 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
         } else if (verified.plan === '7D') {
@@ -466,7 +470,11 @@ export default async function handler(req, res) {
       } else if (verified.tier === 'VIP_FREE') {
         activatedMsg = 'Kích hoạt Key VIP 30 Giờ (khóa 1 thiết bị) thành công!';
       } else if (verified.tier === 'PRO_SHOP') {
-        const singleLabel = verified.plan === 'LIFE' ? 'Vĩnh Viễn' : (verified.plan === '30D' ? '1 Tháng' : '7 Ngày');
+        const singleLabel = verified.plan === 'LIFE'
+          ? 'Vĩnh Viễn'
+          : ((verified.plan === '365D' || verified.plan === '1Y')
+              ? '12 Tháng'
+              : (verified.plan === '90D' ? '3 Tháng' : (verified.plan === '30D' ? '1 Tháng' : '7 Ngày')));
         activatedMsg = `Kích hoạt thành công Key ${singleLabel} Đơn App (${APPS[appId].name})!`;
       }
 

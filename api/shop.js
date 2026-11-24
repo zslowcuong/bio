@@ -108,16 +108,24 @@ export default async function handler(req, res) {
                 ? `Gói 1 Tuần (7 Ngày) Combo Full 5 App (${priceTagK})`
                 : (planCode === '30D'
                     ? `Gói 1 Tháng (30 Ngày) Combo Full 5 App (${priceTagK})`
-                    : (planCode === 'LIFE'
-                        ? `Gói Vĩnh Viễn Full 5 App Trọn Đời (${priceTagK})`
-                        : `${selectedPlan.name} (${priceTagK})`))))
+                    : (planCode === '90D'
+                        ? `Gói 3 Tháng (90 Ngày) Combo Full 5 App (${priceTagK})`
+                        : ((planCode === '365D' || planCode === '1Y')
+                            ? `Gói 12 Tháng (365 Ngày) Combo Full 5 App (${priceTagK})`
+                            : (planCode === 'LIFE'
+                                ? `Gói Vĩnh Viễn Full 5 App Trọn Đời (${priceTagK})`
+                                : `${selectedPlan.name} (${priceTagK})`))))))
         : (planCode === '7D'
             ? `Gói 7 Ngày Đơn App • ${APPS[appId].name} (${priceTagK})`
             : (planCode === '30D'
                 ? `Gói 1 Tháng Đơn App • ${APPS[appId].name} (${priceTagK})`
-                : (planCode === 'LIFE'
-                    ? `Gói Vĩnh Viễn Đơn App • ${APPS[appId].name} (${priceTagK})`
-                    : `${selectedPlan.name} • ${APPS[appId].name} (${priceTagK})`)));
+                : (planCode === '90D'
+                    ? `Gói 3 Tháng (90 Ngày) Đơn App • ${APPS[appId].name} (${priceTagK})`
+                    : ((planCode === '365D' || planCode === '1Y')
+                        ? `Gói 12 Tháng (365 Ngày) Đơn App • ${APPS[appId].name} (${priceTagK})`
+                        : (planCode === 'LIFE'
+                            ? `Gói Vĩnh Viễn Đơn App • ${APPS[appId].name} (${priceTagK})`
+                            : `${selectedPlan.name} • ${APPS[appId].name} (${priceTagK})`)))));
 
       const order = {
         orderCode,
@@ -314,6 +322,8 @@ export default async function handler(req, res) {
       if (planCode === 'LIFE') {
         maxFreeChanges = isComboAllOrder ? 3 : 2;
       } else if (planCode === '1Y' || planCode === '365D') {
+        maxFreeChanges = isComboAllOrder ? 3 : 2;
+      } else if (planCode === '90D') {
         maxFreeChanges = 2;
       } else {
         maxFreeChanges = 1;
