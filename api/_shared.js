@@ -27,12 +27,18 @@ export const BANK_CONFIG = {
 export const PLANS = {
   '2D': { code: '2D', name: 'Gói Trải Nghiệm (2 Ngày / 48H)', days: 2, hours: 48, price: 10000, origPrice: 15000 },
   '3D': { code: '3D', name: 'Gói Trải Nghiệm (2 Ngày / 48H)', days: 2, hours: 48, price: 10000, origPrice: 15000 },
-  '7D': { code: '7D', name: 'Gói 7 Ngày (1 Tuần)', days: 7, hours: 168, price: 15000, origPrice: 29000 },
-  '30D': { code: '30D', name: 'Gói Tháng (30 Ngày)', days: 30, hours: 720, price: 39000, origPrice: 54000 },
-  '90D': { code: '90D', name: 'Gói 3 Tháng (90 Ngày)', days: 90, hours: 2160, price: 79000, origPrice: 119000 },
-  '365D': { code: '365D', name: 'Gói 1 Năm VIP (365 Ngày)', days: 365, hours: 8760, price: 199000, origPrice: 488000 },
-  '1Y': { code: '1Y', name: 'Gói 1 Năm VIP (365 Ngày)', days: 365, hours: 8760, price: 199000, origPrice: 488000 },
-  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn VIP Trọn Đời', days: 36500, hours: 876000, price: 99000, origPrice: 249000 },
+  '7D': { code: '7D', name: 'Gói 1 Tuần Full 5 App (7 Ngày)', days: 7, hours: 168, price: 19000, origPrice: 39000 },
+  '30D': { code: '30D', name: 'Gói 1 Tháng Full 5 App (30 Ngày)', days: 30, hours: 720, price: 45000, origPrice: 79000 },
+  '90D': { code: '90D', name: 'Gói 3 Tháng Full 5 App (90 Ngày)', days: 90, hours: 2160, price: 79000, origPrice: 119000 },
+  '365D': { code: '365D', name: 'Gói 1 Năm VIP Full 5 App (365 Ngày)', days: 365, hours: 8760, price: 199000, origPrice: 488000 },
+  '1Y': { code: '1Y', name: 'Gói 1 Năm VIP Full 5 App (365 Ngày)', days: 365, hours: 8760, price: 199000, origPrice: 488000 },
+  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn Full 5 App Trọn Đời', days: 36500, hours: 876000, price: 99000, origPrice: 249000 },
+};
+
+export const SINGLE_PLANS = {
+  '7D': { code: '7D', name: 'Gói 7 Ngày Đơn App', days: 7, hours: 168, price: 10000, origPrice: 19000 },
+  '30D': { code: '30D', name: 'Gói 1 Tháng Đơn App (30 Ngày)', days: 30, hours: 720, price: 25000, origPrice: 39000 },
+  'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn Đơn App (Trọn Đời)', days: 36500, hours: 876000, price: 59000, origPrice: 129000 },
 };
 
 export const APPS = {
@@ -184,39 +190,7 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
     }
   }
 
-  // 2) Check if key is a LIFE key from ANY Flowly app (Lifetime unlocks ALL 5 apps on 1 device)
-  for (const [otherId, otherApp] of Object.entries(APPS)) {
-    if (key.startsWith(`${otherApp.prefix}-PRO-`)) {
-      const parts = key.slice(`${otherApp.prefix}-PRO-`.length).split('-');
-      if (parts.length === 4) {
-        const [keyHwid, planCode, nonce4, sig8] = parts;
-        if (planCode === 'LIFE') {
-          const expectedSig = sha256Hex(`${otherApp.prefix}:PRO:${keyHwid}:${planCode}:${nonce4}:${otherApp.salt}`).slice(0, 8);
-          if (sig8 === expectedSig) {
-            // Check 1 device restriction
-            if (cleanHwid && keyHwid && cleanHwid !== keyHwid) {
-              return {
-                valid: false,
-                reason: `Key Vĩnh Viễn này chỉ được kích hoạt trên 1 thiết bị (${keyHwid}), không khớp với máy hiện tại (${cleanHwid})!`
-              };
-            }
-            return {
-              valid: true,
-              tier: 'PRO_SHOP',
-              expiryUtcMs: 4102444800000,
-              plan: 'LIFE',
-              key,
-              isLifetime: true,
-              isAllApps: true,
-              keyOriginHwid: keyHwid
-            };
-          }
-        }
-      }
-    }
-  }
-
-  // Check VIP format: <PREFIX>-VIP-<HWID>-<EXPIRY_HEX>-<SIG8>
+  // 2) Check Single-App VIP format: <PREFIX>-VIP-<HWID>-<EXPIRY_HEX>-<SIG8>
   const vipPrefix = `${app.prefix}-VIP-`;
   if (key.startsWith(vipPrefix)) {
     const rest = key.slice(vipPrefix.length);
@@ -232,25 +206,29 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
     if (sig8 !== expectedSig) return { valid: false, reason: 'Chữ ký Key VIP không hợp lệ' };
     const expiryUtcMs = expirySec * 1000;
     if (Date.now() > expiryUtcMs) return { valid: false, reason: 'Key VIP đã hết hạn 30 giờ, vui lòng vượt link lấy key mới' };
-    return { valid: true, tier: 'VIP_FREE', expiryUtcMs, plan: 'VIP30H', key };
+    return { valid: true, tier: 'VIP_FREE', expiryUtcMs, plan: 'VIP30H', key, isAllApps: false, isLifetime: false };
   }
 
-  // Check PRO format: <PREFIX>-PRO-<HWID>-<PLAN>-<NONCE4>-<SIG8>
-  const proPrefix = `${app.prefix}-PRO-`;
-  if (key.startsWith(proPrefix)) {
-    const rest = key.slice(proPrefix.length);
-    const parts = rest.split('-');
-    if (parts.length !== 4) return { valid: false, reason: 'Sai định dạng Key PRO' };
-    const [keyHwid, planCode, nonce4, sig8] = parts;
-    if (keyHwid !== cleanHwid) {
-      return { valid: false, reason: `Key PRO này gắn với thiết bị ${keyHwid}, không khớp máy ${cleanHwid}` };
+  // 3) Check Single-App PRO format: <PREFIX>-PRO-<HWID>-<PLAN>-<NONCE4>-<SIG8> (KHÔNG dùng chung app khác)
+  const allowedApps = expectedAppId === 'flowmax' ? [app, APPS.flowextra, APPS.flowultra].filter(Boolean) : [app];
+  for (const targetApp of allowedApps) {
+    const proPrefix = `${targetApp.prefix}-PRO-`;
+    if (key.startsWith(proPrefix)) {
+      const rest = key.slice(proPrefix.length);
+      const parts = rest.split('-');
+      if (parts.length !== 4) return { valid: false, reason: 'Sai định dạng Key PRO' };
+      const [keyHwid, planCode, nonce4, sig8] = parts;
+      if (keyHwid !== cleanHwid) {
+        return { valid: false, reason: `Key PRO này gắn với thiết bị ${keyHwid}, không khớp máy ${cleanHwid}` };
+      }
+      const plan = SINGLE_PLANS[planCode] || PLANS[planCode];
+      if (!plan) return { valid: false, reason: 'Gói Key PRO không hợp lệ' };
+      const expectedSig = sha256Hex(`${targetApp.prefix}:PRO:${keyHwid}:${planCode}:${nonce4}:${targetApp.salt}`).slice(0, 8);
+      if (sig8 !== expectedSig) return { valid: false, reason: 'Chữ ký Key PRO không hợp lệ' };
+      const isLifetime = planCode === 'LIFE';
+      const expiryUtcMs = isLifetime ? 4102444800000 : Date.now() + plan.hours * 3600 * 1000;
+      return { valid: true, tier: 'PRO_SHOP', expiryUtcMs, plan: planCode, key, isLifetime, isAllApps: false, keyOriginHwid: keyHwid };
     }
-    if (!PLANS[planCode]) return { valid: false, reason: 'Gói Key PRO không hợp lệ' };
-    const expectedSig = sha256Hex(`${app.prefix}:PRO:${keyHwid}:${planCode}:${nonce4}:${app.salt}`).slice(0, 8);
-    if (sig8 !== expectedSig) return { valid: false, reason: 'Chữ ký Key PRO không hợp lệ' };
-    const plan = PLANS[planCode];
-    const expiryUtcMs = planCode === 'LIFE' ? 4102444800000 : Date.now() + plan.hours * 3600 * 1000;
-    return { valid: true, tier: 'PRO_SHOP', expiryUtcMs, plan: planCode, key };
   }
 
   for (const [otherId, otherApp] of Object.entries(APPS)) {
@@ -578,16 +556,17 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
   }
 
   const nonce4 = crypto.randomBytes(2).toString('hex').toUpperCase();
-  const issueAppId = 'all';
+  const issueAppId = normalizeAppId(existing.appId || 'all') || 'all';
+  const isComboAll = issueAppId === 'all';
   const proKey = signProKey(issueAppId, existing.hwid, existing.planCode, nonce4);
   const nowUtc = Date.now();
-  const plan = PLANS[existing.planCode];
+  const plan = isComboAll ? PLANS[existing.planCode] : (SINGLE_PLANS[existing.planCode] || PLANS[existing.planCode]);
   const expiryUtcMs = existing.planCode === 'LIFE' ? 4102444800000 : nowUtc + (plan ? plan.hours * 3600 * 1000 : 7 * 86400000);
 
   const completed = {
     ...existing,
     appId: issueAppId,
-    allApps: true,
+    allApps: isComboAll,
     status: 'COMPLETED',
     key: proKey,
     txId: txId || existing.txId || null,
@@ -607,6 +586,7 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
   const keyRecord = {
     key: proKey,
     appId: completed.appId,
+    allApps: isComboAll,
     hwid: completed.hwid,
     planCode: completed.planCode,
     planName: completed.planName,
@@ -657,7 +637,7 @@ export async function getLifetimePricingTier() {
   // Tính số lượng key LIFE mới bán ra từ mốc khuyến mãi mới
   const PROMO_START_UTC = 1795418000000; // Mốc chiến dịch 23/11/2026
   const newLifeCount = Array.isArray(issuedKeys)
-    ? issuedKeys.filter(k => (Number(k.createdAtUtc || 0) >= PROMO_START_UTC) && (k.planCode === 'LIFE' || k.plan === 'LIFE' || (k.key && k.key.includes('-LIFE-')))).length
+    ? issuedKeys.filter(k => (Number(k.createdAtUtc || 0) >= PROMO_START_UTC) && (k.planCode === 'LIFE' || k.plan === 'LIFE' || (k.key && k.key.includes('-LIFE-'))) && (k.appId === 'all' || k.allApps === true || (k.key && k.key.startsWith('FLOWALL-')))).length
     : 0;
 
   // Khởi điểm đã có 2 lượt, còn chính xác 13/15 suất cho đợt 1 giá 99.000đ

@@ -3,6 +3,7 @@ import {
   APPS,
   BANK_CONFIG,
   PLANS,
+  SINGLE_PLANS,
   buildVietQrUrl,
   completeOrderWithProKey,
   getLifetimePricingTier,
@@ -47,6 +48,7 @@ export default async function handler(req, res) {
         success: true,
         pricing,
         plans: PLANS,
+        singlePlans: SINGLE_PLANS,
         bank: BANK_CONFIG,
         serverNowUtc,
         ...backendStatus,
@@ -58,6 +60,7 @@ export default async function handler(req, res) {
         success: true,
         bank: BANK_CONFIG,
         plans: PLANS,
+        singlePlans: SINGLE_PLANS,
         apps: Object.values(APPS).map((a) => ({ id: a.id, name: a.name, prefix: a.prefix })),
         ...backendStatus,
       });
@@ -68,8 +71,10 @@ export default async function handler(req, res) {
       const hwid = normalizeHwid(body.hwid);
       const planCode = String(body.planCode || body.plan || '7D').trim().toUpperCase();
       const phone = String(body.phone || '').trim().slice(0, 32);
+      const isComboAll = appId === 'all';
+      const selectedPlan = isComboAll ? PLANS[planCode] : (SINGLE_PLANS[planCode] || PLANS[planCode]);
 
-      if (!appId || !PLANS[planCode]) {
+      if (!appId || !APPS[appId] || !selectedPlan) {
         return res.status(400).json({ success: false, error: 'Ứng dụng hoặc gói không hợp lệ' });
       }
       if (!hwid || hwid.length < 4) {
@@ -79,55 +84,52 @@ export default async function handler(req, res) {
         return res.status(400).json({ success: false, error: 'Vui lòng nhập SĐT hoặc Zalo để bảo hành & tra cứu đơn' });
       }
 
-      const plan = PLANS[planCode];
-      let finalPrice = plan.price;
-      if (planCode === '2D' || planCode === '3D') {
-        finalPrice = 10000;
-      } else if (planCode === '7D') {
-        finalPrice = 15000;
-      } else if (planCode === '30D') {
-        finalPrice = 39000;
-      } else if (planCode === '90D' || planCode === '3M') {
-        finalPrice = 79000;
-      } else if (planCode === '1Y' || planCode === '365D') {
-        finalPrice = 199000;
-      } else if (planCode === 'LIFE') {
+      let finalPrice = selectedPlan.price;
+      if (isComboAll && planCode === 'LIFE') {
         const lifeTier = await getLifetimePricingTier();
         finalPrice = lifeTier.currentPrice || 99000;
       }
+
       const num6 = String(Math.floor(100000 + Math.random() * 900000));
       const orderCode = `ORD${num6}`;
       const memo = makePaymentMemo(num6);
       const qrUrl = buildVietQrUrl(finalPrice, memo);
       const nowUtc = Date.now();
 
-      // Tat ca cac goi deu mo khoa tron bo 5 App
-      const finalAppId = 'all';
-      const planTitle = (planCode === '2D' || planCode === '3D')
-        ? 'Gói Trải Nghiệm 48H Combo Full 5 App (10K)'
+      const finalAppId = appId;
+      const appDisplayName = isComboAll
+        ? 'Combo Full 5 App (FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)'
+        : `${APPS[appId].name} (Đơn App)`;
+      const priceTagK = `${Math.round(finalPrice / 1000)}K`;
+      const planTitle = isComboAll
+        ? ((planCode === '2D' || planCode === '3D')
+            ? `Gói Trải Nghiệm 48H Combo Full 5 App (${priceTagK})`
+            : (planCode === '7D'
+                ? `Gói 1 Tuần (7 Ngày) Combo Full 5 App (${priceTagK})`
+                : (planCode === '30D'
+                    ? `Gói 1 Tháng (30 Ngày) Combo Full 5 App (${priceTagK})`
+                    : (planCode === 'LIFE'
+                        ? `Gói Vĩnh Viễn Full 5 App Trọn Đời (${priceTagK})`
+                        : `${selectedPlan.name} (${priceTagK})`))))
         : (planCode === '7D'
-            ? 'Gói 7 Ngày (1 Tuần) Combo Full 5 App (15K)'
+            ? `Gói 7 Ngày Đơn App • ${APPS[appId].name} (${priceTagK})`
             : (planCode === '30D'
-                ? 'Gói Tháng (30 Ngày) Combo Full 5 App (39K)'
-                : (planCode === '90D' || planCode === '3M'
-                    ? 'Gói 3 Tháng (90 Ngày) Combo Full 5 App (79K)'
-                    : (planCode === '1Y' || planCode === '365D'
-                        ? 'Gói 1 Năm VIP (365 Ngày) Combo Full 5 App (199K)'
-                        : (planCode === 'LIFE'
-                            ? `Gói Vĩnh Viễn VIP Full 5 App Trọn Đời (${Math.round(finalPrice / 1000)}K)`
-                            : 'Gói Combo Full 5 App')))));
+                ? `Gói 1 Tháng Đơn App • ${APPS[appId].name} (${priceTagK})`
+                : (planCode === 'LIFE'
+                    ? `Gói Vĩnh Viễn Đơn App • ${APPS[appId].name} (${priceTagK})`
+                    : `${selectedPlan.name} • ${APPS[appId].name} (${priceTagK})`)));
 
       const order = {
         orderCode,
         memo,
         appId: finalAppId,
-        appName: 'Combo Full 5 App (FlowOptimize, FlowS, FlowUltra, FlowExtra, FlowZ VIP)',
+        appName: appDisplayName,
         hwid,
         planCode,
         planName: planTitle,
         price: finalPrice,
         phone,
-        allApps: true,
+        allApps: isComboAll,
         method: 'VIETQR_TPB',
         qrUrl,
         status: 'PENDING',
@@ -143,7 +145,9 @@ export default async function handler(req, res) {
       await dbSetJson('flowly:orders', orders.slice(0, 500));
 
       const tgTitle = `🔔 [FLOW SHOP] ĐƠN HÀNG MỚI (${planTitle})`;
-      const tgAppName = 'Full 5 App: FlowOptimize + FlowS + FlowUltra + FlowExtra + FlowZ VIP';
+      const tgAppName = isComboAll
+        ? 'Full 5 App: FlowZ + FlowOptimize + FlowS + FlowMax + FlowCore'
+        : `Đơn App: ${APPS[appId].name} (${APPS[appId].prefix})`;
       const tgPlanName = planTitle;
 
       await sendTelegram(
@@ -305,9 +309,10 @@ export default async function handler(req, res) {
         return res.status(400).json({ success: false, error: 'HWID mới trùng khớp với HWID hiện tại của máy!' });
       }
 
+      const isComboAllOrder = appId === 'all' || targetOrder?.allApps === true || targetKeyRec?.allApps === true || keyInput.startsWith('FLOWALL-');
       let maxFreeChanges = 1;
       if (planCode === 'LIFE') {
-        maxFreeChanges = 3;
+        maxFreeChanges = isComboAllOrder ? 3 : 2;
       } else if (planCode === '1Y' || planCode === '365D') {
         maxFreeChanges = 2;
       } else {

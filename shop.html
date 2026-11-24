@@ -635,6 +635,83 @@
         .btn-plan-action.btn-365d { background: linear-gradient(135deg, #d97706, #f59e0b); color: #04152b; font-weight: 900; }
         .btn-plan-action.btn-365d:hover { box-shadow: 0 0 25px rgba(245, 158, 11, 0.7); }
 
+        .section-jump-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .section-jump-btn {
+            flex: 1 1 220px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 16px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 800;
+            text-decoration: none;
+            color: #e2e8f0;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1.5px solid rgba(56, 189, 248, 0.35);
+            transition: all 0.2s ease;
+        }
+        .section-jump-btn:hover {
+            transform: translateY(-2px);
+            border-color: #38bdf8;
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.22);
+        }
+        .section-jump-btn.combo {
+            border-color: rgba(245, 158, 11, 0.55);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.14), rgba(168, 85, 247, 0.14));
+            color: #fde68a;
+        }
+        .single-app-picker {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        @media (max-width: 767px) {
+            .single-app-picker {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .single-app-chip {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1.5px solid rgba(148, 163, 184, 0.25);
+            border-radius: 12px;
+            padding: 10px 8px;
+            color: #cbd5e1;
+            font-size: 12.5px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .single-app-chip:hover {
+            border-color: rgba(56, 189, 248, 0.65);
+            color: #fff;
+        }
+        .single-app-chip.active {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.28), rgba(56, 189, 248, 0.22));
+            border-color: #c084fc;
+            color: #fff;
+            box-shadow: 0 0 18px rgba(168, 85, 247, 0.35);
+        }
+        .btn-plan-action.btn-vip-single {
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            color: #fff;
+        }
+        .btn-plan-action.btn-vip-single:hover {
+            box-shadow: 0 0 22px rgba(245, 158, 11, 0.65);
+        }
+
     </style>
 </head>
 <body>
@@ -692,14 +769,105 @@
             </div>
         </div>
 
-                <!-- 2. CHỌN GÓI KEY PRO -->
-        <div class="section-card" style="padding: 22px 18px; position: relative;">
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+        <div class="section-jump-tabs">
+            <a href="#single-app-plans" class="section-jump-btn">🎯 Mua Lẻ Đơn App (10K • 25K • 59K)</a>
+            <a href="#combo-5app-plans" class="section-jump-btn combo">👑 Combo Full 5 App Tiết Kiệm (19K • 45K • 99K)</a>
+        </div>
+
+        <!-- 2A. GÓI ĐƠN APP (CHỈ MỞ KHÓA 1 ỨNG DỤNG ĐÃ CHỌN) -->
+        <div class="section-card" id="single-app-plans" style="padding: 22px 18px; position: relative; border-color: rgba(168, 85, 247, 0.35);">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
                 <div style="font-size: 16px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
-                    <span style="color:#00f0ff; font-size: 18px;">💎</span> BẢNG GIÁ DỊCH VỤ NIÊM YẾT MỚI (MỞ KHÓA TRỌN BỘ 5 ỨNG DỤNG)
+                    <span style="color:#c084fc; font-size: 18px;">🎯</span> 2A. GÓI ĐƠN APP (CHỈ MỞ KHÓA DUY NHẤT 1 APP ĐÃ CHỌN)
+                </div>
+                <div style="font-size: 11.5px; color: #e9d5ff; font-weight: 800; background: rgba(168, 85, 247, 0.16); border: 1px solid rgba(168, 85, 247, 0.4); padding: 5px 12px; border-radius: 20px;">
+                    🔒 Chỉ kích hoạt 1 App riêng biệt (không dùng chung App khác)
+                </div>
+            </div>
+
+            <div class="single-app-picker" id="singleAppPicker">
+                <button type="button" class="single-app-chip active" data-app="flowz" onclick="selectSingleApp('flowz')">🎯 FlowZ</button>
+                <button type="button" class="single-app-chip" data-app="flowoptimize" onclick="selectSingleApp('flowoptimize')">🌸 FlowOptimize</button>
+                <button type="button" class="single-app-chip" data-app="flows" onclick="selectSingleApp('flows')">⚡ FlowS</button>
+                <button type="button" class="single-app-chip" data-app="flowmax" onclick="selectSingleApp('flowmax')">🚀 FlowMax</button>
+                <button type="button" class="single-app-chip" data-app="flowcore" onclick="selectSingleApp('flowcore')">🧠 FlowCore</button>
+            </div>
+
+            <div style="font-size: 12px; color: #cbd5e1; background: rgba(15, 23, 42, 0.72); border: 1px dashed rgba(192, 132, 252, 0.45); border-radius: 10px; padding: 9px 12px; margin-bottom: 16px;">
+                ⚡ App đang chọn: <b id="selectedSingleAppName" style="color: #c084fc;">FlowZ</b> — Key cấp ra chỉ mở khóa riêng cho <b><span class="singleAppInline">FlowZ</span></b> trên đúng 1 thiết bị (HWID). Nếu muốn mở khóa cả 5 App hãy chọn bảng giá <b>Combo Full 5 App</b> ở bên dưới.
+            </div>
+
+            <div class="plans-grid">
+                <!-- ĐƠN APP 1: GÓI 7 NGÀY -->
+                <div class="pricing-card-box aura-7d">
+                    <span class="plan-ribbon sky">🎯 ĐƠN APP • 7 NGÀY</span>
+                    <div>
+                        <div class="plan-card-title">7 NGÀY ĐƠN APP (<span class="singleAppInline">FlowZ</span>)</div>
+                        <div class="plan-card-price">
+                            <span>10.000đ</span>
+                            <span class="plan-old-strikethrough">19.000đ</span>
+                        </div>
+                        <div class="plan-flash-tag tag-blue">⚡ Tiết Kiệm — Chỉ ~1.428đ/ngày cho riêng <span class="singleAppInline">FlowZ</span></div>
+                        <ul class="plan-card-perks">
+                            <li>Chỉ mở khóa duy nhất app <b class="singleAppInline">FlowZ</b></li>
+                            <li>Dùng liên tục 7 ngày không cần vượt link 30h</li>
+                            <li>Khóa cứng theo HWID máy của bạn</li>
+                            <li>Tặng 1 lần đổi thiết bị miễn phí</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-plan-action btn-7d" id="btnSingle7D" onclick="createShopOrder('7D', selectedSingleApp)">🎯 Mua 7 Ngày FlowZ • 10K</button>
+                </div>
+
+                <!-- ĐƠN APP 2: GÓI 1 THÁNG (30 NGÀY) -->
+                <div class="pricing-card-box aura-30d featured">
+                    <span class="plan-ribbon purple-neon">🔥 ĐƠN APP PHỔ BIẾN</span>
+                    <div>
+                        <div class="plan-card-title" style="color:#d8b4fe; font-size:16px;">1 THÁNG ĐƠN APP (<span class="singleAppInline">FlowZ</span>)</div>
+                        <div class="plan-card-price">
+                            <span style="color:#f3e8ff;">25.000đ</span>
+                            <span class="plan-old-strikethrough">39.000đ</span>
+                        </div>
+                        <div class="plan-flash-tag tag-purple">💎 Siêu Rẻ — Chỉ ~833đ/ngày suốt 30 ngày dùng <span class="singleAppInline">FlowZ</span></div>
+                        <ul class="plan-card-perks">
+                            <li>Chỉ mở khóa duy nhất app <b class="singleAppInline">FlowZ</b></li>
+                            <li>Hạn dùng 30 ngày PRO không giới hạn tính năng</li>
+                            <li>Tặng 1 lần đổi thiết bị miễn phí</li>
+                            <li>Nhận mọi bản cập nhật của <span class="singleAppInline">FlowZ</span></li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-plan-action btn-30d" id="btnSingle30D" onclick="createShopOrder('30D', selectedSingleApp)">🔥 Mua 1 Tháng FlowZ • 25K</button>
+                </div>
+
+                <!-- ĐƠN APP 3: GÓI VĨNH VIỄN ĐƠN APP -->
+                <div class="pricing-card-box aura-365d">
+                    <span class="plan-ribbon gold">👑 VĨNH VIỄN ĐƠN APP</span>
+                    <div>
+                        <div class="plan-card-title" style="color:#fcd34d;">VĨNH VIỄN ĐƠN APP (<span class="singleAppInline">FlowZ</span>)</div>
+                        <div class="plan-card-price">
+                            <span style="color:#fef08a;">59.000đ</span>
+                            <span class="plan-old-strikethrough">129.000đ</span>
+                        </div>
+                        <div class="plan-flash-tag tag-gold">👑 Mua 1 Lần Dùng Mãi Mãi riêng app <span class="singleAppInline">FlowZ</span></div>
+                        <ul class="plan-card-perks">
+                            <li>Chỉ mở khóa trọn đời duy nhất app <b class="singleAppInline">FlowZ</b></li>
+                            <li>Không bao giờ phải gia hạn lại</li>
+                            <li>Tặng 2 lần đổi thiết bị miễn phí trọn đời</li>
+                            <li>Hỗ trợ kỹ thuật VIP 24/7</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-plan-action btn-vip-single" id="btnSingleLIFE" onclick="createShopOrder('LIFE', selectedSingleApp)">👑 Mua Vĩnh Viễn FlowZ • 59K</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2B. COMBO FULL 5 APP (1 KEY MỞ KHÓA CẢ 5 APP FLOWENGINE) -->
+        <div class="section-card" id="combo-5app-plans" style="padding: 22px 18px; position: relative; border-color: rgba(245, 158, 11, 0.45);">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
+                <div style="font-size: 16px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
+                    <span style="color:#00f0ff; font-size: 18px;">👑</span> 2B. COMBO FULL 5 APP (FLOWZ • FLOWOP • FLOWS • FLOWMAX • FLOWCORE)
                 </div>
                 <div style="font-size: 12px; color: #fbbf24; font-weight: 800; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.35); padding: 5px 14px; border-radius: 20px;">
-                    🔥 1 Key VIP sử dụng đồng thời trên cả 5 App
+                    🔥 1 Key Dùng Đồng Thời Trọn Bộ 5 App
                 </div>
             </div>
 
@@ -707,61 +875,61 @@
             <div class="vip-promo-banner" style="background: linear-gradient(90deg, rgba(245, 158, 11, 0.16), rgba(239, 68, 68, 0.16)); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: 14px; padding: 14px 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
                 <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                     <span style="background: linear-gradient(135deg, #f59e0b, #ef4444); color: #fff; font-size: 11px; font-weight: 900; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.5px;">🔥 ƯU ĐÃI ĐỘC QUYỀN</span>
-                    <span style="font-size: 13.5px; color: #f8fafc; font-weight: 700;">Gói Vĩnh Viễn Trọn Đời chỉ <b>99.000đ</b> cho <span style="color:#ef4444; font-weight:900;" id="vipBannerSlot">13/15 suất còn lại</span> — Sau khi hết lượt giá sẽ tăng dần cho đến giá gốc <b>249.000đ</b>!</span>
+                    <span style="font-size: 13.5px; color: #f8fafc; font-weight: 700;">Combo Vĩnh Viễn Full 5 App chỉ <b>99.000đ</b> cho <span style="color:#ef4444; font-weight:900;" id="vipBannerSlot">13/15 suất còn lại</span> — Hết lượt tăng dần lên giá gốc <b>249.000đ</b>!</span>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; color: #fbbf24; background: rgba(15, 23, 42, 0.85); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(245, 158, 11, 0.35);">
-                    <span>⚡ 1 Key Mở Khóa Cả 5 App</span>
+                    <span>⚡ Rẻ Hơn Đến 66% So Với Mua Lẻ</span>
                 </div>
             </div>
 
             <div class="plans-grid">
-                <!-- CỘT 1: GÓI 7 NGÀY (1 TUẦN) -->
+                <!-- COMBO 1: GÓI 1 TUẦN (7 NGÀY) FULL 5 APP -->
                 <div class="pricing-card-box aura-7d">
-                    <span class="plan-ribbon sky">🚀 LEO RANK TUẦN</span>
+                    <span class="plan-ribbon sky">🚀 1 TUẦN FULL 5 APP</span>
                     <div>
-                        <div class="plan-card-title">GÓI 7 NGÀY (1 TUẦN)</div>
+                        <div class="plan-card-title">1 TUẦN (7 NGÀY) FULL 5 APP</div>
                         <div class="plan-card-price">
-                            <span id="price7D">15.000đ</span>
-                            <span class="plan-old-strikethrough">29.000đ</span>
+                            <span id="price7D">19.000đ</span>
+                            <span class="plan-old-strikethrough">39.000đ</span>
                         </div>
-                        <div class="plan-flash-tag tag-blue">🚀 Giá Tối Ưu — Chỉ ~2.140đ/ngày (Tiết kiệm 14.000đ)</div>
+                        <div class="plan-flash-tag tag-blue">🚀 Mở khóa cả 5 App suốt 7 ngày — Chỉ ~540đ/App/ngày</div>
                         <ul class="plan-card-perks">
-                            <li>Mở khóa trọn bộ 5 app FlowEngine</li>
-                            <li>Hạn dùng: 7 ngày liên tục, bỏ qua vượt link4m 30h</li>
-                            <li>Chi phí tối ưu: chỉ ~2.140đ/ngày</li>
+                            <li>1 Key mở khóa trọn bộ 5 app (FlowZ, FlowOp, FlowS, FlowMax, FlowCore)</li>
+                            <li>Hạn dùng: 7 ngày liên tục, bỏ qua vượt link 30h</li>
+                            <li>Tiết kiệm 31K so với mua lẻ từng app</li>
                             <li>Tặng 1 lần đổi thiết bị miễn phí linh hoạt</li>
                             <li>Hỗ trợ kỹ thuật 24/7 trực tiếp</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-7d" onclick="createShopOrder('7D')">🚀 Mua Gói Tuần • 15K</button>
+                    <button type="button" class="btn-plan-action btn-7d" onclick="createShopOrder('7D', 'all')">🚀 Mua 1 Tuần Full 5 App • 19K</button>
                 </div>
 
-                <!-- CỘT 2: GÓI THÁNG (30 NGÀY) - CHỦ LỰC NỔI BẬT NHẤT -->
+                <!-- COMBO 2: GÓI 1 THÁNG (30 NGÀY) FULL 5 APP -->
                 <div class="pricing-card-box aura-30d featured">
-                    <span class="plan-ribbon purple-neon">🔥 PHỔ BIẾN NHẤT • BÁN CHẠY</span>
+                    <span class="plan-ribbon purple-neon">🔥 PHỔ BIẾN NHẤT • FULL 5 APP</span>
                     <div>
-                        <div class="plan-card-title" style="color:#d8b4fe; font-size:16.5px;">GÓI THÁNG (30 NGÀY)</div>
+                        <div class="plan-card-title" style="color:#d8b4fe; font-size:16px;">1 THÁNG (30 NGÀY) FULL 5 APP</div>
                         <div class="plan-card-price">
-                            <span id="price30D" style="color:#f3e8ff;">39.000đ</span>
-                            <span class="plan-old-strikethrough">54.000đ</span>
+                            <span id="price30D" style="color:#f3e8ff;">45.000đ</span>
+                            <span class="plan-old-strikethrough">79.000đ</span>
                         </div>
-                        <div class="plan-flash-tag tag-purple">🔥 Cực Rẻ — Chỉ ~1.300đ/ngày (Rẻ hơn 39% so với gói Tuần)</div>
+                        <div class="plan-flash-tag tag-purple">🔥 Chỉ ~1.500đ/ngày cho cả 5 App (Rẻ hơn 64% mua lẻ)</div>
                         <ul class="plan-card-perks">
-                            <li>Mở khóa full 5 app FlowEngine trong 30 ngày</li>
-                            <li>Đơn giá siêu rẻ: chỉ ~1.300đ/ngày</li>
+                            <li>Mở khóa Full 5 app FlowEngine suốt 30 ngày</li>
+                            <li>Tính ra chỉ 9.000đ/App cả tháng cực hời</li>
                             <li>Tặng 1 lần đổi thiết bị miễn phí linh hoạt</li>
                             <li>Nhận mọi bản cập nhật tính năng mới lớn nhỏ</li>
                             <li>Hỗ trợ kỹ thuật ưu tiên 24/7</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-30d" onclick="createShopOrder('30D')">🔥 Mua Gói Tháng • 39K</button>
+                    <button type="button" class="btn-plan-action btn-30d" onclick="createShopOrder('30D', 'all')">🔥 Mua 1 Tháng Full 5 App • 45K</button>
                 </div>
 
-                <!-- CỘT 3: GÓI VĨNH VIỄN (TRỌN ĐỜI) -->
+                <!-- COMBO 3: GÓI VĨNH VIỄN FULL 5 APP -->
                 <div class="pricing-card-box aura-365d">
-                    <span class="plan-ribbon gold" id="vipTierBadge">👑 VĨNH VIỄN • ĐỢT 1</span>
+                    <span class="plan-ribbon gold" id="vipTierBadge">👑 VĨNH VIỄN FULL 5 APP • ĐỢT 1</span>
                     <div>
-                        <div class="plan-card-title" style="color:#fcd34d;">GÓI VĨNH VIỄN (TRỌN ĐỜI)</div>
+                        <div class="plan-card-title" style="color:#fcd34d;">VĨNH VIỄN FULL 5 APP (TRỌN ĐỜI)</div>
                         <div class="plan-card-price">
                             <span id="vipPriceLabel" style="color:#fef08a;">99.000đ</span>
                             <span class="plan-old-strikethrough">249.000đ</span>
@@ -779,17 +947,16 @@
                             <div class="vip-slot-hint" id="vipSlotHint">⚡ Hết 13 lượt mua ưu đãi 99.000đ sẽ tăng dần lên cho đến khi về giá gốc 249.000đ!</div>
                         </div>
 
-                        <div class="plan-flash-tag tag-gold">💎 Tiết kiệm ngay 150.000đ (-60,2%) so với giá gốc 249.000đ</div>
+                        <div class="plan-flash-tag tag-gold">💎 Tiết kiệm ngay 150.000đ (-60,2%) — Trọn đời cả 5 App</div>
                         <ul class="plan-card-perks">
                             <li>Full bản quyền trọn đời vĩnh viễn trên cả 5 app FlowEngine</li>
-                            <li>Đơn giá trọn đời: chỉ 99.000đ dùng mãi mãi, không bao giờ phải gia hạn</li>
+                            <li>Chỉ ~19.800đ/App dùng mãi mãi, không bao giờ phải gia hạn</li>
                             <li>Ưu đãi độc quyền: 13/15 lượt còn lại, hết lượt tăng lên 249.000đ</li>
                             <li>Tặng 3 lần đổi thiết bị miễn phí trọn đời</li>
-                            <li>Cập nhật miễn phí mọi tính năng mới &amp; phiên bản Android</li>
                             <li>Hỗ trợ kỹ thuật VIP 24/7 chuyên sâu, ưu tiên cao nhất</li>
                         </ul>
                     </div>
-                    <button type="button" class="btn-plan-action btn-vip" id="vipBuyBtn" onclick="createShopOrder('LIFE')">💎 Mua Vĩnh Viễn • 99K</button>
+                    <button type="button" class="btn-plan-action btn-vip" id="vipBuyBtn" onclick="createShopOrder('LIFE', 'all')">💎 Mua Vĩnh Viễn Full 5 App • 99K</button>
                 </div>
             </div>
         </div>
@@ -884,16 +1051,26 @@
     <script>
         const API_BASE = 'https://bio-seven-nu.vercel.app';
         const APPS = {
-            all:          { name: 'Combo Full 5 Ứng Dụng (Tặng FlowZ)', prefix: 'FLOWALL', scheme: 'flowoptimize' },
-            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', scheme: 'flowoptimize' },
-            flows:        { id: 'flows',        name: 'FlowS',        scheme: 'flows' },
-            flowultra:    { id: 'flowultra',    name: 'FlowUltra',    scheme: 'flowultra' },
-            flowextra:    { id: 'flowextra',    name: 'FlowExtra',    scheme: 'flowextra' },
-            flowz:        { id: 'flowz',        name: 'FlowZ',        scheme: 'flowz' }
+            all:          { id: 'all',          name: 'Combo Full 5 Ứng Dụng', prefix: 'FLOWALL',  scheme: 'flowoptimize' },
+            flowz:        { id: 'flowz',        name: 'FlowZ',                  prefix: 'FLOWZ',    scheme: 'flowz' },
+            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize',           prefix: 'FLOWOP',   scheme: 'flowoptimize' },
+            flows:        { id: 'flows',        name: 'FlowS',                  prefix: 'FLOWS',    scheme: 'flows' },
+            flowmax:      { id: 'flowmax',      name: 'FlowMax',                prefix: 'FLOWMAX',  scheme: 'flowmax' },
+            flowextra:    { id: 'flowextra',    name: 'FlowMax',                prefix: 'FLOWEXTRA',scheme: 'flowmax' },
+            flowultra:    { id: 'flowultra',    name: 'FlowMax',                prefix: 'FLOWULTRA',scheme: 'flowmax' },
+            flowcore:     { id: 'flowcore',     name: 'FlowCore',               prefix: 'FLOWCORE', scheme: 'flowcore' }
         };
 
         const params = new URLSearchParams(window.location.search);
-        let selectedAppId = 'all';
+        let rawAppParam = (params.get('app') || params.get('appId') || 'flowz').trim().toLowerCase();
+        if (rawAppParam === 'flowop' || rawAppParam === 'com.example.gameoptimizer') rawAppParam = 'flowoptimize';
+        if (rawAppParam === 'com.flows.gaming') rawAppParam = 'flows';
+        if (rawAppParam === 'flowextra' || rawAppParam === 'flowultra' || rawAppParam === 'com.flowextra.optimizer' || rawAppParam === 'com.flows.flowultra') rawAppParam = 'flowmax';
+        if (rawAppParam === 'com.nebula.hnx' || rawAppParam === 'com.flows.flowz') rawAppParam = 'flowz';
+        if (rawAppParam === 'com.flowcore.brain' || rawAppParam === 'com.flowengine.core') rawAppParam = 'flowcore';
+        const SINGLE_IDS = ['flowz', 'flowoptimize', 'flows', 'flowmax', 'flowcore'];
+        let selectedSingleApp = SINGLE_IDS.includes(rawAppParam) ? rawAppParam : 'flowz';
+        let selectedAppId = rawAppParam === 'all' ? 'all' : selectedSingleApp;
 
         const hwidParam = (params.get('hwid') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
         if (hwidParam) {
@@ -970,7 +1147,7 @@
                     }
                     const btnEl = document.getElementById('vipBuyBtn');
                     if (btnEl) {
-                        btnEl.textContent = `💎 Mua Vĩnh Viễn • ${Math.round(currentVipPrice/1000)}K`;
+                        btnEl.textContent = `💎 Mua Vĩnh Viễn Full 5 App • ${Math.round(currentVipPrice/1000)}K`;
                     }
                     const countEl = document.getElementById('vipSlotCount');
                     if (countEl && p.slotsLeft !== undefined) {
@@ -997,17 +1174,39 @@
         }
 
 
+        function selectSingleApp(appId) {
+            if (!SINGLE_IDS.includes(appId)) appId = 'flowz';
+            selectedSingleApp = appId;
+            const appName = APPS[appId]?.name || 'FlowZ';
+            document.querySelectorAll('#singleAppPicker .single-app-chip').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.app === appId);
+            });
+            const nameEl = document.getElementById('selectedSingleAppName');
+            if (nameEl) nameEl.textContent = appName;
+            document.querySelectorAll('.singleAppInline').forEach(el => {
+                el.textContent = appName;
+            });
+            const btn7 = document.getElementById('btnSingle7D');
+            const btn30 = document.getElementById('btnSingle30D');
+            const btnLife = document.getElementById('btnSingleLIFE');
+            if (btn7) btn7.textContent = `🎯 Mua 7 Ngày ${appName} • 10K`;
+            if (btn30) btn30.textContent = `🔥 Mua 1 Tháng ${appName} • 25K`;
+            if (btnLife) btnLife.textContent = `👑 Mua Vĩnh Viễn ${appName} • 59K`;
+        }
+
         function selectApp(appId) {
-            selectedAppId = 'all';
-            const label = document.getElementById('selectedAppLabel');
-            if (label) label.textContent = "Combo 5 App FlowEngine";
-            document.querySelectorAll('.appNameInline').forEach(el => el.textContent = "Combo 5 App");
+            if (SINGLE_IDS.includes(appId)) {
+                selectSingleApp(appId);
+            } else {
+                selectSingleApp(selectedSingleApp);
+            }
         }
 
         let isCreatingOrder = false;
 
-        async function createShopOrder(planCode) {
+        async function createShopOrder(planCode, targetAppId = 'all') {
             if (isCreatingOrder) return;
+            const orderAppId = targetAppId || 'all';
             const hwid = (document.getElementById('hwidInput').value || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
             const phone = (document.getElementById('phoneInput').value || '').trim();
             if (!hwid || hwid.length < 4) {
@@ -1024,14 +1223,14 @@
             }
 
             isCreatingOrder = true;
-            const buyBtns = document.querySelectorAll('.btn-buy');
+            const buyBtns = document.querySelectorAll('.btn-plan-action, .btn-buy');
             buyBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.6'; });
 
             try {
                 const res = await fetch(`${API_BASE}/api/shop?action=create_order`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ appId: 'all', app: 'all', hwid, phone, planCode })
+                    body: JSON.stringify({ appId: orderAppId, app: orderAppId, hwid, phone, planCode })
                 });
                 const data = await res.json();
                 if (!data.success || !data.order) {
@@ -1102,23 +1301,24 @@
                     box.innerHTML = '<span style="font-size:24px;">✅</span><div><b style="color:#34d399;">XÁC NHẬN THANH TOÁN THÀNH CÔNG!</b><br><span style="font-size:11.5px;color:#a7f3d0;">Giao dịch đã khớp SePay TPBank. Key PRO của bạn đã được cấp bên dưới:</span></div>';
                     document.getElementById('modalPendingBtns').style.display = 'none';
                     document.getElementById('modalKeySuccess').style.display = 'block';
-                            // Tự động chuyển hướng FlowCore sau 1.5s
-                            setTimeout(() => {
-                                const k = currentOrder?.key || '';
-                                if (k) {
-                                    window.location.href = `flowcore://unlock?key=${encodeURIComponent(k)}`;
-                                }
-                            }, 1500);
+                    const isComboAllPaid = currentOrder.allApps === true || currentOrder.appId === 'all' || String(currentOrder.key || '').startsWith('FLOWALL-');
+                    const scheme = isComboAllPaid ? 'flowoptimize' : (APPS[currentOrder.appId]?.scheme || 'flowz');
+                    setTimeout(() => {
+                        const k = currentOrder?.key || '';
+                        if (k) {
+                            window.location.href = `${scheme}://unlock?key=${encodeURIComponent(k)}`;
+                        }
+                    }, 1500);
                     document.getElementById('issuedKeyBox').textContent = currentOrder.key;
                     const noteEl = document.getElementById('issuedKeyNote');
                     if (noteEl) {
-                        if (currentOrder.planCode === 'LIFE' || currentOrder.appId === 'all') {
-                            noteEl.innerHTML = '<span style="color:#34d399;font-weight:700;">👑 Key Vĩnh Viễn Combo Full 5 App: Kích hoạt chung trên 1 máy cho cả 5 App (FlowOptimize, FlowS, FlowMax, FlowCore, FlowZ)!</span>';
+                        if (isComboAllPaid) {
+                            noteEl.innerHTML = '<span style="color:#34d399;font-weight:700;">👑 Key Combo Full 5 App: Kích hoạt chung trên 1 máy cho cả 5 App (FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!</span>';
                         } else {
-                            noteEl.innerHTML = '<span style="color:#38bdf8;font-weight:700;">⚡ Key Combo 4 App: Kích hoạt chung cho 4 App (FlowOp, FlowS, FlowUltra, FlowExtra). FlowZ dùng Key VIP 30h miễn phí!</span>';
+                            const sName = APPS[currentOrder.appId]?.name || currentOrder.appName || currentOrder.appId;
+                            noteEl.innerHTML = `<span style="color:#c084fc;font-weight:700;">🎯 Key Đơn App (${sName}): Chỉ kích hoạt riêng cho duy nhất app ${sName} trên thiết bị này!</span>`;
                         }
                     }
-                    const scheme = APPS[currentOrder.appId]?.scheme || 'flowoptimize';
                     document.getElementById('openAppWithKeyBtn').href = `${scheme}://unlock?key=${encodeURIComponent(currentOrder.key)}`;
                 } else if (manualClick) {
                     box.className = 'status-box';

@@ -313,7 +313,10 @@ export default async function handler(req, res) {
       const matchingPro = issuedKeys.find(
         (k) =>
           k &&
-          (k.appId === appId || k.appId === 'all' || k.allApps === true || k.planCode === 'LIFE') &&
+          ((k.appId === appId) ||
+            (appId === 'flowmax' && (k.appId === 'flowextra' || k.appId === 'flowultra')) ||
+            k.appId === 'all' ||
+            k.allApps === true) &&
           (k.hwid === hwid || (Array.isArray(k.hwids) && k.hwids.includes(hwid))) &&
           !k.revoked &&
           !revokedKeys.includes(String(k.key || '').toUpperCase()) &&
@@ -406,7 +409,7 @@ export default async function handler(req, res) {
       }
 
       let finalExpiryMs = verified.expiryUtcMs;
-      const isLifeComboSave = verified.isAllApps || verified.plan === 'LIFE';
+      const isLifeComboSave = Boolean(verified.isAllApps);
       if (foundIssued) {
         if (foundIssued.expiryUtcMs) {
           finalExpiryMs = Number(foundIssued.expiryUtcMs);
@@ -419,6 +422,11 @@ export default async function handler(req, res) {
         }
       } else if (verified.tier === 'PRO_SHOP') {
         // Persist first activation of offline-minted PRO key so duration can't be extended by re-entering
+        const durText = verified.plan === 'LIFE'
+          ? 'Vĩnh Viễn Trọn Đời'
+          : (verified.plan === '1Y' || verified.plan === '365D'
+              ? '1 Năm (365 Ngày)'
+              : (verified.plan === '30D' ? '1 Tháng (30 Ngày)' : '7 Ngày'));
         issuedKeys.unshift({
           key,
           appId: isLifeComboSave ? 'all' : appId,
@@ -426,11 +434,9 @@ export default async function handler(req, res) {
           hwid,
           hwids: [hwid, verified.keyOriginHwid].filter(Boolean),
           planCode: verified.plan,
-          planName: verified.plan === 'LIFE'
-            ? 'Gói Vĩnh Viễn Full Bảo Hành Trọn Đời Hệ Thống App FlowEngine'
-            : (verified.plan === '1Y' || verified.plan === '365D'
-                ? 'Gói 1 Năm Combo 5 App (365 Ngày)'
-                : (verified.plan === '30D' ? 'Gói Tháng Combo 5 App (30 Ngày)' : 'Gói Tuần Combo 5 App (7 Ngày)')),
+          planName: isLifeComboSave
+            ? `Gói ${durText} Combo Full 5 App`
+            : `Gói ${durText} Đơn App (${APPS[appId].name})`,
           source: 'KEY_ACTIVATED',
           createdAtUtc: serverNowUtc,
           expiryUtcMs: finalExpiryMs,
@@ -443,22 +449,25 @@ export default async function handler(req, res) {
         return res.status(400).json({ success: false, reason: 'Mã Key đã hết hạn!', serverNowUtc });
       }
 
-      const isLifeCombo = verified.isAllApps || verified.plan === 'LIFE';
+      const isLifeCombo = Boolean(verified.isAllApps);
       let activatedMsg = 'Kích hoạt Key PRO thành công!';
       if (isLifeCombo) {
         if (verified.plan === 'LIFE') {
-          activatedMsg = 'Kích hoạt thành công Gói Vĩnh Viễn Full Bảo Hành Trọn Đời (Full 5 App: FlowS, FlowUltra, FlowOp, FlowExtra, FlowZ VIP)!';
+          activatedMsg = 'Kích hoạt thành công Gói Vĩnh Viễn Full Bảo Hành Trọn Đời (Full 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
         } else if (verified.plan === '1Y' || verified.plan === '365D') {
-          activatedMsg = 'Kích hoạt thành công Gói 1 Năm (Mở khóa toàn bộ 5 App: FlowS, FlowUltra, FlowOp, FlowExtra, FlowZ VIP)!';
+          activatedMsg = 'Kích hoạt thành công Gói 1 Năm (Mở khóa toàn bộ 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
         } else if (verified.plan === '30D') {
-          activatedMsg = 'Kích hoạt thành công Gói Tháng 30 Ngày (Mở khóa toàn bộ 5 App: FlowS, FlowUltra, FlowOp, FlowExtra, FlowZ VIP)!';
+          activatedMsg = 'Kích hoạt thành công Gói 1 Tháng 30 Ngày (Mở khóa toàn bộ 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
         } else if (verified.plan === '7D') {
-          activatedMsg = 'Kích hoạt thành công Gói Tuần 7 Ngày (Mở khóa toàn bộ 5 App: FlowS, FlowUltra, FlowOp, FlowExtra, FlowZ VIP)!';
+          activatedMsg = 'Kích hoạt thành công Gói 1 Tuần 7 Ngày (Mở khóa toàn bộ 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
         } else {
           activatedMsg = 'Kích hoạt thành công Key Combo Full 5 App FlowEngine!';
         }
       } else if (verified.tier === 'VIP_FREE') {
         activatedMsg = 'Kích hoạt Key VIP 30 Giờ (khóa 1 thiết bị) thành công!';
+      } else if (verified.tier === 'PRO_SHOP') {
+        const singleLabel = verified.plan === 'LIFE' ? 'Vĩnh Viễn' : (verified.plan === '30D' ? '1 Tháng' : '7 Ngày');
+        activatedMsg = `Kích hoạt thành công Key ${singleLabel} Đơn App (${APPS[appId].name})!`;
       }
 
       return res.status(200).json({
@@ -574,7 +583,7 @@ export default async function handler(req, res) {
             const tKey = sanitizeKeyInput(tokenA);
             const tHwid = normalizeHwid(tokenB);
             if (tKey && tHwid && tHwid.length >= 4) {
-              for (const testApp of ['all', 'flowoptimize', 'flows', 'flowultra', 'flowextra', 'flowz']) {
+              for (const testApp of ['all', 'flowz', 'flowoptimize', 'flows', 'flowmax', 'flowultra', 'flowextra', 'flowcore']) {
                 const v = verifySignedKeyFormat(tKey, testApp, tHwid);
                 if (v.valid && (v.tier === 'PRO_SHOP' || v.plan === 'LIFE' || v.isLifetime)) {
                   isCryptValid = true;
@@ -590,14 +599,16 @@ export default async function handler(req, res) {
       }
 
       if (foundRecord && !foundRecord.revoked && (!foundRecord.expiryUtcMs || Number(foundRecord.expiryUtcMs) > serverNowUtc)) {
-        const isLife = foundRecord.planCode === 'LIFE' || foundRecord.allApps === true || foundRecord.appId === 'all';
+        const isComboAll = foundRecord.allApps === true || foundRecord.appId === 'all' || String(foundRecord.key || '').startsWith('FLOWALL-');
+        const isLife = foundRecord.planCode === 'LIFE';
         return res.status(200).json({
           success: true,
           isVip: true,
+          allApps: isComboAll,
           key: foundRecord.key,
           appId: foundRecord.appId || 'all',
           plan: foundRecord.planCode || (isLife ? 'LIFE' : 'PRO'),
-          planName: foundRecord.planName || (isLife ? 'Gói Vĩnh Viễn Full Bảo Hành Trọn Đời Hệ Thống App FlowEngine' : 'Gói PRO'),
+          planName: foundRecord.planName || (isComboAll ? 'Gói Combo Full 5 App FlowEngine' : 'Gói PRO Đơn App'),
           hwid: foundRecord.hwid,
           phone: foundRecord.phone || '',
           hwidChanges: Number(foundRecord.hwidChanges || 0),

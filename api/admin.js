@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import {
   APPS,
   PLANS,
+  SINGLE_PLANS,
   completeOrderWithProKey,
   dbGetJson,
   dbSetJson,
@@ -134,28 +135,30 @@ export default async function handler(req, res) {
       }
 
       const plan = PLANS[planCode];
+      const isComboAll = appId === 'all';
+      const selectedPlan = isComboAll ? PLANS[planCode] : (SINGLE_PLANS[planCode] || PLANS[planCode]);
+      const finalPrice = selectedPlan ? selectedPlan.price : plan.price;
       const nonce4 = crypto.randomBytes(2).toString('hex').toUpperCase();
       const key = signProKey(appId, hwid, planCode, nonce4);
       const nowUtc = Date.now();
       const expiryUtcMs = planCode === 'LIFE' ? 4102444800000 : nowUtc + plan.hours * 3600 * 1000;
       const orderCode = `ADM${Math.floor(100000 + Math.random() * 900000)}`;
-      const isLifeCombo = appId === 'all' || planCode === 'LIFE';
 
       const order = {
         orderCode,
         memo: orderCode,
         appId,
-        appName: isLifeCombo ? 'Combo Full 5 App (FlowOp, FlowS, FlowUltra, FlowExtra, FlowZ VIP)' : APPS[appId].name,
+        appName: isComboAll ? 'Combo Full 5 App (FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)' : `${APPS[appId].name} (Đơn App)`,
         hwid,
         planCode,
-        planName: planCode === 'LIFE'
-          ? 'Gói Vĩnh Viễn Full Bảo Hành Trọn Đời Hệ Thống App FlowEngine'
-          : (planCode === '1Y' || planCode === '365D'
-            ? 'Gói 1 Năm Combo 5 App (365 Ngày)'
-            : plan.name),
-        price: plan.price,
+        planName: isComboAll
+          ? (planCode === 'LIFE'
+              ? 'Gói Vĩnh Viễn Full 5 App Trọn Đời'
+              : plan.name)
+          : `${selectedPlan ? selectedPlan.name : plan.name} • ${APPS[appId].name}`,
+        price: finalPrice,
         phone,
-        allApps: isLifeCombo,
+        allApps: isComboAll,
         method: 'ADMIN_MANUAL',
         status: 'COMPLETED',
         key,
@@ -173,12 +176,12 @@ export default async function handler(req, res) {
       issuedKeys.unshift({
         key,
         appId,
-        allApps: isLifeCombo,
+        allApps: isComboAll,
         hwid,
         planCode,
-        planName: plan.name,
+        planName: order.planName,
         phone,
-        price: plan.price,
+        price: finalPrice,
         orderCode,
         source: 'ADMIN_MANUAL',
         createdAtUtc: nowUtc,
