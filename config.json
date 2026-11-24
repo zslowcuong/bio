@@ -9,7 +9,8 @@
   "telegram_bot": "https://t.me/FlowCSKH_bot",
   "wait_seconds": 8,
   "revoked_keys": [
-    "FLOWALL-PRO-OPPO_95CEA305-LIFE-EAD6-95D7C8A0"
+    "FLOWALL-PRO-OPPO_95CEA305-LIFE-EAD6-95D7C8A0",
+    "FLOWEXTRA-PRO-OPPO_95CEA305-LIFE-A524-90ED55FC"
   ],
   "event_keys": {
     "flowoptimize": {
