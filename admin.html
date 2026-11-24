@@ -121,7 +121,8 @@
                     <option value="flowoptimize">FlowOptimize</option>
                     <option value="flows">FlowS</option>
                     <option value="flowmax">FlowMax</option>
-                    <option value="flowz">FlowZ VIP</option>
+                    <option value="flowz">FlowZ</option>
+                    <option value="flowcore">FlowCore Brain AI</option>
                 </select>
             </div>
 
@@ -157,7 +158,8 @@
                         <option value="flowoptimize">FlowOptimize (FLOWOP-PRO-...)</option>
                         <option value="flows">FlowS (FLOWS-PRO-...)</option>
                         <option value="flowmax">FlowMax (FLOWMAX-PRO-...)</option>
-                        <option value="flowz">FlowZ VIP (FLOWZ-PRO-...)</option>
+                        <option value="flowz">FlowZ (FLOWZ-PRO-...)</option>
+                        <option value="flowcore">FlowCore Brain AI (FLOWCORE-PRO-...)</option>
                     </select>
                 </div>
                 <div class="field">
@@ -234,11 +236,12 @@
                     <div class="field">
                         <label>App áp dụng</label>
                         <select id="bulkEvTarget">
-                            <option value="all">🌟 Cả 5 App (FlowOptimize • FlowS • FlowMax • FlowZ VIP • FlowCore)</option>
+                            <option value="all">🌟 Cả 5 App (FlowOptimize • FlowS • FlowMax • FlowZ • FlowCore)</option>
                             <option value="flowoptimize">🌸 Chỉ FlowOptimize</option>
                             <option value="flows">⚡ Chỉ FlowS</option>
                             <option value="flowmax">🚀 Chỉ FlowMax</option>
-                            <option value="flowz">🎯 Chỉ FlowZ VIP</option>
+                            <option value="flowz">🎯 Chỉ FlowZ</option>
+                            <option value="flowcore">🧠 Chỉ FlowCore Brain AI</option>
                         </select>
                     </div>
                     <div class="field">
@@ -277,11 +280,12 @@
                     <div class="field">
                         <label>App được Reset Day</label>
                         <select id="rstTarget">
-                            <option value="all">🌟 Cả 5 App (FlowOptimize • FlowS • FlowMax • FlowZ VIP • FlowCore)</option>
+                            <option value="all">🌟 Cả 5 App (FlowOptimize • FlowS • FlowMax • FlowZ • FlowCore)</option>
                             <option value="flowoptimize">🌸 Chỉ FlowOptimize</option>
                             <option value="flows">⚡ Chỉ FlowS</option>
                             <option value="flowmax">🚀 Chỉ FlowMax</option>
-                            <option value="flowz">🎯 Chỉ FlowZ VIP</option>
+                            <option value="flowz">🎯 Chỉ FlowZ</option>
+                            <option value="flowcore">🧠 Chỉ FlowCore Brain AI</option>
                         </select>
                     </div>
                     <div class="field">
@@ -300,7 +304,7 @@
                 </div>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
                     <button type="button" class="btn gold" onclick="triggerAutoResetDay()">🚀 Kích Hoạt Auto Reset Day Ngay</button>
-                    <button type="button" class="btn red" onclick="clearAutoResetDay('all')">🛑 Tắt Thông Báo Reset (Cả 4 App)</button>
+                    <button type="button" class="btn red" onclick="clearAutoResetDay('all')">🛑 Tắt Thông Báo Reset (Cả 5 App)</button>
                 </div>
                 <div id="resetStatusList" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;"></div>
             </div>
@@ -395,7 +399,8 @@
             { id: 'flowmax',      name: 'FlowMax',          prefix: 'FLOWMAX' },
             { id: 'flowextra',    name: 'FlowExtra (Legacy)',prefix: 'FLOWEXTRA' },
             { id: 'flowultra',    name: 'FlowUltra (Legacy)',prefix: 'FLOWULTRA' },
-            { id: 'flowz',        name: 'FlowZ VIP',        prefix: 'FLOWZ' }
+            { id: 'flowz',        name: 'FlowZ',            prefix: 'FLOWZ' },
+            { id: 'flowcore',     name: 'FlowCore Brain AI',prefix: 'FLOWCORE' }
         ];
 
         let adminPin = sessionStorage.getItem('flow_admin_pin') || '';
@@ -740,7 +745,7 @@
             });
             const data = await res.json();
             if (data.success) {
-                alert(`✅ Đã ${active ? 'BẬT' : 'TẮT'} Key Event (${key}) cho ${appId === 'all' ? 'cả 4 App' : appId} • Thời hạn: ${durHoursToText(durationHours)}!`);
+                alert(`✅ Đã ${active ? 'BẬT' : 'TẮT'} Key Event (${key}) cho ${appId === 'all' ? 'cả 5 App' : appId} • Thời hạn: ${durHoursToText(durationHours)}!`);
                 await refreshDashboard();
             } else {
                 alert('❌ Lỗi: ' + data.error);
@@ -748,7 +753,7 @@
         }
 
         async function disableAllEvents() {
-            if (!confirm('Tắt Key Event trên cả 4 App?')) return;
+            if (!confirm('Tắt Key Event trên cả 5 App?')) return;
             const res = await fetch(`${API_BASE}/api/admin?action=save_event_key`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'X-Admin-Pin': adminPin },
@@ -894,7 +899,7 @@ const MAINT_APP_DEFS = {
     defaultPro: 'https://zslowcuong.github.io/bio/FlowS.apk'
   },
   flowz: {
-    name: 'FlowZ VIP HyperBoost & Macro Pro',
+    name: 'FlowZ HyperBoost & Macro Pro',
     icon: '🎯',
     package: 'com.nebula.hnx',
     defaultTitle: '🛑 THÔNG BÁO BẢO TRÌ & NÂNG CẤP FLOWZ VIP V3.1.0',

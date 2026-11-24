@@ -98,9 +98,13 @@ export default async function handler(req, res) {
     const staticCfg = loadStaticConfig();
     const appCfg = staticCfg[appId] || {};
     const eventKeysMap = await getEventKeysMap();
-    const appEvent = eventKeysMap[appId] || { active: false };
+    const rawAppEvent = eventKeysMap[appId] || { active: false };
+    const rawAllEvent = eventKeysMap['all'] || { active: false };
+    const appEvent = (rawAppEvent && rawAppEvent.active) ? rawAppEvent : ((rawAllEvent && rawAllEvent.active) ? rawAllEvent : rawAppEvent);
     const globalResetsMap = await getGlobalResetsMap();
-    const appReset = globalResetsMap[appId] || { active: false };
+    const rawAppReset = globalResetsMap[appId] || { active: false };
+    const rawAllReset = globalResetsMap['all'] || { active: false };
+    const appReset = (rawAppReset && rawAppReset.active) ? rawAppReset : ((rawAllReset && rawAllReset.active) ? rawAllReset : rawAppReset);
     const revokedKeys = await getRevokedKeysList();
 
     const eventKeyPlain = sanitizeKeyInput(appEvent.key || '');

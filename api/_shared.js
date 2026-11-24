@@ -38,7 +38,7 @@ export const PLANS = {
 export const APPS = {
   all: {
     id: 'all',
-    name: 'Combo Toàn Bộ 5 Ứng Dụng (FlowOptimize, FlowS, FlowUltra, FlowExtra, FlowZ VIP)',
+    name: 'Combo Toàn Bộ 5 Ứng Dụng (FlowOptimize, FlowS, FlowMax, FlowZ, FlowCore)',
     prefix: 'FLOWALL',
     salt: 'FLOWLY_2026_ALL_APPS_SALT_66F0',
     package: 'all',
@@ -86,11 +86,19 @@ export const APPS = {
   },
   flowz: {
     id: 'flowz',
-    name: 'FlowZ VIP Headshot & Sensitivity Pro',
+    name: 'FlowZ',
     prefix: 'FLOWZ',
     salt: 'FLOWLY_2026_FLOWZ_VIP_SALT_98B2',
     package: 'com.nebula.hnx',
     scheme: 'flowz',
+  },
+  flowcore: {
+    id: 'flowcore',
+    name: 'FlowCore Brain AI',
+    prefix: 'FLOWCORE',
+    salt: 'FLOWLY_2026_FLOWCORE_BRAIN_SALT_41D7',
+    package: 'com.flowcore.brain',
+    scheme: 'flowcore',
   },
 };
 
@@ -101,6 +109,7 @@ export function normalizeAppId(raw) {
   if (s === 'flows' || s === 'com.flows.gaming') return 'flows';
   if (s === 'flowmax' || s === 'flowextra' || s === 'flowultra' || s === 'com.flowextra.optimizer' || s === 'com.flows.flowultra') return 'flowmax';
   if (s === 'flowz' || s === 'com.flows.flowz' || s === 'com.nebula.hnx') return 'flowz';
+  if (s === 'flowcore' || s === 'com.flowcore.brain' || s === 'com.flowengine.core') return 'flowcore';
   return 'all';
 }
 

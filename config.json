@@ -8,7 +8,9 @@
   "telegram": "https://t.me/+dtVBEzwuN2Q4NmI9",
   "telegram_bot": "https://t.me/FlowCSKH_bot",
   "wait_seconds": 8,
-  "revoked_keys": [],
+  "revoked_keys": [
+    "FLOWALL-PRO-OPPO_95CEA305-LIFE-EAD6-95D7C8A0"
+  ],
   "event_keys": {
     "flowoptimize": {
       "active": false,
@@ -25,6 +27,14 @@
       "expires_at_utc": 0,
       "title": "Sự Kiện PRO FlowS",
       "notice": "Nhận mã Key Event FlowS tại Admin Dashboard hoặc Nhóm Telegram"
+    },
+    "flowmax": {
+      "active": false,
+      "key_sha256": "",
+      "duration_hours": 24,
+      "expires_at_utc": 0,
+      "title": "Sự Kiện PRO FlowMax",
+      "notice": "Nhận mã Key Event FlowMax tại Admin Dashboard hoặc Nhóm Telegram"
     },
     "flowultra": {
       "active": false,
@@ -47,8 +57,16 @@
       "key_sha256": "",
       "duration_hours": 24,
       "expires_at_utc": 0,
-      "title": "Sự Kiện PRO FlowZ VIP",
+      "title": "Sự Kiện PRO FlowZ",
       "notice": "Nhận mã Key Event FlowZ tại Admin Dashboard hoặc Nhóm Telegram"
+    },
+    "flowcore": {
+      "active": false,
+      "key_sha256": "",
+      "duration_hours": 24,
+      "expires_at_utc": 0,
+      "title": "Sự Kiện PRO FlowCore Brain AI",
+      "notice": "Nhận mã Key Event FlowCore tại Admin Dashboard hoặc Nhóm Telegram"
     }
   },
   "global_resets": {
@@ -61,6 +79,14 @@
       "triggered_at_utc": 0
     },
     "flows": {
+      "active": false,
+      "resetId": "",
+      "duration_hours": 72,
+      "title": "",
+      "notice": "",
+      "triggered_at_utc": 0
+    },
+    "flowmax": {
       "active": false,
       "resetId": "",
       "duration_hours": 72,
@@ -85,6 +111,14 @@
       "triggered_at_utc": 0
     },
     "flowz": {
+      "active": false,
+      "resetId": "",
+      "duration_hours": 72,
+      "title": "",
+      "notice": "",
+      "triggered_at_utc": 0
+    },
+    "flowcore": {
       "active": false,
       "resetId": "",
       "duration_hours": 72,
@@ -122,7 +156,7 @@
     "direct_apk": "FlowS.apk"
   },
   "flowz": {
-    "name": "FlowZ VIP Headshot & Sensitivity Pro",
+    "name": "FlowZ",
     "version": "v3.1.0",
     "version_code": 3,
     "min_version_code": 1,

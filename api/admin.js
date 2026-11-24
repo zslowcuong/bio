@@ -36,6 +36,7 @@ function resolveTargetAppIds(body) {
   const raw = String(body.appId || '').trim().toLowerCase();
   if (raw === 'all' || raw === '*') return Object.keys(APPS);
   const single = normalizeAppId(raw);
+  if (single === 'flowmax') return ['flowmax', 'flowextra', 'flowultra'];
   return single ? [single] : [];
 }
 
