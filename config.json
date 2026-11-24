@@ -158,14 +158,14 @@
   },
   "flowz": {
     "name": "FlowZ",
-    "version": "v3.2.2",
-    "version_code": 5,
+    "version": "v3.2.3",
+    "version_code": 6,
     "min_version_code": 1,
     "force_update": false,
     "update_url": "https://zslowcuong.github.io/bio/?dl=flowz#download",
     "download_url": "https://zslowcuong.github.io/bio/?dl=flowz#download",
     "package": "com.nebula.hnx",
-    "changelog": "Bản cập nhật v3.2.2: Giữ nguyên giao diện Anime độc quyền & HyperBoost V2, fix triệt để lỗi treo/nhân đôi nút nổi nhanh phụ, fix kẹt cảm ứng Sơ đồ phím, bổ sung Tâm Ảo Crosshair, Focus Chặn TB, Hạ Nhiệt Tự Động & nút Đặt Lại Toàn Hệ Thống.",
+    "changelog": "Bản cập nhật v3.2.3: Bổ sung Auto Múa Flo ở chế độ Thủ công (Chạm Đánh = 2x C2, Giữ Đánh = Auto múa tại chỗ, Bật AUTO = Múa rảnh tay), giữ nguyên giao diện Anime, HyperBoost V2, Tâm Ảo Crosshair, Hạ Nhiệt Tự Động & Đặt Lại Toàn Hệ Thống.",
     "destination_apk": "https://zslowcuong.github.io/bio/FlowZ.apk",
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowZ.apk",
     "direct_apk": "FlowZ.apk"
