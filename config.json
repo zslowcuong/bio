@@ -158,14 +158,14 @@
   },
   "flowz": {
     "name": "FlowZ",
-    "version": "v3.2.3",
-    "version_code": 6,
+    "version": "v3.2.4",
+    "version_code": 7,
     "min_version_code": 1,
     "force_update": false,
     "update_url": "https://zslowcuong.github.io/bio/?dl=flowz#download",
     "download_url": "https://zslowcuong.github.io/bio/?dl=flowz#download",
     "package": "com.nebula.hnx",
-    "changelog": "Bản cập nhật v3.2.3: Bổ sung Auto Múa Flo ở chế độ Thủ công (Chạm Đánh = 2x C2, Giữ Đánh = Auto múa tại chỗ, Bật AUTO = Múa rảnh tay), giữ nguyên giao diện Anime, HyperBoost V2, Tâm Ảo Crosshair, Hạ Nhiệt Tự Động & Đặt Lại Toàn Hệ Thống.",
+    "changelog": "Bản cập nhật v3.2.4: Tự động mở Menu Nổi ngay cả khi chưa cài đặt game, bổ sung Macro Tỉa AWM Cực Nhanh Free Fire (giữ nút Bắn ngắm thủ công, buông tay tự Đổi Súng + Bật Ngắm siêu nhanh), giữ nguyên Auto Flo Thủ công & giao diện Anime.",
     "destination_apk": "https://zslowcuong.github.io/bio/FlowZ.apk",
     "link4m": "https://link4m.co/st?api=6ae77b1c1473a714b32b2a3a&url=https%3A%2F%2Fzslowcuong.github.io%2Fbio%2FFlowZ.apk",
     "direct_apk": "FlowZ.apk"
