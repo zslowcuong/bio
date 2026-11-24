@@ -428,7 +428,9 @@ export default async function handler(req, res) {
               ? '12 Tháng (365 Ngày)'
               : (verified.plan === '90D'
                   ? '3 Tháng (90 Ngày)'
-                  : (verified.plan === '30D' ? '1 Tháng (30 Ngày)' : '7 Ngày')));
+                  : (verified.plan === '30D'
+                      ? '30 Ngày (1 Tháng)'
+                      : (verified.plan === '1D' ? '1 Ngày (24 Giờ)' : '7 Ngày'))));
         issuedKeys.unshift({
           key,
           appId: isLifeComboSave ? 'all' : appId,
@@ -461,9 +463,11 @@ export default async function handler(req, res) {
         } else if (verified.plan === '90D') {
           activatedMsg = 'Kích hoạt thành công Gói 3 Tháng 90 Ngày (Mở khóa toàn bộ 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
         } else if (verified.plan === '30D') {
-          activatedMsg = 'Kích hoạt thành công Gói 1 Tháng 30 Ngày (Mở khóa toàn bộ 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
+          activatedMsg = 'Kích hoạt thành công Gói 30 Ngày (Mở khóa toàn bộ 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
         } else if (verified.plan === '7D') {
-          activatedMsg = 'Kích hoạt thành công Gói 1 Tuần 7 Ngày (Mở khóa toàn bộ 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
+          activatedMsg = 'Kích hoạt thành công Gói 7 Ngày (Mở khóa toàn bộ 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
+        } else if (verified.plan === '1D') {
+          activatedMsg = 'Kích hoạt thành công Gói 1 Ngày 24 Giờ (Mở khóa toàn bộ 5 App: FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)!';
         } else {
           activatedMsg = 'Kích hoạt thành công Key Combo Full 5 App FlowEngine!';
         }

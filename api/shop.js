@@ -67,15 +67,15 @@ export default async function handler(req, res) {
     }
 
     if (action === 'create_order') {
-      const appId = normalizeAppId(body.appId || body.app || 'all') || 'all';
+      const appId = 'all';
       const hwid = normalizeHwid(body.hwid);
       const planCode = String(body.planCode || body.plan || '7D').trim().toUpperCase();
       const phone = String(body.phone || '').trim().slice(0, 32);
-      const isComboAll = appId === 'all';
-      const selectedPlan = isComboAll ? PLANS[planCode] : (SINGLE_PLANS[planCode] || PLANS[planCode]);
+      const isComboAll = true;
+      const selectedPlan = PLANS[planCode];
 
-      if (!appId || !APPS[appId] || !selectedPlan) {
-        return res.status(400).json({ success: false, error: 'Ứng dụng hoặc gói không hợp lệ' });
+      if (!selectedPlan) {
+        return res.status(400).json({ success: false, error: 'Gói thời hạn không hợp lệ' });
       }
       if (!hwid || hwid.length < 4) {
         return res.status(400).json({ success: false, error: 'Vui lòng nhập Mã Thiết Bị (HWID) hợp lệ' });
@@ -84,11 +84,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ success: false, error: 'Vui lòng nhập SĐT hoặc Zalo để bảo hành & tra cứu đơn' });
       }
 
-      let finalPrice = selectedPlan.price;
-      if (isComboAll && planCode === 'LIFE') {
-        const lifeTier = await getLifetimePricingTier();
-        finalPrice = lifeTier.currentPrice || 99000;
-      }
+      const finalPrice = selectedPlan.price;
 
       const num6 = String(Math.floor(100000 + Math.random() * 900000));
       const orderCode = `ORD${num6}`;
@@ -96,36 +92,22 @@ export default async function handler(req, res) {
       const qrUrl = buildVietQrUrl(finalPrice, memo);
       const nowUtc = Date.now();
 
-      const finalAppId = appId;
-      const appDisplayName = isComboAll
-        ? 'Combo Full 5 App (FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)'
-        : `${APPS[appId].name} (Đơn App)`;
+      const finalAppId = 'all';
+      const appDisplayName = 'Combo Full 5 App (FlowZ, FlowOptimize, FlowS, FlowMax, FlowCore)';
       const priceTagK = `${Math.round(finalPrice / 1000)}K`;
-      const planTitle = isComboAll
-        ? ((planCode === '2D' || planCode === '3D')
-            ? `Gói Trải Nghiệm 48H Combo Full 5 App (${priceTagK})`
-            : (planCode === '7D'
-                ? `Gói 1 Tuần (7 Ngày) Combo Full 5 App (${priceTagK})`
-                : (planCode === '30D'
-                    ? `Gói 1 Tháng (30 Ngày) Combo Full 5 App (${priceTagK})`
-                    : (planCode === '90D'
-                        ? `Gói 3 Tháng (90 Ngày) Combo Full 5 App (${priceTagK})`
-                        : ((planCode === '365D' || planCode === '1Y')
-                            ? `Gói 12 Tháng (365 Ngày) Combo Full 5 App (${priceTagK})`
-                            : (planCode === 'LIFE'
-                                ? `Gói Vĩnh Viễn Full 5 App Trọn Đời (${priceTagK})`
-                                : `${selectedPlan.name} (${priceTagK})`))))))
+      const planTitle = planCode === '1D'
+        ? `Gói 1 Ngày (24 Giờ) Full 5 App (${priceTagK})`
         : (planCode === '7D'
-            ? `Gói 7 Ngày Đơn App • ${APPS[appId].name} (${priceTagK})`
+            ? `Gói 7 Ngày Full 5 App (${priceTagK})`
             : (planCode === '30D'
-                ? `Gói 1 Tháng Đơn App • ${APPS[appId].name} (${priceTagK})`
+                ? `Gói 30 Ngày Full 5 App (${priceTagK})`
                 : (planCode === '90D'
-                    ? `Gói 3 Tháng (90 Ngày) Đơn App • ${APPS[appId].name} (${priceTagK})`
+                    ? `Gói 90 Ngày (3 Tháng) Full 5 App (${priceTagK})`
                     : ((planCode === '365D' || planCode === '1Y')
-                        ? `Gói 12 Tháng (365 Ngày) Đơn App • ${APPS[appId].name} (${priceTagK})`
+                        ? `Gói 12 Tháng (365 Ngày) Full 5 App (${priceTagK})`
                         : (planCode === 'LIFE'
-                            ? `Gói Vĩnh Viễn Đơn App • ${APPS[appId].name} (${priceTagK})`
-                            : `${selectedPlan.name} • ${APPS[appId].name} (${priceTagK})`)))));
+                            ? `Gói Vĩnh Viễn Full 5 App (${priceTagK})`
+                            : `${selectedPlan.name} (${priceTagK})`)))));
 
       const order = {
         orderCode,
@@ -153,9 +135,7 @@ export default async function handler(req, res) {
       await dbSetJson('flowly:orders', orders.slice(0, 500));
 
       const tgTitle = `🔔 [FLOW SHOP] ĐƠN HÀNG MỚI (${planTitle})`;
-      const tgAppName = isComboAll
-        ? 'Full 5 App: FlowZ + FlowOptimize + FlowS + FlowMax + FlowCore'
-        : `Đơn App: ${APPS[appId].name} (${APPS[appId].prefix})`;
+      const tgAppName = 'Full 5 App: FlowZ + FlowOptimize + FlowS + FlowMax + FlowCore';
       const tgPlanName = planTitle;
 
       await sendTelegram(

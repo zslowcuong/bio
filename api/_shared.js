@@ -25,11 +25,12 @@ export const BANK_CONFIG = {
 };
 
 export const PLANS = {
+  '1D': { code: '1D', name: 'Gói 1 Ngày Full 5 App (24 Giờ)', days: 1, hours: 24, price: 3000, origPrice: 6000 },
   '2D': { code: '2D', name: 'Gói Trải Nghiệm (2 Ngày / 48H)', days: 2, hours: 48, price: 10000, origPrice: 15000 },
   '3D': { code: '3D', name: 'Gói Trải Nghiệm (2 Ngày / 48H)', days: 2, hours: 48, price: 10000, origPrice: 15000 },
-  '7D': { code: '7D', name: 'Gói 1 Tuần Full 5 App (7 Ngày)', days: 7, hours: 168, price: 19000, origPrice: 39000 },
-  '30D': { code: '30D', name: 'Gói 1 Tháng Full 5 App (30 Ngày)', days: 30, hours: 720, price: 45000, origPrice: 79000 },
-  '90D': { code: '90D', name: 'Gói 3 Tháng Full 5 App (90 Ngày)', days: 90, hours: 2160, price: 99000, origPrice: 179000 },
+  '7D': { code: '7D', name: 'Gói 7 Ngày Full 5 App (1 Tuần)', days: 7, hours: 168, price: 15000, origPrice: 25000 },
+  '30D': { code: '30D', name: 'Gói 30 Ngày Full 5 App (1 Tháng)', days: 30, hours: 720, price: 75000, origPrice: 110000 },
+  '90D': { code: '90D', name: 'Gói 90 Ngày Full 5 App (3 Tháng)', days: 90, hours: 2160, price: 200000, origPrice: 299000 },
   '365D': { code: '365D', name: 'Gói 12 Tháng Full 5 App (365 Ngày)', days: 365, hours: 8760, price: 249000, origPrice: 499000 },
   '1Y': { code: '1Y', name: 'Gói 12 Tháng Full 5 App (365 Ngày)', days: 365, hours: 8760, price: 249000, origPrice: 499000 },
   'LIFE': { code: 'LIFE', name: 'Gói Vĩnh Viễn Full 5 App Trọn Đời', days: 36500, hours: 876000, price: 99000, origPrice: 249000 },
