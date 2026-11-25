@@ -1,5 +1,6 @@
 import {
   completeOrderWithProKey,
+  completeHwidChangeRequest,
   dbGetJson,
   dbSetJson,
   dbHgetAllJson,
@@ -43,19 +44,18 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, ignored: true, reason: 'Account number mismatch' });
     }
 
-    // 1. Atomic Deduplication via SETNX
     const claimKey = `flowly:claim_tx:${txId}`;
-    const acquired = await dbSetNx(claimKey, JSON.stringify({ txId, amountIn, time: Date.now() }), 86400 * 30);
-    if (!acquired) {
+    const alreadyClaimed = await dbGetJson(claimKey, null);
+    if (alreadyClaimed) {
       return res.status(200).json({ success: true, duplicate: true, reason: 'Transaction already claimed' });
     }
 
     const compactContent = normalizeTextForMatch(content).replace(/\s+/g, '');
 
-    // 2. Query Atomic Orders Map First
+    // 1. Query Atomic Orders Map First (New PRO orders)
     const ordersMap = (await dbHgetAllJson('flowly:orders_map')) || {};
     let target = Object.values(ordersMap).find((o) => {
-      if (o.status === 'COMPLETED') return false;
+      if (!o || o.status === 'COMPLETED') return false;
       const memoUpper = String(o.memo || '').toUpperCase();
       return memoUpper && compactContent.includes(memoUpper) && amountIn >= Number(o.price);
     });
@@ -63,26 +63,57 @@ export default async function handler(req, res) {
     if (!target) {
       const orders = (await dbGetJson('flowly:orders', [])) || [];
       target = orders.find((o) => {
-        if (o.status === 'COMPLETED') return false;
+        if (!o || o.status === 'COMPLETED') return false;
         const memoUpper = String(o.memo || '').toUpperCase();
         return memoUpper && compactContent.includes(memoUpper) && amountIn >= Number(o.price);
       });
     }
 
-    if (!target) {
-      return res.status(200).json({ success: true, matched: false, reason: 'No matching pending order found' });
+    if (target) {
+      const acquired = await dbSetNx(claimKey, JSON.stringify({ txId, type: 'ORDER', orderCode: target.orderCode, amountIn, time: Date.now() }), 86400 * 30);
+      if (!acquired) {
+        return res.status(200).json({ success: true, duplicate: true, reason: 'Transaction already claimed' });
+      }
+      const completed = await completeOrderWithProKey(target, txId, 'SEPAY_WEBHOOK_VERIFIED');
+      return res.status(200).json({
+        success: true,
+        matched: true,
+        type: 'ORDER',
+        autoApproved: true,
+        orderCode: completed.orderCode,
+        key: completed.key,
+        hwid: completed.hwid,
+      });
     }
 
-    // AUTO APPROVE & ISSUE KEY IMMEDIATELY
-    const completed = await completeOrderWithProKey(target, txId, 'SEPAY_WEBHOOK_VERIFIED');
-    return res.status(200).json({
-      success: true,
-      matched: true,
-      autoApproved: true,
-      orderCode: completed.orderCode,
-      key: completed.key,
-      hwid: completed.hwid,
+    // 2. Check Paid HWID Migration Requests (flowly:hwid_change_requests - 5.000đ)
+    const changeReqs = (await dbGetJson('flowly:hwid_change_requests', [])) || [];
+    const targetChange = changeReqs.find((r) => {
+      if (!r || r.status === 'COMPLETED') return false;
+      const memoUpper = String(r.memo || '').toUpperCase();
+      return memoUpper && compactContent.includes(memoUpper) && amountIn >= Number(r.price || 5000);
     });
+
+    if (targetChange) {
+      const acquired = await dbSetNx(claimKey, JSON.stringify({ txId, type: 'HWID_CHANGE', orderCode: targetChange.orderCode, amountIn, time: Date.now() }), 86400 * 30);
+      if (!acquired) {
+        return res.status(200).json({ success: true, duplicate: true, reason: 'Transaction already claimed' });
+      }
+      const completedChange = await completeHwidChangeRequest(targetChange, txId, 'SEPAY_WEBHOOK_VERIFIED');
+      return res.status(200).json({
+        success: true,
+        matched: true,
+        type: 'HWID_CHANGE',
+        autoApproved: !completedChange.error,
+        orderCode: completedChange.orderCode,
+        newKey: completedChange.newKey || null,
+        newHwid: completedChange.newHwid || null,
+        error: completedChange.error || undefined,
+      });
+    }
+
+    // Do NOT claim txId when unmatched so retries or delayed order creation still work
+    return res.status(200).json({ success: true, matched: false, reason: 'No matching pending order or HWID migration request found' });
   } catch (e) {
     return res.status(500).json({ success: false, error: e.message });
   }

@@ -1,10 +1,14 @@
+import crypto from 'node:crypto';
 import {
   APPS,
+  BANK_CONFIG,
   TRIAL_DURATION_MS,
   getTrialEnabled,
   buildVietQrUrl,
+  completeHwidChangeRequest,
   dbGetJson,
   dbSetJson,
+  dbHsetJson,
   dbSetNx,
   getBackendStatus,
   getEventKeysMap,
@@ -14,10 +18,12 @@ import {
   loadStaticConfig,
   normalizeAppId,
   normalizeHwid,
+  normalizeTextForMatch,
   parseBody,
   sanitizeKeyInput,
   sendTelegram,
   sha256Hex,
+  signProKey,
   verifySignedKeyFormat,
 } from './_shared.js';
 
@@ -308,7 +314,7 @@ export default async function handler(req, res) {
 
       const activeKeyRevoked = Boolean(activeKey && revokedKeys.includes(activeKey));
 
-      // Check if this HWID has an issued non-revoked PRO key in server DB
+      // Check if this HWID (or same physical device widevineHash) has an issued non-revoked PRO key in server DB
       const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
       const matchingPro = issuedKeys.find(
         (k) =>
@@ -317,11 +323,44 @@ export default async function handler(req, res) {
             (appId === 'flowmax' && (k.appId === 'flowextra' || k.appId === 'flowultra')) ||
             k.appId === 'all' ||
             k.allApps === true) &&
-          (k.hwid === hwid || (Array.isArray(k.hwids) && k.hwids.includes(hwid))) &&
+          (
+            normalizeHwid(k.hwid) === hwid ||
+            (Array.isArray(k.hwids) && k.hwids.some((h) => normalizeHwid(h) === hwid)) ||
+            (widevineHash && widevineHash.length >= 8 && (
+              k.widevineHash === widevineHash ||
+              (Array.isArray(k.widevineHashes) && k.widevineHashes.includes(widevineHash))
+            ))
+          ) &&
           !k.revoked &&
           !revokedKeys.includes(String(k.key || '').toUpperCase()) &&
           (!k.expiryUtcMs || Number(k.expiryUtcMs) > serverNowUtc)
       );
+
+      // Auto-link same physical device (widevineHash <-> hwid across different app versions)
+      if (matchingPro) {
+        let proDirty = false;
+        if (widevineHash && widevineHash.length >= 8) {
+          if (!matchingPro.widevineHash) {
+            matchingPro.widevineHash = widevineHash;
+            proDirty = true;
+          }
+          if (!Array.isArray(matchingPro.widevineHashes)) matchingPro.widevineHashes = [];
+          if (!matchingPro.widevineHashes.includes(widevineHash)) {
+            matchingPro.widevineHashes.push(widevineHash);
+            proDirty = true;
+          }
+        }
+        if (hwid) {
+          if (!Array.isArray(matchingPro.hwids)) matchingPro.hwids = [matchingPro.hwid].filter(Boolean);
+          if (!matchingPro.hwids.some((h) => normalizeHwid(h) === hwid)) {
+            matchingPro.hwids.push(hwid);
+            proDirty = true;
+          }
+        }
+        if (proDirty) {
+          await dbSetJson('flowly:issued_keys', issuedKeys.slice(0, 800));
+        }
+      }
 
       const effectiveTrialRemainingMs = trialEnabled ? Math.max(0, (record.trialEndUtc || 0) - serverNowUtc) : 0;
 
@@ -395,28 +434,77 @@ export default async function handler(req, res) {
         return res.status(400).json({ success: false, error: 'Thiếu HWID thiết bị', reason: 'Thiếu HWID thiết bị', serverNowUtc });
       }
 
-      // 2) Check cryptographically signed VIP / PRO key
-      const verified = verifySignedKeyFormat(key, appId, hwid);
+      // 2) Check cryptographically signed VIP / PRO key (allow migrated HWID verification via issued_keys)
+      const verified = verifySignedKeyFormat(key, appId, hwid, { ignoreHwidMismatch: true });
       if (!verified.valid) {
         return res.status(400).json({ success: false, reason: verified.reason, serverNowUtc });
       }
 
-      // Also check if server issued_keys has authoritative expiry / revocation for PRO keys
+      // Check server issued_keys (including migrated oldKey / oldKeys and same-device widevineHash)
       const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
-      const foundIssued = issuedKeys.find((k) => String(k.key || '').toUpperCase() === key);
-      if (foundIssued && foundIssued.revoked) {
+      const foundIssued = issuedKeys.find((k) => {
+        if (!k) return false;
+        const kKey = String(k.key || '').toUpperCase();
+        const kOld = String(k.oldKey || '').toUpperCase();
+        const kOlds = Array.isArray(k.oldKeys) ? k.oldKeys.map((x) => String(x || '').toUpperCase()) : [];
+        return kKey === key || kOld === key || kOlds.includes(key);
+      });
+      if (foundIssued && (foundIssued.revoked || revokedKeys.includes(String(foundIssued.key || '').toUpperCase()))) {
         return res.status(403).json({ success: false, reason: 'Mã Key này đã bị Admin thu hồi!', revoked: true, serverNowUtc });
       }
 
+      // If key string HWID != current app HWID, allow if server DB already migrated to this HWID or matches same physical widevineHash
+      if (verified.hwidMatched === false) {
+        const dbAuthorizesHwid = Boolean(
+          foundIssued && (
+            normalizeHwid(foundIssued.hwid) === hwid ||
+            (Array.isArray(foundIssued.hwids) && foundIssued.hwids.some((h) => normalizeHwid(h) === hwid)) ||
+            (widevineHash && widevineHash.length >= 8 && (
+              foundIssued.widevineHash === widevineHash ||
+              (Array.isArray(foundIssued.widevineHashes) && foundIssued.widevineHashes.includes(widevineHash))
+            ))
+          )
+        );
+        if (!dbAuthorizesHwid) {
+          return res.status(400).json({
+            success: false,
+            reason: `Key này chỉ được kích hoạt trên 1 thiết bị (${verified.keyOriginHwid}), không khớp với máy hiện tại (${hwid})!`,
+            serverNowUtc,
+          });
+        }
+      }
+
       let finalExpiryMs = verified.expiryUtcMs;
+      let resolvedKey = key;
       const isLifeComboSave = Boolean(verified.isAllApps);
       if (foundIssued) {
         if (foundIssued.expiryUtcMs) {
           finalExpiryMs = Number(foundIssued.expiryUtcMs);
         }
-        if (isLifeComboSave) {
-          if (!Array.isArray(foundIssued.hwids)) foundIssued.hwids = [foundIssued.hwid].filter(Boolean);
-          if (!foundIssued.hwids.includes(hwid)) foundIssued.hwids.push(hwid);
+        if (foundIssued.key && normalizeHwid(foundIssued.hwid) === hwid) {
+          resolvedKey = String(foundIssued.key).toUpperCase();
+        }
+        let dirty = false;
+        if (!Array.isArray(foundIssued.hwids)) {
+          foundIssued.hwids = [foundIssued.hwid].filter(Boolean);
+          dirty = true;
+        }
+        if (hwid && !foundIssued.hwids.some((h) => normalizeHwid(h) === hwid)) {
+          foundIssued.hwids.push(hwid);
+          dirty = true;
+        }
+        if (widevineHash && widevineHash.length >= 8) {
+          if (!foundIssued.widevineHash) {
+            foundIssued.widevineHash = widevineHash;
+            dirty = true;
+          }
+          if (!Array.isArray(foundIssued.widevineHashes)) foundIssued.widevineHashes = [];
+          if (!foundIssued.widevineHashes.includes(widevineHash)) {
+            foundIssued.widevineHashes.push(widevineHash);
+            dirty = true;
+          }
+        }
+        if (dirty || isLifeComboSave) {
           foundIssued.lastActivatedAtUtc = serverNowUtc;
           await dbSetJson('flowly:issued_keys', issuedKeys.slice(0, 800));
         }
@@ -437,6 +525,8 @@ export default async function handler(req, res) {
           allApps: isLifeComboSave,
           hwid,
           hwids: [hwid, verified.keyOriginHwid].filter(Boolean),
+          widevineHash: widevineHash || undefined,
+          widevineHashes: widevineHash ? [widevineHash] : undefined,
           planCode: verified.plan,
           planName: isLifeComboSave
             ? `Gói ${durText} Combo Full 5 App`
@@ -488,7 +578,7 @@ export default async function handler(req, res) {
         appId: isLifeCombo ? 'all' : appId,
         isAllApps: isLifeCombo,
         hwid,
-        key,
+        key: resolvedKey,
         plan: verified.plan,
         expiryUtcMs: finalExpiryMs,
         serverNowUtc,
@@ -707,14 +797,24 @@ export default async function handler(req, res) {
       }
 
       const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
-      let targetIdx = issuedKeys.findIndex((k) => String(k.key || '').toUpperCase() === qKey);
+      const qDigits = qKey.replace(/[^0-9]/g, '');
+      let targetIdx = issuedKeys.findIndex((k) => {
+        if (!k) return false;
+        const kKey = String(k.key || '').toUpperCase();
+        const kOld = String(k.oldKey || '').toUpperCase();
+        const kOlds = Array.isArray(k.oldKeys) ? k.oldKeys.map((x) => String(x || '').toUpperCase()) : [];
+        return kKey === qKey || kOld === qKey || kOlds.includes(qKey);
+      });
 
       if (targetIdx < 0) {
-        // Tìm thông minh nếu người dùng nhập HWID cũ hoặc SĐT
+        // Tìm thông minh nếu người dùng nhập HWID cũ, Mã đơn, hoặc SĐT
         targetIdx = issuedKeys.findIndex((k) =>
           k && (
             String(k.hwid || '').toUpperCase() === qKey ||
-            (k.phone && k.phone.replace(/[^0-9]/g, '') === qKey.replace(/[^0-9]/g, ''))
+            String(k.oldHwid || '').toUpperCase() === qKey ||
+            (Array.isArray(k.hwids) && k.hwids.some((h) => String(h || '').toUpperCase() === qKey)) ||
+            String(k.orderCode || '').toUpperCase() === qKey ||
+            (qDigits.length >= 8 && k.phone && k.phone.replace(/[^0-9]/g, '') === qDigits)
           )
         );
       }
@@ -727,12 +827,19 @@ export default async function handler(req, res) {
             String(o.orderCode || '').toUpperCase() === qKey ||
             String(o.memo || '').toUpperCase() === qKey ||
             String(o.key || '').toUpperCase() === qKey ||
+            String(o.oldKey || '').toUpperCase() === qKey ||
+            (Array.isArray(o.oldKeys) && o.oldKeys.some((ok) => String(ok || '').toUpperCase() === qKey)) ||
             String(o.hwid || '').toUpperCase() === qKey ||
-            (o.phone && o.phone.replace(/[^0-9]/g, '') === qKey.replace(/[^0-9]/g, ''))
+            String(o.oldHwid || '').toUpperCase() === qKey ||
+            (Array.isArray(o.hwids) && o.hwids.some((h) => String(h || '').toUpperCase() === qKey)) ||
+            (qDigits.length >= 8 && o.phone && o.phone.replace(/[^0-9]/g, '') === qDigits)
           )
         );
         if (ord && ord.key) {
-          targetIdx = issuedKeys.findIndex((k) => String(k.key || '').toUpperCase() === String(ord.key).toUpperCase());
+          targetIdx = issuedKeys.findIndex((k) =>
+            String(k.key || '').toUpperCase() === String(ord.key).toUpperCase() ||
+            (ord.oldKey && String(k.key || '').toUpperCase() === String(ord.oldKey).toUpperCase())
+          );
         }
       }
 
@@ -745,38 +852,82 @@ export default async function handler(req, res) {
         return res.status(403).json({ success: false, reason: 'Mã Key này đã bị Admin thu hồi!' });
       }
 
-      const oldHwid = record.hwid;
+      const canonicalKey = String(record.key || qKey).toUpperCase();
+      const oldHwid = normalizeHwid(record.hwid || '');
       if (oldHwid === newHwid) {
-        return res.status(400).json({ success: false, reason: 'Mã HWID mới trùng với HWID hiện tại của máy!' });
+        return res.status(200).json({
+          success: true,
+          free: true,
+          alreadyMigrated: true,
+          oldHwid,
+          newHwid,
+          key: canonicalKey,
+          newKey: canonicalKey,
+          hwidChanges: Math.max(Number(record.hwidChanges || 0), Number(record.changeHwidCount || 0)),
+          message: `✅ Thiết bị ${newHwid} đã được gắn sẵn bản quyền PRO trên hệ thống! Hãy dùng mã Key hiện tại của bạn: ${canonicalKey}`,
+        });
       }
 
-      const changesCount = Number(record.hwidChanges || 0);
+      const changesCount = Math.max(Number(record.hwidChanges || 0), Number(record.changeHwidCount || 0));
 
       // ĐỔI LẦN ĐẦU TIÊN (changesCount === 0): HOÀN TOÀN MIỄN PHÍ 100%!
       if (changesCount === 0) {
+        const appIdForSign = normalizeAppId(record.appId || (canonicalKey.startsWith('FLOWALL-') ? 'all' : 'all')) || 'all';
+        const planCode = String(record.planCode || record.plan || 'LIFE').toUpperCase();
+        const nonce4 = crypto.randomBytes(2).toString('hex').toUpperCase();
+        const newKey = signProKey(appIdForSign, newHwid, planCode, nonce4);
+
+        record.oldKey = canonicalKey;
+        record.key = newKey;
+        record.oldHwid = oldHwid;
         record.hwid = newHwid;
+        if (!Array.isArray(record.oldKeys)) record.oldKeys = [];
+        if (canonicalKey && !record.oldKeys.includes(canonicalKey)) record.oldKeys.push(canonicalKey);
+        if (!Array.isArray(record.hwids)) record.hwids = [oldHwid].filter(Boolean);
+        if (oldHwid && !record.hwids.includes(oldHwid)) record.hwids.push(oldHwid);
+        if (!record.hwids.includes(newHwid)) record.hwids.push(newHwid);
         record.hwidChanges = 1;
+        record.changeHwidCount = 1;
+        record.lastChangedAtUtc = serverNowUtc;
         record.hwidHistory = [
           ...(Array.isArray(record.hwidHistory) ? record.hwidHistory : []),
-          { oldHwid, newHwid, changedAtUtc: serverNowUtc, fee: 0, reason: 'FREE_FIRST_MIGRATION' },
+          { oldHwid, newHwid, oldKey: canonicalKey, newKey, changedAtUtc: serverNowUtc, fee: 0, reason: 'FREE_FIRST_MIGRATION' },
         ];
         issuedKeys[targetIdx] = record;
         await dbSetJson('flowly:issued_keys', issuedKeys);
+        await dbHsetJson('flowly:keys_map', newKey, record);
+        if (canonicalKey) await dbHsetJson('flowly:keys_map', canonicalKey, record);
 
         // Đồng bộ đơn hàng tương ứng
         const orders = (await dbGetJson('flowly:orders', [])) || [];
-        const orderIdx = orders.findIndex((o) => o.key === qKey || o.hwid === oldHwid);
+        const orderIdx = orders.findIndex((o) =>
+          (record.orderCode && o.orderCode === record.orderCode) ||
+          String(o.key || '').toUpperCase() === canonicalKey ||
+          normalizeHwid(o.hwid) === oldHwid
+        );
         if (orderIdx >= 0) {
+          orders[orderIdx].oldKey = canonicalKey;
+          orders[orderIdx].key = newKey;
+          orders[orderIdx].oldHwid = oldHwid;
           orders[orderIdx].hwid = newHwid;
+          orders[orderIdx].hwidChanges = 1;
+          orders[orderIdx].changeHwidCount = 1;
+          if (!Array.isArray(orders[orderIdx].hwids)) orders[orderIdx].hwids = [oldHwid].filter(Boolean);
+          if (oldHwid && !orders[orderIdx].hwids.includes(oldHwid)) orders[orderIdx].hwids.push(oldHwid);
+          if (!orders[orderIdx].hwids.includes(newHwid)) orders[orderIdx].hwids.push(newHwid);
+          if (!Array.isArray(orders[orderIdx].oldKeys)) orders[orderIdx].oldKeys = [];
+          if (canonicalKey && !orders[orderIdx].oldKeys.includes(canonicalKey)) orders[orderIdx].oldKeys.push(canonicalKey);
           await dbSetJson('flowly:orders', orders);
+          if (orders[orderIdx].orderCode) await dbHsetJson('flowly:orders_map', orders[orderIdx].orderCode, orders[orderIdx]);
         }
 
         await sendTelegram(
           `🔄 <b>[KHÁCH PRO ĐỔI HWID MIỄN PHÍ LẦN ĐẦU]</b>\n\n` +
-          `🔑 <b>Key:</b> <code>${qKey}</code>\n` +
+          `🔑 <b>Key cũ:</b> <code>${canonicalKey}</code>\n` +
+          `🆕 <b>Key mới:</b> <code>${newKey}</code>\n` +
           `📱 <b>App:</b> ${record.appId || 'All'}\n` +
           `📟 <b>HWID cũ:</b> <code>${oldHwid}</code>\n` +
-          `🆕 <b>HWID mới:</b> <code>${newHwid}</code>\n` +
+          `📲 <b>HWID mới:</b> <code>${newHwid}</code>\n` +
           `✅ <i>Hệ thống đã tự động chuyển đổi bản quyền sang máy mới miễn phí 100%!</i>`
         );
 
@@ -785,8 +936,11 @@ export default async function handler(req, res) {
           free: true,
           oldHwid,
           newHwid,
+          oldKey: canonicalKey,
+          key: newKey,
+          newKey,
           hwidChanges: 1,
-          message: `🎉 Đổi thiết bị thành công miễn phí lần đầu! Bản quyền PRO đã được chuyển sang máy ${newHwid}.`,
+          message: `🎉 Đổi thiết bị thành công miễn phí lần đầu! Bản quyền PRO đã được chuyển sang máy ${newHwid}. Key mới của bạn: ${newKey}`,
         });
       }
 
@@ -800,7 +954,9 @@ export default async function handler(req, res) {
       const newReq = {
         orderCode: changeOrderCode,
         memo: changeMemo,
-        key: qKey,
+        key: canonicalKey,
+        orderCodeRef: record.orderCode || '',
+        phone: record.phone || '',
         oldHwid,
         newHwid,
         price: 5000,
@@ -816,7 +972,7 @@ export default async function handler(req, res) {
         `📦 <b>Mã đơn:</b> <code>${changeOrderCode}</code>\n` +
         `💬 <b>Nội dung CK:</b> <code>${changeMemo}</code>\n` +
         `💰 <b>Phí bảo trì:</b> <b>5.000đ</b>\n` +
-        `🔑 <b>Key:</b> <code>${qKey}</code>\n` +
+        `🔑 <b>Key:</b> <code>${canonicalKey}</code>\n` +
         `📟 <b>Cũ:</b> <code>${oldHwid}</code> ➔ 🆕 <b>Mới:</b> <code>${newHwid}</code>`
       );
 
@@ -831,10 +987,92 @@ export default async function handler(req, res) {
           memo: changeMemo,
           price: 5000,
           qrUrl,
-          key: qKey,
+          key: canonicalKey,
           oldHwid,
           newHwid,
         },
+      });
+    }
+
+    // 5) Action: check_hwid_change (Kiểm tra & tự động xác thực thanh toán 5.000đ qua SePay API)
+    if (action === 'check_hwid_change') {
+      const orderCode = String(req.query?.orderCode || body.orderCode || '').trim().toUpperCase();
+      if (!orderCode) {
+        return res.status(400).json({ success: false, error: 'Thiếu orderCode' });
+      }
+      const changeReqs = (await dbGetJson('flowly:hwid_change_requests', [])) || [];
+      let targetReq = changeReqs.find((r) => r && (String(r.orderCode || '').toUpperCase() === orderCode || String(r.memo || '').toUpperCase() === orderCode));
+      if (!targetReq) {
+        return res.status(404).json({ success: false, error: 'Không tìm thấy yêu cầu đổi thiết bị này!' });
+      }
+      if (targetReq.status === 'COMPLETED') {
+        return res.status(200).json({
+          success: true,
+          paid: true,
+          request: targetReq,
+          newKey: targetReq.newKey || targetReq.key,
+          newHwid: targetReq.newHwid,
+          message: `🎉 Đã nhận 5.000đ và chuyển bản quyền sang máy ${targetReq.newHwid} thành công!`,
+          serverNowUtc,
+        });
+      }
+
+      // Actively poll SePay API if configured
+      const sepayApiKey = process.env.SEPAY_API_KEY || process.env.SEPAY_WEBHOOK_SECRET || '';
+      if (sepayApiKey) {
+        try {
+          const sepayUrl = `https://my.sepay.vn/userapi/transactions/list?account_number=${encodeURIComponent(BANK_CONFIG.accountNo)}&limit=30`;
+          const spRes = await fetch(sepayUrl, {
+            headers: {
+              Authorization: `Bearer ${sepayApiKey}`,
+              'Content-Type': 'application/json',
+            },
+          });
+          if (spRes.ok) {
+            const spData = await spRes.json();
+            const txs = Array.isArray(spData?.transactions) ? spData.transactions : [];
+            const memoUpper = String(targetReq.memo || '').toUpperCase();
+            const matched = txs.find((tx) => {
+              const txId = String(tx.id || '');
+              const amountIn = Number(tx.amount_in || 0);
+              const compact = normalizeTextForMatch(tx.transaction_content || '').replace(/\s+/g, '');
+              return txId && memoUpper && amountIn >= Number(targetReq.price || 5000) && compact.includes(memoUpper);
+            });
+            if (matched) {
+              const txId = String(matched.id);
+              const acquired = await dbSetNx(`flowly:claim_tx:${txId}`, JSON.stringify({ type: 'HWID_CHANGE', orderCode: targetReq.orderCode, claimedAtUtc: serverNowUtc }), 86400 * 30);
+              if (acquired) {
+                targetReq = await completeHwidChangeRequest(targetReq, txId, 'SEPAY_POLL_VERIFIED');
+                return res.status(200).json({
+                  success: true,
+                  paid: true,
+                  request: targetReq,
+                  newKey: targetReq.newKey || targetReq.key,
+                  newHwid: targetReq.newHwid,
+                  message: `🎉 Đã nhận 5.000đ và chuyển bản quyền sang máy ${targetReq.newHwid} thành công!`,
+                  serverNowUtc,
+                });
+              }
+            }
+          }
+        } catch (err) {
+          return res.status(200).json({
+            success: true,
+            paid: false,
+            request: targetReq,
+            message: 'Đang kiểm tra giao dịch TPBank, vui lòng đợi thêm giây lát...',
+            sepayError: err.message,
+            serverNowUtc,
+          });
+        }
+      }
+
+      return res.status(200).json({
+        success: true,
+        paid: false,
+        request: targetReq,
+        message: `Chưa thấy giao dịch ${Number(targetReq.price || 5000).toLocaleString('vi-VN')}đ kèm nội dung "${targetReq.memo}" về TPBank. Vui lòng chờ 5–10 giây sau khi chuyển khoản rồi bấm kiểm tra lại.`,
+        serverNowUtc,
       });
     }
 

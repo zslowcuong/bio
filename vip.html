@@ -909,8 +909,14 @@
             const data = await res.json();
             btn.innerText = '🔄 Xác Nhận Chuyển Sang Thiết Bị Mới';
 
-            if (data.success && data.free) {
-                alert(`🎉 CHÚC MỪNG BẠN!\n\nĐã chuyển đổi bản quyền PRO sang máy mới thành công MIỄN PHÍ 100%!\n\nMã HWID mới: ${data.newHwid}\nHãy mở app trên máy mới để sử dụng ngay!`);
+            if (data.success && (data.free || data.alreadyMigrated)) {
+                const newKeyStr = data.newKey || data.key || '';
+                alert(
+                    `${data.alreadyMigrated ? '✅ THIẾT BỊ ĐÃ ĐƯỢC GẮN BẢN QUYỀN PRO!' : '🎉 CHÚC MỪNG BẠN! ĐỔI MÁY THÀNH CÔNG MIỄN PHÍ 100%!'}\n\n` +
+                    `Mã HWID mới: ${data.newHwid}\n` +
+                    (newKeyStr ? `Key PRO hiện tại: ${newKeyStr}\n\n` : '\n') +
+                    `Hãy mở app trên máy mới (hoặc dán mã Key PRO trên) để sử dụng ngay!`
+                );
                 localStorage.setItem('flow_vip_hwid', data.newHwid);
                 document.getElementById('vipQueryInput').value = data.newHwid;
                 verifyVipAccess();
@@ -919,6 +925,7 @@
                 document.getElementById('modalQrImg').src = data.order.qrUrl;
                 document.getElementById('modalMemo').innerText = data.order.memo;
                 document.getElementById('qrModal').style.display = 'flex';
+                startHwidPaymentPolling();
             } else {
                 alert(data.reason || data.message || 'Không thể đổi thiết bị!');
             }
@@ -928,13 +935,61 @@
         }
     }
 
+    let hwidPollTimer = null;
+
+    function stopHwidPaymentPolling() {
+        if (hwidPollTimer) {
+            clearInterval(hwidPollTimer);
+            hwidPollTimer = null;
+        }
+    }
+
+    function startHwidPaymentPolling() {
+        stopHwidPaymentPolling();
+        hwidPollTimer = setInterval(() => {
+            if (currentPendingOrder && document.getElementById('qrModal').style.display === 'flex') {
+                checkHwidPayment(true);
+            } else {
+                stopHwidPaymentPolling();
+            }
+        }, 5000);
+    }
+
     function closeQrModal() {
+        stopHwidPaymentPolling();
         document.getElementById('qrModal').style.display = 'none';
     }
 
-    function checkHwidPayment() {
-        alert('Cảm ơn bạn! Hệ thống SePay sẽ tự động kích hoạt ngay khi ngân hàng báo tiền về. Bạn cũng có thể liên hệ Telegram Admin để được chuyển ngay trong 1 phút!');
-        closeQrModal();
+    async function checkHwidPayment(silent = false) {
+        if (!currentPendingOrder || !currentPendingOrder.orderCode) {
+            if (!silent) alert('Không tìm thấy mã đơn đổi máy đang chờ!');
+            return;
+        }
+        try {
+            const res = await fetch(`${API_BASE}/api/license?action=check_hwid_change&orderCode=${encodeURIComponent(currentPendingOrder.orderCode)}`, { cache: 'no-store' });
+            const data = await res.json();
+            if (data.success && data.paid) {
+                stopHwidPaymentPolling();
+                closeQrModal();
+                const newKeyStr = data.newKey || data.request?.newKey || '';
+                const newHwidStr = data.newHwid || data.request?.newHwid || currentPendingOrder.newHwid || '';
+                alert(
+                    `🎉 THANH TOÁN 5.000đ THÀNH CÔNG!\n\n` +
+                    `Bản quyền PRO đã được chuyển sang thiết bị: ${newHwidStr}\n` +
+                    (newKeyStr ? `Key PRO mới của bạn: ${newKeyStr}\n\n` : '\n') +
+                    `Hãy mở app trên máy mới hoặc bấm Kích hoạt 1-Chạm ngay!`
+                );
+                if (newHwidStr) {
+                    localStorage.setItem('flow_vip_hwid', newHwidStr);
+                    document.getElementById('vipQueryInput').value = newHwidStr;
+                    verifyVipAccess();
+                }
+            } else if (!silent) {
+                alert(data.message || 'Hệ thống chưa thấy giao dịch 5.000đ về TPBank. Vui lòng đợi 5–10 giây rồi bấm kiểm tra lại!');
+            }
+        } catch (e) {
+            if (!silent) alert('Lỗi kiểm tra thanh toán: ' + e.message);
+        }
     }
 </script>
 

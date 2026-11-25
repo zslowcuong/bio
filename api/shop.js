@@ -281,20 +281,43 @@ export default async function handler(req, res) {
       const orders = (await dbGetJson('flowly:orders', [])) || [];
       const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
 
-      let targetOrder = orders.find((o) => o.key === keyInput);
-      let targetKeyRec = issuedKeys.find((k) => k.key === keyInput);
+      let targetOrder = orders.find((o) =>
+        String(o.key || '').toUpperCase() === keyInput ||
+        String(o.oldKey || '').toUpperCase() === keyInput ||
+        (Array.isArray(o.oldKeys) && o.oldKeys.some((ok) => String(ok || '').toUpperCase() === keyInput))
+      );
+      let targetKeyRec = issuedKeys.find((k) =>
+        String(k.key || '').toUpperCase() === keyInput ||
+        String(k.oldKey || '').toUpperCase() === keyInput ||
+        (Array.isArray(k.oldKeys) && k.oldKeys.some((ok) => String(ok || '').toUpperCase() === keyInput))
+      );
 
       if (!targetOrder && !targetKeyRec) {
         return res.status(404).json({ success: false, error: 'Không tìm thấy thông tin Key này trên hệ thống!' });
       }
 
-      const currentHwid = targetOrder?.hwid || targetKeyRec?.hwid || '';
-      const planCode = targetOrder?.planCode || targetKeyRec?.planCode || 'LIFE';
-      const appId = targetOrder?.appId || targetKeyRec?.appId || 'all';
-      let changeCount = Number(targetOrder?.changeHwidCount || targetKeyRec?.changeHwidCount || 0);
+      const currentKey = String(targetKeyRec?.key || targetOrder?.key || keyInput).toUpperCase();
+      const currentHwid = targetKeyRec?.hwid || targetOrder?.hwid || '';
+      const planCode = targetKeyRec?.planCode || targetOrder?.planCode || 'LIFE';
+      const appId = normalizeAppId(targetKeyRec?.appId || targetOrder?.appId || 'all') || 'all';
+      let changeCount = Math.max(
+        Number(targetOrder?.changeHwidCount || 0),
+        Number(targetOrder?.hwidChanges || 0),
+        Number(targetKeyRec?.changeHwidCount || 0),
+        Number(targetKeyRec?.hwidChanges || 0)
+      );
 
       if (currentHwid === newHwidInput) {
-        return res.status(400).json({ success: false, error: 'HWID mới trùng khớp với HWID hiện tại của máy!' });
+        return res.status(200).json({
+          success: true,
+          alreadyMigrated: true,
+          newKey: currentKey,
+          oldKey: keyInput,
+          newHwid: newHwidInput,
+          changeCount,
+          remainingFree: Math.max(0, (planCode === 'LIFE' ? 3 : 1) - changeCount),
+          message: `Thiết bị ${newHwidInput} đã được gắn sẵn bản quyền PRO rồi! Mã Key hiện tại của bạn: ${currentKey}`
+        });
       }
 
       const isComboAllOrder = appId === 'all' || targetOrder?.allApps === true || targetKeyRec?.allApps === true || keyInput.startsWith('FLOWALL-');
@@ -327,29 +350,38 @@ export default async function handler(req, res) {
 
       if (targetOrder) {
         targetOrder.oldHwid = currentHwid;
-        targetOrder.oldKey = keyInput;
+        targetOrder.oldKey = currentKey;
         if (!Array.isArray(targetOrder.hwids)) targetOrder.hwids = [currentHwid].filter(Boolean);
+        if (currentHwid && !targetOrder.hwids.includes(currentHwid)) targetOrder.hwids.push(currentHwid);
         if (!targetOrder.hwids.includes(newHwidInput)) targetOrder.hwids.push(newHwidInput);
         if (!Array.isArray(targetOrder.oldKeys)) targetOrder.oldKeys = [];
-        if (!targetOrder.oldKeys.includes(keyInput)) targetOrder.oldKeys.push(keyInput);
+        if (currentKey && !targetOrder.oldKeys.includes(currentKey)) targetOrder.oldKeys.push(currentKey);
+        if (keyInput && !targetOrder.oldKeys.includes(keyInput)) targetOrder.oldKeys.push(keyInput);
         targetOrder.hwid = newHwidInput;
         targetOrder.key = newKey;
         targetOrder.changeHwidCount = changeCount;
+        targetOrder.hwidChanges = changeCount;
         targetOrder.lastChangedAtUtc = Date.now();
         await dbSetJson('flowly:orders', orders);
+        if (targetOrder.orderCode) await dbHsetJson('flowly:orders_map', targetOrder.orderCode, targetOrder);
       }
       if (targetKeyRec) {
         targetKeyRec.oldHwid = currentHwid;
-        targetKeyRec.oldKey = keyInput;
+        targetKeyRec.oldKey = currentKey;
         if (!Array.isArray(targetKeyRec.hwids)) targetKeyRec.hwids = [currentHwid].filter(Boolean);
+        if (currentHwid && !targetKeyRec.hwids.includes(currentHwid)) targetKeyRec.hwids.push(currentHwid);
         if (!targetKeyRec.hwids.includes(newHwidInput)) targetKeyRec.hwids.push(newHwidInput);
         if (!Array.isArray(targetKeyRec.oldKeys)) targetKeyRec.oldKeys = [];
-        if (!targetKeyRec.oldKeys.includes(keyInput)) targetKeyRec.oldKeys.push(keyInput);
+        if (currentKey && !targetKeyRec.oldKeys.includes(currentKey)) targetKeyRec.oldKeys.push(currentKey);
+        if (keyInput && !targetKeyRec.oldKeys.includes(keyInput)) targetKeyRec.oldKeys.push(keyInput);
         targetKeyRec.hwid = newHwidInput;
         targetKeyRec.key = newKey;
         targetKeyRec.changeHwidCount = changeCount;
+        targetKeyRec.hwidChanges = changeCount;
         targetKeyRec.lastChangedAtUtc = Date.now();
         await dbSetJson('flowly:issued_keys', issuedKeys);
+        await dbHsetJson('flowly:keys_map', newKey, targetKeyRec);
+        if (currentKey) await dbHsetJson('flowly:keys_map', currentKey, targetKeyRec);
       }
 
       await sendTelegram(

@@ -150,12 +150,13 @@ export function signVipKey(appId, hwid, expirySec) {
   return `${app.prefix}-VIP-${cleanHwid}-${expiryHex}-${sig8}`;
 }
 
-export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
+export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid, options = {}) {
   const key = sanitizeKeyInput(keyStr);
   const app = APPS[expectedAppId];
   if (!app || !key) return { valid: false, reason: 'Thiếu thông tin ứng dụng hoặc mã key' };
 
   const cleanHwid = normalizeHwid(expectedHwid);
+  const ignoreHwidMismatch = Boolean(options && options.ignoreHwidMismatch);
 
   // 1) Universal ALL-APPS Combo Key (FLOWALL-PRO-<HWID>-<PLAN>-<NONCE4>-<SIG8>)
   const allApp = APPS.all;
@@ -168,8 +169,8 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
         return { valid: false, reason: 'Chữ ký Key Combo không hợp lệ hoặc đã bị chỉnh sửa' };
       }
 
-      // Check 1 device restriction
-      if (cleanHwid && keyHwid && cleanHwid !== keyHwid) {
+      const hwidMatched = !cleanHwid || !keyHwid || cleanHwid === keyHwid;
+      if (!hwidMatched && !ignoreHwidMismatch) {
         return {
           valid: false,
           reason: `Key này chỉ được kích hoạt trên 1 thiết bị (${keyHwid}), không khớp với máy hiện tại (${cleanHwid})!`
@@ -183,6 +184,7 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
 
       return {
         valid: true,
+        hwidMatched,
         tier: 'PRO_SHOP',
         expiryUtcMs,
         plan: planCode,
@@ -210,7 +212,7 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
     if (sig8 !== expectedSig) return { valid: false, reason: 'Chữ ký Key VIP không hợp lệ' };
     const expiryUtcMs = expirySec * 1000;
     if (Date.now() > expiryUtcMs) return { valid: false, reason: 'Key VIP đã hết hạn 30 giờ, vui lòng vượt link lấy key mới' };
-    return { valid: true, tier: 'VIP_FREE', expiryUtcMs, plan: 'VIP30H', key, isAllApps: false, isLifetime: false };
+    return { valid: true, hwidMatched: true, tier: 'VIP_FREE', expiryUtcMs, plan: 'VIP30H', key, isAllApps: false, isLifetime: false };
   }
 
   // 3) Check Single-App PRO format: <PREFIX>-PRO-<HWID>-<PLAN>-<NONCE4>-<SIG8> (KHÔNG dùng chung app khác)
@@ -222,16 +224,17 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid) {
       const parts = rest.split('-');
       if (parts.length !== 4) return { valid: false, reason: 'Sai định dạng Key PRO' };
       const [keyHwid, planCode, nonce4, sig8] = parts;
-      if (keyHwid !== cleanHwid) {
-        return { valid: false, reason: `Key PRO này gắn với thiết bị ${keyHwid}, không khớp máy ${cleanHwid}` };
-      }
       const plan = SINGLE_PLANS[planCode] || PLANS[planCode];
       if (!plan) return { valid: false, reason: 'Gói Key PRO không hợp lệ' };
       const expectedSig = sha256Hex(`${targetApp.prefix}:PRO:${keyHwid}:${planCode}:${nonce4}:${targetApp.salt}`).slice(0, 8);
       if (sig8 !== expectedSig) return { valid: false, reason: 'Chữ ký Key PRO không hợp lệ' };
+      const hwidMatched = !cleanHwid || !keyHwid || cleanHwid === keyHwid;
+      if (!hwidMatched && !ignoreHwidMismatch) {
+        return { valid: false, reason: `Key PRO này gắn với thiết bị ${keyHwid}, không khớp máy ${cleanHwid}` };
+      }
       const isLifetime = planCode === 'LIFE';
       const expiryUtcMs = isLifetime ? 4102444800000 : Date.now() + plan.hours * 3600 * 1000;
-      return { valid: true, tier: 'PRO_SHOP', expiryUtcMs, plan: planCode, key, isLifetime, isAllApps: false, keyOriginHwid: keyHwid };
+      return { valid: true, hwidMatched, tier: 'PRO_SHOP', expiryUtcMs, plan: planCode, key, isLifetime, isAllApps: false, keyOriginHwid: keyHwid };
     }
   }
 
@@ -632,6 +635,144 @@ export async function completeOrderWithProKey(order, txId = null, source = 'SEPA
   );
 
   return completed;
+}
+
+export async function completeHwidChangeRequest(changeReq, txId = null, source = 'SEPAY_WEBHOOK_VERIFIED') {
+  const nowUtc = Date.now();
+  const changeReqs = (await dbGetJson('flowly:hwid_change_requests', [])) || [];
+  const reqIdx = changeReqs.findIndex((r) => r && r.orderCode === changeReq.orderCode);
+  const existingReq = reqIdx >= 0 ? changeReqs[reqIdx] : changeReq;
+
+  if (existingReq.status === 'COMPLETED' && existingReq.newKey) {
+    return existingReq;
+  }
+
+  const targetKeyUpper = sanitizeKeyInput(existingReq.key || '');
+  const oldHwidNorm = normalizeHwid(existingReq.oldHwid || '');
+  const newHwid = normalizeHwid(existingReq.newHwid || '');
+  const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+
+  let targetIdx = issuedKeys.findIndex((k) => {
+    if (!k) return false;
+    const kKey = String(k.key || '').toUpperCase();
+    const kOld = String(k.oldKey || '').toUpperCase();
+    const kOlds = Array.isArray(k.oldKeys) ? k.oldKeys.map((x) => String(x || '').toUpperCase()) : [];
+    const kHwids = Array.isArray(k.hwids) ? k.hwids.map((x) => normalizeHwid(x)) : [];
+    return (
+      (targetKeyUpper && (kKey === targetKeyUpper || kOld === targetKeyUpper || kOlds.includes(targetKeyUpper))) ||
+      (existingReq.orderCodeRef && k.orderCode === existingReq.orderCodeRef) ||
+      (oldHwidNorm && (normalizeHwid(k.hwid) === oldHwidNorm || kHwids.includes(oldHwidNorm)))
+    );
+  });
+
+  if (targetIdx < 0) {
+    return { ...existingReq, error: 'ISSUED_KEY_NOT_FOUND' };
+  }
+
+  const record = issuedKeys[targetIdx];
+  const prevKey = String(record.key || targetKeyUpper).toUpperCase();
+  const prevHwid = normalizeHwid(record.hwid || oldHwidNorm);
+  const appId = normalizeAppId(record.appId || (prevKey.startsWith('FLOWALL-') ? 'all' : 'all')) || 'all';
+  const planCode = String(record.planCode || record.plan || 'LIFE').toUpperCase();
+  const nonce4 = crypto.randomBytes(2).toString('hex').toUpperCase();
+  const newKey = signProKey(appId, newHwid, planCode, nonce4);
+
+  record.oldKey = prevKey;
+  record.key = newKey;
+  record.oldHwid = prevHwid;
+  record.hwid = newHwid;
+  if (!Array.isArray(record.oldKeys)) record.oldKeys = [];
+  if (prevKey && !record.oldKeys.includes(prevKey)) record.oldKeys.push(prevKey);
+  if (targetKeyUpper && !record.oldKeys.includes(targetKeyUpper)) record.oldKeys.push(targetKeyUpper);
+  if (!Array.isArray(record.hwids)) record.hwids = [prevHwid].filter(Boolean);
+  if (prevHwid && !record.hwids.includes(prevHwid)) record.hwids.push(prevHwid);
+  if (newHwid && !record.hwids.includes(newHwid)) record.hwids.push(newHwid);
+
+  const nextChanges = Math.max(Number(record.hwidChanges || 0), Number(record.changeHwidCount || 0)) + 1;
+  record.hwidChanges = nextChanges;
+  record.changeHwidCount = nextChanges;
+  record.lastChangedAtUtc = nowUtc;
+  record.hwidHistory = [
+    ...(Array.isArray(record.hwidHistory) ? record.hwidHistory : []),
+    {
+      oldHwid: prevHwid,
+      newHwid,
+      oldKey: prevKey,
+      newKey,
+      orderCode: existingReq.orderCode,
+      txId: txId || existingReq.txId || null,
+      fee: Number(existingReq.price || 5000),
+      source,
+      changedAtUtc: nowUtc,
+      reason: 'PAID_HWID_MIGRATION',
+    },
+  ];
+  issuedKeys[targetIdx] = record;
+  await dbSetJson('flowly:issued_keys', issuedKeys.slice(0, 800));
+  await dbHsetJson('flowly:keys_map', newKey, record);
+  if (prevKey) await dbHsetJson('flowly:keys_map', prevKey, record);
+
+  // Sync matching order in flowly:orders and flowly:orders_map
+  const orders = (await dbGetJson('flowly:orders', [])) || [];
+  const orderIdx = orders.findIndex((o) => {
+    if (!o) return false;
+    const oKey = String(o.key || '').toUpperCase();
+    const oOld = String(o.oldKey || '').toUpperCase();
+    const oOlds = Array.isArray(o.oldKeys) ? o.oldKeys.map((x) => String(x || '').toUpperCase()) : [];
+    return (
+      (record.orderCode && o.orderCode === record.orderCode) ||
+      oKey === prevKey ||
+      oOld === prevKey ||
+      oOlds.includes(prevKey) ||
+      (targetKeyUpper && (oKey === targetKeyUpper || oOld === targetKeyUpper || oOlds.includes(targetKeyUpper))) ||
+      (prevHwid && normalizeHwid(o.hwid) === prevHwid)
+    );
+  });
+  if (orderIdx >= 0) {
+    const ord = orders[orderIdx];
+    ord.oldKey = prevKey;
+    ord.key = newKey;
+    ord.oldHwid = prevHwid;
+    ord.hwid = newHwid;
+    if (!Array.isArray(ord.oldKeys)) ord.oldKeys = [];
+    if (prevKey && !ord.oldKeys.includes(prevKey)) ord.oldKeys.push(prevKey);
+    if (!Array.isArray(ord.hwids)) ord.hwids = [prevHwid].filter(Boolean);
+    if (prevHwid && !ord.hwids.includes(prevHwid)) ord.hwids.push(prevHwid);
+    if (newHwid && !ord.hwids.includes(newHwid)) ord.hwids.push(newHwid);
+    ord.hwidChanges = nextChanges;
+    ord.changeHwidCount = nextChanges;
+    ord.lastChangedAtUtc = nowUtc;
+    orders[orderIdx] = ord;
+    await dbSetJson('flowly:orders', orders.slice(0, 500));
+    if (ord.orderCode) await dbHsetJson('flowly:orders_map', ord.orderCode, ord);
+  }
+
+  const completedReq = {
+    ...existingReq,
+    status: 'COMPLETED',
+    oldHwid: prevHwid,
+    newHwid,
+    oldKey: prevKey,
+    newKey,
+    txId: txId || existingReq.txId || null,
+    verifiedSource: source,
+    completedAtUtc: nowUtc,
+  };
+  if (reqIdx >= 0) changeReqs[reqIdx] = completedReq;
+  else changeReqs.unshift(completedReq);
+  await dbSetJson('flowly:hwid_change_requests', changeReqs.slice(0, 300));
+
+  await sendTelegram(
+    `✅ <b>[ĐỔI HWID CÓ PHÍ THÀNH CÔNG!]</b>\n\n` +
+    `📦 <b>Mã đơn đổi:</b> <code>${completedReq.orderCode}</code>\n` +
+    `💬 <b>Nội dung CK:</b> <code>${completedReq.memo}</code>\n` +
+    `💰 <b>Phí đã nhận:</b> <b>${Number(completedReq.price || 5000).toLocaleString('vi-VN')}đ</b>\n` +
+    `📟 <b>HWID cũ:</b> <code>${prevHwid}</code> ➔ 🆕 <b>Mới:</b> <code>${newHwid}</code>\n` +
+    `🔑 <b>Key PRO mới:</b> <code>${newKey}</code>\n` +
+    `⚡ <b>Nguồn xác thực:</b> ${source}`
+  );
+
+  return completedReq;
 }
 
 

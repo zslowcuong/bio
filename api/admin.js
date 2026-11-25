@@ -4,8 +4,10 @@ import {
   PLANS,
   SINGLE_PLANS,
   completeOrderWithProKey,
+  completeHwidChangeRequest,
   dbGetJson,
   dbSetJson,
+  dbHsetJson,
   getBackendStatus,
   getEventKeysMap,
   getGlobalResetsMap,
@@ -17,6 +19,7 @@ import {
   normalizeHwid,
   parseBody,
   sanitizeKeyInput,
+  sendTelegram,
   sha256Hex,
   signProKey,
 } from './_shared.js';
@@ -56,6 +59,7 @@ export default async function handler(req, res) {
     if (action === 'dashboard') {
       const orders = (await dbGetJson('flowly:orders', [])) || [];
       const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
+      const hwidChangeRequests = (await dbGetJson('flowly:hwid_change_requests', [])) || [];
       const revokedKeys = await getRevokedKeysList();
       const eventKeys = await getEventKeysMap();
       const globalResets = await getGlobalResetsMap();
@@ -65,6 +69,7 @@ export default async function handler(req, res) {
         success: true,
         orders,
         issuedKeys,
+        hwidChangeRequests,
         revokedKeys,
         eventKeys,
         globalResets,
@@ -229,65 +234,107 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, deleted: beforeLen !== issuedKeys.length, key: targetKey });
     }
 
+    if (action === 'approve_hwid_change') {
+      const orderCode = String(body.orderCode || '').trim().toUpperCase();
+      if (!orderCode) {
+        return res.status(400).json({ success: false, error: 'Thiếu mã đơn đổi HWID (CHG...)' });
+      }
+      const changeReqs = (await dbGetJson('flowly:hwid_change_requests', [])) || [];
+      const targetReq = changeReqs.find((r) => r && String(r.orderCode || '').toUpperCase() === orderCode);
+      if (!targetReq) {
+        return res.status(404).json({ success: false, error: 'Không tìm thấy yêu cầu đổi HWID này' });
+      }
+      const completed = await completeHwidChangeRequest(targetReq, body.txId || `ADMIN_CHG_${Date.now()}`, 'ADMIN_APPROVED');
+      if (completed.error) {
+        return res.status(404).json({ success: false, error: `Không tìm thấy key gốc (${completed.error})` });
+      }
+      return res.status(200).json({ success: true, request: completed, newKey: completed.newKey, newHwid: completed.newHwid });
+    }
+
     if (action === 'change_hwid') {
-      const targetKey = String(body.key || '').trim().toUpperCase();
+      const targetKey = sanitizeKeyInput(body.key || '');
       const newHwid = normalizeHwid(body.newHwid || '');
       if (!targetKey || !newHwid || newHwid.length < 4) {
         return res.status(400).json({ success: false, error: 'Thiếu mã Key hoặc HWID mới không hợp lệ' });
       }
 
       const issuedKeys = (await dbGetJson('flowly:issued_keys', [])) || [];
-      const targetIdx = issuedKeys.findIndex((k) => String(k.key || '').toUpperCase() === targetKey);
+      const targetIdx = issuedKeys.findIndex((k) => {
+        if (!k) return false;
+        const kKey = String(k.key || '').toUpperCase();
+        const kOld = String(k.oldKey || '').toUpperCase();
+        const kOlds = Array.isArray(k.oldKeys) ? k.oldKeys.map((x) => String(x || '').toUpperCase()) : [];
+        return kKey === targetKey || kOld === targetKey || kOlds.includes(targetKey) || normalizeHwid(k.hwid) === targetKey;
+      });
       if (targetIdx < 0) {
         return res.status(404).json({ success: false, error: 'Không tìm thấy mã key này trong danh sách đã cấp' });
       }
 
       const record = issuedKeys[targetIdx];
+      const prevKey = String(record.key || targetKey).toUpperCase();
       const oldHwid = record.hwid;
-      const appId = record.appId || 'all';
+      const appId = normalizeAppId(record.appId || 'all') || 'all';
       const planCode = record.planCode || 'LIFE';
       const nonce4 = crypto.randomBytes(2).toString('hex').toUpperCase();
       const newKey = signProKey(appId, newHwid, planCode, nonce4);
 
-      record.oldKey = targetKey;
+      record.oldKey = prevKey;
       record.key = newKey;
+      record.oldHwid = oldHwid;
       record.hwid = newHwid;
       if (!Array.isArray(record.oldKeys)) record.oldKeys = [];
-      if (!record.oldKeys.includes(targetKey)) record.oldKeys.push(targetKey);
+      if (prevKey && !record.oldKeys.includes(prevKey)) record.oldKeys.push(prevKey);
+      if (targetKey && !record.oldKeys.includes(targetKey)) record.oldKeys.push(targetKey);
       if (!Array.isArray(record.hwids)) record.hwids = [oldHwid].filter(Boolean);
+      if (oldHwid && !record.hwids.includes(oldHwid)) record.hwids.push(oldHwid);
       if (!record.hwids.includes(newHwid)) record.hwids.push(newHwid);
 
-      record.hwidChanges = (Number(record.hwidChanges || 0)) + 1;
+      const nextChanges = Math.max(Number(record.hwidChanges || 0), Number(record.changeHwidCount || 0)) + 1;
+      record.hwidChanges = nextChanges;
+      record.changeHwidCount = nextChanges;
+      record.lastChangedAtUtc = Date.now();
       record.hwidHistory = [
         ...(Array.isArray(record.hwidHistory) ? record.hwidHistory : []),
-        { oldHwid, newHwid, oldKey: targetKey, newKey, changedAtUtc: Date.now(), by: 'ADMIN', reason: body.reason || 'ADMIN_OVERRIDE' },
+        { oldHwid, newHwid, oldKey: prevKey, newKey, changedAtUtc: Date.now(), by: 'ADMIN', reason: body.reason || 'ADMIN_OVERRIDE' },
       ];
       issuedKeys[targetIdx] = record;
       await dbSetJson('flowly:issued_keys', issuedKeys);
+      await dbHsetJson('flowly:keys_map', newKey, record);
+      if (prevKey) await dbHsetJson('flowly:keys_map', prevKey, record);
 
       const orders = (await dbGetJson('flowly:orders', [])) || [];
-      const orderIdx = orders.findIndex((o) => o.key === targetKey || o.hwid === oldHwid);
+      const orderIdx = orders.findIndex((o) =>
+        (record.orderCode && o.orderCode === record.orderCode) ||
+        String(o.key || '').toUpperCase() === prevKey ||
+        String(o.key || '').toUpperCase() === targetKey ||
+        o.hwid === oldHwid
+      );
       if (orderIdx >= 0) {
-        orders[orderIdx].oldKey = targetKey;
+        orders[orderIdx].oldKey = prevKey;
         orders[orderIdx].key = newKey;
         orders[orderIdx].oldHwid = oldHwid;
         orders[orderIdx].hwid = newHwid;
+        orders[orderIdx].hwidChanges = nextChanges;
+        orders[orderIdx].changeHwidCount = nextChanges;
         if (!Array.isArray(orders[orderIdx].hwids)) orders[orderIdx].hwids = [oldHwid].filter(Boolean);
+        if (oldHwid && !orders[orderIdx].hwids.includes(oldHwid)) orders[orderIdx].hwids.push(oldHwid);
         if (!orders[orderIdx].hwids.includes(newHwid)) orders[orderIdx].hwids.push(newHwid);
         if (!Array.isArray(orders[orderIdx].oldKeys)) orders[orderIdx].oldKeys = [];
-        if (!orders[orderIdx].oldKeys.includes(targetKey)) orders[orderIdx].oldKeys.push(targetKey);
+        if (prevKey && !orders[orderIdx].oldKeys.includes(prevKey)) orders[orderIdx].oldKeys.push(prevKey);
         await dbSetJson('flowly:orders', orders);
+        if (orders[orderIdx].orderCode) await dbHsetJson('flowly:orders_map', orders[orderIdx].orderCode, orders[orderIdx]);
       }
 
       await sendTelegram(
         `👑 <b>[ADMIN ĐỔI HWID THÀNH CÔNG]</b>\n\n` +
-        `🔑 <b>Key:</b> <code>${targetKey}</code>\n` +
-        `📟 <b>Cũ:</b> <code>${oldHwid}</code>\n` +
-        `🆕 <b>Mới:</b> <code>${newHwid}</code>\n` +
+        `🔑 <b>Key cũ:</b> <code>${prevKey}</code>\n` +
+        `🆕 <b>Key mới:</b> <code>${newKey}</code>\n` +
+        `📟 <b>HWID cũ:</b> <code>${oldHwid}</code>\n` +
+        `📲 <b>HWID mới:</b> <code>${newHwid}</code>\n` +
         `📝 <b>Lý do:</b> ${body.reason || 'Admin duyệt'}`
       );
 
-      return res.status(200).json({ success: true, oldHwid, newHwid, key: targetKey, message: `Đã đổi HWID thành công sang ${newHwid}` });
+      return res.status(200).json({ success: true, oldHwid, newHwid, oldKey: prevKey, key: newKey, newKey, message: `Đã đổi HWID thành công sang ${newHwid}. Key mới: ${newKey}` });
     }
 
     if (action === 'save_event_key') {
