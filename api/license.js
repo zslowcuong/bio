@@ -57,7 +57,7 @@ export default async function handler(req, res) {
           serverNowUtc
         });
       }
-      const targetApp = APPS[targetAppId] || APPS['flowoptimize'];
+      const targetApp = targetAppId === 'flowmax' ? APPS['flowextra'] : (APPS[targetAppId] || APPS['flowoptimize']);
       const expiryMs = serverNowUtc + 30 * 3600 * 1000;
       const expirySec = Math.floor(expiryMs / 1000);
       const expiryHex = expirySec.toString(16).toUpperCase();

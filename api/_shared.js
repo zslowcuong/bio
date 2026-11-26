@@ -197,22 +197,25 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid, optio
   }
 
   // 2) Check Single-App VIP format: <PREFIX>-VIP-<HWID>-<EXPIRY_HEX>-<SIG8>
-  const vipPrefix = `${app.prefix}-VIP-`;
-  if (key.startsWith(vipPrefix)) {
-    const rest = key.slice(vipPrefix.length);
-    const parts = rest.split('-');
-    if (parts.length !== 3) return { valid: false, reason: 'Sai định dạng Key VIP' };
-    const [keyHwid, expiryHex, sig8] = parts;
-    if (keyHwid !== cleanHwid) {
-      return { valid: false, reason: `Key VIP này khóa cứng cho thiết bị ${keyHwid}, không thể dùng trên máy ${cleanHwid}` };
+  const allowedVipApps = expectedAppId === 'flowmax' ? [app, APPS.flowextra, APPS.flowultra].filter(Boolean) : [app];
+  for (const targetVipApp of allowedVipApps) {
+    const vipPrefix = `${targetVipApp.prefix}-VIP-`;
+    if (key.startsWith(vipPrefix)) {
+      const rest = key.slice(vipPrefix.length);
+      const parts = rest.split('-');
+      if (parts.length !== 3) return { valid: false, reason: 'Sai định dạng Key VIP' };
+      const [keyHwid, expiryHex, sig8] = parts;
+      if (keyHwid !== cleanHwid) {
+        return { valid: false, reason: `Key VIP này khóa cứng cho thiết bị ${keyHwid}, không thể dùng trên máy ${cleanHwid}` };
+      }
+      const expirySec = parseInt(expiryHex, 16);
+      if (!Number.isFinite(expirySec) || expirySec <= 0) return { valid: false, reason: 'Thời hạn Key VIP không hợp lệ' };
+      const expectedSig = sha256Hex(`${targetVipApp.prefix}:VIP:${keyHwid}:${expirySec}:${targetVipApp.salt}`).slice(0, 8);
+      if (sig8 !== expectedSig) return { valid: false, reason: 'Chữ ký Key VIP không hợp lệ' };
+      const expiryUtcMs = expirySec * 1000;
+      if (Date.now() > expiryUtcMs) return { valid: false, reason: 'Key VIP đã hết hạn 30 giờ, vui lòng vượt link lấy key mới' };
+      return { valid: true, hwidMatched: true, tier: 'VIP_FREE', expiryUtcMs, plan: 'VIP30H', key, isAllApps: false, isLifetime: false };
     }
-    const expirySec = parseInt(expiryHex, 16);
-    if (!Number.isFinite(expirySec) || expirySec <= 0) return { valid: false, reason: 'Thời hạn Key VIP không hợp lệ' };
-    const expectedSig = sha256Hex(`${app.prefix}:VIP:${keyHwid}:${expirySec}:${app.salt}`).slice(0, 8);
-    if (sig8 !== expectedSig) return { valid: false, reason: 'Chữ ký Key VIP không hợp lệ' };
-    const expiryUtcMs = expirySec * 1000;
-    if (Date.now() > expiryUtcMs) return { valid: false, reason: 'Key VIP đã hết hạn 30 giờ, vui lòng vượt link lấy key mới' };
-    return { valid: true, hwidMatched: true, tier: 'VIP_FREE', expiryUtcMs, plan: 'VIP30H', key, isAllApps: false, isLifetime: false };
   }
 
   // 3) Check Single-App PRO format: <PREFIX>-PRO-<HWID>-<PLAN>-<NONCE4>-<SIG8> (KHÔNG dùng chung app khác)

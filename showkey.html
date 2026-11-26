@@ -147,20 +147,22 @@
 
     <script>
         const APPS = {
-            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP', scheme: 'flowoptimize', pkg: 'com.example.gameoptimizer', logo: 'app_logo.png' },
-            flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS',  scheme: 'flows',        pkg: 'com.flows.gaming',         logo: 'flows_logo.png' },
-            flowultra:    { id: 'flowultra',    name: 'FlowUltra',    prefix: 'FLOWULTRA', scheme: 'flowultra', pkg: 'com.flows.flowultra',    logo: 'flowultra_logo.png' },
-            flowextra:    { id: 'flowextra',    name: 'FlowExtra',    prefix: 'FLOWEXTRA', scheme: 'flowextra', pkg: 'com.flowextra.optimizer', logo: 'flowextra_logo.png' },
-            flowz:        { id: 'flowz',        name: 'FlowZ',        prefix: 'FLOWZ',  scheme: 'flowz',        pkg: 'com.nebula.hnx',         logo: 'flowz_logo.png' }
+            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP',    scheme: 'flowoptimize', pkg: 'com.example.gameoptimizer', logo: 'app_logo.png' },
+            flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS',     scheme: 'flows',        pkg: 'com.flows.gaming',          logo: 'flows_logo.png' },
+            flowmax:      { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWEXTRA', scheme: 'flowextra',    pkg: 'com.flowextra.optimizer',   logo: 'flowmax_logo.png' },
+            flowultra:    { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWEXTRA', scheme: 'flowextra',    pkg: 'com.flowextra.optimizer',   logo: 'flowmax_logo.png' },
+            flowextra:    { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWEXTRA', scheme: 'flowextra',    pkg: 'com.flowextra.optimizer',   logo: 'flowmax_logo.png' },
+            flowz:        { id: 'flowz',        name: 'FlowZ',        prefix: 'FLOWZ',     scheme: 'flowz',        pkg: 'com.nebula.hnx',            logo: 'flowz_logo.png' },
+            flowcore:     { id: 'flowcore',     name: 'FlowCore',     prefix: 'FLOWCORE',  scheme: 'flowcore',     pkg: 'com.flowcore.brain',        logo: 'flowcore_logo.png' }
         };
 
         const urlParams = new URLSearchParams(window.location.search);
         let appId = (urlParams.get('app') || urlParams.get('appId') || 'flowoptimize').trim().toLowerCase();
         if (appId === 'flowop' || appId === 'com.example.gameoptimizer') appId = 'flowoptimize';
         if (appId === 'com.flows.gaming') appId = 'flows';
-        if (appId === 'com.flows.flowultra') appId = 'flowultra';
-        if (appId === 'com.flowextra.optimizer') appId = 'flowextra';
+        if (appId === 'flowmax' || appId === 'flowextra' || appId === 'flowultra' || appId === 'com.flows.flowultra' || appId === 'com.flowextra.optimizer' || appId === 'com.flowmax.suite') appId = 'flowmax';
         if (appId === 'flowz' || appId === 'com.flows.flowz' || appId === 'com.nebula.hnx') appId = 'flowz';
+        if (appId === 'flowcore' || appId === 'com.flowcore.brain' || appId === 'com.flowengine.core') appId = 'flowcore';
         if (!APPS[appId]) appId = 'flowoptimize';
         const app = APPS[appId];
 
