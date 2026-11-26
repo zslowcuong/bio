@@ -4014,14 +4014,14 @@
 
             <div class="apps-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
 
-                <!-- 1. FlowZ (MỚI RA MẮT • Anime Theme + HyperBoost V2 v3.2.4) -->
+                <!-- 1. FlowZ (MỚI RA MẮT • Anime Theme + HyperBoost V2 v3.3.0) -->
                 <div class="app-download-card flowz" style="border-color: rgba(168, 85, 247, 0.55); background: linear-gradient(160deg, rgba(22, 11, 46, 0.92) 0%, rgba(10, 17, 34, 0.96) 100%); box-shadow: 0 10px 30px rgba(168, 85, 247, 0.22);">
                     <div>
                         <div class="app-header">
                             <img src="flowz_logo.png" alt="FlowZ" class="app-icon-img" style="border-color: #c084fc; border-radius: 14px;" loading="lazy" decoding="async">
                             <div>
                                 <div class="app-title" style="color: #c084fc; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">FlowZ <span style="font-size: 10px; font-weight: 900; letter-spacing: 0.5px; padding: 3px 8px; border-radius: 999px; background: linear-gradient(135deg, #f59e0b, #ef4444); color: #fff; box-shadow: 0 0 12px rgba(245, 158, 11, 0.55);">✨ MỚI RA MẮT</span></div>
-                                <span class="app-sub-badge" style="background: rgba(168, 85, 247, 0.2); color: #e9d5ff; border: 1px solid rgba(168, 85, 247, 0.4);">ANIME UI &amp; HYPERBOOST PRO (v3.2.4 • VIP 30H &amp; PRO)</span>
+                                <span class="app-sub-badge" style="background: rgba(168, 85, 247, 0.2); color: #e9d5ff; border: 1px solid rgba(168, 85, 247, 0.4);">ANIME UI &amp; HYPERBOOST PRO (v3.3.0 • VIP 30H &amp; PRO)</span>
                             </div>
                         </div>
                         <div class="app-bullets">
@@ -4034,7 +4034,7 @@
                     </div>
                     <button type="button" onclick="openUnlockModal('flowz')" class="btn-download-action" style="background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%); color: #fff; box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4); margin-top: 14px;">
                         <span>🎯</span>
-                        <span>TẢI XUỐNG FLOWZ v3.2.4 (MIỄN PHÍ)</span>
+                        <span>TẢI XUỐNG FLOWZ v3.3.0 (MIỄN PHÍ)</span>
                     </button>
                 </div>
 
@@ -4052,7 +4052,7 @@
 
                                 <div class="app-title">FlowS</div>
 
-                                <span class="app-sub-badge" style="background: rgba(0, 255, 102, 0.15); color: #00ff66;">GAMER TUNER (v1.3.0 • TRIAL 3D PRO)</span>
+                                <span class="app-sub-badge" style="background: rgba(0, 255, 102, 0.15); color: #00ff66;">GAMER TUNER (v2.5.0 • VIP 30H &amp; PRO)</span>
 
                             </div>
 
@@ -4100,7 +4100,7 @@
 
                                 <div class="app-title">FlowOptimize</div>
 
-                                <span class="app-sub-badge" style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">THEME ANIME (v1.7.0 • TRIAL 3D PRO)</span>
+                                <span class="app-sub-badge" style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">THEME ANIME (v2.5.1 • VIP 30H &amp; PRO)</span>
 
                             </div>
 
@@ -7769,6 +7769,10 @@ settings put secure multi_press_timeout 200</code></pre>
                 destination_apk: "https://zslowcuong.github.io/bio/FlowZ.apk",
                 direct_apk: "FlowZ.apk"
             },
+            flowcore: {
+                destination_apk: "https://zslowcuong.github.io/bio/FlowCore.apk",
+                direct_apk: "FlowCore.apk"
+            },
             voidadb: {
                 destination_apk: "https://zslowcuong.github.io/bio/VOID_ADB_VIE.apk",
                 direct_apk: "VOID_ADB_VIE.apk"
@@ -7806,6 +7810,7 @@ settings put secure multi_press_timeout 200</code></pre>
                     if (data.flowmax) globalConfig.flowmax = Object.assign(globalConfig.flowmax, data.flowmax);
                     if (data.flowextra) globalConfig.flowextra = Object.assign(globalConfig.flowextra, data.flowextra);
                     if (data.flowz) globalConfig.flowz = Object.assign(globalConfig.flowz, data.flowz);
+                    if (data.flowcore) globalConfig.flowcore = Object.assign(globalConfig.flowcore, data.flowcore);
                     if (data.tools_store) {
                         if (data.tools_store.brotx) Object.assign(globalConfig.brotx, data.tools_store.brotx, { destination_apk: data.tools_store.brotx.gofile || data.tools_store.brotx.destination_apk || globalConfig.brotx.destination_apk });
                         if (data.tools_store.shizuku) Object.assign(globalConfig.shizuku, data.tools_store.shizuku, { destination_apk: data.tools_store.shizuku.gofile || data.tools_store.shizuku.destination_apk || globalConfig.shizuku.destination_apk });
@@ -7842,7 +7847,7 @@ settings put secure multi_press_timeout 200</code></pre>
                 return {
                     key,
                     icon: 'flows_logo.png',
-                    title: 'FlowS - Gamer Tuner (v1.2.0 • Miễn Phí)',
+                    title: 'FlowS - Gamer Tuner (v2.5.0 • Miễn Phí)',
                     sub: 'Quét Game Thật • Preset Máy Mạnh • 120Hz',
                     dest: globalConfig.flows.destination_apk || 'https://zslowcuong.github.io/bio/FlowS.apk',
                     prebuiltGateway: '',
@@ -7868,12 +7873,25 @@ settings put secure multi_press_timeout 200</code></pre>
                 return {
                     key,
                     icon: 'flowz_logo.png',
-                    title: 'FlowZ v3.2.4 — Anime UI & HyperBoost Pro',
+                    title: 'FlowZ v3.3.0 — Anime UI & HyperBoost Pro',
                     sub: 'Tỉa AWM Free Fire • Auto Flo (Thủ Công & Auto) • Tự Mở Menu • Hạ Nhiệt',
                     dest: (globalConfig.flowz && globalConfig.flowz.destination_apk) || 'https://zslowcuong.github.io/bio/FlowZ.apk',
                     prebuiltGateway: '',
                     btnLabel: '🎯 TẢI VỀ FLOWZ APK →',
                     bg: 'linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)',
+                    color: '#fff'
+                };
+            }
+            if (key === 'flowcore' || key === 'flowbrain') {
+                return {
+                    key: 'flowcore',
+                    icon: 'app_logo.png',
+                    title: 'FlowCore Brain AI (v3.0.1 • Miễn Phí)',
+                    sub: 'Điều phối 5 app chống xung đột • Đồng bộ Key PRO • Tối ưu hệ thống',
+                    dest: (globalConfig.flowcore && globalConfig.flowcore.destination_apk) || 'https://zslowcuong.github.io/bio/FlowCore.apk',
+                    prebuiltGateway: '',
+                    btnLabel: '🧠 TẢI VỀ FLOWCORE APK →',
+                    bg: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)',
                     color: '#fff'
                 };
             }
@@ -7969,8 +7987,8 @@ settings put secure multi_press_timeout 200</code></pre>
             return {
                 key: 'flowoptimize',
                 icon: 'app_logo.png',
-                title: 'FlowOptimize Anime Edition (v1.6.0 • Miễn Phí)',
-                sub: 'Không GetKey • 7 Theme Anime • Whitelist Tự Động',
+                title: 'FlowOptimize Anime Edition (v2.5.1 • Miễn Phí)',
+                sub: 'VIP 30H & PRO • 7 Theme Anime • Whitelist Tự Động',
                 dest: globalConfig.flowoptimize.destination_apk || 'https://zslowcuong.github.io/bio/FlowOptimize.apk',
                 prebuiltGateway: '',
                 btnLabel: '🌸 TẢI VỀ FLOWOPTIMIZE APK →',
@@ -8527,28 +8545,40 @@ settings put secure multi_press_timeout 200</code></pre>
         "dest": "https://gofile.io/d/2gc6ZgYP"
     },
     "flowoptimize": {
-        "name": "FlowOptimize v1.7.0 (Miễn Phí)",
+        "name": "FlowOptimize v2.5.1 (Miễn Phí)",
         "dest": "https://zslowcuong.github.io/bio/FlowOptimize.apk",
-        "gofile": "https://zslowcuong.github.io/bio/FlowOptimize.apk",
+        "gofile": "https://raw.githubusercontent.com/zslowcuong/bio/main/FlowOptimize.apk",
         "direct_apk": "FlowOptimize.apk"
     },
     "flows": {
-        "name": "FlowS v1.3.0 (Miễn Phí)",
+        "name": "FlowS v2.5.0 (Miễn Phí)",
         "dest": "https://zslowcuong.github.io/bio/FlowS.apk",
-        "gofile": "https://zslowcuong.github.io/bio/FlowS.apk",
+        "gofile": "https://raw.githubusercontent.com/zslowcuong/bio/main/FlowS.apk",
         "direct_apk": "FlowS.apk"
     },
     "flowmax": {
         "name": "FlowMax v3.0.1 Unified Hardware Suite (Miễn Phí)",
         "dest": "https://zslowcuong.github.io/bio/FlowMax.apk",
-        "gofile": "https://zslowcuong.github.io/bio/FlowMax.apk",
+        "gofile": "https://raw.githubusercontent.com/zslowcuong/bio/main/FlowMax.apk",
         "direct_apk": "FlowMax.apk"
     },
     "flowextra": {
         "name": "FlowMax v3.0.1 Unified Hardware Suite (Miễn Phí)",
         "dest": "https://zslowcuong.github.io/bio/FlowMax.apk",
-        "gofile": "https://zslowcuong.github.io/bio/FlowMax.apk",
+        "gofile": "https://raw.githubusercontent.com/zslowcuong/bio/main/FlowMax.apk",
         "direct_apk": "FlowMax.apk"
+    },
+    "flowz": {
+        "name": "FlowZ v3.3.0 — Anime UI & HyperBoost Pro",
+        "dest": "https://zslowcuong.github.io/bio/FlowZ.apk",
+        "gofile": "https://raw.githubusercontent.com/zslowcuong/bio/main/FlowZ.apk",
+        "direct_apk": "FlowZ.apk"
+    },
+    "flowcore": {
+        "name": "FlowCore Brain AI v3.0.1 (Miễn Phí)",
+        "dest": "https://zslowcuong.github.io/bio/FlowCore.apk",
+        "gofile": "https://raw.githubusercontent.com/zslowcuong/bio/main/FlowCore.apk",
+        "direct_apk": "FlowCore.apk"
     }
 };
 
@@ -9778,7 +9808,7 @@ settings put secure multi_press_timeout 200</code></pre>
             await fetchConfig();
             const params = new URLSearchParams(window.location.search);
             const dl = (params.get('dl') || params.get('app') || '').trim().toLowerCase();
-            if (dl && (['flows', 'flowoptimize', 'flowmax', 'flowextra', 'flowultra', 'brotx', 'voidadb', 'shizukunext', 'shizuku'].includes(dl) || (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS[dl]))) {
+            if (dl && (['flowz', 'flowcore', 'flowbrain', 'flows', 'flowoptimize', 'flowop', 'flowmax', 'flowextra', 'flowultra', 'brotx', 'voidadb', 'setedit', 'shizukunext', 'shizuku'].includes(dl) || (typeof APP_TRIPLE_LINKS !== 'undefined' && APP_TRIPLE_LINKS[dl]))) {
                 openUnlockModal(dl);
             }
         });

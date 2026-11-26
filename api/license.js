@@ -7,7 +7,9 @@ import {
   buildVietQrUrl,
   completeHwidChangeRequest,
   dbGetJson,
+  dbGetJsonEx,
   dbSetJson,
+  dbSetJsonEx,
   dbHsetJson,
   dbSetNx,
   getBackendStatus,
@@ -40,24 +42,49 @@ export default async function handler(req, res) {
     const status = getBackendStatus();
 
     if (action === 'mint_vip') {
-      const targetAppId = normalizeAppId(req.query?.appId || req.query?.app || body.appId || body.app);
-      const targetHwid = normalizeHwid(req.query?.hwid || body.hwid);
-      if (!targetHwid || targetHwid.length < 4) {
-        return res.status(400).json({ success: false, error: 'MISSING_HWID', serverNowUtc });
-      }
-
-      // Atomic Rate Limit: 60s per HWID
-      const rateLimitKey = `flowly:mint_vip_rate:${targetHwid}`;
-      const canMint = await dbSetNx(rateLimitKey, '1', 60);
-      if (!canMint) {
-        return res.status(429).json({
+      const rawAppParam = String(req.query?.appId || req.query?.app || body.appId || body.app || '').trim();
+      if (!rawAppParam) {
+        return res.status(400).json({
           success: false,
-          error: 'RATE_LIMIT_EXCEEDED',
-          message: 'Thao tác quá nhanh! Vui lòng đợi 60 giây trước khi nhận key tiếp theo.',
-          serverNowUtc
+          error: 'MISSING_APP_ID',
+          message: 'Thiếu mã ứng dụng (FlowZ / FlowOptimize / FlowMax / FlowS / FlowCore)!',
+          serverNowUtc,
         });
       }
-      const targetApp = targetAppId === 'flowmax' ? APPS['flowextra'] : (APPS[targetAppId] || APPS['flowoptimize']);
+      const normalizedRawApp = rawAppParam.toLowerCase();
+      const targetAppId = normalizeAppId(normalizedRawApp);
+      const validSingleApps = ['flowoptimize', 'flows', 'flowmax', 'flowz', 'flowcore'];
+      if (!targetAppId || !validSingleApps.includes(targetAppId)) {
+        return res.status(400).json({
+          success: false,
+          error: 'INVALID_APP_ID',
+          message: `Ứng dụng "${rawAppParam}" không hợp lệ để cấp Key VIP 30H đơn app!`,
+          serverNowUtc,
+        });
+      }
+      const targetHwid = normalizeHwid(req.query?.hwid || body.hwid);
+      if (!targetHwid || targetHwid.length < 4) {
+        return res.status(400).json({
+          success: false,
+          error: 'MISSING_HWID',
+          message: 'Thiếu mã thiết bị (HWID)!',
+          serverNowUtc,
+        });
+      }
+
+      // Per-(appId, hwid) 60s cache: reloading returns the same key, switching to another app works immediately
+      const cacheKey = `flowly:mint_vip_cache:${targetAppId}:${targetHwid}`;
+      const cached = await dbGetJsonEx(cacheKey, null);
+      if (cached && cached.key && Number(cached.expiresAtUtc || 0) > serverNowUtc) {
+        return res.status(200).json({
+          ...cached,
+          cached: true,
+          serverNowUtc,
+          ...status,
+        });
+      }
+
+      const targetApp = targetAppId === 'flowmax' ? APPS['flowextra'] : APPS[targetAppId];
       const expiryMs = serverNowUtc + 30 * 3600 * 1000;
       const expirySec = Math.floor(expiryMs / 1000);
       const expiryHex = expirySec.toString(16).toUpperCase();
@@ -66,14 +93,21 @@ export default async function handler(req, res) {
       const sig8 = hashHex.slice(0, 8);
       const vipKey = `${targetApp.prefix}-VIP-${targetHwid}-${expiryHex}-${sig8}`;
 
-      return res.status(200).json({
+      const mintPayload = {
         success: true,
         key: vipKey,
-        appId: targetApp.id,
+        appId: targetAppId,
+        mintAppId: targetApp.id,
         appName: targetApp.name,
         hwid: targetHwid,
         durationHours: 30,
         expiresAtUtc: expiryMs,
+        mintedAtUtc: serverNowUtc,
+      };
+      await dbSetJsonEx(cacheKey, mintPayload, 60);
+
+      return res.status(200).json({
+        ...mintPayload,
         serverNowUtc,
         ...status,
       });
@@ -137,7 +171,9 @@ export default async function handler(req, res) {
       versionCode: Number(appCfg.version_code || 1),
       minVersionCode: Number(appCfg.min_version_code || 1),
       forceUpdate: Boolean(appCfg.force_update),
-      updateUrl: appCfg.update_url || `https://zslowcuong.github.io/bio/?dl=${appId}#download`,
+      updateUrl: appCfg.vip_update_url || appCfg.update_url || `https://zslowcuong.github.io/bio/?dl=${appId}#download`,
+      vipUpdateUrl: appCfg.vip_update_url || appCfg.update_url || `https://zslowcuong.github.io/bio/?dl=${appId}#download`,
+      proUpdateUrl: appCfg.pro_update_url || `https://zslowcuong.github.io/bio/vip.html?app=${appId}`,
       changelog: appCfg.changelog || '',
     };
 
@@ -718,36 +754,41 @@ export default async function handler(req, res) {
           expiresAtUtc: Number(foundRecord.expiryUtcMs || 4102444800000),
           serverNowUtc,
           directDownloads: {
-            flowoptimize: {
-              name: 'FlowOptimize Anime Edition (v1.8.0 PRO Suite)',
-              directApk: 'https://zslowcuong.github.io/bio/FlowOptimize.apk',
-              gofile: 'https://gofile.io/d/Vr3bEORd',
-            },
-            flows: {
-              name: 'FlowS Gamer Tuner Edition (v1.4.0 PRO)',
-              directApk: 'https://zslowcuong.github.io/bio/FlowS.apk',
-              gofile: 'https://gofile.io/d/kzDVlE2G',
-            },
-            flowultra: {
-              name: 'FlowUltra eSports Suite (v1.3.0 PRO)',
-              directApk: 'https://zslowcuong.github.io/bio/FlowUltra.apk',
-              gofile: 'https://gofile.io/d/p8GZrZNY',
-            },
-            flowextra: {
-              name: 'FlowExtra Kaito Kid 1412 (v3.7 PRO Edition)',
-              directApk: 'https://zslowcuong.github.io/bio/FlowExtra.apk',
-              gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowExtra.apk',
-            },
             flowz: {
-              name: 'FlowZ VIP Headshot & Sensitivity Pro (Quà tặng kèm PRO)',
+              name: 'FlowZ VIP Headshot & Sensitivity Pro (v3.3.0 • Quà tặng kèm PRO)',
               directApk: 'https://zslowcuong.github.io/bio/FlowZ.apk',
               gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowZ.apk',
               giftNotice: '🎁 Tặng kèm miễn phí dành riêng cho khách hàng mua KEY PRO!'
             },
+            flowoptimize: {
+              name: 'FlowOptimize Anime Edition (v2.5.1 PRO Suite)',
+              directApk: 'https://zslowcuong.github.io/bio/FlowOptimize.apk',
+              gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowOptimize.apk',
+            },
+            flows: {
+              name: 'FlowS Gamer Tuner Edition (v2.5.0 PRO)',
+              directApk: 'https://zslowcuong.github.io/bio/FlowS.apk',
+              gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowS.apk',
+            },
+            flowmax: {
+              name: 'FlowMax Unified Hardware Suite (v3.0.1 PRO Edition)',
+              directApk: 'https://zslowcuong.github.io/bio/FlowMax.apk',
+              gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowMax.apk',
+            },
+            flowextra: {
+              name: 'FlowMax Unified Hardware Suite (v3.0.1 PRO Edition)',
+              directApk: 'https://zslowcuong.github.io/bio/FlowMax.apk',
+              gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowMax.apk',
+            },
+            flowcore: {
+              name: 'FlowCore Brain AI (v3.0.1 PRO)',
+              directApk: 'https://zslowcuong.github.io/bio/FlowCore.apk',
+              gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowCore.apk',
+            },
             tools: {
-              shizuku: 'https://gofile.io/d/DkhZ4xaM',
-              shizukunext: 'https://gofile.io/d/AdqIc0Gp',
-              brotx: 'https://gofile.io/d/RaSXG0aV',
+              shizuku: 'https://zslowcuong.github.io/bio/Shizuku.apk',
+              shizukunext: 'https://zslowcuong.github.io/bio/Shizuku-Next.apk',
+              brotx: 'https://zslowcuong.github.io/bio/BrotX-v8.apk',
               toolpc: 'https://raw.githubusercontent.com/zslowcuong/bio/main/TU_DONG_KICH_HOAT_SHIZUKU_VA_CAI_APP.bat',
             }
           },
@@ -770,11 +811,12 @@ export default async function handler(req, res) {
           expiresAtUtc: cryptInfo.expiryUtcMs || 4102444800000,
           serverNowUtc,
           directDownloads: {
-            flowoptimize: { name: 'FlowOptimize Anime Edition (v1.8.0 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowOptimize.apk', gofile: 'https://gofile.io/d/Vr3bEORd' },
-            flows: { name: 'FlowS Gamer Tuner Edition (v1.4.0 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowS.apk', gofile: 'https://gofile.io/d/kzDVlE2G' },
-            flowultra: { name: 'FlowUltra eSports Suite (v1.3.0 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowUltra.apk', gofile: 'https://gofile.io/d/p8GZrZNY' },
-            flowextra: { name: 'FlowExtra Kaito Kid 1412 (v3.7 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowExtra.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowExtra.apk' },
-            flowz: { name: 'FlowZ VIP Headshot & Sensitivity Pro (Quà tặng kèm PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowZ.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowZ.apk', giftNotice: '🎁 Tặng kèm miễn phí dành riêng cho khách hàng mua KEY PRO!' },
+            flowz: { name: 'FlowZ VIP Headshot & Sensitivity Pro (v3.3.0 • Quà tặng kèm PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowZ.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowZ.apk', giftNotice: '🎁 Tặng kèm miễn phí dành riêng cho khách hàng mua KEY PRO!' },
+            flowoptimize: { name: 'FlowOptimize Anime Edition (v2.5.1 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowOptimize.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowOptimize.apk' },
+            flows: { name: 'FlowS Gamer Tuner Edition (v2.5.0 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowS.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowS.apk' },
+            flowmax: { name: 'FlowMax Unified Hardware Suite (v3.0.1 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowMax.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowMax.apk' },
+            flowextra: { name: 'FlowMax Unified Hardware Suite (v3.0.1 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowMax.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowMax.apk' },
+            flowcore: { name: 'FlowCore Brain AI (v3.0.1 PRO)', directApk: 'https://zslowcuong.github.io/bio/FlowCore.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowCore.apk' },
           },
           message: '👑 Xác thực thành viên PRO thành công! Đã mở khóa link tải trực tiếp trọn bộ 5 app không cần vượt link (tặng kèm FlowZ VIP).',
         });

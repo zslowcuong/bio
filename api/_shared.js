@@ -242,8 +242,19 @@ export function verifySignedKeyFormat(keyStr, expectedAppId, expectedHwid, optio
   }
 
   for (const [otherId, otherApp] of Object.entries(APPS)) {
-    if (otherId !== expectedAppId && (key.startsWith(`${otherApp.prefix}-VIP-`) || key.startsWith(`${otherApp.prefix}-PRO-`))) {
-      return { valid: false, reason: `Key này thuộc ứng dụng ${otherApp.name}, không thể dùng cho ${app.name}` };
+    if (otherId !== expectedAppId && !(expectedAppId === 'flowmax' && (otherId === 'flowextra' || otherId === 'flowultra'))) {
+      if (key.startsWith(`${otherApp.prefix}-VIP-`)) {
+        return {
+          valid: false,
+          reason: `Key VIP này thuộc ứng dụng ${otherApp.name}, không thể dùng cho ${app.name}. Vui lòng vượt link lấy Key VIP riêng cho ${app.name}!`,
+        };
+      }
+      if (key.startsWith(`${otherApp.prefix}-PRO-`)) {
+        return {
+          valid: false,
+          reason: `Key này thuộc ứng dụng ${otherApp.name}, không thể dùng cho ${app.name}`,
+        };
+      }
     }
   }
 
@@ -402,6 +413,36 @@ export async function dbSetNx(key, val, exSec = 86400) {
   if (mem.nxLocks[key] && mem.nxLocks[key].exp > Date.now()) return false;
   mem.nxLocks[key] = { val, exp: Date.now() + exSec * 1000 };
   return true;
+}
+
+export async function dbSetJsonEx(key, val, exSec = 60) {
+  const kv = getKvCredentials();
+  if (kv) {
+    try {
+      await kvCommand(['SET', key, JSON.stringify(val), 'EX', String(exSec)]);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+  const mem = getMemoryStore();
+  if (!mem.ttlCache) mem.ttlCache = {};
+  mem.ttlCache[key] = { val, exp: Date.now() + exSec * 1000 };
+  return false;
+}
+
+export async function dbGetJsonEx(key, defaultVal = null) {
+  const kv = getKvCredentials();
+  if (kv) {
+    return await dbGetJson(key, defaultVal);
+  }
+  const mem = getMemoryStore();
+  if (!mem.ttlCache || !mem.ttlCache[key]) return defaultVal;
+  if (mem.ttlCache[key].exp <= Date.now()) {
+    delete mem.ttlCache[key];
+    return defaultVal;
+  }
+  return mem.ttlCache[key].val;
 }
 
 export async function dbGetJson(key, defaultVal = null) {

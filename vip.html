@@ -540,7 +540,7 @@
                             <img src="app_logo.png" class="app-card-icon" alt="FlowOptimize">
                             <div>
                                 <div class="app-card-name">FlowOptimize</div>
-                                <span class="app-card-tag">v1.8.0 • Anime Edition</span>
+                                <span class="app-card-tag">v2.5.1 • Anime Edition</span>
                             </div>
                         </div>
                         <span class="lock-badge locked" id="badge-flowoptimize">🔒 ĐANG KHÓA</span>
@@ -552,7 +552,7 @@
                 <div class="app-card-actions">
                     <button type="button" class="btn btn-locked app-dl-btn" id="dl-flowoptimize" onclick="handleLockedClick('FlowOptimize')">🔒 Khóa Bản Quyền • Nhập Key PRO Để Tải</button>
                     <button type="button" class="btn btn-locked app-act-btn" id="act-flowoptimize" onclick="handleLockedClick('FlowOptimize')">⚡ Mở & Tự Kích Hoạt 1-Chạm</button>
-                    <button type="button" class="btn btn-locked app-gf-btn" id="gf-flowoptimize" onclick="handleLockedClick('FlowOptimize')">🔒 Link Dự Phòng Gofile</button>
+                    <button type="button" class="btn btn-locked app-gf-btn" id="gf-flowoptimize" onclick="handleLockedClick('FlowOptimize')">🔒 Link Dự Phòng GitHub</button>
                 </div>
             </div>
 
@@ -564,7 +564,7 @@
                             <img src="flows_logo.png" class="app-card-icon" alt="FlowS">
                             <div>
                                 <div class="app-card-name">FlowS Tuner</div>
-                                <span class="app-card-tag">v1.4.0 • Gamer Edition</span>
+                                <span class="app-card-tag">v2.5.0 • Gamer Edition</span>
                             </div>
                         </div>
                         <span class="lock-badge locked" id="badge-flows">🔒 ĐANG KHÓA</span>
@@ -576,7 +576,7 @@
                 <div class="app-card-actions">
                     <button type="button" class="btn btn-locked app-dl-btn" id="dl-flows" onclick="handleLockedClick('FlowS')">🔒 Khóa Bản Quyền • Nhập Key PRO Để Tải</button>
                     <button type="button" class="btn btn-locked app-act-btn" id="act-flows" onclick="handleLockedClick('FlowS')">⚡ Mở & Tự Kích Hoạt 1-Chạm</button>
-                    <button type="button" class="btn btn-locked app-gf-btn" id="gf-flows" onclick="handleLockedClick('FlowS')">🔒 Link Dự Phòng Gofile</button>
+                    <button type="button" class="btn btn-locked app-gf-btn" id="gf-flows" onclick="handleLockedClick('FlowS')">🔒 Link Dự Phòng GitHub</button>
                 </div>
             </div>
 
@@ -612,7 +612,7 @@
                             <img src="flowz_logo.png" onerror="this.src='app_logo.png'" class="app-card-icon" alt="FlowZ">
                             <div>
                                 <div class="app-card-name" style="color: #c084fc;">FlowZ</div>
-                                <span class="app-card-tag" style="background: rgba(168, 85, 247, 0.2); color: #e9d5ff; border: 1px solid rgba(168, 85, 247, 0.4);">v3.1.0 • 🎁 TẶNG KÈM KEY PRO</span>
+                                <span class="app-card-tag" style="background: rgba(168, 85, 247, 0.2); color: #e9d5ff; border: 1px solid rgba(168, 85, 247, 0.4);">v3.3.0 • 🎁 TẶNG KÈM KEY PRO</span>
                             </div>
                         </div>
                         <span class="lock-badge locked" id="badge-flowz">🔒 ĐANG KHÓA</span>
@@ -812,10 +812,11 @@
         const schemes = {
             flowoptimize: 'flowoptimize',
             flows: 'flows',
-            flowmax: 'flowmax',
-            flowextra: 'flowmax',
-            flowultra: 'flowmax',
-            flowz: 'flowz'
+            flowmax: 'flowextra',
+            flowextra: 'flowextra',
+            flowultra: 'flowextra',
+            flowz: 'flowz',
+            flowcore: 'flowcore'
         };
         const activeKey = localStorage.getItem('flow_vip_key') || (document.getElementById('vipQueryInput').value || '').trim();
 
@@ -834,16 +835,18 @@
             }
 
             const defaultLinks = {
-                flowoptimize: { directApk: 'https://zslowcuong.github.io/bio/FlowOptimize.apk', gofile: 'https://zslowcuong.github.io/bio/FlowOptimize.apk' },
-                flows: { directApk: 'https://zslowcuong.github.io/bio/FlowS.apk', gofile: 'https://zslowcuong.github.io/bio/FlowS.apk' },
-                flowmax: { directApk: 'https://zslowcuong.github.io/bio/FlowMax.apk', gofile: 'https://zslowcuong.github.io/bio/FlowMax.apk' },
-                flowz: { directApk: 'https://zslowcuong.github.io/bio/FlowZ.apk', gofile: 'https://zslowcuong.github.io/bio/FlowZ.apk' }
+                flowoptimize: { directApk: 'https://zslowcuong.github.io/bio/FlowOptimize.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowOptimize.apk' },
+                flows: { directApk: 'https://zslowcuong.github.io/bio/FlowS.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowS.apk' },
+                flowmax: { directApk: 'https://zslowcuong.github.io/bio/FlowMax.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowMax.apk' },
+                flowz: { directApk: 'https://zslowcuong.github.io/bio/FlowZ.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowZ.apk' },
+                flowcore: { directApk: 'https://zslowcuong.github.io/bio/FlowCore.apk', gofile: 'https://raw.githubusercontent.com/zslowcuong/bio/main/FlowCore.apk' }
             };
             let appDl = (downloads && (downloads[appId] || (appId === 'flowmax' ? (downloads['flowmax'] || downloads['flowextra']) : null))) || defaultLinks[appId];
-            if (appId === 'flowmax' && appDl) {
+            if (appDl) {
+                const rawBackup = appDl.gofile && !/gofile\.io/i.test(appDl.gofile) ? appDl.gofile : defaultLinks[appId].gofile;
                 appDl = {
-                    directApk: (appDl.directApk || '').replace(/FlowExtra\.apk/gi, 'FlowMax.apk') || defaultLinks.flowmax.directApk,
-                    gofile: (appDl.gofile || '').replace(/FlowExtra\.apk/gi, 'FlowMax.apk') || defaultLinks.flowmax.gofile
+                    directApk: (appId === 'flowmax' ? (appDl.directApk || '').replace(/FlowExtra\.apk/gi, 'FlowMax.apk') : appDl.directApk) || defaultLinks[appId].directApk,
+                    gofile: rawBackup
                 };
             }
 
@@ -860,7 +863,7 @@
 
             if (gfBtn && appDl) {
                 gfBtn.className = 'btn btn-ghost app-gf-btn';
-                gfBtn.innerHTML = (appId === 'flowmax' || appId === 'flowz') ? '🚀 Dự Phòng GitHub' : '🚀 Dự Phòng Gofile';
+                gfBtn.innerHTML = '🚀 Dự Phòng GitHub';
                 gfBtn.removeAttribute('onclick');
                 gfBtn.onclick = (e) => {
                     if (e) e.preventDefault();
@@ -871,14 +874,23 @@
 
             if (actBtn) {
                 actBtn.className = 'btn btn-cyan app-act-btn';
-                actBtn.innerHTML = '⚡ Mở & Kích Hoạt PRO 1-Chạm';
+                actBtn.innerHTML = appId === 'flowz' ? '⚡ Copy Key & Mở FlowZ' : '⚡ Mở & Kích Hoạt PRO 1-Chạm';
                 actBtn.removeAttribute('onclick');
                 actBtn.onclick = (e) => {
                     if (e) e.preventDefault();
-                    if (activeKey) {
-                        window.location.href = `${schemes[appId]}://license?key=${encodeURIComponent(activeKey)}`;
-                    } else {
+                    if (!activeKey) {
                         alert('Vui lòng xác thực bản quyền PRO trước khi kích hoạt!');
+                        return;
+                    }
+                    try {
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            navigator.clipboard.writeText(activeKey).catch(() => {});
+                        }
+                    } catch (_) {}
+                    if (appId === 'flowz') {
+                        window.location.href = 'intent://#Intent;package=com.nebula.hnx;end';
+                    } else {
+                        window.location.href = `${schemes[appId]}://license?key=${encodeURIComponent(activeKey)}`;
                     }
                 };
             }

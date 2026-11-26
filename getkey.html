@@ -176,14 +176,14 @@
 <body>
     <div class="container">
         <div class="app-tabs" id="appTabs">
-            <button type="button" class="app-tab" data-app="flowoptimize" onclick="selectApp('flowoptimize')">🌸 FlowOp</button>
-            <button type="button" class="app-tab" data-app="flows" onclick="selectApp('flows')">⚡ FlowS</button>
-            <button type="button" class="app-tab" data-app="flowmax" onclick="selectApp('flowmax')">⚡ FlowMax</button>
             <button type="button" class="app-tab" data-app="flowz" onclick="selectApp('flowz')">🎯 FlowZ</button>
+            <button type="button" class="app-tab" data-app="flowoptimize" onclick="selectApp('flowoptimize')">🌸 FlowOp</button>
+            <button type="button" class="app-tab" data-app="flowmax" onclick="selectApp('flowmax')">⚡ FlowMax</button>
+            <button type="button" class="app-tab" data-app="flows" onclick="selectApp('flows')">⚡ FlowS</button>
         </div>
 
         <div class="logo-wrap">
-            <img id="appLogo" src="app_logo.png" alt="Flow Logo">
+            <img id="appLogo" src="app_logo.png" alt="Flow Logo" onerror="this.src='app_logo.png'">
         </div>
         <div><span class="badge-prefix" id="appPrefixBadge">APP RIÊNG BIỆT • FLOWOP-VIP</span></div>
         <h1 id="pageTitle">LẤY KEY VIP 30 GIỜ • FLOWOPTIMIZE</h1>
@@ -242,21 +242,39 @@
         }
 
         const APPS = {
-            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP-VIP', logo: 'app_logo.png' },
-            flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS-VIP',  logo: 'flows_logo.png' },
-            flowmax:      { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWMAX-VIP', logo: 'flowmax_logo.png' },
-            flowz:        { id: 'flowz',        name: 'FlowZ',        prefix: 'FLOWZ-VIP',     logo: 'flowz_logo.png' }
+            flowz:        { id: 'flowz',        name: 'FlowZ',        prefix: 'FLOWZ-VIP',     logo: 'flowz_logo.png' },
+            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP-VIP',    logo: 'app_logo.png' },
+            flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS-VIP',     logo: 'flows_logo.png' },
+            flowmax:      { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWEXTRA-VIP', logo: 'flowmax_logo.png' },
+            flowcore:     { id: 'flowcore',     name: 'FlowCore',     prefix: 'FLOWCORE-VIP',  logo: 'app_logo.png' }
         };
 
-        const params = new URLSearchParams(window.location.search);
-        let currentAppId = (params.get('app') || params.get('appId') || 'flowoptimize').trim().toLowerCase();
+        function parseRobustParams() {
+            let raw = window.location.search || '';
+            try { raw = decodeURIComponent(raw); } catch (_) {}
+            raw = raw.replace(/&amp;/gi, '&');
+            const p = new URLSearchParams(raw.startsWith('?') ? raw : '?' + raw);
+            const packed = (p.get('p') || '').trim();
+            let app = (p.get('app') || p.get('appId') || '').trim();
+            let hwid = (p.get('hwid') || '').trim();
+            if (packed && packed.includes('.')) {
+                const dotIdx = packed.indexOf('.');
+                if (!app) app = packed.slice(0, dotIdx);
+                if (!hwid) hwid = packed.slice(dotIdx + 1);
+            }
+            return { app, hwid };
+        }
+
+        const parsedQ = parseRobustParams();
+        let currentAppId = (parsedQ.app || 'flowz').toLowerCase();
         if (currentAppId === 'flowop' || currentAppId === 'com.example.gameoptimizer') currentAppId = 'flowoptimize';
-        if (currentAppId === 'com.flows.gaming') currentAppId = 'flows';
+        if (currentAppId === 'flows' || currentAppId === 'com.flows.gaming') currentAppId = 'flows';
         if (currentAppId === 'flowultra' || currentAppId === 'com.flows.flowultra' || currentAppId === 'flowextra' || currentAppId === 'com.flowextra.optimizer' || currentAppId === 'flowmax' || currentAppId === 'com.flowmax.suite') currentAppId = 'flowmax';
         if (currentAppId === 'flowz' || currentAppId === 'com.flows.flowz' || currentAppId === 'com.nebula.hnx') currentAppId = 'flowz';
-        if (!APPS[currentAppId]) currentAppId = 'flowoptimize';
+        if (currentAppId === 'flowcore' || currentAppId === 'com.flowcore.brain' || currentAppId === 'com.flowengine.core') currentAppId = 'flowcore';
+        if (!APPS[currentAppId]) currentAppId = 'flowz';
 
-        const rawHwidParam = (params.get('hwid') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+        const rawHwidParam = (parsedQ.hwid || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
         if (rawHwidParam) {
             document.getElementById('hwidInput').value = rawHwidParam;
             try { sessionStorage.setItem('flow_getkey_hwid', rawHwidParam); } catch (_) {}
@@ -271,14 +289,20 @@
         let gatewayTimer = null;
 
         function selectApp(appId) {
-            currentAppId = APPS[appId] ? appId : 'flowoptimize';
+            currentAppId = APPS[appId] ? appId : 'flowz';
             const meta = APPS[currentAppId];
             document.querySelectorAll('.app-tab').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.app === currentAppId);
             });
             document.getElementById('appLogo').src = meta.logo;
-            document.getElementById('appPrefixBadge').textContent = `KHÓA THEO APP • ${meta.prefix}`;
+            document.getElementById('appPrefixBadge').textContent = `KEY ĐƠN APP • ${meta.prefix}`;
             document.getElementById('pageTitle').textContent = `LẤY KEY VIP 30 GIỜ • ${meta.name.toUpperCase()}`;
+            try {
+                const hwid = getCleanHwid();
+                if (hwid) {
+                    localStorage.setItem('flow_last_getkey', JSON.stringify({ app: currentAppId, hwid, ts: Date.now() }));
+                }
+            } catch (_) {}
             updateGatewayLink();
         }
 
@@ -288,7 +312,11 @@
 
         function buildGatewayUrl(hwid) {
             const token = '6ae77b1c1473a714b32b2a3a';
-            const dest = `https://zslowcuong.github.io/bio/showkey.html?app=${encodeURIComponent(currentAppId)}&hwid=${encodeURIComponent(hwid)}`;
+            try {
+                localStorage.setItem('flow_last_getkey', JSON.stringify({ app: currentAppId, hwid, ts: Date.now() }));
+            } catch (_) {}
+            // Single query parameter (no '&') so Link4M & TikTok in-app browser never truncate or scramble app/hwid
+            const dest = `https://zslowcuong.github.io/bio/showkey.html?p=${encodeURIComponent(currentAppId + '.' + hwid)}`;
             const host = ['li', 'nk', '4m', '.co'].join('');
             return `https://${host}/st?api=${token}&url=${encodeURIComponent(dest)}`;
         }

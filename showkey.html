@@ -106,10 +106,21 @@
         <div class="badge-success">✅ XÁC THỰC LINK THÀNH CÔNG • KHÓA 1 THIẾT BỊ</div>
 
         <div class="logo-row">
-            <img id="appLogo" src="app_logo.png" alt="Logo">
+            <img id="appLogo" src="app_logo.png" alt="Logo" onerror="this.src='app_logo.png'">
             <h1 id="pageTitle">KEY VIP 30 GIỜ</h1>
         </div>
-        <p class="sub" id="subText">Mã Key VIP bên dưới chỉ dùng để kích hoạt &amp; gia hạn trên đúng thiết bị mang HWID này (mở tối ưu hệ thống; tính năng Game yêu cầu Key PRO).</p>
+        <p class="sub" id="subText">Mã Key VIP bên dưới là <b>Key Đơn App (chỉ dùng cho đúng 1 ứng dụng đang hiển thị)</b> &amp; khóa cứng theo HWID máy trong <b>30 giờ</b>.</p>
+
+        <div id="missingAppPicker" style="display:none;background:rgba(239,68,68,0.14);border:1px solid rgba(239,68,68,0.45);border-radius:14px;padding:12px;margin-bottom:14px;text-align:left;">
+            <div style="font-size:12px;font-weight:800;color:#fca5a5;margin-bottom:8px;">⚠️ Không xác định được ứng dụng hoặc HWID từ liên kết trả về. Vui lòng chọn đúng ứng dụng để cấp lại Key VIP:</div>
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;">
+                <button type="button" onclick="retryForApp('flowz')" style="padding:8px;border-radius:10px;border:1px solid #a855f7;background:rgba(168,85,247,0.2);color:#e9d5ff;font-weight:800;font-size:12px;cursor:pointer;">🎯 FlowZ</button>
+                <button type="button" onclick="retryForApp('flowoptimize')" style="padding:8px;border-radius:10px;border:1px solid #ec4899;background:rgba(236,72,153,0.2);color:#fbcfe8;font-weight:800;font-size:12px;cursor:pointer;">🌸 FlowOptimize</button>
+                <button type="button" onclick="retryForApp('flowmax')" style="padding:8px;border-radius:10px;border:1px solid #38bdf8;background:rgba(56,189,248,0.2);color:#bae6fd;font-weight:800;font-size:12px;cursor:pointer;">⚡ FlowMax</button>
+                <button type="button" onclick="retryForApp('flows')" style="padding:8px;border-radius:10px;border:1px solid #10b981;background:rgba(16,185,129,0.2);color:#a7f3d0;font-weight:800;font-size:12px;cursor:pointer;">⚡ FlowS</button>
+            </div>
+            <a id="backToGetkeyLink" href="getkey.html" style="display:block;text-align:center;margin-top:8px;font-size:11.5px;color:#38bdf8;font-weight:800;text-decoration:none;">← Quay lại trang nhập HWID lấy Key</a>
+        </div>
 
         <div class="timer-card">
             <div class="timer-label">⏱️ Thời Hạn Key VIP (Ngày : Giờ : Phút : Giây)</div>
@@ -147,36 +158,91 @@
 
     <script>
         const APPS = {
+            flowz:        { id: 'flowz',        name: 'FlowZ',        prefix: 'FLOWZ',     scheme: 'flowz',        pkg: 'com.nebula.hnx',            logo: 'flowz_logo.png' },
             flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP',    scheme: 'flowoptimize', pkg: 'com.example.gameoptimizer', logo: 'app_logo.png' },
             flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS',     scheme: 'flows',        pkg: 'com.flows.gaming',          logo: 'flows_logo.png' },
             flowmax:      { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWEXTRA', scheme: 'flowextra',    pkg: 'com.flowextra.optimizer',   logo: 'flowmax_logo.png' },
             flowultra:    { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWEXTRA', scheme: 'flowextra',    pkg: 'com.flowextra.optimizer',   logo: 'flowmax_logo.png' },
             flowextra:    { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWEXTRA', scheme: 'flowextra',    pkg: 'com.flowextra.optimizer',   logo: 'flowmax_logo.png' },
-            flowz:        { id: 'flowz',        name: 'FlowZ',        prefix: 'FLOWZ',     scheme: 'flowz',        pkg: 'com.nebula.hnx',            logo: 'flowz_logo.png' },
-            flowcore:     { id: 'flowcore',     name: 'FlowCore',     prefix: 'FLOWCORE',  scheme: 'flowcore',     pkg: 'com.flowcore.brain',        logo: 'flowcore_logo.png' }
+            flowcore:     { id: 'flowcore',     name: 'FlowCore',     prefix: 'FLOWCORE',  scheme: 'flowcore',     pkg: 'com.flowcore.brain',        logo: 'app_logo.png' }
         };
 
-        const urlParams = new URLSearchParams(window.location.search);
-        let appId = (urlParams.get('app') || urlParams.get('appId') || 'flowoptimize').trim().toLowerCase();
-        if (appId === 'flowop' || appId === 'com.example.gameoptimizer') appId = 'flowoptimize';
-        if (appId === 'com.flows.gaming') appId = 'flows';
-        if (appId === 'flowmax' || appId === 'flowextra' || appId === 'flowultra' || appId === 'com.flows.flowultra' || appId === 'com.flowextra.optimizer' || appId === 'com.flowmax.suite') appId = 'flowmax';
-        if (appId === 'flowz' || appId === 'com.flows.flowz' || appId === 'com.nebula.hnx') appId = 'flowz';
-        if (appId === 'flowcore' || appId === 'com.flowcore.brain' || appId === 'com.flowengine.core') appId = 'flowcore';
-        if (!APPS[appId]) appId = 'flowoptimize';
-        const app = APPS[appId];
-
-        let hwid = (urlParams.get('hwid') || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
-        if (!hwid || hwid.length < 4) {
-            document.getElementById('keyValDisplay').textContent = '⚠️ THIẾU MÃ HWID! HÃY LẤY KEY TỪ TRONG APP.';
+        function normalizeClientAppId(raw) {
+            const s = String(raw || '').trim().toLowerCase();
+            if (!s) return '';
+            if (s === 'flowop' || s === 'flowoptimize' || s === 'com.example.gameoptimizer') return 'flowoptimize';
+            if (s === 'flows' || s === 'com.flows.gaming') return 'flows';
+            if (s === 'flowmax' || s === 'flowextra' || s === 'flowultra' || s === 'com.flows.flowultra' || s === 'com.flowextra.optimizer' || s === 'com.flowmax.suite') return 'flowmax';
+            if (s === 'flowz' || s === 'com.flows.flowz' || s === 'com.nebula.hnx') return 'flowz';
+            if (s === 'flowcore' || s === 'com.flowcore.brain' || s === 'com.flowengine.core') return 'flowcore';
+            return APPS[s] ? APPS[s].id : '';
         }
 
-        document.getElementById('appLogo').src = app.logo;
-        document.getElementById('pageTitle').textContent = `KEY VIP 30H • ${app.name.toUpperCase()}`;
-        document.getElementById('keyLabel').textContent = `🔑 MÃ KEY VIP DÀNH RIÊNG CHO ${app.name.toUpperCase()}`;
-        document.getElementById('infoApp').textContent = `${app.name} (${app.pkg})`;
-        document.getElementById('infoHwid').textContent = hwid || 'CHƯA_CÓ';
-        document.getElementById('shopLink').href = `shop.html?app=${encodeURIComponent(app.id)}${hwid ? '&hwid=' + encodeURIComponent(hwid) : ''}`;
+        function parseShowkeyParams() {
+            let rawSearch = window.location.search || '';
+            try { rawSearch = decodeURIComponent(rawSearch); } catch (_) {}
+            rawSearch = rawSearch.replace(/&amp;/gi, '&');
+            const p = new URLSearchParams(rawSearch.startsWith('?') ? rawSearch : '?' + rawSearch);
+
+            let rawApp = (p.get('app') || p.get('appId') || '').trim();
+            let rawHwid = (p.get('hwid') || '').trim();
+
+            const packed = (p.get('p') || '').trim();
+            if (packed && packed.includes('.')) {
+                const dotIdx = packed.indexOf('.');
+                if (!rawApp) rawApp = packed.slice(0, dotIdx);
+                if (!rawHwid) rawHwid = packed.slice(dotIdx + 1);
+            }
+
+            let resolvedApp = normalizeClientAppId(rawApp);
+            let resolvedHwid = rawHwid.toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+
+            // Recover from recent getkey.html session in localStorage ONLY if query lost values (e.g. truncated by gateway/in-app browser)
+            try {
+                const saved = JSON.parse(localStorage.getItem('flow_last_getkey') || 'null');
+                if (saved && Date.now() - Number(saved.ts || 0) < 30 * 60 * 1000) {
+                    if (!resolvedApp && saved.app) resolvedApp = normalizeClientAppId(saved.app);
+                    if ((!resolvedHwid || resolvedHwid.length < 4) && saved.hwid) {
+                        resolvedHwid = String(saved.hwid).toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+                    }
+                }
+            } catch (_) {}
+
+            return { appId: resolvedApp, rawApp, hwid: resolvedHwid };
+        }
+
+        const parsed = parseShowkeyParams();
+        let appId = parsed.appId;
+        let hwid = parsed.hwid;
+        const app = appId ? APPS[appId] : null;
+
+        function retryForApp(chosenAppId) {
+            const targetHwid = hwid || '';
+            if (!targetHwid || targetHwid.length < 4) {
+                window.location.href = `getkey.html?app=${encodeURIComponent(chosenAppId)}`;
+                return;
+            }
+            window.location.href = `showkey.html?p=${encodeURIComponent(chosenAppId + '.' + targetHwid)}`;
+        }
+
+        if (!app || !hwid || hwid.length < 4) {
+            document.getElementById('missingAppPicker').style.display = 'block';
+            if (hwid) {
+                document.getElementById('backToGetkeyLink').href = `getkey.html?hwid=${encodeURIComponent(hwid)}`;
+            }
+            document.getElementById('infoApp').textContent = parsed.rawApp ? `Không hợp lệ (${parsed.rawApp})` : 'CHƯA XÁC ĐỊNH';
+            document.getElementById('infoHwid').textContent = hwid || 'CHƯA_CÓ';
+            document.getElementById('keyValDisplay').textContent = !app
+                ? '⚠️ THIẾU HOẶC SAI TÊN ỨNG DỤNG! VUI LÒNG CHỌN ĐÚNG APP Ở TRÊN.'
+                : '⚠️ THIẾU MÃ HWID! HÃY LẤY KEY TỪ TRONG APP.';
+        } else {
+            document.getElementById('appLogo').src = app.logo;
+            document.getElementById('pageTitle').textContent = `KEY VIP 30H • ${app.name.toUpperCase()}`;
+            document.getElementById('keyLabel').textContent = `🔑 MÃ KEY VIP ĐƠN APP DÀNH RIÊNG CHO ${app.name.toUpperCase()}`;
+            document.getElementById('infoApp').textContent = `${app.name} (${app.pkg})`;
+            document.getElementById('infoHwid').textContent = hwid;
+            document.getElementById('shopLink').href = `shop.html?app=${encodeURIComponent(app.id)}${hwid ? '&hwid=' + encodeURIComponent(hwid) : ''}`;
+        }
 
         let generatedKey = '';
         let expiryMs = Date.now() + 30 * 3600 * 1000;
@@ -187,31 +253,63 @@
             return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())} • ${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
         }
 
-        
+        function configureOpenAppButton() {
+            const btn = document.getElementById('deepLinkBtn');
+            if (!btn || !app || !generatedKey) return;
+            if (app.id === 'flowz') {
+                btn.textContent = '🚀 SAO CHÉP KEY & MỞ FLOWZ NGAY';
+                btn.href = `intent://#Intent;package=${app.pkg};end`;
+                btn.onclick = () => {
+                    try {
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            navigator.clipboard.writeText(generatedKey).catch(() => {});
+                        }
+                    } catch (_) {}
+                    showToast('✅ Đã copy Key FlowZ! Hãy dán vào ô Nhập Key trong app.');
+                };
+            } else {
+                btn.textContent = `🚀 BẤM MỞ ${app.name.toUpperCase()} & TỰ ĐỘNG KÍCH HOẠT NGAY`;
+                btn.href = `${app.scheme}://unlock?key=${encodeURIComponent(generatedKey)}`;
+                btn.onclick = () => {
+                    try {
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            navigator.clipboard.writeText(generatedKey).catch(() => {});
+                        }
+                    } catch (_) {}
+                };
+            }
+        }
 
         async function initVipKey() {
-            if (!hwid || hwid.length < 4) return;
+            if (!app || !hwid || hwid.length < 4) return;
             document.getElementById('keyValDisplay').textContent = '⏳ Đang tạo mã Key VIP từ máy chủ bảo mật...';
             try {
                 const query = `action=mint_vip&app=${encodeURIComponent(app.id)}&hwid=${encodeURIComponent(hwid)}`;
+                const isVercelOrLocal = /(vercel\.app|localhost|127\.0\.0\.1)/i.test(window.location.hostname || '');
                 let res = null;
-                try {
-                    res = await fetch(`/api/license?${query}`, { cache: 'no-store' });
-                } catch (_) {}
+                if (isVercelOrLocal) {
+                    try {
+                        res = await fetch(`/api/license?${query}`, { cache: 'no-store' });
+                    } catch (_) {}
+                }
                 if (!res || !res.ok) {
                     res = await fetch(`https://bio-seven-nu.vercel.app/api/license?${query}`, { cache: 'no-store' });
                 }
-                if (res && res.ok) {
-                    const data = await res.json();
-                    if (data.success && data.key) {
+                if (res) {
+                    const data = await res.json().catch(() => null);
+                    if (res.ok && data && data.success && data.key) {
                         generatedKey = data.key;
                         expiryMs = Number(data.expiresAtUtc || (Date.now() + 30 * 3600 * 1000));
                         clockOffsetMs = Number(data.serverNowUtc || Date.now()) - Date.now();
                         document.getElementById('keyValDisplay').textContent = generatedKey;
                         document.getElementById('infoCreated').textContent = formatDate(new Date(Number(data.serverNowUtc || Date.now())));
                         document.getElementById('infoExpires').textContent = formatDate(new Date(expiryMs));
-                        document.getElementById('deepLinkBtn').href = `${app.scheme}://unlock?key=${encodeURIComponent(generatedKey)}`;
+                        configureOpenAppButton();
                         updateCountdown();
+                        return;
+                    }
+                    if (data && (data.message || data.reason || data.error)) {
+                        document.getElementById('keyValDisplay').textContent = `⚠️ ${data.message || data.reason || data.error}`;
                         return;
                     }
                 }
