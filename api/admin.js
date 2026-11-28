@@ -3,12 +3,14 @@ import {
   APPS,
   PLANS,
   SINGLE_PLANS,
+  checkRateLimit,
   completeOrderWithProKey,
   completeHwidChangeRequest,
   dbGetJson,
   dbSetJson,
   dbHsetJson,
   getBackendStatus,
+  getClientIp,
   getEventKeysMap,
   getGlobalResetsMap,
   getTrialEnabled,
@@ -49,7 +51,12 @@ export default async function handler(req, res) {
 
   try {
     const body = req.method === 'POST' ? await parseBody(req) : {};
+    const clientIp = getClientIp(req);
     if (!isAdminAuthorized(req, body)) {
+      const rl = await checkRateLimit(`adm_fail:${clientIp}`, 10, 900);
+      if (!rl.allowed) {
+        return res.status(429).json({ success: false, error: `Thử sai quá nhiều lần! Vui lòng đợi ${rl.retryAfterSec}s.` });
+      }
       return res.status(401).json({ success: false, error: 'Sai mã PIN Admin!' });
     }
 

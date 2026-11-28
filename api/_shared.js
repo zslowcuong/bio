@@ -3,6 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 export const ADMIN_HASH = process.env.ADMIN_PIN_HASH || '246942076e3359c83467555088158cca0cff87e60f95b6cd85a6aacabf0b5ac0';
+export const RESP_SIGN_SECRET = process.env.RESP_SIGN_SECRET || 'FLOWENGINE_RESP_HMAC_2026_V3_9F4C';
+export const GATEWAY_SECRET = process.env.GATEWAY_SECRET || 'FLOWLY_GW_TICKET_2026_X9A7';
 export const TRIAL_DURATION_MS = 0; // Trial event ended -> Default 0h (VIP maintained via getkey 30h)
 export const DEFAULT_TRIAL_HOURS = 0;
 
@@ -133,6 +135,105 @@ export function normalizeHwid(raw) {
 
 export function sha256Hex(input) {
   return crypto.createHash('sha256').update(String(input)).digest('hex').toUpperCase();
+}
+
+export function hmacSha256Hex(secret, input) {
+  return crypto.createHmac('sha256', String(secret)).update(String(input)).digest('hex').toUpperCase();
+}
+
+export function getClientIp(req) {
+  const fwd = String(req?.headers?.['x-forwarded-for'] || req?.headers?.['x-real-ip'] || '').split(',')[0].trim();
+  return fwd || String(req?.socket?.remoteAddress || 'unknown').slice(0, 64);
+}
+
+export async function checkRateLimit(bucketKey, maxHits, windowSec) {
+  const nowSec = Math.floor(Date.now() / 1000);
+  const slotKey = `flowly:rl:${bucketKey}`;
+  try {
+    const rec = await dbGetJsonEx(slotKey, null);
+    if (rec && rec.resetAt > nowSec) {
+      if (Number(rec.count || 0) >= maxHits) {
+        return { allowed: false, retryAfterSec: Math.max(1, rec.resetAt - nowSec) };
+      }
+      await dbSetJsonEx(slotKey, { count: Number(rec.count || 0) + 1, resetAt: rec.resetAt }, Math.max(1, rec.resetAt - nowSec));
+      return { allowed: true };
+    }
+    await dbSetJsonEx(slotKey, { count: 1, resetAt: nowSec + windowSec }, windowSec);
+    return { allowed: true };
+  } catch {
+    return { allowed: true };
+  }
+}
+
+export function createGatewayTicket(appId, hwid, nowMs = Date.now()) {
+  const cleanApp = normalizeAppId(appId);
+  const cleanHwid = normalizeHwid(hwid);
+  const issuedSec = Math.floor(nowMs / 1000);
+  const nonce8 = crypto.randomBytes(4).toString('hex').toUpperCase();
+  const payload = `GW|${cleanApp}|${cleanHwid}|${issuedSec}|${nonce8}`;
+  const sig12 = hmacSha256Hex(GATEWAY_SECRET, payload).slice(0, 12);
+  return `${issuedSec.toString(36).toUpperCase()}_${nonce8}_${sig12}`;
+}
+
+export function verifyGatewayTicket(ticketStr, appId, hwid, nowMs = Date.now(), minWaitSec = 7, maxAgeSec = 1800) {
+  const raw = String(ticketStr || '').trim().toUpperCase();
+  const parts = raw.split('_');
+  if (parts.length !== 3) {
+    return { valid: false, reason: 'Thiếu hoặc sai mã vé xác thực (hãy vượt link từ getkey.html)!' };
+  }
+  const [issued36, nonce8, sig12] = parts;
+  if (!/^[A-Z0-9]{4,12}$/.test(issued36) || !/^[A-F0-9]{8}$/.test(nonce8) || !/^[A-F0-9]{12}$/.test(sig12)) {
+    return { valid: false, reason: 'Mã vé xác thực không hợp lệ!' };
+  }
+  const issuedSec = parseInt(issued36, 36);
+  const cleanApp = normalizeAppId(appId);
+  const cleanHwid = normalizeHwid(hwid);
+  const payload = `GW|${cleanApp}|${cleanHwid}|${issuedSec}|${nonce8}`;
+  const expectedSig = hmacSha256Hex(GATEWAY_SECRET, payload).slice(0, 12);
+  if (sig12.length !== expectedSig.length || !crypto.timingSafeEqual(Buffer.from(sig12, 'utf8'), Buffer.from(expectedSig, 'utf8'))) {
+    return { valid: false, reason: 'Chữ ký vé vượt link không hợp lệ hoặc không khớp App / HWID!' };
+  }
+  const nowSec = Math.floor(nowMs / 1000);
+  const elapsed = nowSec - issuedSec;
+  if (elapsed < minWaitSec) {
+    return { valid: false, reason: `Vui lòng hoàn thành xác minh TikTok đủ ${minWaitSec} giây trước khi nhận Key!` };
+  }
+  if (elapsed > maxAgeSec) {
+    return { valid: false, reason: 'Phiên lấy Key đã hết hạn (>30 phút), vui lòng quay lại lấy link mới!' };
+  }
+  return { valid: true, nonce: nonce8, issuedSec };
+}
+
+export function signCheckinResponse({
+  appId,
+  hwid,
+  serverNowUtc,
+  clientNonce = '',
+  trialEnabled = false,
+  trialStartUtc = 0,
+  trialEndUtc = 0,
+  activeKeyRevoked = false,
+  syncedKey = '',
+  syncedExpiry = 0,
+  blocked = false,
+}) {
+  const msg = `RESP_V1|${appId}|${hwid}|${serverNowUtc}|${clientNonce}|${trialEnabled ? 1 : 0}|${trialStartUtc}|${trialEndUtc}|${activeKeyRevoked ? 1 : 0}|${syncedKey}|${syncedExpiry}|${blocked ? 1 : 0}`;
+  return hmacSha256Hex(RESP_SIGN_SECRET, msg).slice(0, 32);
+}
+
+export function signActivateResponse({
+  appId,
+  hwid,
+  serverNowUtc,
+  clientNonce = '',
+  tier = '',
+  key = '',
+  plan = '',
+  expiryUtcMs = 0,
+  isAllApps = false,
+}) {
+  const msg = `ACT_V1|${appId}|${hwid}|${serverNowUtc}|${clientNonce}|${tier}|${key}|${plan}|${expiryUtcMs}|${isAllApps ? 1 : 0}`;
+  return hmacSha256Hex(RESP_SIGN_SECRET, msg).slice(0, 32);
 }
 
 export function signProKey(appId, hwid, planCode, nonce4) {
@@ -266,6 +367,7 @@ export function setCors(res) {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Admin-Pin');
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
 }
 
 export function handlePreflight(req, res) {

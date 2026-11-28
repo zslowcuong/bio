@@ -158,13 +158,13 @@
 
     <script>
         const APPS = {
-            flowz:        { id: 'flowz',        name: 'FlowZ',        prefix: 'FLOWZ',     scheme: 'flowz',        pkg: 'com.nebula.hnx',            logo: 'flowz_logo.png' },
-            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP',    scheme: 'flowoptimize', pkg: 'com.example.gameoptimizer', logo: 'app_logo.png' },
-            flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS',     scheme: 'flows',        pkg: 'com.flows.gaming',          logo: 'flows_logo.png' },
-            flowmax:      { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWEXTRA', scheme: 'flowextra',    pkg: 'com.flowextra.optimizer',   logo: 'flowmax_logo.png' },
-            flowultra:    { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWEXTRA', scheme: 'flowextra',    pkg: 'com.flowextra.optimizer',   logo: 'flowmax_logo.png' },
-            flowextra:    { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWEXTRA', scheme: 'flowextra',    pkg: 'com.flowextra.optimizer',   logo: 'flowmax_logo.png' },
-            flowcore:     { id: 'flowcore',     name: 'FlowCore',     prefix: 'FLOWCORE',  scheme: 'flowcore',     pkg: 'com.flowcore.brain',        logo: 'app_logo.png' }
+            flowz:        { id: 'flowz',        name: 'FlowZ',        prefix: 'FLOWZ',    scheme: 'flowz',        pkg: 'com.nebula.hnx',            logo: 'flowz_logo.png' },
+            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP',   scheme: 'flowoptimize', pkg: 'com.example.gameoptimizer', logo: 'app_logo.png' },
+            flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS',    scheme: 'flows',        pkg: 'com.flows.gaming',          logo: 'flows_logo.png' },
+            flowmax:      { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWMAX',  scheme: 'flowmax',      pkg: 'com.flowextra.optimizer',   logo: 'flowmax_logo.png' },
+            flowultra:    { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWMAX',  scheme: 'flowmax',      pkg: 'com.flowextra.optimizer',   logo: 'flowmax_logo.png' },
+            flowextra:    { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWMAX',  scheme: 'flowmax',      pkg: 'com.flowextra.optimizer',   logo: 'flowmax_logo.png' },
+            flowcore:     { id: 'flowcore',     name: 'FlowCore',     prefix: 'FLOWCORE', scheme: 'flowcore',     pkg: 'com.flowcore.brain',        logo: 'app_logo.png' }
         };
 
         function normalizeClientAppId(raw) {
@@ -186,43 +186,47 @@
 
             let rawApp = (p.get('app') || p.get('appId') || '').trim();
             let rawHwid = (p.get('hwid') || '').trim();
+            let rawTk = (p.get('tk') || p.get('ticket') || '').trim();
 
             const packed = (p.get('p') || '').trim();
             if (packed && packed.includes('.')) {
-                const dotIdx = packed.indexOf('.');
-                if (!rawApp) rawApp = packed.slice(0, dotIdx);
-                if (!rawHwid) rawHwid = packed.slice(dotIdx + 1);
+                const segs = packed.split('.');
+                if (!rawApp) rawApp = segs[0] || '';
+                if (!rawHwid) rawHwid = segs[1] || '';
+                if (!rawTk && segs[2]) rawTk = segs.slice(2).join('.');
             }
 
             let resolvedApp = normalizeClientAppId(rawApp);
             let resolvedHwid = rawHwid.toUpperCase().replace(/[^A-Z0-9_-]/g, '');
 
-            // Recover from recent getkey.html session in localStorage ONLY if query lost values (e.g. truncated by gateway/in-app browser)
+            // NEVER override explicit URL app; only recover missing HWID or ticket from recent same-app session
             try {
                 const saved = JSON.parse(localStorage.getItem('flow_last_getkey') || 'null');
                 if (saved && Date.now() - Number(saved.ts || 0) < 30 * 60 * 1000) {
-                    if (!resolvedApp && saved.app) resolvedApp = normalizeClientAppId(saved.app);
+                    if (!resolvedApp && !rawApp && saved.app) resolvedApp = normalizeClientAppId(saved.app);
                     if ((!resolvedHwid || resolvedHwid.length < 4) && saved.hwid) {
                         resolvedHwid = String(saved.hwid).toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+                    }
+                    if (!rawTk && saved.tk && (!resolvedApp || normalizeClientAppId(saved.app) === resolvedApp)) {
+                        rawTk = String(saved.tk);
                     }
                 }
             } catch (_) {}
 
-            return { appId: resolvedApp, rawApp, hwid: resolvedHwid };
+            return { appId: resolvedApp, rawApp, hwid: resolvedHwid, ticket: rawTk };
         }
 
         const parsed = parseShowkeyParams();
         let appId = parsed.appId;
         let hwid = parsed.hwid;
+        let ticket = parsed.ticket;
         const app = appId ? APPS[appId] : null;
 
         function retryForApp(chosenAppId) {
             const targetHwid = hwid || '';
-            if (!targetHwid || targetHwid.length < 4) {
-                window.location.href = `getkey.html?app=${encodeURIComponent(chosenAppId)}`;
-                return;
-            }
-            window.location.href = `showkey.html?p=${encodeURIComponent(chosenAppId + '.' + targetHwid)}`;
+            window.location.href = targetHwid && targetHwid.length >= 4
+                ? `getkey.html?p=${encodeURIComponent(chosenAppId + '.' + targetHwid)}`
+                : `getkey.html?app=${encodeURIComponent(chosenAppId)}`;
         }
 
         if (!app || !hwid || hwid.length < 4) {
@@ -282,9 +286,13 @@
 
         async function initVipKey() {
             if (!app || !hwid || hwid.length < 4) return;
+            if (!ticket) {
+                document.getElementById('keyValDisplay').innerHTML = `⚠️ THIẾU VÉ XÁC THỰC BẢO MẬT! <a href="getkey.html?p=${encodeURIComponent(app.id + '.' + hwid)}" style="color:#38bdf8;text-decoration:underline;">BẤM VÀO ĐÂY VƯỢT LINK LẠI</a>`;
+                return;
+            }
             document.getElementById('keyValDisplay').textContent = '⏳ Đang tạo mã Key VIP từ máy chủ bảo mật...';
             try {
-                const query = `action=mint_vip&app=${encodeURIComponent(app.id)}&hwid=${encodeURIComponent(hwid)}`;
+                const query = `action=mint_vip&app=${encodeURIComponent(app.id)}&hwid=${encodeURIComponent(hwid)}&tk=${encodeURIComponent(ticket)}`;
                 const isVercelOrLocal = /(vercel\.app|localhost|127\.0\.0\.1)/i.test(window.location.hostname || '');
                 let res = null;
                 if (isVercelOrLocal) {
@@ -292,12 +300,16 @@
                         res = await fetch(`/api/license?${query}`, { cache: 'no-store' });
                     } catch (_) {}
                 }
-                if (!res || !res.ok) {
+                if (!res || (!res.ok && res.status === 404)) {
                     res = await fetch(`https://bio-seven-nu.vercel.app/api/license?${query}`, { cache: 'no-store' });
                 }
                 if (res) {
                     const data = await res.json().catch(() => null);
                     if (res.ok && data && data.success && data.key) {
+                        if (!String(data.key).toUpperCase().startsWith(app.prefix + '-VIP-')) {
+                            document.getElementById('keyValDisplay').textContent = `⚠️ Key trả về không khớp đúng ứng dụng ${app.name}!`;
+                            return;
+                        }
                         generatedKey = data.key;
                         expiryMs = Number(data.expiresAtUtc || (Date.now() + 30 * 3600 * 1000));
                         clockOffsetMs = Number(data.serverNowUtc || Date.now()) - Date.now();
@@ -309,7 +321,7 @@
                         return;
                     }
                     if (data && (data.message || data.reason || data.error)) {
-                        document.getElementById('keyValDisplay').textContent = `⚠️ ${data.message || data.reason || data.error}`;
+                        document.getElementById('keyValDisplay').innerHTML = `⚠️ ${data.message || data.reason || data.error} <br><a href="getkey.html?p=${encodeURIComponent(app.id + '.' + hwid)}" style="color:#38bdf8;font-size:12px;">← Quay lại lấy vé mới</a>`;
                         return;
                     }
                 }

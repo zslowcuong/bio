@@ -201,9 +201,9 @@
         </div>
 
         <div class="tier-note">
-            <b>⚠️ Lưu ý phân quyền VIP vs PRO:</b><br>
-            • <b>Key VIP (30 Giờ Miễn Phí):</b> Mở khóa tối ưu hệ thống, tiết kiệm pin, dọn RAM, fix hiển thị &amp; khôi phục gốc.<br>
-            • <b>Key PRO (Dùng thử 3 ngày / Shop / Event):</b> Mở khóa <b>100% tính năng Game chuyên biệt</b> (GameSpace, 120/165Hz, Touch Boost, GFX/Resolution Game, Graphics API Driver).
+            <b>⚠️ Lưu ý phân quyền ĐƠN APP vs FULL APP PRO:</b><br>
+            • <b>Key Gia Hạn (VIP 30 Giờ Miễn Phí):</b> Chỉ cấp và hoạt động cho <b>ĐÚNG 1 ỨNG DỤNG</b> đang chọn phía trên (FlowZ chỉ dùng FlowZ, FlowS chỉ dùng FlowS, FlowOp chỉ dùng FlowOp, FlowMax chỉ dùng FlowMax).<br>
+            • <b>Key PRO Combo (Mua trên Web Shop):</b> Mới là Key mở khóa <b>FULL TẤT CẢ 4+ APP</b> (FlowZ + FlowS + FlowOptimize + FlowMax + FlowCore) bằng 1 mã duy nhất <code>FLOWALL-PRO-...</code>!
         </div>
 
         <div class="steps-box">
@@ -242,12 +242,16 @@
         }
 
         const APPS = {
-            flowz:        { id: 'flowz',        name: 'FlowZ',        prefix: 'FLOWZ-VIP',     logo: 'flowz_logo.png' },
-            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP-VIP',    logo: 'app_logo.png' },
-            flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS-VIP',     logo: 'flows_logo.png' },
-            flowmax:      { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWEXTRA-VIP', logo: 'flowmax_logo.png' },
-            flowcore:     { id: 'flowcore',     name: 'FlowCore',     prefix: 'FLOWCORE-VIP',  logo: 'app_logo.png' }
+            flowz:        { id: 'flowz',        name: 'FlowZ',        prefix: 'FLOWZ-VIP',   logo: 'flowz_logo.png' },
+            flowoptimize: { id: 'flowoptimize', name: 'FlowOptimize', prefix: 'FLOWOP-VIP',  logo: 'app_logo.png' },
+            flows:        { id: 'flows',        name: 'FlowS',        prefix: 'FLOWS-VIP',   logo: 'flows_logo.png' },
+            flowmax:      { id: 'flowmax',      name: 'FlowMax',      prefix: 'FLOWMAX-VIP', logo: 'flowmax_logo.png' },
+            flowcore:     { id: 'flowcore',     name: 'FlowCore',     prefix: 'FLOWCORE-VIP',logo: 'app_logo.png' }
         };
+
+        let gatewayTicket = '';
+        let gatewayTicketApp = '';
+        let gatewayTicketHwid = '';
 
         function parseRobustParams() {
             let raw = window.location.search || '';
@@ -258,9 +262,9 @@
             let app = (p.get('app') || p.get('appId') || '').trim();
             let hwid = (p.get('hwid') || '').trim();
             if (packed && packed.includes('.')) {
-                const dotIdx = packed.indexOf('.');
-                if (!app) app = packed.slice(0, dotIdx);
-                if (!hwid) hwid = packed.slice(dotIdx + 1);
+                const segs = packed.split('.');
+                if (!app) app = segs[0] || '';
+                if (!hwid) hwid = segs[1] || '';
             }
             return { app, hwid };
         }
@@ -310,23 +314,41 @@
             return (document.getElementById('hwidInput').value || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
         }
 
-        function buildGatewayUrl(hwid) {
+        function buildGatewayUrl(hwid, tk) {
             const token = '6ae77b1c1473a714b32b2a3a';
             try {
-                localStorage.setItem('flow_last_getkey', JSON.stringify({ app: currentAppId, hwid, ts: Date.now() }));
+                localStorage.setItem('flow_last_getkey', JSON.stringify({ app: currentAppId, hwid, tk: tk || '', ts: Date.now() }));
             } catch (_) {}
-            // Single query parameter (no '&') so Link4M & TikTok in-app browser never truncate or scramble app/hwid
-            const dest = `https://zslowcuong.github.io/bio/showkey.html?p=${encodeURIComponent(currentAppId + '.' + hwid)}`;
+            // Single query parameter (no '&') so Link4M & TikTok in-app browser never truncate or scramble app/hwid/ticket
+            const packedVal = tk ? `${currentAppId}.${hwid}.${tk}` : `${currentAppId}.${hwid}`;
+            const dest = `https://zslowcuong.github.io/bio/showkey.html?p=${encodeURIComponent(packedVal)}`;
             const host = ['li', 'nk', '4m', '.co'].join('');
             return `https://${host}/st?api=${token}&url=${encodeURIComponent(dest)}`;
         }
 
         function updateGatewayLink() {
             const hwid = getCleanHwid();
+            if (hwid !== gatewayTicketHwid || currentAppId !== gatewayTicketApp) {
+                gatewayTicket = '';
+            }
             document.getElementById('shopCtaLink').href = `shop.html?app=${encodeURIComponent(currentAppId)}${hwid ? '&hwid=' + encodeURIComponent(hwid) : ''}`;
         }
 
-        function handleTiktokKeyVerification() {
+        async function requestGatewayTicket(appId, hwid) {
+            try {
+                const res = await fetch(`https://bio-seven-nu.vercel.app/api/license?action=init_gateway&app=${encodeURIComponent(appId)}&hwid=${encodeURIComponent(hwid)}&_t=${Date.now()}`, { cache: 'no-store' });
+                const data = await res.json().catch(() => null);
+                if (res.ok && data && data.success && data.ticket) {
+                    gatewayTicket = data.ticket;
+                    gatewayTicketApp = appId;
+                    gatewayTicketHwid = hwid;
+                    return data.ticket;
+                }
+            } catch (_) {}
+            return '';
+        }
+
+        async function handleTiktokKeyVerification() {
             const hwid = getCleanHwid();
             if (!hwid || hwid.length < 5) {
                 alert('⚠️ Vui lòng mở app và Sao chép Mã Thiết Bị (HWID) dán vào ô trên trước khi lấy Key VIP!');
@@ -336,11 +358,25 @@
 
             const btn = document.getElementById('btnBypassLink');
             if (isTiktokVerified) {
+                btn.disabled = true;
+                btn.innerHTML = '<span>⏳ ĐANG KHỞI TẠO CỔNG BẢO MẬT...</span>';
+                let tk = (gatewayTicket && gatewayTicketApp === currentAppId && gatewayTicketHwid === hwid) ? gatewayTicket : '';
+                if (!tk) {
+                    tk = await requestGatewayTicket(currentAppId, hwid);
+                }
+                if (!tk) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<span>🚀 MỞ CỔNG NHẬN KEY VIP 30H NGAY ➔</span>';
+                    alert('⚠️ Không kết nối được máy chủ cấp vé bảo mật. Vui lòng kiểm tra mạng và thử lại!');
+                    return;
+                }
                 btn.innerHTML = '<span>⏳ ĐANG CHUYỂN ĐẾN CỔNG NHẬN KEY VIP...</span>';
-                window.location.href = buildGatewayUrl(hwid);
+                window.location.href = buildGatewayUrl(hwid, tk);
                 return;
             }
 
+            // Issue signed server ticket right as the 8-second TikTok verification starts
+            requestGatewayTicket(currentAppId, hwid);
             window.open('https://www.tiktok.com/@xxd5974', '_blank', 'noopener,noreferrer');
             btn.disabled = true;
             btn.style.opacity = '0.82';

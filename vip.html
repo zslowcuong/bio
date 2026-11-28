@@ -779,6 +779,7 @@
                 localStorage.setItem('flow_vip_q', query);
                 localStorage.setItem('flow_vip_key', data.key || query);
                 if (data.hwid) localStorage.setItem('flow_vip_hwid', data.hwid);
+                if (data.phone) localStorage.setItem('flow_vip_phone', data.phone);
                 document.getElementById('chgKeyInput').value = data.key || query;
 
                 // MỞ KHÓA TOÀN BỘ 4 APP CARD
@@ -812,7 +813,7 @@
         const schemes = {
             flowoptimize: 'flowoptimize',
             flows: 'flows',
-            flowmax: 'flowextra',
+            flowmax: 'flowmax',
             flowextra: 'flowextra',
             flowultra: 'flowextra',
             flowz: 'flowz',
@@ -913,10 +914,12 @@
 
         btn.innerText = '⏳ Đang xử lý đổi máy...';
         try {
+            const verifyPhone = (localStorage.getItem('flow_vip_phone') || localStorage.getItem('flow_vip_q') || '').trim();
+            const verifyOldHwid = (localStorage.getItem('flow_vip_hwid') || '').trim();
             const res = await fetch(`${API_BASE}/api/license?action=change_hwid`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ key, newHwid })
+                body: JSON.stringify({ key, newHwid, phone: verifyPhone, oldHwid: verifyOldHwid })
             });
             const data = await res.json();
             btn.innerText = '🔄 Xác Nhận Chuyển Sang Thiết Bị Mới';

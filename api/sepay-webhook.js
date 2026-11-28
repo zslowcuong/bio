@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import {
   completeOrderWithProKey,
   completeHwidChangeRequest,
@@ -11,6 +12,13 @@ import {
   BANK_CONFIG,
 } from './_shared.js';
 
+function safeSecretEqual(a, b) {
+  const bufA = Buffer.from(String(a || ''), 'utf8');
+  const bufB = Buffer.from(String(b || ''), 'utf8');
+  if (!bufA.length || bufA.length !== bufB.length) return false;
+  return crypto.timingSafeEqual(bufA, bufB);
+}
+
 export default async function handler(req, res) {
   if (handlePreflight(req, res)) return;
   if (req.method !== 'POST') {
@@ -22,7 +30,7 @@ export default async function handler(req, res) {
     if (webhookSecret) {
       const auth = String(req.headers.authorization || req.headers['x-api-key'] || req.query?.token || '').trim();
       const cleanAuth = auth.replace(/^(Apikey|Bearer)\s+/i, '').trim();
-      if (cleanAuth !== webhookSecret && auth !== `Apikey ${webhookSecret}` && auth !== `Bearer ${webhookSecret}`) {
+      if (!safeSecretEqual(cleanAuth, webhookSecret) && !safeSecretEqual(auth, webhookSecret)) {
         return res.status(401).json({ success: false, error: 'Unauthorized Webhook' });
       }
     }

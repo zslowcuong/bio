@@ -5,6 +5,7 @@ import {
   PLANS,
   SINGLE_PLANS,
   buildVietQrUrl,
+  checkRateLimit,
   completeOrderWithProKey,
   getLifetimePricingTier,
   dbGetJson,
@@ -14,6 +15,7 @@ import {
   dbHgetAllJson,
   dbSetNx,
   getBackendStatus,
+  getClientIp,
   handlePreflight,
   makePaymentMemo,
   normalizeAppId,
@@ -67,6 +69,11 @@ export default async function handler(req, res) {
     }
 
     if (action === 'create_order') {
+      const clientIp = getClientIp(req);
+      const rlOrd = await checkRateLimit(`shop_ord:${clientIp}`, 12, 600);
+      if (!rlOrd.allowed) {
+        return res.status(429).json({ success: false, error: `Tạo đơn quá nhanh! Vui lòng thử lại sau ${rlOrd.retryAfterSec}s.` });
+      }
       const appId = 'all';
       const hwid = normalizeHwid(body.hwid);
       const planCode = String(body.planCode || body.plan || '7D').trim().toUpperCase();

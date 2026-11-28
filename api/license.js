@@ -5,7 +5,9 @@ import {
   TRIAL_DURATION_MS,
   getTrialEnabled,
   buildVietQrUrl,
+  checkRateLimit,
   completeHwidChangeRequest,
+  createGatewayTicket,
   dbGetJson,
   dbGetJsonEx,
   dbSetJson,
@@ -13,6 +15,7 @@ import {
   dbHsetJson,
   dbSetNx,
   getBackendStatus,
+  getClientIp,
   getEventKeysMap,
   getGlobalResetsMap,
   getRevokedKeysList,
@@ -25,7 +28,10 @@ import {
   sanitizeKeyInput,
   sendTelegram,
   sha256Hex,
+  signActivateResponse,
+  signCheckinResponse,
   signProKey,
+  verifyGatewayTicket,
   verifySignedKeyFormat,
 } from './_shared.js';
 
@@ -40,6 +46,49 @@ export default async function handler(req, res) {
     const action = String(req.query?.action || body.action || 'checkin').trim().toLowerCase();
     const serverNowUtc = Date.now();
     const status = getBackendStatus();
+    const clientIp = getClientIp(req);
+    const clientNonce = String(req.query?.clientNonce || body.clientNonce || '').trim().slice(0, 64);
+
+    if (action === 'init_gateway') {
+      const rawAppParam = String(req.query?.appId || req.query?.app || body.appId || body.app || '').trim();
+      const targetAppId = normalizeAppId(rawAppParam.toLowerCase());
+      const validSingleApps = ['flowoptimize', 'flows', 'flowmax', 'flowz', 'flowcore'];
+      if (!rawAppParam || !targetAppId || !validSingleApps.includes(targetAppId)) {
+        return res.status(400).json({
+          success: false,
+          error: 'INVALID_APP_ID',
+          reason: 'Ứng dụng không hợp lệ (Key 30h chỉ cấp cho từng app riêng)!',
+          serverNowUtc,
+        });
+      }
+      const targetHwid = normalizeHwid(req.query?.hwid || body.hwid);
+      if (!targetHwid || targetHwid.length < 4) {
+        return res.status(400).json({
+          success: false,
+          error: 'MISSING_HWID',
+          reason: 'Thiếu mã thiết bị (HWID)!',
+          serverNowUtc,
+        });
+      }
+      const rl = await checkRateLimit(`gw_init:${clientIp}`, 25, 3600);
+      if (!rl.allowed) {
+        return res.status(429).json({
+          success: false,
+          error: 'RATE_LIMITED',
+          reason: `Thao tác quá nhanh! Vui lòng thử lại sau ${rl.retryAfterSec}s.`,
+          serverNowUtc,
+        });
+      }
+      const ticket = createGatewayTicket(targetAppId, targetHwid, serverNowUtc);
+      return res.status(200).json({
+        success: true,
+        appId: targetAppId,
+        hwid: targetHwid,
+        ticket,
+        minWaitSec: 7,
+        serverNowUtc,
+      });
+    }
 
     if (action === 'mint_vip') {
       const rawAppParam = String(req.query?.appId || req.query?.app || body.appId || body.app || '').trim();
@@ -72,19 +121,69 @@ export default async function handler(req, res) {
         });
       }
 
-      // Per-(appId, hwid) 60s cache: reloading returns the same key, switching to another app works immediately
-      const cacheKey = `flowly:mint_vip_cache:${targetAppId}:${targetHwid}`;
-      const cached = await dbGetJsonEx(cacheKey, null);
-      if (cached && cached.key && Number(cached.expiresAtUtc || 0) > serverNowUtc) {
+      const rawTicket = String(req.query?.tk || req.query?.ticket || body.tk || body.ticket || '').trim();
+      if (!rawTicket) {
+        return res.status(403).json({
+          success: false,
+          error: 'MISSING_GATEWAY_TICKET',
+          message: 'Thiếu mã vé vượt link hợp lệ! Vui lòng lấy Key từ getkey.html.',
+          serverNowUtc,
+        });
+      }
+
+      // Same-ticket reload protection (180s window)
+      const tkHash = sha256Hex(`${targetAppId}|${targetHwid}|${rawTicket}`).slice(0, 24);
+      const tkCacheKey = `flowly:gw_mint:${tkHash}`;
+      const existingMint = await dbGetJsonEx(tkCacheKey, null);
+      if (existingMint && existingMint.key && Number(existingMint.expiresAtUtc || 0) > serverNowUtc) {
         return res.status(200).json({
-          ...cached,
+          ...existingMint,
           cached: true,
           serverNowUtc,
           ...status,
         });
       }
 
-      const targetApp = targetAppId === 'flowmax' ? APPS['flowextra'] : APPS[targetAppId];
+      const tkCheck = verifyGatewayTicket(rawTicket, targetAppId, targetHwid, serverNowUtc, 7, 1800);
+      if (!tkCheck.valid) {
+        return res.status(403).json({
+          success: false,
+          error: 'INVALID_GATEWAY_TICKET',
+          message: tkCheck.reason,
+          serverNowUtc,
+        });
+      }
+
+      const singleUseOk = await dbSetNx(`flowly:gw_used:${tkCheck.nonce}`, '1', 3600);
+      if (!singleUseOk) {
+        return res.status(403).json({
+          success: false,
+          error: 'TICKET_ALREADY_USED',
+          message: 'Vé vượt link này đã được sử dụng! Vui lòng quay lại getkey.html để lấy vé mới.',
+          serverNowUtc,
+        });
+      }
+
+      const rlIp = await checkRateLimit(`mint_ip:${clientIp}`, 15, 86400);
+      if (!rlIp.allowed) {
+        return res.status(429).json({
+          success: false,
+          error: 'RATE_LIMITED',
+          message: `Bạn đã vượt quá giới hạn tạo Key VIP hôm nay. Thử lại sau ${rlIp.retryAfterSec}s.`,
+          serverNowUtc,
+        });
+      }
+      const rlHw = await checkRateLimit(`mint_hw:${targetAppId}:${targetHwid}`, 6, 86400);
+      if (!rlHw.allowed) {
+        return res.status(429).json({
+          success: false,
+          error: 'RATE_LIMITED_HWID',
+          message: `Thiết bị ${targetHwid} đã nhận đủ số Key VIP trong 24h cho app này.`,
+          serverNowUtc,
+        });
+      }
+
+      const targetApp = APPS[targetAppId];
       const expiryMs = serverNowUtc + 30 * 3600 * 1000;
       const expirySec = Math.floor(expiryMs / 1000);
       const expiryHex = expirySec.toString(16).toUpperCase();
@@ -96,6 +195,7 @@ export default async function handler(req, res) {
       const mintPayload = {
         success: true,
         key: vipKey,
+        prefix: targetApp.prefix,
         appId: targetAppId,
         mintAppId: targetApp.id,
         appName: targetApp.name,
@@ -104,7 +204,7 @@ export default async function handler(req, res) {
         expiresAtUtc: expiryMs,
         mintedAtUtc: serverNowUtc,
       };
-      await dbSetJsonEx(cacheKey, mintPayload, 60);
+      await dbSetJsonEx(tkCacheKey, mintPayload, 180);
 
       return res.status(200).json({
         ...mintPayload,
@@ -399,15 +499,34 @@ export default async function handler(req, res) {
       }
 
       const effectiveTrialRemainingMs = trialEnabled ? Math.max(0, (record.trialEndUtc || 0) - serverNowUtc) : 0;
+      const respTrialStart = trialEnabled ? record.trialStartUtc : 0;
+      const respTrialEnd = trialEnabled ? record.trialEndUtc : 0;
+      const respSyncedKey = matchingPro ? String(matchingPro.key || '') : '';
+      const respSyncedExpiry = matchingPro ? Number(matchingPro.expiryUtcMs || 0) : 0;
+      const respSig = signCheckinResponse({
+        appId,
+        hwid,
+        serverNowUtc,
+        clientNonce,
+        trialEnabled: Boolean(trialEnabled),
+        trialStartUtc: respTrialStart,
+        trialEndUtc: respTrialEnd,
+        activeKeyRevoked,
+        syncedKey: respSyncedKey,
+        syncedExpiry: respSyncedExpiry,
+        blocked: false,
+      });
 
       return res.status(200).json({
         success: true,
         appId,
         hwid,
         serverNowUtc,
+        clientNonce,
+        respSig,
         trialEnabled: Boolean(trialEnabled),
-        trialStartUtc: trialEnabled ? record.trialStartUtc : 0,
-        trialEndUtc: trialEnabled ? record.trialEndUtc : 0,
+        trialStartUtc: respTrialStart,
+        trialEndUtc: respTrialEnd,
         trialRemainingMs: effectiveTrialRemainingMs,
         lastResetId: record.lastResetId || '',
         resetAppliedNow,
@@ -426,6 +545,14 @@ export default async function handler(req, res) {
     }
 
     if (action === 'activate_key') {
+      const actRl = await checkRateLimit(`act:${clientIp}`, 35, 600);
+      if (!actRl.allowed) {
+        return res.status(429).json({
+          success: false,
+          reason: `Thử kích hoạt quá nhiều lần! Vui lòng đợi ${actRl.retryAfterSec}s.`,
+          serverNowUtc,
+        });
+      }
       const key = activeKey;
       if (!key) {
         return res.status(400).json({ success: false, error: 'Thiếu Mã Key', reason: 'Vui lòng nhập Mã Key', serverNowUtc });
@@ -453,15 +580,29 @@ export default async function handler(req, res) {
         if (expiryUtcMs <= serverNowUtc) {
           return res.status(400).json({ success: false, reason: 'Thời gian sử dụng Key Sự Kiện này đã hết hạn trên thiết bị của bạn!', serverNowUtc });
         }
+        const evPlan = `EVENT_${sanitizedEvent.durationHours}H`;
+        const evSig = signActivateResponse({
+          appId,
+          hwid: deviceSlot,
+          serverNowUtc,
+          clientNonce,
+          tier: 'PRO_EVENT',
+          key,
+          plan: evPlan,
+          expiryUtcMs,
+          isAllApps: false,
+        });
         return res.status(200).json({
           success: true,
           tier: 'PRO_EVENT',
           appId,
           hwid: deviceSlot,
           key,
-          plan: `EVENT_${sanitizedEvent.durationHours}H`,
+          plan: evPlan,
           expiryUtcMs,
           serverNowUtc,
+          clientNonce,
+          respSig: evSig,
           message: `Kích hoạt Key Sự Kiện PRO cho ${APPS[appId].name} (${sanitizedEvent.durationHours}h) thành công trên mọi thiết bị!`,
         });
       }
@@ -575,6 +716,16 @@ export default async function handler(req, res) {
         await dbSetJson('flowly:issued_keys', issuedKeys.slice(0, 800));
       }
 
+      if (verified.tier === 'VIP_FREE') {
+        const vipTrackKey = `flowly:vip_seen:${sha256Hex(resolvedKey).slice(0, 24)}`;
+        const prevVip = await dbGetJsonEx(vipTrackKey, null);
+        if (prevVip && Number(prevVip.expiryUtcMs || 0) > 0) {
+          finalExpiryMs = Math.min(finalExpiryMs, Number(prevVip.expiryUtcMs));
+        } else {
+          await dbSetJsonEx(vipTrackKey, { expiryUtcMs: finalExpiryMs, hwid, appId }, 36 * 3600);
+        }
+      }
+
       if (finalExpiryMs <= serverNowUtc) {
         return res.status(400).json({ success: false, reason: 'Mã Key đã hết hạn!', serverNowUtc });
       }
@@ -598,7 +749,7 @@ export default async function handler(req, res) {
           activatedMsg = 'Kích hoạt thành công Key Combo Full 5 App FlowEngine!';
         }
       } else if (verified.tier === 'VIP_FREE') {
-        activatedMsg = 'Kích hoạt Key VIP 30 Giờ (khóa 1 thiết bị) thành công!';
+        activatedMsg = `Kích hoạt Key VIP 30 Giờ Đơn App (${APPS[appId].name} • khóa 1 thiết bị) thành công!`;
       } else if (verified.tier === 'PRO_SHOP') {
         const singleLabel = verified.plan === 'LIFE'
           ? 'Vĩnh Viễn'
@@ -608,16 +759,31 @@ export default async function handler(req, res) {
         activatedMsg = `Kích hoạt thành công Key ${singleLabel} Đơn App (${APPS[appId].name})!`;
       }
 
+      const respAppId = isLifeCombo ? 'all' : appId;
+      const actSig = signActivateResponse({
+        appId: respAppId,
+        hwid,
+        serverNowUtc,
+        clientNonce,
+        tier: verified.tier,
+        key: resolvedKey,
+        plan: verified.plan,
+        expiryUtcMs: finalExpiryMs,
+        isAllApps: isLifeCombo,
+      });
+
       return res.status(200).json({
         success: true,
         tier: verified.tier,
-        appId: isLifeCombo ? 'all' : appId,
+        appId: respAppId,
         isAllApps: isLifeCombo,
         hwid,
         key: resolvedKey,
         plan: verified.plan,
         expiryUtcMs: finalExpiryMs,
         serverNowUtc,
+        clientNonce,
+        respSig: actSig,
         message: activatedMsg,
       });
     }
@@ -832,8 +998,15 @@ export default async function handler(req, res) {
 
     // 4) Action: change_hwid (Hệ thống chuyển đổi HWID cho khách PRO: Miễn phí lần đầu, từ lần 2 thu 5.000đ bảo trì)
     if (action === 'change_hwid') {
+      const chgRl = await checkRateLimit(`chg:${clientIp}`, 10, 3600);
+      if (!chgRl.allowed) {
+        return res.status(429).json({ success: false, reason: `Thao tác quá nhiều lần! Vui lòng đợi ${chgRl.retryAfterSec}s.` });
+      }
       const qKey = sanitizeKeyInput(body.key || req.query?.key || '');
       const newHwid = normalizeHwid(body.newHwid || req.query?.newHwid || '');
+      const verifyPhoneDigits = String(body.phone || body.verifyPhone || req.query?.phone || '').replace(/[^0-9]/g, '');
+      const verifyOrderCode = String(body.orderCode || req.query?.orderCode || '').trim().toUpperCase();
+      const verifyOldHwid = normalizeHwid(body.oldHwid || req.query?.oldHwid || '');
       if (!qKey || !newHwid || newHwid.length < 4) {
         return res.status(400).json({ success: false, reason: 'Vui lòng cung cấp Mã Key PRO và HWID máy mới (tối thiểu 4 ký tự)!' });
       }
@@ -892,6 +1065,24 @@ export default async function handler(req, res) {
       const record = issuedKeys[targetIdx];
       if (record.revoked) {
         return res.status(403).json({ success: false, reason: 'Mã Key này đã bị Admin thu hồi!' });
+      }
+      // Anti-hijack ownership verification if record has bound phone or orderCode
+      const recPhoneDigits = String(record.phone || '').replace(/[^0-9]/g, '');
+      const recOrder = String(record.orderCode || '').toUpperCase();
+      const recHwid = normalizeHwid(record.hwid || '');
+      const recHwids = Array.isArray(record.hwids) ? record.hwids.map((h) => normalizeHwid(h)) : [];
+      const callerMatchedProof = Boolean(
+        (qDigits.length >= 8 && recPhoneDigits && recPhoneDigits === qDigits) ||
+        (recOrder && qKey === recOrder) ||
+        (verifyPhoneDigits.length >= 4 && recPhoneDigits && (recPhoneDigits === verifyPhoneDigits || recPhoneDigits.endsWith(verifyPhoneDigits))) ||
+        (verifyOrderCode && recOrder && verifyOrderCode === recOrder) ||
+        (verifyOldHwid && (verifyOldHwid === recHwid || recHwids.includes(verifyOldHwid)))
+      );
+      if (recPhoneDigits.length >= 8 && !callerMatchedProof) {
+        return res.status(403).json({
+          success: false,
+          reason: 'Vui lòng xác thực SĐT mua hàng hoặc tra cứu tại trang VIP trước khi đổi thiết bị để chống đánh cắp Key!',
+        });
       }
 
       const canonicalKey = String(record.key || qKey).toUpperCase();
